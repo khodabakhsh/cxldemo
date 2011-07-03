@@ -4,5 +4,11 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/testJavaMail/activation-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/testJavaMail/mail-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/testMobileBomb/commons-codec-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/testMobileBomb/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/testMobileBomb/httpclient-4.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/testMobileBomb/httpclient-cache-4.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/testMobileBomb/httpcore-4.1.jar"/>
+	<classpathentry kind="lib" path="lib/testMobileBomb/httpmime-4.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
