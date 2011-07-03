@@ -51,7 +51,7 @@ public class FastMailer {
 			MessagingException {
 
 		// DNS服务器，看看本机的DNS配置
-		String dns = GetDnsIp.getDnsIp();
+		String dns = "dns://"+GetDnsIp.getDnsIp();
 		String maitFrom = "wvdeee@gmail.com";
 		String[] mailToArray = { "469399609@qq.com", "denew2000@163.com" };
 		String subject = "这是猪蹄";
