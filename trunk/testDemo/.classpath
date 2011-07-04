@@ -19,5 +19,11 @@
 	<classpathentry kind="lib" path="lib/testFormLogin/commons-codec-1.3.jar"/>
 	<classpathentry kind="lib" path="lib/testFormLogin/commons-httpclient-3.1.jar"/>
 	<classpathentry kind="lib" path="lib/testFormLogin/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/html2pdf/jtidy-r938.jar"/>
+	<classpathentry kind="lib" path="lib/html2pdf/servlet-api.jar"/>
+	<classpathentry kind="lib" path="lib/html2pdf/core-renderer.jar"/>
+	<classpathentry kind="lib" path="lib/html2pdf/itext-2.1.7.jar"/>
+	<classpathentry kind="lib" path="lib/html2pdf/iTextAsian.jar"/>
+	<classpathentry kind="lib" path="lib/ldap/dom4j-1.6.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
