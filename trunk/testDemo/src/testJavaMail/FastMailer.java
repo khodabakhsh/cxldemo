@@ -61,8 +61,8 @@ public class FastMailer {
 		String[] mailToArray = { "469399609@qq.com", "denew2000@163.com" };
 		String subject = "这是猪蹄";
 		String content = "邮件内容来的";
-		String attachmentPath ="d:/压缩 黄腾峡漂流.rar";
-		String attachmentName ="压缩 黄腾峡漂流.rar";
+		String attachmentPath ="d:/673TH.gif";
+		String attachmentName ="673TH.gif";
 
 		for (String mailTo :  mailToArray) {
 			quickSendMail(dns, maitFrom, mailTo, subject, content,attachmentPath,attachmentName);
