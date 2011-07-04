@@ -2,6 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="lib/testJavaMail/activation-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/testJavaMail/mail-1.4.jar"/>
 	<classpathentry kind="lib" path="lib/testMobileBomb/commons-codec-1.4.jar"/>
@@ -25,5 +26,13 @@
 	<classpathentry kind="lib" path="lib/html2pdf/itext-2.1.7.jar"/>
 	<classpathentry kind="lib" path="lib/html2pdf/iTextAsian.jar"/>
 	<classpathentry kind="lib" path="lib/ldap/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/testCompass/commons-logging.jar"/>
+	<classpathentry kind="lib" path="lib/testCompass/compass-2.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/testCompass/lucene-analyzers.jar"/>
+	<classpathentry kind="lib" path="lib/testCompass/lucene-core.jar"/>
+	<classpathentry kind="lib" path="lib/testCompass/lucene-highlighter.jar"/>
+	<classpathentry kind="lib" path="lib/testCompass/lucene-queries.jar"/>
+	<classpathentry kind="lib" path="lib/testCompass/lucene-snowball.jar"/>
+	<classpathentry kind="lib" path="lib/testCompass/lucene-spellchecker.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
