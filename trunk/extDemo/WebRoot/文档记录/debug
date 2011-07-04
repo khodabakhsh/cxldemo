@@ -1,0 +1,7 @@
+
+           }else{
+            this.el = ct.createChild({
+                id: this.id,
+                cls: this.baseCls
+            }, position);      //position此处null为空或不是对象
+        }
