@@ -5,6 +5,10 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.Properties;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
@@ -57,9 +61,11 @@ public class FastMailer {
 		String[] mailToArray = { "469399609@qq.com", "denew2000@163.com" };
 		String subject = "这是猪蹄";
 		String content = "邮件内容来的";
+		String attachmentPath ="d:/压缩 黄腾峡漂流.rar";
+		String attachmentName ="压缩 黄腾峡漂流.rar";
 
 		for (String mailTo :  mailToArray) {
-			quickSendMail(dns, maitFrom, mailTo, subject, content);
+			quickSendMail(dns, maitFrom, mailTo, subject, content,attachmentPath,attachmentName);
 		}
 
 	}
@@ -75,7 +81,7 @@ public class FastMailer {
 	 * @throws MessagingException
 	 */
 	protected static void quickSendMail(String dns, String maitFrom,
-			String mailTo, String subject, String content)
+			String mailTo, String subject, String content, String attachmentPath, String attachmentName)
 			throws NamingException, MessagingException {
 		String domain = mailTo.substring(mailTo.indexOf('@') + 1);
 		Hashtable<String, String> env = new Hashtable<String, String>();
@@ -91,7 +97,7 @@ public class FastMailer {
 				String host = (String) hosts.get(i);
 				host = host.substring(host.indexOf(' ') + 1);
 				System.out.print("Send mail to " + host + " ...");
-				sendMail(host, maitFrom, mailTo, subject, content);
+				sendMail(host, maitFrom, mailTo, subject, content,attachmentPath,attachmentName);
 				System.out.println("OK");
 				//下面这里不break的话，会连着发几封。如下，qq会发3封，网易会发4封
 				 break;
@@ -107,7 +113,7 @@ public class FastMailer {
 	}
 
 	protected static void sendMail(String smtpHost, String maitFrom,
-			String emailTo, String subject, String content)
+			String emailTo, String subject, String content, String attachmentPath, String attachmentName)
 			throws MessagingException {
 		Properties mailProperties = System.getProperties();
 		mailProperties.put("mail.smtp.host", smtpHost);
@@ -123,8 +129,20 @@ public class FastMailer {
 		MimeBodyPart messageBodyPart = new MimeBodyPart();
 		messageBodyPart.setText(content);
 		multipart.addBodyPart(messageBodyPart);
+		
+		//添加附件
+		BodyPart attachmentPart = new MimeBodyPart();
+		DataSource source = new FileDataSource(attachmentPath);
+		attachmentPart.setDataHandler(new DataHandler(source));
+		//注意：下面定义的enc对象用来处理中文附件名，否则名称是中文的附//件在邮箱里面显示的会是乱码，
+		sun.misc.BASE64Encoder enc = new sun.misc.BASE64Encoder();
+		attachmentPart.setFileName("=?GBK?B?"
+				+ enc.encode(attachmentName.getBytes()) + "?=");
+		multipart.addBodyPart(attachmentPart);
+		
 
 		mailMessage.setContent(multipart);
+		
 
 		mailMessage.setSentDate(new Date());
 		mailMessage.setFrom(new InternetAddress(maitFrom));

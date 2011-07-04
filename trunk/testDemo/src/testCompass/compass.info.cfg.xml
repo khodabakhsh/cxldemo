@@ -1,0 +1,34 @@
+<compass-core-config
+	xmlns="http://www.compass-project.org/schema/core-config"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.compass-project.org/schema/core-config
+http://www.compass-project.org/schema/compass-core-config-2.0.xsd">
+
+	<compass name="default">
+
+		<connection>
+			<file path="./data/" /><!--索引目录-->
+		</connection>
+
+		<mappings>
+			<class name="testCompass.Info" />
+		</mappings>
+<!-- 
+<searchEngine>
+
+	<analyzer name="MMAnalyer" type="CustomAnalyzer"
+				analyzerClass="jeasy.analysis.MMAnalyzer">
+
+				<stopWords>
+
+					<stopWord value="test" />
+
+				</stopWords>
+
+			</analyzer>
+</searchEngine>
+ -->
+
+	</compass>
+
+</compass-core-config>
