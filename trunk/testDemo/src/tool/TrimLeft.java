@@ -1,4 +1,4 @@
-package trimLeft;
+package tool;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
