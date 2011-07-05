@@ -53,6 +53,9 @@ public class TestProperties {
 			e.printStackTrace();
 			in.close();
 		}
+		finally{
+			in.close();
+		}
 		// loop entry
 		for (Entry entry : prop.entrySet()) {
 			System.out.println(entry.getKey() + " : " + entry.getValue());
