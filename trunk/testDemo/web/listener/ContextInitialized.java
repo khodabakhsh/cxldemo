@@ -1,9 +1,9 @@
-package web.servletContextListener;
+package listener;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-public  class MyListener implements ServletContextListener {
+public  class ContextInitialized implements ServletContextListener {
   private ServletContext context = null;
 
   /*This method is invoked when the Web Application has been removed 
