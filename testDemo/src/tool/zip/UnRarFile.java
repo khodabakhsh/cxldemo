@@ -47,8 +47,8 @@ public class UnRarFile {
      * @param args
      */
     public static void main(String[] args) {
-        String targetPath = "c:\\";
-        String rarFilePath = "c:\\test.rar";
+        String targetPath = "c:\\unzip";
+        String rarFilePath = "c:\\Archive.zip";
         UnRarFile unrar = new UnRarFile();
         unrar.unRarFile(targetPath, rarFilePath);
     }

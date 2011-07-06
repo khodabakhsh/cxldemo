@@ -8,7 +8,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 /**
- * 解压zip文件
+ * 解压zip文件,
+ * 【中文会有乱码哦】,还是看用ant.jar的ZipUtil类吧
  * @author Michael sun
  */
 public class UnzipFile {
@@ -74,8 +75,8 @@ public class UnzipFile {
      * @param args
      */
     public static void main(String[] args) {
-        String targetPath = "D:\\test\\unzip";
-        String zipFile = "D:\\test\\test.zip";
+        String targetPath = "c:/unzip";
+        String zipFile = "c:/Archive.zip";
         UnzipFile unzip = new UnzipFile();
         unzip.unzipFile(targetPath, zipFile);
     }
