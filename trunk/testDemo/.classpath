@@ -34,5 +34,6 @@
 	<classpathentry kind="lib" path="lib/testCompass/lucene-queries.jar"/>
 	<classpathentry kind="lib" path="lib/testCompass/lucene-snowball.jar"/>
 	<classpathentry kind="lib" path="lib/testCompass/lucene-spellchecker.jar"/>
+	<classpathentry kind="lib" path="lib/tool/zip/ant.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
