@@ -5,7 +5,10 @@ import java.util.Date;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
-
+/**
+ * 可以用于统计在线用户
+ *
+ */
 public class SessionCreated implements HttpSessionListener {
 
   private int sessionCount;
