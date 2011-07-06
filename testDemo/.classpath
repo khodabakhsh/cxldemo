@@ -37,5 +37,8 @@
 	<classpathentry kind="lib" path="lib/testCompass/lucene-snowball.jar"/>
 	<classpathentry kind="lib" path="lib/testCompass/lucene-spellchecker.jar"/>
 	<classpathentry kind="lib" path="lib/tool/zip/ant.jar"/>
+	<classpathentry kind="lib" path="lib/tool/xml/jdom.jar"/>
+	<classpathentry kind="lib" path="lib/tool/xml/jaxen-1.0-FCS.jar"/>
+	<classpathentry kind="lib" path="lib/tool/xml/saxpath-1.0-FCS.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
