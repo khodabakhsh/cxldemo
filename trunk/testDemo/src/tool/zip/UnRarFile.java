@@ -20,7 +20,7 @@ public class UnRarFile {
         try {
 
             // 系统安装winrar的路径
-            String cmd = "C:\\Program Files\\WinRAR\\winrar.exe";
+            String cmd = "C:\\Program Files\\WinRAR\\WinRAR.exe";
             String unrarCmd = cmd + " x -r -p- -o+ " + absolutePath + " "
                     + targetPath;
 
@@ -47,8 +47,8 @@ public class UnRarFile {
      * @param args
      */
     public static void main(String[] args) {
-        String targetPath = "D:\\test\\unrar\\";
-        String rarFilePath = "D:\\test\\test.rar";
+        String targetPath = "c:\\";
+        String rarFilePath = "c:\\test.rar";
         UnRarFile unrar = new UnRarFile();
         unrar.unRarFile(targetPath, rarFilePath);
     }
