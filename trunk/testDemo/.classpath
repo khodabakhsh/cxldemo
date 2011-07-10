@@ -3,6 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="tool"/>
 	<classpathentry kind="src" path="web"/>
+	<classpathentry kind="src" path="config"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="lib/testJavaMail/activation-1.1.jar"/>
@@ -40,5 +41,6 @@
 	<classpathentry kind="lib" path="lib/tool/xml/jdom.jar"/>
 	<classpathentry kind="lib" path="lib/tool/xml/jaxen-1.0-FCS.jar"/>
 	<classpathentry kind="lib" path="lib/tool/xml/saxpath-1.0-FCS.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

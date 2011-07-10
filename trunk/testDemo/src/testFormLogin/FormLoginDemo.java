@@ -13,7 +13,7 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 
 /**
- * 用来演示登录表单的示例
+ * httpclient用来演示登录表单的示例
  * 
  */
 
