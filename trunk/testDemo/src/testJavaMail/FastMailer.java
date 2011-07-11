@@ -1,6 +1,7 @@
 package testJavaMail;
 
 
+import java.io.File;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.Properties;
@@ -53,12 +54,12 @@ import tool.GetDnsIp;
 public class FastMailer {
 
 	public static void main(String[] args) throws NamingException,
-			MessagingException {
+			MessagingException{
 
 		// DNS服务器，看看本机的DNS配置
 		String dns = "dns://"+GetDnsIp.getDnsIp();
 		String maitFrom = "wvdeee@gmail.com";
-		String[] mailToArray = { "469399609@qq.com", "denew2000@163.com" };
+		String[] mailToArray = { "13430363480@139.com" };
 		String subject = "这是猪蹄";
 		String content = "邮件内容来的";
 		String attachmentPath ="d:/673TH.gif";
@@ -79,6 +80,7 @@ public class FastMailer {
 	 * @param content
 	 * @throws NamingException
 	 * @throws MessagingException
+	 * @throws InterruptedException 
 	 */
 	protected static void quickSendMail(String dns, String maitFrom,
 			String mailTo, String subject, String content, String attachmentPath, String attachmentName)
@@ -130,16 +132,17 @@ public class FastMailer {
 		messageBodyPart.setText(content);
 		multipart.addBodyPart(messageBodyPart);
 		
-		//添加附件
-		BodyPart attachmentPart = new MimeBodyPart();
-		DataSource source = new FileDataSource(attachmentPath);
-		attachmentPart.setDataHandler(new DataHandler(source));
-		//注意：下面定义的enc对象用来处理中文附件名，否则名称是中文的附//件在邮箱里面显示的会是乱码，
-		sun.misc.BASE64Encoder enc = new sun.misc.BASE64Encoder();
-		attachmentPart.setFileName("=?GBK?B?"
-				+ enc.encode(attachmentName.getBytes()) + "?=");
-		multipart.addBodyPart(attachmentPart);
-		
+		if (new File(attachmentPath).exists()) {
+			// 添加附件
+			BodyPart attachmentPart = new MimeBodyPart();
+			DataSource source = new FileDataSource(attachmentPath);
+			attachmentPart.setDataHandler(new DataHandler(source));
+			// 注意：下面定义的enc对象用来处理中文附件名，否则名称是中文的附//件在邮箱里面显示的会是乱码，
+			sun.misc.BASE64Encoder enc = new sun.misc.BASE64Encoder();
+			attachmentPart.setFileName("=?GBK?B?"
+					+ enc.encode(attachmentName.getBytes()) + "?=");
+			multipart.addBodyPart(attachmentPart);
+		}
 
 		mailMessage.setContent(multipart);
 		
