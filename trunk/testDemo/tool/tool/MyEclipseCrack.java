@@ -3,11 +3,15 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
+/**
+ * for  MyEclipse 6.5
+ * @author caixl
+ *
+ */
 public class MyEclipseCrack {
     //
     public static final void main(String[] args) {
-        String id = "abc";//any characters here
+        String id = "abc";//Subscriber,any characters here
         String num = "999";
         System.out.println("Subscriber:" + id);
         System.out.println("Subscription Code:"
