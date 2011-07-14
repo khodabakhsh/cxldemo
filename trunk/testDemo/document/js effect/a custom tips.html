@@ -1,0 +1,82 @@
+<html>
+<head>
+
+<title>tip</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<body>
+<script>
+
+
+
+if(!document.attachEvent)
+{
+    document.attachEvent = function(){document.addEventListener(arguments[0].substr(2),arguments[1],arguments[2])}
+}
+
+document.attachEvent("onmouseover",function(e)
+{
+    var tip = "";
+
+    if(typeof(event)=="undefined"){
+        tip = e.target.getAttribute("tips")
+    }else{
+        e    = event;
+        tip = e.srcElement.tips;
+    }
+
+    
+    if(typeof(tip)!="undefined"&&tip.length>0)
+    {
+        var _tips = document.getElementById("myTip");
+        
+        if(typeof(_tips)=="undefined"||_tips == null)
+        {
+            _tips        = document.createElement("div");
+            _tips.id    = "myTip";
+            _tips.style.position        = "absolute";
+            _tips.style.width            = "150px";
+            _tips.style.borderWidth        = "1px";
+            _tips.style.borderStyle        = "solid";
+            _tips.style.borderColor        = "gray";
+            _tips.style.fontSize        = "9pt";
+            _tips.style.backgroundColor    = "#ffffff";
+            _tips.style.color            = "#349045";
+
+            
+            _tips.style.filter            = "progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=135,strength=3)";
+            _tips.style.padding            = "5px 8px 3px 8px";
+            
+
+            document.body.appendChild(_tips);            
+            _tips.style.display            = "none";
+        }
+
+            _tips.style.display    = "";
+            
+            _tips.innerHTML        = tip;
+            _tips.style.left = document.body.scrollLeft+e.clientX+10; 
+            _tips.style.top = document.body.scrollTop+e.clientY+10; 
+    }
+}
+);
+
+document.attachEvent('onmouseout',function(e)
+{   
+    var _tips = document.getElementById("myTip");
+    if(_tips!=null)
+    {
+        _tips.style.display="none";
+    }
+}
+)
+</script>
+
+<a href="#" tips="自定义提示" >测试链接</a>
+<a href="#" >测试链接</a>   
+<a href="#" tips="中华人民共和国中华人民共和国自中华人民共和国中华人民共和国自定义提示中华人民共和国中华人民共和国自定义提示中华人民共和国中华人民共和国自定义提示定义提示中华人民共和国中华人民共和国自中华人民共和国中华人民共和国自定义提示中华人民共和">测试链接</a>   
+
+</body>
+</html>
