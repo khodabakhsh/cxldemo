@@ -44,10 +44,10 @@ public class testGetImgFromBaidu {
 	
 	private static final String encoding = "gb2312";
 	
-	private static final String huge = "#z=9";
-	private static final String big = "#z=3";
-	private static final String middle = "#z=2";
-	private static final String small = "#z=1";
+	private static final String huge = "&z=9";
+	private static final String big = "&z=3";
+	private static final String middle = "&z=2";
+	private static final String small = "&z=1";
 
 	/**
 	 * 链接超时
@@ -59,18 +59,19 @@ public class testGetImgFromBaidu {
 	 * 
 	 * @param url
 	 */
-	public static void getHtmlContent(String url) {
+	public static String getHtmlContent(String url) {
 		HttpClient client = new DefaultHttpClient();
 		client.getParams().setParameter(
 				CoreConnectionPNames.CONNECTION_TIMEOUT, TIME_OUT);
 		HttpGet get = new HttpGet(url);
 		get.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT,
 				TIME_OUT);
+		StringBuilder sBuffer = new StringBuilder();
 		try {
 			HttpResponse response = client.execute(get);
 			InputStreamReader iStreamReader = new InputStreamReader(
 					new BufferedInputStream(response.getEntity().getContent()),encoding);
-			StringBuilder sBuffer = new StringBuilder();
+			
 			BufferedReader bufferedReader = new BufferedReader(iStreamReader);
 			String strLine;
 			while ((strLine = bufferedReader.readLine()) != null) {
@@ -82,6 +83,7 @@ public class testGetImgFromBaidu {
 		} finally {
 			client.getConnectionManager().shutdown();
 		}
+		return  sBuffer.toString();
 	}
 
 	public static void beginGetImgs(String url, final String directory)
@@ -133,6 +135,44 @@ public class testGetImgFromBaidu {
 
 		}
 	}
+	
+	public static void finalBeginGetImgs(String url, final String directory)
+	throws Exception {
+		String htmlString = "var imgdata = " +getHtmlContent(url);
+
+		System.out.println(htmlString);
+
+		Context cx = Context.enter();
+		Scriptable scope = cx.initStandardObjects();
+		cx.evaluateString(scope, htmlString, "htmlString", 1, null);
+		Scriptable imgdata = (Scriptable) scope.get("imgdata", scope);
+		NativeArray scriptableArray = (NativeArray) imgdata.get("data",
+				scope);
+		for (int j = 0; j < scriptableArray.getLength(); j++) {
+			Scriptable scriptable = (Scriptable) (scriptableArray.get(
+					j, scope));
+			if (!scriptable.has("objURL", scope)) {
+				continue;
+			}
+			final String imgSrcString = scriptable.get("objURL", scope)
+					.toString().trim();
+			final String savefileName = j
+					+ imgSrcString.substring(imgSrcString
+							.lastIndexOf("."));
+			System.out.println(imgSrcString);
+			Thread.sleep(500);
+			new Thread(new Runnable() {
+				public void run() {
+					System.out.println(imgSrcString);
+					try {
+						saveImg(imgSrcString, savefileName, directory);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}).start();
+		}
+}
 
 	/**
 	 * 保存图片
@@ -199,15 +239,13 @@ public class testGetImgFromBaidu {
 	}
 
 	public static void main(String[] args) throws Exception {
-		String[] words = { "何静","周韦彤" };
-//		for (String word : words) {
+		String[] words = { "周韦彤" };
+		for (String word : words) {
 ////			http://image.baidu.com/i?tn=baiduimage&ct=201326592&lm=-1&cl=2&width=&height=&pn=0&word=%BA%CE%BE%B2#z=3 
 //			beginGetImgs(
 //					"http://image.baidu.com/i?tn=baiduimage&ct=201326592&lm=-1&cl=2&width=&height=&pn=0&word="
 //							+ URLEncoder.encode(word) + huge, word);
-//		}
-		
-		getHtmlContent("http://image.baidu.com/i?tn=baiduimagejson&ct=201326592&lm=-1&cl=2&width=&height=&pn=0&word=%BA%CE%BE%B2&z=3&rn=30");
-
+		finalBeginGetImgs("http://image.baidu.com/i?tn=baiduimagejson&ct=201326592&lm=-1&cl=2&width=&height=&pn=0&rn=30&word=" + URLEncoder.encode(word) + huge,word);
+		}
 	}
 }
