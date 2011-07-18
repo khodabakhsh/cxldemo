@@ -42,5 +42,6 @@
 	<classpathentry kind="lib" path="lib/tool/xml/jaxen-1.0-FCS.jar"/>
 	<classpathentry kind="lib" path="lib/tool/xml/saxpath-1.0-FCS.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="lib/testGetImgFromBaidu/jsoup-1.6.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
