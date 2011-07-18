@@ -200,12 +200,14 @@ public class testGetImgFromBaidu {
 
 	public static void main(String[] args) throws Exception {
 		String[] words = { "何静","周韦彤" };
-		for (String word : words) {
-//			http://image.baidu.com/i?tn=baiduimage&ct=201326592&lm=-1&cl=2&width=&height=&pn=0&word=%BA%CE%BE%B2#z=3 
-			beginGetImgs(
-					"http://image.baidu.com/i?tn=baiduimage&ct=201326592&lm=-1&cl=2&width=&height=&pn=0&word="
-							+ URLEncoder.encode(word) + huge, word);
-		}
+//		for (String word : words) {
+////			http://image.baidu.com/i?tn=baiduimage&ct=201326592&lm=-1&cl=2&width=&height=&pn=0&word=%BA%CE%BE%B2#z=3 
+//			beginGetImgs(
+//					"http://image.baidu.com/i?tn=baiduimage&ct=201326592&lm=-1&cl=2&width=&height=&pn=0&word="
+//							+ URLEncoder.encode(word) + huge, word);
+//		}
+		
+		getHtmlContent("http://image.baidu.com/i?tn=baiduimagejson&ct=201326592&lm=-1&cl=2&width=&height=&pn=0&word=%BA%CE%BE%B2&z=3&rn=30");
 
 	}
 }
