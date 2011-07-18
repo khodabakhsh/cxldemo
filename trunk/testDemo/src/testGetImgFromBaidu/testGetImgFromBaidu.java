@@ -43,6 +43,11 @@ public class testGetImgFromBaidu {
 	private static final String PIC_DIR = "c:/temp";
 	
 	private static final String encoding = "gb2312";
+	
+	private static final String huge = "#z=9";
+	private static final String big = "#z=3";
+	private static final String middle = "#z=2";
+	private static final String small = "#z=1";
 
 	/**
 	 * 链接超时
@@ -101,13 +106,17 @@ public class testGetImgFromBaidu {
 				NativeArray scriptableArray = (NativeArray) imgdata.get("data",
 						scope);
 				for (int j = 0; j < scriptableArray.getLength(); j++) {
-					Scriptable scriptable = (Scriptable) (((Scriptable) (scriptableArray
-							.get(j, scope))));
+					Scriptable scriptable = (Scriptable) (scriptableArray.get(
+							j, scope));
+					if (!scriptable.has("objURL", scope)) {
+						continue;
+					}
 					final String imgSrcString = scriptable.get("objURL", scope)
 							.toString().trim();
 					final String savefileName = j
 							+ imgSrcString.substring(imgSrcString
 									.lastIndexOf("."));
+					System.out.println(imgSrcString);
 					Thread.sleep(500);
 					new Thread(new Runnable() {
 						public void run() {
@@ -195,7 +204,7 @@ public class testGetImgFromBaidu {
 //			http://image.baidu.com/i?tn=baiduimage&ct=201326592&lm=-1&cl=2&width=&height=&pn=0&word=%BA%CE%BE%B2#z=3 
 			beginGetImgs(
 					"http://image.baidu.com/i?tn=baiduimage&ct=201326592&lm=-1&cl=2&width=&height=&pn=0&word="
-							+ URLEncoder.encode(word) + "#z=3", word);
+							+ URLEncoder.encode(word) + huge, word);
 		}
 
 	}
