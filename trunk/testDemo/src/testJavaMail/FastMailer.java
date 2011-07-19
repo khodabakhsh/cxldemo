@@ -60,11 +60,11 @@ public class FastMailer {
 
 		// DNS服务器，看看本机的DNS配置
 		String dns = "dns://"+GetDnsIp.getDnsIp();
-		String maitFrom = "wvdeee@gmail.com";
+		String maitFrom = "wvd333eee@gmail.com";
 		String[] mailToArray = { "13430363480@139.com" };
 		String subject = "这是猪蹄";
 		String content = "邮件内容来的";
-		String[] attachmentPath ={"d:/673TH.gif","d:/activation-1.1.jar"};
+		String[] attachmentPath ={"d:/tesseract.log"};
 		String[] attachmentName ={"673TH.gif","activation-1.1.jar"};
 
 		for (String mailTo :  mailToArray) {
