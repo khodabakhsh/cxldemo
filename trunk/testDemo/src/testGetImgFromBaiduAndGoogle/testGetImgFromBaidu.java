@@ -252,9 +252,22 @@ public class testGetImgFromBaidu {
 	}
 
 	public static void main(String[] args) throws Exception {
-		String[] words = { "周韦彤" };
+		String[] words = { "何静","张馨予","周韦彤" };
 		for (String word : words) {
-			finalBeginGetImgs(genRequestUrl("0", "3", word, big), word);
+			final String tempword = word;
+			new Thread(new Runnable() {
+				public void run() {
+					try {
+						finalBeginGetImgs(genRequestUrl("0", "20", tempword, big), tempword);
+					} catch (UnsupportedEncodingException e) {
+						e.printStackTrace();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}).start();
+			
+			
 		}
 	}
 
