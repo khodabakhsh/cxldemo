@@ -199,9 +199,21 @@ public class testGetImgFromGoogle {
 	}
 
 	public static void main(String[] args) throws Exception {
-		String[] words = { "何静" };
+		String[] words = { "何静","张馨予","周韦彤" };
 		for (String word : words) {
-			beginGetImgs(genRequestUrl(word, "0", big), word);
+			final String tempword = word;
+			new Thread(new Runnable() {
+				public void run() {
+					try {
+						beginGetImgs(genRequestUrl(tempword, "0", big), tempword);
+					} catch (UnsupportedEncodingException e) {
+						e.printStackTrace();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}).start();
+
 		}
 	}
 
