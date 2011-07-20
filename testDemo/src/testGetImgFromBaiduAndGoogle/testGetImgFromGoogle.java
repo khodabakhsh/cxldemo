@@ -87,7 +87,7 @@ public class testGetImgFromGoogle {
 			while ((strLine = bufferedReader.readLine()) != null) {
 				sBuffer.append(strLine + "\n");
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -98,38 +98,38 @@ public class testGetImgFromGoogle {
 
 	public static void beginGetImgs(String url, final String directory)
 			throws Exception {
+		System.out.println(url);
 		// 1.用这个访问会抓到所有页面的连页，下面必须加入header，否则会出现403 load url error(禁止访问)
 		Document doc = Jsoup
 				.connect(url)
-				.header(
-						"User-Agent",
-						"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2")
-				.get();
-//		System.err.println(doc.outerHtml());
-		
+				.header("User-Agent",
+						"Mozilla/5.0 (Windows; U; Windows NT 5.2) Gecko/2008070208 Firefox/3.0.1")
+				.header("Accept", "text ml,application/xhtml+xml").header(
+						"Accept-Language", "zh-cn,zh;q=0.5").header(
+						"Accept-Charset", "GB2312,utf-8;q=0.7,*;q=0.7").get();
+		// System.err.println(doc.outerHtml());
+
 		// 2.用下面这句，只能抓到从start开始的21个图，why
-//		 Document doc = Jsoup.parse(getHtmlContent(url));
+		// Document doc = Jsoup.parse(getHtmlContent(url));
 		Elements links = doc.select("a[href~=/imgres\\?imgurl*]");
-		 System.out.println(links.size());
-//		for (int i = 0; i < links.size(); i++) {
-//			Element element = links.get(i);
-//			String fullImgHref = element.attr("href");
-//			final String imgHref = fullImgHref.substring("/imgres?imgurl="
-//					.length(), fullImgHref.indexOf("&"));
-//			System.out.println(imgHref);
-//			final String savefileName = i
-//					+ imgHref.substring(imgHref.lastIndexOf("."));
-//			Thread.sleep(500);
-//			new Thread(new Runnable() {
-//				public void run() {
-//					try {
-//						 saveImg(imgHref, savefileName, directory);
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-//				}
-//			}).start();
-//		}
+		for (int i = 0; i < links.size(); i++) {
+			Element element = links.get(i);
+			String fullImgHref = element.attr("href");
+			final String imgHref = fullImgHref.substring("/imgres?imgurl="
+					.length(), fullImgHref.indexOf("&"));
+			final String savefileName = i
+					+ imgHref.substring(imgHref.lastIndexOf("."));
+			Thread.sleep(500);
+			new Thread(new Runnable() {
+				public void run() {
+					try {
+						saveImg(imgHref, savefileName, directory);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}).start();
+		}
 	}
 
 	/**
@@ -199,15 +199,18 @@ public class testGetImgFromGoogle {
 	}
 
 	public static void main(String[] args) throws Exception {
-		String[] words = { "何静","张馨予","周韦彤"};
+		String[] words = { "何静", "张馨予", "周韦彤" };
 		for (String word : words) {
 			final String tempword = word;
 			new Thread(new Runnable() {
 				public void run() {
 					try {
-						beginGetImgs(genRequestUrl(tempword, "0", big), tempword);
-//						System.out.println(genRequestUrl(tempword, "0", big));
-//						System.out.println(getHtmlContent(genRequestUrl(tempword, "0", big)));
+						beginGetImgs(genRequestUrl(tempword, "0", big),
+								tempword);
+						// System.out.println(genRequestUrl(tempword, "0",
+						// big));
+						// System.out.println(getHtmlContent(genRequestUrl(tempword,
+						// "0", big)));
 					} catch (UnsupportedEncodingException e) {
 						e.printStackTrace();
 					} catch (Exception e) {
@@ -221,9 +224,12 @@ public class testGetImgFromGoogle {
 
 	/**
 	 * 
-	 * @param word 关键字
-	 * @param start 开始位置
-	 * @param imgSize 尺寸
+	 * @param word
+	 *            关键字
+	 * @param start
+	 *            开始位置
+	 * @param imgSize
+	 *            尺寸
 	 * @return
 	 * @throws UnsupportedEncodingException
 	 */
