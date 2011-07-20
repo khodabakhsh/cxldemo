@@ -87,7 +87,7 @@ public class testGetImgFromGoogle {
 			while ((strLine = bufferedReader.readLine()) != null) {
 				sBuffer.append(strLine + "\n");
 			}
-			// System.out.println(sBuffer);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -110,26 +110,26 @@ public class testGetImgFromGoogle {
 		// 2.用下面这句，只能抓到从start开始的21个图，why
 //		 Document doc = Jsoup.parse(getHtmlContent(url));
 		Elements links = doc.select("a[href~=/imgres\\?imgurl*]");
-//		 System.out.println(links.size());
-		for (int i = 0; i < links.size(); i++) {
-			Element element = links.get(i);
-			String fullImgHref = element.attr("href");
-			final String imgHref = fullImgHref.substring("/imgres?imgurl="
-					.length(), fullImgHref.indexOf("&"));
-			System.out.println(imgHref);
-			final String savefileName = i
-					+ imgHref.substring(imgHref.lastIndexOf("."));
-			Thread.sleep(500);
-			new Thread(new Runnable() {
-				public void run() {
-					try {
-						 saveImg(imgHref, savefileName, directory);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			}).start();
-		}
+		 System.out.println(links.size());
+//		for (int i = 0; i < links.size(); i++) {
+//			Element element = links.get(i);
+//			String fullImgHref = element.attr("href");
+//			final String imgHref = fullImgHref.substring("/imgres?imgurl="
+//					.length(), fullImgHref.indexOf("&"));
+//			System.out.println(imgHref);
+//			final String savefileName = i
+//					+ imgHref.substring(imgHref.lastIndexOf("."));
+//			Thread.sleep(500);
+//			new Thread(new Runnable() {
+//				public void run() {
+//					try {
+//						 saveImg(imgHref, savefileName, directory);
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
+//				}
+//			}).start();
+//		}
 	}
 
 	/**
@@ -199,13 +199,15 @@ public class testGetImgFromGoogle {
 	}
 
 	public static void main(String[] args) throws Exception {
-		String[] words = { "何静","张馨予","周韦彤" };
+		String[] words = { "何静","张馨予","周韦彤"};
 		for (String word : words) {
 			final String tempword = word;
 			new Thread(new Runnable() {
 				public void run() {
 					try {
 						beginGetImgs(genRequestUrl(tempword, "0", big), tempword);
+//						System.out.println(genRequestUrl(tempword, "0", big));
+//						System.out.println(getHtmlContent(genRequestUrl(tempword, "0", big)));
 					} catch (UnsupportedEncodingException e) {
 						e.printStackTrace();
 					} catch (Exception e) {
