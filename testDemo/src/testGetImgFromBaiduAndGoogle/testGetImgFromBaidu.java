@@ -44,7 +44,7 @@ import org.mozilla.javascript.Scriptable;
  * 
  */
 /**
- * 需要的主要jar包 httpclient-4.0.1jar jsoup-1.5.2.jar(后来没用到了) rhino.jar
+ * 需要的主要jar包 httpclient-4.0.1jar rhino.jar
  * 
  * @author caixl
  * 
