@@ -37,7 +37,7 @@ import org.jsoup.select.Elements;
  * 
  */
 /**
- * 需要的主要jar包 httpclient-4.0.1jar jsoup-1.5.2.jar(后来没用到了)
+ * 需要的主要jar包 httpclient-4.0.1jar jsoup-1.5.2.jar
  * 
  * @author caixl
  * 
@@ -99,16 +99,16 @@ public class testGetImgFromGoogle {
 	public static void beginGetImgs(String url, final String directory)
 			throws Exception {
 		// 1.用这个访问会抓到所有页面的连页，下面必须加入header，否则会出现403 load url error(禁止访问)
-//		Document doc = Jsoup
-//				.connect(url)
-//				.header(
-//						"User-Agent",
-//						"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2")
-//				.get();
+		Document doc = Jsoup
+				.connect(url)
+				.header(
+						"User-Agent",
+						"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2")
+				.get();
 //		System.err.println(doc.outerHtml());
 		
 		// 2.用下面这句，只能抓到从start开始的21个图，why
-		 Document doc = Jsoup.parse(getHtmlContent(url));
+//		 Document doc = Jsoup.parse(getHtmlContent(url));
 		Elements links = doc.select("a[href~=/imgres\\?imgurl*]");
 //		 System.out.println(links.size());
 		for (int i = 0; i < links.size(); i++) {
@@ -227,7 +227,7 @@ public class testGetImgFromGoogle {
 	 */
 	public static String genRequestUrl(String word, String start, String imgSize)
 			throws UnsupportedEncodingException {
-		return "http://www.google.com.hk/search?um=1&hl=zh-CN&newwindow=1&safe=strict&sa=X&biw=1540&bih=125&tbm=isch&ijn=bg&ei=XjMlTs-7N7HomAW4r-zqCQ&start="
+		return "http://www.google.com.hk/search?hl=zh-CN&newwindow=1&safe=strict&tbm=isch&prmd=ivnsol&source=lnt&sa=X&ei=N1gmTsPxHOOfmQXl7bGOCg&ved=0CAcQpwUoAQ&biw=1540&bih=258&start="
 				+ start
 				+ "&q="
 				+ URLEncoder.encode(word, gb2312)
