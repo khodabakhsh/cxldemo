@@ -294,9 +294,10 @@ public class ContinueFTP {
 		ContinueFTP myFtp = new ContinueFTP();
 		try {
 			myFtp.connect("128.8.1.154", 21, "administrator", "1");
+//			myFtp.CreateDirecroty("/2/3/",myFtp.ftpClient);
 //			myFtp.ftpClient.makeDirectory(new String("创建目录_电视剧".getBytes("GBK"),"iso-8859-1"));
-			System.out.println(myFtp.upload("E:\\ftptest\\本地的ftptest.rar", "/新创建目录/上传的ftptest.rar"));
-			System.out.println(myFtp.download("/ftptest/ftptest.rar", "E:\\ftptest/ftptest.rar"));
+//			System.out.println(myFtp.upload("E:\\ftptest\\本地的ftptest.rar", "/新创建目录/上传的ftptest.rar"));
+//			System.out.println(myFtp.download("/ftptest/ftptest.rar", "E:\\ftptest/ftptest.rar"));
 			myFtp.disconnect();
 		} catch (IOException e) {
 			System.out.println("连接FTP出错："+e.getMessage());

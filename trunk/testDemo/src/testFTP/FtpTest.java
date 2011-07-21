@@ -67,7 +67,8 @@ public class FtpTest {
                         String objFolder = distFolder + File.separator + furi1.substring(furi2.length());
 
                         ftpClient.changeWorkingDirectory("/");
-                        ftpClient.makeDirectory(objFolder);
+//                        ftpClient.makeDirectory(objFolder);
+                        CreateDirecroty(objFolder,ftpClient);
                         System.out.println("a>>>>>>> : " + distFolder + File.separator + localFile.getParent());
                         System.out.println("x>>>>>>> : " + objFolder);
                         ftpClient.changeWorkingDirectory(objFolder);
@@ -88,6 +89,50 @@ public class FtpTest {
                 }
                 return flag;
         }
+
+    	/**
+    	 * 递归创建远程服务器目录
+    	 * @param remote 远程服务器文件绝对路径
+    	 * @param ftpClient FTPClient对象
+    	 * @return 目录创建是否成功
+    	 * @throws IOException
+    	 */
+    	public static UploadStatus CreateDirecroty(String remote,FTPClient ftpClient) throws IOException{
+    		UploadStatus status = UploadStatus.Create_Directory_Success;
+    		String directory = remote.substring(0,remote.lastIndexOf("/")+1);
+    		if(!directory.equalsIgnoreCase("/")&&!ftpClient.changeWorkingDirectory(directory)){
+    			//如果远程目录不存在，则递归创建远程服务器目录
+    			int start=0;
+    			int end = 0;
+    			if(directory.startsWith("/")){
+    				start = 1;
+    			}else{
+    				start = 0;
+    			}
+    			end = directory.indexOf("/",start);
+    			while(true){
+    				String subDirectory = remote.substring(start,end);
+    				if(!ftpClient.changeWorkingDirectory(subDirectory)){
+    					if(ftpClient.makeDirectory(subDirectory)){
+    						ftpClient.changeWorkingDirectory(subDirectory);
+    					}else {
+    						System.out.println("创建目录失败");
+    						return UploadStatus.Create_Directory_Fail;
+    					}
+    				}
+    				
+    				start = end + 1;
+    				end = directory.indexOf("/",start);
+    				
+    				//检查所有目录是否创建完毕
+    				if(end <= start){
+    					break;
+    				}
+    			}
+    		}
+    		return status;
+    	}
+    	
 
         /**
          * 上传多个文件
