@@ -1,4 +1,4 @@
-package testGetImgFromBaiduAndGoogle;
+package testJsoup.testGetImgFromBaiduAndGoogle;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
