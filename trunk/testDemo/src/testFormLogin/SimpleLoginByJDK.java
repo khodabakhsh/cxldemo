@@ -62,10 +62,10 @@ public class SimpleLoginByJDK {
 		InputStream urlStream = resumeConnection.getInputStream();
 		BufferedReader bufferedReader = new BufferedReader(
 				new InputStreamReader(urlStream));
-		String ss = null;
-		String total = "";
-		while ((ss = bufferedReader.readLine()) != null) {
-			total += ss;
+		String readString = "";
+		StringBuffer total = new StringBuffer("");
+		while ((readString = bufferedReader.readLine()) != null) {
+			total.append(readString);
 		}
 		System.out.println(total);
 		// IOUtils.write(total, new FileOutputStream("d:/index.html"));
