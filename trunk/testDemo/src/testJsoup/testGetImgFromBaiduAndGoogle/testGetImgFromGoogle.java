@@ -120,7 +120,7 @@ public class testGetImgFromGoogle {
 			final String savefileName = i
 					+ imgHref.substring(imgHref.lastIndexOf("."));
 			Thread.sleep(500);
-			new Thread(new Runnable() {
+			ThreadPool.execute((new Runnable() {
 				public void run() {
 					try {
 						saveImg(imgHref, savefileName, directory);
@@ -128,7 +128,7 @@ public class testGetImgFromGoogle {
 						e.printStackTrace();
 					}
 				}
-			}).start();
+			}));
 		}
 	}
 
@@ -200,13 +200,11 @@ public class testGetImgFromGoogle {
 
 	public static void main(String[] args) throws Exception {
 		String[] words = { "何静", "张馨予", "周韦彤" };
-		for (String word : words) {
-			final String tempword = word;
+		for (final String word : words) {
 			new Thread(new Runnable() {
 				public void run() {
 					try {
-						beginGetImgs(genRequestUrl(tempword, "0", big),
-								tempword);
+						beginGetImgs(genRequestUrl(word, "0", big), word);
 						// System.out.println(genRequestUrl(tempword, "0",
 						// big));
 						// System.out.println(getHtmlContent(genRequestUrl(tempword,
