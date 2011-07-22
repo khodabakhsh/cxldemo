@@ -5,6 +5,7 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -76,21 +77,28 @@ public class testGetImgFromGoogle {
 		get.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT,
 				TIME_OUT);
 		StringBuilder sBuffer = new StringBuilder();
+		BufferedReader bufferedReader = null;
+		InputStreamReader iStreamReader = null;
 		try {
 			HttpResponse response = client.execute(get);
-			InputStreamReader iStreamReader = new InputStreamReader(
-					new BufferedInputStream(response.getEntity().getContent()),
-					gb2312);
+			iStreamReader = new InputStreamReader(new BufferedInputStream(
+					response.getEntity().getContent()), gb2312);
 
-			BufferedReader bufferedReader = new BufferedReader(iStreamReader);
+			bufferedReader = new BufferedReader(iStreamReader);
 			String strLine;
 			while ((strLine = bufferedReader.readLine()) != null) {
 				sBuffer.append(strLine + "\n");
 			}
-
+			System.out.println(sBuffer);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			try {
+				iStreamReader.close();
+				bufferedReader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			client.getConnectionManager().shutdown();
 		}
 		return sBuffer.toString();

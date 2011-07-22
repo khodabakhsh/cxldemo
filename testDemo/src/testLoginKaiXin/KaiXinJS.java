@@ -1,6 +1,7 @@
 package testLoginKaiXin;
 
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.LineNumberReader;
 
 import org.mozilla.javascript.*;
@@ -21,7 +22,7 @@ public final class KaiXinJS {
     }
 
     private String getJsContent(String filename) {
-        LineNumberReader reader;
+        LineNumberReader reader =null;
         try {
             reader = new LineNumberReader(new FileReader(filename));
             String s = null;
@@ -33,7 +34,14 @@ public final class KaiXinJS {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }finally{
+        	try {
+				reader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
         }
+        
     }
 
     public Scriptable getScope() {

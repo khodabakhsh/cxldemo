@@ -5,6 +5,7 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -19,11 +20,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.util.EntityUtils;
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
@@ -81,13 +77,14 @@ public class testGetImgFromBaidu {
 		get.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT,
 				TIME_OUT);
 		StringBuilder sBuffer = new StringBuilder();
+		BufferedReader bufferedReader = null;
+		InputStreamReader iStreamReader = null;
 		try {
 			HttpResponse response = client.execute(get);
-			InputStreamReader iStreamReader = new InputStreamReader(
-					new BufferedInputStream(response.getEntity().getContent()),
-					encoding);
+			iStreamReader = new InputStreamReader(new BufferedInputStream(
+					response.getEntity().getContent()), encoding);
 
-			BufferedReader bufferedReader = new BufferedReader(iStreamReader);
+			bufferedReader = new BufferedReader(iStreamReader);
 			String strLine;
 			while ((strLine = bufferedReader.readLine()) != null) {
 				sBuffer.append(strLine + "\n");
@@ -96,11 +93,16 @@ public class testGetImgFromBaidu {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			try {
+				iStreamReader.close();
+				bufferedReader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			client.getConnectionManager().shutdown();
 		}
 		return sBuffer.toString();
 	}
-
 
 	/**
 	 * 用此方法
@@ -211,8 +213,8 @@ public class testGetImgFromBaidu {
 			new Thread(new Runnable() {
 				public void run() {
 					try {
-						finalBeginGetImgs(genRequestUrl("0", "20", word,
-								big), word);
+						finalBeginGetImgs(genRequestUrl("0", "20", word, big),
+								word);
 					} catch (UnsupportedEncodingException e) {
 						e.printStackTrace();
 					} catch (Exception e) {
