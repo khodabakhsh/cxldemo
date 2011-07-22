@@ -101,52 +101,6 @@ public class testGetImgFromBaidu {
 		return sBuffer.toString();
 	}
 
-	public static void beginGetImgs(String url, final String directory)
-			throws Exception {
-		Connection conn = Jsoup.connect(url);
-		Document doc = conn.get();
-		Elements links = doc.select("script");
-		for (int i = 0; i < links.size(); i++) {
-			Element element = links.get(i);
-			String htmlString = element.html();
-			if (htmlString.indexOf("var imgdata") != -1) {
-
-				System.out.println(htmlString);
-				htmlString = htmlString.substring(0, htmlString
-						.lastIndexOf("var isRightData"));
-
-				Context cx = Context.enter();
-				Scriptable scope = cx.initStandardObjects();
-				cx.evaluateString(scope, htmlString, "htmlString", 1, null);
-				Scriptable imgdata = (Scriptable) scope.get("imgdata", scope);
-				NativeArray scriptableArray = (NativeArray) imgdata.get("data",
-						scope);
-				for (int j = 0; j < scriptableArray.getLength(); j++) {
-					Scriptable scriptable = (Scriptable) (scriptableArray.get(
-							j, scope));
-					if (!scriptable.has("objURL", scope)) {
-						continue;
-					}
-					final String imgSrcString = scriptable.get("objURL", scope)
-							.toString().trim();
-					final String savefileName = j
-							+ imgSrcString.substring(imgSrcString
-									.lastIndexOf("."));
-					Thread.sleep(500);
-					new Thread(new Runnable() {
-						public void run() {
-							try {
-								saveImg(imgSrcString, savefileName, directory);
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						}
-					}).start();
-				}
-			}
-
-		}
-	}
 
 	/**
 	 * 用此方法
@@ -173,7 +127,7 @@ public class testGetImgFromBaidu {
 			final String savefileName = j
 					+ imgSrcString.substring(imgSrcString.lastIndexOf("."));
 			Thread.sleep(500);
-			new Thread(new Runnable() {
+			ThreadPool.execute(new Runnable() {
 				public void run() {
 					try {
 						saveImg(imgSrcString, savefileName, directory);
@@ -181,7 +135,7 @@ public class testGetImgFromBaidu {
 						e.printStackTrace();
 					}
 				}
-			}).start();
+			});
 		}
 	}
 
@@ -252,13 +206,13 @@ public class testGetImgFromBaidu {
 	}
 
 	public static void main(String[] args) throws Exception {
-		String[] words = { "何静","张馨予","周韦彤" };
-		for (String word : words) {
-			final String tempword = word;
+		String[] words = { "何静", "张馨予", "周韦彤" };
+		for (final String word : words) {
 			new Thread(new Runnable() {
 				public void run() {
 					try {
-						finalBeginGetImgs(genRequestUrl("0", "20", tempword, big), tempword);
+						finalBeginGetImgs(genRequestUrl("0", "20", word,
+								big), word);
 					} catch (UnsupportedEncodingException e) {
 						e.printStackTrace();
 					} catch (Exception e) {
@@ -266,8 +220,7 @@ public class testGetImgFromBaidu {
 					}
 				}
 			}).start();
-			
-			
+
 		}
 	}
 
@@ -282,7 +235,7 @@ public class testGetImgFromBaidu {
 	 * @param size
 	 *            尺寸
 	 * @return
-	 * @throws UnsupportedEncodingException 
+	 * @throws UnsupportedEncodingException
 	 */
 	public static String genRequestUrl(String pn, String rn, String word,
 			String size) throws UnsupportedEncodingException {
@@ -291,9 +244,7 @@ public class testGetImgFromBaidu {
 				+ "&rn="
 				+ rn
 				+ "&word="
-				+ URLEncoder.encode(word,encoding)
-				+ "&z="
-				+ size;
+				+ URLEncoder.encode(word, encoding) + "&z=" + size;
 
 	}
 }
