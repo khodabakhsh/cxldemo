@@ -138,6 +138,7 @@ public class testGetImgFromBaidu {
 					}
 				}
 			});
+			ThreadPool.showDown();
 		}
 	}
 

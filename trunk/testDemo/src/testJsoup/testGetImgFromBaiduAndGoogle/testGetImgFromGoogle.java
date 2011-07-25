@@ -137,6 +137,7 @@ public class testGetImgFromGoogle {
 					}
 				}
 			}));
+			ThreadPool.showDown();
 		}
 	}
 
