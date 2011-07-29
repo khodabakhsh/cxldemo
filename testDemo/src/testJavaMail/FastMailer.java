@@ -26,9 +26,6 @@ import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
-
-import com.sun.java_cup.internal.internal_error;
-
 import tool.GetDnsIp;
 
 
