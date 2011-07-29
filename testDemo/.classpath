@@ -4,7 +4,6 @@
 	<classpathentry kind="src" path="tool"/>
 	<classpathentry kind="src" path="web"/>
 	<classpathentry kind="src" path="config"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="lib/testJavaMail/activation-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/testJavaMail/mail-1.4.jar"/>
@@ -47,5 +46,6 @@
 	<classpathentry kind="lib" path="lib/commons-net-3.0.1/commons-net-3.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/commons-net-3.0.1/commons-net-3.0.1-sources.jar"/>
 	<classpathentry kind="lib" path="lib/commons-net-3.0.1/commons-net-examples-3.0.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
