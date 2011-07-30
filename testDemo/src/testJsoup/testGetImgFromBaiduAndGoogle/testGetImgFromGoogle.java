@@ -108,17 +108,17 @@ public class testGetImgFromGoogle {
 			throws Exception {
 		System.out.println(url);
 		// 1.用这个访问会抓到所有页面的连页，下面必须加入header，否则会出现403 load url error(禁止访问)
-		Document doc = Jsoup
-				.connect(url)
-				.header("User-Agent",
-						"Mozilla/5.0 (Windows; U; Windows NT 5.2) Gecko/2008070208 Firefox/3.0.1")
-				.header("Accept", "text ml,application/xhtml+xml").header(
-						"Accept-Language", "zh-cn,zh;q=0.5").header(
-						"Accept-Charset", "GB2312,utf-8;q=0.7,*;q=0.7").get();
+//		Document doc = Jsoup
+//				.connect(url)
+//				.header("User-Agent",
+//						"Mozilla/5.0 (Windows; U; Windows NT 5.2) Gecko/2008070208 Firefox/3.0.1")
+//				.header("Accept", "text ml,application/xhtml+xml").header(
+//						"Accept-Language", "zh-cn,zh;q=0.5").header(
+//						"Accept-Charset", "GB2312,utf-8;q=0.7,*;q=0.7").get();
 		// System.err.println(doc.outerHtml());
 
 		// 2.用下面这句，只能抓到从start开始的21个图，why
-		// Document doc = Jsoup.parse(getHtmlContent(url));
+		 Document doc = Jsoup.parse(getHtmlContent(url));
 		Elements links = doc.select("a[href~=/imgres\\?imgurl*]");
 		for (int i = 0; i < links.size(); i++) {
 			Element element = links.get(i);
@@ -137,7 +137,6 @@ public class testGetImgFromGoogle {
 					}
 				}
 			}));
-			ThreadPool.showDown();
 		}
 	}
 
