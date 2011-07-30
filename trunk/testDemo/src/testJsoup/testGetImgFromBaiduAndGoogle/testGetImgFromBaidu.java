@@ -138,7 +138,6 @@ public class testGetImgFromBaidu {
 					}
 				}
 			});
-			ThreadPool.showDown();
 		}
 	}
 
@@ -211,6 +210,7 @@ public class testGetImgFromBaidu {
 	public static void main(String[] args) throws Exception {
 		String[] words = { "何静", "张馨予", "周韦彤" };
 		for (final String word : words) {
+			Thread.sleep(500);
 			new Thread(new Runnable() {
 				public void run() {
 					try {
@@ -225,6 +225,7 @@ public class testGetImgFromBaidu {
 			}).start();
 
 		}
+//		ThreadPool.showDown();
 	}
 
 	/**
