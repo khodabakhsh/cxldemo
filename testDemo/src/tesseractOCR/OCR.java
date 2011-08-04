@@ -1,15 +1,10 @@
 package tesseractOCR;
 
 import java.io.BufferedReader;
-
 import java.io.File;
-
 import java.io.FileInputStream;
-
 import java.io.InputStreamReader;
-
 import java.util.ArrayList;
-
 import java.util.List;
 
 import org.jdesktop.swingx.util.OS;
@@ -20,15 +15,11 @@ public class OCR {
 
 	private final String EOL = System.getProperty("line.separator");
 
-	private String tessPath = new File("D:\\Program Files\\Tesseract-OCR").getAbsolutePath();
-
-	//private String tessPath="C://Program Files (x86)//Tesseract-OCR//";
-
 	public String recognizeText(File imageFile, String imageFormat)
 			throws Exception {
 
 		File tempImage = ImageIOHelper.createImage(imageFile, imageFormat);
-
+	
 		File outputFile = new File(imageFile.getParentFile(), "output");
 
 		StringBuffer strB = new StringBuffer();
@@ -37,19 +28,12 @@ public class OCR {
 
 		if (OS.isWindowsXP()) {
 
-			cmd.add(tessPath + "//tesseract.exe");
+			cmd.add("tesseract");
 
-			//cmd.add(tessPath + "//Tesseract-OCR");
 
 		} else if (OS.isLinux()) {
 
 			cmd.add("tesseract");
-
-		} else {
-
-			//cmd.add(tessPath + "//Tesseract-OCR");
-
-			cmd.add(tessPath + "//tesseract");
 
 		}
 
