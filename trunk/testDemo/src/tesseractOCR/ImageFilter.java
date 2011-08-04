@@ -1,21 +1,14 @@
 package tesseractOCR;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
-
 import java.awt.color.ColorSpace;
-
 import java.awt.geom.AffineTransform;
-
 import java.awt.image.AffineTransformOp;
-
 import java.awt.image.BufferedImage;
-
 import java.awt.image.ColorConvertOp;
-
 import java.awt.image.ColorModel;
-
 import java.awt.image.MemoryImageSource;
-
 import java.awt.image.PixelGrabber;
 
 /**
@@ -46,6 +39,55 @@ public class ImageFilter {
 
 		pixels = new int[iw * ih];
 
+	}
+	/**
+	 * 1.首先灰度化，灰度值=0.3R+0.59G+0.11B
+	 */
+	public void grey() {
+		for (int y = 0; y < ih; y++) {
+			for (int x = 0; x < iw; x++) {
+				int rgb = image.getRGB(x, y);
+				Color color = new Color(rgb); // 根据rgb的int值分别取得r,g,b颜色。
+				int gray = (int) (0.3 * color.getRed() + 0.59
+						* color.getGreen() + 0.11 * color.getBlue());
+				Color newColor = new Color(gray, gray, gray);
+				image.setRGB(x, y, newColor.getRGB());
+			}
+		}
+	}
+	/**
+	 * 2.其次是灰度反转： 
+	 */
+	public void greyRevert() {
+	    for (int y = 0; y < ih; y++) {     
+	        for (int x = 0; x < iw; x++) {     
+	            int rgb = image.getRGB(x, y);     
+	            Color color = new Color(rgb); // 根据rgb的int值分别取得r,g,b颜色。     
+	            Color newColor = new Color(255 - color.getRed(), 255 - color     
+	                .getGreen(), 255 - color.getBlue());     
+	            image.setRGB(x, y, newColor.getRGB());     
+	        }     
+	    }    
+	}
+	/**
+	 * 3.再次是二值化，取图片的平均灰度作为阈值，低于该值的全都为0，高于该值的全都为255 
+	 */
+	public void erZhi() {
+		int grey = 100;
+	    for (int y = 0; y < ih; y++) {     
+	        for (int x = 0; x < iw; x++) {     
+	            int rgb = image.getRGB(x, y);     
+	            Color color = new Color(rgb); // 根据rgb的int值分别取得r,g,b颜色。     
+	            int value = 255 - color.getBlue();     
+	            if (value > grey) {     
+	                Color newColor = new Color(0, 0, 0);     
+	                image.setRGB(x, y, newColor.getRGB());     
+	            } else {     
+	                Color newColor = new Color(255, 255, 255);     
+	                image.setRGB(x, y, newColor.getRGB());     
+	            } 
+	        }     
+	    }    
 	}
 
 	/** 图像二值化 */
