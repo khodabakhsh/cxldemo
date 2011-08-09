@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<context-param>
+		<param-name>backupMailers</param-name>
+		<param-value>mail.latest.costnote.appspot.com</param-value>
+	</context-param>
+	
+	<servlet>
+		<servlet-name>webManager</servlet-name>
+		<servlet-class>com.terry.weatherlib.servlet.WebManagerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>webManager</servlet-name>
+		<url-pattern>/webManager</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>send</servlet-name>
+		<servlet-class>com.terry.weatherlib.servlet.SendMailServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>send</servlet-name>
+		<url-pattern>/cron/send</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>check</servlet-name>
+		<servlet-class>com.terry.weatherlib.servlet.CheckScheduleServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>check</servlet-name>
+		<url-pattern>/cron/check</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>clearWeatherCache</servlet-name>
+		<servlet-class>com.terry.weatherlib.servlet.ClearWeatherCacheServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>clearWeatherCache</servlet-name>
+		<url-pattern>/cron/clearWeatherCache</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>xmppreceiver</servlet-name>
+		<servlet-class>com.terry.weatherlib.servlet.XMPPServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>xmppreceiver</servlet-name>
+		<url-pattern>/_ah/xmpp/message/chat/</url-pattern>
+	</servlet-mapping>
+	
+	<security-constraint>
+        <web-resource-collection>
+            <url-pattern>/cron/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
+    <listener>
+		<listener-class>com.terry.weatherlib.listener.InitListener</listener-class>
+	</listener>
+</web-app>
