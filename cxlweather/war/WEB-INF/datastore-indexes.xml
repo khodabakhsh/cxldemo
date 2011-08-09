@@ -1,0 +1,6 @@
+<datastore-indexes autoGenerate="false">
+	<datastore-index kind="Schedule" ancestor="false" source="manual">
+		<property name="type" direction="asc"/>
+		<property name="sdate" direction="asc"/>
+	</datastore-index>
+</datastore-indexes>
