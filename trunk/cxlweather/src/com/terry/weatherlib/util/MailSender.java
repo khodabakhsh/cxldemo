@@ -33,8 +33,7 @@ public class MailSender {
 			sender = "service";
 		/**
 		 * 下面的邮件地址请改成你的Gmail帐号，根据官方文档
-		 * http://code.google.com/intl/zh-CN/appengine
-		 * /docs/java/mail/overview.html#Email_Messages
+		 * http://code.google.com/intl/zh-CN/appengine/docs/java/mail/overview.html#Email_Messages
 		 * 
 		 * 不能随意设置发件人
 		 */
@@ -51,6 +50,7 @@ public class MailSender {
 			String sender, String subject, String body) {
 		try {
 			sendMail(email, sender, subject, body);
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
