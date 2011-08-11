@@ -15,6 +15,8 @@ import javax.mail.internet.MimeUtility;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.google.appengine.api.utils.SystemProperty;
+
 /**
  * @author xinghuo.yao E-mail: yaoxinghuo at 126 dot com
  * @version create: 2010-2-3 下午04:38:15
@@ -37,7 +39,9 @@ public class MailSender {
 		 * 
 		 * 不能随意设置发件人
 		 */
-		msg.setFrom(new InternetAddress("cxdragon@gmail.com", MimeUtility
+		String from = "service@" + SystemProperty.applicationId.get()
+		+ ".appspotmail.com";
+		msg.setFrom(new InternetAddress(from, MimeUtility
 				.encodeText(sender, "UTF-8", "b")));
 		msg.addRecipient(javax.mail.Message.RecipientType.TO,
 				new InternetAddress(email));
