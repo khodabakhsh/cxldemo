@@ -24,7 +24,7 @@ import com.terry.weatherlib.model.Schedule;
  */
 @SuppressWarnings("unchecked")
 public class WeatherMailSender {
-	private static final String HELP = "\r\n管理订阅请登录http://www.tianqiyubao.org.ru/\r\n请勿直接回复";
+	private static final String HELP = "\r\n\r\n";
 
 	private static SimpleDateFormat sdf2 = new SimpleDateFormat("M月d日H:mm",
 			Locale.CHINA);
