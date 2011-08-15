@@ -8,7 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jdesktop.swingx.util.OS;
-
+/**
+ * tesseract 地址，http://code.google.com/p/tesseract-ocr/downloads/list
+ * @author caixl
+ *
+ */
 public class OCR {
 
 	private final String LANG_OPTION = "-l";
