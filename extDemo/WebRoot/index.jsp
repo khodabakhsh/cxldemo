@@ -55,6 +55,9 @@
 					<a href="tree/AsyncTree.html">AsyncTree</a>
 				</li>
 				<li>
+					<a href="tree/checkboxTree.html">checkboxTree</a>
+				</li>
+				<li>
 					<a href="closeMenuTab/closeMenuTab.html">closeMenuTab</a>
 				</li>
 				<li>
