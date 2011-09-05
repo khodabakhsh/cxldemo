@@ -1,0 +1,22 @@
+<head><script language=Javascript>
+var proMaxHeight = 150;
+var proMaxWidth = 110;
+
+function proDownImage(ImgD){
+      var image=new Image();
+      image.src=ImgD.src;
+      if(image.width>0 && image.height>0){
+      var rate = (proMaxWidth/image.width < proMaxHeight/image.height)?proMaxWidth/image.width:proMaxHeight/image.height;
+    if(rate <= 1){   
+     ImgD.width = image.width*rate;
+     ImgD.height =image.height*rate;
+    }
+    else {
+                          ImgD.width = image.width;
+                          ImgD.height =image.height;
+                  }
+      }
+}
+</script></head>
+<body><img src="1.gif" onload=proDownImage(this) width="110px" height="150px" /> <br/><br/><br/>
+<img src="2.gif" onload=proDownImage(this) /></body>
