@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Mouse Scroll Wheel example in JavaScript - ViralPatel.net</title>
+<style>
+#scroll {
+    width: 250px;
+    height: 50px;
+    border: 2px solid black;
+    background-color: lightyellow;
+    top: 100px;
+    left: 50px;
+    position:absolute;
+}
+</style>
+<script language="javascript">
+window.onload = function()
+{
+    //adding the event listerner for Mozilla
+    if(window.addEventListener)
+        document.addEventListener('DOMMouseScroll', moveObject, false);
+ 
+    //for IE/OPERA etc
+    document.onmousewheel = moveObject;
+}
+function moveObject(event)
+{
+    var delta = 0;
+ 
+    if (!event) event = window.event;
+ 
+    // normalize the delta
+    if (event.wheelDelta) {
+ 
+        // IE and Opera
+        delta = event.wheelDelta / 60;
+ 
+    } else if (event.detail) {
+ 
+        // W3C
+        delta = -event.detail / 2;
+    }
+ 
+    var currPos=document.getElementById('scroll').offsetTop;
+ 
+    //calculating the next position of the object
+    currPos=parseInt(currPos)-(delta*10);
+ 
+    //moving the position of the object
+    document.getElementById('scroll').style.top = currPos+"px";
+    document.getElementById('scroll').innerHTML = event.wheelDelta + ":" + event.detail;
+}
+</script>
+</head>
+<body>
+Scroll mouse wheel to move this DIV up and down.
+    <div id="scroll">Dancing Div</div>
+</body>
+</html>
