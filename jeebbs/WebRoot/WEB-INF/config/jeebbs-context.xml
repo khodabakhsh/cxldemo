@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-lazy-init="true">
+	
+	<bean id="category_list" class="com.jeecms.bbs.action.directive.CategoryDirective"/>
+	<bean id="forum_list" class="com.jeecms.bbs.action.directive.ForumDirective"/>
+	<bean id="topic_page" class="com.jeecms.bbs.action.directive.TopicPageDirective"/>
+	<bean id="post_page" class="com.jeecms.bbs.action.directive.PostPageDirective"/>
+	<bean id="topic_vcount" class="com.jeecms.bbs.action.directive.ViewCountDirective"/>
+	<bean id="my_topic" class="com.jeecms.bbs.action.directive.MyTopicPageDirective"/>
+	<bean id="my_reply" class="com.jeecms.bbs.action.directive.MyReplyPageDirective"/>
+	<bean id="config_count" class="com.jeecms.bbs.action.directive.ConfigCountDirective"/>
+	<bean id="topic_day" class="com.jeecms.bbs.action.directive.TopicDayPageDirective"/>
+	
+	<!--后台权限标签-->
+	<bean id="cms_perm" class="com.jeecms.bbs.web.PermistionDirective"/>
+	
+	<bean id="topicCountEhCache" class="com.jeecms.bbs.cache.TopicCountEhCacheImpl"/>
+	<bean id="bbsConfigEhCache" class="com.jeecms.bbs.cache.BbsConfigEhCacheImpl"/>
+	
+	<bean id="cmsSiteMng" class="com.jeecms.core.manager.impl.CmsSiteMngImpl"/>
+	<bean id="bbsCategoryMng" class="com.jeecms.bbs.manager.impl.BbsCategoryMngImpl"/>
+	<bean id="bbsUserMng" class="com.jeecms.bbs.manager.impl.BbsUserMngImpl"/>
+	<bean id="bbsUserGroupMng" class="com.jeecms.bbs.manager.impl.BbsUserGroupMngImpl"/>
+	<bean id="bbsUserExtMng" class="com.jeecms.bbs.manager.impl.BbsUserExtMngImpl"/>
+	<bean id="bbsPostMng" class="com.jeecms.bbs.manager.impl.BbsPostMngImpl"/>
+	<bean id="bbsTopicMng" class="com.jeecms.bbs.manager.impl.BbsTopicMngImpl"/>
+	<bean id="bbsConfigMng" class="com.jeecms.bbs.manager.impl.BbsConfigMngImpl"/>
+	<bean id="bbsForumMng" class="com.jeecms.bbs.manager.impl.BbsForumMngImpl"/>
+	<bean id="bbsOperationMng" class="com.jeecms.bbs.manager.impl.BbsOperationMngImpl"/>
+	<bean id="bbsGradeMng" class="com.jeecms.bbs.manager.impl.BbsGradeMngImpl"/>
+	<bean id="attachmentMng" class="com.jeecms.bbs.manager.impl.AttachmentMngImpl"/>
+	<bean id="cmsResourceMng" class="com.jeecms.bbs.template.manager.impl.CmsResourceMngImpl"/>
+	<bean id="cmsConfigMng" class="com.jeecms.core.manager.impl.CmsConfigMngImpl"/>
+	
+	<bean id="cmsSiteDao" class="com.jeecms.core.dao.impl.CmsSiteDaoImpl"/>
+	<bean id="bbsCategoryDao" class="com.jeecms.bbs.dao.impl.BbsCategoryDaoImpl"/>
+	<bean id="bbsUserDao" class="com.jeecms.bbs.dao.impl.BbsUserDaoImpl"/>
+	<bean id="bbsUserGroupDao" class="com.jeecms.bbs.dao.impl.BbsUserGroupDaoImpl"/>
+	<bean id="bbsUserExtDao" class="com.jeecms.bbs.dao.impl.BbsUserExtDaoImpl"/>
+	<bean id="bbsPostDao" class="com.jeecms.bbs.dao.impl.BbsPostDaoImpl"/>
+	<bean id="bbsTopicDao" class="com.jeecms.bbs.dao.impl.BbsTopicDaoImpl"/>
+	<bean id="bbsConfigDao" class="com.jeecms.bbs.dao.impl.BbsConfigDaoImpl"/>
+	<bean id="bbsForumDao" class="com.jeecms.bbs.dao.impl.BbsForumDaoImpl"/>
+	<bean id="bbsOperationDao" class="com.jeecms.bbs.dao.impl.BbsOperationDaoImpl"/>
+	<bean id="bbsGradeDao" class="com.jeecms.bbs.dao.impl.BbsGradeDaoImpl"/>
+	<bean id="attachmentDao" class="com.jeecms.bbs.dao.impl.AttachmentDaoImpl"/>
+	<bean id="cmsConfigDao" class="com.jeecms.core.dao.impl.CmsConfigDaoImpl"/>
+	
+</beans>
