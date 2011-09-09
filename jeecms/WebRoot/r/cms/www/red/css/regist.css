@@ -1,0 +1,28 @@
+/*----------------------------------------
+Name: regist.css
+Developed by: JEECMS
+Date Created: 2010-06-27
+Last Updated: 2010-06-27
+Copyright: JEECMS
+----------------------------------------*/
+@charset "utf-8";
+@import url(global.css);  
+
+body{background:url(../img/member/head_bg.jpg) no-repeat 50% 28px;}
+.container{min-width:980px;margin:0 auto;background:url(../img/member/nav_bg.png) no-repeat 50% 120px;}
+ 
+.toolbar{margin-bottom:15px;background:#fafafa url(../img/member/toolbar.gif) repeat-x 0 100%;}
+.toolbar-inner{width:980px;height:31px; line-height:31px; margin:0 auto;}
+.toolbar a{padding:0 5px;}
+
+.header{width:980px; height:90px; margin:0 auto 10px;}
+.header .brand{float:left;padding-left:20px;}
+.header .brand h1 a{display:block;width:292px; height:70px;overflow:hidden;text-indent:-9999px;margin-right:10px;background:url(../img/logo.gif) no-repeat;}
+
+.main{width:980px;margin:0 auto; font-size:14px;}
+
+.input{width:200px; height:20px; line-height:20px; border:1px solid #ccc;}
+
+ .footer{width:980px;margin:0 auto;padding:20px 0;line-height:1.8;text-align:center;color:#999;background:url(../img/member/foot_bg.png) no-repeat 50% 0;}
+.footer a:link,.footer a:visited{color:#999;}
+ 

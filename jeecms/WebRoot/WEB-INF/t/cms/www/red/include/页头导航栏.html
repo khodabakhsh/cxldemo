@@ -1,0 +1,37 @@
+<div id="header" class="box">
+  <div id="logo" class="page box">
+    <div class="logo fl" onclick="window.location.href='${base}/'"></div>
+    <div class="banner fr"><script type="text/javascript" src="${base}/adspace.jspx?id=1"></script></div>
+  </div>
+  
+  <div class="box"></div>
+  
+  <div id="menu" class="page box relative">
+    <dl id="topmenu">  
+	[@cms_channel_list]
+    <dt class="menu_first"><a href="${base}/" target="_self" class="selected" id="nav1" onmouseover="jeeNav(this,${tag_list?size+1})"><span>首 页</span></a></dt>
+	[#list tag_list as c]
+    <dt><a href="${c.url}" target="_self" id="nav${c_index+2}" onmouseover="jeeNav(this,${tag_list?size+1})"><span>${c.name}</span></a></dt>
+	[/#list]
+	[/@cms_channel_list]
+    <dd>	
+      <ul id="sub1">
+        <li><strong>滚动资讯:</strong> </li>
+        <li class="notice">[@cms_content_list styleList='2-1' titLen='16' count='9' rollCols='3' rollDisplayHeight='20' rollLineHeight='20' rollSpeed='20' rollSleepTime='100' rollRows='1' dateFormat='MM-dd' datePosition='3' dateClass='red' channelOption='1' tpl='2'/]</li>
+      </ul>
+[@cms_channel_list]
+[#list tag_list as c]	  
+      <ul class="hide" id="sub${c_index+2}">
+	    [@cms_channel_list parentId=c.id]
+        [#list tag_list as sub]
+        <li><a href='${sub.url}'>${sub.name}</a></li>
+		[/#list]
+        [/@cms_channel_list]
+      </ul>
+[/#list]
+[/@cms_channel_list]	  
+    </dd>
+  </dl>
+  </div> 
+    
+</div>
