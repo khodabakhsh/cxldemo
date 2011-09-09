@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>会员登录 - ${site.name} - Powered by JEECMS</title>
+<link href="${resSys}/front.css" rel="stylesheet" type="text/css"/>
+<script src="${resSys}/jquery.js" type="text/javascript"></script>
+<script src="${resSys}/front.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="/${res}/css/member.css" />
+</head>
+
+<body>
+<div class="container">
+<!--mc_header-->
+[#include "会员中心页_页头.html"/]
+<!--mc_header_end-->
+
+<div class="main">
+<!--top-->
+<div class="my_local">
+<div class="location_cs">
+您现在的位置：&nbsp;<a class='LinkPath' href='#'>网站首页</a>&nbsp;&raquo;&nbsp;会员中心</div>
+</div>
+<!--top_end-->
+
+<div class="mrow box">
+
+<!--mc_left-->
+[#include "会员中心页_导航.html"/]
+<!--mc_left_end-->
+
+<!--mc_center-->
+<div class="mc_center">
+  <div><img src="/${res}/img/member/web_center_top.jpg" /></div>
+  <div class="mc_center_bj"></div>
+  <div><img src="/${res}/img/member/web_center_bottom.jpg" /></div>
+</div>
+<!--mc_center_end-->
+
+<!--mc_right-->
+<div class="mc_right">
+   <div class="mc_top_bj box">
+      <div class="page_tit">会员中心</div>
+	  <!--
+	  <div class="user_info_cs">
+	  <a href="${base}/member/index.jspx">会员中心首页</a> | <a href="#">退出</a>
+	  </div>
+	  -->
+   </div>
+   <div class="mc_content">   
+     <table width="98%" border="0" align="center" cellpadding="5" cellspacing="1" bgcolor="#C8DCF0" style="margin:5px;">
+       <tr>
+         <td width="150" height="25" align="right" bgcolor="#FAF9FE">用户名：  </td>
+         <td bgcolor="#FFFFFF">${user.username}</td>
+       </tr>
+       <tr>
+         <td height="25" align="right" bgcolor="#FAF9FE">会员组：</td>
+         <td bgcolor="#FFFFFF">${user.group.name}</td>
+       </tr>
+       <tr>
+         <td height="25" align="right" bgcolor="#FAF9FE">邮箱：</td>
+         <td bgcolor="#FFFFFF">${user.email!}</td>
+       </tr>
+       <tr>
+         <td height="25" align="right" bgcolor="#FAF9FE">真实姓名：</td>
+         <td bgcolor="#FFFFFF">${user.realname!}</td>
+       </tr>
+       <tr>
+         <td height="25" align="right" bgcolor="#FAF9FE">性别：</td>
+         <td bgcolor="#FFFFFF">[#if user.gender??]${user.gender?string('男','女')}[#else]保密[/#if]</td>
+       </tr>
+       <tr>
+         <td height="25" align="right" bgcolor="#FAF9FE">出生日期：</td>
+         <td bgcolor="#FFFFFF">${(user.birthday?string('yyyy-MM-dd'))!}</td>
+       </tr>
+       <tr>
+         <td height="25" align="right" bgcolor="#FAF9FE">自我介绍：</td>
+         <td bgcolor="#FFFFFF">${user.intro!}</td>
+       </tr>
+       <tr>
+         <td height="25" align="right" bgcolor="#FAF9FE">来自：</td>
+         <td bgcolor="#FFFFFF">${user.comefrom!}</td>
+       </tr>
+       <tr>
+         <td height="25" align="right" bgcolor="#FAF9FE">QQ：</td>
+         <td bgcolor="#FFFFFF">${user.qq!}</td>
+       </tr>
+       <tr>
+         <td height="25" align="right" bgcolor="#FAF9FE">MSN：</td>
+         <td bgcolor="#FFFFFF">${user.msn!}</td>
+       </tr>
+       <tr>
+         <td height="25" align="right" bgcolor="#FAF9FE">电话：</td>
+         <td bgcolor="#FFFFFF">${user.phone!}</td>
+       </tr>
+       <tr>
+         <td height="25" align="right" bgcolor="#FAF9FE">手机：</td>
+         <td bgcolor="#FFFFFF">${user.moble!}</td>
+       </tr>
+       <tr>
+         <td height="25" colspan="2" align="center" bgcolor="#FFFFFF">
+		 <input type="button" onclick="window.location.href='profile.jspx'" value="修 改"/></td>
+         </tr>
+     </table>     
+   </div>
+
+</div>
+<!--mc_right_end-->
+
+</div>
+</div>
+
+<!--footer-->
+[#include "会员中心页_页脚.html"/]
+<!--footer_end-->
+
+</div>
+</body>
+</html>
