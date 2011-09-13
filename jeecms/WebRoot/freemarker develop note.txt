@@ -1,0 +1,156 @@
+ps:
+一个不存在的变量和一个是null 的变量，对于FreeMarker 来说是同样的
+
+1.
+<#if condition>..........<#else>.......</#if>
+
+2.
+<p>We have these animals:
+<table border=1>
+<tr><th>Name<th>Price
+<#list animals as being>
+<tr><td>${being.name}<td>${being.price} Euros
+</#list>
+</table>
+
+3.
+<body>
+<h1>Test page</h1>
+<p>Blah blah...
+<#include "/copyright_footer.html">
+</body>
+
+
+4.
+当user 从数据模型中丢失时，模板将会将
+user 的值表示为字符串”Anonymous”。（若user 并没有丢失，那么模板就会表现
+出”Anonymous”不存在一样）：
+<h1>Welcome ${user!"Anonymous"}!</h1>
+在变量名后面通过放置??来询问FreeMarker 一个变量是否存在。
+<#if user??><h1>Welcome ${user}!</h1></#if>
+
+5.用户自定义的指令
+<@mydirective parameters>...</@mydirective>。
+
+
+6.注意字符序列${、#{有特殊的含义，为了表明字符串是原生字符串，在开始的引号或单引号之前放置字
+母r，例如：
+${r"${foo}"}
+${r"C:\foo\bar"}
+将会打印：
+${foo}
+C:\foo\bar
+
+7.
+<#list ["winter", "spring", "summer", "autumn"] as x>
+${x}
+</#list>
+
+8.
+插值只能在文本区段（ <h1>Hello ${name}!</h1> ） 和字符串文字（ <#include
+"/footer/${company}.html"> ） 中使用。一个典型的错误使用是<#if
+${isBig}>Wow!</#if> ， 这是语法上的错误。只能这么来写： <#if
+isBig>Wow!</#if>，<#if "${isBig}">Wow!</#if>来写也是错误的。因为
+if 指令的参数需要的是布尔值，而这里是字符串，那么就会引起运行时的错误。
+
+9.
+FreeMarker 解释>的时候可以把它当作FTL 标签的结
+束符。为了避免这种问题，不得不将表达式放到括号内：<#if (x > y)>，或者可以在
+比较关系处使用&gt;和&lt;：<#if x &gt; y>。（通常在FLT 标签中不支持实体引
+用（比如&...;这些），否则就会抛出算数比较异常）。另外，可以使用lt 代替<，lte
+代替<=，gt 代替>，gte 代替>=， 由于历史遗留的原因，FTL 也支持\lt, \lte, \gt 和
+\gte，使用他们和使用不带反斜杠的效果一样。
+
+10.
+了解一些重要的内建函数就行了。
+ 10.1字符串使用的内建函数：
+ html: 字符串中所有的特殊HTML 字符都需要用实体引用来代替（比如<代
+替&lt;）。
+ cap_first:字符串的第一个字母变为大写形式
+ lower_case:字符串的小写形式
+ upper_case:字符串的大写形式
+ trim:去掉字符串首尾的空格
+ 10.2序列使用的内建函数：
+ size：序列中元素的个数
+ 10.3数字使用的内建函数：
+ int:数字的整数部分（比如-1.9?int 就是-1）
+10.4示例：
+${test?html}
+${test?upper_case?html}
+假设字符串test 存储”Tom & Jerry”，那么输出为：
+Tom &amp; Jerry
+TOM &amp; JERRY
+注意test?upper_case?html，内嵌函数双重使用，test?upper_case 的
+结果是字符串了，但也还可以继续在其后使用html 内建函数。
+
+11.
+假设下面展示的代码给名为mouse 的变量赋值：
+<#assign mouse="Jerry">
+${mouse}
+
+12.
+我们可以使用内建函数string 来将布尔值转换为字符串形式。比如打印变
+量”married”（假设它是布尔值），那么可以这么来写: ${married?string("yes",
+"no")}。
+转换日期格式：
+${(cmsAcquisition.startTime?string('yyyy-MM-dd HH:mm:ss'))!}
+
+13.
+自定义指令可以使用macro 指令来定义
+例如，创建一个宏变量greet，person和color是其参数（当然参数值并不一定是字符串类
+型，也可以是数字，布尔值，哈希表，序列等…也可以在=号左边使用复杂表达式）。
+<#macro greet person color="red">
+<font size="+2" color="${color}">Hello ${person}!</font>
+</#macro>
+如下是调用（参数的顺序不重要，color="red"是默认参数）：
+<@greet person="Fred"/>和<@greet person="Fred" color="black"/>都可以。
+
+14.
+先定义/lib/my_test.ftl如下：
+<#macro copyright date>
+<p>Copyright (C) ${date} Julia Smith. All rights reserved.</p>
+</#macro>
+<#assign mail = "jsmith@acme.com">
+然后import：
+<#import "/lib/my_test.ftl" as my>
+就可以使用它了：
+<@my.copyright date="1999-2002"/>
+${my.mail}
+
+15.
+嵌套内容,自定义指令可以嵌套内容（嵌套的内容可以是任意有效的FTL，包含其他的用户自定义指令）， 和预定义指令相似.
+<#macro border>
+<table border=4 cellspacing=0 cellpadding=4><tr><td>
+<#nested>
+</td></tr></table>
+</#macro>
+使用如：<@border>The bordered text</@border>
+
+16.
+替换（方括号）语法,FreeMarker 支持一个替换的语法。就是在FreeMarker 的指令和注释中用[和]来代替<和>，例如下面这个例子：
+ 调用预定义指令：[#list animals as being]...[/#list]
+ 调用自定义指令：[@myMacro /]
+ 注释：[#-- the comment --]
+为了使用这种语法从而代替默认语法，从模板开始，使用ftl 指令都要使用这用语法。
+如果你不知道什么是ftl 指令，那么就用[#ftl]来开始模板，要记住这个要放在文件的
+最前面（除了它前面的空格）。例如，下面的示例入门章节的最后一个例子使用这种替换语
+法的样子（假设这是一个完整的模板，而不是一个片段）。
+[#ftl]
+<p>We have these animals:
+<table border=1>
+<tr><th>Name<th>Price
+[#list animals as being]
+<tr>
+<td>
+[#if being.size = "large"]<b>[/#if]
+${being.name}
+[#if being.size = "large"]</b>[/#if]
+<td>${being.price} Euros
+[/#list]
+</table>
+。如果文件中没有ftl 指令，那么程序员可以通过配置
+FreeMarker（程序员参看API 文档的Configuration.setTagSyntax(int)来使
+用）来决定使用哪种语法。但是程序员可能使用默认配置。FreeMarker 2.3.x 版本默认配置
+使用常规语法。而2.4 版本中的默认配置将会自动检测，也就是说第一个FreeMarker 标签决
+定了语法形式（它可以是任意的，而不仅仅是ftl）。
+
