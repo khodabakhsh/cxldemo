@@ -74,5 +74,6 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<context:annotation-config/>
+	<!-- 使用annotation定义事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 </beans>
