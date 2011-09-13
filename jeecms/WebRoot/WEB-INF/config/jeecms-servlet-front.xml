@@ -96,7 +96,7 @@
 		<property name="templateLoaderPath" value=""/>
 		<property name="freemarkerSettings">
 			<props>
-				<prop key="tag_syntax">auto_detect</prop>
+				<prop key="tag_syntax">auto_detect</prop><!-- 配置了 tag_syntax为auto_detect，这样语法就用[号代替了<号-->
 				<prop key="template_update_delay">5</prop>
 				<prop key="defaultEncoding">UTF-8</prop>
 				<prop key="url_escaping_charset">UTF-8</prop>
