@@ -24,6 +24,7 @@
 		-->
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="webBindingInitializer">
+		<!-- 向所有 Controller 注册属性编辑器，如果要对单个controller使用属性编辑器，请使用@InitBinder 注解 -->
 			<bean class=" com.jeecms.common.web.springmvc.BindingInitializer"/>
 		</property>
 	</bean>
