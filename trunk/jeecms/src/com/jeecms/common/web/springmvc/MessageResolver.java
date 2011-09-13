@@ -30,6 +30,10 @@ public final class MessageResolver {
 	 */
 	public static String getMessage(HttpServletRequest request, String code,
 			Object... args) {
+		/**
+		 * RequestContextUtils这个类：
+		 * Supports lookup of current WebApplicationContext, LocaleResolver, Locale, ThemeResolver, Theme, and MultipartResolver. 
+		 */
 		WebApplicationContext messageSource = RequestContextUtils
 				.getWebApplicationContext(request);
 		if (messageSource == null) {
