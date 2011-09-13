@@ -112,6 +112,8 @@
 			</props>
 		</property>
 	</bean>
+	
+	<!-- allow us to use @Autowire, @Required and @Qualifier annotations. -->
 	<context:annotation-config/>
 	
 	<import resource="jeecms-servlet-front-action.xml"/>
