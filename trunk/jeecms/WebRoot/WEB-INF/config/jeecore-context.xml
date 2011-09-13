@@ -39,7 +39,7 @@
 	<!--SessionId生成器
 		<bean id="sessionIdGenerator" class="com.jeecms.common.web.session.id.JdkUUIDGenerator"/>
 		-->
-	<!--图片处理-->
+	<!--图片处理,采用了init-method配置-->
 	<bean id="imageScale" class="com.jeecms.common.image.ImageScaleImpl" init-method="init">
 		<property name="tryMagick" value="false"/>
 	</bean>
