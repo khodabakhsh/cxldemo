@@ -21,7 +21,13 @@ public class RssAct {
 	private static final Logger log = LoggerFactory.getLogger(RssAct.class);
 
 	public static final String RSS_TPL = "tpl.rss";
-
+/**
+ *直接用模板 RSS.html生成rss信息，没有用到第三方jar
+ * @param request
+ * @param response
+ * @param model
+ * @return
+ */
 	@RequestMapping(value = "/rss.jspx", method = RequestMethod.GET)
 	public String rss(HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) {
