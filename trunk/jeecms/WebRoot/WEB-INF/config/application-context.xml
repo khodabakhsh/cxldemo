@@ -43,7 +43,7 @@
 			hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect
 			hibernate.show_sql=false
 			hibernate.format_sql=false
-			hibernate.query.substitutions=true 1, false 0
+			hibernate.query.substitutions=true 1, false 0<!-- This will replace the keywords true and false with the literals 1 and 0 in the translated SQL from this HQL: "from Cat cat where cat.alive = true"-->
 			hibernate.jdbc.batch_size=20
 			hibernate.cache.use_query_cache=true
 			</value>
