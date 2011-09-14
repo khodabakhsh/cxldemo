@@ -41,6 +41,7 @@
 
 	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
+		<!-- 配置异常处理，如果controller抛出了相应的异常类型，会使用相应的视图 -->
 			<props>
 				<prop key="org.springframework.web.bind.MissingServletRequestParameterException">/WEB-INF/error/requiredParameter.html</prop>
 				<prop key="org.springframework.beans.TypeMismatchException">/WEB-INF/error/mismatchParameter.html</prop>
@@ -96,7 +97,7 @@
 		<property name="templateLoaderPath" value=""/>
 		<property name="freemarkerSettings">
 			<props>
-				<prop key="tag_syntax">auto_detect</prop><!-- 配置了 tag_syntax为auto_detect，这样语法就用[号代替了<号-->
+				<prop key="tag_syntax">auto_detect</prop><!-- 配置了 tag_syntax为auto_detect，这样语法就用[号代替了<号,不管是否嵌套其他模板，只要同一个模板都使用同样的语法号就可以了-->
 				<prop key="template_update_delay">5</prop>
 				<prop key="defaultEncoding">UTF-8</prop>
 				<prop key="url_escaping_charset">UTF-8</prop>
