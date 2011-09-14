@@ -34,6 +34,11 @@
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
 		<property name="interceptors">
 			<list>
+			<!-- 该拦截器继承HandlerInterceptorAdapter，方法说明：
+			 //1.【 preHandle()】方法在业务处理器处理请求之前被调用。这个方法在业务处理器处理请求之前被调用，在该方法中对用户请求request进行处理。如果程序员决定该拦截器对请求进行拦截处理后还要调用其他的拦截器，或者是业务处理器去进行处理，则返回true；如果程序员决定不需要再调用其他的组件去处理请求，则返回false。		 
+			 //2. 【postHandle()】方法在业务处理器处理请求之后被调用 。这个方法在业务处理器处理完请求后，但是DispatcherServlet向客户端返回请求前被调用，在该方法中对用户请求request进行处理。
+			 //3. 【afterCompletion()】方法在DispatcherServlet完全处理完请求后被调用  。这个方法在DispatcherServlet完全处理完请求后被调用，可以在该方法中进行一些资源清理的操作。
+			   -->
 				<ref bean="adminContextInterceptor"/>
 				<ref bean="adminLocaleIntercept"/>
 			</list>
