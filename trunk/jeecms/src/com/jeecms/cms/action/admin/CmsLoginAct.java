@@ -65,7 +65,7 @@ public class CmsLoginAct {
 				}
 			}
 		}
-//		读取客户端cookie的_error_remaining信息,减1，再写_error_remaining信息到cookie和modelView中。
+//		读取客户端cookie的_error_remaining信息,减1，再写_error_remaining信息到cookie和Model中。
 //		登录页面可以通过这个判断是否要验证码(客户端只要删除了_error_remaining这个cookie，就可以不用验证码!)
 		writeCookieErrorRemaining(null, request, response, model);
 		if (!StringUtils.isBlank(processUrl)) {
@@ -129,9 +129,9 @@ public class CmsLoginAct {
 						"username=" + username + ";password=" + password);
 			}
 		}
-		// 登录失败,减少cookie中的 _error_remaining（会先把cookie中的信息与数据库同步）,写_error_remaining信息到cookie和modelView中。
+		// 登录失败,减少cookie中的 _error_remaining（会先把cookie中的信息与数据库同步）,写_error_remaining信息到cookie和Model中。
 		writeCookieErrorRemaining(errorRemaining, request, response, model);
-		//保存错误信息到ModelMap 
+		//保存错误信息到Model
 		errors.toModel(model);
 		if (!StringUtils.isBlank(processUrl)) {
 			model.addAttribute(PROCESS_URL, processUrl);
