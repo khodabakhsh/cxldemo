@@ -65,6 +65,8 @@ public class CmsLoginAct {
 				}
 			}
 		}
+//		读取客户端cookie的_error_remaining信息,减1，再写_error_remaining信息到cookie和modelView中。
+//		登录页面可以通过这个判断是否要验证码(客户端只要删除了_error_remaining这个cookie，就可以不用验证码!)
 		writeCookieErrorRemaining(null, request, response, model);
 		if (!StringUtils.isBlank(processUrl)) {
 			model.addAttribute(PROCESS_URL, processUrl);
@@ -83,15 +85,18 @@ public class CmsLoginAct {
 			String processUrl, String returnUrl, String message,
 			HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) {
+		//根据配置（jo_config表）和jo_user表表，返回用户最大剩余登录次数。如果在最大登录时间内超过最大登录错误次数，要验证码
 		Integer errorRemaining = unifiedUserMng.errorRemaining(username);
+		//验证用户名、密码长度，及验证码,生成errors信息(本地化)。
 		WebErrors errors = validateSubmit(username, password, captcha,
 				errorRemaining, request, response);
 		if (!errors.hasErrors()) {
 			try {
 				String ip = RequestUtils.getIpAddr(request);
+				//验证用户名、密码正确，更新登录信息，认证信息,session中设置认证信息
 				Authentication auth = authMng.login(username, password, ip,
 						request, response, session);
-				// 是否需要在这里加上登录次数的更新？按正常的方式，应该在process里面处理的，不过这里处理也没大问题。
+				// 是否需要在这里加上登录次数(jc_user表)的更新？按正常的方式，应该在process里面处理的，不过这里处理也没大问题。
 				cmsUserMng.updateLoginInfo(auth.getUid(), ip);
 				CmsUser user = cmsUserMng.findById(auth.getUid());
 				if (user.getDisabled()) {
@@ -100,8 +105,10 @@ public class CmsLoginAct {
 					session.logout(request, response);
 					throw new DisabledException("user disabled");
 				}
+				//移除cookie中的 _error_remaining
 				removeCookieErrorRemaining(request, response);
 				String view = getView(processUrl, returnUrl, auth.getId());
+				//保存登录日志
 				cmsLogMng.loginSuccess(request, user, "login.log.loginSuccess");
 				if (view != null) {
 					return view;
@@ -122,8 +129,9 @@ public class CmsLoginAct {
 						"username=" + username + ";password=" + password);
 			}
 		}
-		// 登录失败
+		// 登录失败,减少cookie中的 _error_remaining（会先把cookie中的信息与数据库同步）,写_error_remaining信息到cookie和modelView中。
 		writeCookieErrorRemaining(errorRemaining, request, response, model);
+		//保存错误信息到ModelMap 
 		errors.toModel(model);
 		if (!StringUtils.isBlank(processUrl)) {
 			model.addAttribute(PROCESS_URL, processUrl);
