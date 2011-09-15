@@ -33,7 +33,7 @@ public class AuthenticationMngImpl implements AuthenticationMng {
 			HttpServletRequest request, HttpServletResponse response,
 			SessionProvider session) throws UsernameNotFoundException,
 			BadCredentialsException {
-		//验证用户名、密码，登录成功的话更新(登录信息，jo_user表)
+		//验证用户名、密码是否正确，登录成功的话更新(登录信息，jo_user表)，登录失败的话，更新登录错误时间和登录次数加1(jo_user表)
 		UnifiedUser user = unifiedUserMng.login(username, password, ip);
 		Authentication auth = new Authentication();
 		auth.setUid(user.getId());
