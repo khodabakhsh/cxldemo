@@ -68,6 +68,7 @@
 				<prop key="org.springframework.web.bind.MissingServletRequestParameterException">/error/requiredParameter</prop>
 				<prop key="org.springframework.beans.TypeMismatchException">/error/mismatchParameter</prop>
 				<prop key="org.springframework.web.bind.ServletRequestBindingException">/error/bindException</prop>
+				<!-- 数据完整性异常，如抛出org.hibernate.exception.ConstraintViolationException的时候(如删除一个用户)，会使用此配置的视图 -->
 				<prop key="org.springframework.dao.DataIntegrityViolationException">/error/integrityViolation</prop>
 			</props>
 		</property>
