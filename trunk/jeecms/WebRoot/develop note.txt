@@ -1,0 +1,24 @@
+1.
+hibernate查询缓存  http://xuzhanxi.iteye.com/blog/298218
+查询缓存是针对普通属性结果集的缓存，对实体对象的结果集只缓存id 
+
+查询缓存的生命周期，当前关联的表发生修改，那么查询缓存生命周期结束 
+查询缓存的配置和使用： 
+* 在hibernate.cfg.xml文件中启用查询缓存，如： 
+<property name="hibernate.cache.use_query_cache">true</property> 
+* 在程序中必须手动启用查询缓存，如： 
+query.setCacheable(true); 
+         查询缓存的生命周期和session无关 
+          查询缓存只对query.list()起作用，query.iterate不起作用，也就是query.iterate不使用查询缓存 
+
+
+
+2.
+WebApplicationContext context = RequestContextUtils
+				.getWebApplicationContext(request);
+RequestContextUtils.getWebApplicationContext这个方法， 返回request.getAttribute(DispatcherServlet.WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+而WEB_APPLICATION_CONTEXT_ATTRIBUTE其实就是DispatcherServlet.class.getName() + ".CONTEXT"。
+注意，如果配置了不同的DispatcherServlet，返回的WebApplicationContext实例是不同的。
+
+RequestContextUtils.getLocaleResolver(request);也同理去获得request.getAttribute（
+DispatcherServlet.class.getName() + ".LOCALE_RESOLVER"）
