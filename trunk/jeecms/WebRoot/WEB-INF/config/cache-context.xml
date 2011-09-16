@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
 	default-lazy-init="true">
-	<!--缓存-->
+	<!--缓存, WebEhCacheManagerFacotryBean implements FactoryBean<CacheManager>,InitializingBean, DisposableBean-->
 	<bean id="cacheManager" class="com.jeecms.common.web.WebEhCacheManagerFacotryBean">
 		<property name="configLocation">
 			<value>classpath:ehcache-application.xml</value>
