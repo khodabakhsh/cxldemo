@@ -4,7 +4,7 @@
 	<defaultCache maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120"
 		overflowToDisk="true" diskSpoolBufferSizeMB="30" maxElementsOnDisk="10000000" 
 		diskPersistent="false" diskExpiryThreadIntervalSeconds="120"/>
-
+<!-- 见WEB-INF/config/cache-context.xml ，包含SESSION缓存 和 内容浏览数缓存 -->
 	<cache name="com.jeecms.common.web.session.Session" maxElementsInMemory="500" eternal="false" timeToIdleSeconds="1200" overflowToDisk="true" diskPersistent="true"/>
 	<cache name="com.jeecms.cms.front.ContentCount" maxElementsInMemory="500" eternal="true" overflowToDisk="true" diskPersistent="false"/>
 
