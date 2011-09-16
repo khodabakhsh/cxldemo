@@ -21,7 +21,7 @@
 		</property>
 		<qualifier value="session"/>
 	</bean>
-	<!--内容计数缓存-->
+	<!--内容浏览数，计数缓存 注入了 ContentCountCacheImpl中供使用-->
 	<bean id="ehContentCountCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
 		<property name="cacheManager">
 			<ref local="cacheManager"/>
@@ -29,7 +29,6 @@
 		<property name="cacheName">
 			<value>com.jeecms.cms.front.ContentCount</value>
 		</property>		
-		<!--注入了 ContentCountCacheImpl中供使用 -->
 		<qualifier value="contentCount"/>
 	</bean>
 </beans>
