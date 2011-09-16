@@ -11,7 +11,7 @@
 			<value>/WEB-INF/cache/application</value>
 		</property>
 	</bean>
-	<!--SESSION缓存-->
+	<!--SESSION缓存(这个session现在暂时不用，被注释掉了，见WEB-INF/config/jeecore-context.xml)-->
 	<bean id="ehSessionCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
 		<property name="cacheManager">
 			<ref local="cacheManager"/>
