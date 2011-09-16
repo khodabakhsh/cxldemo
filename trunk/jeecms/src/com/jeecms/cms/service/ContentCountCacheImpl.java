@@ -14,7 +14,7 @@ import com.jeecms.cms.entity.main.ContentCount;
 import com.jeecms.cms.manager.main.ContentCountMng;
 
 /**
- * 内容计数器缓存实现
+ * 内容计数器缓存实现,在指定时间间隔内把内容浏览数写入缓存，到了时间间隔把缓存同步数据库中。
  * 
  * @author liufang
  * 
