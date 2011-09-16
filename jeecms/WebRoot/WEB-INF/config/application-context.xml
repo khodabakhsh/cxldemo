@@ -61,9 +61,10 @@
 	
 	<bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true"/>
 
-<!-- hibernate缓存配置-->
-	<bean id="cacheProvider" class="com.jeecms.common.hibernate3.SpringEhCacheProvider">
-<!--	spring 会自动根据<value>值，为configLocation和diskStoreLocation生成相应的Resource实例-->
+<!-- hibernate缓存配置, 解决配置文件地址和缓存文件存放地址的问题。支持/WEB-INF的地址 格式。 -->
+	<bean id="cacheProvider"
+		class="com.jeecms.common.hibernate3.SpringEhCacheProvider">
+		<!--	spring 会自动根据<value>值，为configLocation和diskStoreLocation生成相应的Resource实例-->
 		<property name="configLocation"><!-- ClassPathResource实例。 以类路径的方式进行访问 -->
 			<value>classpath:ehcache-hibernate.xml</value>
 		</property>
@@ -71,19 +72,9 @@
 			<value>/WEB-INF/cache/hibernate</value>
 		</property>
 		<property name="test">
-			<ref local="test"/>
+			<ref local="test" />
 		</property>
 	</bean>
-	
-	<bean id="test" class="com.jeecms.Test" init-method="init">
-		<property name="configLocation"><!-- ClassPathResource实例。 以类路径的方式进行访问 -->
-			<value>classpath:ehcache-hibernate.xml</value>
-		</property>
-		<property name="diskStoreLocation"><!-- ServletContextResource实例。以相对于Web应用根目录的方式进行访问 -->
-			<value>/WEB-INF/cache/hibernate</value>
-		</property>
-	</bean>
-	
 	<bean id="treeInterceptor" class="com.jeecms.common.hibernate3.TreeIntercptor"/>
 	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
