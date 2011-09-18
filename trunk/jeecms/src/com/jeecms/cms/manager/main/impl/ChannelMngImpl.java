@@ -204,6 +204,7 @@ public class ChannelMngImpl implements ChannelMng {
 
 	public Channel deleteById(Integer id) {
 		Channel entity = dao.findById(id);
+//		其实CmsGroup配置了inverse="true"，应该可以直接删除channel即可，下面两个for循环好像多余了？
 		for (CmsGroup group : entity.getViewGroups()) {
 			group.getViewChannels().remove(entity);
 		}
