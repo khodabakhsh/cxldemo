@@ -71,7 +71,7 @@ DispatcherServlet.class.getName() + ".LOCALE_RESOLVER"）
 		}
 	}
 	
-	5.JBoss web site clearly mentioned that in one-2-many, inverse = true has to be at many side,
+5.JBoss web site clearly mentioned that in one-2-many, inverse = true has to be at many side,
 	 and in many-2-many, it does not matter which side you put. 
 	 
 	 见Content.hbm.xml
@@ -81,3 +81,9 @@ DispatcherServlet.class.getName() + ".LOCALE_RESOLVER"）
 			<list-index column="priority"/>
 			<many-to-many column="tag_id" class="ContentTag"/>
 		</list>
+		
+6. 见Content.hbm.xml,content和channel的关系应该是多对一的吧，这里这么写？是业务需要 ？还是设计需要，这样做可以多一个中间表？
+<set name="channels" table="jc_content_channel">
+			<key column="content_id"/>
+			<many-to-many column="channel_id" class="Channel"/>
+		</set>
