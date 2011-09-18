@@ -25,7 +25,18 @@ DispatcherServlet.class.getName() + ".LOCALE_RESOLVER"）
 
 
 3.级联删除问题。
-栏目c的浏览权限引用了某个会员组g，删除c必先级联删除关联，如下（ChannelMngImpl.deleteById）：
+栏目c的浏览权限引用了某个会员组g，因为g配置了inverse="true"，删除g必先级联删除关联，如（CmsGroupMngImpl.deleteById）改为以下代码：
+	public CmsGroup deleteById(Integer id) {
+		CmsGroup bean =  dao.findById(id);
+		
+//		bean.getViewChannels().remove(bean);
+//		for(Channel chanel : bean.getViewChannels()){
+//			chanel.getViewGroups().remove(bean);
+//		}
+		dao.deleteById(id);
+		return bean;
+	}
+如果删除c，其实可以直接删除即可。不必写出如下代码（ChannelMngImpl.deleteById）：
 	public Channel deleteById(Integer id) {
 		Channel entity = dao.findById(id);
 		for (CmsGroup group : entity.getViewGroups()) {
@@ -36,8 +47,7 @@ DispatcherServlet.class.getName() + ".LOCALE_RESOLVER"）
 		}
 		entity = dao.deleteById(id);
 		return entity;
-	}
-如果删除g，因为现在代码中没有先删除关联，会抛出数据引用异常。
+	}。
 
 4.删除包含某个标签t的内容c，t的内容计数减1，代码如何体现？以下（ContentTagMngImpl.removeTags），传入的tags参数是集合引用，带密码里面tag.setCount(tag.getCount() - 1);
 之后，hibernate应该会检测到数据的变化，把tags也持久化，就实现减1了。
