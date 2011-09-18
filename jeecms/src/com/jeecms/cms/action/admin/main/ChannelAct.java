@@ -278,6 +278,7 @@ public class ChannelAct {
 	@RequestMapping("/channel/o_delete.do")
 	public String delete(Integer root, Integer[] ids,
 			HttpServletRequest request, ModelMap model) {
+		//删除栏目，会先检查栏目下是否没有内容，是否没有采集内容，是否没有专题。
 		WebErrors errors = validateDelete(ids, request);
 		if (errors.hasErrors()) {
 			return errors.showErrorPage(model);
