@@ -70,3 +70,6 @@ DispatcherServlet.class.getName() + ".LOCALE_RESOLVER"）
 			}
 		}
 	}
+	
+	5.JBoss web site clearly mentioned that in one-2-many, inverse = true has to be at many side,
+	 and in many-2-many, it does not matter which side you put. 
