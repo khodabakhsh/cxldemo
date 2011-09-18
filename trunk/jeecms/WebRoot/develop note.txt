@@ -25,7 +25,7 @@ DispatcherServlet.class.getName() + ".LOCALE_RESOLVER"）
 
 
 3.级联删除问题。
-栏目c的浏览权限引用了某个会员组g，因为g配置了inverse="true"，删除g必先级联删除关联，如（CmsGroupMngImpl.deleteById）改为以下代码：
+栏目c的浏览权限引用了某个会员组g，因为g配置了inverse="true"(inverse="false"是默认值)，删除g必先级联删除关联，如（CmsGroupMngImpl.deleteById）改为以下代码：
 	public CmsGroup deleteById(Integer id) {
 		CmsGroup bean =  dao.findById(id);
 		
