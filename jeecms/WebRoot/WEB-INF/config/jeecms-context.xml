@@ -114,7 +114,7 @@
 	<bean id="channelExtMng" class="com.jeecms.cms.manager.main.impl.ChannelExtMngImpl"/>
 	<bean id="channelTxtMng" class="com.jeecms.cms.manager.main.impl.ChannelTxtMngImpl"/>
 	<bean id="contentMng" class="com.jeecms.cms.manager.main.impl.ContentMngImpl">
-		<property name="listenerList">
+		<property name="listenerList"><!-- 配置内容变化监听器 -->
 			<list>
 				<ref bean="contentLuceneListener"/>
 				<ref bean="contentStaticPageListener"/>
