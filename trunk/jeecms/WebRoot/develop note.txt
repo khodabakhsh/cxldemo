@@ -38,3 +38,25 @@ DispatcherServlet.class.getName() + ".LOCALE_RESOLVER"）
 		return entity;
 	}
 如果删除g，因为现在代码中没有先删除关联，会抛出数据引用异常。
+
+4.删除包含某个标签t的内容c，t的内容计数减1，代码如何体现？以下（ContentTagMngImpl.removeTags），传入的tags参数是集合引用，带密码里面tag.setCount(tag.getCount() - 1);
+之后，hibernate应该会检测到数据的变化，把tags也持久化，就实现减1了。
+	public void removeTags(Collection<ContentTag> tags) {
+		Set<ContentTag> toRemove = new HashSet<ContentTag>();
+		for (ContentTag tag : tags) {
+			tag.setCount(tag.getCount() - 1);
+			if (tag.getCount() <= 0) {
+				toRemove.add(tag);
+			}
+		}
+		for (ContentTag tag : toRemove) {
+			//由于事务真正删除关联的sql语句还没有执行，这个时候jc_contenttag里至少还有一条数据。
+			if (dao.countContentRef(tag.getId()) <= 1) {
+				dao.deleteById(tag.getId());
+			} else {
+				// 还有引用，不应该出现的情况，此时无法删除。
+				log.warn("ContentTag ref to Content > 1,"
+						+ " while ContentTag.ref_counter <= 0");
+			}
+		}
+	}
