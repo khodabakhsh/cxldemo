@@ -22,3 +22,19 @@ RequestContextUtils.getWebApplicationContext这个方法， 返回request.getAtt
 
 RequestContextUtils.getLocaleResolver(request);也同理去获得request.getAttribute（
 DispatcherServlet.class.getName() + ".LOCALE_RESOLVER"）
+
+
+3.级联删除问题。
+栏目c的浏览权限引用了某个会员组g，删除c必先级联删除关联，如下（ChannelMngImpl.deleteById）：
+	public Channel deleteById(Integer id) {
+		Channel entity = dao.findById(id);
+		for (CmsGroup group : entity.getViewGroups()) {
+			group.getViewChannels().remove(entity);
+		}
+		for (CmsGroup group : entity.getContriGroups()) {
+			group.getContriChannels().remove(entity);
+		}
+		entity = dao.deleteById(id);
+		return entity;
+	}
+如果删除g，因为现在代码中没有先删除关联，会抛出数据引用异常。
