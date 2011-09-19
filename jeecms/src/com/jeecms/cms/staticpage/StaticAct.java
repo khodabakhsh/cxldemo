@@ -35,7 +35,9 @@ public class StaticAct {
 	public String indexInput(HttpServletRequest request, ModelMap model) {
 		return "static/index";
 	}
-
+/**
+ * 首页静态化
+ */
 	@RequestMapping(value = "/static/o_index.do")
 	public void indexSubmit(HttpServletRequest request,
 			HttpServletResponse response, ModelMap model) {
@@ -77,7 +79,9 @@ public class StaticAct {
 		model.addAttribute("channelList", channelList);
 		return "static/channel";
 	}
-
+/**
+ * 栏目静态化
+ */
 	@RequestMapping(value = "/static/o_channel.do")
 	public void channelSubmit(Integer channelId, Boolean containChild,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -110,7 +114,9 @@ public class StaticAct {
 		model.addAttribute("channelList", channelList);
 		return "static/content";
 	}
-
+	/**
+	 * 内容静态化
+	 */
 	@RequestMapping(value = "/static/o_content.do")
 	public void contentSubmit(Integer channelId, Date startDate,
 			HttpServletRequest request, HttpServletResponse response) {
