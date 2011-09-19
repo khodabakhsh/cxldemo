@@ -182,7 +182,7 @@
 		<session-timeout>50</session-timeout>
 	</session-config>
 	<welcome-file-list>
-	<!-- 首页静态化可以生成 index.html或index.shtml两个页面-->
+	<!-- 首页静态化可以生成 index.html或index.shtml两个页面,有了这两个页面就会有静态化功能。至于后台站点设置，开启静态首页，这个配置是跟内容监听器等等功能有关的。-->
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.shtml</welcome-file>
 		<welcome-file>index.jhtml</welcome-file>
