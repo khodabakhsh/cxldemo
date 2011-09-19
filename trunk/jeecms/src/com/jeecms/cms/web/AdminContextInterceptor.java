@@ -99,6 +99,10 @@ public class AdminContextInterceptor extends HandlerInterceptorAdapter {
 		}
 		boolean viewonly = user.getViewonlyAdmin();
 		// 没有访问权限，提示无权限。
+		//1.user.isSuper(),当用户拥有“具备所有操作权限的角色”时，为true
+//		2.permistionPass(uri, user.getPerms(), viewonly)
+//		2.1用户是只读管理员，当用户的角色所拥有的操作权限包含uri，且操作地址不能以o_开头才返回true
+//		2.2用户不是只读管理员，当用户的角色所拥有的操作权限包含uri即返回true
 		if (auth && !user.isSuper()
 				&& !permistionPass(uri, user.getPerms(), viewonly)) {
 			request.setAttribute(MESSAGE, MessageResolver.getMessage(request,
