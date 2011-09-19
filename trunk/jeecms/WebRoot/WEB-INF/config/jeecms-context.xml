@@ -45,7 +45,7 @@
 	<!-- 页面静态化 -->
 	<bean id="staticPageSvc" class="com.jeecms.cms.staticpage.StaticPageSvcImpl">
 		<property name="tplMessageSource" ref="tplMessageSource"/>
-		<property name="freeMarkerConfigurer">
+		<property name="freeMarkerConfigurer"><!-- 注入freemarker.template.Configuration -->
 			<bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 				<property name="freemarkerVariables">
 					<map>
