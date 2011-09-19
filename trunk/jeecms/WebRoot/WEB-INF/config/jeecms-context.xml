@@ -42,6 +42,7 @@
 	<bean id="contentCountCache" class="com.jeecms.cms.service.ContentCountCacheImpl"/>
 	<bean id="acquisitionSvc" class="com.jeecms.cms.service.AcquisitionSvcImpl"/>
 	<bean id="luceneContentSvc" class="com.jeecms.cms.lucene.LuceneContentSvcImpl"/>
+	<!-- 页面静态化 -->
 	<bean id="staticPageSvc" class="com.jeecms.cms.staticpage.StaticPageSvcImpl">
 		<property name="tplMessageSource" ref="tplMessageSource"/>
 		<property name="freeMarkerConfigurer">
