@@ -35,6 +35,13 @@ import com.jeecms.core.manager.AuthenticationMng;
  * @author liufang
  * 
  */
+/**
+ * Interceptor请求处理调用顺序:
+ * 1.先preHandle
+ * 2.controller处理请求
+ * 3.postHandle
+ * 4.渲染视图
+ */
 public class AdminContextInterceptor extends HandlerInterceptorAdapter {
 	private static final Logger log = Logger
 			.getLogger(AdminContextInterceptor.class);
@@ -112,7 +119,7 @@ public class AdminContextInterceptor extends HandlerInterceptorAdapter {
 		}
 		return true;
 	}
-
+//postHandle方法在处理请求后，渲染模板视图前调用。
 	@Override
 	public void postHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler, ModelAndView mav)
