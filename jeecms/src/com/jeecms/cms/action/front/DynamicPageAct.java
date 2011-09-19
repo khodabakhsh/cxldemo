@@ -157,6 +157,7 @@ public class DynamicPageAct {
 						gname);
 			}
 		}
+		//获取当前选择页的内容
 		String txt = content.getTxtByNo(pageNo);
 		// 内容加上关键字
 		txt = cmsKeywordMng.attachKeyword(site.getId(), txt);
