@@ -197,7 +197,7 @@ public class CmsUser extends BaseCmsUser implements PriorityInterface {
 			return false;
 		}
 		for (CmsRole role : getRoles()) {
-			if (role.getSuper()) {
+			if (role.getSuper()) {//当选定角色“拥有所有权限”时，role.getSuper()==true
 				return true;
 			}
 		}
