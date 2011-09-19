@@ -42,6 +42,7 @@ public class PermistionDirective implements TemplateDirectiveModel {
 			// url为空，则认为有权限。
 			pass = true;
 		} else {
+			//下面的getPerms(env)为什么可以获得权限？，见com.jeecms.cms.web.AdminContextInterceptor.postHandle方法
 			TemplateSequenceModel perms = getPerms(env);
 			if (perms == null) {
 				// perms为null，则代表不需要判断权限。
