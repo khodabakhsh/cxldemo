@@ -49,7 +49,7 @@
 			</value>
 		</property>
 		<property name="entityInterceptor">   
-			<ref local="treeInterceptor"/>
+			<ref local="treeInterceptor"/><!-- 维护栏目的树状结构，使用The Nested Set Model算法 -->
 		</property>
 		<property name="cacheProvider">
 			<ref local="cacheProvider"/>
