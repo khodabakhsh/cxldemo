@@ -182,6 +182,7 @@
 		<session-timeout>50</session-timeout>
 	</session-config>
 	<welcome-file-list>
+	<!-- 首页静态化可以生成 index.html或index.shtml两个页面-->
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.shtml</welcome-file>
 		<welcome-file>index.jhtml</welcome-file>
