@@ -90,5 +90,6 @@ DispatcherServlet.class.getName() + ".LOCALE_RESOLVER"）
 		
 7.栏目的树状结构采用的The Nested Set Model算法 。见application-context.xml里sessionFactory的配置entityInterceptor
 
-8.关于fck的文件上传，看一下src/com/jeecms/common/fck这个包下的类，实现了上传功能
+8.关于fck的文件上传，看一下src/com/jeecms/common/fck这个包下的类，实现了上传功能,fck的文件上传request及response格式，请看
+http://docs.fckeditor.net/FCKeditor_2.x/Developers_Guide/Server_Side_Integration#FileUpload_.28HTML.29
 
