@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import cn.jcenterhome.util.Common;
 import cn.jcenterhome.util.JavaCenterHome;
-import cn.jcenterhome.web.servlet.GZIPResponseWrapper;
+import cn.jcenterhome.web.servlet.GZIPResponseWrapper;/** * gzip压缩过滤器,如果config.properties的gzipCompress=1，就采用gzip压缩 *  * @author caixl , Sep 21, 2011 * */
 public class GZIPFilter implements Filter {
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
 			ServletException {
