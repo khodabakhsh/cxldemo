@@ -79,6 +79,7 @@ public class AdminContextInterceptor extends HandlerInterceptorAdapter {
 			}
 		}
 		// 此时用户可以为null
+		
 		CmsUtils.setUser(request, user);
 		// User加入线程变量
 		CmsThreadVariable.setUser(user);
