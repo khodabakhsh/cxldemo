@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Map;
 import cn.jcenterhome.vo.TableColumnsVO;
 import cn.jcenterhome.vo.TableFieldVO;
-import cn.jcenterhome.vo.TableStatusVO;
+import cn.jcenterhome.vo.TableStatusVO;/** *  基础dao接口 *  * @author caixl , Sep 21, 2011 * */
 public interface DataBaseDao {
 	public List<Map<String, Object>> executeQuery(String sql);
 	public List<String> executeQuery(String sql, int columnIndex);
