@@ -4,7 +4,7 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.NodeList;/** * bean工厂，根据beanfactory.xml的配置，装配一个bean的Map<String, Object>，提供service服务。 *  * @author caixl , Sep 21, 2011 * */
 public final class BeanFactory {
 	private static Map<String, Object> map = null;
 	static {
