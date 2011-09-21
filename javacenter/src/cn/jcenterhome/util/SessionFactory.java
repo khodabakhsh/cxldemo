@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.Properties;
 import org.hibernate.Session;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.cfg.Configuration;
 public class SessionFactory {
 	private static String CONFIG_FILE_LOCATION = "/hibernate.cfg.xml";
 	private static org.hibernate.SessionFactory sessionFactory;
