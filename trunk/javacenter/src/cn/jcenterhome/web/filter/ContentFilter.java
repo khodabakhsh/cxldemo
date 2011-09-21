@@ -29,7 +29,7 @@ public class ContentFilter implements Filter {
 			ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
-		String ac = request.getParameter("ac");
+		String ac = request.getParameter("ac");		//ac = seccode是请求验证码
 		if ("seccode".equals(ac)) {
 			doSeccode(request, response);
 		} else {
