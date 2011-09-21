@@ -68,7 +68,10 @@ public class AdminContextInterceptor extends HandlerInterceptorAdapter {
 						+ " not found!");
 			}
 		} else {
-			// 正常状态
+			// 正常状态,
+//			每个request，都会进来，
+//			1.如果上次操作时间距离当前时间超过AuthenticationMngImpl.interval的间隔，就会删除数据库中jo_authentication表过期的数据。
+//			2.如果对应jo_authentication表的updateTime时间距离当前时间超过AuthenticationMngImpl.timeout间隔，就返回null，此时就要求重登陆。否则就更新updateTime并返回userId
 			Integer userId = authMng
 					.retrieveUserIdFromSession(session, request);
 			if (userId != null) {
