@@ -79,7 +79,7 @@
 		<property name="contentType" value="text/html; charset=UTF-8"/>
 		<property name="exposeRequestAttributes" value="false"/>
 		<property name="exposeSessionAttributes" value="false"/>
-		<property name="exposeSpringMacroHelpers" value="true"/>
+		<property name="exposeSpringMacroHelpers" value="true"/><!-- 暴露这个属性，在freemarker中可以使用spring的一些功能，见WEB-INF/ftl/spring.ftl -->
 	</bean>
 	<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 		<property name="templateLoaderPath" value="/WEB-INF"/>
