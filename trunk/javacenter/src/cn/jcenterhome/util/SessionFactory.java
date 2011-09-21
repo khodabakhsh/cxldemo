@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.Properties;
 import org.hibernate.Session;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.cfg.Configuration;/** * 初始化：根据hibernate配置文件hibernate.cfg.xml和config.properties构建hibernate的sessionFactory * 提供绑定到当前线程的session *  * @author caixl , Sep 21, 2011 * */
 public class SessionFactory {
 	private static String CONFIG_FILE_LOCATION = "/hibernate.cfg.xml";
 	private static org.hibernate.SessionFactory sessionFactory;
