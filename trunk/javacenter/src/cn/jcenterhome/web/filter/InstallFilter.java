@@ -8,7 +8,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import cn.jcenterhome.util.JavaCenterHome;
+import cn.jcenterhome.util.JavaCenterHome;/** * 初始化安装filter *  * @author caixl , Sep 21, 2011 * */
 public class InstallFilter implements Filter {
 	public void init(FilterConfig fc) throws ServletException {
 	}

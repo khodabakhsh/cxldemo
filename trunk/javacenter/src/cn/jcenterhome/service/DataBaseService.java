@@ -7,7 +7,7 @@ import cn.jcenterhome.util.BeanFactory;
 import cn.jcenterhome.util.JavaCenterHome;
 import cn.jcenterhome.vo.TableColumnsVO;
 import cn.jcenterhome.vo.TableFieldVO;
-import cn.jcenterhome.vo.TableStatusVO;
+import cn.jcenterhome.vo.TableStatusVO;/** * 基础服务类,封装了<code>DataBaseDao</code> *  * @author caixl , Sep 21, 2011 * */
 public class DataBaseService {
 	private DataBaseDao dataBaseDao = (DataBaseDao) BeanFactory.getBean("dataBaseDao");
 	public List<Map<String, Object>> executeQuery(String sql) {

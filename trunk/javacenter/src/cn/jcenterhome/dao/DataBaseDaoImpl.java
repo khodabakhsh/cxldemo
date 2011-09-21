@@ -18,7 +18,7 @@ import cn.jcenterhome.util.SessionFactory;
 import cn.jcenterhome.vo.FieldVO;
 import cn.jcenterhome.vo.TableColumnsVO;
 import cn.jcenterhome.vo.TableFieldVO;
-import cn.jcenterhome.vo.TableStatusVO;
+import cn.jcenterhome.vo.TableStatusVO;/** * 基础dao类，封装了数据库CRUD操作（附加事务） *  * @author caixl , Sep 21, 2011 * */
 public class DataBaseDaoImpl implements DataBaseDao {
 	public List<Map<String, Object>> executeQuery(String sql) {
 		Connection conn = null;
