@@ -5,6 +5,7 @@ import com.jeecms.cms.entity.main.CmsUser;
 
 /**
  * CMS线程变量
+ * cmsUserVariable目前在判断用户对内容是否有修改、删除权限的时候会用这个来取的当前用户
  * 
  * @author liufang
  * 
