@@ -93,7 +93,7 @@ public class CmsLoginAct {
 		if (!errors.hasErrors()) {
 			try {
 				String ip = RequestUtils.getIpAddr(request);
-				//验证用户名、密码正确，更新登录信息，认证信息,session中设置认证信息
+				//验证用户名、密码正确，更新登录信息，认证信息,session中设置认证AUTH_KEY信息
 				Authentication auth = authMng.login(username, password, ip,
 						request, response, session);
 				// 是否需要在这里加上登录次数(jc_user表)的更新？按正常的方式，应该在process里面处理的，不过这里处理也没大问题。
