@@ -154,3 +154,4 @@ FreeMarker（程序员参看API 文档的Configuration.setTagSyntax(int)来使
 使用常规语法。而2.4 版本中的默认配置将会自动检测，也就是说第一个FreeMarker 标签决
 定了语法形式（它可以是任意的，而不仅仅是ftl）。
 
+17.<#rt> 去掉右边空白和换行
