@@ -1,7 +1,7 @@
 package cn.jcenterhome.util;
 import java.util.HashMap;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;/** * 提供全局常量，如编码、版本号、数据库表名、web根目录实际磁盘地址 *  * @author caixl , Sep 22, 2011 * */
 public final class JavaCenterHome {
 	public static final boolean IN_JCHOME = true;
 	public static final String JCH_CHARSET = "UTF-8";
