@@ -108,7 +108,7 @@ public class Common {
 				"(GMT +11:00) Magadan, New Caledonia, Solomon Islands"});
 		timeZoneIDs.put("12", new String[] {"GMT+12:00",
 				"(GMT +12:00) Auckland, Wellington, Fiji, Marshall Island"});
-	}	/**	 * 以下条件返回true，<br/>	 * <li>obj为null，<br/>	 * <li>空字符串或字符串为0，<br/>	 * <li>数值为0，<br/>	 * <li>boolean为false，<br/>	 * <li>集合为空集合，<br/>	 * <li>数组长度为0	 */
+	}	/**	 * 以下条件返回true，	 * <li>obj为null	 * <li>空字符串或字符串为0	 * <li>数值为0	 * <li>boolean为false	 * <li>集合为空集合	 * <li>数组长度为0	 */
 	@SuppressWarnings("unchecked")
 	public static boolean empty(Object obj) {
 		if (obj == null) {
