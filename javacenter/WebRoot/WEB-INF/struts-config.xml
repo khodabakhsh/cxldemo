@@ -214,6 +214,6 @@
 		<action path="/other" type="cn.jcenterhome.web.action.OtherAction" scope="request" validate="false"
 			parameter="action" />
 	</action-mappings>
-
+<!-- 指定国际化资源文件位置 -->
 	<message-resources parameter="cn.jcenterhome.web.ApplicationResources" />
 </struts-config>
