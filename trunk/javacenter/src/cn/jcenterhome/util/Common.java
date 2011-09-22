@@ -133,10 +133,10 @@ public class Common {
 			return "";
 		}
 		return text.trim();
-	}
+	}	/**	 * 检验source是否包含指定对象ext，即ext.toSTring()等于source中某个项.toSTring()	 * @param source ，是 Collection 或者 Object[]	 * @param ext ，查找的对象	 * @return	 */
 	public static boolean in_array(Object source, Object ext) {
 		return in_array(source, ext, false);
-	}
+	}	/**	 * 检验source是否包含指定对象ext	 * @param source ，是 Collection 或者 Object[]	 * @param ext ，查找的对象	 * @param strict ， true要求ext.getClass().getName()等于source中某个项.getClass().getName()	 * @return	 */
 	public static boolean in_array(Object source, Object ext, boolean strict) {
 		if (source == null || ext == null) {
 			return false;
