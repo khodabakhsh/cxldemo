@@ -1998,7 +1998,7 @@ public class Common {
 			}
 			share.put("body_data", bodyData);
 		}
-	}
+	}	/**	 * 根据key，和传入的参数args获得对应的国际化信息	 */
 	public static String getMessage(HttpServletRequest request, String key, Object... args) {
 		if (key == null || key.length() == 0) {
 			return key;
