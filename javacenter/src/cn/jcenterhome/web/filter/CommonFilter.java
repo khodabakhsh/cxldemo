@@ -21,7 +21,7 @@ import cn.jcenterhome.util.BeanFactory;
 import cn.jcenterhome.util.Common;
 import cn.jcenterhome.util.CookieHelper;
 import cn.jcenterhome.util.JavaCenterHome;
-import cn.jcenterhome.util.SessionFactory;
+import cn.jcenterhome.util.SessionFactory;/** * 基础过滤器 * <li>设置IN_JCHOME，JCH_VERSION，JCH_RELEASE，sGlobal，sCookie，sNames，space等等属性 * <li>如果不存在jsp缓存文件，在webRoot/data/cache目录下初始化缓存jsp *  * @author caixl , Sep 22, 2011 * */
 public class CommonFilter implements Filter {
 	private String[] cacheNames = {"app", "userapp", "ad", "magic"};
 	private DataBaseService dataBaseService = (DataBaseService) BeanFactory.getBean("dataBaseService");
@@ -42,7 +42,7 @@ public class CommonFilter implements Filter {
 		int timestamp = (int) (currentTime / 1000);
 		sGlobal.put("timestamp", timestamp);
 		sGlobal.put("starttime", currentTime);
-		request.setAttribute("sGlobal", sGlobal);
+		request.setAttribute("sGlobal", sGlobal);		/**		 * request中以jchome_开头的cookie中可能保存了以下值，：{name :jchome_loginuser , value:admin}{name :jchome_mytemplate , value:blue}{name :jchome_collapse , value:}{name :jchome_auth , value:d485ImIfWjdiOmtSa3p%2FWBMyWTdufklzW3g7Fx9QRj8%2FPHxQbAwvQDQiRE5wcm06GS8HKH5WGwkTGh9CImFq}{name :jchome_pic_sequence , value:1}{name :jchome_sendmail , value:1}保存在下面sCookie的时候，会去掉前缀		 */
 		Map<String, String> sCookie = CookieHelper.getCookies(request);
 		Map<Integer, String> sNames = new HashMap<Integer, String>();
 		Map<String, Object> space = new HashMap<String, Object>();
@@ -61,9 +61,9 @@ public class CommonFilter implements Filter {
 		String jchRoot = JavaCenterHome.jchRoot;
 		try {
 			File configFile = new File(jchRoot + "data/cache/cache_config.jsp");
-			if (!configFile.exists()) {
+			if (!configFile.exists()) {				//如果不存在jsp缓存文件，初始化
 				cacheService.updateCache();
-			}
+			}			//include,设置request.setAttribute("sConfig",sConfig);
 			request.getRequestDispatcher("/data/cache/cache_config.jsp").include(request, response);
 		} catch (Exception e) {
 			response.getWriter().write(e.getMessage());
@@ -132,7 +132,7 @@ public class CommonFilter implements Filter {
 				+ String.valueOf(timestamp).substring(0, 6)));
 		getUserApp(request, sGlobal, sConfig);
 		chain.doFilter(req, res);
-	}
+	}	/**	 * 检验cookie中的数据与jchome_session表中的数据是否一致	 */
 	private void checkAuth(HttpServletRequest request, HttpServletResponse response,
 			Map<String, Object> sGlobal, Map<String, Object> sConfig, Map<String, String> sCookie) {
 		String m_auth = request.getParameter("m_auth");
