@@ -15,13 +15,13 @@ import cn.jcenterhome.util.BeanFactory;
 import cn.jcenterhome.util.Common;
 import cn.jcenterhome.util.FileHelper;
 import cn.jcenterhome.util.JavaCenterHome;
-import cn.jcenterhome.util.Serializer;
+import cn.jcenterhome.util.Serializer;/** * 缓存服务，在webRoot/data/cache目录下生成对应的jsp *  * @author caixl , Sep 22, 2011 * */
 public class CacheService {
 	private DataBaseDao dataBaseDao = (DataBaseDao) BeanFactory.getBean("dataBaseDao");
 	private String[] cacheNames = {"config", "network", "usergroup", "profilefield", "profield", "censor",
-			"creditrule", "ad", "task", "click", "block", "userapp", "app", "eventclass", "magic"};
+			"creditrule", "ad", "task", "click", "block", "userapp", "app", "eventclass", "magic"};/** * 初始化缓存jsp，在webRoot/data/cache目录下生成文件名是"cache_"+cacheName的jsp * @throws Exception */
 	public void updateCache() throws Exception {
-		try {
+		try {//遍历cacheNames在webRoot/data/cache目录下生成文件名是"cache_"+cacheName的jsp
 			for (String cacheName : cacheNames) {
 				Method method = this.getClass().getMethod(cacheName + "_cache");
 				method.invoke(this);
@@ -306,7 +306,7 @@ public class CacheService {
 		} else {
 			delTreeDir(JavaCenterHome.jchRoot + "data/block_cache");
 		}
-	}
+	}	/**	 * 递归生成Map对象。	 * 生成如下格式（注意缩进）：	 * Map sConfigPrivacy= new HashMap();		        Map sConfigPrivacyFeed= new HashMap();		        sConfigPrivacyFeed.put("invite",1);	       sConfigPrivacy.put("feed",sConfigPrivacyFeed);		        Map sConfigPrivacyView= new HashMap();		        sConfigPrivacyView.put("profile",0);	       sConfigPrivacy.put("view",sConfigPrivacyView);	       	 * @param var ,生成Map对象名	 * @param values ,包含Map对象的key-value值	 * @param level ,生成对象的层次，用于生成的代码美观缩进	 * @return	 */
 	@SuppressWarnings("unchecked")
 	private String arrayeval(String var, Map values, int level) {
 		StringBuffer space = new StringBuffer();
@@ -350,7 +350,7 @@ public class CacheService {
 			}
 		}
 		return curdata.toString();
-	}
+	}	/**	 * 生成缓存jsp文件。	 * @param fileName ,文件位置：web根目录/data/cache/* .jsp	 * @param var ,生成Map对象名	 * @param values ,包含Map对象的key-value值	 * @throws IOException	 */
 	@SuppressWarnings("unchecked")
 	private void cache_write(String fileName, String var, Map values) throws IOException {
 		String cachePath = JavaCenterHome.jchRoot + "data/cache/" + fileName + ".jsp";
