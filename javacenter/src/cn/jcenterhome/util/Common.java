@@ -108,7 +108,7 @@ public class Common {
 				"(GMT +11:00) Magadan, New Caledonia, Solomon Islands"});
 		timeZoneIDs.put("12", new String[] {"GMT+12:00",
 				"(GMT +12:00) Auckland, Wellington, Fiji, Marshall Island"});
-	}
+	}	/**	 * 以下条件返回true，<br/>	 * <li>obj为null，<br/>	 * <li>空字符串或字符串为0，<br/>	 * <li>数值为0，<br/>	 * <li>boolean为false，<br/>	 * <li>集合为空集合，<br/>	 * <li>数组长度为0	 */
 	@SuppressWarnings("unchecked")
 	public static boolean empty(Object obj) {
 		if (obj == null) {
@@ -180,7 +180,7 @@ public class Common {
 			}
 		}
 		return s;
-	}
+	}	/**	 * 调用java.net.URLDecoder.decode(String s, String enc)	 */
 	public static String urlDecode(String s) {
 		return urlDecode(s, JavaCenterHome.JCH_CHARSET);
 	}
@@ -203,7 +203,7 @@ public class Common {
 		} else {
 			return min;
 		}
-	}
+	}	/**	 * md5加密	 */
 	public static String md5(String arg0) {
 		return Md5Util.encode(arg0);
 	}
@@ -433,7 +433,7 @@ public class Common {
 			character = iterator.next();
 		}
 		return sb.toString();
-	}
+	}	/**	 * 把text中的 ' " \ 三个符号替换为\	 */
 	public static String addSlashes(String text) {
 		if (text == null || text.equals("")) {
 			return "";
@@ -1289,7 +1289,7 @@ public class Common {
 					+ " (var,datavalue,dateline) VALUES ('" + var + "','" + addSlashes((String) dataValue)
 					+ "','" + time() + "')");
 		}
-	}
+	}	/**	 * 从jchome_data表中查找对应var的值	 */
 	public static String getData(String var) {
 		return (String) getData(var, false);
 	}

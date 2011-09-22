@@ -6,7 +6,7 @@ public final class JavaCenterHome {
 	public static final boolean IN_JCHOME = true;
 	public static final String JCH_CHARSET = "UTF-8";
 	public static final String JCH_VERSION = "2.0";
-	public static final int JCH_RELEASE = 20110324;
+	public static final int JCH_RELEASE = 20110324;	/**	 * web根目录实际磁盘地址	 */
 	public static String jchRoot = null;
 	public static Map<String, String> jchConfig = new HashMap<String, String>();
 	private static Map<String, String> tableNames = new HashMap<String, String>();
