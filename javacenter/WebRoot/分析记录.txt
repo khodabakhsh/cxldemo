@@ -1,0 +1,7 @@
+1.首页http://localhost:8080/javacenter/space.jsp?do=home构成：
+1.主页space_home.jsp，
+2.页眉菜单栏，header.jsp
+3.显示和发布心情，space_status.jsp
+4.显示动态明细，space_feed_li.jsp
+5.页脚，footer.jsp
+6.这个还不知道干嘛的？space_menu.jsp
