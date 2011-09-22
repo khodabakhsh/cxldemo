@@ -1075,7 +1075,7 @@ CREATE TABLE jchome_report (
 -- --------------------------------------------------------
 
 --
--- 表的结构 'jchome_session'
+-- 表的结构 'jchome_session',记住密码时保存session数据
 --
 
 CREATE TABLE jchome_session (
