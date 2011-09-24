@@ -1,4 +1,3 @@
-一、首页页面对应jsp
 1.首页http://localhost:8080/javacenter/space.jsp?do=home构成：
 1.主页space_home.jsp，
 2.页眉菜单栏，header.jsp
@@ -6,6 +5,3 @@
 4.每一条动态明细是一个space_feed_li.jsp
 5.页脚，footer.jsp
 6.这个还不知道干嘛的？space_menu.jsp
-
-二、标签对应：
-jch:template，对应Common类的template方法，用于获取模板路径

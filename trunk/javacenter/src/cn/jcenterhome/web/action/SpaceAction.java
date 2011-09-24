@@ -2437,7 +2437,7 @@ public class SpaceAction extends BaseAction {
 			LinkedHashMap icon_num = new LinkedHashMap();
 			List tempList = null;
 			boolean isMyApp = false;
-			LinkedHashMap hashDataMap = null;
+			LinkedHashMap hashDataMap = null;			//filterCount:动态被屏蔽数量
 			int filterCount = 0;
 			List<Map<String, Object>> filter_list = new ArrayList<Map<String, Object>>();
 			LinkedHashMap hiddenfeed_num = new LinkedHashMap();
@@ -6584,7 +6584,7 @@ public class SpaceAction extends BaseAction {
 						+ (space.get(value) == null ? 0 : (Integer) space.get(value)));
 			}
 		}
-		Common.realname_get(sGlobal, sConfig, sNames, space);
+		Common.realname_get(sGlobal, sConfig, sNames, space);				//list存储首页动态,是一个LinkedHashMap，存储<key,value>是<日期,对应日期的内容列表
 		LinkedHashMap list = new LinkedHashMap();
 		Set feedKeys = feed_list.keySet();
 		int dateline = 0;

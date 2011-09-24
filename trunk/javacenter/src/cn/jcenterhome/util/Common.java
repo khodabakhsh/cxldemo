@@ -338,7 +338,7 @@ public class Common {
 	}
 	public static String gmdate(String format, int timestamp, String timeoffset) {
 		return getSimpleDateFormat(format, timeoffset).format(timestamp * 1000l);
-	}
+	}	/**	 * 把时间转换为多少小时、多少分钟、多少秒前这样的显示	 */
 	public static String sgmdate(HttpServletRequest request, String dateformat, int timestamp) {
 		return sgmdate(request, dateformat, timestamp, false);
 	}
@@ -1226,7 +1226,7 @@ public class Common {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-	}
+	}	/**	 * 生成对应风格的模板	 * <li>如果sGlobal.get("mobile")不为空，返回"/api/mobile/tpl_" + pageName	 * <li>否则返回"/template/" + sConfig.get("template") + "/" + pageName，假如这个不存在，返回"/template/default/" + pageName	 */
 	@SuppressWarnings("unchecked")
 	public static String template(Map<String, Object> sConfig, Map<String, Object> sGlobal, String pageName) {
 		String tpl = null;
