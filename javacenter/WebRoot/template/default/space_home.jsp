@@ -292,6 +292,7 @@
 				</c:if>
 </c:if>
 
+<!-- 首页动态,list是一个LinkedHashMap，存储<key,value>是<日期,对应日期的内容列表> -->
 <c:if test="${not empty list}">
 	<c:forEach items="${list}" var="values">
 		<c:if test="${param.view!='hot'}">

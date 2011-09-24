@@ -11,6 +11,11 @@ var ajaxpostHandle = 0;
 var evalscripts = new Array();
 var ajaxpostresult = 0;
 
+/**
+ * Ajax调用封装类
+ * @param {} recvType ,接收响应类型，有HTML、XML，默认xml
+ * @param {} waitId
+ */
 function Ajax(recvType, waitId) {
 
 	for(var stackId = 0; stackId < AjaxStacks.length && AjaxStacks[stackId] != 0; stackId++);
@@ -89,7 +94,11 @@ function Ajax(recvType, waitId) {
 			AjaxStacks[aj.stackId] = 0;
 		}
 	}
-
+/**
+ * ajax的get，加入请求参数inajax=1表示ajax调用
+ * @param {} targetUrl ,请求url
+ * @param {} resultHandle ，回调函数
+ */
 	aj.get = function(targetUrl, resultHandle) {	
 		if(targetUrl.indexOf('?') != -1) {
 			targetUrl = targetUrl + '&inajax=1';
@@ -342,7 +351,14 @@ function ajaxpost_load() {
 	formid.target = 'ajaxframe';
 	ajaxpostHandle = 0;
 }
-
+/**
+ * ajax调用
+ * @param {} e，事件
+ * @param {} ctrlid ，控件id
+ * @param {} isbox 
+ * @param {} timeout
+ * @param {} func
+ */
 function ajaxmenu(e, ctrlid, isbox, timeout, func) {
 	
 	var offset = 0;
@@ -388,7 +404,8 @@ function ajaxmenu(e, ctrlid, isbox, timeout, func) {
 		if(s.indexOf('ajaxerror') != -1) {
 			evaled = true;
 		}
-		if(s.indexOf('hideMenu()') == -1) {//添加关闭
+		if(s.indexOf('hideMenu()') == -1) {
+			//添加关闭按钮
 			s = '<h1>消息</h1><a href="javascript:hideMenu();" class="float_del" title="关闭">关闭</a><div class="popupmenu_inner">' + s + '<div>';
 		}
 		if(!evaled) {

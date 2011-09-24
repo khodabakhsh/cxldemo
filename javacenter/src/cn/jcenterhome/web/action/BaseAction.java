@@ -81,12 +81,12 @@ public class BaseAction extends DispatchAction {
 		String mobile = (String) sGlobal.get("mobile");
 		String message = Common.getMessage(request, msgKey, args);
 		if (Common.empty(mobile)) {
-			int inajax = (Integer) sGlobal.get("inajax");
+			int inajax = (Integer) sGlobal.get("inajax");//inajax=1表示ajax调用
 			if (inajax == 0 && forwardURL != null && second == 0) {
 				response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 				response.setHeader("Location", forwardURL);
 			} else {
-				if (inajax > 0) {
+				if (inajax > 0) {					//forwardURL不为空，例如用户没登陆，打开首页，点击动态中的更多选项，就会进来这里，返回信息可能如下：                    //<a href="do.jsp?ac=4928159152d0acd0363cc735588b6518">您需要先登录才能继续本操作</a>
 					if (forwardURL != null) {
 						message = "<a href=\"" + forwardURL + "\">" + message + "</a><ajaxok>";
 					}
@@ -269,7 +269,7 @@ public class BaseAction extends DispatchAction {
 			sGlobal.put("formhash", formhash);
 		}
 		return formhash;
-	}
+	}	/**	 * include一个Common.template(sConfig, sGlobal, pageName)生成的风格页面	 * request.getRequestDispatcher(tpl).include(request, response);	 */
 	@SuppressWarnings("unchecked")
 	protected ActionForward include(HttpServletRequest request, HttpServletResponse response,
 			Map<String, Object> sConfig, Map<String, Object> sGlobal, String pageName) {

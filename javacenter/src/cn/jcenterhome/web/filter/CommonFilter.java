@@ -94,7 +94,7 @@ public class CommonFilter implements Filter {
 			mobile = null;
 		}
 		sGlobal.put("supe_uid", 0);
-		sGlobal.put("supe_username", "");
+		sGlobal.put("supe_username", "");		//请求参数inajax=1表示ajax调用
 		sGlobal.put("inajax", Common.intval(request.getParameter("inajax")));
 		sGlobal.put("mobile", mobile);
 		sGlobal.put("refer", Common.trim(request.getHeader("Referer")));
