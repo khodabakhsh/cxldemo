@@ -274,7 +274,12 @@ function ajaxget(url, showid, waitid) {
 		if(!evaled)evalscript(s);
 	});
 }
-
+/**
+ * ajax发送post请求,提交到的target为ajaxframe
+ * @param {} formid ,提交的formid
+ * @param {} func ，回调函数
+ * @param {} timeout ,提示层消失时间
+ */
 function ajaxpost(formid, func, timeout) {
 	showloading();
 	
@@ -309,7 +314,9 @@ function ajaxpost(formid, func, timeout) {
 	$(formid).submit();
 	return false;
 }
-
+/**
+ * ajaxpost方法调用之后，ajaxframe的load处理
+ */
 function ajaxpost_load() {
 	
 	var formid = ajaxpostHandle[0];
@@ -349,10 +356,11 @@ function ajaxpost_load() {
 	if(timeout && ajaxpostresult) jsmenu['timer'][formid] = setTimeout("hideMenu()", timeout);
 
 	formid.target = 'ajaxframe';
+	//调用完毕，ajaxpostHandle设置为0
 	ajaxpostHandle = 0;
 }
 /**
- * ajax调用
+ * ajax调用menu
  * @param {} e，事件
  * @param {} ctrlid ，控件id
  * @param {} isbox 

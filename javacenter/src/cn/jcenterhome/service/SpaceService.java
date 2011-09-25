@@ -16,7 +16,7 @@ public class SpaceService {
 			String email) throws Exception {
 		if (uid == 0 || Common.empty(userName)) {
 			return null;
-		}
+		}		//先校验对应空间是否已被删除
 		int count = dataBaseService.findRows("SELECT COUNT(*) FROM "
 				+ JavaCenterHome.getTableName("spacelog") + " WHERE uid=" + uid + " AND flag=-1");
 		if (count > 0) {
@@ -28,7 +28,7 @@ public class SpaceService {
 		space.put("namestatus", 0);
 		space.put("avatar", 0);
 		space.put("dateline", sGlobal.get("timestamp"));
-		space.put("groupid", gid);
+		space.put("groupid", gid);		//注册空间的ip地址
 		space.put("regip", Common.getOnlineIP(request));
 		Map<String, Integer> reward = Common.getReward("register", false, uid, "", true, request, response);
 		int credit = reward.get("credit");

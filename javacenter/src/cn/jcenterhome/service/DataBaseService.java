@@ -54,7 +54,7 @@ public class DataBaseService {
 	}
 	public List<String> showTableNames(String prefix) {
 		return dataBaseDao.executeQuery("SHOW TABLES LIKE '" + prefix + "%';", 1);
-	}
+	}	/**	 * 对数据库表tableName插入或替换数据insertData	 * @param returnId，是否返回id	 * @param replace，是否替换	 */
 	public int insertTable(String tableName, Map<String, Object> insertData, boolean returnId, boolean replace) {
 		String comma = "";
 		StringBuffer insertKey = new StringBuffer();

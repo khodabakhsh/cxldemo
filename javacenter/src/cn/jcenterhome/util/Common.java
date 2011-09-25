@@ -127,7 +127,7 @@ public class Common {
 			return true;
 		}
 		return false;
-	}
+	}	/**	 * 如果text为null，返回"",否则返回text.trim()	 */
 	public static String trim(String text) {
 		if (text == null) {
 			return "";
@@ -259,7 +259,7 @@ public class Common {
 		} else {
 			return Math.min(max, Math.max((Integer) value, min));
 		}
-	}
+	}	/**	 * 返回数值。如果s是null或空字符串，返回0	 */
 	public static int intval(String s) {
 		return intval(s, 10);
 	}
@@ -379,7 +379,7 @@ public class Common {
 			e.printStackTrace();
 		}
 		return flag;
-	}
+	}	/**	 * <li>isOnlyNum为true，返回长度为length的随机数字（0到9组成）	 * <li>isOnlyNum为false，返回长度为length的随机字母数字组合(0123456789abcdefghigklmnopqrstuvtxyzABCDEFGHIGKLMNOPQRSTUVWXYZ组成)	 */
 	public static String getRandStr(int length, boolean isOnlyNum) {
 		int size = isOnlyNum ? 10 : 62;
 		StringBuffer hash = new StringBuffer(length);
@@ -678,7 +678,7 @@ public class Common {
 		} else {
 			return false;
 		}
-	}
+	}	/**	 * 是否邮件格式	 */
 	public static boolean isEmail(String email) {
 		return Common.strlen(email) > 6 && email.matches("^[\\w\\-\\.]+@[\\w\\-\\.]+(\\.\\w+)+$");
 	}
@@ -924,7 +924,7 @@ public class Common {
 		}
 		String var = "checkperm_" + permType;
 		Object perm = sGlobal.get(var);
-		if (perm == null) {
+		if (perm == null) {			//supe_uid（用户id）
 			int supe_uid = (Integer) sGlobal.get("supe_uid");
 			if (supe_uid == 0) {
 				perm = 0;
@@ -1097,7 +1097,7 @@ public class Common {
 			}
 		}
 		return gid;
-	}
+	}	/**	 * 返回request.getAttribute(var)，因为该值应该是缓存jsp所设置的，所以其实是从缓存【JavaCenterHome.jchRoot+path】.jsp中获取	 * @param path,缓存的页面文件路径	 */
 	@SuppressWarnings("unchecked")
 	public static Map getCacheDate(HttpServletRequest request, HttpServletResponse response, String path,
 			String var) {
@@ -1111,7 +1111,7 @@ public class Common {
 					cacheService.updateCache();
 				}
 				HttpServletRequest myRequest = request;
-		        if (request instanceof MultipartRequestWrapper) {
+		        if (request instanceof MultipartRequestWrapper) {		        	//如果是MultipartRequestWrapper实例，先获取原先的request,为什么??
 		            myRequest = ((MultipartRequestWrapper) request).getRequest();
 		        }
 				request.getRequestDispatcher(path).include(myRequest, response);
@@ -1142,7 +1142,7 @@ public class Common {
 	public static Map<String, Object> getSpace(HttpServletRequest request, Map<String, Object> sGlobal,
 			Map<String, Object> sConfig, Object key) {
 		return getSpace(request, sGlobal, sConfig, key, "uid", false);
-	}
+	}	/**	 * 获得一个space	 * @param sGlobal	 * @param sConfig	 * @param key	 * @param indexType	 * @param autoOpen	 * @return	 */
 	@SuppressWarnings("unchecked")
 	public static Map<String, Object> getSpace(HttpServletRequest request, Map<String, Object> sGlobal,
 			Map<String, Object> sConfig, Object key, String indexType, boolean autoOpen) {
@@ -1401,14 +1401,14 @@ public class Common {
 		}
 		return url;
 	}
-	public static Map<String, Integer> getReward(String action, boolean update, int uid, String needle,
+	@SuppressWarnings("unchecked")	public static Map<String, Integer> getReward(String action, boolean update, int uid, String needle,
 			boolean setcookie, HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Integer> reward = new HashMap<String, Integer>();
 		reward.put("credit", 0);
 		reward.put("experience", 0);
 		Map<String, Object> sGlobal = (Map<String, Object>) request.getAttribute("sGlobal");
 		int supe_uid = (Integer) sGlobal.get("supe_uid");
-		int timestamp = (Integer) sGlobal.get("timestamp");
+		int timestamp = (Integer) sGlobal.get("timestamp");		//获得对应动作的积分规则:creditRule
 		Map<String, Map<String, Object>> creditRule = Common.getCacheDate(request, response,
 				"/data/cache/cache_creditrule.jsp", "globalCreditrule");
 		Map<String, Object> rule = creditRule.get(action);

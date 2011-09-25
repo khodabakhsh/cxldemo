@@ -21,7 +21,7 @@ import cn.jcenterhome.util.BeanFactory;
 import cn.jcenterhome.util.Common;
 import cn.jcenterhome.util.CookieHelper;
 import cn.jcenterhome.util.JavaCenterHome;
-import cn.jcenterhome.util.SessionFactory;/** * 基础过滤器 * <li>设置IN_JCHOME，JCH_VERSION，JCH_RELEASE，sGlobal，sCookie，sNames，space等等属性 * <li>如果不存在jsp缓存文件，在webRoot/data/cache目录下初始化缓存jsp *  * @author caixl , Sep 22, 2011 * */
+import cn.jcenterhome.util.SessionFactory;/** * 基础过滤器 * <li>设置IN_JCHOME，JCH_VERSION，JCH_RELEASE，sGlobal，sCookie，sNames，space等等属性 * <li>如果不存在jsp缓存文件，在webRoot/data/cache目录下初始化缓存jsp，所以sConfig也通过这个赋值 *  * @author caixl , Sep 22, 2011 * */
 public class CommonFilter implements Filter {
 	private String[] cacheNames = {"app", "userapp", "ad", "magic"};
 	private DataBaseService dataBaseService = (DataBaseService) BeanFactory.getBean("dataBaseService");
@@ -86,7 +86,7 @@ public class CommonFilter implements Filter {
 					jchConfig.put(variable, value);
 				}
 			}
-		}
+		}		//获得jchome_config表的sitekey，用来构造提交动作的md5编码
 		String sitekey = (String) sConfig.get("sitekey");
 		String mobile = request.getParameter("mobile");
 		String m_timestamp = request.getParameter("m_timestamp");
@@ -97,10 +97,10 @@ public class CommonFilter implements Filter {
 		sGlobal.put("supe_username", "");		//请求参数inajax=1表示ajax调用
 		sGlobal.put("inajax", Common.intval(request.getParameter("inajax")));
 		sGlobal.put("mobile", mobile);
-		sGlobal.put("refer", Common.trim(request.getHeader("Referer")));
+		sGlobal.put("refer", Common.trim(request.getHeader("Referer")));		//设置login_action
 		if (Common.empty((String) sConfig.get("login_action"))) {
 			sConfig.put("login_action", Common.md5("login" + Common.md5(sitekey)));
-		}
+		}		//设置register_action
 		if (Common.empty((String) sConfig.get("register_action"))) {
 			sConfig.put("register_action", Common.md5("register" + Common.md5(sitekey)));
 		}
@@ -132,7 +132,7 @@ public class CommonFilter implements Filter {
 				+ String.valueOf(timestamp).substring(0, 6)));
 		getUserApp(request, sGlobal, sConfig);
 		chain.doFilter(req, res);
-	}	/**	 * 检验cookie中的数据与jchome_session表中的数据是否一致	 */
+	}	/**	 * 检验cookie中的数据与jchome_session表中的数据是否一致,并为sGlobal设置supe_uid（用户id）等等等信息	 */
 	private void checkAuth(HttpServletRequest request, HttpServletResponse response,
 			Map<String, Object> sGlobal, Map<String, Object> sConfig, Map<String, String> sCookie) {
 		String m_auth = request.getParameter("m_auth");
