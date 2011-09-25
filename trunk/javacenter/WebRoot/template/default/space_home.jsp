@@ -6,6 +6,7 @@
 	<div id="content">
 		<c:choose>
 			<c:when test="${space.uid>0 && space.self}">
+				<!-- 这个when标签，包括个人设置，状态，心情，通知，新手任务，动态的菜单栏 -->
 				<table cellpadding="0" cellspacing="0" border="0" width="100%">
 					<tr>
 						<td valign="top" width="150">
@@ -22,8 +23,7 @@
 							<ul class="u_setting">
 								<li class="dropmenu" id="usettingli" onclick="showMenu(this.id)">
 									<a href="javascript:;">个人设置 <img src="image/more.gif"
-											align="absmiddle">
-									</a>
+											align="absmiddle"> </a>
 								</li>
 							</ul>
 							<ul id="usettingli_menu" class="dropmenu_drop"
@@ -48,12 +48,14 @@
 								<li>
 									<a href="cp.jsp?ac=privacy">隐私筛选</a>
 								</li>
+								<!-- 管理员可用 -->
 								<c:if
 									test="${jch:checkPerm(pageContext.request, pageContext.response,'admin')}">
 									<li>
 										<a href="admincp.jsp">站点管理</a>
 									</li>
 								</c:if>
+								<!-- 趋势统计 -->
 								<c:if
 									test="${jch:checkPerm(pageContext.request, pageContext.response,'allowstat')}">
 									<li>
@@ -91,6 +93,7 @@
 								已有 ${space.viewnum } 人次访问, ${space.credit } 个积分,
 								${space.experience } 个经验
 							</div>
+							<!-- 显示和发布心情 -->
 							<jsp:include
 								page="${jch:template(sConfig, sGlobal, 'space_status.jsp')}" />
 						</td>
@@ -172,7 +175,7 @@
 						</c:if>
 					</div>
 				</c:if>
-
+				<!-- 新手任务 -->
 				<c:if test="${isnewer && not empty task}">
 					<div class="ye_r_t">
 						<div class="ye_l_t">
@@ -231,8 +234,7 @@
 
 					<ul class="tabs">
 						<li${actives.all }>
-							<a href="space.jsp?do=home&view=all"><span>全部</span>
-							</a>
+							<a href="space.jsp?do=home&view=all"><span>全部</span> </a>
 						</li>
 						<li${actives.doing }>
 							<a href="space.jsp?do=home&view=all&icon=doing"><span>记录</span>
@@ -267,12 +269,13 @@
 			</c:when>
 
 			<c:when test="${space.uid>0}">
+				<!-- 这个页面还不知道 -->
 				<jsp:include
 					page="${jch:template(sConfig, sGlobal, 'space_menu.jsp')}" />
 			</c:when>
 		</c:choose>
 
-
+		<!-- 热点推荐 -->
 		<div class="feed">
 			<div id="feed_div" class="enter-content">
 
@@ -292,7 +295,7 @@
 				</c:if>
 </c:if>
 
-<!-- 首页动态,list是一个LinkedHashMap，存储<key,value>是<日期,对应日期的内容列表> -->
+<!-- 首页动态内容列表,list是一个LinkedHashMap，存储<key,value>是<日期,对应日期的内容列表> -->
 <c:if test="${not empty list}">
 	<c:forEach items="${list}" var="values">
 		<c:if test="${param.view!='hot'}">
@@ -322,6 +325,7 @@
 	</ul>
 </c:if>
 
+<!-- 屏蔽的动态 -->
 <c:if test="${filtercount>0}">
 	<div class="notice" id="feed_filter_notice_${start}">
 		根据您的
@@ -364,6 +368,7 @@
 	</div>
 	<!--/content-->
 
+<!-- sidebar是右边栏。包括“任务积分”，“投票”，“热烈欢迎新成员” ，“最近来访”，“我的好友”，“好友生日提醒”，“搜索用户”-->
 	<div id="sidebar">
 		<c:if test="${!isnewer && not empty task}">
 			<div class="ye_r_t">
@@ -401,8 +406,7 @@
 									<div class="task_notice_body">
 										<c:if test="${not empty value.pic}">
 											<a href="space.jsp?do=topic&topicid=${value.topicid }"><img
-													src="${value.pic }" alt="" class="icon" />
-											</a>
+													src="${value.pic }" alt="" class="icon" /> </a>
 										</c:if>
 										<h3>
 											<img src="image/app/topic.gif" align="absmiddle">
@@ -464,8 +468,7 @@
 								src="image/magic/detector.small.gif"
 								title="${globalMagic.detector }" /><a id="a_magic_detector"
 							href="magic.jsp?mid=detector" onclick="ajaxmenu(event,this.id,1)">${globalMagic.detector
-								}</a>
-						</span>
+								}</a> </span>
 					</c:if>
 				</h2>
 				<ul class="avatar_list">
@@ -516,8 +519,7 @@
 						<span class="gray"><img src="image/magic/visit.small.gif"
 								title="${globalMagic.visit }" /><a id="a_magic_visit"
 							href="magic.jsp?mid=visit" onclick="ajaxmenu(event,this.id,1)">${globalMagic.visit
-								}</a>
-						</span>
+								}</a> </span>
 					</c:if>
 				</h2>
 				<ul class="avatar_list">

@@ -4,11 +4,12 @@
 <c:set var="tpl_noSideBar" value="1" scope="request" />
 <jsp:include page="${jch:template(sConfig, sGlobal, 'header.jsp')}" />
 <script>
+//提交注册后的回调函数
 	function register(id, result) {
-		if(result) {
+		if(result) {//成功
 			$('registersubmit').disabled = true;
 			window.location.href = "${jumpurl}";
-		} else {
+		} else {//失败，更换验证码
 			updateseccode();
 		}
 	}
@@ -186,6 +187,7 @@
 			cp2.innerHTML = '<img src="image/check_right.gif" width="13" height="13">';
 		}
 	}
+	//校验验证码
 	function checkSeccode() {
 		var seccodeVerify = $('seccode').value;
 		if(seccodeVerify == lastSecCode) {
@@ -217,7 +219,7 @@
 		obj.innerHTML = '<img src="image/check_error.gif" width="13" height="13"> &nbsp; ' + msg;
 		obj.className = "warning";
 	}
-
+//显示密码强度
 	function checkPwd(pwd){
 
 		if (pwd == "") {

@@ -8,4 +8,17 @@
 6.这个还不知道干嘛的？space_menu.jsp
 
 二、标签对应：
-jch:template，对应Common类的template方法，用于获取模板路径
+1.jch:template，用于获取模板路径，对应Common类的template方法，
+2.jch:checkPerm,检测权限，对应cn.jcenterhome.taglib.Function的checkPerm，其实最终也是要调用Common.checkPerm
+
+三、CommonFilter
+1.CommonFilter里设置了一些action的值，用于前台和后台的交换，
+如设置了sConfig.register_action，前台用<a href="do.jsp?ac=${sConfig.register_action}">注册</a>，后台再判断这个参数是否匹配来判断提交动作.
+
+四、注册页面
+1.注册页面，填验证码、用户名等等注册信息的时候，都是光标移开焦点之后就用ajax先验证的,且验证地址，都是跟注册显示页面是一样的，即DoAction的do_register方法，只不过附加了自己的操作参数op
+2.注册页面有一个formhash参数
+
+五、mysql 的insert语句，字段用`号
+
+六、应为主键是递增的，所以系统中，可以id是否>0判断该值在是否存在

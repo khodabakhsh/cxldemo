@@ -217,7 +217,7 @@ public class BaseAction extends DispatchAction {
 		orders.put("sql", sql.toString());
 		orders.put("url", url.toString());
 		return orders;
-	}
+	}	/**	 * 检查以下几项：	 * <li>post方法，且var不为空	 * <li>检查reffer，检查请求参数是否包含formhash	 */
 	protected boolean submitCheck(HttpServletRequest request, String var) throws Exception {
 		if ("POST".equals(request.getMethod()) && !Common.empty(request.getParameter(var))) {
 			String referer = request.getHeader("Referer");
