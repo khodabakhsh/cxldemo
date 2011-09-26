@@ -37,3 +37,7 @@
 2.jchome_magic有两个字段是`name`, `close`，关键字来的哦。加`表示
 
 十二、hibernate使用sql之后，得到一个map
+
+十三、搜索form，如果有范围参数，命名都是名字1、名字
+
+十四、mysql的LIKE BINARY 查询,还有where 1写法

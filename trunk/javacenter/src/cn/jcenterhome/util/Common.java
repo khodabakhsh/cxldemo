@@ -56,7 +56,7 @@ public class Common {
 	private static final char[] pregChars = {'.', '\\', '+', '*', '?', '[', '^', ']', '$', '(', ')', '{',
 			'}', '=', '!', '<', '>', '|', ':'};
 	private static final String randChars = "0123456789abcdefghigklmnopqrstuvtxyzABCDEFGHIGKLMNOPQRSTUVWXYZ";
-	private static Random random = new Random();
+	private static Random random = new Random();	/**	 * 时区	 */
 	private static Map<String, String[]> timeZoneIDs = new LinkedHashMap<String, String[]>(32);
 	static {
 		timeZoneIDs.put("-12", new String[] {"GMT-12:00", "(GMT -12:00) Eniwetok, Kwajalein"});

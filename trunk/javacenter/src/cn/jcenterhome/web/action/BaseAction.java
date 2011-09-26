@@ -114,7 +114,7 @@ public class BaseAction extends DispatchAction {
 			include(request, response, sConfig, sGlobal, "showmessage.jsp");
 		}
 		return null;
-	}
+	}	/**	 * 返回一个Map，包含了sql查询语句和url查询字符串	 * @param intKeys，数值类型	 * @param strKeys，字符串类型	 * @param randKeys，范围类型，有intval(数值范围)和sstrtotime(时间范围)	 * @param likeKeys ，like类型，构建 "LIKE BINARY '%" + value + "%'"	 * @param pre ，前缀	 * @param paramMap ，参数Map	 * @param timeoffset，时区	 */
 	protected Map<String, String> getWheres(String[] intKeys, String[] strKeys, List<String[]> randKeys,
 			String[] likeKeys, String pre, Map<String, String[]> paramMap, String timeoffset) {
 		String prefix = " AND ";
