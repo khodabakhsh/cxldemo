@@ -179,7 +179,7 @@ public class CacheService {
 			globalCensor.put("banword", Common.implode(banwords, ", "));
 		}
 		cache_write("cache_censor", "globalCensor", globalCensor);
-	}
+	}	/**	 * 积分规则	 */
 	public void creditrule_cache() throws Exception {
 		Map<String, Map<String, Object>> datas = new LinkedHashMap<String, Map<String, Object>>();
 		List<Map<String, Object>> creditrules = dataBaseDao.executeQuery("SELECT * FROM "

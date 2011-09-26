@@ -29,7 +29,7 @@ public class SpaceService {
 		space.put("avatar", 0);
 		space.put("dateline", sGlobal.get("timestamp"));
 		space.put("groupid", gid);		//注册空间的ip地址
-		space.put("regip", Common.getOnlineIP(request));
+		space.put("regip", Common.getOnlineIP(request));		//根据积分规则，获取积分和经验
 		Map<String, Integer> reward = Common.getReward("register", false, uid, "", true, request, response);
 		int credit = reward.get("credit");
 		if (credit != 0) {
@@ -48,7 +48,7 @@ public class SpaceService {
 		spaceField.put("privacy", "");
 		spaceField.put("friend", "");
 		spaceField.put("feedfriend", "");
-		spaceField.put("sendmail", "");
+		spaceField.put("sendmail", "");		//更新jchome_space,和jchome_spacefield表
 		dataBaseService.insertTable("space", space, false, true);
 		dataBaseService.insertTable("spacefield", spaceField, false, true);
 		CpService cpService = (CpService) BeanFactory.getBean("cpService");
@@ -56,7 +56,7 @@ public class SpaceService {
 		int _uid = (Integer) sGlobal.get("supe_uid");
 		String _userName = (String) sGlobal.get("supe_username");
 		sGlobal.put("supe_uid", uid);
-		sGlobal.put("supe_username", Common.addSlashes(userName));
+		sGlobal.put("supe_username", Common.addSlashes(userName));		//??
 		if (Common.ckPrivacy(sGlobal, sConfig, space, "spaceopen", 1)) {
 			cpService.addFeed(sGlobal, "profile", Common.getMessage(request, "cp_feed_space_open"), null, "",
 					null, "", null, null, "", 0, 0, 0, "", false);
