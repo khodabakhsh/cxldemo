@@ -28,12 +28,12 @@
 八、积分规则：
 奖励周期：每天（1），一次性（0），不限周期（4）六、应为主键是递增的，所以系统中，可以id是否>0判断该值在是否存在
 
-七、url是一个jsp，但include了一个*.do ，这样就被拦截器拦截了
+九、url是一个jsp，但include了一个*.do ，这样就被拦截器拦截了
 
-八、el表达式对map遍历，可以获得entry
+十、el表达式对map遍历，可以获得entry
 
-九、关于mysql
+十一、关于mysql
 1.mysql的text类型？
 2.jchome_magic有两个字段是`name`, `close`，关键字来的哦。加`表示
 
-十、hibernate使用sql之后，得到一个map
+十二、hibernate使用sql之后，得到一个map
