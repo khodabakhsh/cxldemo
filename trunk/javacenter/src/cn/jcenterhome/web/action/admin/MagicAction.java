@@ -92,7 +92,7 @@ public class MagicAction extends BaseAction {
 			}
 		} catch (Exception e) {
 			return showMessage(request, response, e.getMessage());
-		}
+		}		//编辑道具显示页面
 		if ("edit".equals(request.getParameter("op"))) {
 			String mid = request.getParameter("mid");
 			String sql = "SELECT m.*,ms.storage FROM " + JavaCenterHome.getTableName("magic")
@@ -120,7 +120,7 @@ public class MagicAction extends BaseAction {
 			request.setAttribute("userGroups", userGroups);
 			magic.put("forbiddengid", ((String) magic.get("forbiddengid")).split(","));
 			magic.put("custom", Serializer.unserialize((String) magic.get("custom"), false));
-			request.setAttribute("magic", magic);
+			request.setAttribute("magic", magic);			//设置自定义效果
 			request.setAttribute("custom", getCustom(mid));
 		} else {
 			int close = "disabled".equals(view) ? 1 : 0;
@@ -131,7 +131,7 @@ public class MagicAction extends BaseAction {
 			request.setAttribute("magics", magics);
 		}
 		return mapping.findForward("magic");
-	}
+	}	/**	 * 获得自定义效果	 * @param mid：应属于invisible、superstar、friendnum、attachsize、visit、gift、viewmagic、viewvisitor、detector、call	 */
 	private Map<String, Object> getCustom(String mid) {
 		Map<String, Object> custom = new HashMap<String, Object>();
 		Map<Integer, String> option = new TreeMap<Integer, String>();
