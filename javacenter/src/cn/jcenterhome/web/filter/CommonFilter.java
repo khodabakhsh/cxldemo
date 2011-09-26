@@ -40,7 +40,7 @@ public class CommonFilter implements Filter {
 		Map<String, Object> sGlobal = new HashMap<String, Object>();
 		long currentTime = System.currentTimeMillis();
 		int timestamp = (int) (currentTime / 1000);
-		sGlobal.put("timestamp", timestamp);
+		sGlobal.put("timestamp", timestamp);//设置一个时间戳,公共使用
 		sGlobal.put("starttime", currentTime);
 		request.setAttribute("sGlobal", sGlobal);		/**		 * request中以jchome_开头的cookie中可能保存了以下值，：{name :jchome_loginuser , value:admin}{name :jchome_mytemplate , value:blue}{name :jchome_collapse , value:}{name :jchome_auth , value:d485ImIfWjdiOmtSa3p%2FWBMyWTdufklzW3g7Fx9QRj8%2FPHxQbAwvQDQiRE5wcm06GS8HKH5WGwkTGh9CImFq}{name :jchome_pic_sequence , value:1}{name :jchome_sendmail , value:1}保存在下面sCookie的时候，会去掉前缀		 */
 		Map<String, String> sCookie = CookieHelper.getCookies(request);
