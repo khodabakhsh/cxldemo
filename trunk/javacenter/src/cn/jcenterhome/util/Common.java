@@ -1623,7 +1623,7 @@ public class Common {
 			}
 		}
 		return repeat;
-	}
+	}	/**	 * 获取用户组名称的颜色样式，返回如" style=\"color:green;\""	 * @param userGroup，用户组	 */
 	@SuppressWarnings("unchecked")
 	public static String getColor(Map<String, Object> userGroup) {
 		Object color = userGroup.get("color");

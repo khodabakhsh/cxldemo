@@ -286,7 +286,7 @@ public class BaseAction extends DispatchAction {
 			}
 		}
 		return null;
-	}
+	}	/**	 * 反射调用对象obj的函数methodName	 */
 	protected ActionForward invokeMethod(Object obj, String methodName, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		return (ActionForward) obj.getClass().getMethod(methodName, HttpServletRequest.class,
