@@ -11,11 +11,11 @@
     </ul>
    </div>
   </c:if>
-  <c:choose><c:when test="${op=='add'}">
+  <c:choose><c:when test="${op=='add'}"><!-- 发布全局动态 -->
    <div class="bdrcontent">
     全局动态，就是会在站内任何一个成员的好友动态里面都会出现的动态，每个成员都能第一时间看到。站长可以灵活使用全局动态来发布一些公开的信息。
    </div><br>
-  </c:when><c:otherwise>
+  </c:when><c:otherwise><!-- 搜索form -->
    <form method="post" action="admincp.jsp">
     <div class="block style4">
      <table cellspacing="3" cellpadding="3">
@@ -78,7 +78,7 @@
     <script language="javascript" src="image/editor/editor_function.js"></script>
     <div class="bdrcontent">
      <table cellspacing="3" cellpadding="3" width="100%">
-      <c:choose><c:when test="${jch:jchEmpty(feed.uid)}">
+      <c:choose><c:when test="${jch:jchEmpty(feed.uid)}"><!-- 增加动态 -->
        <tr>
         <th width="150">动态标题</th>
         <td>
@@ -94,7 +94,7 @@
         </td>
        </tr>
        <tr><th>动态备注</th><td><input type="text" name="body_general" value="${feed.body_general }" size="60"> (支持html)</td></tr>
-      </c:when><c:otherwise>
+      </c:when><c:otherwise><!-- 编辑动态 -->
        <tr><th width="150">动态标题</th><td>${feed.title_template}</td></tr>
        <tr><th>动态内容</th><td>${feed.body_template}</td></tr>
        <tr><th>动态备注</th><td>${feed.body_general}</td></tr>
@@ -145,7 +145,7 @@
         <input type="hidden" name="ids" value="${value.feedid}">
        </c:forEach>
       </c:when><c:otherwise>
-       <div class="feed">
+       <div class="feed"><!-- 动态内容列表 -->
         <div id="feed_div" class="feed_content">
          <ul>
           <c:forEach items="${list}" var="value">

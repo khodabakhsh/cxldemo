@@ -505,41 +505,41 @@ CREATE TABLE jchome_eventpic (
 
 --
 -- 表的结构 'jchome_feed'
---
+-- 动态(feed)
 
 CREATE TABLE jchome_feed (
   feedid int(10) unsigned NOT NULL auto_increment,
   appid smallint(6) unsigned NOT NULL default '0',
-  icon varchar(30) NOT NULL default '',
-  uid mediumint(8) unsigned NOT NULL default '0',
+  icon varchar(30) NOT NULL default '' COMMENT '类型',
+  uid mediumint(8) unsigned NOT NULL default '0' COMMENT '0表示全局动态',
   username varchar(15) NOT NULL default '',
-  dateline int(10) unsigned NOT NULL default '0',
+  dateline int(10) unsigned NOT NULL default '0' COMMENT '发布时间，动态会在这个日期到来之前，一直显示在第一位。',
   friend tinyint(1) NOT NULL default '0',
   hash_template varchar(32) NOT NULL default '',
   hash_data varchar(32) NOT NULL default '',
-  title_template text NOT NULL,
+  title_template text NOT NULL  COMMENT '标题模板，含占位符，支持html，例如：加粗 <b></b>，变色 <font color=red></font> ',
   title_data text NOT NULL,
-  body_template text NOT NULL,
+  body_template text NOT NULL COMMENT '内容模板，含占位符',
   body_data text NOT NULL,
-  body_general text NOT NULL,
-  image_1 varchar(255) NOT NULL default '',
-  image_1_link varchar(255) NOT NULL default '',
-  image_2 varchar(255) NOT NULL default '',
-  image_2_link varchar(255) NOT NULL default '',
-  image_3 varchar(255) NOT NULL default '',
-  image_3_link varchar(255) NOT NULL default '',
-  image_4 varchar(255) NOT NULL default '',
-  image_4_link varchar(255) NOT NULL default '',
+  body_general text NOT NULL  COMMENT '备注',
+  image_1 varchar(255) NOT NULL default '' COMMENT '第1张图片地址',
+  image_1_link varchar(255) NOT NULL default '' COMMENT '第1张图片链接',
+  image_2 varchar(255) NOT NULL default ''  COMMENT '第2张图片地址',
+  image_2_link varchar(255) NOT NULL default '' COMMENT '第2张图片链接',
+  image_3 varchar(255) NOT NULL default ''  COMMENT '第3张图片地址',
+  image_3_link varchar(255) NOT NULL default '' COMMENT '第3张图片链接',
+  image_4 varchar(255) NOT NULL default ''  COMMENT '第4张图片地址',
+  image_4_link varchar(255) NOT NULL default '' COMMENT '第4张图片链接',
   target_ids text NOT NULL,
   id mediumint(8) unsigned NOT NULL default '0',
   idtype varchar(15) NOT NULL default '',
-  hot mediumint(8) unsigned NOT NULL default '0',
+  hot mediumint(8) unsigned NOT NULL default '0'  COMMENT '热度',
   PRIMARY KEY  (feedid),
   KEY uid (uid,dateline),
   KEY dateline (dateline),
   KEY hot (hot),
   KEY id (id,idtype)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT ='动态(feed)';
 
 -- --------------------------------------------------------
 --

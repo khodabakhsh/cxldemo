@@ -11,7 +11,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import cn.jcenterhome.util.Common;
 import cn.jcenterhome.util.JavaCenterHome;
-import cn.jcenterhome.web.action.BaseAction;
+import cn.jcenterhome.web.action.BaseAction;/** * 后台管理-批量管理-动态(feed) * @author Administrator * */
 public class FeedAction extends BaseAction {
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -114,7 +114,7 @@ public class FeedAction extends BaseAction {
 			return showMessage(request, response, e.getMessage());
 		}
 		String op = request.getParameter("op");
-		if ("add".equals(op)) {
+		if ("add".equals(op)) {//发布全局动态
 			if (!allowManage) {
 				return cpMessage(request, mapping, "cp_no_authority_management_operation");
 			}
@@ -123,7 +123,7 @@ public class FeedAction extends BaseAction {
 			feed.put("dateline", dateline);
 			feed.put("timestamp", dateline);
 			request.setAttribute("feed", feed);
-		} else if ("edit".equals(op)) {
+		} else if ("edit".equals(op)) {//编辑
 			if (!allowManage) {
 				return cpMessage(request, mapping, "cp_no_authority_management_operation");
 			}
@@ -148,7 +148,7 @@ public class FeedAction extends BaseAction {
 			feed.put("timestamp", Common.sgmdate(request, "yyyy-MM-dd HH:mm", (Integer) sGlobal
 					.get("timestamp")));
 			request.setAttribute("feed", feed);
-		} else if ("delete".equals(op)) {
+		} else if ("delete".equals(op)) {//删除
 			int feedid = Common.intval(request.getParameter("feedid"));
 			if (adminDeleteService.deleteFeeds(request, response, supe_uid, feedid)) {
 				return cpMessage(request, mapping, "do_success", "admincp.jsp?ac=feed");
@@ -156,7 +156,7 @@ public class FeedAction extends BaseAction {
 				return cpMessage(request, mapping, "cp_choose_to_delete_events", "admincp.jsp?ac=feed");
 			}
 		} else {
-			StringBuffer mpURL = new StringBuffer("admincp.jsp?ac=feed");
+			StringBuffer mpURL = new StringBuffer("admincp.jsp?ac=feed");			//uid=0表示浏览的是全局动态，否则是全部动态
 			String[] intkeys = new String[] { "uid", "feedid" };
 			String[] strkeys = new String[] { "username", "icon" };
 			List<String[]> randkeys = new ArrayList<String[]>();
