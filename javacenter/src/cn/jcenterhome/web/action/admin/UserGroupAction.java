@@ -22,7 +22,7 @@ public class UserGroupAction extends BaseAction {
 			HttpServletResponse response) {
 		if (!Common.checkPerm(request, response, "manageusergroup")) {
 			return cpMessage(request, mapping, "cp_no_authority_management_operation");
-		}
+		}		//当操作某个用户组的时候，theValue指该组
 		Map<String, Object> theValue = null;
 		int gid = Common.intval(request.getParameter("gid"));
 		if (gid > 0) {
@@ -31,7 +31,7 @@ public class UserGroupAction extends BaseAction {
 			if (values.isEmpty()) {
 				return cpMessage(request, mapping, "cp_user_group_does_not_exist");
 			}
-			theValue = values.get(0);
+			theValue = values.get(0);			//获取升级奖励道具,数据库中字段类型为text
 			theValue.put("magicaward", Serializer.unserialize((String) theValue.get("magicaward"), false));
 		} else {
 			theValue = new HashMap<String, Object>();
