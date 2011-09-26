@@ -206,7 +206,7 @@ public class Common {
 	}	/**	 * md5加密	 */
 	public static String md5(String arg0) {
 		return Md5Util.encode(arg0);
-	}
+	}	/**	 * 返回把data的元素用separator连接后的字符串	 * @param data 应属于Object[]、Map、Collection、Object	 */
 	@SuppressWarnings("unchecked")
 	public static String implode(Object data, String separator) {
 		if (data == null) {

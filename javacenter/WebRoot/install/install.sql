@@ -255,13 +255,17 @@ CREATE TABLE jchome_comment (
 
 --
 -- 表的结构 'jchome_config'
---
+--系统配置属性,存贮键值对
+--已知的key-value如下：
+--defaultpoke:默认好友 打招呼内容
+--defaultfusername:默认好友,这些用户会自动将新注册用户添加为好友，并向其打个招呼。注意，指定的这几位用户浏览自己的首页时，可能会因其好友数众多而增加服务器负载。
+--spacebarusername:推荐成员,这些用户将随机显示在随便看看页面的“站长推荐”栏目中。
 
 CREATE TABLE jchome_config (
-  var varchar(30) NOT NULL default '',
-  datavalue text NOT NULL,
+  var varchar(30) NOT NULL default '' COMMENT '键',
+  datavalue text NOT NULL COMMENT '值',
   PRIMARY KEY  (var)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT='系统配置属性,存贮键值对';
 
 -- --------------------------------------------------------
 
@@ -643,59 +647,59 @@ CREATE TABLE jchome_magic (
 
 --
 -- 表的结构 'jchome_magicinlog'
---
+--道具获取记录表
 
 CREATE TABLE jchome_magicinlog (
   logid mediumint(8) unsigned NOT NULL auto_increment,
   uid mediumint(8) unsigned NOT NULL default '0',
-  username varchar(15) NOT NULL default '',
-  mid varchar(15) NOT NULL default '',
-  count smallint(6) unsigned NOT NULL default '0',
-  `type` tinyint(3) unsigned NOT NULL default '0',
+  username varchar(15) NOT NULL default '' COMMENT '用户',
+  mid varchar(15) NOT NULL default '' COMMENT '道具id',
+  count smallint(6) unsigned NOT NULL default '0' COMMENT '道具数量',
+  `type` tinyint(3) unsigned NOT NULL default '0' COMMENT '方式,2(获赠),3(升级用户组),其他(购买)',
   fromid mediumint(8) unsigned NOT NULL default '0',
   credit smallint(6) unsigned NOT NULL default '0',
-  dateline int(10) NOT NULL default '0',
+  dateline int(10) NOT NULL default '0' COMMENT '时间',
   PRIMARY KEY  (logid),
   KEY uid (uid,dateline),
   KEY `type` (`type`,fromid,dateline)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT= '道具获取记录表';
 
 -- --------------------------------------------------------
 
 --
 -- 表的结构 'jchome_magicstore'
---
+--道具出售统计表
 
 CREATE TABLE jchome_magicstore (
   mid varchar(15) NOT NULL default '',
-  `storage` smallint(6) unsigned NOT NULL default '0',
+  `storage` smallint(6) unsigned NOT NULL default '0' COMMENT  '库存数量',
   lastprovide int(10) unsigned NOT NULL default '0',
-  sellcount int(8) unsigned NOT NULL default '0',
-  sellcredit int(8) unsigned NOT NULL default '0',
+  sellcount int(8) unsigned NOT NULL default '0' COMMENT  '' COMMENT  '售出数',
+  sellcredit int(8) unsigned NOT NULL default '0' COMMENT  '' COMMENT  '回收积分',
   PRIMARY KEY  (mid)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT= '道具出售统计表';
 
 -- --------------------------------------------------------
 
 --
 -- 表的结构 'jchome_magicuselog'
---
+--道具使用记录表
 
 CREATE TABLE jchome_magicuselog (
   logid mediumint(8) unsigned NOT NULL auto_increment,
   uid mediumint(8) unsigned NOT NULL default '0',
-  username varchar(15) NOT NULL default '',
-  mid varchar(15) NOT NULL default '',
+  username varchar(15) NOT NULL default '' COMMENT '用户',
+  mid varchar(15) NOT NULL default '' COMMENT '道具id',
   id mediumint(8) unsigned NOT NULL default '0',
   idtype varchar(20) NOT NULL default '',
   count mediumint(8) unsigned NOT NULL default '0',
   `data` text NOT NULL,
-  dateline int(10) unsigned NOT NULL default '0',
+  dateline int(10) unsigned NOT NULL default '0' COMMENT '时间',
   expire int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (logid),
   KEY uid (uid,mid),
   KEY id (id,idtype)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT= '道具使用记录表';
 
 -- --------------------------------------------------------
 
@@ -1015,21 +1019,21 @@ CREATE TABLE jchome_post (
 
 --
 -- 表的结构 'jchome_profield'
---
+--群组栏目
 
 CREATE TABLE jchome_profield (
   fieldid smallint(6) unsigned NOT NULL auto_increment,
-  title varchar(80) NOT NULL default '',
-  note varchar(255) NOT NULL default '',
-  formtype varchar(20) NOT NULL default '0',
-  inputnum smallint(3) unsigned NOT NULL default '0',
-  choice text NOT NULL,
-  mtagminnum smallint(6) unsigned NOT NULL default '0',
-  manualmoderator tinyint(1) NOT NULL default '0',
-  manualmember tinyint(1) NOT NULL default '0',
-  displayorder tinyint(3) unsigned NOT NULL default '0',
+  title varchar(80) NOT NULL default '' comment '名称',
+  note varchar(255) NOT NULL default '' comment '简单介绍',
+  formtype varchar(20) NOT NULL default '0' comment '填写(表单)类型',
+  inputnum smallint(3) unsigned NOT NULL default '0' comment '用户可加入群组最多个数.填写类型是多选类型或填写类型的才有',
+  choice text NOT NULL comment '可选值。填写类型是选择类型的才有',
+  mtagminnum smallint(6) unsigned NOT NULL default '0'  comment '群组讨论区人数下限。当群组的成员数达到该数目时，才允许成员在群组内发话题和回帖',
+  manualmoderator tinyint(1) NOT NULL default '0'  comment '群组群主手工指定，1（手工），0（自动）。如果选择不手工指定，则系统会自动将第一次使用某个群组的用户作为群主。',
+  manualmember tinyint(1) NOT NULL default '0' comment '群组成员可由群主控制，1（群主可控制），0（会员可自由加入）。群主可控制，则允许群主有权设置群组的会员加入方式，来控制加入群组的会员。',
+  displayorder tinyint(3) unsigned NOT NULL default '0' comment '显示顺序',
   PRIMARY KEY  (fieldid)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT='群组栏目'; 
 
 
 -- --------------------------------------------------------
@@ -1646,15 +1650,15 @@ CREATE TABLE jchome_userlog (
 
 --
 -- 表的结构 'jchome_usermagic'
---
+--道具持有记录
 
 CREATE TABLE jchome_usermagic (
   uid mediumint(8) unsigned NOT NULL default '0',
-  username char(15) NOT NULL default '',
-  mid varchar(15) NOT NULL default '',
-  count smallint(6) unsigned NOT NULL default '0',
+  username char(15) NOT NULL default '' COMMENT '用户',
+  mid varchar(15) NOT NULL default '' COMMENT '道具id',
+  count smallint(6) unsigned NOT NULL default '0' COMMENT '数量',
   PRIMARY KEY  (uid,mid)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT='道具持有记录';
 
 -- --------------------------------------------------------
 

@@ -8,7 +8,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import cn.jcenterhome.util.Common;
 import cn.jcenterhome.util.JavaCenterHome;
-import cn.jcenterhome.web.action.BaseAction;
+import cn.jcenterhome.web.action.BaseAction;/** * 处理后台管理中功能(都是对应到magiclog.jsp)： * <li>道具持有记录（jchome_usermagic表） * <li>道具获取记录（jchome_magicinlog表） * <li>道具使用记录(jchome_magicuselog表) * <li>道具出售统计(jchome_magicstore表) *  * @author caixl , Sep 26, 2011 * */
 public class MagicLogAction extends BaseAction {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -28,7 +28,7 @@ public class MagicLogAction extends BaseAction {
 			view = "holdlog";
 		}
 		request.setAttribute("actives_" + view, " class='active'");
-		if ("inlog".equals(view)) {
+		if ("inlog".equals(view)) {//道具获取记录
 			StringBuffer mpUrl = new StringBuffer("admincp.jsp?ac=magiclog&view=inlog");
 			String[] intKeys = {"type"};
 			String[] strKeys = {"mid"};
@@ -86,7 +86,7 @@ public class MagicLogAction extends BaseAction {
 				request.setAttribute("list", list);
 				request.setAttribute("multi", multi);
 			}
-		} else if ("uselog".equals(view)) {
+		} else if ("uselog".equals(view)) {//道具使用记录
 			StringBuffer mpUrl = new StringBuffer("admincp.jsp?ac=magiclog&view=uselog");
 			String[] intKeys = {"id"};
 			String[] strKeys = {"mid", "idtype"};
@@ -138,14 +138,14 @@ public class MagicLogAction extends BaseAction {
 				request.setAttribute("list", list);
 				request.setAttribute("multi", multi);
 			}
-		} else if ("storelog".equals(view)) {
+		} else if ("storelog".equals(view)) {//道具出售统计
 			if (!allowManage) {
 				return cpMessage(request, mapping, "cp_no_authority_management_operation");
 			}
 			int totalCount = 0, totalCredit = 0;
 			String sql = "SELECT * FROM " + JavaCenterHome.getTableName("magicstore")
 					+ " ORDER BY sellcount DESC";
-			List<Map<String, Object>> list = dataBaseService.executeQuery(sql);
+			List<Map<String, Object>> list = dataBaseService.executeQuery(sql);			//计算售出道具总数，回收总积分
 			for (Map<String, Object> value : list) {
 				totalCount += (Integer) value.get("sellcount");
 				totalCredit += (Integer) value.get("sellcredit");
@@ -153,7 +153,7 @@ public class MagicLogAction extends BaseAction {
 			request.setAttribute("totalcount", totalCount);
 			request.setAttribute("totalcredit", totalCredit);
 			request.setAttribute("list", list);
-		} else {
+		} else {//道具持有记录
 			StringBuffer mpUrl = new StringBuffer("admincp.jsp?ac=magiclog&view=holdlog");
 			String[] intKeys = {"uid"};
 			String[] strKeys = {"mid"};

@@ -10,21 +10,21 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import cn.jcenterhome.util.Common;
 import cn.jcenterhome.util.JavaCenterHome;
-import cn.jcenterhome.web.action.BaseAction;
+import cn.jcenterhome.web.action.BaseAction;/** * 后台管理，推荐成员设置、默认好友设置 *  * @author caixl , Sep 26, 2011 * */
 public class HotUserAction extends BaseAction {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) {
 		String ac = request.getParameter("ac");
 		String vars = null;
-		if ("hotuser".equals(ac)) {
+		if ("hotuser".equals(ac)) {//推荐成员设置
 			if (!Common.checkPerm(request, response, "managehotuser")) {
 				return cpMessage(request, mapping, "cp_no_authority_management_operation");
 			}
 			vars = "'spacebarusername'";
-		} else {
+		} else {//默认好友设置
 			if (!Common.checkPerm(request, response, "managedefaultuser")) {
 				return cpMessage(request, mapping, "cp_no_authority_management_operation");
-			}
+			}			//defaultfusername：默认好友，defaultpoke：默认打招呼内容
 			vars = "'defaultfusername','defaultpoke'";
 		}
 		try {
