@@ -27,4 +27,8 @@
 
 八、el表达式对map遍历，可以获得entry
 
-九、mysql的text类型？
+九、关于mysql
+1.mysql的text类型？
+2.jchome_magic有两个字段是`name`, `close`，关键字来的哦。加`表示
+
+十、hibernate使用sql之后，得到一个map
