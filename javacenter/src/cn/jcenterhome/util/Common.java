@@ -206,7 +206,7 @@ public class Common {
 	}	/**	 * md5加密	 */
 	public static String md5(String arg0) {
 		return Md5Util.encode(arg0);
-	}	/**	 * 返回把data的元素用separator连接后的字符串	 * @param data 应属于Object[]、Map、Collection、Object	 */
+	}	/**	 * 返回一个把data内的元素用separator合并之后的字符串，有点像js的join	 * @param data 可以是Object[]、Map、Collection、Object	 */
 	@SuppressWarnings("unchecked")
 	public static String implode(Object data, String separator) {
 		if (data == null) {
@@ -1423,7 +1423,7 @@ public class Common {
 						+ rule.get("rid"));
 				int clid = 0;
 				int cycletype = (Integer) rule.get("cycletype");
-				if (creditlogList.size() == 0) {
+				if (creditlogList.size() == 0) {//没有积分记录,直接插入数据
 					reward.put("credit", credit);
 					reward.put("experience", experience);
 					Map<String, Object> setarr = new HashMap<String, Object>();
@@ -1458,12 +1458,12 @@ public class Common {
 					for (String key : keys) {
 						insertkeysql.append(key + ",");
 						insertvaluesql.append("'" + setarr.get(key) + "',");
-					}
+					}					//写到jchome_creditlog表
 					String sql = "INSERT  INTO " + JavaCenterHome.getTableName("creditlog") + " ("
 							+ insertkeysql.substring(0, insertkeysql.length() - 1) + ") VALUES ("
 							+ insertvaluesql.substring(0, insertvaluesql.length() - 1) + ")";
 					clid = dataBaseService.insert(sql);
-				} else {
+				} else {//有积分记录，检验是否符合规则
 					boolean newcycle = false;
 					Map<String, String> setarr = new HashMap<String, String>();
 					Map<String, Object> creditlog = creditlogList.get(0);
@@ -1582,7 +1582,7 @@ public class Common {
 				reward.put("experience", -experience);
 			}
 			credit = reward.get("credit");
-			experience = reward.get("experience");
+			experience = reward.get("experience");			//更新jchome_space表
 			if (update && (credit != 0 || experience != 0)) {
 				Map<String, String> setarr = new HashMap<String, String>();
 				if (credit != 0) {
