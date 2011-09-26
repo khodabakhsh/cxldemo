@@ -18,6 +18,7 @@
       <td colspan="2">添加格式：<br>请输入用户名，每个用户名一行。<br>例如：<br>admin<br>webmaster<br>${param.ac == "defaultuser" ? "这些用户会自动将新注册用户添加为好友，并向其打个招呼。注意，指定的这几位用户浏览自己的首页时，可能会因其好友数众多而增加服务器负载。" : "这些用户将随机显示在随便看看页面的“站长推荐”栏目中。"}</td>
      </tr>
     </table>
+    <!-- 默认好友 打招呼内容 -->
     <c:if test="${param.ac == 'defaultuser'}">
      <table cellspacing="0" cellpadding="0" class="formtable">
       <tr>

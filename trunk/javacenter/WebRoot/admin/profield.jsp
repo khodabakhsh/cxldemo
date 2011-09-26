@@ -32,7 +32,7 @@
    </c:when>
    <c:otherwise>
     <c:choose>
-     <c:when test="${empty profield}">
+     <c:when test="${empty profield}"><!-- 浏览栏目列表 -->
       <form method="post" action="admincp.jsp?ac=profield">
        <input type="hidden" name="formhash" value="${jch:formHash(sGlobal,sConfig,true)}" />
        <div class="bdrcontent">

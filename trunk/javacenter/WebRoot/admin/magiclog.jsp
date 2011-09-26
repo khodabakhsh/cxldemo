@@ -11,7 +11,7 @@
    </ul>
   </div>
   <c:choose>
-   <c:when test="${param.view == 'inlog'}">
+   <c:when test="${param.view == 'inlog'}"> <!-- 道具获取记录 -->
     <form method="post" action="admincp.jsp">
      <div class="block style4">
       <table cellspacing="3" cellpadding="3">
@@ -93,7 +93,7 @@
      <c:otherwise><div class="bdrcontent">没有指定数据</div></c:otherwise>
     </c:choose>
    </c:when>
-   <c:when test="${param.view == 'uselog'}">
+   <c:when test="${param.view == 'uselog'}"><!-- 道具使用记录 -->
     <form method="post" action="admincp.jsp">
      <div class="block style4">
       <table cellspacing="3" cellpadding="3">
@@ -162,7 +162,7 @@
      <c:otherwise><div class="bdrcontent">没有指定数据</div></c:otherwise>
     </c:choose>
    </c:when>
-   <c:when test="${param.view == 'storelog'}">
+   <c:when test="${param.view == 'storelog'}"><!-- 道具出售统计 -->
     <c:choose>
      <c:when test="${not empty list}">
       <div class="bdrcontent">
@@ -185,7 +185,7 @@
      <c:otherwise><div class="bdrcontent">没有指定数据</div></c:otherwise>
     </c:choose>
    </c:when>
-   <c:otherwise>
+   <c:otherwise><!-- 道具持有记录 -->
     <form method="post" action="admincp.jsp">
      <div class="block style4">
       <table cellspacing="3" cellpadding="3">

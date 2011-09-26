@@ -94,7 +94,7 @@ public class MagicAction extends BaseAction {
 			return showMessage(request, response, e.getMessage());
 		}		//编辑道具显示页面
 		if ("edit".equals(request.getParameter("op"))) {
-			String mid = request.getParameter("mid");
+			String mid = request.getParameter("mid");			//left join 查询道具和道具库存
 			String sql = "SELECT m.*,ms.storage FROM " + JavaCenterHome.getTableName("magic")
 					+ " m LEFT JOIN " + JavaCenterHome.getTableName("magicstore")
 					+ " ms ON m.mid=ms.mid WHERE m.mid='" + mid + "'";

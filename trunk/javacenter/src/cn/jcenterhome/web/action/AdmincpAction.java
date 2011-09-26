@@ -16,7 +16,7 @@ import cn.jcenterhome.util.CookieHelper;
 import cn.jcenterhome.util.FileHelper;
 import cn.jcenterhome.util.JavaCenterHome;
 import cn.jcenterhome.util.Serializer;
-import cn.jcenterhome.vo.MessageVO;
+import cn.jcenterhome.vo.MessageVO;/** * 后台管理，总体入口 *  * @author caixl , Sep 26, 2011 * */
 public class AdmincpAction extends BaseAction {
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
