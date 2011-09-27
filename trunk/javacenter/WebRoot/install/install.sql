@@ -873,29 +873,29 @@ CREATE TABLE jchome_member (
 
 --
 -- 表的结构 'jchome_mtag'
---
+--群组
 
 CREATE TABLE jchome_mtag (
   tagid mediumint(8) unsigned NOT NULL auto_increment,
-  tagname varchar(40) NOT NULL default '',
-  fieldid smallint(6) NOT NULL default '0',
-  membernum mediumint(8) unsigned NOT NULL default '0',
-  threadnum mediumint(8) unsigned NOT NULL default '0',
-  postnum mediumint(8) unsigned NOT NULL default '0',
-  `close` tinyint(1) NOT NULL default '0',
+  tagname varchar(40) NOT NULL default '' comment '群组名',
+  fieldid smallint(6) NOT NULL default '0' comment '归属栏目id',
+  membernum mediumint(8) unsigned NOT NULL default '0' comment '用户数',
+  threadnum mediumint(8) unsigned NOT NULL default '0' comment '话题数',
+  postnum mediumint(8) unsigned NOT NULL default '0' comment '回帖数',
+  `close` tinyint(1) NOT NULL default '0'  comment '是否锁定,1(是)',
   announcement text NOT NULL,
   pic varchar(150) NOT NULL default '',
   closeapply tinyint(1) NOT NULL default '0',
-  joinperm tinyint(1) NOT NULL default '0',
-  viewperm tinyint(1) NOT NULL default '0',
-  threadperm tinyint(1) NOT NULL default '0',
-  postperm tinyint(1) NOT NULL default '0',
-  recommend tinyint(1) NOT NULL default '0',
+  joinperm tinyint(1) NOT NULL default '0'  comment '加入权限,0(公开),1(审核),2(私密)',
+  viewperm tinyint(1) NOT NULL default '0' comment '浏览权限,0(公开),1(封闭)',
+  threadperm tinyint(1) NOT NULL default '0' comment '发帖权限,0(仅成员可发话题),1(所有人可以发话题)',
+  postperm tinyint(1) NOT NULL default '0' comment '回帖权限,0(仅成员可回帖),1(所有人可回帖)',
+  recommend tinyint(1) NOT NULL default '0' comment '是否推荐,1(是)',
   moderator varchar(255) NOT NULL default '',
   PRIMARY KEY  (tagid),
   KEY tagname (tagname),
   KEY threadnum (threadnum)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT='群组';
 
 -- --------------------------------------------------------
 
@@ -1451,18 +1451,18 @@ CREATE TABLE jchome_statuser (
 
 --
 -- 表的结构 'jchome_tag'
---
+--标签
 
 CREATE TABLE jchome_tag (
   tagid mediumint(8) unsigned NOT NULL auto_increment,
-  tagname char(30) NOT NULL default '',
+  tagname char(30) NOT NULL default '' comment '标签名',
   uid mediumint(8) unsigned NOT NULL default '0',
-  dateline int(10) unsigned NOT NULL default '0',
-  blognum smallint(6) unsigned NOT NULL default '0',
-  `close` tinyint(1) NOT NULL default '0',
+  dateline int(10) unsigned NOT NULL default '0' comment '发布时间',
+  blognum smallint(6) unsigned NOT NULL default '0' comment '日志数',
+  `close` tinyint(1) NOT NULL default '0' comment '是否锁定,1(锁定)',
   PRIMARY KEY  (tagid),
   KEY tagname (tagname)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT ='标签';
 
 -- --------------------------------------------------------
 
