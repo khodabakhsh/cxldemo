@@ -13,7 +13,7 @@ import org.apache.struts.action.ActionMapping;
 import cn.jcenterhome.util.Common;
 import cn.jcenterhome.util.JavaCenterHome;
 import cn.jcenterhome.util.Serializer;
-import cn.jcenterhome.web.action.BaseAction;
+import cn.jcenterhome.web.action.BaseAction;/** * 后台管理，站点设置 *  * @author caixl , Sep 26, 2011 * */
 public class ConfigAction extends BaseAction {
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -113,7 +113,7 @@ public class ConfigAction extends BaseAction {
 			}
 		}
 		Map<String, String> datas = (Map<String, String>) dataSets.get("setting");
-		Map<String, String> mails = (Map<String, String>) dataSets.get("mail");
+		Map<String, String> mails = (Map<String, String>) dataSets.get("mail");		//获取站点模板templates，站点模板目录存放在 /template 下面。其中 default 目录为默认风格，不能删除。
 		List<String> templates = new ArrayList<String>();
 		templates.add("default");
 		File tplDir = new File(JavaCenterHome.jchRoot + "template");

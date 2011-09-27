@@ -12,9 +12,9 @@ import org.apache.struts.action.ActionMapping;
 import cn.jcenterhome.util.Common;
 import cn.jcenterhome.util.JavaCenterHome;
 import cn.jcenterhome.util.Serializer;
-import cn.jcenterhome.web.action.BaseAction;
+import cn.jcenterhome.web.action.BaseAction;/** * 后台管理,隐私设置，包含游客开放浏览设置、新用户默认隐私设置、默认动态发布设置 *  * @author caixl , Sep 26, 2011 * */
 public class PrivacyAction extends BaseAction {
-	@Override
+	@SuppressWarnings("unchecked")	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) {
 		if (!Common.checkPerm(request, response, "manageconfig")) {
@@ -54,11 +54,11 @@ public class PrivacyAction extends BaseAction {
 			}
 		} catch (Exception e) {
 			return showMessage(request, response, e.getMessage());
-		}
+		}		
 		List<Map<String, Object>> configs = dataBaseService.executeQuery("SELECT * FROM "
 				+ JavaCenterHome.getTableName("config") + " where var IN ('networkpublic','privacy')");
 		for (Map<String, Object> config : configs) {
-			if ("privacy".equals(config.get("var"))) {
+			if ("privacy".equals(config.get("var"))) {				//privacy包含新用户默认隐私设置view与默认动态发布设置feed,序列化存储在数据库中
 				Map<String, Map<String, Integer>> privacy = Serializer.unserialize((String) config
 						.get("datavalue"), true);
 				Map<String, Integer> view = privacy.get("view");

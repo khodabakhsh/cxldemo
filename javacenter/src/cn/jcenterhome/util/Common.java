@@ -321,7 +321,7 @@ public class Common {
 		} else {
 			return -result;
 		}
-	}
+	}/** * 获取时区列表 */
 	public static Map<String, String[]> getTimeZoneIDs() {
 		return timeZoneIDs;
 	}
