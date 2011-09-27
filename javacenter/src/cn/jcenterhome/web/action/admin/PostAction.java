@@ -11,7 +11,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import cn.jcenterhome.util.Common;
 import cn.jcenterhome.util.JavaCenterHome;
-import cn.jcenterhome.web.action.BaseAction;
+import cn.jcenterhome.web.action.BaseAction;/** * 回帖 *  * @author caixl , Sep 27, 2011 * */
 public class PostAction extends BaseAction {
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,

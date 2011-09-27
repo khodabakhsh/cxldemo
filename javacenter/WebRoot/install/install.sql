@@ -41,25 +41,25 @@ CREATE TABLE jchome_adminsession (
 
 --
 -- 表的结构 'jchome_album'
---
+-- 相册表
 
 CREATE TABLE jchome_album (
   albumid mediumint(8) unsigned NOT NULL auto_increment,
-  albumname varchar(50) NOT NULL default '',
-  uid mediumint(8) unsigned NOT NULL default '0',
-  username varchar(15) NOT NULL default '',
+  albumname varchar(50) NOT NULL default '' COMMENT '相册名',
+  uid mediumint(8) unsigned NOT NULL default '0' COMMENT '所属用户id',
+  username varchar(15) NOT NULL default '' COMMENT '所属用户名',
   dateline int(10) unsigned NOT NULL default '0',
   updatetime int(10) unsigned NOT NULL default '0',
   picnum smallint(6) unsigned NOT NULL default '0',
   pic varchar(60) NOT NULL default '',
   picflag tinyint(1) NOT NULL default '0',
-  friend tinyint(1) NOT NULL default '0',
+  friend tinyint(1) NOT NULL default '0'  COMMENT '权限，0(全站用户可见),1(全好友可见),2(仅指定的好友可见),3(仅自己可见),4(凭密码查看)',
   `password` varchar(10) NOT NULL default '',
   target_ids text NOT NULL,
   PRIMARY KEY  (albumid),
   KEY uid (uid,updatetime),
   KEY updatetime (updatetime)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT ='相册表';
 
 -- --------------------------------------------------------
 
@@ -117,24 +117,24 @@ CREATE TABLE jchome_block (
 
 --
 -- 表的结构 'jchome_blog'
---
+--日志表
 
 CREATE TABLE jchome_blog (
   blogid mediumint(8) unsigned NOT NULL auto_increment,
   topicid mediumint(8) unsigned NOT NULL default '0',
   uid mediumint(8) unsigned NOT NULL default '0',
   username char(15) NOT NULL default '',
-  `subject` char(80) NOT NULL default '',
-  classid smallint(6) unsigned NOT NULL default '0',
+  `subject` char(80) NOT NULL default '' COMMENT '标题',
+  classid smallint(6) unsigned NOT NULL default '0' COMMENT '分类',
   viewnum mediumint(8) unsigned NOT NULL default '0',
   replynum mediumint(8) unsigned NOT NULL default '0',
-  hot mediumint(8) unsigned NOT NULL default '0',
+  hot mediumint(8) unsigned NOT NULL default '0' COMMENT '热度',
   dateline int(10) unsigned NOT NULL default '0',
   pic char(120) NOT NULL default '',
   picflag tinyint(1) NOT NULL default '0',
-  noreply tinyint(1) NOT NULL default '0',
-  friend tinyint(1) NOT NULL default '0',
-  `password` char(10) NOT NULL default '',
+  noreply tinyint(1) NOT NULL default '0' COMMENT '不允许评论,1(不允许评论)',
+  friend tinyint(1) NOT NULL default '0' COMMENT '隐私设置，0(全站用户可见),1(全好友可见),2(仅指定的好友可见),3(仅自己可见),4(凭密码查看)',
+  `password` char(10) NOT NULL default '' COMMENT '密码',
   click_1 smallint(6) unsigned NOT NULL default '0',
   click_2 smallint(6) unsigned NOT NULL default '0',
   click_3 smallint(6) unsigned NOT NULL default '0',
@@ -144,19 +144,19 @@ CREATE TABLE jchome_blog (
   KEY uid (uid,dateline),
   KEY topicid (topicid,dateline),
   KEY dateline (dateline)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT='日志表';
 
 -- --------------------------------------------------------
 
 --
 -- 表的结构 'jchome_blogfield'
---
+--日志字段
 
 CREATE TABLE jchome_blogfield (
   blogid mediumint(8) unsigned NOT NULL default '0',
   uid mediumint(8) unsigned NOT NULL default '0',
-  tag varchar(255) NOT NULL default '',
-  message mediumtext NOT NULL,
+  tag varchar(255) NOT NULL default '' COMMENT '标签',
+  message mediumtext NOT NULL COMMENT '内容',
   postip varchar(20) NOT NULL default '',
   related text NOT NULL,
   relatedtime int(10) unsigned NOT NULL default '0',
@@ -166,7 +166,7 @@ CREATE TABLE jchome_blogfield (
   magicpaper tinyint(6) NOT NULL default '0',
   magiccall tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (blogid)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT='日志字段';
 
 -- --------------------------------------------------------
 
@@ -185,16 +185,16 @@ CREATE TABLE jchome_cache (
 
 --
 -- 表的结构 'jchome_class'
---
+--日志分类表
 
 CREATE TABLE jchome_class (
-  classid mediumint(8) unsigned NOT NULL auto_increment,
-  classname char(40) NOT NULL default '',
-  uid mediumint(8) unsigned NOT NULL default '0',
+  classid mediumint(8) unsigned NOT NULL auto_increment COMMENT 'id',
+  classname char(40) NOT NULL default '' COMMENT '名称',
+  uid mediumint(8) unsigned NOT NULL default '0' COMMENT '所属用户id',
   dateline int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (classid),
   KEY uid (uid)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT ='日志分类表';
 
 -- --------------------------------------------------------
 
@@ -233,23 +233,23 @@ CREATE TABLE jchome_clickuser (
 
 --
 -- 表的结构 'jchome_comment'
---
+--评论、留言
 
 CREATE TABLE jchome_comment (
   cid mediumint(8) unsigned NOT NULL auto_increment,
-  uid mediumint(8) unsigned NOT NULL default '0',
-  id mediumint(8) unsigned NOT NULL default '0',
-  idtype varchar(20) NOT NULL default '',
-  authorid mediumint(8) unsigned NOT NULL default '0',
-  author varchar(15) NOT NULL default '',
-  ip varchar(20) NOT NULL default '',
-  dateline int(10) unsigned NOT NULL default '0',
-  message text NOT NULL,
+  uid mediumint(8) unsigned NOT NULL default '0'  COMMENT 'ID',
+  id mediumint(8) unsigned NOT NULL default '0' COMMENT '评论对象ID',
+  idtype varchar(20) NOT NULL default '' COMMENT '评论对象类型,uid(留言),blogid(日志),picid(图片),eventid(活动),sid(分享)',
+  authorid mediumint(8) unsigned NOT NULL default '0' COMMENT '作者id',
+  author varchar(15) NOT NULL default '' COMMENT '作者',
+  ip varchar(20) NOT NULL default '' COMMENT '评论ip',
+  dateline int(10) unsigned NOT NULL default '0'  COMMENT '发布时间',
+  message text NOT NULL COMMENT '内容',
   magicflicker tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (cid),
   KEY authorid (authorid, idtype),
   KEY id (id, idtype, dateline)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT ='评论、留言';
 
 -- --------------------------------------------------------
 
@@ -494,22 +494,22 @@ CREATE TABLE jchome_docomment (
 
 --
 -- 表的结构 'jchome_doing'
---
+--记录
 
 CREATE TABLE jchome_doing (
   doid mediumint(8) unsigned NOT NULL auto_increment,
-  uid mediumint(8) unsigned NOT NULL default '0',
-  username varchar(15) NOT NULL default '',
+  uid mediumint(8) unsigned NOT NULL default '0' comment '作者UID',
+  username varchar(15) NOT NULL default '' comment '作者名',
   `from` varchar(20) NOT NULL default '',
-  dateline int(10) unsigned NOT NULL default '0',
-  message text NOT NULL,
-  ip varchar(20) NOT NULL default '',
+  dateline int(10) unsigned NOT NULL default '0' comment '发布时间',
+  message text NOT NULL comment '内容',
+  ip varchar(20) NOT NULL default '' comment '发布ip',
   replynum int(10) unsigned NOT NULL default '0',
   mood smallint(6) NOT NULL default '0',
   PRIMARY KEY  (doid),
   KEY uid (uid,dateline),
   KEY dateline (dateline)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT='记录';
 
 -- --------------------------------------------------------
 
@@ -1036,26 +1036,26 @@ CREATE TABLE jchome_poke (
 
 --
 -- 表的结构 'jchome_poll'
---
+--投票
 
 CREATE TABLE jchome_poll (
   pid mediumint(8) unsigned NOT NULL auto_increment,
   topicid mediumint(8) unsigned NOT NULL default '0',
-  uid mediumint(8) unsigned NOT NULL default '0',
-  username char(15) NOT NULL default '',
-  subject char(80) NOT NULL default '',
-  voternum mediumint(8) unsigned NOT NULL default '0',
-  replynum mediumint(8) unsigned NOT NULL default '0',
+  uid mediumint(8) unsigned NOT NULL default '0' comment '作者UID',
+  username char(15) NOT NULL default ''  comment '作者名',
+  subject char(80) NOT NULL default ''  comment '标题',
+  voternum mediumint(8) unsigned NOT NULL default '0' comment '参与人数',
+  replynum mediumint(8) unsigned NOT NULL default '0' comment '评论数',
   multiple tinyint(1) NOT NULL default '0',
   maxchoice tinyint(3) NOT NULL default '0',
-  sex tinyint(1) NOT NULL default '0',
-  noreply tinyint(1) NOT NULL default '0',
+  sex tinyint(1) NOT NULL default '0' comment '性别限制，1(男),2(女)',
+  noreply tinyint(1) NOT NULL default '0'  comment '评论限制，0(全站用户可见),1(仅好友可评论)',
   credit mediumint(8) unsigned NOT NULL default '0',
-  percredit mediumint(8) unsigned NOT NULL default '0',
-  expiration int(10) unsigned NOT NULL default '0',
+  percredit mediumint(8) unsigned NOT NULL default '0'  comment '悬赏积分',
+  expiration int(10) unsigned NOT NULL default '0'  comment '过期投票，1(未过期),2(已过期)',
   lastvote int(10) unsigned NOT NULL default '0',
-  dateline int(10) unsigned NOT NULL default '0',
-  hot mediumint(8) unsigned NOT NULL default '0',
+  dateline int(10) unsigned NOT NULL default '0' comment '发布时间',
+  hot mediumint(8) unsigned NOT NULL default '0' comment '热度',
   PRIMARY KEY  (pid),
   KEY uid (uid,dateline),
   KEY topicid (topicid,dateline),
@@ -1064,7 +1064,7 @@ CREATE TABLE jchome_poll (
   KEY lastvote (lastvote),
   KEY hot (hot),
   KEY percredit (percredit)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM comment ='投票';
 
 -- --------------------------------------------------------
 
@@ -1119,23 +1119,23 @@ CREATE TABLE jchome_polluser (
 
 --
 -- 表的结构 'jchome_post'
---
+--回帖
 
 CREATE TABLE jchome_post (
   pid int(10) unsigned NOT NULL auto_increment,
-  tagid mediumint(8) unsigned NOT NULL default '0',
-  tid mediumint(8) unsigned NOT NULL default '0',
-  uid mediumint(8) unsigned NOT NULL default '0',
-  username varchar(15) NOT NULL default '',
+  tagid mediumint(8) unsigned NOT NULL default '0' COMMENT '群组ID',
+  tid mediumint(8) unsigned NOT NULL default '0' COMMENT '话题ID',
+  uid mediumint(8) unsigned NOT NULL default '0' COMMENT '作者UID',
+  username varchar(15) NOT NULL default '' COMMENT '作者名',
   ip varchar(20) NOT NULL default '',
-  dateline int(10) unsigned NOT NULL default '0',
-  message text NOT NULL,
+  dateline int(10) unsigned NOT NULL default '0' COMMENT '发布时间',
+  message text NOT NULL COMMENT '内容',
   pic varchar(255) NOT NULL default '',
-  isthread tinyint(1) NOT NULL default '0',
+  isthread tinyint(1) NOT NULL default '0' COMMENT '是否主题帖,1(是)',
   hotuser text NOT NULL,
   PRIMARY KEY  (pid),
   KEY tid (tid,dateline)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT '回帖';
 
 -- --------------------------------------------------------
 
@@ -1220,29 +1220,29 @@ CREATE TABLE jchome_session (
 
 --
 -- 表的结构 'jchome_share'
---
+--分享,下面的`type`我改的
 
 CREATE TABLE jchome_share (
-  sid mediumint(8) unsigned NOT NULL auto_increment,
+  sid mediumint(8) unsigned NOT NULL auto_increment comment 'ID',
   topicid mediumint(8) unsigned NOT NULL default '0',
-  type varchar(30) NOT NULL default '',
-  uid mediumint(8) unsigned NOT NULL default '0',
-  username varchar(15) NOT NULL default '',
-  dateline int(10) unsigned NOT NULL default '0',
+  `type` varchar(30) NOT NULL default '' comment '事件类型',
+  uid mediumint(8) unsigned NOT NULL default '0' comment '作者UID',
+  username varchar(15) NOT NULL default '' comment '作者名',
+  dateline int(10) unsigned NOT NULL default '0'  comment '发布时间',
   title_template text NOT NULL,
   body_template text NOT NULL,
   body_data text NOT NULL,
   body_general text NOT NULL,
   image varchar(255) NOT NULL default '',
   image_link varchar(255) NOT NULL default '',
-  hot mediumint(8) unsigned NOT NULL default '0',
+  hot mediumint(8) unsigned NOT NULL default '0' comment '热度',
   hotuser text NOT NULL,
   PRIMARY KEY  (sid),
   KEY uid (uid,dateline),
   KEY topicid (topicid,dateline),
   KEY hot (hot),
   KEY dateline (dateline)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM comment='分享';
 
 -- --------------------------------------------------------
 
@@ -1521,27 +1521,27 @@ CREATE TABLE jchome_task (
 
 --
 -- 表的结构 'jchome_thread'
---
+--话题
 
 CREATE TABLE jchome_thread (
-  tid mediumint(8) unsigned NOT NULL auto_increment,
+  tid mediumint(8) unsigned NOT NULL auto_increment COMMENT '指定话题ID',
   topicid mediumint(8) unsigned NOT NULL default '0',
-  tagid mediumint(8) unsigned NOT NULL default '0',
+  tagid mediumint(8) unsigned NOT NULL default '0' COMMENT '群组ID',
   eventid mediumint(8) unsigned NOT NULL default '0',
-  `subject` char(80) NOT NULL default '',
+  `subject` char(80) NOT NULL default '' COMMENT '标题',
   magiccolor tinyint(6) unsigned NOT NULL default '0',
   magicegg tinyint(6) unsigned NOT NULL default '0',
-  uid mediumint(8) unsigned NOT NULL default '0',
-  username char(15) NOT NULL default '',
+  uid mediumint(8) unsigned NOT NULL default '0' COMMENT '作者ID',
+  username char(15) NOT NULL default '' COMMENT '作者名',
   dateline int(10) unsigned NOT NULL default '0',
-  viewnum mediumint(8) unsigned NOT NULL default '0',
-  replynum mediumint(8) unsigned NOT NULL default '0',
+  viewnum mediumint(8) unsigned NOT NULL default '0' COMMENT '查看数',
+  replynum mediumint(8) unsigned NOT NULL default '0' COMMENT '回复数',
   lastpost int(10) unsigned NOT NULL default '0',
   lastauthor char(15) NOT NULL default '',
   lastauthorid mediumint(8) unsigned NOT NULL default '0',
   displayorder tinyint(1) unsigned NOT NULL default '0',
-  digest tinyint(1) NOT NULL default '0',
-  hot mediumint(8) unsigned NOT NULL default '0',
+  digest tinyint(1) NOT NULL default '0'  COMMENT '是否精华，1(是),0(否)',
+  hot mediumint(8) unsigned NOT NULL default '0'  COMMENT '热度',
   click_11 smallint(6) unsigned NOT NULL default '0',
   click_12 smallint(6) unsigned NOT NULL default '0',
   click_13 smallint(6) unsigned NOT NULL default '0',
@@ -1553,7 +1553,7 @@ CREATE TABLE jchome_thread (
   KEY lastpost (lastpost),
   KEY topicid (topicid,dateline),
   KEY eventid (eventid,lastpost)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT ='话题';
 
 -- --------------------------------------------------------
 

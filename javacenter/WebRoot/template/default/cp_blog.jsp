@@ -198,7 +198,7 @@
 		</td></tr>
 	</table>
 	</c:if>
-
+<!-- 上传图片 -->
 	<table cellspacing="4" cellpadding="4" width="100%" id="jchome-edit-pic" class="infotable" style="display:none;">
 		<tr>
 			<th width="100">&nbsp;</th>
@@ -240,6 +240,7 @@
 			</td>
 		</tr>
 	</table>
+	<!-- 插入图片 -->
 	<table cellspacing="4" cellpadding="4" width="100%" class="infotable" id="jchome-edit-album" style="display:none;">
 		<tr>
 			<th width="100">&nbsp;</th>

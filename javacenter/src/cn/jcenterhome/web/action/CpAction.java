@@ -677,7 +677,7 @@ public class CpAction extends BaseAction {
 	private String decodeFlashData(byte[] s) {
 		StringBuffer r = new StringBuffer();
 		return r.toString();
-	}
+	}	/**	 * 日志操作	 */
 	public ActionForward cp_blog(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> sGlobal = (Map<String, Object>) request.getAttribute("sGlobal");
 		Map<String, Object> sConfig = (Map<String, Object>) request.getAttribute("sConfig");
@@ -685,7 +685,7 @@ public class CpAction extends BaseAction {
 		int blogId = Common.intval(request.getParameter("blogid"));
 		String op = Common.empty(request.getParameter("op")) ? "" : request.getParameter("op");
 		Map<String, Object> blog = new HashMap<String, Object>();
-		if (!Common.empty(blogId)) {
+		if (!Common.empty(blogId)) {			//根据blogId联合blog和blogfield获得日志
 			List<Map<String, Object>> blogs = dataBaseService.executeQuery("SELECT bf.*,b.* FROM "
 					+ JavaCenterHome.getTableName("blog") + " b LEFT JOIN "
 					+ JavaCenterHome.getTableName("blogfield") + " bf ON bf.blogid=b.blogid WHERE b.blogid='"
@@ -774,7 +774,7 @@ public class CpAction extends BaseAction {
 							+ "&do=blog&id=" + newBlog.get("blogid"), 0);
 				}
 			}
-			if (op.equals("delete")) {
+			if (op.equals("delete")) {//删除
 				if (submitCheck(request, "deletesubmit")) {
 					if (blogService.deleteBlogs(request, response, blogId) != null) {
 						return showMessage(request, response, "do_success", "space.jsp?uid="
@@ -790,7 +790,7 @@ public class CpAction extends BaseAction {
 				int uid = id != 0 ? Common.intval(Common.getCount("blog", whereArr, "uid")) : 0;
 				return showMessage(request, response, "do_success", "space.jsp?uid=" + uid + "&do=blog&id="
 						+ id, 0);
-			} else if (op.equals("edithot")) {
+			} else if (op.equals("edithot")) {//调整热度
 				if (!Common.checkPerm(request, response, "manageblog")) {
 					return showMessage(request, response, "no_privilege");
 				}
@@ -813,7 +813,7 @@ public class CpAction extends BaseAction {
 					return showMessage(request, response, "do_success", "space.jsp?uid=" + blog.get("uid")
 							+ "&do=blog&id=" + blog.get("blogid"), 0);
 				}
-			} else {
+			} else {//编辑				//获得属于用户的日志分类classArr
 				Map<Integer, Object> classArr = !Common.empty(blog.get("uid")) ? cpService
 						.getClassArr((Integer) blog.get("uid")) : cpService.getClassArr((Integer) sGlobal
 						.get("supe_uid"));
@@ -823,10 +823,10 @@ public class CpAction extends BaseAction {
 				blog.put("tag", Common.implode(tags, " "));
 				blog.put("target_names", "");
 				String passwordStyle = "display:none";
-				String selectGroupStyle = "display:none";
-				if (blog.get("friend") != null && (Integer) blog.get("friend") == 4) {
+				String selectGroupStyle = "display:none";				
+				if (blog.get("friend") != null && (Integer) blog.get("friend") == 4) {//如果隐私设置friend是4(凭密码查看)，显示密码输入框
 					passwordStyle = "";
-				} else if (blog.get("friend") != null && (Integer) blog.get("friend") == 2) {
+				} else if (blog.get("friend") != null && (Integer) blog.get("friend") == 2) {//如果隐私设置friend是2(仅指定的好友可见)，好友输入框
 					selectGroupStyle = "";
 					if (!Common.empty(blog.get("target_ids"))) {
 						List<String> names = dataBaseService.executeQuery("SELECT username FROM "
@@ -852,14 +852,14 @@ public class CpAction extends BaseAction {
 				Map<String, String> menuActives = new HashMap<String, String>();
 				menuActives.put("space", " class='active'");
 				boolean blogPrivacy = Common.ckPrivacy(sGlobal, sConfig, space, "blog", 1);
-				request.setAttribute("classarr", classArr);
+				request.setAttribute("classarr", classArr);//分类
 				request.setAttribute("allowhtml", allowHtml);
 				request.setAttribute("groups", Common.getFriendGroup(request));
-				request.setAttribute("friend", blog.get("friend"));
-				request.setAttribute("selectgroupstyle", selectGroupStyle);
-				request.setAttribute("passwordstyle", passwordStyle);
-				request.setAttribute("blogprivacy", blogPrivacy);
-				request.setAttribute("albums", albums);
+				request.setAttribute("friend", blog.get("friend"));//隐私设置
+				request.setAttribute("selectgroupstyle", selectGroupStyle);//指定好友(隐私设置)
+				request.setAttribute("passwordstyle", passwordStyle);//显示密码输入框(隐私设置)
+				request.setAttribute("blogprivacy", blogPrivacy);//动态选项
+				request.setAttribute("albums", albums);//用户相册
 			}
 		} catch (Exception e) {
 			return showMessage(request, response, e.getMessage());
