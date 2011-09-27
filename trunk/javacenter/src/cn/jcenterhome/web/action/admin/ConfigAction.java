@@ -105,7 +105,7 @@ public class ConfigAction extends BaseAction {
 		Map<String, Object> dataSets = new HashMap<String, Object>();
 		values = dataBaseService.executeQuery("SELECT * FROM " + JavaCenterHome.getTableName("data"));
 		for (Map<String, Object> value : values) {
-			String var = (String) value.get("var");
+			String var = (String) value.get("var");			//setting包含上传图片设置和FTP连接信息，mail是邮件设置信息
 			if ("setting".equals(var) || "mail".equals(var)) {
 				dataSets.put(var, Serializer.unserialize((String) value.get("datavalue"), false));
 			} else {
@@ -128,9 +128,9 @@ public class ConfigAction extends BaseAction {
 		request.setAttribute("templates", templates);
 		request.setAttribute("configs", configs);
 		request.setAttribute("datasets", dataSets);
-		request.setAttribute("datas", datas);
-		request.setAttribute("mails", mails);
-		request.setAttribute("timeZoneIDs", Common.getTimeZoneIDs());
+		request.setAttribute("datas", datas);//包含上传图片设置和FTP连接信息
+		request.setAttribute("mails", mails);//邮件配置
+		request.setAttribute("timeZoneIDs", Common.getTimeZoneIDs());//时区
 		return mapping.findForward("config");
 	}
 }
