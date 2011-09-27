@@ -337,7 +337,7 @@ public class CpService {
 			return 5;
 		}
 		return 1;
-	}
+	}	/**	 * 获得uid的相册	 */
 	public List<Map<String, Object>> getAlbums(int uid) {
 		String sql = "SELECT * FROM " + JavaCenterHome.getTableName("album") + " WHERE uid='" + uid
 				+ "' ORDER BY albumid DESC";
@@ -950,7 +950,7 @@ public class CpService {
 			setarr.put("dateline", sGlobal.get("timestamp"));
 			dataBaseService.insertTable("topicuser", setarr, false, false);
 		}
-	}
+	}	/**	 * 获得用户uid的日志分类	 */
 	public Map<Integer, Object> getClassArr(int uid) {
 		Map<Integer, Object> classArr = new HashMap<Integer, Object>();
 		List<Map<String, Object>> values = dataBaseService.executeQuery("SELECT classid, classname FROM "
