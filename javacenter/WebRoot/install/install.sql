@@ -1358,7 +1358,7 @@ CREATE TABLE jchome_spacefield (
   sendmail text NOT NULL,
   magicstar tinyint(1) NOT NULL default '0',
   magicexpire int(10) unsigned NOT NULL default '0',
-  timeoffset varchar(20) NOT NULL default '',
+  timeoffset varchar(20) NOT NULL default '' comment '个人时区',
   PRIMARY KEY  (uid)
 ) ENGINE=MyISAM comment='用户字段';
 

@@ -186,7 +186,7 @@ public class SpaceAction extends BaseAction {
 			}
 		}
 		request.setAttribute("do", action);
-		request.setAttribute("space", space);
+		request.setAttribute("space", space);//设置用户
 		if (supe_uid > 0) {
 			Common.getMember(request);
 			if ((Integer) ((Map) sGlobal.get("member")).get("flag") == -1) {
@@ -6254,34 +6254,34 @@ public class SpaceAction extends BaseAction {
 			}
 		}
 		return excelFile;
-	}
+	}	/**	 * 首页	 * @param request	 * @param response	 * @return	 */
 	public ActionForward space_home(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> sGlobal = (Map<String, Object>) request.getAttribute("sGlobal");
 		Map<String, Object> sConfig = (Map<String, Object>) request.getAttribute("sConfig");
-		Map<String, Object> space = (Map<String, Object>) request.getAttribute("space");
+		Map<String, Object> space = (Map<String, Object>) request.getAttribute("space");		//showallfriendnum对应后台管理-站点设置-注册与显示-首页动态默认标签设置.//		好友数小于showallfriendnum的时候显示所有人的动态，超过这个数值显示好友动态,在日志、相册列表页面，该参数同样生效。
 		if (Common.empty(sConfig.get("showallfriendnum")) || (Integer) sConfig.get("showallfriendnum") < 1) {
 			sConfig.put("showallfriendnum", 10);
-		}
+		}		//feedhotday对应后台管理-站点设置-注册与显示-热点推荐的天数范围，设置首页热点推荐选择的天数范围。
 		if (Common.empty(sConfig.get("feedhotday"))) {
 			sConfig.put("feedhotday", 2);
-		}
+		}		//friendnum:好友数,isNewer判断是否新手,好友数小于showallfriendnum也算是新手,新手会显示新手任务
 		boolean isNewer = space.get("friendnum") == null
 				|| (Integer) space.get("friendnum") < (Integer) sConfig.get("showallfriendnum") ? true
 				: false;
 		Map<String, String[]> paramMap = request.getParameterMap();
 		String view = "all";
-		paramMap.put("view", new String[]{view});
+		paramMap.put("view", new String[]{view});		//feedmaxnum:首页显示的好友动态将从这些数目的事件中进行合并显示。建议不要设置太多，从而可以保证MySQL的效率，但最少不能低于50。
 		int feedMaxNum = (Integer) sConfig.get("feedmaxnum");
-		int perPage = feedMaxNum < 50 ? 50 : feedMaxNum;
-		perPage = Common.mobPerpage(request, perPage);
-		int start = Common.intval(request.getParameter("start"));
-		int maxPage = (Integer) sConfig.get("maxpage");
+		int perPage = feedMaxNum < 50 ? 50 : feedMaxNum;		//跟手机有关？
+		perPage = Common.mobPerpage(request, perPage);//每页大小
+		int start = Common.intval(request.getParameter("start"));//起始位置
+		int maxPage = (Integer) sConfig.get("maxpage");//最大页
 		String result = Common.ckStart(start, perPage, maxPage);
 		if (result != null) {
 			return showMessage(request, response, result);
 		}
 		sGlobal.put("today", Common.strToTime(Common.sgmdate(request, "yyyy-MM-dd", 0), Common.getTimeOffset(
-				sGlobal, sConfig)));
+				sGlobal, sConfig)));		//feedhotmin:热点推荐的最小热度值，设置当发布的信息热度值超过多少后，才会显示在推荐里面。
 		int feedHotMin = (Integer) sConfig.get("feedhotmin");
 		int minHot = feedHotMin < 1 ? 3 : feedHotMin;
 		sGlobal.put("gift_appid", "1027468");
@@ -6584,7 +6584,7 @@ public class SpaceAction extends BaseAction {
 						+ (space.get(value) == null ? 0 : (Integer) space.get(value)));
 			}
 		}
-		Common.realname_get(sGlobal, sConfig, sNames, space);				//list存储首页动态,是一个LinkedHashMap，存储<key,value>是<日期,对应日期的内容列表
+		Common.realname_get(sGlobal, sConfig, sNames, space);				//list存储首页动态,是一个LinkedHashMap，存储<key,value>是<日期,对应日期的内容列表>
 		LinkedHashMap list = new LinkedHashMap();
 		Set feedKeys = feed_list.keySet();
 		int dateline = 0;
