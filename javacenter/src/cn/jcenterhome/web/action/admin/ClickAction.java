@@ -9,7 +9,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import cn.jcenterhome.util.Common;
 import cn.jcenterhome.util.JavaCenterHome;
-import cn.jcenterhome.web.action.BaseAction;
+import cn.jcenterhome.web.action.BaseAction;/** * 后台管理-高级设置-表态动作 *  * @author caixl , Sep 28, 2011 * */
 public class ClickAction extends BaseAction {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) {

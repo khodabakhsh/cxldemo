@@ -1097,7 +1097,7 @@ public class Common {
 			}
 		}
 		return gid;
-	}	/**	 * 返回request.getAttribute(var)，因为该值应该是缓存jsp所设置的，所以其实是从缓存【JavaCenterHome.jchRoot+path】.jsp中获取	 * @param path,缓存的页面文件路径	 */
+	}	/**	 * <li>返回request.getAttribute(var)，因为该值应该是缓存jsp所设置的，所以其实是从缓存【JavaCenterHome.jchRoot+path】.jsp中获取	 * <li>代码中request.getRequestDispatcher(path).include(myRequest, response);设置了相应jsp定义的值(request的attribute)	 * @param path,缓存的页面文件路径	 */
 	@SuppressWarnings("unchecked")
 	public static Map getCacheDate(HttpServletRequest request, HttpServletResponse response, String path,
 			String var) {
@@ -1113,7 +1113,7 @@ public class Common {
 				HttpServletRequest myRequest = request;
 		        if (request instanceof MultipartRequestWrapper) {		        	//如果是MultipartRequestWrapper实例，先获取原先的request,为什么??
 		            myRequest = ((MultipartRequestWrapper) request).getRequest();
-		        }
+		        }		        //这里include了，等于调用设置了所在jsp的一些request的attribute
 				request.getRequestDispatcher(path).include(myRequest, response);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -1663,13 +1663,13 @@ public class Common {
 		} else {
 			return getIcon(userGroup);
 		}
-	}
+	}	/**	 * 返回目录dir中后缀名为extarr的文件	 */
 	public static File[] readDir(String dir, final String... extarr) {
 		File supDir = new File(dir);
 		if (supDir.isDirectory()) {
 			if (extarr == null || extarr.length == 0) {
 				return supDir.listFiles();
-			} else {
+			} else {				//使用FilenameFilter过滤
 				FilenameFilter filenameFilter = new FilenameFilter() {
 					public boolean accept(File dir, String name) {
 						int tempI = name.lastIndexOf(".");

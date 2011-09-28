@@ -21,7 +21,7 @@ import cn.jcenterhome.util.Common;
 import cn.jcenterhome.util.FileHelper;
 import cn.jcenterhome.util.JavaCenterHome;
 import cn.jcenterhome.util.Serializer;
-import cn.jcenterhome.web.action.BaseAction;
+import cn.jcenterhome.web.action.BaseAction;/** * 后台管理-高级设置-系统log记录 *  * @author caixl , Sep 28, 2011 * */
 public class LogAction extends BaseAction {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response){
@@ -29,7 +29,7 @@ public class LogAction extends BaseAction {
 		Map<String, Object> sConfig = (Map<String, Object>) request.getAttribute("sConfig");
 		Map<Integer, String> sNames = (Map<Integer, String>) request.getAttribute("sNames");
 		Map<String, Object> space = (Map<String, Object>) request.getAttribute("space");
-		String logRoot=JavaCenterHome.jchRoot+"/data/log/";
+		String logRoot=JavaCenterHome.jchRoot+"/data/log/";//日志文件目录
 		File[] files=Common.readDir(logRoot,"log");
 		if(files==null){
 			return mapping.findForward("log");
@@ -50,7 +50,7 @@ public class LogAction extends BaseAction {
 			}
 		}
 		String op=request.getParameter("op");
-		if("view".equals(op)){
+		if("view".equals(op)){//查看日志详细
 			Map log=new HashMap();
 			String file=request.getParameter("file");
 			file=Common.empty(file) ? "" : file.trim();
@@ -189,9 +189,9 @@ public class LogAction extends BaseAction {
 				count=data.size();
 				int toIndex=perpage+start;
 				toIndex=toIndex>count ? count : toIndex;
-				List<String> lines=data.subList(start, toIndex);
+				List<String> lines=data.subList(start, toIndex);				//根据日志文件封装返回日志记录
 				if(lines!=null && lines.size()>0){
-					File logFile=new File(logRoot+file);
+					File logFile=new File(logRoot+file);//日志文件
 					RandomAccessFile ras=null;
 					if(!Common.empty(file)){
 						try {
@@ -233,11 +233,11 @@ public class LogAction extends BaseAction {
 			}
 			String multi = Common.multi(request, count, perpage, page,maxPage ,mpurl, null, null);
 			request.setAttribute("multi", multi);
-			request.setAttribute("logfiles", logFiles);
+			request.setAttribute("logfiles", logFiles);//日志log文件
 			request.setAttribute("list", list);
 		}
 		return mapping.findForward("log");
-	}
+	}	/**	 * 根据读入的line，返回一个日志的Map记录	 * @param detail，是否读取get、post记录	 */
 	private Map parseLog(String line,boolean detail){
 		Map logInfo=new HashMap();
 		if(line==null || line.equals("")){

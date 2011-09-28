@@ -98,20 +98,20 @@ CREATE TABLE jchome_blacklist (
 
 --
 -- 表的结构 'jchome_block'
---
+--数据调用
 
 CREATE TABLE jchome_block (
-  bid smallint(6) unsigned NOT NULL auto_increment,
-  blockname varchar(40) NOT NULL default '',
-  blocksql text NOT NULL,
-  cachename varchar(30) NOT NULL default '',
-  cachetime smallint(6) unsigned NOT NULL default '0',
-  startnum tinyint(3) unsigned NOT NULL default '0',
-  num tinyint(3) unsigned NOT NULL default '0',
-  perpage tinyint(3) unsigned NOT NULL default '0',
-  htmlcode text NOT NULL,
+  bid smallint(6) unsigned NOT NULL auto_increment comment 'ID',
+  blockname varchar(40) NOT NULL default '' comment '名称',
+  blocksql text NOT NULL comment '数据调用SQL',
+  cachename varchar(30) NOT NULL default '' comment '变量名',
+  cachetime smallint(6) unsigned NOT NULL default '0' comment '缓存时间,设置一个缓存时间间隔，该模块数据将自动在指定的时间间隔内更新数据。缓存时间设置越大，对服务器的负载就越小，但数据的及时性就不够。设置为0，则不使用缓存，实时更新，这样会严重增加服务器负载。',
+  startnum tinyint(3) unsigned NOT NULL default '0' comment '获取满足条件的数据的开始位置',
+  num tinyint(3) unsigned NOT NULL default '0' comment '获取满足条件的数据的结束位置',
+  perpage tinyint(3) unsigned NOT NULL default '0' comment '获取数目,0(获取满足条件的部分数据),其他（获取全部数据，分页显示）',
+  htmlcode text NOT NULL comment '数据显示HTML代码,用html语言，编写数据的显示样式。',
   PRIMARY KEY  (bid)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM comment='数据调用';
 
 -- --------------------------------------------------------
 
@@ -200,17 +200,17 @@ CREATE TABLE jchome_class (
 
 --
 -- 表的结构 'jchome_click'
---
+--表态动作
 
 CREATE TABLE jchome_click (
-  clickid smallint(6) unsigned NOT NULL auto_increment,
-  `name` varchar(50) NOT NULL default '',
-  icon varchar(100) NOT NULL default '',
-  idtype varchar(15) NOT NULL default '',
-  displayorder tinyint(6) unsigned NOT NULL default '0',
+  clickid smallint(6) unsigned NOT NULL auto_increment comment 'ID',
+  `name` varchar(50) NOT NULL default '' comment '动作名称',
+  icon varchar(100) NOT NULL default '' comment '动作图标',
+  idtype varchar(15) NOT NULL default '' comment '系统类型,blogid(日志),picid(图片),tid(话题)',
+  displayorder tinyint(6) unsigned NOT NULL default '0' comment '显示顺序',
   PRIMARY KEY  (clickid),
   KEY idtype (idtype,displayorder)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM comment='表态动作';
 
 -- --------------------------------------------------------
 
@@ -388,23 +388,23 @@ CREATE TABLE jchome_config (
 
 --
 -- 表的结构 'jchome_cron'
---
+--系统计划任务
 
 CREATE TABLE jchome_cron (
-  cronid smallint(6) unsigned NOT NULL auto_increment,
-  available tinyint(1) NOT NULL default '0',
+  cronid smallint(6) unsigned NOT NULL auto_increment comment 'ID',
+  available tinyint(1) NOT NULL default '0' comment '有效性,0(无效),1(有效)',
   `type` enum('user','system') NOT NULL default 'user',
-  `name` char(50) NOT NULL default '',
-  filename char(50) NOT NULL default '',
-  lastrun int(10) unsigned NOT NULL default '0',
-  nextrun int(10) unsigned NOT NULL default '0',
-  weekday tinyint(1) NOT NULL default '0',
-  `day` tinyint(2) NOT NULL default '0',
-  `hour` tinyint(2) NOT NULL default '0',
-  `minute` char(36) NOT NULL default '',
+  `name` char(50) NOT NULL default '' comment '任务名',
+  filename char(50) NOT NULL default '' comment '任务脚本',
+  lastrun int(10) unsigned NOT NULL default '0' comment '上次执行时间',
+  nextrun int(10) unsigned NOT NULL default '0' comment '下次执行时间',
+  weekday tinyint(1) NOT NULL default '0' comment '星期几,本设置会覆盖下面的“日”设定',
+  `day` tinyint(2) NOT NULL default '0' comment '日期',
+  `hour` tinyint(2) NOT NULL default '0' comment '小时',
+  `minute` char(36) NOT NULL default '' comment '分钟',
   PRIMARY KEY  (cronid),
   KEY nextrun (available,nextrun)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM comment ='系统计划任务';
 
 -- --------------------------------------------------------
 
@@ -455,19 +455,21 @@ CREATE TABLE jchome_creditlog (
 
 --
 -- 表的结构 'jchome_data'
---配置数据
+--后台管理一些配置数据
 --已知的key-value如下：
---spam:个性问题和答案,【序列化存储】
---reason:举报可选理由
---setting:一、上传图片设置,预览缩略图宽高，图片最大宽高，水印图片地址，水印位置（1顶端居左，2顶端居右，3底端居左，4底端居右）。二、FTP连接信息（地址、用户名、密码等等）【序列化存储】
---mail：邮件设置【序列化存储】
+--spam:后台管理-基本设置-防灌水设置,个性问题和答案,【序列化存储】
+--reason:后台管理-基本设置-站点设置-基本设置，举报可选理由
+--setting:后台管理-基本设置-站点设置-上传图片设置、远程上传设置。一、上传图片设置,预览缩略图宽高，图片最大宽高，水印图片地址，水印位置（1顶端居左，2顶端居右，3底端居左，4底端居右）。二、FTP连接信息（地址、用户名、密码等等）【序列化存储】
+--mail：后台管理-基本设置-站点设置-邮件设置【序列化存储】
+--network：后台管理-高级设置-随便看看设置【序列化存储】
+--censor:后台管理-高级设置-词语屏蔽
 
 CREATE TABLE jchome_data (
   var varchar(20) NOT NULL default '',
   datavalue text NOT NULL,
   dateline int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (var)
-) ENGINE=MyISAM COMMENT='配置数据';
+) ENGINE=MyISAM COMMENT='后台管理一些配置数据';
 
 -- --------------------------------------------------------
 
@@ -557,17 +559,17 @@ CREATE TABLE jchome_event (
 
 --
 -- 表的结构 'jchome_eventclass'
---
+--活动分类
 
 CREATE TABLE jchome_eventclass (
-  classid smallint(6) unsigned NOT NULL auto_increment,
-  classname varchar(80) NOT NULL default '',
-  poster tinyint(1) NOT NULL default '0',
-  template text NOT NULL,
-  displayorder mediumint(8) unsigned NOT NULL default '0',
+  classid smallint(6) unsigned NOT NULL auto_increment comment 'ID',
+  classname varchar(80) NOT NULL default '' comment '名称',
+  poster tinyint(1) NOT NULL default '0' comment '默认海报,活动发起者发起此类型的活动时如果没有上传海报则默认使用此海报',
+  template text NOT NULL comment '默认模板 ,建议活动发起者发起此类型的活动时按此内容模板填写活动介绍',
+  displayorder mediumint(8) unsigned NOT NULL default '0' comment '显示顺序',
   PRIMARY KEY  (classid),
   UNIQUE KEY classname (classname)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM comment='活动分类';
 
 -- --------------------------------------------------------
 
@@ -740,7 +742,7 @@ CREATE TABLE jchome_log (
   id mediumint(8) unsigned NOT NULL default '0',
   idtype char(20) NOT NULL default '',
   PRIMARY KEY  (logid)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM ;
 
 -- --------------------------------------------------------
 
@@ -1162,21 +1164,21 @@ CREATE TABLE jchome_profield (
 
 --
 -- 表的结构 'jchome_profilefield'
---
+--用户栏目
 
 CREATE TABLE jchome_profilefield (
-  fieldid smallint(6) unsigned NOT NULL auto_increment,
-  title varchar(80) NOT NULL default '',
-  note varchar(255) NOT NULL default '',
-  formtype varchar(20) NOT NULL default '0',
-  maxsize tinyint(3) unsigned NOT NULL default '0',
-  required tinyint(1) NOT NULL default '0',
-  invisible tinyint(1) NOT NULL default '0',
-  allowsearch tinyint(1) NOT NULL default '0',
-  choice text NOT NULL,
-  displayorder tinyint(3) unsigned NOT NULL default '0',
+  fieldid smallint(6) unsigned NOT NULL auto_increment COMMENT 'ID',
+  title varchar(80) NOT NULL default '' COMMENT '名称',
+  note varchar(255) NOT NULL default '' comment '简单介绍',
+  formtype varchar(20) NOT NULL default '0' COMMENT '表单类型,text(文本输入框),select(列表框)',
+  maxsize tinyint(3) unsigned NOT NULL default '0' comment '可填写的最多字符',
+  required tinyint(1) NOT NULL default '0' comment '必填,0(否),1(是)',
+  invisible tinyint(1) NOT NULL default '0' comment '资料页面隐藏,0(否),1(是)',
+  allowsearch tinyint(1) NOT NULL default '0' comment '允许搜索,0(否),1(是)',
+  choice text NOT NULL comment '可选值,表单类型是列表框的才有',
+  displayorder tinyint(3) unsigned NOT NULL default '0' comment '显示顺序',
   PRIMARY KEY  (fieldid)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT='用户栏目';
 
 -- --------------------------------------------------------
 
@@ -1496,26 +1498,26 @@ CREATE TABLE jchome_tagspace (
 
 --
 -- 表的结构 'jchome_task'
---
+--有奖任务
 
 CREATE TABLE jchome_task (
-  taskid smallint(6) unsigned NOT NULL auto_increment,
-  available tinyint(1) NOT NULL default '0',
-  `name` varchar(50) NOT NULL default '',
-  note text NOT NULL,
-  num mediumint(8) unsigned NOT NULL default '0',
-  maxnum mediumint(8) unsigned NOT NULL default '0',
-  image varchar(150) NOT NULL default '',
-  filename varchar(50) NOT NULL default '',
-  starttime int(10) unsigned NOT NULL default '0',
-  endtime int(10) unsigned NOT NULL default '0',
-  nexttime int(10) unsigned NOT NULL default '0',
-  nexttype varchar(20) NOT NULL default '',
-  credit smallint(6) NOT NULL default '0',
-  displayorder smallint(6) unsigned NOT NULL default 0,
+  taskid smallint(6) unsigned NOT NULL auto_increment comment 'ID',
+  available tinyint(1) NOT NULL default '0' comment '有效性,0(无效),1(有效)',
+  `name` varchar(50) NOT NULL default '' comment '名称',
+  note text NOT NULL comment '任务说明',
+  num mediumint(8) unsigned NOT NULL default '0' comment '该有奖任务已经完成的人次',
+  maxnum mediumint(8) unsigned NOT NULL default '0' comment '完成数限制,设置该有奖任务最多可完成多少人次。超过该人次后，该有奖任务将自动失效。为0，则不限制',
+  image varchar(150) NOT NULL default '' comment '任务图片',
+  filename varchar(50) NOT NULL default '' comment '有奖任务处理JSP脚本文件',
+  starttime int(10) unsigned NOT NULL default '0' comment '开始日期',
+  endtime int(10) unsigned NOT NULL default '0' comment '结束日期',
+  nexttime int(10) unsigned NOT NULL default '0' comment '间隔时间，当nexttype（用户重复执行周期）是time(间隔指定时间)的时候才有的',
+  nexttype varchar(20) NOT NULL default '' comment '用户重复执行周期,day(每天),hour(整点),time(间隔指定时间)',
+  credit smallint(6) NOT NULL default '0' comment '奖励积分',
+  displayorder smallint(6) unsigned NOT NULL default 0 comment '优先顺序,数字越小，排序越靠前，优先级越高',
   PRIMARY KEY  (taskid),
   KEY displayorder (displayorder)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM comment ='有奖任务';
 
 -- --------------------------------------------------------
 
@@ -1851,18 +1853,18 @@ CREATE TABLE jchome_newpm (
 -- --------------------------------------------------------
 --
 -- 表的结构 'jchome_gift'
---
+--礼物设置
 CREATE TABLE jchome_gift (
   giftid int(4) NOT NULL AUTO_INCREMENT,
-  giftname varchar(20) NOT NULL,
-  tips varchar(20) NOT NULL,
-  price int(4) NOT NULL,
-  buycount int(4) NOT NULL,
-  icon text NOT NULL,
-  addtime int(10) NOT NULL,
-  typeid varchar(20) NOT NULL,
+  giftname varchar(20) NOT NULL comment '礼物名称',
+  tips varchar(20) NOT NULL comment '礼物提示,当用户鼠标移动到礼物图像时，显示的提示信息',
+  price int(4) NOT NULL comment '礼物价格,必填，值必须大于0',
+  buycount int(4) NOT NULL comment '购买次数',
+  icon text NOT NULL comment '礼物图像,必填',
+  addtime int(10) NOT NULL comment '添加日期',
+  typeid varchar(20) NOT NULL comment '所属分类id,必填，设置礼物所属分类',
   PRIMARY KEY (giftid)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM comment='礼物设置';
 
 -- --------------------------------------------------------
 --

@@ -19,7 +19,7 @@ import org.apache.struts.upload.FormFile;
 import cn.jcenterhome.util.Common;
 import cn.jcenterhome.util.ImageUtil;
 import cn.jcenterhome.util.JavaCenterHome;
-import cn.jcenterhome.web.action.BaseAction;
+import cn.jcenterhome.web.action.BaseAction;/** * 后台管理-高级设置-活动分类 *  * @author caixl , Sep 28, 2011 * */
 public class EventClassAction extends BaseAction {
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -33,7 +33,7 @@ public class EventClassAction extends BaseAction {
 			List<Map<String, Object>> query = dataBaseService.executeQuery("SELECT * FROM "
 					+ JavaCenterHome.getTableName("eventclass") + " WHERE classid='" + classId + "'");
 			if (query.size() > 0) {
-				thevalue = query.get(0);
+				thevalue = query.get(0);				//默认海报poster
 				int poster = (Integer) thevalue.get("poster");
 				if (poster != 0) {
 					thevalue.put("poster", "data/event/" + thevalue.get("classid") + ".jpg");
