@@ -58,7 +58,7 @@ public class CacheService {
 			String spam = Common.getData("spam");
 			cache_write("cache_spam", "globalSpam", Serializer.unserialize(spam, false));
 		}
-	}
+	}	//后台管理-高级设置-随便看看 ,配置内容
 	public void network_cache() throws IOException {
 		String network = Common.getData("network");
 		cache_write("cache_network", "globalNetWork", Serializer.unserialize(network, false));

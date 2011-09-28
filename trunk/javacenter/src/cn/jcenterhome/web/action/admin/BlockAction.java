@@ -18,7 +18,7 @@ import cn.jcenterhome.util.Common;
 import cn.jcenterhome.util.FileHelper;
 import cn.jcenterhome.util.JavaCenterHome;
 import cn.jcenterhome.util.Serializer;
-import cn.jcenterhome.web.action.BaseAction;
+import cn.jcenterhome.web.action.BaseAction;/** * 后台管理-高级设置-数据调用 *  * @author caixl , Sep 28, 2011 * */
 public class BlockAction extends BaseAction {
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,

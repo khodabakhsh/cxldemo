@@ -15,6 +15,12 @@ import cn.jcenterhome.util.Common;
 import cn.jcenterhome.util.FileUploadUtil;
 import cn.jcenterhome.util.JavaCenterHome;
 import cn.jcenterhome.web.action.BaseAction;
+/**
+ * 后台管理-高级设置-礼物设置
+ * 
+ * @author caixl , Sep 28, 2011
+ *
+ */
 public class GiftAction extends BaseAction {
 	@SuppressWarnings("unchecked")
 	@Override
