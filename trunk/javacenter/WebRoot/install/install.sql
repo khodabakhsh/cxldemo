@@ -517,16 +517,16 @@ CREATE TABLE jchome_doing (
 
 --
 -- 表的结构 'jchome_event'
---
+--活动
 
 CREATE TABLE jchome_event (
-  eventid mediumint(8) unsigned NOT NULL auto_increment,
+  eventid mediumint(8) unsigned NOT NULL auto_increment COMMENT 'ID',
   topicid mediumint(8) unsigned NOT NULL default '0',
-  uid mediumint(8) unsigned NOT NULL default '0',
-  username varchar(15) NOT NULL default '',
+  uid mediumint(8) unsigned NOT NULL default '0' COMMENT '创建者UID',
+  username varchar(15) NOT NULL default '' COMMENT '创建者名',
   dateline int(10) unsigned NOT NULL default '0',
-  title varchar(80) NOT NULL default '',
-  classid smallint(6) unsigned NOT NULL default '0',
+  title varchar(80) NOT NULL default '' COMMENT '标题',
+  classid smallint(6) unsigned NOT NULL default '0' COMMENT '活动分类id',
   province varchar(20) NOT NULL default '',
   city varchar(20) NOT NULL default '',
   location varchar(80) NOT NULL default '',
@@ -534,26 +534,26 @@ CREATE TABLE jchome_event (
   thumb tinyint(1) NOT NULL default '0',
   remote tinyint(1) NOT NULL default '0',
   deadline int(10) unsigned NOT NULL default '0',
-  starttime int(10) unsigned NOT NULL default '0',
-  endtime int(10) unsigned NOT NULL default '0',
-  public tinyint(3) NOT NULL default '0',
+  starttime int(10) unsigned NOT NULL default '0' COMMENT '活动开始时间',
+  endtime int(10) unsigned NOT NULL default '0' COMMENT '活动结束时间',
+  public tinyint(3) NOT NULL default '0' COMMENT '公开性质,0(私密),1(半公开),2(完全公开)',
   membernum mediumint(8) unsigned NOT NULL default '0',
   follownum mediumint(8) unsigned NOT NULL default '0',
   viewnum mediumint(8) unsigned NOT NULL default '0',
-  grade tinyint(3) NOT NULL default '0',
+  grade tinyint(3) NOT NULL default '0' COMMENT '活动状态,-2(已关闭),-1(未通过审核),0(待审核),1(通过审核),2(推荐)',
   recommendtime int(10) unsigned NOT NULL default '0',
   tagid mediumint(8) unsigned NOT NULL default '0',
   picnum mediumint(8) unsigned NOT NULL default '0',
   threadnum mediumint(8) unsigned NOT NULL default '0',
   updatetime int(10) unsigned NOT NULL default '0',
-  hot mediumint(8) unsigned NOT NULL default '0',
+  hot mediumint(8) unsigned NOT NULL default '0' COMMENT '热度',
   PRIMARY KEY  (eventid),
   KEY grade (grade,recommendtime),
   KEY membernum (membernum),
   KEY uid (uid,eventid),
   KEY tagid (tagid,eventid),
   KEY topicid (topicid,dateline)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT ='活动';
 
 -- --------------------------------------------------------
 
@@ -1184,21 +1184,21 @@ CREATE TABLE jchome_profilefield (
 
 --
 -- 表的结构 'jchome_report'
---
+--举报
 
 CREATE TABLE jchome_report (
   rid mediumint(8) unsigned NOT NULL auto_increment,
   id mediumint(8) unsigned NOT NULL default '0',
-  idtype varchar(15) NOT NULL default '',
+  idtype varchar(15) NOT NULL default '' COMMENT '举报类型',
   `new` tinyint(1) NOT NULL default '0',
-  num smallint(6) unsigned NOT NULL default '0',
+  num smallint(6) unsigned NOT NULL default '0' COMMENT '举报次数',
   dateline int(10) unsigned NOT NULL default '0',
   reason text NOT NULL,
   uids text NOT NULL,
   PRIMARY KEY  (rid),
   KEY id (id,idtype,num,dateline),
   KEY `new` (new,dateline)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT='举报';
 
 -- --------------------------------------------------------
 
@@ -1265,20 +1265,20 @@ CREATE TABLE jchome_show (
 
 --
 -- 表的结构 'jchome_space'
---
+--用户
 
 CREATE TABLE jchome_space (
-  uid mediumint(8) unsigned NOT NULL default '0',
-  groupid smallint(6) unsigned NOT NULL default '0',
-  credit int(10) NOT NULL default '0',
-  experience int(10) NOT NULL default '0',
-  username char(15) NOT NULL default '',
-  `name` char(20) NOT NULL default '',
-  namestatus tinyint(1) NOT NULL default '0',
-  videostatus tinyint(1) NOT NULL default '0',
+  uid mediumint(8) unsigned NOT NULL default '0' COMMENT '用户UID',
+  groupid smallint(6) unsigned NOT NULL default '0'  COMMENT '用户组id',
+  credit int(10) NOT NULL default '0' comment '用户积分',
+  experience int(10) NOT NULL default '0' comment '用户经验值',
+  username char(15) NOT NULL default '' COMMENT '用户名',
+  `name` char(20) NOT NULL default '' COMMENT '姓名',
+  namestatus tinyint(1) NOT NULL default '0' COMMENT '实名认证，0(未认证),1(已认证)',
+  videostatus tinyint(1) NOT NULL default '0' COMMENT '视频认证，0(视频未认证),1(视频已认证)',
   domain char(15) NOT NULL default '',
-  friendnum int(10) unsigned NOT NULL default '0',
-  viewnum int(10) unsigned NOT NULL default '0',
+  friendnum int(10) unsigned NOT NULL default '0' comment '好友数',
+  viewnum int(10) unsigned NOT NULL default '0' comment '查看数',
   notenum int(10) unsigned NOT NULL default '0',
   addfriendnum smallint(6) unsigned NOT NULL default '0',
   mtaginvitenum smallint(6) unsigned NOT NULL default '0',
@@ -1292,19 +1292,19 @@ CREATE TABLE jchome_space (
   pollnum smallint(6) unsigned NOT NULL default '0',
   eventnum smallint(6) unsigned NOT NULL default '0',
   sharenum smallint(6) unsigned NOT NULL default '0',
-  dateline int(10) unsigned NOT NULL default '0',
-  updatetime int(10) unsigned NOT NULL default '0',
+  dateline int(10) unsigned NOT NULL default '0' comment '空间创建时间',
+  updatetime int(10) unsigned NOT NULL default '0' comment '最后更新时间',
   lastsearch int(10) unsigned NOT NULL default '0',
-  lastpost int(10) unsigned NOT NULL default '0',
-  lastlogin int(10) unsigned NOT NULL default '0',
+  lastpost int(10) unsigned NOT NULL default '0' comment '最后发信息时间',
+  lastlogin int(10) unsigned NOT NULL default '0' comment '上次登录',
   lastsend int(10) unsigned NOT NULL default '0',
   attachsize int(10) unsigned NOT NULL default '0',
-  addsize int(10) unsigned NOT NULL default '0',
-  addfriend smallint(6) unsigned NOT NULL default '0',
-  flag tinyint(1) NOT NULL default '0',
+  addsize int(10) unsigned NOT NULL default '0' COMMENT '额外空间大小',
+  addfriend smallint(6) unsigned NOT NULL default '0' comment '额外好友数',
+  flag tinyint(1) NOT NULL default '0' comment '用户状态,1(保护用户),0(普通用户),-1(锁定用户),保护状态下，该用户将不能够在JavaCenter、以及本应用中删除。',
   newpm smallint(6) unsigned NOT NULL default '0',
-  avatar tinyint(1) NOT NULL default '0',
-  regip char(15) NOT NULL default '',
+  avatar tinyint(1) NOT NULL default '0' comment '头像,0(没有头像),1(上传头像)',
+  regip char(15) NOT NULL default '' comment '注册IP',
   ip int(10) unsigned NOT NULL default '0',
   mood smallint(6) unsigned NOT NULL default '0',
   advgiftcount smallint(6) NOT NULL DEFAULT '0',
@@ -1316,35 +1316,35 @@ CREATE TABLE jchome_space (
   KEY ip (ip),
   KEY updatetime (updatetime),
   KEY mood (mood)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT='用户';
 
 -- --------------------------------------------------------
 
 --
 -- 表的结构 'jchome_spacefield'
---
+--用户字段
 
 CREATE TABLE jchome_spacefield (
   uid mediumint(8) unsigned NOT NULL default '0',
-  sex tinyint(1) NOT NULL default '0',
-  email varchar(100) NOT NULL default '',
+  sex tinyint(1) NOT NULL default '0' comment '性别,1(男),2(女)',
+  email varchar(100) NOT NULL default '' comment '常用邮箱',
   newemail varchar(100) NOT NULL default '',
-  emailcheck tinyint(1) NOT NULL default '0',
+  emailcheck tinyint(1) NOT NULL default '0' comment '邮箱验证，0(未激活),1(已经验证激活)',
   mobile varchar(40) NOT NULL default '',
-  qq varchar(20) NOT NULL default '',
-  msn varchar(80) NOT NULL default '',
+  qq varchar(20) NOT NULL default '' comment 'QQ',
+  msn varchar(80) NOT NULL default '' COMMENT 'MSN',
   msnrobot varchar(15) NOT NULL default '',
   msncstatus tinyint(1) NOT NULL default '0',
   videopic varchar(32) NOT NULL default '',
-  birthyear smallint(6) unsigned NOT NULL default '0',
-  birthmonth tinyint(3) unsigned NOT NULL default '0',
-  birthday tinyint(3) unsigned NOT NULL default '0',
-  blood varchar(5) NOT NULL default '',
-  marry tinyint(1) NOT NULL default '0',
-  birthprovince varchar(20) NOT NULL default '',
-  birthcity varchar(20) NOT NULL default '',
-  resideprovince varchar(20) NOT NULL default '',
-  residecity varchar(20) NOT NULL default '',
+  birthyear smallint(6) unsigned NOT NULL default '0' comment '生日-年',
+  birthmonth tinyint(3) unsigned NOT NULL default '0' comment '生日-月',
+  birthday tinyint(3) unsigned NOT NULL default '0' comment '生日-日',
+  blood varchar(5) NOT NULL default '' comment '血型',
+  marry tinyint(1) NOT NULL default '0' comment '婚恋状态,1(单身),2(非单身)',
+  birthprovince varchar(20) NOT NULL default '' comment '家乡(省)',
+  birthcity varchar(20) NOT NULL default '' comment '家乡(市)',
+  resideprovince varchar(20) NOT NULL default '' comment '居住地(省)',
+  residecity varchar(20) NOT NULL default '' comment '居住地(市)',
   note text NOT NULL,
   spacenote text NOT NULL,
   authstr varchar(20) NOT NULL default '',
@@ -1360,7 +1360,7 @@ CREATE TABLE jchome_spacefield (
   magicexpire int(10) unsigned NOT NULL default '0',
   timeoffset varchar(20) NOT NULL default '',
   PRIMARY KEY  (uid)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM comment='用户字段';
 
 -- --------------------------------------------------------
 

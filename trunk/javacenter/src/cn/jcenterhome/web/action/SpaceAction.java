@@ -37,7 +37,7 @@ import cn.jcenterhome.util.FileHelper;
 import cn.jcenterhome.util.JavaCenterHome;
 import cn.jcenterhome.util.JcHomeCode;
 import cn.jcenterhome.util.Serializer;
-import cn.jcenterhome.vo.MessageVO;
+import cn.jcenterhome.vo.MessageVO;/** *  * @author Administrator , Sep 27, 2011 * */
 public class SpaceAction extends BaseAction {
 	private String[] dos = {"feed", "doing", "mood", "blog", "album", "thread", "mtag", "friend", "wall",
 			"tag", "notice", "share", "topic", "home", "pm", "event", "poll", "top", "info", "videophoto",
