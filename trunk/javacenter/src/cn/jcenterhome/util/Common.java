@@ -327,7 +327,7 @@ public class Common {
 	}
 	public static int time() {
 		return (int) (System.currentTimeMillis() / 1000);
-	}
+	}	/**	 *返回跟timeoffset有关的SimpleDateFormat	 */
 	public static SimpleDateFormat getSimpleDateFormat(String format, String timeoffset) {
 		SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.ENGLISH);
 		sdf.setTimeZone(TimeZone.getTimeZone(timeZoneIDs.get(timeoffset)[0]));
@@ -335,13 +335,13 @@ public class Common {
 	}
 	public static String gmdate(SimpleDateFormat sdf, int timestamp) {
 		return sdf.format(timestamp * 1000l);
-	}
+	}	/**	 * 根据format和timeoffset，格式化日期timestamp	 */
 	public static String gmdate(String format, int timestamp, String timeoffset) {
 		return getSimpleDateFormat(format, timeoffset).format(timestamp * 1000l);
-	}	/**	 * 把时间转换为多少小时、多少分钟、多少秒前这样的显示	 */
+	}	/**	 * 格式化日期,已考虑时区	 */
 	public static String sgmdate(HttpServletRequest request, String dateformat, int timestamp) {
 		return sgmdate(request, dateformat, timestamp, false);
-	}
+	}	/**	 * 根据dateformat格式化日期timestamp，如果format为true，则可格式化成多少小时前？多少分钟前？这种格式	 */
 	@SuppressWarnings("unchecked")
 	public static String sgmdate(HttpServletRequest request, String dateformat, int timestamp, boolean format) {
 		Map<String, Object> sGlobal = (Map<String, Object>) request.getAttribute("sGlobal");
@@ -1337,7 +1337,7 @@ public class Common {
 		string = Common.addSlashes(string).replace("*", "%");
 		string = string.replace("_", "\\_");
 		return string;
-	}
+	}	//检查开始位置start在总记录范围内
 	@SuppressWarnings("unchecked")
 	public static String ckStart(int start, int perPage, int maxPage) {
 		int maxStart = perPage * maxPage;
@@ -1345,7 +1345,7 @@ public class Common {
 			return "length_is_not_within_the_scope_of";
 		}
 		return null;
-	}
+	}	/**	 * 返回时间戳(Date.getTime()/ 1000)	 */
 	public static int strToTime(String string, String timeoffset) {
 		return strToTime(string, timeoffset, "yyyy-MM-dd");
 	}
@@ -2240,7 +2240,7 @@ public class Common {
 	}
 	public static Calendar getCalendar(String timeoffset) {
 		return Calendar.getInstance(TimeZone.getTimeZone(timeZoneIDs.get(timeoffset)[0]));
-	}
+	}	/**	 * 获得当前用户时区	 */
 	public static String getTimeOffset(Map<String, Object> sGlobal, Map<String, Object> sConfig) {
 		Map<String, Object> member = (Map<String, Object>) sGlobal.get("member");
 		String timeoffset = null;
