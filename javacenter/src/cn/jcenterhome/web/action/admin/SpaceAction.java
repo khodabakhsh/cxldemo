@@ -15,7 +15,7 @@ import org.apache.struts.action.DynaActionForm;
 import org.apache.struts.upload.FormFile;
 import cn.jcenterhome.util.Common;
 import cn.jcenterhome.util.JavaCenterHome;
-import cn.jcenterhome.web.action.BaseAction;
+import cn.jcenterhome.web.action.BaseAction;/** * 后台管理-批量管理-用户管理 * @author Administrator , Sep 27, 2011 * */
 public class SpaceAction extends BaseAction {
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -546,7 +546,7 @@ public class SpaceAction extends BaseAction {
 					+ " SET avatar=0, credit=credit-" + reward.get("credit") + ", experience=experience-"
 					+ reward.get("experience") + " WHERE uid=" + uid);
 			return cpMessage(request, mapping, "do_success", "admincp.jsp?ac=space&op=manage&uid=" + uid);
-		} else if ("manage".equals(op)) {
+		} else if ("manage".equals(op)) {//编辑管理
 			if (Common.empty(member)) {
 				return cpMessage(request, mapping, "cp_designated_users_do_not_exist");
 			}

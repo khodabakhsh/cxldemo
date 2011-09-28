@@ -12,7 +12,7 @@ import org.apache.struts.action.ActionMapping;
 import cn.jcenterhome.util.Common;
 import cn.jcenterhome.util.JavaCenterHome;
 import cn.jcenterhome.util.Serializer;
-import cn.jcenterhome.web.action.BaseAction;
+import cn.jcenterhome.web.action.BaseAction;/** * 活动 * @author Administrator , Sep 27, 2011 * */
 public class EventAction extends BaseAction {
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -167,7 +167,7 @@ public class EventAction extends BaseAction {
 		}
 		return mapping.findForward("event");
 	}
-	private boolean verifyEvents(HttpServletRequest request, HttpServletResponse response,
+	@SuppressWarnings("unchecked")	private boolean verifyEvents(HttpServletRequest request, HttpServletResponse response,
 			Map<String, Object> sGlobal, int grade, String[] eventIds) throws Exception {
 		boolean allowmanage = Common.checkPerm(request, response, "manageevent");
 		boolean managebatch = Common.checkPerm(request, response, "managebatch");
