@@ -125,6 +125,8 @@
 			}
 			return true;
 		} catch (SQLException e) {
+			System.out.println(sql);
+			e.printStackTrace();
 			errorMessage = e.getMessage();
 		}finally {
 			try {
@@ -177,12 +179,13 @@
 			e.printStackTrace();
 		}
 	}
+	//读取sql文件WebRoot/install/install.sql
 	public String sreadFile(File file) {
 		StringBuffer strBuf = new StringBuffer();
 		try {
 			if (file != null && file.canRead()) {
 				InputStream in = new FileInputStream(file);
-				InputStreamReader isr = new InputStreamReader(in);
+				InputStreamReader isr = new InputStreamReader(in,"UTF-8");//这里指定UTF-8编码
 				BufferedReader br = new BufferedReader(isr);
 				String sqlContent = br.readLine();
 				while (sqlContent != null) {
@@ -231,6 +234,7 @@
 						String charSet=Common.empty(dbCharset) ? "" : " DEFAULT CHARSET="+dbCharset.replace("-","");
 						String finalStr=(mysql_get_server_info().compareTo("4.1")> 0 ? " ENGINE="+(containsSession ? "MEMORY" : type)+charSet:" TYPE="+(containsSession ? "HEAP" : type));
 						query=query.substring(0,query.lastIndexOf(")")+1)+finalStr;
+						
 						if(!mysql_update(query)){
 							return tableName;
 						}
