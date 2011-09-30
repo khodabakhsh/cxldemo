@@ -663,7 +663,7 @@ CREATE TABLE jchome_feed (
   KEY dateline (dateline),
   KEY hot (hot),
   KEY id (id,idtype)
-) ENGINE=MyISAM COMMENT ='动态(feed)';
+) ENGINE=MyISAM COMMENT ='动态feed';
 
 -- --------------------------------------------------------
 --
@@ -1137,7 +1137,7 @@ CREATE TABLE jchome_post (
   hotuser text NOT NULL,
   PRIMARY KEY  (pid),
   KEY tid (tid,dateline)
-) ENGINE=MyISAM COMMENT '回帖';
+) ENGINE=MyISAM COMMENT='回帖';
 
 -- --------------------------------------------------------
 
