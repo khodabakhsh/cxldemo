@@ -1150,14 +1150,14 @@ CREATE TABLE jchome_profield (
   title varchar(80) NOT NULL default '' comment '名称',
   note varchar(255) NOT NULL default '' comment '简单介绍',
   formtype varchar(20) NOT NULL default '0' comment '填写(表单)类型',
-  inputnum smallint(3) unsigned NOT NULL default '0' comment '用户可加入群组最多个数.填写类型是多选类型或填写类型的才有',
+  inputnum smallint(3) unsigned NOT NULL default '0' comment '用户可加入群组最多个数，填写类型是多选类型或填写类型的才有',
   choice text NOT NULL comment '可选值。填写类型是选择类型的才有',
   mtagminnum smallint(6) unsigned NOT NULL default '0'  comment '群组讨论区人数下限。当群组的成员数达到该数目时，才允许成员在群组内发话题和回帖',
   manualmoderator tinyint(1) NOT NULL default '0'  comment '群组群主手工指定，1（手工），0（自动）。如果选择不手工指定，则系统会自动将第一次使用某个群组的用户作为群主。',
   manualmember tinyint(1) NOT NULL default '0' comment '群组成员可由群主控制，1（群主可控制），0（会员可自由加入）。群主可控制，则允许群主有权设置群组的会员加入方式，来控制加入群组的会员。',
   displayorder tinyint(3) unsigned NOT NULL default '0' comment '显示顺序',
   PRIMARY KEY  (fieldid)
-) ENGINE=MyISAM COMMENT='群组栏目'; 
+) ENGINE=MyISAM COMMENT='群组栏目';
 
 
 -- --------------------------------------------------------
@@ -1167,7 +1167,7 @@ CREATE TABLE jchome_profield (
 -- 用户栏目
 
 CREATE TABLE jchome_profilefield (
-  fieldid smallint(6) unsigned NOT NULL auto_increment COMMENT 'ID',
+  fieldid smallint(6) unsigned NOT NULL auto_increment,
   title varchar(80) NOT NULL default '' COMMENT '名称',
   note varchar(255) NOT NULL default '' comment '简单介绍',
   formtype varchar(20) NOT NULL default '0' COMMENT '表单类型,text(文本输入框),select(列表框)',
@@ -1842,6 +1842,7 @@ CREATE TABLE jchome_pms (
 ) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
+
 --
 -- 表的结构 'jchome_newpm'
 --
@@ -1858,7 +1859,7 @@ CREATE TABLE jchome_gift (
   giftid int(4) NOT NULL AUTO_INCREMENT,
   giftname varchar(20) NOT NULL comment '礼物名称',
   tips varchar(20) NOT NULL comment '礼物提示,当用户鼠标移动到礼物图像时，显示的提示信息',
-  price int(4) NOT NULL comment '礼物价格,必填，值必须大于0',
+  price int(4) NOT NULL comment '礼物价格，必填，值必须大于零',
   buycount int(4) NOT NULL comment '购买次数',
   icon text NOT NULL comment '礼物图像,必填',
   addtime int(10) NOT NULL comment '添加日期',
