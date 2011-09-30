@@ -98,7 +98,7 @@ CREATE TABLE jchome_blacklist (
 
 --
 -- 表的结构 'jchome_block'
---数据调用
+-- 数据调用
 
 CREATE TABLE jchome_block (
   bid smallint(6) unsigned NOT NULL auto_increment comment 'ID',
@@ -117,7 +117,7 @@ CREATE TABLE jchome_block (
 
 --
 -- 表的结构 'jchome_blog'
---日志表
+-- 日志表
 
 CREATE TABLE jchome_blog (
   blogid mediumint(8) unsigned NOT NULL auto_increment,
@@ -150,7 +150,7 @@ CREATE TABLE jchome_blog (
 
 --
 -- 表的结构 'jchome_blogfield'
---日志字段
+-- 日志字段
 
 CREATE TABLE jchome_blogfield (
   blogid mediumint(8) unsigned NOT NULL default '0',
@@ -185,7 +185,7 @@ CREATE TABLE jchome_cache (
 
 --
 -- 表的结构 'jchome_class'
---日志分类表
+-- 日志分类表
 
 CREATE TABLE jchome_class (
   classid mediumint(8) unsigned NOT NULL auto_increment COMMENT 'id',
@@ -200,7 +200,7 @@ CREATE TABLE jchome_class (
 
 --
 -- 表的结构 'jchome_click'
---表态动作
+-- 表态动作
 
 CREATE TABLE jchome_click (
   clickid smallint(6) unsigned NOT NULL auto_increment comment 'ID',
@@ -233,7 +233,7 @@ CREATE TABLE jchome_clickuser (
 
 --
 -- 表的结构 'jchome_comment'
---评论、留言
+-- 评论、留言
 
 CREATE TABLE jchome_comment (
   cid mediumint(8) unsigned NOT NULL auto_increment,
@@ -255,127 +255,127 @@ CREATE TABLE jchome_comment (
 
 --
 -- 表的结构 'jchome_config'
---系统配置属性,存贮键值对
---已知的key-value如下：
---defaultpoke:默认好友 打招呼内容
---defaultfusername:默认好友,这些用户会自动将新注册用户添加为好友，并向其打个招呼。注意，指定的这几位用户浏览自己的首页时，可能会因其好友数众多而增加服务器负载。
---spacebarusername:推荐成员,这些用户将随机显示在随便看看页面的“站长推荐”栏目中。
+-- 系统配置属性,存贮键值对
+-- 已知的key-value如下：
+-- defaultpoke:默认好友 打招呼内容
+-- defaultfusername:默认好友,这些用户会自动将新注册用户添加为好友，并向其打个招呼。注意，指定的这几位用户浏览自己的首页时，可能会因其好友数众多而增加服务器负载。
+-- spacebarusername:推荐成员,这些用户将随机显示在随便看看页面的“站长推荐”栏目中。
 --         ********防灌水设置*******
---login_action:自定义登录识别名,给登录页面设置个性名，可加大灌水机自动登录的难度，如果有必要，可以不定期更改一下
---register_action:自定义注册识别名,给注册页面设置个性名。注意，不能与登录识别名相同
---seccode_login:登录页面开启验证码功能,1(开启)
---seccode_register:注册页面开启验证码功能,1(开启)
---questionmode：验证码采用个性提问模式，1(使用我自定义的问答（推荐，效果好）)，0(使用系统验证码图片)
---need_email:强制新用户验证激活邮箱,1(是),0(否),选择是的话，用户必须验证激活自己的邮箱后，才可以进行发布操作。
---uniqueemail:验证激活邮箱唯一性,1(是),0(否),选择是的话，验证激活的邮箱将唯一性，不允许重复。
---newusertime:新用户见习时间,设置新注册用户必须等待多少小时后才可以发布操作。
---need_avatar:强制新用户上传头像,1(是),0(否),选择是的话，用户必须设置自己的头像后才能进行发布操作。
---need_friendnum:设置用户必须拥有多少个好友后，才可以进行发布操作。
---pmsendregdays:发短消息最少注册天数,注册天数少于次设置的，不允许发送短消息，0为不限制，此举为了限制机器人发广告。
---pmlimit1day:同一用户在 24 小时允许发送短消息的最大数目,同一用户在 24 小时内可以发送的短消息的极限，建议在 30 - 100 范围内取值，0 为不限制，此举为了限制通过机器批量发广告。
---pmfloodctrl:发短消息灌水预防,两次发短消息间隔小于此时间，单位秒，0 为不限制，此举为了限制通过机器批量发广告。
+-- login_action:自定义登录识别名,给登录页面设置个性名，可加大灌水机自动登录的难度，如果有必要，可以不定期更改一下
+-- register_action:自定义注册识别名,给注册页面设置个性名。注意，不能与登录识别名相同
+-- seccode_login:登录页面开启验证码功能,1(开启)
+-- seccode_register:注册页面开启验证码功能,1(开启)
+-- questionmode：验证码采用个性提问模式，1(使用我自定义的问答（推荐，效果好）)，0(使用系统验证码图片)
+-- need_email:强制新用户验证激活邮箱,1(是),0(否),选择是的话，用户必须验证激活自己的邮箱后，才可以进行发布操作。
+-- uniqueemail:验证激活邮箱唯一性,1(是),0(否),选择是的话，验证激活的邮箱将唯一性，不允许重复。
+-- newusertime:新用户见习时间,设置新注册用户必须等待多少小时后才可以发布操作。
+-- need_avatar:强制新用户上传头像,1(是),0(否),选择是的话，用户必须设置自己的头像后才能进行发布操作。
+-- need_friendnum:设置用户必须拥有多少个好友后，才可以进行发布操作。
+-- pmsendregdays:发短消息最少注册天数,注册天数少于次设置的，不允许发送短消息，0为不限制，此举为了限制机器人发广告。
+-- pmlimit1day:同一用户在 24 小时允许发送短消息的最大数目,同一用户在 24 小时内可以发送的短消息的极限，建议在 30 - 100 范围内取值，0 为不限制，此举为了限制通过机器批量发广告。
+-- pmfloodctrl:发短消息灌水预防,两次发短消息间隔小于此时间，单位秒，0 为不限制，此举为了限制通过机器批量发广告。
 --         *******访问ip设置*********
---ipbanned:禁止访问的IP列表
---ipaccess:允许访问的IP列表
+-- ipbanned:禁止访问的IP列表
+-- ipaccess:允许访问的IP列表
 --         *******隐私设置***********
---networkpublic:游客开放浏览，1(是),0(否)。开放的话用户不需要登录也能浏览随便看看、未设置隐私的个人空间，同时，站内的信息也可以被搜索引擎收录。
---privacy:新用户默认隐私设置与默认动态发布设置,【序列化存储】
+-- networkpublic:游客开放浏览，1(是),0(否)。开放的话用户不需要登录也能浏览随便看看、未设置隐私的个人空间，同时，站内的信息也可以被搜索引擎收录。
+-- privacy:新用户默认隐私设置与默认动态发布设置,【序列化存储】
 --         *******站点设置***********
 --                ********1.基本设置********
---sitename:站点名称
---siteallurl:站点访问URL地址
---adminemail：站点联系邮箱
---licensed:显示授权信息链接,1(是),0(否)
---debuginfo:显示程序执行信息,1(是),0(否)
---miibeian:ICP/IP/域名备案
---headercharset:强制使用默认字符集,1(是),0(否)
---allowrewrite:URL Rewrite,URL 静态化可以提高搜索引擎抓取，开启本功能会轻微增加服务器负担。,1(是),0(否)
---onlinehold:记录在线时间(单位 秒)
---updatestat:开启站点概况统计,1(是),0(否),建议开启，记录站点每日的登录人数、发表数、互动数等重点参数，可为站点运营发展提供重要数据依据
---avatarreal:用户头像体系,1(使用头像体系2),其他(使用头像体系2)
---jc_dir:JavaCenter的物理路径.默认为空。如果本系统可以读取JavaCenter的程序目录，推荐填写该路径值。
---close:站点关闭访问,1(是),0(否)
---closereason:站点关闭说明
+-- sitename:站点名称
+-- siteallurl:站点访问URL地址
+-- adminemail：站点联系邮箱
+-- licensed:显示授权信息链接,1(是),0(否)
+-- debuginfo:显示程序执行信息,1(是),0(否)
+-- miibeian:ICP/IP/域名备案
+-- headercharset:强制使用默认字符集,1(是),0(否)
+-- allowrewrite:URL Rewrite,URL 静态化可以提高搜索引擎抓取，开启本功能会轻微增加服务器负担。,1(是),0(否)
+-- onlinehold:记录在线时间(单位 秒)
+-- updatestat:开启站点概况统计,1(是),0(否),建议开启，记录站点每日的登录人数、发表数、互动数等重点参数，可为站点运营发展提供重要数据依据
+-- avatarreal:用户头像体系,1(使用头像体系2),其他(使用头像体系2)
+-- jc_dir:JavaCenter的物理路径.默认为空。如果本系统可以读取JavaCenter的程序目录，推荐填写该路径值。
+-- close:站点关闭访问,1(是),0(否)
+-- closereason:站点关闭说明
 --               *******2.注册与显示*******
---closeregister：关闭新用户注册,1(是),0(否)
---closeinvite：关闭邀请注册功能,1(是),0(否)
---checkemail：一个邮箱只能注册一个账号,1(是),0(否)
---regipdate：同一IP注册时间间隔，限制同一个ip，在多长时间内只能注册一个账号
---registerrule：注册服务条款，用户注册的时候会显示并需要接受的服务条款。（支持html语言，换行使用<br>）
---maxpage：列表最大分页数，允许用户查看的最大分页数。当用户查看的分页数越大的时候，对服务器的负载压力就越大。
---feedday：动态保留天数，个人动态的保留天数。超过该天数的个人动态会被清理掉，从而可以保证MySQL的效率。建议不要设置太长。
---feedmaxnum：首页显示的好友动态将从这些数目的事件中进行合并显示。建议不要设置太多，从而可以保证MySQL的效率，但最少不能低于50。
---showallfriendnum:首页动态默认标签设置.好友数小于showallfriendnum的时候显示所有人的动态，超过这个数值显示好友动态,在日志、相册列表页面，该参数同样生效。
---feedhiddenicon:首页动态折叠设置,将某些动态折叠后，可以适当减少首页的动态噪音。
---feedhotnum:首页显示热点的数目,系统会自动获取10个热点，其中，排名第一的热点会固定显示，其余热点会随机显示。
---newspacenum:首页欢迎新成员数量
---newspaceavatar:已经上传头像(显示的新成员条件)
---newspacerealname：已经实名认证(显示的新成员条件)
---newspacevideophoto：已经视频认证(显示的新成员条件)
---feedhotday：热点推荐的天数范围，设置首页热点推荐选择的天数范围。
---feedhotmin：热点推荐的最小热度值，设置当发布的信息热度值超过多少后，才会显示在推荐里面。
---feedtargetblank：动态链接打开模式，1(新窗口打开),其他(同一窗口打开)
---feedread:记录动态阅读状态,1(是),0(否),如果选择是，该条动态被点击的时候，会变成灰色，以表示已经阅读。(注意，该功能对热点动态无效)
---networkpage:成员排行榜允许分页浏览,1(是),0(否),该设置只对排行榜中的竞价排行、在线成员、全部成员有效。
---topcachetime:成员排行榜缓存时间，用户排行榜中，除竞价排行、在线成员、全部成员外，其余排行榜是缓存处理的。
---linkguide：外部链接显示导航条,1(是),0(否)
---starcredit：星星经验阀值.当用户经验数到此阀值时，增加一个星星。最小为2，否则此功能无效，不显示星星数。
---starlevelnum:星星数在达到此阀值时，会升级为高级别的图标。最小为2，否则此项功能无效，始终以星星显示
+-- closeregister：关闭新用户注册,1(是),0(否)
+-- closeinvite：关闭邀请注册功能,1(是),0(否)
+-- checkemail：一个邮箱只能注册一个账号,1(是),0(否)
+-- regipdate：同一IP注册时间间隔，限制同一个ip，在多长时间内只能注册一个账号
+-- registerrule：注册服务条款，用户注册的时候会显示并需要接受的服务条款。（支持html语言，换行使用<br>）
+-- maxpage：列表最大分页数，允许用户查看的最大分页数。当用户查看的分页数越大的时候，对服务器的负载压力就越大。
+-- feedday：动态保留天数，个人动态的保留天数。超过该天数的个人动态会被清理掉，从而可以保证MySQL的效率。建议不要设置太长。
+-- feedmaxnum：首页显示的好友动态将从这些数目的事件中进行合并显示。建议不要设置太多，从而可以保证MySQL的效率，但最少不能低于50。
+-- showallfriendnum:首页动态默认标签设置.好友数小于showallfriendnum的时候显示所有人的动态，超过这个数值显示好友动态,在日志、相册列表页面，该参数同样生效。
+-- feedhiddenicon:首页动态折叠设置,将某些动态折叠后，可以适当减少首页的动态噪音。
+-- feedhotnum:首页显示热点的数目,系统会自动获取10个热点，其中，排名第一的热点会固定显示，其余热点会随机显示。
+-- newspacenum:首页欢迎新成员数量
+-- newspaceavatar:已经上传头像(显示的新成员条件)
+-- newspacerealname：已经实名认证(显示的新成员条件)
+-- newspacevideophoto：已经视频认证(显示的新成员条件)
+-- feedhotday：热点推荐的天数范围，设置首页热点推荐选择的天数范围。
+-- feedhotmin：热点推荐的最小热度值，设置当发布的信息热度值超过多少后，才会显示在推荐里面。
+-- feedtargetblank：动态链接打开模式，1(新窗口打开),其他(同一窗口打开)
+-- feedread:记录动态阅读状态,1(是),0(否),如果选择是，该条动态被点击的时候，会变成灰色，以表示已经阅读。(注意，该功能对热点动态无效)
+-- networkpage:成员排行榜允许分页浏览,1(是),0(否),该设置只对排行榜中的竞价排行、在线成员、全部成员有效。
+-- topcachetime:成员排行榜缓存时间，用户排行榜中，除竞价排行、在线成员、全部成员外，其余排行榜是缓存处理的。
+-- linkguide：外部链接显示导航条,1(是),0(否)
+-- starcredit：星星经验阀值.当用户经验数到此阀值时，增加一个星星。最小为2，否则此功能无效，不显示星星数。
+-- starlevelnum:星星数在达到此阀值时，会升级为高级别的图标。最小为2，否则此项功能无效，始终以星星显示
 --             ********3.系统功能*********
---groupnum：好友用户组个数。设置每个用户最多拥有的好友用户组个数。
---importnum:日志单次导入最大数，允许用户单次导入日志的条数
---maxreward:投票单次最高悬赏，允许用户创建悬赏投票时平均单次投票悬赏额度
---sendmailday：邮件通知更新天数单位：天，当用户多少天没有登陆站点的时候才会给其发送邮件通知，设置为0，则不启用邮件通知功能
---openxmlrpc：开启XMLPRC协议接口,1(是),0(否),用户可以通过本协议接口，使用客户端发布日志。但是，也可能会增加恶意灌水的可能。
---openim:开启即时消息,实现站内消息的即时提醒，无需刷新页面就能收到有新消息提示信息。注意: 本功能会严重加重服务器负担。此功能仅在Tomcat服务器下有效，此功能需要web服务器为Tomcat6.x，并需要配置Tomcat的server.xml，修改Connector节点的protocol属性值为"org.apache.coyote.http11.Http11NioProtocol"。
---jc_tagrelated：JavaCenter应用标签相关信息,1(是),0(否)，开启本功能，则系统会通过JavaCenter，获取到站内其他应用的标签相关信息
---jc_tagrelatedtime：缓存更新间隔，设置标签关联信息多长时间更新一次，建议设置1小时（3600秒）以上，减轻对服务器的压力。为0则不更新。
---allowcache：模块缓存,1(是),0(否)，推荐开启，这样在使用模块调用数据的时候，可以大幅度降低MYSQL服务器负载
---cachemode：缓存模式，file(存储到文本),database(存储到数据库)
---cachegrade:缓存分表等级,0(只用一个表(或目录)),1(分散到15个子表(或目录)),2(分散到225个子表(或目录)),分表(或目录)越多效率越高，但建立的数据表(或目录)越多
---allowdomain:二级域名功能,1(是),0(否),二级域名功能需要服务器配置支持
---holddomain:保留二级域名
---domainroot:二级域名根域名
+-- groupnum：好友用户组个数。设置每个用户最多拥有的好友用户组个数。
+-- importnum:日志单次导入最大数，允许用户单次导入日志的条数
+-- maxreward:投票单次最高悬赏，允许用户创建悬赏投票时平均单次投票悬赏额度
+-- sendmailday：邮件通知更新天数单位：天，当用户多少天没有登陆站点的时候才会给其发送邮件通知，设置为0，则不启用邮件通知功能
+-- openxmlrpc：开启XMLPRC协议接口,1(是),0(否),用户可以通过本协议接口，使用客户端发布日志。但是，也可能会增加恶意灌水的可能。
+-- openim:开启即时消息,实现站内消息的即时提醒，无需刷新页面就能收到有新消息提示信息。注意: 本功能会严重加重服务器负担。此功能仅在Tomcat服务器下有效，此功能需要web服务器为Tomcat6.x，并需要配置Tomcat的server.xml，修改Connector节点的protocol属性值为"org.apache.coyote.http11.Http11NioProtocol"。
+-- jc_tagrelated：JavaCenter应用标签相关信息,1(是),0(否)，开启本功能，则系统会通过JavaCenter，获取到站内其他应用的标签相关信息
+-- jc_tagrelatedtime：缓存更新间隔，设置标签关联信息多长时间更新一次，建议设置1小时（3600秒）以上，减轻对服务器的压力。为0则不更新。
+-- allowcache：模块缓存,1(是),0(否)，推荐开启，这样在使用模块调用数据的时候，可以大幅度降低MYSQL服务器负载
+-- cachemode：缓存模式，file(存储到文本),database(存储到数据库)
+-- cachegrade:缓存分表等级,0(只用一个表(或目录)),1(分散到15个子表(或目录)),2(分散到225个子表(或目录)),分表(或目录)越多效率越高，但建立的数据表(或目录)越多
+-- allowdomain:二级域名功能,1(是),0(否),二级域名功能需要服务器配置支持
+-- holddomain:保留二级域名
+-- domainroot:二级域名根域名
 --             ********4.实名认证设置********
---realname:实名认证设置,1(是),0(否),注意，开启实名认证会增加服务器负担。
---namecheck:实名需手工认证,1(是),0(否),设置为“是”，则用户填写的姓名只有在被管理者手工认证后才算有效。否则，则自动为认证有效。
---namechange:填写的姓名经认证有效后,1(是),0(否)，是否允许用户再次修改姓名。
---name_allowviewspace:允许查看实名用户主页,1(是),0(否)
---name_allowfriend:允许加好友,1(是),0(否)
---name_allowpoke:允许打招呼,1(是),0(否)
---name_allowdoing:允许发记录,1(是),0(否)
---name_allowblog:允许发日志,1(是),0(否)
---name_allowalbum:允许使用相册,1(是),0(否)
---name_allowthread:允许发话题,1(是),0(否)
---name_allowpoll:允许发投票,1(是),0(否)
---name_allowevent:允许发活动,1(是),0(否)
---name_allowshare:允许分享,1(是),0(否)
---name_allowgift:允许发送礼物,1(是),0(否)
---name_allowcomment:允许留言/评论,1(是),0(否)
---name_allowpost:允许群组回帖,1(是),0(否)
+-- realname:实名认证设置,1(是),0(否),注意，开启实名认证会增加服务器负担。
+-- namecheck:实名需手工认证,1(是),0(否),设置为“是”，则用户填写的姓名只有在被管理者手工认证后才算有效。否则，则自动为认证有效。
+-- namechange:填写的姓名经认证有效后,1(是),0(否)，是否允许用户再次修改姓名。
+-- name_allowviewspace:允许查看实名用户主页,1(是),0(否)
+-- name_allowfriend:允许加好友,1(是),0(否)
+-- name_allowpoke:允许打招呼,1(是),0(否)
+-- name_allowdoing:允许发记录,1(是),0(否)
+-- name_allowblog:允许发日志,1(是),0(否)
+-- name_allowalbum:允许使用相册,1(是),0(否)
+-- name_allowthread:允许发话题,1(是),0(否)
+-- name_allowpoll:允许发投票,1(是),0(否)
+-- name_allowevent:允许发活动,1(是),0(否)
+-- name_allowshare:允许分享,1(是),0(否)
+-- name_allowgift:允许发送礼物,1(是),0(否)
+-- name_allowcomment:允许留言/评论,1(是),0(否)
+-- name_allowpost:允许群组回帖,1(是),0(否)
 --          *********5.视频认证设置********
---videophoto:开启视频认证,1(是),0(否)
---videophotocheck:视频认证照片需手工认证,1(是),0(否),设置为“是”，则用户上传的认证照片只有在被管理者手工认证后才算有效。否则，则自动为认证有效。
---videophotochange:视频认证照片可再修改,1(是),0(否),上传的认证照片经认证有效后，是否允许用户再次修改认证照片。
---video_allowviewphoto:允许查看视频用户的照片,1(是),0(否)
---video_allowfriend:允许加视频用户为好友,1(是),0(否)
---video_allowpoke:允许向视频用户打招呼,1(是),0(否)
---video_allowwall:允许向视频用户留言,1(是),0(否)
---video_allowcomment:允许向视频用户评论,1(是),0(否)
---video_allowdoing:允许发记录,1(是),0(否)
---video_allowblog:允许发日志,1(是),0(否)
---video_allowalbum:允许使用相册,1(是),0(否)
---video_allowthread:允许发话题,1(是),0(否)
---video_allowpoll:允许发投票,1(是),0(否)
---video_allowevent:允许发活动,1(是),0(否)
---video_allowshare:允许分享,1(是),0(否)
---video_allowgift:允许发送礼物,1(是),0(否)
---video_allowpost:允许群组回帖,1(是),0(否)
+-- videophoto:开启视频认证,1(是),0(否)
+-- videophotocheck:视频认证照片需手工认证,1(是),0(否),设置为“是”，则用户上传的认证照片只有在被管理者手工认证后才算有效。否则，则自动为认证有效。
+-- videophotochange:视频认证照片可再修改,1(是),0(否),上传的认证照片经认证有效后，是否允许用户再次修改认证照片。
+-- video_allowviewphoto:允许查看视频用户的照片,1(是),0(否)
+-- video_allowfriend:允许加视频用户为好友,1(是),0(否)
+-- video_allowpoke:允许向视频用户打招呼,1(是),0(否)
+-- video_allowwall:允许向视频用户留言,1(是),0(否)
+-- video_allowcomment:允许向视频用户评论,1(是),0(否)
+-- video_allowdoing:允许发记录,1(是),0(否)
+-- video_allowblog:允许发日志,1(是),0(否)
+-- video_allowalbum:允许使用相册,1(是),0(否)
+-- video_allowthread:允许发话题,1(是),0(否)
+-- video_allowpoll:允许发投票,1(是),0(否)
+-- video_allowevent:允许发活动,1(是),0(否)
+-- video_allowshare:允许分享,1(是),0(否)
+-- video_allowgift:允许发送礼物,1(是),0(否)
+-- video_allowpost:允许群组回帖,1(是),0(否)
 --          *********6.上传图片设置********
---allowwatermark：是否启用图片水印,1(是),0(否)，注意，开启水印功能后，图片的EXIF信息将无法获取
+-- allowwatermark：是否启用图片水印,1(是),0(否)，注意，开启水印功能后，图片的EXIF信息将无法获取
 --          *********7.远程上传设置********
---allowftp:启用远程附件,1(是),0(否)
---ftpssl:启用 SSL 连接,1(是),0(否)
+-- allowftp:启用远程附件,1(是),0(否)
+-- ftpssl:启用 SSL 连接,1(是),0(否)
 --          *********8.邮件设置********
 
 CREATE TABLE jchome_config (
@@ -388,7 +388,7 @@ CREATE TABLE jchome_config (
 
 --
 -- 表的结构 'jchome_cron'
---系统计划任务
+-- 系统计划任务
 
 CREATE TABLE jchome_cron (
   cronid smallint(6) unsigned NOT NULL auto_increment comment 'ID',
@@ -455,14 +455,14 @@ CREATE TABLE jchome_creditlog (
 
 --
 -- 表的结构 'jchome_data'
---后台管理一些配置数据
---已知的key-value如下：
---spam:后台管理-基本设置-防灌水设置,个性问题和答案,【序列化存储】
---reason:后台管理-基本设置-站点设置-基本设置，举报可选理由
---setting:后台管理-基本设置-站点设置-上传图片设置、远程上传设置。一、上传图片设置,预览缩略图宽高，图片最大宽高，水印图片地址，水印位置（1顶端居左，2顶端居右，3底端居左，4底端居右）。二、FTP连接信息（地址、用户名、密码等等）【序列化存储】
---mail：后台管理-基本设置-站点设置-邮件设置【序列化存储】
---network：后台管理-高级设置-随便看看设置【序列化存储】
---censor:后台管理-高级设置-词语屏蔽
+-- 后台管理一些配置数据
+-- 已知的key-value如下：
+-- spam:后台管理-基本设置-防灌水设置,个性问题和答案,【序列化存储】
+-- reason:后台管理-基本设置-站点设置-基本设置，举报可选理由
+-- setting:后台管理-基本设置-站点设置-上传图片设置、远程上传设置。一、上传图片设置,预览缩略图宽高，图片最大宽高，水印图片地址，水印位置（1顶端居左，2顶端居右，3底端居左，4底端居右）。二、FTP连接信息（地址、用户名、密码等等）【序列化存储】
+-- mail：后台管理-基本设置-站点设置-邮件设置【序列化存储】
+-- network：后台管理-高级设置-随便看看设置【序列化存储】
+-- censor:后台管理-高级设置-词语屏蔽
 
 CREATE TABLE jchome_data (
   var varchar(20) NOT NULL default '',
@@ -496,7 +496,7 @@ CREATE TABLE jchome_docomment (
 
 --
 -- 表的结构 'jchome_doing'
---记录
+-- 记录
 
 CREATE TABLE jchome_doing (
   doid mediumint(8) unsigned NOT NULL auto_increment,
@@ -517,7 +517,7 @@ CREATE TABLE jchome_doing (
 
 --
 -- 表的结构 'jchome_event'
---活动
+-- 活动
 
 CREATE TABLE jchome_event (
   eventid mediumint(8) unsigned NOT NULL auto_increment COMMENT 'ID',
@@ -559,7 +559,7 @@ CREATE TABLE jchome_event (
 
 --
 -- 表的结构 'jchome_eventclass'
---活动分类
+-- 活动分类
 
 CREATE TABLE jchome_eventclass (
   classid smallint(6) unsigned NOT NULL auto_increment comment 'ID',
@@ -771,7 +771,7 @@ CREATE TABLE jchome_magic (
 
 --
 -- 表的结构 'jchome_magicinlog'
---道具获取记录表
+-- 道具获取记录表
 
 CREATE TABLE jchome_magicinlog (
   logid mediumint(8) unsigned NOT NULL auto_increment,
@@ -792,7 +792,7 @@ CREATE TABLE jchome_magicinlog (
 
 --
 -- 表的结构 'jchome_magicstore'
---道具出售统计表
+-- 道具出售统计表
 
 CREATE TABLE jchome_magicstore (
   mid varchar(15) NOT NULL default '',
@@ -807,7 +807,7 @@ CREATE TABLE jchome_magicstore (
 
 --
 -- 表的结构 'jchome_magicuselog'
---道具使用记录表
+-- 道具使用记录表
 
 CREATE TABLE jchome_magicuselog (
   logid mediumint(8) unsigned NOT NULL auto_increment,
@@ -875,7 +875,7 @@ CREATE TABLE jchome_member (
 
 --
 -- 表的结构 'jchome_mtag'
---群组
+-- 群组
 
 CREATE TABLE jchome_mtag (
   tagid mediumint(8) unsigned NOT NULL auto_increment,
@@ -1038,7 +1038,7 @@ CREATE TABLE jchome_poke (
 
 --
 -- 表的结构 'jchome_poll'
---投票
+-- 投票
 
 CREATE TABLE jchome_poll (
   pid mediumint(8) unsigned NOT NULL auto_increment,
@@ -1121,7 +1121,7 @@ CREATE TABLE jchome_polluser (
 
 --
 -- 表的结构 'jchome_post'
---回帖
+-- 回帖
 
 CREATE TABLE jchome_post (
   pid int(10) unsigned NOT NULL auto_increment,
@@ -1143,7 +1143,7 @@ CREATE TABLE jchome_post (
 
 --
 -- 表的结构 'jchome_profield'
---群组栏目
+-- 群组栏目
 
 CREATE TABLE jchome_profield (
   fieldid smallint(6) unsigned NOT NULL auto_increment,
@@ -1164,7 +1164,7 @@ CREATE TABLE jchome_profield (
 
 --
 -- 表的结构 'jchome_profilefield'
---用户栏目
+-- 用户栏目
 
 CREATE TABLE jchome_profilefield (
   fieldid smallint(6) unsigned NOT NULL auto_increment COMMENT 'ID',
@@ -1184,7 +1184,7 @@ CREATE TABLE jchome_profilefield (
 
 --
 -- 表的结构 'jchome_report'
---举报
+-- 举报
 
 CREATE TABLE jchome_report (
   rid mediumint(8) unsigned NOT NULL auto_increment,
@@ -1222,7 +1222,7 @@ CREATE TABLE jchome_session (
 
 --
 -- 表的结构 'jchome_share'
---分享,下面的`type`我改的
+-- 分享,下面的`type`我改的
 
 CREATE TABLE jchome_share (
   sid mediumint(8) unsigned NOT NULL auto_increment comment 'ID',
@@ -1265,7 +1265,7 @@ CREATE TABLE jchome_show (
 
 --
 -- 表的结构 'jchome_space'
---用户
+-- 用户
 
 CREATE TABLE jchome_space (
   uid mediumint(8) unsigned NOT NULL default '0' COMMENT '用户UID',
@@ -1322,7 +1322,7 @@ CREATE TABLE jchome_space (
 
 --
 -- 表的结构 'jchome_spacefield'
---用户字段
+-- 用户字段
 
 CREATE TABLE jchome_spacefield (
   uid mediumint(8) unsigned NOT NULL default '0',
@@ -1382,7 +1382,7 @@ CREATE TABLE jchome_spaceinfo (
   endmonth smallint(6) unsigned NOT NULL default '0',
   PRIMARY KEY  (infoid),
   KEY uid (uid)
-) ENGINE=MyISAM;;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -1453,7 +1453,7 @@ CREATE TABLE jchome_statuser (
 
 --
 -- 表的结构 'jchome_tag'
---标签
+-- 标签
 
 CREATE TABLE jchome_tag (
   tagid mediumint(8) unsigned NOT NULL auto_increment,
@@ -1498,7 +1498,7 @@ CREATE TABLE jchome_tagspace (
 
 --
 -- 表的结构 'jchome_task'
---有奖任务
+-- 有奖任务
 
 CREATE TABLE jchome_task (
   taskid smallint(6) unsigned NOT NULL auto_increment comment 'ID',
@@ -1523,7 +1523,7 @@ CREATE TABLE jchome_task (
 
 --
 -- 表的结构 'jchome_thread'
---话题
+-- 话题
 
 CREATE TABLE jchome_thread (
   tid mediumint(8) unsigned NOT NULL auto_increment COMMENT '指定话题ID',
@@ -1659,7 +1659,7 @@ CREATE TABLE jchome_userevent (
 
 --
 -- 表的结构 'jchome_usergroup'
---用户组,字段中manage开头的是管理权限，系统组和特殊组可见。
+-- 用户组,字段中manage开头的是管理权限，系统组和特殊组可见。
 
 CREATE TABLE jchome_usergroup (
   gid smallint(6) unsigned NOT NULL auto_increment comment '组的id',
@@ -1774,7 +1774,7 @@ CREATE TABLE jchome_userlog (
 
 --
 -- 表的结构 'jchome_usermagic'
---道具持有记录
+-- 道具持有记录
 
 CREATE TABLE jchome_usermagic (
   uid mediumint(8) unsigned NOT NULL default '0',
@@ -1853,7 +1853,7 @@ CREATE TABLE jchome_newpm (
 -- --------------------------------------------------------
 --
 -- 表的结构 'jchome_gift'
---礼物设置
+-- 礼物设置
 CREATE TABLE jchome_gift (
   giftid int(4) NOT NULL AUTO_INCREMENT,
   giftname varchar(20) NOT NULL comment '礼物名称',
