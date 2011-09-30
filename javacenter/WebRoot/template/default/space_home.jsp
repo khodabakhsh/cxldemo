@@ -1,6 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://jchome.jsprun.com/jch" prefix="jch"%>
+<!-- 主页 -->
 <c:if test="${empty TPL.getmore}">
 	<jsp:include page="${jch:template(sConfig, sGlobal, 'header.jsp')}" />
 	<div id="content">
