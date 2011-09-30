@@ -6304,14 +6304,14 @@ public class SpaceAction extends BaseAction {
 		} else if ("myapp".equals(filter)) {
 			whereSQL += " AND appid='0'";
 		}
-		int count = 0;
+		int count = 0;		//获取动态
 		List<Map<String, Object>> feedList = dataBaseService.executeQuery("SELECT * FROM "
 				+ JavaCenterHome.getTableName("feed") +"	WHERE " + whereSQL + "	ORDER BY "
 				+ orderSQL + "	LIMIT " + start + "," + perPage);
 		LinkedHashMap<Object, Map> feed_list = new LinkedHashMap<Object, Map>();
 		LinkedHashMap<Object, LinkedHashMap> appfeedList = new LinkedHashMap<Object, LinkedHashMap>();
 		Map<Integer, String> sNames = (Map<Integer, String>) request.getAttribute("sNames");
-		String[] hidden_icons = null;
+		String[] hidden_icons = null;		//feedhiddenicon:首页动态折叠设置,将某些动态折叠后，可以适当减少首页的动态噪音。
 		String feedHiddenIcon = (String) sConfig.get("feedhiddenicon");
 		if (!Common.empty(feedHiddenIcon)) {
 			sConfig.put("feedhiddenicon", (feedHiddenIcon = feedHiddenIcon.replace(" ", "")));
@@ -6383,7 +6383,7 @@ public class SpaceAction extends BaseAction {
 		request.setAttribute("hiddenfeed_list", hiddenfeed_list);
 		request.setAttribute("hiddenfeed_num", hiddenfeed_num);
 		request.setAttribute("filtercount", filterCount);
-		request.setAttribute("filter_list", filter_list);
+		request.setAttribute("filter_list", filter_list);		//hotList:热点推荐
 		LinkedHashMap<Object, Map<String, Object>> hotList = new LinkedHashMap<Object, Map<String, Object>>();
 		if ((Boolean) space.get("self") && Common.empty(start)) {
 			space.put("pmnum", ((Map) sGlobal.get("member")) == null ? 0 : ((Map) sGlobal.get("member"))
@@ -6476,7 +6476,7 @@ public class SpaceAction extends BaseAction {
 					}
 				}
 			}
-			request.setAttribute("olfriendlist", olFriendList);
+			request.setAttribute("olfriendlist", olFriendList);			//task:新手任务
 			request.setAttribute("task", spaceService.getTask(request, response));
 			if (!Common.empty(space.get("feedfriend"))) {
 				Integer timesTamp = (Integer) sGlobal.get("timestamp");

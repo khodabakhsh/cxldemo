@@ -139,7 +139,7 @@ public class SpaceService {
 		CpService cpService = (CpService) BeanFactory.getBean("cpService");
 		cpService.updateStat(sGlobal, sConfig, "login", true);
 	}
-	public Map getTask(HttpServletRequest request, HttpServletResponse response) {
+	@SuppressWarnings("unchecked")	public Map getTask(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> sGlobal = (Map<String, Object>) request.getAttribute("sGlobal");
 		Map<Object, Map> globalTask = Common.getCacheDate(request, response, "/data/cache/cache_task.jsp",
 				"globalTask");
