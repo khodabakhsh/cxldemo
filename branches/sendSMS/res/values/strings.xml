@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="txtPhoneNo">Please input phone NO:</string>
+	<string name="txtContent">Please input SMS\'s content:</string>
+	<string name="btnText">send!</string>
+	<string name="app_name">SMS</string>
+	<string name="btnContact">contact</string>
+</resources>
