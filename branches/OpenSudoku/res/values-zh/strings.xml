@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">OpenSudoku</string>
+    <string name="app_name">数独！90大关</string>
     <string name="edit_sudoku">编辑sudoku</string>
     
     <string name="puzzle_folders">OpenSudoku智力游戏文件夹</string>

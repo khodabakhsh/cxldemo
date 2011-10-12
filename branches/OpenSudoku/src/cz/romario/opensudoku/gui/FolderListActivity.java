@@ -39,11 +39,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
 
+import com.waps.AdView;
 import com.waps.AppConnect;
 import com.waps.UpdatePointsNotifier;
 
@@ -92,14 +94,28 @@ public class FolderListActivity extends ListActivity implements UpdatePointsNoti
 		super.onCreate(savedInstanceState);
 
 
+	
+
+		
+		setContentView(R.layout.folder_list);
+//		View getMorePuzzles = (View)findViewById(R.id.get_more_puzzles);
+		
 		// 连接服务器. 应用启动时调用(为了统计准确性，此句必须填写).
 		AppConnect.getInstance(this);
 		pointsTextView = (TextView) findViewById(R.id.PointsTextView);
 		AppConnect.getInstance(FolderListActivity.this).getPoints(
 				FolderListActivity.this);
 		
-		setContentView(R.layout.folder_list);
-//		View getMorePuzzles = (View)findViewById(R.id.get_more_puzzles);
+		LinearLayout container =(LinearLayout)findViewById(R.id.AdLinearLayout);
+		new AdView(this,container).DisplayAd(20);//每20秒轮换一次广告；最少为20
+
+				Button awardBurron = (Button) findViewById(R.id.awardButton);
+				awardBurron.setOnClickListener(new Button.OnClickListener() {
+					public void onClick(View arg0) {
+						// 奖励虚拟货币
+						AppConnect.getInstance(FolderListActivity.this).awardPoints(10, FolderListActivity.this);
+					}
+				});
 		
 		setDefaultKeyMode(DEFAULT_KEYS_SHORTCUT);
 		// Inform the list we provide context menus for items
@@ -118,6 +134,14 @@ public class FolderListActivity extends ListActivity implements UpdatePointsNoti
 			public void onClick(View arg0) {
 				// 显示推荐安装程序（Offer）.
 				AppConnect.getInstance(FolderListActivity.this).showOffers(FolderListActivity.this);
+			}
+		});
+		
+		Button owns = (Button) findViewById(R.id.OwnsButton);
+		owns.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View arg0) {
+				// 显示自家应用列表.
+				AppConnect.getInstance(FolderListActivity.this).showMore(FolderListActivity.this);
 			}
 		});
 		
@@ -528,10 +552,10 @@ public class FolderListActivity extends ListActivity implements UpdatePointsNoti
 	private void showMyDialog(int requirePoint) {
 		new AlertDialog.Builder(FolderListActivity.this)
 				.setIcon(R.drawable.happy2)
-				.setTitle("提示,当前积分：" + currentPointTotal)
+				.setTitle("当前积分：" + currentPointTotal)
 				.setMessage(
-						"只要积分满足" + requirePoint + "，本关卡就可以永久使用！！ 您当前的积分不足" + requirePoint
-								+ "，无法使用。\n【免费获得积分方法】：请点击确认键进入推荐下载列表 , 下载并安装软件获得相应积分。")
+						"【温馨提示:】只要积分满足" + requirePoint + "，本关卡就可以永久使用！！ 您当前的积分不足" + requirePoint
+								+ "，无法使用。\n【免费获得积分方法:】请点击确认键进入推荐下载列表 , 下载并安装软件获得相应积分。")
 				.setPositiveButton("确认", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialoginterface, int i) {
 						// 显示推荐安装程序（Offer）.
