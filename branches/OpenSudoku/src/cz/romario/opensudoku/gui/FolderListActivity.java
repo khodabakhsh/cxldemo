@@ -27,23 +27,27 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
 import android.widget.SimpleCursorAdapter.ViewBinder;
+import android.widget.TextView;
+
+import com.waps.AppConnect;
+import com.waps.UpdatePointsNotifier;
+
 import cz.romario.opensudoku.R;
 import cz.romario.opensudoku.db.FolderColumns;
 import cz.romario.opensudoku.db.SudokuDatabase;
@@ -57,7 +61,7 @@ import cz.romario.opensudoku.utils.AndroidUtils;
  * @author romario
  *
  */
-public class FolderListActivity extends ListActivity {
+public class FolderListActivity extends ListActivity implements UpdatePointsNotifier{
     
 	public static final int MENU_ITEM_ADD = Menu.FIRST;
     public static final int MENU_ITEM_RENAME = Menu.FIRST + 1;
@@ -88,6 +92,13 @@ public class FolderListActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+
+		// 连接服务器. 应用启动时调用(为了统计准确性，此句必须填写).
+		AppConnect.getInstance(this);
+		pointsTextView = (TextView) findViewById(R.id.PointsTextView);
+		AppConnect.getInstance(FolderListActivity.this).getPoints(
+				FolderListActivity.this);
+		
 		setContentView(R.layout.folder_list);
 		View getMorePuzzles = (View)findViewById(R.id.get_more_puzzles);
 		
@@ -129,6 +140,7 @@ public class FolderListActivity extends ListActivity {
     
     @Override
     protected void onDestroy() {
+    	AppConnect.getInstance(this).finalize();
     	super.onDestroy();
     	mDatabase.close();
     	mFolderListBinder.destroy();
@@ -353,12 +365,49 @@ public class FolderListActivity extends ListActivity {
         }
         return super.onOptionsItemSelected(item);
 	}
-	
+	/**
+	 * item的onclick事件
+	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		Intent i = new Intent(this, SudokuListActivity.class);
-		i.putExtra(SudokuListActivity.EXTRA_FOLDER_ID, id);
-		startActivity(i);
+		if (id == 1 && !Has_Easy_Require_Point) {
+			// 先获取当前积分
+			AppConnect.getInstance(FolderListActivity.this).getPoints(
+					FolderListActivity.this);
+			if (currentPointTotal < Easy_Require_Point) {
+				showMyDialog(Easy_Require_Point);
+			} else {
+				Intent i = new Intent(this, SudokuListActivity.class);
+				i.putExtra(SudokuListActivity.EXTRA_FOLDER_ID, id);
+				startActivity(i);
+			}
+		} else if (id == 2 && !Has_Medium_Require_Point) {
+			// 先获取当前积分
+			AppConnect.getInstance(FolderListActivity.this).getPoints(
+					FolderListActivity.this);
+			if (currentPointTotal < Medium_Require_Point) {
+				showMyDialog(Medium_Require_Point);
+			} else {
+				Intent i = new Intent(this, SudokuListActivity.class);
+				i.putExtra(SudokuListActivity.EXTRA_FOLDER_ID, id);
+				startActivity(i);
+			}
+		} else if (id == 3 && !Has_Hard_Require_Point) {
+			// 先获取当前积分
+			AppConnect.getInstance(FolderListActivity.this).getPoints(
+					FolderListActivity.this);
+			if (currentPointTotal < Hard_Require_Point) {
+				showMyDialog(Hard_Require_Point);
+			} else {
+				Intent i = new Intent(this, SudokuListActivity.class);
+				i.putExtra(SudokuListActivity.EXTRA_FOLDER_ID, id);
+				startActivity(i);
+			}
+		} else {
+			Intent i = new Intent(this, SudokuListActivity.class);
+			i.putExtra(SudokuListActivity.EXTRA_FOLDER_ID, id);
+			startActivity(i);
+		}
 	}
 
 	private void updateList() {
@@ -402,6 +451,95 @@ public class FolderListActivity extends ListActivity {
 			mDetailLoader.destroy();
 		}
 	}
+	TextView pointsTextView;
+	String displayText;
+	boolean update_text = false;
+	int currentPointTotal = 0;//当前积分
+	public static final int Easy_Require_Point = 200;
+	public static final int Medium_Require_Point = 300;
+	public static final int Hard_Require_Point = 400;
+	private static boolean Has_Easy_Require_Point = false;//是否达到积分
+	private static boolean Has_Medium_Require_Point = false;//是否达到积分
+	private static boolean Has_Hard_Require_Point = false;//是否达到积分
+	private static boolean isShowContent = true;//
+
+	final Handler mHandler = new Handler();
 	
+	// 创建一个线程
+	final Runnable mUpdateResults = new Runnable() {
+		public void run() {
+			if (pointsTextView != null) {
+				if (update_text) {
+					pointsTextView.setText(displayText);
+					update_text = false;
+				}
+			}
+		}
+	};
+	
+	@Override
+	protected void onResume() {
+		AppConnect.getInstance(FolderListActivity.this).getPoints(FolderListActivity.this);
+		super.onResume();
+	}
+	/**
+	 * AppConnect.getPoints()方法的实现，必须实现
+	 *
+	 * @param currencyName
+	 *            虚拟货币名称.
+	 * @param pointTotal
+	 *            虚拟货币余额.
+	 */
+	public void getUpdatePoints(String currencyName, int pointTotal) {
+
+		currentPointTotal = pointTotal;
+		if (currentPointTotal >= Easy_Require_Point) {
+			Has_Easy_Require_Point = true;
+		}
+		if (currentPointTotal >= Medium_Require_Point) {
+			Has_Medium_Require_Point = true;
+		}
+		if (currentPointTotal >= Hard_Require_Point) {
+			Has_Hard_Require_Point = true;
+		}
+		update_text = true;
+		displayText = currencyName + ": " + pointTotal;
+		mHandler.post(mUpdateResults);
+	}
+
+	/**
+	 * AppConnect.getPoints() 方法的实现，必须实现
+	 *
+	 * @param error
+	 *            请求失败的错误信息
+	 */
+
+	public void getUpdatePointsFailed(String error) {
+		currentPointTotal = 0;
+		update_text = true;
+		displayText = error;
+		mHandler.post(mUpdateResults);
+	}
+	private void showMyDialog(int requirePoint) {
+		new AlertDialog.Builder(FolderListActivity.this)
+				.setIcon(R.drawable.happy2)
+				.setTitle("提示,当前积分：" + currentPointTotal)
+				.setMessage(
+						"只要积分满足" + requirePoint + "，本关卡就可以永久使用！！ 您当前的积分不足" + requirePoint
+								+ "，无法使用。\n【免费获得积分方法】：请点击确认键进入推荐下载列表 , 下载并安装软件获得相应积分。")
+				.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialoginterface, int i) {
+						// 显示推荐安装程序（Offer）.
+						AppConnect.getInstance(FolderListActivity.this).showOffers(FolderListActivity.this);
+					}
+				}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+					public void onClick(DialogInterface dialog, int which) {
+						isShowContent =false;
+						//						finish();
+					}
+				}).show();
+	}
+
 	
 }
