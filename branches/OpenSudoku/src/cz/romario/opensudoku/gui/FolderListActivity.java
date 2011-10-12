@@ -467,7 +467,6 @@ public class FolderListActivity extends ListActivity implements UpdatePointsNoti
 	private static boolean Has_Easy_Require_Point = false;//是否达到积分
 	private static boolean Has_Medium_Require_Point = false;//是否达到积分
 	private static boolean Has_Hard_Require_Point = false;//是否达到积分
-	private static boolean isShowContent = true;//
 
 	final Handler mHandler = new Handler();
 	
@@ -541,7 +540,6 @@ public class FolderListActivity extends ListActivity implements UpdatePointsNoti
 				}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
 					public void onClick(DialogInterface dialog, int which) {
-						isShowContent =false;
 						//						finish();
 					}
 				}).show();
