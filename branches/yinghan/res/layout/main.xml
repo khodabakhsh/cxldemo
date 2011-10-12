@@ -3,6 +3,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
+	<Button android:id="@+id/OffersButton" android:visibility="visible"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:text="看看大家最近在用神马软件,我也试一试？!" />
+	<TextView android:id="@+id/PointsTextView"
+		android:layout_height="wrap_content" android:layout_width="fill_parent"
+		android:visibility="visible" android:gravity="center" />
+	<!-- <Button android:id="@+id/PointsButton" android:text="查询积分" android:layout_height="wrap_content" 
+		android:layout_width="fill_parent" android:visibility="visible" /> 
+		 <Button 
+		android:id="@+id/awardButton" android:text="奖励积分(10)" android:layout_height="wrap_content" 
+		android:layout_width="fill_parent" android:visibility="visible" /> -->
+	<Button android:id="@+id/OwnsButton" android:text="看看本程序相关的应用"
+		android:layout_height="wrap_content" android:layout_width="fill_parent"
+		android:visibility="visible" />
 	<TableLayout android:orientation="horizontal"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:stretchColumns="0">
@@ -11,7 +25,8 @@
 
 			<!-- 建立一個EditText -->
 			<EditText android:id="@+id/myEditText1"
-				android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="请输入内容" />
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:hint="请输入内容" />
 			<!-- 建立一個Button -->
 			<Button android:id="@+id/myButton01" android:layout_width="fill_parent"
 				android:layout_height="wrap_content" android:text="查询" />
@@ -21,6 +36,5 @@
 	</TableLayout>
 	<!-- 建立一個WebView -->
 	<WebView android:id="@+id/myWebView1" android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-		android:focusable="false" />
+		android:layout_height="wrap_content" android:focusable="false" />
 </LinearLayout>
