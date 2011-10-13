@@ -109,13 +109,13 @@ public class FolderListActivity extends ListActivity implements UpdatePointsNoti
 		LinearLayout container =(LinearLayout)findViewById(R.id.AdLinearLayout);
 		new AdView(this,container).DisplayAd(20);//每20秒轮换一次广告；最少为20
 
-				Button awardBurron = (Button) findViewById(R.id.awardButton);
-				awardBurron.setOnClickListener(new Button.OnClickListener() {
-					public void onClick(View arg0) {
-						// 奖励虚拟货币
-						AppConnect.getInstance(FolderListActivity.this).awardPoints(10, FolderListActivity.this);
-					}
-				});
+//				Button awardBurron = (Button) findViewById(R.id.awardButton);
+//				awardBurron.setOnClickListener(new Button.OnClickListener() {
+//					public void onClick(View arg0) {
+//						// 奖励虚拟货币
+//						AppConnect.getInstance(FolderListActivity.this).awardPoints(10, FolderListActivity.this);
+//					}
+//				});
 		
 		setDefaultKeyMode(DEFAULT_KEYS_SHORTCUT);
 		// Inform the list we provide context menus for items
@@ -157,8 +157,8 @@ public class FolderListActivity extends ListActivity implements UpdatePointsNoti
         setListAdapter(adapter);
         
         // show changelog on first run
-        Changelog changelog = new Changelog(this);
-        changelog.showOnFirstRun();
+//        Changelog changelog = new Changelog(this);
+//        changelog.showOnFirstRun();
 	}
     
     @Override
