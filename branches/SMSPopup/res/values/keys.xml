@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<string name="empty"></string>
+ <string name="OffersButton_key">OffersButton</string>
+  <string name="OwnsButton_key">OwnsButton</string>
+   <string name="PointsTextView_key">PointsTextView</string>
+   
    <string name="pref_other_key">other</string>
    <string name="pref_enabled_key">enabled</string>
    <string name="pref_about_key">about</string>

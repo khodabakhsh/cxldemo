@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.TextView.OnEditorActionListener;
+import com.cxl.smspopup.R;
 
 public class ConfigPresetMessagesActivity extends ListActivity implements OnEditorActionListener {
   private SmsPopupDbAdapter mDbAdapter;

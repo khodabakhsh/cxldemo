@@ -21,6 +21,7 @@ import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
+import com.cxl.smspopup.R;
 
 /*
  * This class handles the Notifications (sounds/vibrate/LED)

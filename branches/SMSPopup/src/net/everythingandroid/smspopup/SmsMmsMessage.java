@@ -9,6 +9,7 @@ import android.telephony.PhoneNumberUtils;
 import android.telephony.gsm.SmsMessage;
 import android.telephony.gsm.SmsMessage.MessageClass;
 import android.text.format.DateUtils;
+import com.cxl.smspopup.R;
 
 public class SmsMmsMessage {
   // Private EXTRAS strings

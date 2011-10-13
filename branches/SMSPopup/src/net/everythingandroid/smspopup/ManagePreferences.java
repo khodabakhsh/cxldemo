@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.preference.PreferenceManager;
+import com.cxl.smspopup.R;
 
 public class ManagePreferences {
   private String contactId;

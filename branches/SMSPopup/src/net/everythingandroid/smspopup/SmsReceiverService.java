@@ -25,6 +25,7 @@ import android.telephony.gsm.SmsManager;
 import android.telephony.gsm.SmsMessage;
 import android.telephony.gsm.SmsMessage.MessageClass;
 import android.widget.Toast;
+import com.cxl.smspopup.R;
 
 public class SmsReceiverService extends Service {
   private static final String ACTION_SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";

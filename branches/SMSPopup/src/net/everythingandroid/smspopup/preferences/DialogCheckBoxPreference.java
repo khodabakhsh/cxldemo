@@ -1,7 +1,7 @@
 package net.everythingandroid.smspopup.preferences;
 
 import net.everythingandroid.smspopup.ManageNotification;
-import net.everythingandroid.smspopup.R;
+import com.cxl.smspopup.R;
 import net.everythingandroid.smspopup.ReminderReceiver;
 import android.app.AlertDialog;
 import android.content.Context;

@@ -29,6 +29,7 @@ import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.telephony.gsm.SmsManager;
+import com.cxl.smspopup.R;
 
 public class SmsMessageSender {
   private final Context mContext;

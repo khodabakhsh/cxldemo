@@ -61,6 +61,7 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
+import com.cxl.smspopup.R;
 import com.google.tts.TTS;
 import com.google.tts.TTS.InitListener;
 import com.google.tts.TTSVersionAlert;

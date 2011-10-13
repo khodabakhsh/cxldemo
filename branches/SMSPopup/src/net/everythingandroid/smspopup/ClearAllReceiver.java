@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import com.cxl.smspopup.R;
 
 /*
  * This class provides an easy way to clear held WakeLocks and re-enable the

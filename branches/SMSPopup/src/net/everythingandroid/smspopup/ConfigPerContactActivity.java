@@ -18,6 +18,7 @@ import android.preference.RingtonePreference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.cxl.smspopup.R;
 
 public class ConfigPerContactActivity extends PreferenceActivity {
   private long contactId = 0;

@@ -2,25 +2,25 @@ package net.everythingandroid.smspopup;
 
 import net.everythingandroid.smspopup.preferences.AppEnabledCheckBoxPreference;
 import net.everythingandroid.smspopup.preferences.ButtonListPreference;
-import net.everythingandroid.smspopup.preferences.DialogPreference;
-import net.everythingandroid.smspopup.preferences.EmailDialogPreference;
 import net.everythingandroid.smspopup.preferences.QuickReplyCheckBoxPreference;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.Preference.OnPreferenceClickListener;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,7 +29,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class SmsPopupConfigActivity extends PreferenceActivity {
+import com.cxl.smspopup.R;
+import com.waps.AppConnect;
+import com.waps.UpdatePointsNotifier;
+
+public class SmsPopupConfigActivity extends PreferenceActivity implements UpdatePointsNotifier{
   private static final int DIALOG_DONATE = Menu.FIRST;
   private Preference donateDialogPref = null;
   private QuickReplyCheckBoxPreference quickReplyPref;
@@ -37,10 +41,167 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
   private ButtonListPreference button2;
   private ButtonListPreference button3;
 
+  Preference pointsTextView;
+  Preference offersButton;
+  Preference  ownsButton;
+	String displayText;
+	boolean update_text = false;
+	int currentPointTotal = 0;//当前积分
+	public static final int Pref_Additional_Require_Point = 80;
+	public static final int QuickMessage_Require_Point = 180;
+	private static boolean Has_Pref_Additional_Point = false;//是否达到积分
+	private static boolean Has_QuickMessage_Require_Point = false;//是否达到积分
+	
+	 PreferenceScreen prefAdditional;
+	 PreferenceScreen quickmessages;
+
+	final Handler mHandler = new Handler();
+	
+    @Override
+    protected void onDestroy() {
+    	AppConnect.getInstance(this).finalize();
+    	super.onDestroy();
+    }
+	// 创建一个线程
+	final Runnable mUpdateResults = new Runnable() {
+		public void run() {
+			if (pointsTextView != null) {
+				if (update_text) {
+//					pointsTextView.setText(displayText);
+					pointsTextView.setTitle(displayText);
+					update_text = false;
+				}
+			}
+		}
+	};
+  /**
+	 * AppConnect.getPoints()方法的实现，必须实现
+	 *
+	 * @param currencyName
+	 *            虚拟货币名称.
+	 * @param pointTotal
+	 *            虚拟货币余额.
+	 */
+	public void getUpdatePoints(String currencyName, int pointTotal) {
+		currentPointTotal = pointTotal;
+		if (currentPointTotal >= Pref_Additional_Require_Point) {
+//			prefAdditional.setShouldDisableView(false);
+			Has_Pref_Additional_Point = true;
+		}else {
+//			prefAdditional.setShouldDisableView(true);
+		}
+		if (currentPointTotal >= QuickMessage_Require_Point) {
+//			quickmessages.setShouldDisableView(false);
+			Has_QuickMessage_Require_Point = true;
+		}else {
+//			quickmessages.setShouldDisableView(true);
+		}
+		update_text = true;
+		displayText = currencyName + ": " + pointTotal;
+		mHandler.post(mUpdateResults);
+	}
+
+	/**
+	 * AppConnect.getPoints() 方法的实现，必须实现
+	 *
+	 * @param error
+	 *            请求失败的错误信息
+	 */
+
+	public void getUpdatePointsFailed(String error) {
+		currentPointTotal = 0;
+		update_text = true;
+		displayText = error;
+		mHandler.post(mUpdateResults);
+	}
+	private void showMyDialog(int requirePoint) {
+		new AlertDialog.Builder(SmsPopupConfigActivity.this)
+				.setIcon(R.drawable.happy2)
+				.setTitle("当前积分：" + currentPointTotal)
+				.setMessage(
+						"【温馨提示:】只要积分满足" + requirePoint + "，本设置就可以永久使用！！ 您当前的积分不足" + requirePoint
+								+ "，无法使用。\n【免费获得积分方法:】请点击确认键进入推荐下载列表 , 下载并安装软件获得相应积分。")
+				.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialoginterface, int i) {
+						// 显示推荐安装程序（Offer）.
+						AppConnect.getInstance(SmsPopupConfigActivity.this).showOffers(SmsPopupConfigActivity.this);
+					}
+				}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+					public void onClick(DialogInterface dialog, int which) {
+						//						finish();
+					}
+				}).show();
+	}
+	
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     addPreferencesFromResource(R.xml.preferences);
+    
+	// 连接服务器. 应用启动时调用(为了统计准确性，此句必须填写).
+	AppConnect.getInstance(this);
+	pointsTextView = findPreference(getString(R.string.PointsTextView_key));
+	offersButton = findPreference(getString(R.string.OffersButton_key));
+	offersButton.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+		public boolean onPreferenceClick(Preference arg0) {
+			// 显示推荐安装程序（Offer）.
+			AppConnect.getInstance(SmsPopupConfigActivity.this).showOffers(SmsPopupConfigActivity.this);
+			return false;
+		}
+	});
+	ownsButton = findPreference(getString(R.string.OwnsButton_key));
+	ownsButton.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+		public boolean onPreferenceClick(Preference arg0) {
+			// 显示自家应用列表.
+			AppConnect.getInstance(SmsPopupConfigActivity.this).showMore(SmsPopupConfigActivity.this);
+			return false;
+		}
+	});
+	AppConnect.getInstance(SmsPopupConfigActivity.this).getPoints(
+			SmsPopupConfigActivity.this);
+	//更多设置
+	    prefAdditional =
+		      (PreferenceScreen) findPreference("pref_additional_key");
+	  prefAdditional.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+		public boolean onPreferenceClick(Preference preference) {
+			if (!Has_Pref_Additional_Point) {
+				// 先获取当前积分
+				AppConnect.getInstance(SmsPopupConfigActivity.this).getPoints(
+						SmsPopupConfigActivity.this);
+				if (currentPointTotal < Pref_Additional_Require_Point) {
+					showMyDialog(Pref_Additional_Require_Point);
+					return false;
+				} else {
+					return true;
+				}
+			}
+			return true;
+		}
+	});
+		//预设信息
+	     quickmessages =
+		      (PreferenceScreen) findPreference(getString(R.string.quickmessages_key));
+	  quickmessages.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+		public boolean onPreferenceClick(Preference preference) {
+			if (!Has_QuickMessage_Require_Point) {
+				
+				// 先获取当前积分
+				AppConnect.getInstance(SmsPopupConfigActivity.this).getPoints(
+						SmsPopupConfigActivity.this);
+				if (currentPointTotal < QuickMessage_Require_Point) {
+					showMyDialog(QuickMessage_Require_Point);
+					return false;
+				} else {
+					return true;
+				}
+			}
+			return true;
+		}
+	});
+	 
+	
+
 
     //Try and find app version number
     String version;
@@ -54,16 +215,16 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
       version = "";
     }
 
-    // Set the version number in the about dialog preference
-    final DialogPreference aboutPref =
-      (DialogPreference) findPreference(getString(R.string.pref_about_key));
-    aboutPref.setDialogTitle(getString(R.string.app_name) + version);
-    aboutPref.setDialogLayoutResource(R.layout.about);
-
-    // Set the version number in the email preference dialog
-    final EmailDialogPreference emailPref =
-      (EmailDialogPreference) findPreference(getString(R.string.pref_sendemail_key));
-    emailPref.setVersion(version);
+//    // Set the version number in the about dialog preference
+//    final DialogPreference aboutPref =
+//      (DialogPreference) findPreference(getString(R.string.pref_about_key));
+//    aboutPref.setDialogTitle(getString(R.string.app_name) + version);
+//    aboutPref.setDialogLayoutResource(R.layout.about);
+//
+//    // Set the version number in the email preference dialog
+//    final EmailDialogPreference emailPref =
+//      (EmailDialogPreference) findPreference(getString(R.string.pref_sendemail_key));
+//    emailPref.setVersion(version);
 
     // Set intent for contact notification option
     final PreferenceScreen contactsPS =
@@ -192,15 +353,15 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     });
 
     // Donate dialog preference
-    donateDialogPref = findPreference(getString(R.string.pref_donate_key));
-    if (donateDialogPref != null) {
-      donateDialogPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-        public boolean onPreferenceClick(Preference preference) {
-          SmsPopupConfigActivity.this.showDialog(DIALOG_DONATE);
-          return true;
-        }
-      });
-    }
+//    donateDialogPref = findPreference(getString(R.string.pref_donate_key));
+//    if (donateDialogPref != null) {
+//      donateDialogPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+//        public boolean onPreferenceClick(Preference preference) {
+//          SmsPopupConfigActivity.this.showDialog(DIALOG_DONATE);
+//          return true;
+//        }
+//      });
+//    }
 
     // Split long messages preference (for some CDMA carriers like Verizon)
     CheckBoxPreference splitLongMessagesPref =
@@ -232,6 +393,7 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
 
   @Override
   protected void onResume() {
+	  AppConnect.getInstance(SmsPopupConfigActivity.this).getPoints(SmsPopupConfigActivity.this);
     super.onResume();
 
     SharedPreferences myPrefs = PreferenceManager.getDefaultSharedPreferences(this);

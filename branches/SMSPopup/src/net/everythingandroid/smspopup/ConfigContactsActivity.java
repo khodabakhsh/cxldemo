@@ -32,6 +32,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
+import com.cxl.smspopup.R;
 
 public class ConfigContactsActivity extends ListActivity {
   private SmsPopupDbAdapter mDbAdapter;

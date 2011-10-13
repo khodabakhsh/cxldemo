@@ -4,6 +4,7 @@ import android.app.KeyguardManager;
 import android.app.KeyguardManager.KeyguardLock;
 import android.app.KeyguardManager.OnKeyguardExitResult;
 import android.content.Context;
+import com.cxl.smspopup.R;
 
 public class ManageKeyguard {
   private static KeyguardManager myKM = null;

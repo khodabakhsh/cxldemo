@@ -14,6 +14,7 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.os.Process;
 import android.preference.PreferenceManager;
+import com.cxl.smspopup.R;
 
 public class ReminderReceiverService extends Service {
   public static final String ACTION_REMIND = "net.everythingandroid.smspopup.ACTION_REMIND";

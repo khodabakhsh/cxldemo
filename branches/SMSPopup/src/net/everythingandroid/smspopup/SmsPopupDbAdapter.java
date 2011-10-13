@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.TextUtils;
 import android.widget.Toast;
+import com.cxl.smspopup.R;
 
 public class SmsPopupDbAdapter {
 

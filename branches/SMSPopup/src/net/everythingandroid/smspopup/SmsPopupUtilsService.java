@@ -10,6 +10,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.PowerManager;
 import android.os.Process;
+import com.cxl.smspopup.R;
 
 public class SmsPopupUtilsService extends Service {
   public static final String ACTION_MARK_THREAD_READ =

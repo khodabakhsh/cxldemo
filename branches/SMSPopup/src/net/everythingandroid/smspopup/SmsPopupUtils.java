@@ -33,6 +33,7 @@ import android.preference.PreferenceManager;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.gsm.SmsMessage;
 import android.text.TextUtils;
+import com.cxl.smspopup.R;
 
 public class SmsPopupUtils {
   //Content URIs for SMS app, these may change in future SDK

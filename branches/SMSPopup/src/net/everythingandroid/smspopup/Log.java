@@ -1,5 +1,7 @@
 package net.everythingandroid.smspopup;
 
+import com.cxl.smspopup.R;
+
 public class Log {
   public final static String LOGTAG = "SMSPopup";
 

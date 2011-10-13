@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
+import com.cxl.smspopup.R;
 
 
 public class ManageWakeLock {
