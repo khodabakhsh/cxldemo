@@ -171,12 +171,12 @@ public class SmsPopupConfigActivity extends PreferenceActivity implements Update
 						SmsPopupConfigActivity.this);
 				if (currentPointTotal < Pref_Additional_Require_Point) {
 					showMyDialog(Pref_Additional_Require_Point);
-					return false;
-				} else {
 					return true;
+				} else {
+					return false;
 				}
 			}
-			return true;
+			return false;
 		}
 	});
 		//预设信息
@@ -191,12 +191,12 @@ public class SmsPopupConfigActivity extends PreferenceActivity implements Update
 						SmsPopupConfigActivity.this);
 				if (currentPointTotal < QuickMessage_Require_Point) {
 					showMyDialog(QuickMessage_Require_Point);
-					return false;
-				} else {
 					return true;
+				} else {
+					return false;
 				}
 			}
-			return true;
+			return false;
 		}
 	});
 	 
