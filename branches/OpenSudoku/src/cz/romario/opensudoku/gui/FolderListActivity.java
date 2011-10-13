@@ -485,7 +485,7 @@ public class FolderListActivity extends ListActivity implements UpdatePointsNoti
 	String displayText;
 	boolean update_text = false;
 	int currentPointTotal = 0;//当前积分
-	public static final int Easy_Require_Point = 200;
+	public static final int Easy_Require_Point = 180;
 	public static final int Medium_Require_Point = 300;
 	public static final int Hard_Require_Point = 400;
 	private static boolean Has_Easy_Require_Point = false;//是否达到积分
