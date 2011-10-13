@@ -38,7 +38,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
-import cz.romario.opensudoku.R;
+import com.cxl.opensudoku.R;
 import cz.romario.opensudoku.db.SudokuDatabase;
 import cz.romario.opensudoku.game.SudokuGame;
 import cz.romario.opensudoku.game.SudokuGame.OnPuzzleSolvedListener;

@@ -43,7 +43,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.SimpleAdapter.ViewBinder;
-import cz.romario.opensudoku.R;
+import com.cxl.opensudoku.R;
 import cz.romario.opensudoku.game.FolderInfo;
 import cz.romario.opensudoku.gui.FolderDetailLoader.FolderDetailCallback;
 
