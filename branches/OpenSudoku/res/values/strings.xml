@@ -147,9 +147,9 @@
 	<string name="puzzles_have_been_exported">Puzzles have been exported to %s.</string>
 	<string name="file_exists">File already exists, do you want to overwrite it?</string>
 	<!-- localization of default folder names -->
-	<string name="difficulty_hard">Hard</string>
-    <string name="difficulty_medium">Medium</string>
-    <string name="difficulty_easy">Easy</string>
+	<string name="difficulty_hard">困难</string>
+    <string name="difficulty_medium">普通</string>
+    <string name="difficulty_easy">简单</string>
     
 	<!-- Strings added/changed in 1.1.0 -->
     <string name="generate_sudoku">Generate new game</string>

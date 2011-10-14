@@ -106,8 +106,8 @@ public class FolderListActivity extends ListActivity implements UpdatePointsNoti
 		AppConnect.getInstance(FolderListActivity.this).getPoints(
 				FolderListActivity.this);
 		
-		LinearLayout container =(LinearLayout)findViewById(R.id.AdLinearLayout);
-		new AdView(this,container).DisplayAd(20);//每20秒轮换一次广告；最少为20
+//		LinearLayout container =(LinearLayout)findViewById(R.id.AdLinearLayout);
+//		new AdView(this,container).DisplayAd(20);//每20秒轮换一次广告；最少为20
 
 //				Button awardBurron = (Button) findViewById(R.id.awardButton);
 //				awardBurron.setOnClickListener(new Button.OnClickListener() {
@@ -400,17 +400,10 @@ public class FolderListActivity extends ListActivity implements UpdatePointsNoti
 	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		if (id == 1 && !Has_Easy_Require_Point) {
-			// 先获取当前积分
-			AppConnect.getInstance(FolderListActivity.this).getPoints(
-					FolderListActivity.this);
-			if (currentPointTotal < Easy_Require_Point) {
-				showMyDialog(Easy_Require_Point);
-			} else {
+		if (id == 1 ) {//easy的不做限制
 				Intent i = new Intent(this, SudokuListActivity.class);
 				i.putExtra(SudokuListActivity.EXTRA_FOLDER_ID, id);
 				startActivity(i);
-			}
 		} else if (id == 2 && !Has_Medium_Require_Point) {
 			// 先获取当前积分
 			AppConnect.getInstance(FolderListActivity.this).getPoints(
@@ -486,8 +479,8 @@ public class FolderListActivity extends ListActivity implements UpdatePointsNoti
 	boolean update_text = false;
 	int currentPointTotal = 0;//当前积分
 	public static final int Easy_Require_Point = 180;
-	public static final int Medium_Require_Point = 300;
-	public static final int Hard_Require_Point = 400;
+	public static final int Medium_Require_Point = 150;
+	public static final int Hard_Require_Point = 200;
 	private static boolean Has_Easy_Require_Point = false;//是否达到积分
 	private static boolean Has_Medium_Require_Point = false;//是否达到积分
 	private static boolean Has_Hard_Require_Point = false;//是否达到积分
@@ -550,12 +543,13 @@ public class FolderListActivity extends ListActivity implements UpdatePointsNoti
 		mHandler.post(mUpdateResults);
 	}
 	private void showMyDialog(int requirePoint) {
+		String setting = requirePoint==Medium_Require_Point?"普通":"困难";
 		new AlertDialog.Builder(FolderListActivity.this)
 				.setIcon(R.drawable.happy2)
 				.setTitle("当前积分：" + currentPointTotal)
 				.setMessage(
-						"【温馨提示:】只要积分满足" + requirePoint + "，本关卡就可以永久使用！！ 您当前的积分不足" + requirePoint
-								+ "，无法使用。\n【免费获得积分方法:】请点击确认键进入推荐下载列表 , 下载并安装软件获得相应积分。")
+						"【温馨提示:】只要积分满足" + requirePoint + "，【"+setting+"】关卡就可以永久使用！！ 您当前的积分不足" + requirePoint
+								+ "，无法使用【"+setting+"】关卡。\n【免费获得积分方法:】请点击确认键进入推荐下载列表 , 下载并安装软件获得相应积分。")
 				.setPositiveButton("确认", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialoginterface, int i) {
 						// 显示推荐安装程序（Offer）.
