@@ -2,30 +2,20 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-<PreferenceCategory android:key="@string/empty"
-		android:title="基本信息">
+	<PreferenceCategory android:key="@string/empty"
+		android:title="扩展信息">
 		<Preference android:key="@string/OffersButton_key"
-			android:title="看看大家最近在用神马软件,我也试一试？!\n下载应用可获得积分哦 " />
-			
-					<Preference android:key="@string/OwnsButton_key"
-			android:title="看看本程序相关的免费应用?!" />
-			
-					<Preference android:key="@string/PointsTextView_key"
-			android:title="" />
-	
-	</PreferenceCategory>
-	
-	<PreferenceCategory android:title="@string/pref_config_title">
-		<!-- <Button android:key="@string/OffersButton" android:visibility="visible" 
-			android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="看看大家最近在用神马软件,我也试一试？!\n下载应用可获得积分哦 
-			, O(∩_∩)O" /> <Button android:key="@string/OwnsButton" android:text="看看本程序相关的免费应用?! 
-			(*^__^*)" android:layout_height="wrap_content" android:layout_width="fill_parent" 
-			android:visibility="visible" /> <TextView android:key="@string/PointsTextView" 
-			android:layout_height="wrap_content" android:layout_width="fill_parent" android:visibility="visible" 
-			android:gravity="center" /> -->
-	
-	
+			android:title="下载应用获得积分，更多功能..." />
 
+		<Preference android:key="@string/OwnsButton_key"
+			android:title="看看本程序相关的免费应用?!" />
+
+		<Preference android:key="@string/PointsTextView_key"
+			android:title="" />
+
+	</PreferenceCategory>
+
+	<PreferenceCategory android:title="@string/pref_config_title">
 		<net.everythingandroid.smspopup.preferences.AppEnabledCheckBoxPreference
 			android:key="@string/pref_enabled_key" android:title="@string/pref_enabled_title"
 			android:summaryOn="@string/pref_enabled_summaryon"
@@ -257,28 +247,17 @@
 			android:dependency="@string/pref_enabled_key">
 		</PreferenceScreen>
 	</PreferenceCategory>
-	<!-- 
-	<PreferenceCategory android:key="@string/pref_other_key"
-		android:title="@string/pref_other_title">
-		<Preference android:key="@string/pref_donate_key"
-			android:title="@string/pref_donate_title" />
-		<PreferenceScreen android:key="@string/pref_faq_key"
-			android:title="@string/pref_faq_title" android:summary="@string/pref_faq_summary">
-			<intent android:action="android.intent.action.VIEW"
-				android:data="@string/pref_faq_url" />
-		</PreferenceScreen>
-		<net.everythingandroid.smspopup.preferences.DialogPreference
-			android:key="@string/pref_about_key" android:dialogIcon="@drawable/smspopup_icon"
-			android:title="@string/pref_about_title" android:dialogTitle="@string/app_name"
-			android:summary="@string/pref_about_summary"
-			android:negativeButtonText="@null" />
-		<net.everythingandroid.smspopup.preferences.EmailDialogPreference
-			android:key="@string/pref_sendemail_key" android:title="@string/pref_sendemail_title"
-			android:summary="@string/pref_sendemail_summary" android:dialogIcon="@drawable/smspopup_icon"
-			android:dialogTitle="@string/pref_sendemail_title"
-			android:dialogMessage="@string/pref_sendemail_dialog"
-			android:positiveButtonText="@string/pref_sendemail_buttonok"
-			android:negativeButtonText="@string/pref_sendemail_buttoncancel" />
-	</PreferenceCategory>
-	 -->
+	<!-- <PreferenceCategory android:key="@string/pref_other_key" android:title="@string/pref_other_title"> 
+		<Preference android:key="@string/pref_donate_key" android:title="@string/pref_donate_title" 
+		/> <PreferenceScreen android:key="@string/pref_faq_key" android:title="@string/pref_faq_title" 
+		android:summary="@string/pref_faq_summary"> <intent android:action="android.intent.action.VIEW" 
+		android:data="@string/pref_faq_url" /> </PreferenceScreen> <net.everythingandroid.smspopup.preferences.DialogPreference 
+		android:key="@string/pref_about_key" android:dialogIcon="@drawable/smspopup_icon" 
+		android:title="@string/pref_about_title" android:dialogTitle="@string/app_name" 
+		android:summary="@string/pref_about_summary" android:negativeButtonText="@null" 
+		/> <net.everythingandroid.smspopup.preferences.EmailDialogPreference android:key="@string/pref_sendemail_key" 
+		android:title="@string/pref_sendemail_title" android:summary="@string/pref_sendemail_summary" 
+		android:dialogIcon="@drawable/smspopup_icon" android:dialogTitle="@string/pref_sendemail_title" 
+		android:dialogMessage="@string/pref_sendemail_dialog" android:positiveButtonText="@string/pref_sendemail_buttonok" 
+		android:negativeButtonText="@string/pref_sendemail_buttoncancel" /> </PreferenceCategory> -->
 </PreferenceScreen>

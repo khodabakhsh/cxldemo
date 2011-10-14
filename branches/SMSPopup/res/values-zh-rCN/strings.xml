@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-  <string name="app_name">SMS Popup</string>
+  <string name="app_name">闪电短信</string>
   <string name="new_text_at">新短信：%s</string>
   <string name="unread_text_waiting">%d 其他未读短信</string>
   <string name="mms_subject">主题:</string>
@@ -22,7 +22,7 @@
   <string name="button_delete_noconfirm">删除 (没有确认框)</string>
   <string name="button_quickreply">快速回复</string>
   <string name="button_disabled">禁用</string>
-  <string name="pref_config_title">SMS Popup设置</string>
+  <string name="pref_config_title">程序设置</string>
   <string name="pref_other_title">其他</string>
   <string name="pref_enabled_title">启用SMS Popup</string>
   <string name="pref_enabled_summaryon">SMS Popup已启用</string>

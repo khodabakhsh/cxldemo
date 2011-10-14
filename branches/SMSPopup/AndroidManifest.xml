@@ -3,7 +3,7 @@
 	package="com.cxl.smspopup" android:versionName="1.1.0"
 	android:versionCode="116">
 	<uses-sdk android:minSdkVersion="3" android:targetSdkVersion="4" />
-	<application android:label="@string/app_name" android:icon="@drawable/smspopup_icon">
+	<application android:label="@string/app_name" android:icon="@drawable/smspopup">
 		<activity android:name="net.everythingandroid.smspopup.SmsPopupConfigActivity"
 			android:label="@string/app_name" android:launchMode="singleTask"
 			android:configChanges="keyboardHidden|orientation">
