@@ -414,8 +414,8 @@ public class SmsPopupConfigActivity extends PreferenceActivity implements Update
 			prefAdditional.setEnabled(false);
 			showMyDialog(Pref_Additional_Require_Point);
 		}else if (currentPointTotal < QuickMessage_Require_Point) {
-			quickmessages.setEnabled(false);
-			showMyDialog(QuickMessage_Require_Point);
+//			quickmessages.setEnabled(false);
+//			showMyDialog(QuickMessage_Require_Point);
 		}
 			
 	}
