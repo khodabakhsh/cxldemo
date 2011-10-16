@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="hello">Hello World, HitMe!</string>
-    <string name="app_name">打得到我吗？</string>
-    <string name="start">开始</string>
-    <string name="end">结束</string>
-</resources>
