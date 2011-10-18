@@ -2,23 +2,44 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
-	<TextView android:id="@+id/currentLocation"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+	<TableLayout android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:stretchColumns="0">
+		<TableRow android:layout_width="fill_parent"
+			android:layout_height="wrap_content">
+			<Button android:id="@+id/OffersButton" android:visibility="visible"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:text="下载应用获得积分!" />
+			<Button android:id="@+id/OwnsButton" android:text="看看其他免费应用！"
+				android:layout_height="wrap_content" android:layout_width="fill_parent"
+				android:visibility="visible" />
+		</TableRow>
+	</TableLayout>
+
+
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:orientation="horizontal" android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
 
-		<TextView android:text="在" android:layout_width="wrap_content"
+		<TextView android:text="请选择搜索范围：" android:layout_width="wrap_content"
 			android:layout_height="wrap_content"></TextView>
 		<Spinner android:id="@+id/bound" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
-		<TextView android:text="米内搜索" android:layout_width="wrap_content"
+		<TextView android:text="米内" android:layout_width="wrap_content"
 			android:layout_height="wrap_content"></TextView>
-		<EditText android:id="@+id/searchkey" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:text="天安门" />
-		<Button android:id="@+id/search" android:text="开始"
-			android:layout_width="fill_parent" android:layout_height="wrap_content" />
 	</LinearLayout>
+	<TableLayout android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:stretchColumns="0">
+		<TableRow android:layout_width="fill_parent"
+			android:layout_height="wrap_content">
+			<EditText android:id="@+id/searchkey" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="" android:hint="请输入内容"  />
+			<Button android:id="@+id/search" android:text="搜索"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_marginLeft="4dip" android:layout_marginRight="3dip" />
+		</TableRow>
+	</TableLayout>
 	<com.baidu.mapapi.MapView android:id="@+id/bmapsView"
 		android:layout_width="fill_parent" android:layout_height="fill_parent"
 		android:clickable="true" />
