@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 public class TVServiceActivity extends TabActivity {
 
 	TextView TVdetails;
+	Button favoriteButton;
 
 	Spinner areaSpinner;
 	Spinner TVstationSpinner;
@@ -91,6 +93,15 @@ public class TVServiceActivity extends TabActivity {
 			}
 		});
 		TVdetails.setText(TVServiceHelper.getTVprogramDetail(((KeyValuePair) TVchannelSpinner.getSelectedItem()).getKey(), ""));
+		
+		favoriteButton = (Button) findViewById(R.id.favoriteButton);
+		favoriteButton.setOnClickListener(new Button.OnClickListener() {
+			
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
 		TabHost mTabHost = getTabHost();
 		mTabHost.addTab(mTabHost.newTabSpec("tab_test1").setIndicator("TAB 1").setContent(R.id.mainPanel));
