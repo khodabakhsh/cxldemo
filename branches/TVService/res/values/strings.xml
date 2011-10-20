@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="hello">Hello World, TVServiceActivity!</string>
+	<string name="app_name">TVService</string>
+	<string name="planet_prompt">Choose a planet</string>
+
+</resources>
