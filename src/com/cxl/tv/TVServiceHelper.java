@@ -19,7 +19,7 @@ public class TVServiceHelper {
 		/**
 		 * 香港
 		 */
-		
+
 		System.out.println("=====================香港=======================");
 		for (String tvStation : helper.getTVstationString("32")) {
 			System.out.println(tvStation);
@@ -29,7 +29,7 @@ public class TVServiceHelper {
 			System.out.println(tvStation);
 		}
 		System.out.println("=====================翡翠台=======================");
-		for (String tvStation : helper.getTVprogramString("537","2011-10-20")) {
+		for (String tvStation : helper.getTVprogramString("537", "2011-10-20")) {
 			System.out.println(tvStation);
 		}
 		/**
@@ -44,7 +44,7 @@ public class TVServiceHelper {
 			System.out.println(tvStation);
 		}
 		System.out.println("=====================广州新闻频道=======================");
-		for (String tvStation : helper.getTVprogramString("337","2011-10-20")) {
+		for (String tvStation : helper.getTVprogramString("337", "2011-10-20")) {
 			System.out.println(tvStation);
 		}
 	}
@@ -165,7 +165,7 @@ public class TVServiceHelper {
 	/**
 	 *[第四步] 通过频道ID获得该频道节目 String()
 	*/
-	public List<String> getTVprogramString(String theTVchannelID,String theDate) {
+	public List<String> getTVprogramString(String theTVchannelID, String theDate) {
 		List<String> TVprograms = new ArrayList<String>();
 		SoapObject soapObject = new SoapObject(targetNameSpace, getTVprogramString);
 		soapObject.addProperty("theTVchannelID ", theTVchannelID);
@@ -192,97 +192,4 @@ public class TVServiceHelper {
 		}
 		return TVprograms;
 	}
-	//
-	//	/**
-	//	* 解析返回的结果
-	//	* @param soapObject
-	//	*/
-	//	protected WeatherBean parserWeather(SoapObject soapObject) {
-	//		WeatherBean bean = new WeatherBean();
-	//
-	//		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-	//
-	//		Map<String, Object> map = new HashMap<String, Object>();
-	//
-	//		//城市名
-	//		bean.setCityName(soapObject.getProperty(1).toString());
-	//		//城市简介
-	//		bean.setCityDescription(soapObject.getProperty(soapObject.getPropertyCount() - 1).toString());
-	//		//天气实况+建议
-	//		bean.setLiveWeather(soapObject.getProperty(10).toString() + "\n" + soapObject.getProperty(11).toString());
-	//
-	//		//其他数据
-	//		//日期，
-	//		String date = soapObject.getProperty(6).toString();
-	//		//---------------------------------------------------
-	//		String weatherToday = "今天：" + date.split(" ")[0];
-	//		weatherToday += "\n天气：" + date.split(" ")[1];
-	//		weatherToday += "\n气温：" + soapObject.getProperty(5).toString();
-	//		weatherToday += "\n风力：" + soapObject.getProperty(7).toString();
-	//		weatherToday += "\n";
-	//
-	//		List<Integer> icons = new ArrayList<Integer>();
-	//
-	//		icons.add(parseIcon(soapObject.getProperty(8).toString()));
-	//		icons.add(parseIcon(soapObject.getProperty(9).toString()));
-	//
-	//		map.put("weatherDay", weatherToday);
-	//		map.put("icons", icons);
-	//		list.add(map);
-	//
-	//		//-------------------------------------------------
-	//		map = new HashMap<String, Object>();
-	//		date = soapObject.getProperty(13).toString();
-	//		String weatherTomorrow = "明天：" + date.split(" ")[0];
-	//		weatherTomorrow += "\n天气：" + date.split(" ")[1];
-	//		weatherTomorrow += "\n气温：" + soapObject.getProperty(12).toString();
-	//		weatherTomorrow += "\n风力：" + soapObject.getProperty(14).toString();
-	//		weatherTomorrow += "\n";
-	//
-	//		icons = new ArrayList<Integer>();
-	//
-	//		icons.add(parseIcon(soapObject.getProperty(15).toString()));
-	//		icons.add(parseIcon(soapObject.getProperty(16).toString()));
-	//
-	//		map.put("weatherDay", weatherTomorrow);
-	//		map.put("icons", icons);
-	//		list.add(map);
-	//		//--------------------------------------------------------------
-	//		map = new HashMap<String, Object>();
-	//
-	//		date = soapObject.getProperty(18).toString();
-	//		String weatherAfterTomorrow = "后天：" + date.split(" ")[0];
-	//		weatherAfterTomorrow += "\n天气：" + date.split(" ")[1];
-	//		weatherAfterTomorrow += "\n气温：" + soapObject.getProperty(17).toString();
-	//		weatherAfterTomorrow += "\n风力：" + soapObject.getProperty(19).toString();
-	//		weatherAfterTomorrow += "\n";
-	//
-	//		icons = new ArrayList<Integer>();
-	//		icons.add(parseIcon(soapObject.getProperty(20).toString()));
-	//		icons.add(parseIcon(soapObject.getProperty(21).toString()));
-	//
-	//		map.put("weatherDay", weatherAfterTomorrow);
-	//		map.put("icons", icons);
-	//		list.add(map);
-	//		//--------------------------------------------------------------
-	//
-	//		bean.setList(list);
-	//		return bean;
-	//	}
-	//
-	//	//解析图标字符串
-	//	private int parseIcon(String data) {
-	//		// 0.gif，返回名称0,
-	//		int resID = 32;
-	//		String result = data.substring(0, data.length() - 4).trim();
-	//		// String []icon=data.split(".");
-	//		// String result=icon[0].trim();
-	//		// Log.e("this is the icon", result.trim());
-	//
-	//		if (!result.equals("nothing")) {
-	//			resID = Integer.parseInt(result.trim());
-	//		}
-	//		return resID;
-	//		//return ("a_"+data).split(".")[0];
-	//	}
 }
