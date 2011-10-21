@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="hello">Hello World, TVServiceActivity!</string>
-	<string name="app_name">TVService</string>
-	<string name="planet_prompt">Choose a planet</string>
+	<string name="app_name">电视节目预告</string>
+	<string name="planet_prompt">请选择</string>
+	<string name="mainPanel">频道选择</string>
+	<string name="favoritePanel">我的收藏</string>
 
 </resources>
