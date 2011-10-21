@@ -43,7 +43,7 @@ public class TVServiceHelper {
 		for (String tvStation : helper.getTVchannelString("55")) {
 			System.out.println(tvStation);
 		}
-		System.out.println("=====================广州新闻频道=======================");
+		System.out.println("=====================广东新闻频道=======================");
 		for (String tvStation : helper.getTVprogramString("337", "2011-10-20")) {
 			System.out.println(tvStation);
 		}
