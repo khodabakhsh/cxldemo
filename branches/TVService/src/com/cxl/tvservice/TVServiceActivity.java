@@ -232,7 +232,7 @@ public class TVServiceActivity extends TabActivity implements UpdatePointsNotifi
 		favoriteButton = (Button) findViewById(R.id.favoriteButton);
 		favoriteButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				if (!!hasEnoughRequrePoint) {//没达到积分
+				if (!hasEnoughRequrePoint) {//没达到积分
 					showDialog();
 				} else {
 
