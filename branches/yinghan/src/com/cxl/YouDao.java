@@ -92,11 +92,7 @@ public class YouDao extends Activity implements UpdatePointsNotifier {
 		myButton01.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
 				if (!hasEnoughRequrePoint) {//没达到积分
-					//先获取当前积分
-					AppConnect.getInstance(YouDao.this).getPoints(YouDao.this);
-					if (currentPointTotal < requirePoint) {
 						showDialog();
-					}
 				}
 
 				String strURI = (mEditText1.getText().toString());
