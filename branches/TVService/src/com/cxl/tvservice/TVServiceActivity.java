@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,8 +25,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.waps.AppConnect;
+import com.waps.UpdatePointsNotifier;
 
-public class TVServiceActivity extends TabActivity {
+public class TVServiceActivity extends TabActivity implements UpdatePointsNotifier {
 	private static final String My_Favorite = "My_Favorite";//存放格式为：   337@#@广东新闻频道###334@#@广东体育频道
 	private static final String Favorite_Item_Split = "###";
 	private static final String ID_Name_Split = "@#@";
@@ -53,6 +55,92 @@ public class TVServiceActivity extends TabActivity {
 	ArrayAdapter<KeyValuePair> TVstationaAdapter;
 	ArrayAdapter<KeyValuePair> TVchannelAdapter;
 
+	private void showDialog() {
+		new AlertDialog.Builder(TVServiceActivity.this)
+				.setIcon(R.drawable.happy2)
+				.setTitle("当前积分：" + currentPointTotal)
+				.setMessage(
+						"只要积分满足" + requirePoint + "，收藏功能就可以使用！！ 您当前的积分不足" + requirePoint
+								+ "，无法进行收藏。\n【免费获得积分方法】：请点击确认键进入推荐下载列表 , 下载并安装软件获得相应积分，解除收藏功能，定制您喜欢的频道预告！！")
+				.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialoginterface, int i) {
+						// 显示推荐安装程序（Offer）.
+						AppConnect.getInstance(TVServiceActivity.this).showOffers(TVServiceActivity.this);
+					}
+				}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+					public void onClick(DialogInterface dialog, int which) {
+						//						finish();
+					}
+				}).show();
+	}
+
+	TextView pointsTextView;
+	String displayText;
+	boolean update_text = false;
+	int currentPointTotal = 0;//当前积分
+	public static final int requirePoint = 150;//要求积分
+	private static boolean hasEnoughRequrePoint = false;//是否达到积分
+
+	final Handler mHandler = new Handler();
+
+	// 创建一个线程
+	final Runnable mUpdateResults = new Runnable() {
+		public void run() {
+			if (pointsTextView != null) {
+				if (update_text) {
+					pointsTextView.setText(displayText);
+					update_text = false;
+				}
+			}
+		}
+	};
+
+	/**
+	 * AppConnect.getPoints()方法的实现，必须实现
+	 *
+	 * @param currencyName
+	 *            虚拟货币名称.
+	 * @param pointTotal
+	 *            虚拟货币余额.
+	 */
+	public void getUpdatePoints(String currencyName, int pointTotal) {
+
+		currentPointTotal = pointTotal;
+		if (currentPointTotal >= requirePoint) {
+			hasEnoughRequrePoint = true;
+		}
+		update_text = true;
+		displayText = currencyName + ": " + pointTotal;
+		mHandler.post(mUpdateResults);
+	}
+
+	/**
+	 * AppConnect.getPoints() 方法的实现，必须实现
+	 *
+	 * @param error
+	 *            请求失败的错误信息
+	 */
+
+	public void getUpdatePointsFailed(String error) {
+		currentPointTotal = 0;
+		update_text = true;
+		displayText = error;
+		mHandler.post(mUpdateResults);
+	}
+
+	@Override
+	protected void onDestroy() {
+		AppConnect.getInstance(this).finalize();
+		super.onDestroy();
+	}
+
+	@Override
+	protected void onResume() {
+		AppConnect.getInstance(this).getPoints(this);
+		super.onResume();
+	}
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
@@ -75,7 +163,6 @@ public class TVServiceActivity extends TabActivity {
 				AppConnect.getInstance(TVServiceActivity.this).showOffers(TVServiceActivity.this);
 			}
 		});
-
 
 		TVdetails = (TextView) findViewById(R.id.TVdetails);
 
@@ -145,18 +232,24 @@ public class TVServiceActivity extends TabActivity {
 		favoriteButton = (Button) findViewById(R.id.favoriteButton);
 		favoriteButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				KeyValuePair selectedItem = (KeyValuePair) TVchannelSpinner.getSelectedItem();
-				String selectedIdAndName = selectedItem.getKey() + ID_Name_Split + selectedItem.getValue();
-				SharedPreferences mPerferences = PreferenceManager.getDefaultSharedPreferences(TVServiceActivity.this);
-				String myFavorite = mPerferences.getString(My_Favorite, "");
-				if (!exist(myFavorite, selectedIdAndName)) {
-					favoriteChangeSet.add(selectedIdAndName);
-				}
-				SharedPreferences.Editor mEditor = mPerferences.edit();
-				mEditor.putString(My_Favorite, add(myFavorite, selectedIdAndName));
-				mEditor.commit();
+				if (!!hasEnoughRequrePoint) {//没达到积分
+					showDialog();
+				} else {
 
-				Toast.makeText(TVServiceActivity.this, "您收藏了" + selectedItem.getValue(), Toast.LENGTH_LONG).show();
+					KeyValuePair selectedItem = (KeyValuePair) TVchannelSpinner.getSelectedItem();
+					String selectedIdAndName = selectedItem.getKey() + ID_Name_Split + selectedItem.getValue();
+					SharedPreferences mPerferences = PreferenceManager
+							.getDefaultSharedPreferences(TVServiceActivity.this);
+					String myFavorite = mPerferences.getString(My_Favorite, "");
+					if (!exist(myFavorite, selectedIdAndName)) {
+						favoriteChangeSet.add(selectedIdAndName);
+					}
+					SharedPreferences.Editor mEditor = mPerferences.edit();
+					mEditor.putString(My_Favorite, add(myFavorite, selectedIdAndName));
+					mEditor.commit();
+
+					Toast.makeText(TVServiceActivity.this, "您收藏了" + selectedItem.getValue(), Toast.LENGTH_LONG).show();
+				}
 			}
 		});
 		deleteButton = (Button) findViewById(R.id.deleteButton);
