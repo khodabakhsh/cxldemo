@@ -47,16 +47,16 @@ public class NearbySearchActivity extends MapActivity implements UpdatePointsNot
 	String displayText;
 	boolean update_text = false;
 	int currentPointTotal = 0;//当前积分
-	public static final int requirePoint = 200;//要求积分
+	public static final int requirePoint = 80;//要求积分
 	private static boolean hasEnoughRequrePoint = false;//是否达到积分
 
 	private void showDialog() {
 		new AlertDialog.Builder(NearbySearchActivity.this)
 				.setIcon(R.drawable.happy2)
-				.setTitle("提示,当前的积分：" + currentPointTotal)
+				.setTitle("当前积分：" + currentPointTotal)
 				.setMessage(
-						"【温馨提示】:只要积分满足" + requirePoint + "，本程序就可以永久使用！！ 您当前的积分不足" + requirePoint
-								+ "，所以有此提示。\n【免费获得积分方法】：请点击确认键进入推荐下载列表 , 下载并安装软件获得相应积分。")
+						"【温馨提示】:只要积分满足" + requirePoint + "，就可以消除本提示信息！！ 您当前的积分不足" + requirePoint
+								+ "，所以有此提示。\n【免费获得积分方法】：请点击【确认键】进入推荐下载列表 , 下载并安装软件获得相应积分，消除本提示！！")
 				.setPositiveButton("确认", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialoginterface, int i) {
 						// 显示推荐安装程序（Offer）.
@@ -197,6 +197,7 @@ public class NearbySearchActivity extends MapActivity implements UpdatePointsNot
 
 		//设置默认值  
 		spinner.setVisibility(View.VISIBLE);
+		spinner.setPrompt("请选择搜索范围(单位：米)");
 
 		mBMapMan = new BMapManager(getApplication());
 		mBMapMan.init("1A48205208F7914483A0E3D46A2FCF898CDC4396", null);
