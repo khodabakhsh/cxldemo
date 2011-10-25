@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent">
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:orientation="vertical">
+		<TextView android:text="请在下面选择两个星座，进行查询哦："
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:textColor="#FF69B4" android:textSize="25px"
+			android:paddingTop="10dip" android:paddingBottom="10dip" />
+		<Spinner android:id="@+id/firstConstellation"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:drawSelectorOnTop="true" />
+		<!-- <ImageView android:src="@drawable/add" android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" android:layout_gravity="center" /> -->
+		<Spinner android:id="@+id/secondConstellation"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:drawSelectorOnTop="true" />
+		<Button android:layout_height="wrap_content"
+			android:layout_width="fill_parent" android:text="查询" android:id="@+id/queryButton"
+			android:visibility="visible" android:drawableLeft="@drawable/query"
+			android:drawableRight="@drawable/query" android:textSize="20px"
+			android:paddingTop="10dip" android:paddingBottom="10dip" />
+		<ImageView android:src="@drawable/love"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_gravity="center" />
+	</LinearLayout>
+</LinearLayout>
