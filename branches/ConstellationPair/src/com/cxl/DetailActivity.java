@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.cxl.constellationpair.R;
 import com.waps.AppConnect;
@@ -33,7 +34,7 @@ public class DetailActivity extends Activity {
 				}).show();
 	}
 
-	private WebView mWebView1;
+	private WebView mWebView;
 
 	private Button returnButton;
 
@@ -53,8 +54,8 @@ public class DetailActivity extends Activity {
 			public void run() {
 				Bundle bundle = getIntent().getExtras();
 				String id = bundle.getString("id");
-				mWebView1 = (WebView) findViewById(R.id.myWebView1);
-				mWebView1.loadDataWithBaseURL(ConstellationPairUtil.getConstellationPairDetailUrl,
+				mWebView = (WebView) findViewById(R.id.myWebView);
+				mWebView.loadDataWithBaseURL(ConstellationPairUtil.getConstellationPairDetailUrl,
 						new ConstellationPairUtil().getConstellationPairDetail(id), "text/html", ConstellationPairUtil.UTF8,
 						"");
 				progressDialog.dismiss();

@@ -62,7 +62,7 @@ public class ConstellationPairUtil {
 		Document document = getDocument(getConstellationPairUrl);
 		Elements elements  = document.select("a[href^=qot.asp?id=]");
 		for(Element element :elements){
-			map.put(element.attr("href").substring("qot.asp?id=".length()),element.text());
+			map.put(element.text(),element.attr("href").substring("qot.asp?id=".length()));
 		}
 		return map;
 	}
@@ -74,8 +74,6 @@ public class ConstellationPairUtil {
 		try {
 			doc = getDocument(addQueryParams(queryParams));
 			Elements element = doc.getElementsByClass("entry");
-			element.select("p").first().remove();
-			element.select("p").last().remove();
 			return element.get(0).outerHtml();
 		} catch (Exception e) {
 			return getConstellationPairDetail( id);

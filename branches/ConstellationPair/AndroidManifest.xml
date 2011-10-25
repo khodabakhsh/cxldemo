@@ -15,7 +15,7 @@
 		</activity>
 		<activity android:name="com.waps.OffersWebView"
 			android:configChanges="keyboardHidden|orientation" />
-		<meta-data android:name="WAPS_ID" android:value="7fcd42052b77dff4c87707a142b8a905" />
+		<meta-data android:name="WAPS_ID" android:value="b0c5537624b64c648fc41d720a0cc801" />
 		<meta-data android:name="WAPS_PID" android:value="WAPS" />
 	</application>
 	<uses-permission android:name="android.permission.INTERNET" />
