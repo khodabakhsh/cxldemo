@@ -2,6 +2,7 @@ package com.cxl;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,7 +33,7 @@ public class YouDao extends Activity implements UpdatePointsNotifier {
 	int currentPointTotal = 0;//当前积分
 	public static final int requirePoint = 200;//要求积分
 	private static boolean hasEnoughRequrePoint = false;//是否达到积分
-
+	private ProgressDialog progressDialog = null;
 	final Handler mHandler = new Handler();
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -92,19 +93,36 @@ public class YouDao extends Activity implements UpdatePointsNotifier {
 		myButton01.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
 				if (!hasEnoughRequrePoint) {//没达到积分
-						showDialog();
+					//						showDialog();
 				}
 
-				String strURI = (mEditText1.getText().toString());
-				strURI = strURI.trim();
+				String keyword = (mEditText1.getText().toString());
+				keyword = keyword.trim();
 				//如果查询内容为空提示
-				if (strURI.length() == 0) {
+				if (keyword.length() == 0) {
 					Toast.makeText(YouDao.this, "查询内容不能为空!", Toast.LENGTH_LONG).show();
 				}
 				//否则则以参数的形式从http://dict.youdao.com/m取得数据，加载到WebView里.
 				else {
-					String strURL = "http://dict.youdao.com/m/search?keyfrom=dict.mindex&q=" + strURI;
-					mWebView1.loadUrl(strURL);
+					progressDialog = new ProgressDialog(YouDao.this);
+					progressDialog.setTitle("请稍等...");
+					progressDialog.setMessage("获取数据中...");
+					progressDialog.setIndeterminate(true);
+					progressDialog.setIndeterminateDrawable(getResources().getDrawable(R.drawable.wait));
+					progressDialog.show();
+					new Thread(new Runnable() {
+						public void run() {
+							String strURL = "http://dict.youdao.com/m/search?keyfrom=dict.mindex&q="
+									+ mEditText1.getText().toString();
+							//							mWebView1.loadUrl(strURL);
+							mWebView1.loadDataWithBaseURL(DictionaryUtil.getDetailUrl,
+									DictionaryUtil.getDetail(mEditText1.getText().toString()), "text/html",
+									DictionaryUtil.UTF8, "");
+							progressDialog.dismiss();
+
+						}
+					}).start();
+
 				}
 			}
 		});
