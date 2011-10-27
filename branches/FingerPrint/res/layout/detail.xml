@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<!-- <Button android:id="@+id/OffersButton" android:visibility="visible" 
+		android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="其他推荐的免费应用..." 
+		/> -->
+	<Button android:id="@+id/OwnsButton" android:text="更多免费应用..."
+		android:layout_height="wrap_content" android:layout_width="fill_parent"
+		android:visibility="visible" />
+	<Button android:id="@+id/returnButton" android:text="返回"
+		android:layout_height="wrap_content" android:layout_width="fill_parent"
+		android:visibility="visible" />
+	<WebView android:id="@+id/myWebView" android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:focusable="false" />
+</LinearLayout>

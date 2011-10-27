@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent">
+	<ScrollView android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<LinearLayout android:layout_width="fill_parent"
+			android:layout_height="fill_parent" android:orientation="vertical">
+			<TextView android:text="请先阅读页面最下方的文字，然后在下面选择您的指纹【男左女右哦】，然后查询："
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:textColor="#FF69B4" android:textSize="25px"
+				android:paddingTop="10dip" android:paddingBottom="10dip" />
+
+			<TableLayout android:orientation="horizontal"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:stretchColumns="1">
+				<TableRow android:layout_width="fill_parent"
+					android:layout_height="wrap_content">
+					<TextView android:text="大拇指 ：" android:layout_width="fill_parent"
+						android:layout_height="wrap_content" android:textColor="#FF69B4"
+						android:textSize="20px" android:padding="15dip" />
+					<Spinner android:id="@+id/wo1" android:layout_width="fill_parent"
+						android:layout_height="fill_parent" android:drawSelectorOnTop="true"
+						android:paddingRight="15dip" />
+				</TableRow>
+			</TableLayout>
+			<TableLayout android:orientation="horizontal"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:stretchColumns="1">
+				<TableRow android:layout_width="fill_parent"
+					android:layout_height="wrap_content">
+					<TextView android:text="食指：" android:layout_width="fill_parent"
+						android:layout_height="wrap_content" android:textColor="#FF69B4"
+						android:textSize="20px" android:padding="15dip" />
+					<Spinner android:id="@+id/wo2" android:layout_width="fill_parent"
+						android:layout_height="fill_parent" android:drawSelectorOnTop="true"
+						android:paddingRight="15dip" />
+				</TableRow>
+			</TableLayout>
+			<TableLayout android:orientation="horizontal"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:stretchColumns="1">
+				<TableRow android:layout_width="fill_parent"
+					android:layout_height="wrap_content">
+					<TextView android:text="中指：" android:layout_width="fill_parent"
+						android:layout_height="wrap_content" android:textColor="#FF69B4"
+						android:textSize="20px" android:padding="15dip" />
+					<Spinner android:id="@+id/wo3" android:layout_width="fill_parent"
+						android:layout_height="fill_parent" android:drawSelectorOnTop="true"
+						android:paddingRight="15dip" />
+				</TableRow>
+			</TableLayout>
+			<TableLayout android:orientation="horizontal"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:stretchColumns="1">
+				<TableRow android:layout_width="fill_parent"
+					android:layout_height="wrap_content">
+					<TextView android:text="无名指：" android:layout_width="fill_parent"
+						android:layout_height="wrap_content" android:textColor="#FF69B4"
+						android:textSize="20px" android:padding="15dip" />
+					<Spinner android:id="@+id/wo4" android:layout_width="fill_parent"
+						android:layout_height="fill_parent" android:drawSelectorOnTop="true"
+						android:paddingRight="15dip" />
+				</TableRow>
+			</TableLayout>
+			<TableLayout android:orientation="horizontal"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:stretchColumns="1">
+				<TableRow android:layout_width="fill_parent"
+					android:layout_height="wrap_content">
+					<TextView android:text="小指：" android:layout_width="fill_parent"
+						android:layout_height="wrap_content" android:textColor="#FF69B4"
+						android:textSize="20px" android:padding="15dip" />
+					<Spinner android:id="@+id/wo5" android:layout_width="fill_parent"
+						android:layout_height="fill_parent" android:drawSelectorOnTop="true"
+						android:paddingRight="15dip" />
+				</TableRow>
+			</TableLayout>
+			<Button android:layout_height="wrap_content"
+				android:layout_width="fill_parent" android:text="查询" android:id="@+id/queryButton"
+				android:visibility="visible" android:drawableLeft="@drawable/query"
+				android:drawableRight="@drawable/query" android:textSize="20px"
+				android:paddingTop="10dip" android:paddingBottom="10dip" />
+			<TextView
+				android:text="查询前先阅读：\n\n【涡纹】即指纹整体纹路，呈现似旋涡状，纹路由内一圈一圈向外。\n\n【流纹】意指其指纹之纹路是无法成为似旋涡状的纹路，其指纹纹路呈现似外流的现象。\n\n根据指纹的‘涡’、‘流’状两种纹路，可以用来判断性格及命运倾向。\n指纹是依据易理所分解阴、阳的性质而来，阴为‘流形’、阳为‘涡形’。例如：五指全为涡形，称为‘干纹’，若五指全为‘流’形，称为‘坤纹’。根据多年研究报告，人的性格是与生具来的。令人奇怪的是，人的指纹也是终生不变的。经过多年的研究，终于通过指纹可以辅助研究人的性格。本程序可以使您对自己或他人的性格有一定的了解，在生活中泰然处之。"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:textColor="#87CEEB" android:textSize="20px" android:padding="15dip" />
+			<!-- <ImageView android:src="@drawable/birth" android:layout_width="wrap_content" 
+				android:layout_height="wrap_content" android:layout_gravity="center" /> -->
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>
