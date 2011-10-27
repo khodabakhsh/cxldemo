@@ -43,9 +43,11 @@ public class DictionaryUtil {
 			
 			doc.select("form").remove();
 			 Elements allDivs = doc.select("div");
-//			 allDivs.first().remove();
-//			 allDivs.first().remove();
-//			 allDivs.last().remove();
+//			 allDivs.remove(1);
+//			 allDivs.remove(0);
+			 allDivs.first().remove();
+			 allDivs.last().remove();
+			 doc.getElementsByClass("title").remove();
 			
 //			Elements element = doc.getElementsByClass("entry");
 //			element.get(0).select("p").remove();
