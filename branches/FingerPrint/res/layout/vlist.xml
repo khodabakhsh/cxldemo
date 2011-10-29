@@ -15,7 +15,7 @@
 			android:textSize="15px" android:visibility="gone"/>
 		<TextView android:id="@+id/name" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:textColor="#FF69B4"
-			android:textSize="25px" />
+			android:textSize="20px" />
 		<TextView android:id="@+id/dateRange" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:textColor="#4169E1"
 			android:textSize="15px" android:visibility="gone" />
