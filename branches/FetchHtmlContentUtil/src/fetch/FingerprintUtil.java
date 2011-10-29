@@ -101,7 +101,7 @@ public class FingerprintUtil
 				map.put(key, content);
 				if (content != null && !"".equals(content))
 				{
-					CommonUtil.WriteFile("d:\\FetchPageContentUtil\\【"
+					CommonUtil.WriteFile("d:\\抓取内容\\指纹运势\\【"
 							+ (i - 1) + "】" + key + ".txt",
 							filterContent(content));
 				}
