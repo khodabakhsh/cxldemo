@@ -3,7 +3,7 @@
 	android:layout_width="fill_parent" android:layout_height="fill_parent">
 	<LinearLayout android:layout_width="fill_parent"
 		android:layout_height="fill_parent" android:orientation="vertical">
-		<TextView android:text="请在下面选择两个星座，进行查询哦："
+		<TextView android:text="请在下面选择两个星座，查询他们的配对情况哦："
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:textColor="#FF69B4" android:textSize="25px"
 			android:paddingTop="10dip" android:paddingBottom="10dip" />
@@ -20,8 +20,9 @@
 			android:visibility="visible" android:drawableLeft="@drawable/query"
 			android:drawableRight="@drawable/query" android:textSize="20px"
 			android:paddingTop="10dip" android:paddingBottom="10dip" />
-		<ImageView android:src="@drawable/love"
+		<TextView
+			android:text="由星座来分析你和另一半在基本性格上的适配度........\n\n它可以帮助您看清彼此的歧异，避免相处时踩到地雷区，希望各位都能知己知彼、相处愉快！"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:layout_gravity="center" />
+			android:textColor="#87CEEB" android:textSize="15px" android:padding="15dip" />
 	</LinearLayout>
 </LinearLayout>
