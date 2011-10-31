@@ -31,7 +31,7 @@ public class DetailActivity extends Activity
 								+ MainActivity.requirePoint
 								+ "，就可以消除本提示信息！！ 您当前的积分不足"
 								+ MainActivity.requirePoint
-								+ "，所以会有此 提示。\n【免费获得积分方法】：请点击【确认键】进入推荐下载列表 , 下载并安装软件获得相应积分，消除本提示！！")
+								+ "，所以会有此 提示。\n\n【免费获得积分方法】：请点击【确认键】进入推荐下载列表 , 下载并安装软件获得相应积分，消除本提示！！")
 				.setPositiveButton("确认", new DialogInterface.OnClickListener()
 				{
 					public void onClick(DialogInterface dialoginterface, int i)
@@ -85,9 +85,8 @@ public class DetailActivity extends Activity
 				String fileContent = getFileContent(DetailActivity.this,
 						getResources().getIdentifier(fileName, "raw",
 								getPackageName()));
-				mWebView1.loadDataWithBaseURL(
-						ShengxiaoUtil.getShengxiaoDetailUrl, fileContent,
-						"text/html", ShengxiaoUtil.UTF8, "");
+				mWebView1.loadDataWithBaseURL(null, fileContent,
+						"text/html", "UTF8", "");
 				progressDialog.dismiss();
 
 			}

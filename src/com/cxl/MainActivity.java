@@ -5,14 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.app.AlertDialog;
 import android.app.ListActivity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -27,7 +24,7 @@ public class MainActivity extends ListActivity implements UpdatePointsNotifier {
 	String displayText;
 	boolean update_text = false;
 	public static int currentPointTotal = 0;// 当前积分
-	public static final int requirePoint = 70;// 要求积分
+	public static final int requirePoint = 60;// 要求积分
 	public static boolean hasEnoughRequrePoint = false;// 是否达到积分
 
 	final Handler mHandler = new Handler();
