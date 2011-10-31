@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, AndroidjosupActivity!</string>
-    <string name="app_name">生日密码查询</string>
+    <string name="app_name">生日运势查询</string>
 </resources>

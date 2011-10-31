@@ -32,7 +32,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 	String displayText;
 	boolean update_text = false;
 	public static int currentPointTotal = 0;// 当前积分
-	public static final int requirePoint = 80;// 要求积分
+	public static final int requirePoint = 60;// 要求积分
 	public static boolean hasEnoughRequrePoint = false;// 是否达到积分
 	public static Map<String, String> ConstellationNameIdMap = new HashMap<String, String>();
 
@@ -138,7 +138,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		yueAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		yue.setAdapter(yueAdapter);
 		yue.setSelection(0);
-		yue.setPrompt("请选择月份");
+		yue.setPrompt("请选择月");
 		yue.setOnItemSelectedListener(new OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				Object selectedId = yue.getSelectedItem();
@@ -152,7 +152,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 			}
 		});
 		ri = (Spinner) findViewById(R.id.ri);
-		ri.setPrompt("请选择日期");
+		ri.setPrompt("请选择日");
 		riAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Yue_Ri_Map.get(yue
 				.getSelectedItem()));
 		//设置下拉列表的风格  
