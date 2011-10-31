@@ -1,0 +1,16 @@
+<div class="entry"> 
+ <div class="csense" id="c001">  
+  <br /> 
+ </div> 
+ <p><img border="0" src="images/6.gif" /></p>  
+ <p>综合运势: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>爱情运势: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>工作状况: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>理财投资: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>健康指数:68%</p> 
+ <p>商谈指数:70%</p> 
+ <p>幸运颜色:紫色</p> 
+ <p>幸运数字:3</p> 
+ <p>速配星座:金牛座</p> 
+ <p>今日忠告:能力虽足够就是少了些包装，主动积极的自我推销，是获得人气与信用的关键时期。<br /> 大家也都愿意对你提出好建议，手边上无法完成的工作可找人帮忙一起解决。但可惜的是对他人的情绪反应稍微迟钝，有无意中说出伤人的话却毫无察觉的可能。察言观色是今天需用心的地方。</p> 
+</div>

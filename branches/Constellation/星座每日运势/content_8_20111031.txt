@@ -1,0 +1,16 @@
+<div class="entry"> 
+ <div class="csense" id="c001">  
+  <br /> 
+ </div> 
+ <p><img border="0" src="images/8.gif" /></p>  
+ <p>综合运势: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>爱情运势: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>工作状况: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>理财投资: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>健康指数:93%</p> 
+ <p>商谈指数:85%</p> 
+ <p>幸运颜色:橘色</p> 
+ <p>幸运数字:7</p> 
+ <p>速配星座:白羊座</p> 
+ <p>今日忠告:积极又具行动力的态度，让你轻易地就掌握住好运的波潮。<br /> 尽可能与多一些人交谈，这阵子正是你丰富人生的时期。特别是对长辈的意见可多多注目喔。而工作上是个才能发挥活跃的日子。能将最近获得的新知识拿来活用最适合了。</p> 
+</div>

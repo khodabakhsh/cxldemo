@@ -1,0 +1,16 @@
+<div class="entry"> 
+ <div class="csense" id="c001">  
+  <br /> 
+ </div> 
+ <p><img border="0" src="images/9.gif" /></p>  
+ <p>综合运势: <img border="0" src="images/star.gif" /> </p> 
+ <p>爱情运势: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>工作状况: <img border="0" src="images/star.gif" /> </p> 
+ <p>理财投资: <img border="0" src="images/star.gif" /> </p> 
+ <p>健康指数:49%</p> 
+ <p>商谈指数:52%</p> 
+ <p>幸运颜色:棕色</p> 
+ <p>幸运数字:2</p> 
+ <p>速配星座:天蝎座</p> 
+ <p>今日忠告:对别人天花乱坠的宣传、推销可别轻易相信。一时怂恿下因此而损失的危险喔。<br /> 即使是以往已熟练习惯的工作也可能因轻忽而犯错，越是放心的事越有这个状况发生的可能。另外就是财务上对高价商品买卖交易或是较大金额的投资最好能延一延，出乎意料外的支出增加的可能。</p> 
+</div>

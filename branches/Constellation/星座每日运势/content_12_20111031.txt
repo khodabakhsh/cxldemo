@@ -1,0 +1,16 @@
+<div class="entry"> 
+ <div class="csense" id="c001">  
+  <br /> 
+ </div> 
+ <p><img border="0" src="images/12.gif" /></p>  
+ <p>综合运势: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>爱情运势: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>工作状况: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>理财投资: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>健康指数:70%</p> 
+ <p>商谈指数:66%</p> 
+ <p>幸运颜色:浅蓝色</p> 
+ <p>幸运数字:9</p> 
+ <p>速配星座:水瓶座</p> 
+ <p>今日忠告:原本只是个人兴趣的事却衍生出与实际利益相关连的可能。<br /> 重视自己的兴趣并保持执著绝对有派上用场的时候呢。身边的社交聚会等琐事也不少，绑手绑脚的让人有些厌烦也剥夺了个人休闲时间，可以推掉的就尽量推掉，多一些时间留给自己放在兴趣上吧。</p> 
+</div>

@@ -1,0 +1,16 @@
+<div class="entry"> 
+ <div class="csense" id="c001">  
+  <br /> 
+ </div> 
+ <p><img border="0" src="images/10.gif" /></p>  
+ <p>综合运势: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>爱情运势: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>工作状况: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>理财投资: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>健康指数:91%</p> 
+ <p>商谈指数:83%</p> 
+ <p>幸运颜色:橘色</p> 
+ <p>幸运数字:6</p> 
+ <p>速配星座:天蝎座</p> 
+ <p>今日忠告:遇到问题以自己的力量来解决能获得较好的效果。<br /> 可以不求人的事就自己来吧。今天可说是幸运要素充足，只要力求表现就能获得掌声认同。而今天初次被介绍跟你认识的人会为你带来好运呢。记得多跟他攀些交情喔。</p> 
+</div>

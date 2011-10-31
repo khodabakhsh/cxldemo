@@ -1,0 +1,16 @@
+<div class="entry"> 
+ <div class="csense" id="c001">  
+  <br /> 
+ </div> 
+ <p><img border="0" src="images/2.gif" /></p>  
+ <p>综合运势: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>爱情运势: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>工作状况: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>理财投资: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>健康指数:57%</p> 
+ <p>商谈指数:61%</p> 
+ <p>幸运颜色:银色</p> 
+ <p>幸运数字:1</p> 
+ <p>速配星座:白羊座</p> 
+ <p>今日忠告:有些目光正暗地里注视著你，更攸关著对你的重要评价。<br /> 就算是你讨厌做的事情今天也要忍耐著去做。今天想要有个明亮好运的秘诀就是多与性格开朗的人相处，一起坐下来聊聊天吧。旧资料、古老文件里藏著对你有利的资讯，空闲时不妨去翻翻那些年代久远的档案、照片吧。</p> 
+</div>

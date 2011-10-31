@@ -1,0 +1,16 @@
+<div class="entry"> 
+ <div class="csense" id="c001">  
+  <br /> 
+ </div> 
+ <p><img border="0" src="images/4.gif" /></p>  
+ <p>综合运势: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>爱情运势: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>工作状况: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>理财投资: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>健康指数:92%</p> 
+ <p>商谈指数:88%</p> 
+ <p>幸运颜色:金色</p> 
+ <p>幸运数字:6</p> 
+ <p>速配星座:魔羯座</p> 
+ <p>今日忠告:多接触电视、报纸等资讯媒体，今天有好情报在里面喔。<br /> 对周围的小道消息也可敏感些。但当作消息来源之一就好，听了又再散播出去将是麻烦的根源，少说一些别人的闲言闲语吧。一大早接到的电话中将有幸运的消息，电话响起时，就以愉快的心情拿起话筒吧。</p> 
+</div>

@@ -1,0 +1,16 @@
+<div class="entry"> 
+ <div class="csense" id="c001">  
+  <br /> 
+ </div> 
+ <p><img border="0" src="images/11.gif" /></p>  
+ <p>综合运势: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>爱情运势: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>工作状况: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>理财投资: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>健康指数:88%</p> 
+ <p>商谈指数:76%</p> 
+ <p>幸运颜色:粉红色</p> 
+ <p>幸运数字:8</p> 
+ <p>速配星座:巨蟹座</p> 
+ <p>今日忠告:表现对别人的小小亲切，只是态度上的一点转换也可使自己的运气上升呢。<br /> 不见得要花钱才能笼络人心嘛。而工作上则有受到上级提拔的可能，但为了让其他人都能服气，自己的态度就更重要了。也要作好公私分明喔。花草树木有助增强你的能量，待在多一些绿意的地方更佳。</p> 
+</div>

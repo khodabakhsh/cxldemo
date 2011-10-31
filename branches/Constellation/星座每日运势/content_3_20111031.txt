@@ -1,0 +1,16 @@
+<div class="entry"> 
+ <div class="csense" id="c001">  
+  <br /> 
+ </div> 
+ <p><img border="0" src="images/3.gif" /></p>  
+ <p>综合运势: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>爱情运势: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>工作状况: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>理财投资: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>健康指数:75%</p> 
+ <p>商谈指数:62%</p> 
+ <p>幸运颜色:红色</p> 
+ <p>幸运数字:7</p> 
+ <p>速配星座:巨蟹座</p> 
+ <p>今日忠告:与以往对立的人有重修旧好的机会，最好能面对面谈谈。<br /> 无法见面的话也可藉由书信往来沟通看看。不论你与此人有没有过节，多与身边的人对话沟通是今天的社交重点。对从事创作工作者而言，将是创意浮现创作出优秀作品的一天。书写文书类时最好将字体放大一点，黏在一起的字会让运势下降喔。</p> 
+</div>

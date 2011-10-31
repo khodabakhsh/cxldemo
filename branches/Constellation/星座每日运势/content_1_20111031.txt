@@ -1,0 +1,16 @@
+<div class="entry"> 
+ <div class="csense" id="c001">  
+  <br /> 
+ </div> 
+ <p><img border="0" src="images/1.gif" /></p>  
+ <p>综合运势: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>爱情运势: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>工作状况: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>理财投资: <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> <img border="0" src="images/star.gif" /> </p> 
+ <p>健康指数:50%</p> 
+ <p>商谈指数:55%</p> 
+ <p>幸运颜色:浅蓝色</p> 
+ <p>幸运数字:6</p> 
+ <p>速配星座:金牛座</p> 
+ <p>今日忠告:自己一头热想到什麽做什麽、想更改就改的毛病，让别人感到头痛喔。<br /> 像这样反覆无常的态度也容易惹来麻烦，与别人的约定最好避免任意地临时取消、中途变更。不过倒可试著去接触一些美丽具有艺术气息的事物，像是到美术馆参观艺术品等等，将可帮助你顺利调适心情。</p> 
+</div>
