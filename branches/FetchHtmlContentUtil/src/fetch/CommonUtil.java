@@ -25,6 +25,7 @@ public class CommonUtil
 {
 	private static final int TIME_OUT = 5000;
 	public static String GB2312 = "GB2312";
+	public static String writeFileBasePath = "d:\\抓取内容\\";
 
 	public static void main(String[] args)
 	{
