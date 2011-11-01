@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent">
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:orientation="vertical">
+		<TextView android:text="请先在下面选择地区，然后选择相应的风俗，点击【查询】查看详细信息："
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:textColor="#FF69B4" android:textSize="20px"
+			android:paddingTop="10dip" android:paddingBottom="10dip" />
+
+		<TableLayout android:orientation="horizontal"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:stretchColumns="1">
+			<TableRow android:layout_width="fill_parent"
+				android:layout_height="wrap_content">
+				<TextView android:text="选择地区：" android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:textColor="#FF69B4"
+					android:textSize="20px" android:padding="15dip" />
+				<Spinner android:id="@+id/area" android:layout_width="fill_parent"
+					android:layout_height="fill_parent" android:drawSelectorOnTop="true"
+					android:paddingRight="15dip" android:textSize="18px" />
+			</TableRow>
+		</TableLayout>
+		<TableLayout android:orientation="horizontal"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:stretchColumns="1">
+			<TableRow android:layout_width="fill_parent"
+				android:layout_height="wrap_content">
+				<TextView android:text="选择风俗：" android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:textColor="#FF69B4"
+					android:textSize="20px" android:padding="15dip" />
+				<Spinner android:id="@+id/custom" android:layout_width="fill_parent"
+					android:layout_height="fill_parent" android:drawSelectorOnTop="true"
+					android:textSize="18px" android:paddingRight="15dip" />
+			</TableRow>
+		</TableLayout>
+		<Button android:layout_height="wrap_content"
+			android:layout_width="fill_parent" android:text="查询" android:id="@+id/queryButton"
+			android:visibility="visible" android:drawableLeft="@drawable/query"
+			android:drawableRight="@drawable/query" android:textSize="20px"
+			android:paddingTop="10dip" android:paddingBottom="10dip" />
+		<TextView
+			android:text="中国地大物博，人口众多,每个地区都有自己风俗习惯  ...\n\n 你了解你所在地区的风俗，除此之外，你了解其他地区的趣味风俗,奇异风俗吗？？"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:textColor="#87CEEB" android:textSize="15px" android:padding="15dip" />
+	</LinearLayout>
+</LinearLayout>

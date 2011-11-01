@@ -1,0 +1,9 @@
+<div class="entry"> 
+ <div class="csense" id="c001">  
+  <br /> 
+ </div> 
+ <p><b>鞭技</b></p> 
+ <p></p> &nbsp;&nbsp; 是从古代兵器演变过来的一个节目。鞭长6米，重10斤，演员双手挥鞭百发百中。（目标大至报纸，小至香烟）
+ <br /> 
+ <p></p> 
+</div>

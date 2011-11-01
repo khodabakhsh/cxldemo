@@ -1,0 +1,63 @@
+<div class="entry"> 
+ <div class="csense" id="c001">  
+  <br /> 
+ </div> 
+ <p><b>白城市汽车客运时刻表</b></p> 
+ <p></p> 
+ <p>&nbsp;&nbsp;&nbsp; 始发站 终到站 发 车&nbsp; 时&nbsp; 间 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 万&nbsp; 宝 16：00 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 万宝乡 15：10 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 月亮泡 14：05 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 通&nbsp; 化 10：10 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 安&nbsp; 广 11：40 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 六&nbsp; 合 14：20 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 古&nbsp; 城 13：50 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 叉干乡 12：55 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 向&nbsp; 海 13：50 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 公主岭 10：00 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 吉林市 7：00 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 榆&nbsp; 树 16：00 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 平&nbsp; 顶 14：00 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 八&nbsp; 面 13：30 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 木&nbsp; 头 14：30 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 山&nbsp; 湾 13：00 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 胡力吐 12：40 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 阿尼哈 13：00 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 杜尔基 7：00 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 突泉北 8：00 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 瞻&nbsp; 榆 15：00 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 天津市 14：00 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 德惠市 11：50 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 兴隆山 13：00 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 长&nbsp; 岭 11：20 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 朝阳镇 12：30 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 乾&nbsp; 安 8：20 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 安&nbsp; 全 11：10、14：20 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 新&nbsp; 华 11：00、15：00 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 红&nbsp; 兴 6：30、14：30 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 吴家窑 10：15、16：40 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 四家村 10：00、16：00 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 石头井子 11：10、15：50 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 马&nbsp; 场 7：10、15：00 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 野&nbsp; 马 13：00、13：30 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 河东村 8：00、9：30 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 四方坨子 8：30、14：40 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 保民农场 11：30、13：20 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 科右中旗 9：20、15：00 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 奶牛场 8：30、13：00 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 陆&nbsp; 家 7：00、13：30 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 蛟流河 9：50、16：00 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 大风东 13：40、10：20 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 到&nbsp; 保 10：00、13：40 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 烧锅镇 14：00、14：40 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 东方红 6：40、13：30 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 永&nbsp; 胜 6:30、7:00、11:40、13:00 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 瓦&nbsp; 房 14:00、14:30、16:10 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 突泉南 7:30、7:50、13:30 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 大安 6:00、7:30、9:00、9:45、10:00、10:30、11:00、 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 12:20、13:30、14:30、15:00、16:00、16:40 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 松&nbsp; 原 8:00、9:30、12:30、13:40、15:10、15:50、16:50 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 通&nbsp; 榆 8:00、9:40、11:00、12:10、14:30、16:00 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 白城 长春市 6:00、7:30、9:30、11:30、14:30、16:00、17:30 </p> 
+ <p></p> 
+</div>

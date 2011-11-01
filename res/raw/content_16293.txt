@@ -1,0 +1,41 @@
+<div class="entry"> 
+ <div class="csense" id="c001">  
+  <br /> 
+ </div> 
+ <p><b>松江风土民情之社会风尚</b></p> 
+ <p></p> 
+ <p align="center"></p> 
+ <p>&nbsp;&nbsp;&nbsp; 礼尚往来重情谊&nbsp; </p> 
+ <p>&nbsp;&nbsp;&nbsp; 亲戚往来 邻里、熟人关系 送礼 作客、待客 攀亲眷 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 乡情民风多淳厚 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 家庭生活 分家 借贷 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 街巷市民众生态 <br />&nbsp; <br />&nbsp;&nbsp;&nbsp; 荡马路 赶时髦 发嗲 甩派头 交相利</p> 
+ <p>&nbsp;&nbsp;&nbsp; 势利眼 讲实惠 轧闹猛 门槛精 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 娱乐消遣花样多 <br /> &nbsp; <br />&nbsp;&nbsp;&nbsp; 孵茶馆 听书 看戏 丝竹音乐 舞蹈 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 禁忌陋俗今犹存 <br />&nbsp; <br />&nbsp;&nbsp;&nbsp; 禁忌 陋习 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 稻 作 生 产 习 俗&nbsp; </p> 
+ <p>&nbsp;&nbsp;&nbsp; 土地就是命根子&nbsp; <br />&nbsp;<br />&nbsp;&nbsp;&nbsp; 围圩筑堤 土地租种 土地买卖典押 土地继承&nbsp; </p> 
+ <p>&nbsp;&nbsp;&nbsp; 生产组织有规矩&nbsp; <br />&nbsp;<br />&nbsp;&nbsp;&nbsp; 劳动量的约定 劳动形式 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 技艺与体力的较量 民间社会组织 <br />&nbsp;<br />&nbsp;&nbsp;&nbsp; 春回大地备耕忙 <br />&nbsp;<br />&nbsp;<br />&nbsp;&nbsp;&nbsp; 整修农田 整修农具和做“柴生活” 准备种子&nbsp; </p> 
+ <p>&nbsp;&nbsp;&nbsp; 播下种子与希望 <br />&nbsp;<br />&nbsp;&nbsp;&nbsp; 落谷 耕耙 插秧&nbsp; </p> 
+ <p>&nbsp;&nbsp;&nbsp; 耘耥灌溉收硕果&nbsp; <br />&nbsp;<br />&nbsp;&nbsp;&nbsp; 耘耥除草 施肥治虫 灌溉排涝 收获储藏&nbsp; </p> 
+ <p>&nbsp;&nbsp;&nbsp; 棉布之乡谈衣着 <br />&nbsp; <br />&nbsp;&nbsp;&nbsp; 松江府衣被天下 男子服饰 女子服饰 内衣 制衣 鞋帽 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 鱼米之乡话饮食 <br />&nbsp; <br />&nbsp;&nbsp;&nbsp; 松江鲈鱼 佘山兰笋 兰花小茄 松江大米 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 主食 酒席 点心 饮料 名菜名点 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 江南水乡看民居 <br />&nbsp; <br />&nbsp;&nbsp;&nbsp; 官绅住宅 市民住宅 农村住房 建房乔迁习俗 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 舟楫车轿说交通 <br />&nbsp; <br />&nbsp;&nbsp;&nbsp; 轿子 船舶 车辆 <br /></p>
+ <p> </p>
+ <p align="center"></p> 
+ <p>&nbsp;&nbsp;&nbsp; 礼尚往来重情谊&nbsp; </p> 
+ <p>&nbsp;&nbsp;&nbsp; 亲戚往来 邻里、熟人关系 送礼 作客、待客 攀亲眷 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 乡情民风多淳厚 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 家庭生活 分家 借贷 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 街巷市民众生态 <br />&nbsp; <br />&nbsp;&nbsp;&nbsp; 荡马路 赶时髦 发嗲 甩派头 交相利</p> 
+ <p>&nbsp;&nbsp;&nbsp; 势利眼 讲实惠 轧闹猛 门槛精 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 娱乐消遣花样多 <br /> &nbsp; <br />&nbsp;&nbsp;&nbsp; 孵茶馆 听书 看戏 丝竹音乐 舞蹈 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 禁忌陋俗今犹存 <br />&nbsp; <br />&nbsp;&nbsp;&nbsp; 禁忌 陋习 </p> 
+ <p>&nbsp;&nbsp;&nbsp; 稻 作 生 产 习 俗&nbsp; </p> 
+ <p>&nbsp;&nbsp;&nbsp; 土地就是命根子&nbsp; <br />&nbsp;<br />&nbsp;&nbsp;&nbsp; 围圩筑堤 土地租种 土地买卖典押 土地继承&nbsp; </p> 
+ <p>&nbsp;&nbsp;&nbsp; 生产组织有规矩&nbsp; <br />&nbsp;<br />&nbsp;&nbsp;&nbsp; 劳动量的约定 劳动形式 </p> 
+ <p></p> 
+</div>
