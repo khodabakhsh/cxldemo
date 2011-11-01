@@ -1,0 +1,36 @@
+<td> &nbsp;&nbsp;&nbsp;<p>坪林位于崇山峻岭之中，是台湾北部高品质茶叶产区，层层 叠叠的山峦中散布着大大小小的茶园，满眼茶山风光。<br/></p><p> 坪林有一个现代化的茶业博物馆，那是一座闽南安溪风格的四合院，庭院内回廊、拱桥、角亭、假山、飞瀑、修竹等构成一幅江南古 典庭园画幅。馆内图文并茂的介绍了茶的历史、茶的种类，以及从古 至今中国人茶业文化的演变。博物馆内辟有雅致的茶馆，和家人或三 几好友到此歇脚、聊天，也是一种很不错的享受。<br/></p><p> 博物馆外的餐馆或食肆有好多以茶叶烹调的菜肴和小吃，如茶&curren; 、茶鸡和茶面线，来到茶乡是不是该吃顿充满茶香的午餐，才不枉此 行？ </p><p style="MARGIN-LEFT: 36pt; MARGIN-RIGHT: 36pt"> 展示-是茶-博物-的主-，包含茶史、茶事、茶-三-展示-。<br/>
+  <!--?xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /-->
+  <o:p></o:p></p><p style="MARGIN-LEFT: 36pt; MARGIN-RIGHT: 36pt"> 茶史展示--茶的沿起、中--代-茶、茶-、茶-文化-商--展，-古至今-次分明-成出-。<br/>
+  <o:p></o:p></p><p style="MARGIN-LEFT: 36pt; MARGIN-RIGHT: 36pt"> 茶事--於茶的--知-，-茶-、茶-的分-、茶的成份、-造-茶-的--、--等等，利用模型--物的交-展示，做最--的介-。<br/>
+  <o:p></o:p></p><p style="MARGIN-LEFT: 36pt; MARGIN-RIGHT: 36pt"> 茶-展示-，-茶-茶器到-茶的--，交-成-於中-人特有的茶-文化。茶--元介-茶器的--、如何判-好-、如何--、婚-茶-、-代茶-及特殊-茶方式及台-民俗中的甩茶。<br/>
+  <o:p></o:p></p><p style="MARGIN-LEFT: 36pt; MARGIN-RIGHT: 36pt"> 茶----包括有「中-精-庭--」、「茶--」及「-外品茗-」。<br/>
+  <o:p></o:p></p><p style="MARGIN-LEFT: 36pt; MARGIN-RIGHT: 36pt"> 紫竹--月明-座落在坪林茶-博物---，以---典雅的建--中心，在曲-、假山、-瀑、角亭、修竹之-，-成一座江南古典庭-式茶--，--供-有坪林特-的文山包-茶、老茶及清心雅-的茶食，在--展示--有-茶史、茶事、茶-的各-知-之後，到---景雅-的庭-休憩、品啜一片馨香，在和---的茶香中浸淫於幽谷情-的庭--景，-著一下旅人的心-，乃是人生一大享受。<br/>
+  <o:p></o:p></p><p style="MARGIN-LEFT: 36pt; MARGIN-RIGHT: 36pt"> 活-主--每一季，展示一--於茶文化的主-，展示不同-代名家巧匠的精心作品-茶器、陶-到茶文化中的-、-、琴、-包--象，--富、深-的茶文化有系-的展-出-。<br/>
+  <o:p></o:p></p><p style="MARGIN-LEFT: 36pt; MARGIN-RIGHT: 36pt"> 多媒---用3D立---，以--方式生-的-茶的知--文化，做有系-的介-。<br/>
+  <o:p></o:p></p><p style="MARGIN-LEFT: 36pt; MARGIN-RIGHT: 36pt">
+  <!--?xml:namespace prefix = v ns = "urn:schemas-microsoft-com:vml" /-->
+  <v:shapetype id="_x0000_t75" stroked="f" filled="f" path="m@4@5l@4@11@9@11@9@5xe" o:preferrelative="t" o:spt="75" coordsize="21600,21600">
+   <v:stroke joinstyle="miter"></v:stroke>
+   <v:formulas>
+    <v:f eqn="if lineDrawn pixelLineWidth 0"></v:f>
+    <v:f eqn="sum @0 1 0"></v:f>
+    <v:f eqn="sum 0 0 @1"></v:f>
+    <v:f eqn="prod @2 1 2"></v:f>
+    <v:f eqn="prod @3 21600 pixelWidth"></v:f>
+    <v:f eqn="prod @3 21600 pixelHeight"></v:f>
+    <v:f eqn="sum @0 0 1"></v:f>
+    <v:f eqn="prod @6 1 2"></v:f>
+    <v:f eqn="prod @7 21600 pixelWidth"></v:f>
+    <v:f eqn="sum @8 21600 0"></v:f>
+    <v:f eqn="prod @7 21600 pixelHeight"></v:f>
+    <v:f eqn="sum @10 21600 0"></v:f>
+   </v:formulas>
+   <v:path o:connecttype="rect" gradientshapeok="t" o:extrusionok="f"></v:path>
+   <o:lock aspectratio="t" v:ext="edit"></o:lock>
+  </v:shapetype>
+  <v:shape id="_x0000_s1026" style="MARGIN-TOP: -158pt; Z-INDEX: 1; LEFT: 0px; MARGIN-LEFT: -90pt; WIDTH: 75pt; POSITION: absolute; HEIGHT: 65.25pt; TEXT-ALIGN: left; mso-wrap-distance-left: 0; mso-wrap-distance-right: 0; mso-position-vertical-relative: line" o:allowoverlap="f" alt="" type="#_x0000_t75">
+   <v:imagedata o:title="TeaUtensils" src="file:///C:/DOCUME~1/user/LOCALS~1/Temp/msoclip1/01/clip_image001.gif"></v:imagedata>
+   <!--?xml:namespace prefix = w ns = "urn:schemas-microsoft-com:office:word" /-->
+   <w:wrap type="square"></w:wrap>
+  </v:shape> 推-中心--客--了文山包-茶、香郁茶食-特-精-的茶-博物--念茶具-及各式-念品，供-客--。<br/>
+  <o:p></o:p></p><p> 要到茶乡作客并不难，台北市有巴士往返。可在台北车站乘搭台 汽客运开往宜兰的巴士，在坪林下车；或在新公园乘搭新店客运开往 坪林的巴士。茶业博物馆、餐馆、商店都在车站附近，步行即可。</p><p></p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <p></p></td>
