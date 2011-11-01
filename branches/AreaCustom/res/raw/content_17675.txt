@@ -1,0 +1,9 @@
+<div class="entry"> 
+ <div class="csense" id="c001">  
+  <br /> 
+ </div> 
+ <p><b>倒立民乐</b></p> 
+ <p></p> &nbsp;&nbsp; 全国首创，集杂技、民乐演奏于一体的，难度非常大的民间节目。
+ <br /> 
+ <p></p> 
+</div>

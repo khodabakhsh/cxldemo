@@ -1,0 +1,10 @@
+<div class="entry"> 
+ <div class="csense" id="c001">  
+  <br /> 
+ </div> 
+ <p><b>剪纸</b></p> 
+ <p></p> &nbsp;&nbsp; 
+ <p>剪 纸 <br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 剪纸是一种民间艺术。灵宝剪纸历史悠久，以独具风格的锯齿缘、弯弯的月牙、镰刀纹、锅纹和内圆外方的构图而著</p> 
+ <p></p> 
+ <p></p> 
+</div>

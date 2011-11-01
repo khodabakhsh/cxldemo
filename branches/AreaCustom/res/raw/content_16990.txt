@@ -1,0 +1,13 @@
+<div class="entry"> 
+ <div class="csense" id="c001">  
+  <br /> 
+ </div> 
+ <p><b>藏式建筑</b></p> 
+ <p></p> 
+ <p align="center"></p> 
+ <p>&nbsp;&nbsp;&nbsp; 藏族建筑的类型多且各具特色，大致可分为寺院宫殿、园林、住宅、塔等四种类型。 </p>
+ <p> </p>
+ <p align="center"></p> 
+ <p>&nbsp;&nbsp;&nbsp; 藏族建筑的类型多且各具特色，大致可分为寺院宫殿、园林、住宅、塔等四种类型。 </p> 
+ <p></p> 
+</div>

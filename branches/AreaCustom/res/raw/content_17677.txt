@@ -1,0 +1,9 @@
+<div class="entry"> 
+ <div class="csense" id="c001">  
+  <br /> 
+ </div> 
+ <p><b>脑弹子</b></p> 
+ <p></p> &nbsp;&nbsp; 是一个古时候流传在佛教、道教中的一个即惊险、难度又非常大的节目。
+ <br /> 
+ <p></p> 
+</div>
