@@ -94,7 +94,7 @@ public class ConstellationUtil {
 				.format(calendar.getTime());
 		
 		for (int i = 1; i <= 12; i++) {
-				CommonUtil.WriteFile(CommonUtil.writeFileBasePath + "\\星座每日运势\\content_" + i+"_"+currentDay + ".txt", getConstellationDetail(String.valueOf(i), currentDay));
+				CommonUtil.WriteFile(CommonUtil.writeFileBasePath + "\\星座每日运势\\content_" + i+"_"+2 + ".txt", getConstellationDetail(String.valueOf(i), currentDay));
 		
 		}
 	}
