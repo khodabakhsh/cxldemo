@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.cxl.birthsecret" android:versionCode="4"
+	package="com.cxl.nationcustom" android:versionCode="4"
 	android:versionName="4.0">
 	<uses-sdk android:minSdkVersion="4" />
 
@@ -15,7 +15,7 @@
 		</activity>
 		<activity android:name="com.waps.OffersWebView"
 			android:configChanges="keyboardHidden|orientation" />
-		<meta-data android:name="WAPS_ID" android:value="e37ac36fea1db04bf7f2040d0c3162aa" />
+		<meta-data android:name="WAPS_ID" android:value="df182dce7157a386024dc8dbcb6d5d83" />
 		<meta-data android:name="WAPS_PID" android:value="WAPS" />
 	</application>
 	<uses-permission android:name="android.permission.INTERNET" />

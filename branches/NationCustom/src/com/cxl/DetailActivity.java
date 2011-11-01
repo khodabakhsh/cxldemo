@@ -16,7 +16,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 
-import com.cxl.birthsecret.R;
+import com.cxl.nationcustom.R;
 import com.waps.AppConnect;
 
 public class DetailActivity extends Activity {
@@ -103,7 +103,7 @@ public class DetailActivity extends Activity {
 		});
 	}
 
-	public String getFileContent(Context context, int x) {// 规划了file参数、ID参数，方便多文件写入。
+	public static String getFileContent(Context context, int x) {// 规划了file参数、ID参数，方便多文件写入。
 		InputStream in = null;
 		BufferedReader bufferedReader = null;
 		StringBuilder sBuffer = new StringBuilder("");
