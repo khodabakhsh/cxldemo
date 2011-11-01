@@ -58,7 +58,7 @@ public class NationCustomUtil {
 		}
 	}
 
-	public static String getConstellationDetail(String id) {
+	public static String getDetail(String id) {
 		Map<String, String> queryParams = new HashMap<String, String>();
 		queryParams.put("id", id);
 		Document doc;
@@ -69,7 +69,7 @@ public class NationCustomUtil {
 			return element.get(0).outerHtml().replace("&#65533;","");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return getConstellationDetail(id);
+			return getDetail(id);
 		}
 
 	}
@@ -84,7 +84,7 @@ public class NationCustomUtil {
 //						nationArray[i], GBK)));
 				CommonUtil.WriteFile(CommonUtil.writeFileBasePath
 						+ "\\名族风俗查询\\content_" + i + ".txt",
-						getConstellationDetail(URLEncoder.encode(
+						getDetail(URLEncoder.encode(
 								nationArray[i], GBK)));
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
