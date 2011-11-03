@@ -419,8 +419,6 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		list.add(new KeyValue("25764", "粉子饼"));
 		list.add(new KeyValue("25765", "徽州饼"));
 		list.add(new KeyValue("25766", "火烧"));
-		list.add(new KeyValue("25767", "香椿�"));
-		list.add(new KeyValue("25768", "黄豆肉�"));
 		list.add(new KeyValue("25769", "山粉圆子"));
 		list.add(new KeyValue("25770", "蟹锅贴"));
 		list.add(new KeyValue("25771", "蚕蛹酥"));
@@ -625,9 +623,6 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		list.add(new KeyValue("26145", "三杖饼"));
 		list.add(new KeyValue("26146", "韭菜烙盒"));
 		list.add(new KeyValue("26147", "豆馅烧饼"));
-		list.add(new KeyValue("26148", "炉箅�子"));
-		list.add(new KeyValue("26149", "糖皮�子"));
-		list.add(new KeyValue("26150", "香油�子"));
 		Province_Food_Map.put("63", list);
 		list = new ArrayList<KeyValue>();
 		list.add(new KeyValue("26134", "黄米切糕"));
@@ -750,7 +745,6 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		list.add(new KeyValue("26424", "鱼匹子"));
 		list.add(new KeyValue("26425", "烩银丝"));
 		list.add(new KeyValue("26426", "炒米"));
-		list.add(new KeyValue("26427", "蒙古�子"));
 		list.add(new KeyValue("26428", "蒙古手把肉"));
 		list.add(new KeyValue("26429", "烤羊方"));
 		list.add(new KeyValue("26430", "卓资山熏鸡"));
@@ -792,7 +786,6 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		list.add(new KeyValue("26470", "清蒸牛蹄筋"));
 		list.add(new KeyValue("26471", "爆焖羊羔肉"));
 		list.add(new KeyValue("26472", "松子鱼"));
-		list.add(new KeyValue("26473", "�锅馍馍"));
 		list.add(new KeyValue("26474", "炒面片"));
 		list.add(new KeyValue("26475", "奶皮"));
 		list.add(new KeyValue("26476", "酿皮"));
@@ -878,14 +871,6 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		list.add(new KeyValue("25957", "肉丸"));
 		list.add(new KeyValue("25958", "叉烧肉粽"));
 		list.add(new KeyValue("25959", "客家八宝粽"));
-		list.add(new KeyValue("25960", "糯米甜�"));
-		list.add(new KeyValue("25961", "九重�"));
-		list.add(new KeyValue("25962", "绿豆馅�"));
-		list.add(new KeyValue("25963", "绿豆�"));
-		list.add(new KeyValue("25964", "扇�"));
-		list.add(new KeyValue("25965", "萝卜丝菠菠�"));
-		list.add(new KeyValue("25966", "油葱�"));
-		list.add(new KeyValue("25967", "白八�"));
 		list.add(new KeyValue("25968", "尾梨糕"));
 		list.add(new KeyValue("25969", "橘红糕"));
 		list.add(new KeyValue("25970", "白猛糕"));
@@ -896,7 +881,6 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		list.add(new KeyValue("25975", "糯米剂"));
 		list.add(new KeyValue("25976", "海澄双糕嫩"));
 		list.add(new KeyValue("25977", "八果芝麻糍"));
-		list.add(new KeyValue("25978", "�条筒"));
 		list.add(new KeyValue("25979", "炖盅当归鸭"));
 		list.add(new KeyValue("25980", "炖盅肉茸"));
 		list.add(new KeyValue("25981", "泥鳅粉干"));
@@ -946,8 +930,6 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		list.add(new KeyValue("26025", "煎米糕"));
 		list.add(new KeyValue("26026", "满煎糕"));
 		list.add(new KeyValue("26027", "福建锅贴"));
-		list.add(new KeyValue("26028", "煎白糖�"));
-		list.add(new KeyValue("26029", "煎红糖�"));
 		list.add(new KeyValue("26030", "卷煎"));
 		list.add(new KeyValue("26031", "糖枣包糍巴"));
 		list.add(new KeyValue("26032", "油糍"));
@@ -971,13 +953,11 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		list.add(new KeyValue("26050", "炸枣"));
 		list.add(new KeyValue("26051", "油猪"));
 		list.add(new KeyValue("26052", "花生剂"));
-		list.add(new KeyValue("26053", "芋�"));
 		list.add(new KeyValue("26054", "五香炸鱼条"));
 		list.add(new KeyValue("26055", "脱胎糯米枣"));
 		Province_Food_Map.put("52", list);
 		list = new ArrayList<KeyValue>();
 		list.add(new KeyValue("26479", "壶冲油茶"));
-		list.add(new KeyValue("26480", "油�凉粉"));
 		list.add(new KeyValue("26481", "烙饼温淘粉"));
 		list.add(new KeyValue("26482", "冷香豆腐脑"));
 		list.add(new KeyValue("26483", "罐罐豆花"));
@@ -1005,11 +985,9 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		list.add(new KeyValue("26505", "空心拉面"));
 		list.add(new KeyValue("26506", "刀削面"));
 		list.add(new KeyValue("26507", "刀拔面"));
-		list.add(new KeyValue("26508", "��面"));
 		list.add(new KeyValue("26509", "麻子金蝉元宵"));
 		list.add(new KeyValue("26510", "馄饨"));
 		list.add(new KeyValue("26511", "米脐饭"));
-		list.add(new KeyValue("26512", "上党粉豆面��"));
 		list.add(new KeyValue("26513", "翡翠剔尖"));
 		list.add(new KeyValue("26514", "曲沃羊杂割"));
 		list.add(new KeyValue("26515", "猪血灌肠"));
@@ -1040,7 +1018,6 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		list.add(new KeyValue("26540", "自酥月饼"));
 		list.add(new KeyValue("26541", "八珍月饼"));
 		list.add(new KeyValue("26542", "火腿月饼"));
-		list.add(new KeyValue("26543", "甘�皮月饼"));
 		list.add(new KeyValue("26544", "繁峙疤饼"));
 		list.add(new KeyValue("26545", "割边枣泥饼"));
 		list.add(new KeyValue("26546", "宝井油旋芝麻饼"));
@@ -1059,7 +1036,6 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		list.add(new KeyValue("26559", "长子炒饼"));
 		list.add(new KeyValue("26560", "生炒面"));
 		list.add(new KeyValue("26561", "炒莜面窝窝"));
-		list.add(new KeyValue("26562", "炒��"));
 		list.add(new KeyValue("26563", "炒卜刀"));
 		list.add(new KeyValue("26564", "烙饼拌汤"));
 		list.add(new KeyValue("26565", "炒糊拔"));
@@ -1135,7 +1111,6 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		list.add(new KeyValue("26629", "宝鸡油茶"));
 		list.add(new KeyValue("26630", "疙瘩油茶"));
 		list.add(new KeyValue("26631", "桂花糖芋艿"));
-		list.add(new KeyValue("26632", "苦荞��"));
 		list.add(new KeyValue("26633", "芋蓉冬瓜糕"));
 		list.add(new KeyValue("26634", "豆黄糕"));
 		list.add(new KeyValue("26635", "猪灌肠"));
@@ -1245,7 +1220,6 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		list.add(new KeyValue("26713", "高汤水饺"));
 		list.add(new KeyValue("26714", "鱼肉水饺"));
 		list.add(new KeyValue("26715", "鸡丝馄饨"));
-		list.add(new KeyValue("26716", "鸡鸭��"));
 		list.add(new KeyValue("26717", "济南米粉"));
 		list.add(new KeyValue("26718", "口蘑脱骨扒鸡"));
 		list.add(new KeyValue("26719", "黄米切糕（山东）"));
@@ -1284,7 +1258,6 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		list.add(new KeyValue("26752", "泰安油煎包"));
 		list.add(new KeyValue("26753", "三鲜锅贴"));
 		list.add(new KeyValue("26754", "炸鸡丝春卷"));
-		list.add(new KeyValue("26755", "八批�子"));
 		list.add(new KeyValue("26756", "酥合"));
 		list.add(new KeyValue("26757", "细馓子"));
 		list.add(new KeyValue("26758", "平阴梨丸子"));
@@ -1550,7 +1523,6 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		list.add(new KeyValue("27099", "杜称奇火烧"));
 		list.add(new KeyValue("27100", "十大酥"));
 		list.add(new KeyValue("27101", "明顺斋什锦烧饼"));
-		list.add(new KeyValue("27102", "煎饼�子"));
 		list.add(new KeyValue("27103", "煎焖子"));
 		list.add(new KeyValue("27104", "桂发祥什锦麻花"));
 		list.add(new KeyValue("27105", "王记剪子股麻花"));
@@ -1644,7 +1616,6 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		list.add(new KeyValue("25843", "面茶"));
 		list.add(new KeyValue("25844", "杏仁茶"));
 		list.add(new KeyValue("25845", "元宝馄饨"));
-		list.add(new KeyValue("25846", "��"));
 		list.add(new KeyValue("25847", "扒糕"));
 		list.add(new KeyValue("25848", "芸豆糕"));
 		list.add(new KeyValue("25849", "白水羊头肉"));
@@ -1690,7 +1661,6 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		list.add(new KeyValue("25889", "炸肉火烧"));
 		list.add(new KeyValue("25890", "江米面炸糕"));
 		list.add(new KeyValue("25891", "白年糕"));
-		list.add(new KeyValue("25892", "棒槌�子"));
 		list.add(new KeyValue("25893", "奶油炸糕"));
 		list.add(new KeyValue("25894", "烫面炸糕"));
 		list.add(new KeyValue("25895", "龙须饼"));
