@@ -1,0 +1,179 @@
+<html>
+
+<head><script Language="JavaScript">
+function processForm(form){
+var xf=xf1=0;
+hc=new Array(20);
+var roll_call=hc.length;
+for (i=roll_call;i>0;i--)
+{hc[i-1]=1};
+//loops through the radio buttons finding out which one is selected
+if (form.c1[0].checked==1) hc[0]=3;
+if (form.c1[2].checked==1) hc[0]=2;
+if (form.c2[0].checked==1) hc[1]=3;
+if (form.c2[2].checked==1) hc[1]=2;
+if (form.c3[0].checked==1) hc[2]=2;
+if (form.c3[1].checked==1) hc[2]=3;
+if (form.c4[0].checked==1) hc[3]=3;
+if (form.c4[2].checked==1) hc[3]=2;
+if (form.c5[1].checked==1) hc[4]=3;
+if (form.c5[2].checked==1) hc[4]=2;
+if (form.c6[0].checked==1) hc[5]=2;
+if (form.c6[2].checked==1) hc[5]=3;
+if (form.c7[0].checked==1) hc[6]=2;
+if (form.c7[1].checked==1) hc[6]=3;
+if (form.c8[0].checked==1) hc[7]=2;
+if (form.c8[1].checked==1) hc[7]=3;
+if (form.c9[0].checked==1) hc[8]=2;
+if (form.c9[1].checked==1) hc[8]=3;
+if (form.c10[1].checked==1) hc[9]=3;
+if (form.c10[2].checked==1) hc[9]=2;
+if (form.c11[0].checked==1) hc[10]=3;
+if (form.c11[1].checked==1) hc[10]=2;
+if (form.c12.checked==1) hc[11]=4;
+if (form.c13.checked==1) hc[12]=4;
+if (form.c14.checked==1) hc[13]=4;
+if (form.c15.checked==1) hc[14]=4;
+if (form.c16.checked==1) hc[15]=4;
+if (form.c17.checked==1) hc[16]=4;
+if (form.c18.checked==1) hc[17]=4;
+if (form.c19.checked==1) hc[18]=4;
+if (form.c20.checked==1) hc[19]=4;
+for (i=roll_call;i>0;i--)
+{xf+=hc[i-1]};
+xf1=xf-9;		
+form.answer.value="你的得分为"+xf1+"分";
+}</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<style>
+<!--
+        A:link {text-decoration: none; color: #0000ff; font-family: 宋体}
+        A:visited {text-decoration: none; color: #DA82F7; font-family: 宋体}
+        A:active {text-decoration: none; font-family: 宋体}
+        A:hover {text-decoration: underline; color: #DA82F7}
+-->
+</style>
+<title>心里测试大全</title>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+</head>
+
+<body bgcolor="#CEF8C7">
+ 
+
+<table border="0" cellpadding="4" cellspacing="0" width="100%" height="31">
+  <tr>
+  <td width="100%" height="31" > <h3><font color="#0000FF"><strong> 他是否值得你托付终身</span></strong></font></h3></td></tr>
+</table> 
+
+<form name="see">
+  <div align="left"><table border="0" cellPadding="8" cellspacing="0" width="100%" height="388">
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">1、当你为出席某次重大活动盛装打扮时，他的反应是：
+      <br><input name="c1" type="radio" value="1">“我能看你卸下这一身服装的模样吗？”
+      <br><input name="c1" type="radio" value="3">他一句话也没说。
+      <br><input name="c1" type="radio" value="5">“你看起来真漂亮。”</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">2、工作上受到挫折，心情沮丧万分，你打电话向他寻求一点心灵的慰藉，他……
+      <br><input name="c2" type="radio" value="3">在倾听之后，通常会带冰激凌等你喜爱的东西来安慰你。
+      <br><input name="c2" type="radio" value="1">立即打断你的谈话，因为他正与哥儿们享受啤酒大餐。
+      <br><input name="c2" type="radio" value="5">一番倾听之后，他安抚你好好睡一觉；第二天，他会一早打电话来关怀你。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">3、鱼水之欢时，你何时达到高潮：
+      <br><input name="c3" type="radio" value="5">在他达到高潮的同时，或随后不久。
+      <br><input name="c3" type="radio" value="1">在他达到高潮之前。
+      <br><input name="c3" type="radio" value="3">不一定。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">4、你无缘无故的开始烦躁不安，他……
+      <br><input name="c4" type="radio" value="51">替你找人咨询。
+      <br><input name="c4" type="radio" value="11">告诉你这是庸人自扰。
+      <br><input name="c4" type="radio" value="31">虽然他表示相当的关心，但你的言行似乎吓坏了他。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">5、你们共赴晚餐之后，面对账单……
+      <br><input name="c5" type="radio" value="52">他仔细计算你所消费的每一项，并告知你点了多少食物花费了多少钱。
+      <br><input name="c5" type="radio" value="12">当你正要拿钱包时，他说：“能请你是我的荣幸。”
+      <br><input name="c5" type="radio" value="32">只递出账单数目一半钱。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">6、当一位绝色美女与你们擦身而过时，他通常：
+      <br><input name="c6" type="radio" value="53">悄悄侧过头注视她。
+      <br><input name="c6" type="radio" value="13">向她行一个长长的“注目礼”。
+      <br><input name="c6" type="radio" value="33">对你说：“别担心，亲爱的，她无法与你媲美。”</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">7、当你们争吵时，你最后感到：
+      <br><input name="c7" type="radio" value="3">沮丧，因为他拒绝与你作坦率的交流。
+      <br><input name="c7" type="radio" value="5">面对你们之间认识上的差异时，他或许会略显不悦，但始终保持理性的态度。
+      <br><input name="c7" type="radio" value="1">他的行为使你害怕。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">8、当你告诉他，你的母亲（好友/姐妹）建议你拒绝一份你很想尝试的新工作时，他的反应是……
+      <br><input name="c8" type="radio" value="3">“别听她的，你能胜任。”
+      <br><input name="c8" type="radio" value="5">“她只是担心你而已，你能愉快地胜任。”
+      <br><input name="c8" type="radio" value="1">我对你妈妈（好友/姐妹）从没有好感。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">9、前夜，你参加一个非常尽兴的舞会，其中虽和一两个男性调情说笑，但只是逢场作戏。隔天，你的男朋友对这件事最可能的反应是……
+      <br><input name="c9" type="radio" value="53">因你的受欢迎而备感兴奋。
+      <br><input name="c9" type="radio" value="13">充满爱意的对你说，能拥有你是他无上的幸福。
+      <br><input name="c9" type="radio" value="33">不开心地怪你喝多了酒。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">10、当你们共度周末时：
+      <br><input name="c10" type="radio" value="3">你总觉得寂寞，因为他不是坐在电视前，便是在忙他的活。
+      <br><input type="radio" name="c10" value="5">你们一起笑，一起放松，你感受到无比的轻松舒适。
+      <br><input type="radio" name="c10" value="1">除了享受美好的性，他对其它的活动都不感兴趣。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">11、你的朋友如何形容他？
+      <br><input name="c11" type="radio" value="31">最佳情人。
+      <br><input type="radio" name="c11" value="51">一个爱着你的好男人。
+      <br><input type="radio" name="c11" value="11">一个可以一同玩乐的对象，但不是一个值得托付终身的人。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">10、下列任何一句话与你们的情况相似，请打勾：
+      <br><input type="checkbox" name="c12" value="ON">对于你所不擅长的事，他不会显出其高度的优越感来贬低你。
+      <br><input type="checkbox" name="c13" value="ON">他尝试带你加入他热衷的运动。
+      <br><input type="checkbox" name="c14" value="ON">你常听到他在别人面前夸耀你。
+      <br><input type="checkbox" name="c15" value="ON">当你胖了两公斤时，他一点也没有察觉。
+      <br><input type="checkbox" name="c16" value="ON">他常会带给你意外的惊喜，可能是你喜欢的CD，趣味的剪报，或是一包你爱吃的糖果。
+      <br><input type="checkbox" name="c17" value="ON">当你哭的时候，他不会烦躁愤怒，更不会问你是不是例假来了。
+      <br><input type="checkbox" name="c18" value="ON">他常搂抱你，牵你的手，这份亲昵感让你深觉幸福。
+      <br><input type="checkbox" name="c19" value="ON">若他拾到一个装满钱的皮夹，他会尽力寻找失主，分文不取地还给别人。
+      <br><input type="checkbox" name="c20" value="ON">你不觉得他饮酒过量。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="25" ><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><br><input type="button" value="都选择完了，结果怎样?" onClick="processForm(this.form)" style="FONT-SIZE: 12pt; font-family: 宋体"><br><input type="text" name="answer" size="20" style="font-family: 宋体; FONT-SIZE: 12pt; color: rgb(255,0,0)"></span></td>
+    </tr>
+  </table>
+  </div>
+</form>
+<div align="left">
+
+<table border="0" cellpadding="4" cellspacing="0" width="100%" height="143">
+  <tr>
+    <td width="520" height="143"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><font color="#FF0000">说明</font></span><p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><strong>分数为44分以上:</strong>百里挑一的好男人。
+    “在一个值得爱的男人身边，你可以充分拥有满足的快乐感。”心理学家说：“具有共同目标和兴趣的恋人，可互相扶持面对现实中的任何艰难和残酷。”
+    当然，在真爱中仍难免有争执，问题出现时，你们该如何面对？
+    “经过一番口角之后，是否发觉你们更加关心对方，更加了解对方？千万不要因双方的差异而分道扬镳，因为在沟通下减小差异，更能让两个人享受一份持久的美好感情。”</span></p>
+    <p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><strong>分数为26--44:</strong>尚待琢磨的男人。
+    每个男人都有他的优点和缺点。重要的是，你能忍受他的不完美，甚至让他改掉一些烦人的行为吗？
+    一般在选择一个人的时候，多少都带有一点期待，所以你最好自问，他是否具有你最看重的那些特质。
+    建议你写下十个你心目中的伴侣特点，如果他符合其中的五项，或许他就是那个值得你爱的人。</span></p>
+    <p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><strong>分数为26分以下:</strong>根本不值得爱的男人
+    这个人完全忽略你的存在，他或许宁可在电视前拼命换台也不想和你说话。甚至在你面前对别的女人眉目传情。你真的需要一个不值得你爱的男人，为他这样委屈自己？
+    或许你明知沉溺在一段不真挚的感情里，为何不向他说分手却困难重重呢？“因为我们都需要爱，都害怕在分手之后没有人再来爱自己。”
+    若你知道你应该离开他却无法当机立断，那么最好去找一个值得信赖的朋友帮你。</span></td>
+  </tr>
+</table>
+</div>
+
+</body> 
+
+
+ 
+</html>

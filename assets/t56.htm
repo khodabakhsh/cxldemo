@@ -1,0 +1,139 @@
+<html>
+
+<head><script Language="JavaScript">
+function processForm(form){
+var xf,hc1, hc2, hc3, hc4, hc5, hc6;
+xf=0;
+hc1=hc2=hc3=hc4=hc5=hc6=1;
+//loops through the radio buttons finding out which one is selected
+if (form.c1[1].checked==1) hc1=2;
+if (form.c1[2].checked==1) hc1=3;
+if (form.c1[3].checked==1) hc1=4;
+if (form.c1[4].checked==1) hc1=5;
+if (form.c1[5].checked==1) hc1=6;
+if (form.c1[6].checked==1) hc1=7;
+if (form.c2[1].checked==1) hc2=2;
+if (form.c2[2].checked==1) hc2=3;
+if (form.c2[3].checked==1) hc2=4;
+if (form.c2[4].checked==1) hc2=5;
+if (form.c2[5].checked==1) hc2=6;
+if (form.c2[6].checked==1) hc2=7;
+if (form.c3[1].checked==1) hc3=2;
+if (form.c3[2].checked==1) hc3=3;
+if (form.c3[3].checked==1) hc3=4;
+if (form.c3[4].checked==1) hc3=5;
+if (form.c3[5].checked==1) hc3=6;
+if (form.c3[6].checked==1) hc3=7;
+if (form.c4[1].checked==1) hc4=2;
+if (form.c4[2].checked==1) hc4=3;
+if (form.c4[3].checked==1) hc4=4;
+if (form.c4[4].checked==1) hc4=5;
+if (form.c4[5].checked==1) hc4=6;
+if (form.c4[6].checked==1) hc4=7;
+if (form.c5[1].checked==1) hc5=2;
+if (form.c5[2].checked==1) hc5=3;
+if (form.c5[3].checked==1) hc5=4;
+if (form.c5[4].checked==1) hc5=5;
+if (form.c5[5].checked==1) hc5=6;
+if (form.c5[6].checked==1) hc5=7;
+if (form.c6[1].checked==1) hc6=2;
+if (form.c6[2].checked==1) hc6=3;
+if (form.c6[3].checked==1) hc6=4;
+if (form.c6[4].checked==1) hc6=5;
+if (form.c6[5].checked==1) hc6=6;
+if (form.c6[6].checked==1) hc6=7;
+xf=hc1+hc3+hc5+24-hc2-hc4-hc6;		
+form.answer.value="你的得分为"+xf+"分";
+}</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<style>
+<!--
+        A:link {text-decoration: none; color: #0000ff; font-family: 宋体}
+        A:visited {text-decoration: none; color: #DA82F7; font-family: 宋体}
+        A:active {text-decoration: none; font-family: 宋体}
+        A:hover {text-decoration: underline; color: #DA82F7}
+-->
+</style>
+<title>心里测试大全</title>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+</head>
+
+<body bgcolor="#CEF8C7">
+<div align="left">
+
+<table border="0" cellpadding="4" cellspacing="0" width="100%" height="128">
+  <tr>
+    <td width="533" height="36" ><h3><span style="font-family: 宋体; font-size: 6pt"></span><font color="#0000FF"><strong><span style="font-family: 宋体; font-size: 12pt; line-height: 22px">职业定位测验：你是胸怀大志的人吗?</span></strong></font><span style="font-family: 宋体; font-size: 6pt"></span>
+    </h3></td></tr>
+  <tr>
+    <td width="533" height="18"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">以下问题测试自我实现的需要。只有胸怀大志的人，才特别追求自我价值的实现。自我实现的需要是指个体充分发挥自己的潜能，实现自己的人生价值，并造福于人类社会的需要。自我实现与个人主义的含义完全不同，个人主义是只考虑自己的利益，而不顾其他人的利益。而自我实现强调的是人尽其才，为社会创造价值。</span></td>
+  </tr>
+</table>
+</div>
+
+<form name="see">
+  <div align="left"><table border="0" cellPadding="5" cellspacing="0"width="100%" height="388">
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">1、我总是不断提高奋斗目标。
+      <br><input name="c1" type="radio" value="1">完全不同意。<br><input name="c1" type="radio" value="3">非常不同意。<br><input name="c1" type="radio" value="5">稍有不同意。
+      <br><input type="radio" name="c1" value="V1">无所谓。<br><input type="radio" name="c1" value="V2">稍有同意。<br><input type="radio" name="c1" value="V3">非常同意。<br><input type="radio" name="c1" value="V4">完全同意。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">2、我并不苛求自己。
+      <br><input name="c2" type="radio" value="11">完全不同意。<br><input name="c2" type="radio" value="31">非常不同意。<br><input name="c2" type="radio" value="51">稍有不同意。
+      <br><input type="radio" name="c2" value="V5">无所谓。<br><input type="radio" name="c2" value="V6">稍有同意。<br><input type="radio" name="c2" value="V7">非常同意。<br><input type="radio" name="c2" value="V8">完全同意。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">3、我择业时很看重在工作中能否不断提高能力。
+      <br><input name="c3" type="radio" value="12">完全不同意。<br><input name="c3" type="radio" value="32">非常不同意。<br><input name="c3" type="radio" value="52">稍有不同意。
+      <br><input type="radio" name="c3" value="V9">无所谓。<br><input type="radio" name="c3" value="V10">稍有同意。<br><input type="radio" name="c3" value="V11">非常同意。<br><input type="radio" name="c3" value="V12">完全同意。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">4、我喜欢既省力又收入高的工作。
+      <br><input name="c4" type="radio" value="13">完全不同意。<br><input name="c4" type="radio" value="33">非常不同意。<br><input name="c4" type="radio" value="53">稍有不同意。
+      <br><input type="radio" name="c4" value="V13">无所谓。<br><input type="radio" name="c4" value="V14">稍有同意。<br><input type="radio" name="c4" value="V15">非常同意。<br><input type="radio" name="c4" value="V16">完全同意。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">5、我总是乐于尝试没做过的事。
+      <br><input name="c5" type="radio" value="14">完全不同意。<br><input name="c5" type="radio" value="34">非常不同意。<br><input name="c5" type="radio" value="54">稍有不同意。
+      <br><input type="radio" name="c5" value="V17">无所谓。<br><input type="radio" name="c5" value="V18">稍有同意。<br><input type="radio" name="c5" value="V19">非常同意。<br><input type="radio" name="c5" value="V20">完全同意。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">6、我的天赋如果不被别人看重，我宁可放弃。
+      <br><input name="c6" type="radio" value="15">完全不同意。<br><input name="c6" type="radio" value="35">非常不同意。<br><input name="c6" type="radio" value="55">稍有不同意。
+      <br><input type="radio" name="c6" value="V21">无所谓。<br><input type="radio" name="c6" value="V22">稍有同意。<br><input type="radio" name="c6" value="V23">非常同意。<br><input type="radio" name="c6" value="V24">完全同意。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="25" ><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><br><input type="button" value="都选择完了，结果怎样?" onClick="processForm(this.form)" style="FONT-SIZE: 12pt; font-family: 宋体"><br><input type="text" name="answer" size="20" style="font-family: 宋体; FONT-SIZE: 12pt; color: rgb(255,0,0)"></span></td>
+    </tr>
+  </table>
+  </div>
+</form>
+<div align="left">
+
+<table border="0" cellpadding="4" cellspacing="0" width="100%" height="22">
+  <tr>
+    <td width="520" height="22"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><font color="#FF0000">说明</font></span><p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><strong>得分在6至22分</strong>：自我实现需要较低；
+    </span></p>
+      <p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><strong>得分在23至26分：</strong>自我实现需要中等；
+        </span></p>
+      <p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><strong>得分在27至35分：</strong>自我实现需要较高。</span></p>
+    <p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">分数越高，表明对该需求越在意，这方面需要的满足越可能牵动大量精力，成为生活的核心焦点。
+    一个人由低到高有5个方面的需要：基本生存需要，安全需要，归属和爱的需要，自尊的需要和自我实现的需要。这5种需要在层次上先后顺序，对于大多数人来说，只有当较低层次的需要得到一定程度的满足后，更高一层次的需要才会成为个体关注的焦点。需要指出的是，某种行为并不一定简单地对应于某种需要，决定行为的因素是多方面的，比如，吃饭有时是因为饥饿，有时是为了发泄自己的不满，有时却是为了庆祝某件事。对于社会中的大多数人来说，这5种需要都在一定程度上得到了满足，只是有些人还在为满足基本的需要而奔波，而另一些人却能够将生活的重心放在如何发展和完善自己、如何施展自己的潜能上。一个人的需求层次越高，他就越重视选择职业是否能符合个人的发展，对职业期望往往也越高，建议择职时眼光要放得长远些，选择那些最能使你发挥潜能的工作。</span></td>
+  </tr>
+</table>
+</div><div align="left">
+
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td border="0"></td>
+  </tr>
+</table>
+</div>
+
+</body> 
+
+
+ 
+</html>

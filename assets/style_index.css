@@ -1,0 +1,28 @@
+body,form{font-family:Arial,Helvetica,sans-serif;line-height:1.3em;padding:0;margin:0;color:#333;font-size:16px}
+img{border:0}
+a{color:#333;text-decoration:none}
+a:active{color:#f00}
+
+.b2{position:relative;height:30px;margin:0 0 10px 0;
+-moz-border-radius:3px;
+-webkit-border-radius:3px;
+border:1px solid #72bf75}
+.kw_wrap{margin:0 84px 0 2px;height:30px;background:#fff}
+#kw{width:100%;border:none;font-size:18px;padding:2px 0}
+#su{position:absolute;height:30px;width:84px;top:0;right:0;border-left:1px solid #72bf75;
+-webkit-border-top-right-radius: 3px;-webkit-border-bottom-right-radius: 3px;
+-moz-border-radius-bottomright:3px;-moz-border-radius-topright:3px;
+background: url(data:image/gif;base64,R0lGODlhAQAdALMAAPT59Mzrz+v47cfpyun26eT05uLy4tbv2NHt0szrzdjx2tLv1Nzx3t7y4M/r0crpzCH5BAAAAAAALAAAAAABAB0AAAQUEIhimmVMqXPWQk6YJMHzDA/CEBEAOw==);
+text-align:center;line-height:30px;color:#26652a;font-size:16px;font-weight:bold;}
+
+.d{height:29px;line-height:29px;padding:0 0 0 15px;
+border-top:1px solid #ababab;border-bottom:1px solid #ababab;
+background: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#d7d7d7));
+background: -moz-linear-gradient(-90deg,#fafafa,#d7d7d7);
+}
+
+.e div{height:36px;line-height:36px;padding-left:15px}
+.e .e1{height:34px;background:#ebebeb;border-top:1px solid #ccc;border-bottom:1px solid #ccc}
+.e .bg0{background:#FFF3C4;height:auto}
+.f{line-height:30px;padding:10px 15px 40px;border-top:1px solid #2fa504;}
+.gray{color:#999}

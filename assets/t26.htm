@@ -1,0 +1,126 @@
+<html>
+
+<head><script Language="JavaScript">
+function processForm(form){
+var xf=0;
+hc=new Array(15);
+var roll_call=hc.length;
+for (i=roll_call;i>0;i--)
+{hc[i-1]=0};
+//loops through the radio buttons finding out which one is selected
+if (form.c1[0].checked==1) hc[0]=1;
+if (form.c2[0].checked==1) hc[1]=1;
+if (form.c3[0].checked==1) hc[2]=1;
+if (form.c4[0].checked==1) hc[3]=1;
+if (form.c5[0].checked==1) hc[4]=1;
+if (form.c6[0].checked==1) hc[5]=1;
+if (form.c7[0].checked==1) hc[6]=1;
+if (form.c8[0].checked==1) hc[7]=1;
+if (form.c9[0].checked==1) hc[8]=1;
+if (form.c10[0].checked==1) hc[9]=1;
+if (form.c11[0].checked==1) hc[10]=1;
+if (form.c12[0].checked==1) hc[11]=1;
+if (form.c13[1].checked==1) hc[12]=1;
+if (form.c14[0].checked==1) hc[13]=1;
+if (form.c15[0].checked==1) hc[14]=1;
+for (i=roll_call;i>0;i--)
+{xf+=hc[i-1]};	
+form.answer.value="你的得分为"+xf+"分";
+}</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<style>
+<!--
+        A:link {text-decoration: none; color: #0000ff; font-family: 宋体}
+        A:visited {text-decoration: none; color: #DA82F7; font-family: 宋体}
+        A:active {text-decoration: none; font-family: 宋体}
+        A:hover {text-decoration: underline; color: #DA82F7}
+-->
+</style>
+<title>心里测试大全</title>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+</head>
+
+<body bgcolor="#CEF8C7">
+<div align="left">
+
+<table border="0" cellpadding="4" cellspacing="0" width="100%" height="89">
+  <tr>
+    <td width="100%" ><h3><span style="font-family: 宋体; font-size: 6pt"></span><font color="#0000FF"><strong><span style="font-family: 宋体; font-size: 12pt">责任感测试</span></strong></font><span style="font-family: 宋体; font-size: 6pt"></span>
+    </h3></td></tr>
+  <tr>
+    <td width="100%" ><span style="font-family: 宋体; FONT-SIZE: 12pt">你是那种没有责任感、每个妈妈都不放心让儿女与你交往的那一类型吗？</span></td>
+  </tr>
+</table>
+</div>
+
+<form name="see">
+  <div align="left"><table border="0" cellPadding="5" cellspacing="0" width="100%" height="1">
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">1、与人约会，你通常准时赴约吗？<br><input name="c1" type="radio" value="12">是。　<br><input name="c1" type="radio" value="32">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">2、你认为你这个人可靠吗？<br><input name="c2" type="radio" value="11">是。&nbsp; <br><input name="c2" type="radio" value="31">否。 
+      </span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">3、你会因未雨绸缪而储蓄吗？<br><input name="c3" type="radio" value="11">是。&nbsp;&nbsp;<br><input name="c3" type="radio" value="31">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">4、发现朋友犯法，你会通知警察吗？<br><input name="c4" type="radio" value="13">是。&nbsp;&nbsp;<br><input name="c4" type="radio" value="33">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">5、出外旅行，找不到垃圾桶时，你会把垃圾带回家去吗？<br><input name="c5" type="radio" value="14">是。&nbsp;&nbsp;<br><input name="c5" type="radio" value="34">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">6、你经常运动以保持健康吗？<br><input name="c6" type="radio" value="15">是。&nbsp;&nbsp;<br><input name="c6" type="radio" value="35">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">7、你忌吃垃圾食物、脂肪性过高和其他有害健康的食物吗？<br><input name="c7" type="radio" value="16">是。&nbsp;&nbsp;<br><input name="c7" type="radio" value="36">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">8、你永远将正事列为优先，再做其他休闲吗？<br><input name="c8" type="radio" value="17">是。&nbsp;&nbsp;<br><input name="c8" type="radio" value="37">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">9、你从来没有错过任何选举权利吗？<br><input name="c9" type="radio" value="18">是。&nbsp;&nbsp;<br><input name="c9" type="radio" value="38">否。 </span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">10、收到别人的信，你总会在一两天内就回信吗？<br><input name="c10" type="radio" value="19">是。&nbsp;&nbsp;<br><input name="c10" type="radio" value="39">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">11、“既然决定做一件事情，那么就要把它做好。”你相信这句话吗？　<br><input name="c11" type="radio" value="110">是。&nbsp;&nbsp;<br><input name="c11" type="radio" value="310">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">12、与人相约，你从来不会耽误，即使自己生病时也不例外吗？　<br><input name="c12" type="radio" value="111">是。&nbsp;&nbsp;<br><input name="c12" type="radio" value="311">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">13、你曾经犯过法吗？　<br><input name="c13" type="radio" value="112">是。&nbsp;&nbsp;<br><input name="c13" type="radio" value="312">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">14、在求学时代，你经常拖延交作业吗？　<br><input name="c14" type="radio" value="113">是。&nbsp;&nbsp;<br><input name="c14" type="radio" value="313">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">15、小时候，你经常帮忙做家务吗？　　<br><input name="c15" type="radio" value="114">是。&nbsp;&nbsp;<br><input name="c15" type="radio" value="314">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%"  ><span style="font-family: 宋体; FONT-SIZE: 12pt"><br><input type="button" value="都选择完了，结果怎样?" onClick="processForm(this.form)" style="FONT-SIZE: 12pt; font-family: 宋体"><br><input type="text" name="answer" size="20" style="font-family: 宋体; FONT-SIZE: 12pt; color: rgb(255,0,0)"></span></td>
+    </tr>
+  </table>
+  </div>
+</form>
+<div align="left">
+
+<table border="0" cellpadding="4" cellspacing="0" width="100%" height="22">
+  <tr>
+    <td width="563" height="22"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><font color="#FF0000">说明</font></span><p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><strong>分数为10--15:</strong>你是个非常有责任感的人。你行事谨慎、懂礼貌、为人可靠，并且相当诚实。</span></p>
+    <p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><strong>分数为3--9:</strong>大多数情况下，你都很有责任感，只是偶尔有些率性而为，没有考虑得很周到。</span></p>
+    <p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><strong>分数为2以下:</strong>你是个完全不负责任的人。有些朋友的父母可能会对你有成见，力劝儿女少跟你来往。你一次又一次地逃避责任，造成每个工作经常干不长，手上的钱也老是不够用。</span></td>
+  </tr>
+</table>
+</div>
+
+</body> 
+
+
+ 
+</html>

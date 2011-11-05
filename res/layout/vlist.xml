@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal" android:layout_width="fill_parent"
+	android:layout_height="wrap_content">
+
+
+	<ImageView android:id="@+id/img" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:layout_margin="1px" />
+
+	<LinearLayout android:orientation="vertical"
+		android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+		<TextView android:id="@+id/id" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:textColor="#FF69B4"
+			android:textSize="15px" android:visibility="gone"/>
+		<TextView android:id="@+id/name" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:textColor="#FF69B4"
+			android:textSize="20px" />
+		<TextView android:id="@+id/dateRange" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:textColor="#4169E1"
+			android:textSize="15px" android:visibility="gone" />
+
+	</LinearLayout>
+	<!-- 
+	<Button android:id="@+id/OwnsButton" android:text="更多免费应用..."
+		android:layout_height="wrap_content" android:layout_width="fill_parent"
+		android:visibility="visible" />
+	<Button android:id="@+id/OffersButton" android:visibility="visible"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:text="其他推荐的免费应用..." /> -->
+</LinearLayout>

@@ -1,0 +1,113 @@
+<html>
+
+<head><script Language="JavaScript">
+function processForm(form){
+var xf=0;
+hc=new Array(10);
+var roll_call=hc.length;
+for (i=roll_call;i>0;i--)
+{hc[i-1]=0};
+//loops through the radio buttons finding out which one is selected
+if (form.c1[0].checked==1) hc[0]=5;
+if (form.c2[0].checked==1) hc[1]=5;
+if (form.c3[0].checked==1) hc[2]=5;
+if (form.c4[0].checked==1) hc[3]=5;
+if (form.c5[0].checked==1) hc[4]=5;
+if (form.c6[0].checked==1) hc[5]=5;
+if (form.c7[0].checked==1) hc[6]=5;
+if (form.c8[0].checked==1) hc[7]=5;
+if (form.c9[0].checked==1) hc[8]=5;
+if (form.c10[0].checked==1) hc[9]=5;
+for (i=roll_call;i>0;i--)
+{xf+=hc[i-1]};	
+form.answer.value="你的得分为"+xf+"分";
+}</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<style>
+<!--
+        A:link {text-decoration: none; color: #0000ff; font-family: 宋体}
+        A:visited {text-decoration: none; color: #DA82F7; font-family: 宋体}
+        A:active {text-decoration: none; font-family: 宋体}
+        A:hover {text-decoration: underline; color: #DA82F7}
+-->
+</style>
+<title>心里测试大全</title>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+</head>
+
+<body bgcolor="#CEF8C7">
+<div align="left">
+
+<table border="0" cellpadding="4" cellspacing="0" width="100%" height="38">
+  <tr>
+    <td width="100%" height="38" ><h3><span style="font-family: 宋体; font-size: 6pt"></span><font color="#0000FF"><strong><span style="font-family: 宋体; font-size: 12pt">合格丈夫测试</span></strong></font><span style="font-family: 宋体; font-size: 6pt"></span></h3></td></tr>
+  <tr>
+    <td width="100%" ><span style="font-family: 宋体; FONT-SIZE: 12pt">请你对下列问题回答“是”或“否”：</span></td>
+  </tr>
+</table>
+</div>
+
+<form name="see">
+  <div align="left"><table border="0" cellPadding="5" cellspacing="0" width="100%" height="1">
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">1、你还偶尔用鲜花作礼物纪念妻子的生日吗？你常用些妻子没有想到的温柔向妻子“求情”吗？
+      <br><input name="c1" type="radio" value="12">是。　<br><input name="c1" type="radio" value="32">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">2、你小心地始终不在别人面前批评妻子吗？
+      <br><input name="c2" type="radio" value="11">是。&nbsp; <br><input name="c2" type="radio" value="31">否。 </span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">3、在家庭费用以外，你给她钱，完全随她用吗？
+      <br><input name="c3" type="radio" value="11">是。&nbsp;&nbsp;<br><input name="c3" type="radio" value="31">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">4、你尽力去了解她的各种女性的性能，并帮助她度过疲乏、不安、好怒的时期吗？
+      <br><input name="c4" type="radio" value="13">是。&nbsp;&nbsp;<br><input name="c4" type="radio" value="33">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">5、你至少有一半的消遣时间同她共处吗？
+      <br><input name="c5" type="radio" value="14">是。&nbsp;&nbsp;<br><input name="c5" type="radio" value="34">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">6、除对她有利之外，你巧妙地避免将妻子烹饪或家务与母亲的、或别人的妻子比较吗？
+      <br><input name="c6" type="radio" value="15">是。&nbsp;&nbsp;<br><input name="c6" type="radio" value="35">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">7、你对她所读的书，她对于公众问题的见解，发生确定的兴趣吗？
+      <br><input name="c7" type="radio" value="16">是。&nbsp;&nbsp;<br><input name="c7" type="radio" value="36">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">8、你能让她与别的男子跳舞而不说嫉妒的话吗？
+      <br><input name="c8" type="radio" value="17">是。&nbsp;&nbsp;<br><input name="c8" type="radio" value="37">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">9、你机警地寻求机会赞美她吗？
+      <br><input name="c9" type="radio" value="18">是。&nbsp;&nbsp;<br><input name="c9" type="radio" value="38">否。 </span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">10、对她为你所作的小事，如钉钮扣、补袜子或帮你洗衣服，你感谢她吗？
+      <br><input name="c10" type="radio" value="19">是。&nbsp;&nbsp;<br><input name="c10" type="radio" value="39">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%"  ><span style="font-family: 宋体; FONT-SIZE: 12pt"><br><input type="button" value="都选择完了，结果怎样?" onClick="processForm(this.form)" style="FONT-SIZE: 12pt; font-family: 宋体"><br><input type="text" name="answer" size="20" style="font-family: 宋体; FONT-SIZE: 12pt; color: rgb(255,0,0)"></span></td>
+    </tr>
+  </table>
+  </div>
+</form>
+<div align="left">
+
+<table border="0" cellpadding="4" cellspacing="0" width="100%" height="22">
+  <tr>
+    <td width="563" height="22"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><font color="#FF0000">说明</font></span><p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><strong>分数为40--100:</strong>你是个合格的丈夫。</span></p>
+    <p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><strong>分数为0--30:</strong>抱歉，你不懂得做丈夫的学问，还得从头学起。</span></td>
+  </tr>
+</table>
+</div>
+
+</body> 
+
+
+ 
+</html>

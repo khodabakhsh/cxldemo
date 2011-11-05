@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent">
+    <ScrollView android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@+id/layFooter" android:layout_below="@+id/layTop">
+        <LinearLayout android:orientation="vertical" android:padding="1.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <TableLayout android:paddingLeft="2.0dip" android:paddingRight="2.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:stretchColumns="0,1" android:shrinkColumns="0,1">
+                <TableRow android:gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip">
+                    <Button android:id="@+id/btnXingge" android:background="@drawable/btn_selector" android:layout_width="95.0dip" android:layout_height="95.0dip" android:text="性格测试" android:drawableTop="@drawable/xingge" />
+                    <Button android:id="@+id/btnQinggan" android:background="@drawable/btn_selector" android:layout_width="95.0dip" android:layout_height="95.0dip" android:layout_marginLeft="8.0dip" android:text="情感测试" android:drawableTop="@drawable/qinggan" />
+                </TableRow>
+                <TableRow android:gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip">
+                    <Button android:id="@+id/btnChenggong" android:background="@drawable/btn_selector" android:layout_width="95.0dip" android:layout_height="95.0dip" android:text="事业测试" android:drawableTop="@drawable/chenggon" />
+                    <Button android:id="@+id/btnLinglei" android:background="@drawable/btn_selector" android:layout_width="95.0dip" android:layout_height="95.0dip" android:layout_marginLeft="8.0dip" android:text="另类测试" android:drawableTop="@drawable/linglei" />
+                </TableRow>
+            </TableLayout>
+            <TextView android:textColor="#ee432104" android:id="@+id/textViewTips" android:background="@drawable/text_corner" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="2.0dip" android:layout_marginTop="8.0dip" android:layout_marginRight="2.0dip" android:text="心理学家认为,只要对心理测试给予有见地的解释,它们真能预测人们从事各种技能的实际本领。 心理测试（Psychological Test）的广泛使用始于1914~1918年的世界大战期间。当时英军、美军都需要一种快捷的方法来分出哪些新兵具有战斗力,哪些需要大量训练,又有哪些对自己部队比对敌军更具威胁。军队必须筛出那些无用之才。" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
