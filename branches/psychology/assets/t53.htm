@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb_2312-80">
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<title>心里测试大全</title>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+</head>
+
+<body bgcolor="#CBF2BF" text="#000000" link="#00000B" vlink="#0000DA">
+<script language="JavaScript"><!--
+
+function getResult(form) {
+
+var score = 0
+
+if (form.Q01[0].checked) { score += -1 }
+if (form.Q01[1].checked) { score += 3 }
+
+if (form.Q02[0].checked) { score += -1 }
+if (form.Q02[1].checked) { score += 0 }
+if (form.Q02[2].checked) { score += 3 }
+
+
+if (form.Q03[0].checked) { score += 3 }
+if (form.Q03[1].checked) { score += 0 }
+
+if (form.Q04[0].checked) { score += 3 }
+if (form.Q04[1].checked) { score += 0 }
+if (form.Q04[2].checked) { score += -1 }
+
+if (form.Q05[0].checked) { score += -1 }
+if (form.Q05[1].checked) { score += 3 }
+
+if (form.Q06[0].checked) { score += 3 }
+if (form.Q06[1].checked) { score += -1 }
+
+if (form.Q07[0].checked) { score += 3 }
+if (form.Q07[1].checked) { score += 0 }
+
+if (form.Q08[0].checked) { score += 3 }
+if (form.Q08[1].checked) { score += 0 }
+
+if (form.Q09[0].checked) { score += 3 }
+if (form.Q09[1].checked) { score += -1 }
+
+score1=score*100/30
+if (score1 > 60) { alert('恭喜恭喜！你的成功率是'+score1+'好兆头，不是吗？ ')}
+if (score1 > 30 && score1 <61) { alert('你的成功率是'+score1+'。怎么办?加把劲吧！') }
+if (score1 < 31 ) { alert('你的成功率只有'+score1+'。你还是放弃吧...') }
+}
+
+// --></script><font color="#FF8000" size="4"><strong>你的恋爱成功率 </strong></font>
+
+<form name="pt1">
+  <ol>
+    <li>与情人相处，能否直接询问对方是不是爱你？<p><input type="radio" checked name="Q01" value="1">能　<input type="radio" name="Q01" value="2">不能　</p>
+    </li>
+    <li>恋爱结婚主要是解决：<p><input type="radio" checked name="Q02" value="1">性欲　<input type="radio" name="Q02" value="2">生活　<input type="radio" name="Q02" value="3">亲密伴侣</p>
+    </li>
+    <li>从恋爱到结婚时间是否需要长一点？<p><input type="radio" checked name="Q03" value="1">要　<input type="radio" name="Q03" value="2">不要</p>
+    </li>
+    <li>嫉妒是什么信号？<p><input type="radio" checked name="Q04" value="1">爱　<input type="radio" name="Q04" value="2">不安　<input type="radio" name="Q04" value="3">竞争</p>
+    </li>
+    <li>可以在情人面前与别的异性过于亲热吗？<p><input type="radio" checked name="Q05" value="1">可以　<input type="radio" name="Q05" value="2">不可以　</p>
+    </li>
+    <li>能同时和两个人要好吗？<p><input type="radio" checked name="Q06" value="1">不能　<input type="radio" name="Q06" value="2">能　</p>
+    </li>
+    <li>许多人对婚后生活满怀奢望，结果常常落空，是这样吗？ <p><input type="radio" checked name="Q07" value="1">是　<input type="radio" name="Q07" value="2">不是　</p>
+    </li>
+    <li>哪种人最经不起失恋和孤寂之苦，女人还是男人？ <p><input type="radio" checked name="Q08" value="1">女人　<input type="radio" name="Q08" value="2">男人　</p>
+    </li>
+    <li>忠贞是搞好婚姻的重要原则吗？<p><input type="radio" checked name="Q09" value="1">是　<input type="radio" name="Q09" value="2">不是　
+      </p>
+    </li>
+  </ol>
+  <p>　　<input type="button" name="finish" value="EQ解码" onClick="getResult(this.form)"> <input type="reset" value=" RESET "> 
+  </p>
+</form>
+
+</body> 
+
+
+ 
+</html>

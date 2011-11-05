@@ -1,0 +1,140 @@
+<html>
+<!-- Copyright www.5719.cn All Rights Reserved -->
+<head><script Language="JavaScript">
+function processForm(form){
+var xf=0;
+hc=new Array(15);
+var roll_call=hc.length;
+for (i=roll_call;i>0;i--)
+{hc[i-1]=0};
+//loops through the radio buttons finding out which one is selected
+if (form.c1[0].checked==1) hc[0]=1;
+if (form.c2[0].checked==1) hc[1]=1;
+if (form.c3[0].checked==1) hc[2]=1;
+if (form.c4[0].checked==1) hc[3]=1;
+if (form.c5[0].checked==1) hc[4]=1;
+if (form.c6[0].checked==1) hc[5]=1;
+if (form.c7[0].checked==1) hc[6]=1;
+if (form.c8[0].checked==1) hc[7]=1;
+if (form.c9[0].checked==1) hc[8]=1;
+if (form.c10[0].checked==1) hc[9]=1;
+if (form.c11[0].checked==1) hc[10]=1;
+if (form.c12[0].checked==1) hc[11]=1;
+if (form.c13[0].checked==1) hc[12]=1;
+if (form.c14[0].checked==1) hc[13]=1;
+if (form.c15[0].checked==1) hc[14]=1;
+for (i=roll_call;i>0;i--)
+{xf+=hc[i-1]};	
+form.answer.value="你的得分为"+xf+"分";
+}</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<style>
+<!--
+        A:link {text-decoration: none; color: #0000ff; font-family: 宋体}
+        A:visited {text-decoration: none; color: #DA82F7; font-family: 宋体}
+        A:active {text-decoration: none; font-family: 宋体}
+        A:hover {text-decoration: underline; color: #DA82F7}
+-->
+</style>
+<title>心里测试大全</title>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+</head>
+
+<body bgcolor="#CEF8C7">
+<div align="left">
+
+<table border="0" cellpadding="4" cellspacing="0" width="100%" height="38">
+  <tr>
+    <td width="100%" height="38" ><h3><span style="font-family: 宋体; font-size: 6pt"></span><font color="#0000FF"><strong><span style="font-family: 宋体; font-size: 12pt">你是哪种类型的丈夫</span></strong></font><span style="font-family: 宋体; font-size: 6pt"></span></h3></td></tr>
+  <tr>
+    <td width="100%" ><span style="font-family: 宋体; FONT-SIZE: 12pt">现在，那些两耳不闻窗外事，一心扑在工作上的大丈夫已越来越不好讨好了。时代要求的理想丈夫必须能独立料理自己的生活。请自测你是否可以自己伺候自己。</span></td>
+  </tr>
+</table>
+</div>
+
+<form name="see">
+  <div align="left"><table border="0" cellPadding="5" cellspacing="0" width="100%" height="1">
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">1、你了解自己的西服、领带、袜子和内衣的放置处吗？
+      <br><input name="c1" type="radio" value="12">是。　<br><input name="c1" type="radio" value="32">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">2、你会使用吸尘器吗？（你经常用拖把拖地吗？）
+      <br><input name="c2" type="radio" value="11">是。&nbsp; <br><input name="c2" type="radio" value="31">否。 </span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">3、你知道大米的价格吗？
+      <br><input name="c3" type="radio" value="11">是。&nbsp;&nbsp;<br><input name="c3" type="radio" value="31">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">4、你会做饭吗？
+      <br><input name="c4" type="radio" value="13">是。&nbsp;&nbsp;<br><input name="c4" type="radio" value="33">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">5、你会做三个以上的菜吗？
+      <br><input name="c5" type="radio" value="14">是。&nbsp;&nbsp;<br><input name="c5" type="radio" value="34">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">6、你饭后洗碗、整理餐桌吗？
+      <br><input name="c6" type="radio" value="15">是。&nbsp;&nbsp;<br><input name="c6" type="radio" value="35">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">7、你使用过洗衣机吗？
+      <br><input name="c7" type="radio" value="16">是。&nbsp;&nbsp;<br><input name="c7" type="radio" value="36">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">8、你知道收集垃圾的时间吗？（你倒垃圾吗？）
+      <br><input name="c8" type="radio" value="17">是。&nbsp;&nbsp;<br><input name="c8" type="radio" value="37">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">9、你打扫、洗刷过浴室吗？
+      <br><input name="c9" type="radio" value="18">是。&nbsp;&nbsp;<br><input name="c9" type="radio" value="38">否。 </span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">10、你知道户籍簿（以及各种票证）和印章放在何处吗？
+      <br><input name="c10" type="radio" value="19">是。&nbsp;&nbsp;<br><input name="c10" type="radio" value="39">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">11、你每周与家人共进晚餐三次以上吗？
+      <br><input name="c11" type="radio" value="1">是。&nbsp;&nbsp;<br><input name="c11" type="radio" value="3">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">12、你知道三个以上的儿子朋友的名字吗？
+      <br><input name="c12" type="radio" value="1">是。&nbsp;&nbsp;<br><input name="c12" type="radio" value="3">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">13、你会看报纸的家庭生活栏目吗？（你买过有关家庭生活的实用书刊吗？）
+      <br><input name="c13" type="radio" value="2">是。&nbsp;&nbsp;<br><input name="c13" type="radio" value="3">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">14、你有业余爱好并坚持下去吗？
+      <br><input name="c14" type="radio" value="1">是。&nbsp;&nbsp;<br><input name="c14" type="radio" value="3">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">15、你同爱人每日谈话30分钟以上吗？（你同爱人至少每天亲热30分钟以上吗？）
+      <br><input name="c15" type="radio" value="1">是。&nbsp;&nbsp;<br><input name="c15" type="radio" value="3">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%"  ><span style="font-family: 宋体; FONT-SIZE: 12pt"><br><input type="button" value="都选择完了，结果怎样?" onClick="processForm(this.form)" style="FONT-SIZE: 12pt; font-family: 宋体"><br><input type="text" name="answer" size="20" style="font-family: 宋体; FONT-SIZE: 12pt; color: rgb(255,0,0)"></span></td>
+    </tr>
+  </table>
+  </div>
+</form>
+<div align="left">
+
+<table border="0" cellpadding="4" cellspacing="0" width="100%" height="22">
+  <tr>
+    <td width="563" height="22"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><font color="#FF0000">说明</font></span><p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><strong>分数为10--15:</strong>你是个自立较强的“二十一世纪”型丈夫。</span></p>
+    <p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><strong>分数为6--9:</strong>你是自立度一般的“自我服务”型丈夫。</span></p>
+    <p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><strong>分数为1--5:</strong>你是自立度差的“产业废物”型丈夫。</span></p>
+    <p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">在做完自我鉴定以后，为尽量避免你向更加危险的方面发展，以至在高龄化社会中成为社会的垃圾，应加强以下五方面：做助人为乐的人、经常下厨房、自己安排盥洗、善于家计、时常整理环境。</span></td>
+  </tr>
+</table>
+</div>
+
+</body> 
+
+
+ 
+</html>

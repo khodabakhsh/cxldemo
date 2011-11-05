@@ -1,0 +1,146 @@
+<html>
+
+<head><script Language="JavaScript">
+function processForm(form){
+var xf=0;
+hc=new Array(20);
+var roll_call=hc.length;
+for (i=roll_call;i>0;i--)
+{hc[i-1]=0};
+//loops through the radio buttons finding out which one is selected
+if (form.c1[0].checked==1) hc[0]=1;
+if (form.c2[0].checked==1) hc[1]=1;
+if (form.c3[0].checked==1) hc[2]=1;
+if (form.c4[0].checked==1) hc[3]=1;
+if (form.c5[0].checked==1) hc[4]=1;
+if (form.c6[0].checked==1) hc[5]=1;
+if (form.c7[0].checked==1) hc[6]=1;
+if (form.c8[1].checked==1) hc[7]=1;
+if (form.c9[1].checked==1) hc[8]=1;
+if (form.c10[1].checked==1) hc[9]=1;
+if (form.c11[1].checked==1) hc[10]=1;
+if (form.c12[1].checked==1) hc[11]=1;
+if (form.c13[1].checked==1) hc[12]=1;
+if (form.c14[1].checked==1) hc[13]=1;
+if (form.c15[1].checked==1) hc[14]=1;
+if (form.c16[1].checked==1) hc[15]=1;
+if (form.c17[0].checked==1) hc[16]=1;
+if (form.c18[0].checked==1) hc[17]=1;
+if (form.c19[1].checked==1) hc[18]=1;
+if (form.c20[0].checked==1) hc[19]=1;
+for (i=roll_call;i>0;i--)
+{xf+=hc[i-1]};	
+form.answer.value="你的得分为"+xf+"分";
+}</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<style>
+<!--
+        A:link {text-decoration: none; color: #0000ff; font-family: 宋体}
+        A:visited {text-decoration: none; color: #DA82F7; font-family: 宋体}
+        A:active {text-decoration: none; font-family: 宋体}
+        A:hover {text-decoration: underline; color: #DA82F7}
+-->
+</style>
+<title>心里测试大全</title>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+</head>
+
+<body  >
+<div align="left">
+
+<table border="0" cellpadding="4" cellspacing="0" width="100%" height="38">
+  <tr>
+    <td width="100%" height="38" ><h3><span style="font-family: 宋体; font-size: 6pt"></span><font color="#0000FF"><span style="font-family: 宋体; font-size: 12pt"><strong>你是个有领导能力的人吗</strong></span></font><span style="font-family: 宋体; font-size: 6pt"></span>
+    </h3></td></tr>
+  <tr>
+    <td width="100%" ><span style="font-family: 宋体; FONT-SIZE: 12pt">你是一个领导者，或是一个跟随者？</span></td>
+  </tr>
+</table>
+</div>
+
+<form name="see">
+  <div align="left"><table border="0" cellPadding="5" cellspacing="0" width="100%" height="1">
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">1、别人拜托你帮忙，你很少拒绝吗？<br><input name="c1" type="radio" value="12">是。　<br><input name="c1" type="radio" value="32">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">2、为了避免与人发生争执，即使你是对的，你也不愿发表意见吗？<br><input name="c2" type="radio" value="11">是。&nbsp; <br><input name="c2" type="radio" value="31">否。 
+      </span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">3、你遵守一般的法规吗？　<br><input name="c3" type="radio" value="11">是。&nbsp;&nbsp;<br><input name="c3" type="radio" value="31">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">4、你经常向别人说抱歉吗？<br><input name="c4" type="radio" value="13">是。&nbsp;&nbsp;<br><input name="c4" type="radio" value="33">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">5、如果有人笑你身上的衣服，你会再穿它一遍吗？<br><input name="c5" type="radio" value="14">是。&nbsp;&nbsp;<br><input name="c5" type="radio" value="34">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">6、你永远走在时髦的前列吗？　<br><input name="c6" type="radio" value="15">是。&nbsp;&nbsp;<br><input name="c6" type="radio" value="35">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">7、你曾经穿那种好看却不舒服的衣服吗？　<br><input name="c7" type="radio" value="16">是。&nbsp;&nbsp;<br><input name="c7" type="radio" value="36">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">8、开车或坐车时，你曾经咒骂别的驾驶者吗？<br><input name="c8" type="radio" value="17">是。&nbsp;&nbsp;<br><input name="c8" type="radio" value="37">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">9、你对反应较慢的人没有耐心吗？　<br><input name="c9" type="radio" value="18">是。&nbsp;&nbsp;<br><input name="c9" type="radio" value="38">否。 </span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">10、你经常对人发誓吗？　　<br><input name="c10" type="radio" value="19">是。&nbsp;&nbsp;<br><input name="c10" type="radio" value="39">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">11、你经常让对方觉得不如你或比你差劲吗？是。&nbsp;&nbsp;<br><input name="c11" type="radio" value="310">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">12、你曾经大力批评电视上的言论吗？　<br><input name="c12" type="radio" value="111">是。&nbsp;&nbsp;<br><input name="c12" type="radio" value="311">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">13、如果请的工人没有做好，你会反应吗？　<br><input name="c13" type="radio" value="112">是。&nbsp;&nbsp;<br><input name="c13" type="radio" value="312">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">14、惯于坦白自己的想法，而不考虑后果吗？　<br><input name="c14" type="radio" value="113">是。&nbsp;&nbsp;<br><input name="c14" type="radio" value="313">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">15、你是个不轻易忍受别人的人吗？　　<br><input name="c15" type="radio" value="114">是。&nbsp;&nbsp;<br><input name="c15" type="radio" value="314">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">16、与人争论时，你总爱争赢吗？　　<br><input name="c16" type="radio" value="115">是。&nbsp;&nbsp;<br><input name="c16" type="radio" value="315">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">17、你总是让别人替你做重要的事吗？　　<br><input name="c17" type="radio" value="116">是。&nbsp;&nbsp;<br><input name="c17" type="radio" value="316">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">18、你喜欢将钱投资在财富上，而胜过于个人成长吗？　　<br><input name="c18" type="radio" value="117">是。&nbsp;&nbsp;<br><input name="c18" type="radio" value="317">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">19、你故意在穿着上吸引他人的注意吗？　　<br><input name="c19" type="radio" value="118">是。&nbsp;&nbsp;<br><input name="c19" type="radio" value="318">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt">20、你不喜欢标新立异吗？　　<br><input name="c20" type="radio" value="119">是。&nbsp;&nbsp;<br><input name="c20" type="radio" value="319">否。</span></td>
+    </tr>
+    <tr>
+      <td width="100%"  ><span style="font-family: 宋体; FONT-SIZE: 12pt"><br><input type="button" value="都选择完了，结果怎样?" onClick="processForm(this.form)" style="FONT-SIZE: 12pt; font-family: 宋体"><br><input type="text" name="answer" size="20" style="font-family: 宋体; FONT-SIZE: 12pt; color: rgb(255,0,0)"></span></td>
+    </tr>
+  </table>
+  </div>
+</form>
+<div align="left">
+
+<table border="0" cellpadding="4" cellspacing="0" width="100%" height="22">
+  <tr>
+    <td width="563" height="22"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><font color="#FF0000">说明</font></span><p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><strong>分数为14--20:</strong>你是个标准的跟随者，不适合领导别人。你喜欢被动地听人指挥。在紧急的情况下，你多半不会主动出头带领群众，但你很愿意跟大家配合。</span></p>
+    <p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><strong>分数为7--13:</strong>你是个介于领导者和跟随者之间的人。你可以随时带头，或指挥别人该怎么做。不过，因为你的个性不够积极，冲劲不足，所以常常是扮演跟随者的角色。</span></p>
+    <p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><strong>分数为6以下:</strong>你是个天生的领导者。你的个性很强，不愿接受别人的指挥。你喜欢使唤别人，如果别人不愿听从的话，你就会变得很叛逆，不肯轻易服从别人。</span></td>
+  </tr>
+</table>
+</div>
+
+</body> 
+
+
+ 
+</html>

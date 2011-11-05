@@ -1,0 +1,212 @@
+<html>
+
+<head><script Language="JavaScript">
+function processForm(form){
+var xf=0;
+hc=new Array(18);
+var roll_call=hc.length;
+for (i=roll_call;i>0;i--)
+{hc[i-1]=0};
+//loops through the radio buttons finding out which one is selected
+if (form.c1[2].checked==1) hc[0]=2;
+if (form.c1[1].checked==1) hc[0]=1;
+if (form.c2[2].checked==1) hc[1]=2;
+if (form.c2[1].checked==1) hc[1]=1;
+if (form.c3[2].checked==1) hc[2]=2;
+if (form.c3[1].checked==1) hc[2]=1;
+if (form.c4[2].checked==1) hc[3]=2;
+if (form.c4[1].checked==1) hc[3]=1;
+if (form.c5[2].checked==1) hc[4]=2;
+if (form.c5[1].checked==1) hc[4]=1;
+if (form.c6[2].checked==1) hc[5]=2;
+if (form.c6[1].checked==1) hc[5]=1;
+if (form.c7[2].checked==1) hc[6]=2;
+if (form.c7[1].checked==1) hc[6]=1;
+if (form.c8[2].checked==1) hc[7]=2;
+if (form.c8[1].checked==1) hc[7]=1;
+if (form.c9[2].checked==1) hc[8]=2;
+if (form.c9[1].checked==1) hc[8]=1;
+if (form.c10[2].checked==1) hc[9]=2;
+if (form.c10[1].checked==1) hc[9]=1;
+if (form.c11[2].checked==1) hc[10]=2;
+if (form.c11[1].checked==1) hc[10]=1;
+if (form.c12[2].checked==1) hc[11]=2;
+if (form.c12[1].checked==1) hc[11]=1;
+if (form.c13[2].checked==1) hc[12]=2;
+if (form.c13[1].checked==1) hc[12]=1;
+if (form.c14[2].checked==1) hc[13]=2;
+if (form.c14[1].checked==1) hc[13]=1;
+if (form.c15[2].checked==1) hc[14]=2;
+if (form.c15[1].checked==1) hc[14]=1;
+if (form.c16[2].checked==1) hc[15]=2;
+if (form.c16[1].checked==1) hc[15]=1;
+if (form.c17[2].checked==1) hc[16]=2;
+if (form.c17[1].checked==1) hc[16]=1;
+if (form.c18[2].checked==1) hc[17]=2;
+if (form.c18[1].checked==1) hc[17]=1;
+for (i=roll_call;i>0;i--)
+{xf+=hc[i-1]};		
+form.answer.value="你的得分为"+xf+"分";
+}</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<style>
+<!--
+        A:link {text-decoration: none; color: #0000ff; font-family: 宋体}
+        A:visited {text-decoration: none; color: #DA82F7; font-family: 宋体}
+        A:active {text-decoration: none; font-family: 宋体}
+        A:hover {text-decoration: underline; color: #DA82F7}
+-->
+</style>
+<title>心里测试大全</title>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+</head>
+
+<body bgcolor="#CEF8C7">
+<div align="left">
+
+<table border="0" cellpadding="4" cellspacing="0" width="100%" height="125">
+  <tr>
+    <td width="574" height="33"  ><h3><span style="font-family: 宋体; font-size: 6pt"></span><font color="#0000FF"><strong><span style="font-family: 宋体; font-size: 12pt">性成熟程度测试(男性回答部分)</span></strong></font><span style="font-family: 宋体; font-size: 6pt"></span>
+    </h3></td></tr>
+  <tr>
+    <td width="574" height="6"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">性的成熟不只是年龄问题。有些成年人性方面比较成熟，对异性了如指掌，因而与异性交往时比较得心应手；而另一些人在性方面却长期处于幼稚和朦胧之中，在求偶或其他与异性交往的活动中往往不能称心如意或屡告失败。
+    请按实际情况回答下列问题，结果将使你认识到自己在性方面成熟与否的程度，它有助于你扩大眼界，提高社交技巧。</span></td>
+  </tr>
+</table>
+</div>
+
+<form name="see">
+  <div align="left"><table border="0" cellPadding="5" cellspacing="0" width="100%" height="388">
+    <tr>
+      <td width="572" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">1、你认为女人最理想的优点是什么？
+      <br><input name="c1" type="radio" value="1">贞操。
+      <br><input name="c1" type="radio" value="3">性欲强。
+      <br><input name="c1" type="radio" value="5">大方。</span></td>
+    </tr>
+    <tr>
+      <td width="572" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">2、如果你有性方面的问题，你将首先与谁谈论此事？
+      <br><input name="c2" type="radio" value="11">好朋友。
+      <br><input name="c2" type="radio" value="31">询问医生。
+      <br><input name="c2" type="radio" value="51">你的爱人。</span></td>
+    </tr>
+    <tr>
+      <td width="572" height="1"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">3、你认为能给女人最深印象的是什么？
+      <br><input name="c3" type="radio" value="12">英勇。
+      <br><input name="c3" type="radio" value="32">性技巧。
+      <br><input name="c3" type="radio" value="52">体贴入微。</span></td>
+    </tr>
+    <tr>
+      <td width="572" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">4、最能使女人感到温馨刺激的是什么？
+      <br><input name="c4" type="radio" value="13">关上灯后抚摸她。
+      <br><input name="c4" type="radio" value="33">亲吻她并轻声呼唤她。
+      <br><input name="c4" type="radio" value="53">放弃嬉戏，注意她的情感。</span></td>
+    </tr>
+    <tr>
+      <td width="572" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">5、你认为当代女人的特点是什么？
+      <br><input name="c5" type="radio" value="14">女人还是喜欢男人在性方面粗俗地对待自己。
+      <br><input name="c5" type="radio" value="34">今天的女人在所有方面都要求平等。
+      <br><input name="c5" type="radio" value="54">女人仍喜欢男人把自己作为贵妇人对待。</span></td>
+    </tr>
+    <tr>
+      <td width="572" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">6、如果你的伴侣花很多时间与别的男人在一起，你会如何反应？
+      <br><input name="c6" type="radio" value="15">禁止她再与他们接触。
+      <br><input name="c6" type="radio" value="35">尽可能地跟着她。
+      <br><input name="c6" type="radio" value="55">因她普遍受人喜爱，但你为她最爱的是你而感到高兴。</span></td>
+    </tr>
+    <tr>
+      <td width="572" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">7、你常赞赏爱人的外貌吗？
+      <br><input name="c7" type="radio" value="16">极少正眼看她。
+      <br><input name="c7" type="radio" value="36">当你特别喜欢或不喜欢她某一点时。
+      <br><input name="c7" type="radio" value="56">常找她的优点并加以赞赏。</span></td>
+    </tr>
+    <tr>
+      <td width="572" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">8、当你有性欲而她表示冷漠时，你怎么做？
+      <br><input name="c8" type="radio" value="17">发脾气，指责她的冷漠。
+      <br><input name="c8" type="radio" value="37">走开去看色情书刊。
+      <br><input name="c8" type="radio" value="57">耐心而温柔地爱抚她。</span></td>
+    </tr>
+    <tr>
+      <td width="572" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">9、你对年龄较大的女人持何态度？
+      <br><input name="c9" type="radio" value="18">在性方面不与她们发生任何关系。
+      <br><input name="c9" type="radio" value="38">她们在性方面仅次于年轻姑娘。
+      <br><input name="c9" type="radio" value="58">她们有丰富的性经验。</span></td>
+    </tr>
+    <tr>
+      <td width="572" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">10、如果你瞒着妻子的事被发现，你将怎么做？
+      <br><input name="c10" type="radio" value="19">找出她的一个过错，为你的过错开脱。
+      <br><input name="c10" type="radio" value="39">避免提及此事，以防伤害感情。
+      <br><input name="c10" type="radio" value="59">使她相信你对那件事根本没在意。</span></td>
+    </tr>
+    <tr>
+      <td width="572" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">11、你对个人卫生有何特别的注意？
+      <br><input name="c11" type="radio" value="110">你认为女人喜欢自然的、男子的气味。
+      <br><input name="c11" type="radio" value="310">在约会前你会洗脸并喷上香水。
+      <br><input name="c11" type="radio" value="510">在约会和作爱前都洗澡。</span></td>
+    </tr>
+    <tr>
+      <td width="572" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">12、你爱的女人认为婚姻是过时的东西，你会怎样？
+      <br><input name="c12" type="radio" value="111">认为她缺乏道德并不能容忍她的这种观点。
+      <br><input name="c12" type="radio" value="311">不结婚但与她共度时光。
+      <br><input name="c12" type="radio" value="511">高兴地与她自由同居。</span></td>
+    </tr>
+    <tr>
+      <td width="572" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">13、你对避孕持何态度？
+      <br><input name="c13" type="radio" value="112">男人不会怀孕，这是女人的事。
+      <br><input name="c13" type="radio" value="312">你会每次都戴避孕套。
+      <br><input name="c13" type="radio" value="512">在谈好双方的共同责任以前，不与她同房。</span></td>
+    </tr>
+    <tr>
+      <td width="572" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">14、你何时送花给伴侣？
+      <br><input name="c14" type="radio" value="113">在你觉得有事对不起她想和好时。
+      <br><input name="c14" type="radio" value="313">在生日或节假日。
+      <br><input name="c14" type="radio" value="513">当你想特别使她高兴时。</span></td>
+    </tr>
+    <tr>
+      <td width="572" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">15、你愿带一个成熟的女人看以下哪一种电影？
+      <br><input name="c15" type="radio" value="114">喜剧片。
+      <br><input name="c15" type="radio" value="314">惊险片。
+      <br><input name="c15" type="radio" value="514">爱情片。</span></td>
+    </tr>
+    <tr>
+      <td width="572" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">16、如果你爱人因病或其他原因丧失了进行正常性生活的能力，你怎么办？
+      <br><input name="c16" type="radio" value="115">对她表示同情，但尽早离开她。
+      <br><input name="c16" type="radio" value="315">感觉受了骗并为自己感到不幸。
+      <br><input name="c16" type="radio" value="515">寻找相互满足的新方式。</span></td>
+    </tr>
+    <tr>
+      <td width="572" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">17、如果一个未成年的女孩对你提出性要求，你怎么办？
+      <br><input name="c17" type="radio" value="116">答应她，但完事后迅速离开她。
+      <br><input name="c17" type="radio" value="316">告诉她父母，并建议多加教育。
+      <br><input name="c17" type="radio" value="516">友善地告诉她你不答应她的理由。</span></td>
+    </tr>
+    <tr>
+      <td width="572" height="35"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">18、刚做完爱后你做什么？
+      <br><input name="c18" type="radio" value="117">抽支烟。
+      <br><input name="c18" type="radio" value="317">很快入睡。
+      <br><input name="c18" type="radio" value="517">继续抚爱你的伴侣。</span></td>
+    </tr>
+    <tr>
+      <td width="572" height="25" ><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><br><input type="button" value="都选择完了，结果怎样?" onClick="processForm(this.form)" style="FONT-SIZE: 12pt; font-family: 宋体"><br><input type="text" name="answer" size="20" style="font-family: 宋体; FONT-SIZE: 12pt; color: rgb(255,0,0)"></span></td>
+    </tr>
+  </table>
+  </div>
+</form>
+<div align="left">
+
+<table border="0" cellpadding="4" cellspacing="0" width="100%" height="22">
+  <tr>
+    <td width="575" height="22"><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><font color="#FF0000">说明</font></span><p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><strong>分数为30--60:</strong>你是一个对异性了如指掌、非常成熟的人。你在爱情生活方面不需要什么指教，只要你愿意，你周围不会缺乏爱你的异性。</span></p>
+    <p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><strong>分数为20--29:</strong>你在爱情生活中及对异性的把握上有相当能力，但如果你想在这方面继续取得进展，你的情感方式的某些方面还需改进，通过回答本测验中的问题，你能够找到自己的弱点。</span></p>
+    <p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><strong>分数为10--19:</strong>你在与异性交往方面不是太年轻就是太天真，大多数人会把你看作爱情方面尚未成熟，不能令人满意的情人。虽然也有少数人会喜欢你那幼稚的恋爱方式。</span></p>
+    <p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px"><strong>分数为0--9:</strong>你态度明显表明你在性方面还处在朦胧状态，没有一个头脑清醒的人会与你再次约会，更不会考虑与你共度终生了。如果你做这个测验时是诚实的，你应该向有关方面寻求指导和帮助。</span></p>
+    <p><span style="font-family: 宋体; FONT-SIZE: 12pt; line-height: 22px">(注：每题的第三个选择为最佳)</span></td>
+  </tr>
+</table>
+</div>
+
+</body> 
+
+
+ 
+</html>
