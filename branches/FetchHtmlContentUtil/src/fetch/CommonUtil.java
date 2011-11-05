@@ -93,7 +93,7 @@ public class CommonUtil {
 		return sBuffer.toString();
 	}
 
-	public static String getDocumentContentByPost(String url) {
+	public static String getDocumentContentByGet(String url) {
 		HttpClient client = new DefaultHttpClient();
 		client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, TIME_OUT);
 		HttpGet get = new HttpGet(url);
@@ -113,6 +113,7 @@ public class CommonUtil {
 			// System.out.println(sBuffer);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return getDocumentContentByGet(url);
 		} finally {
 			try {
 				if (iStreamReader != null)
