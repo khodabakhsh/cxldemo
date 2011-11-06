@@ -2,8 +2,9 @@ package com.cxl;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,20 +24,8 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 	public static int currentPointTotal = 0;// 当前积分
 	public static final int requirePoint = 50;// 要求积分
 	public static boolean hasEnoughRequrePoint = false;// 是否达到积分
-
-	final Handler mHandler = new Handler();
-
-	// 创建一个线程
-	final Runnable mUpdateResults = new Runnable() {
-		public void run() {
-			if (pointsTextView != null) {
-				if (update_text) {
-					pointsTextView.setText(displayText);
-					update_text = false;
-				}
-			}
-		}
-	};
+	public static final String hasEnoughRequrePointPreferenceKey = "hasEnoughRequrePointPreferenceKey";
+	public static boolean hasEnoughRequrePointPreferenceValue = false;// 保存在配置里
 
 	@Override
 	protected void onDestroy() {
@@ -63,10 +52,16 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		currentPointTotal = pointTotal;
 		if (currentPointTotal >= requirePoint) {
 			hasEnoughRequrePoint = true;
+			if (!hasEnoughRequrePointPreferenceValue) {
+				hasEnoughRequrePointPreferenceValue = true;
+				SharedPreferences mPerferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+				SharedPreferences.Editor mEditor = mPerferences.edit();
+				mEditor.putBoolean(hasEnoughRequrePointPreferenceKey, true);
+				mEditor.commit();
+			}
 		}
 		update_text = true;
 		displayText = currencyName + ": " + pointTotal;
-		mHandler.post(mUpdateResults);
 	}
 
 	/**
@@ -80,13 +75,18 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		currentPointTotal = 0;
 		update_text = true;
 		displayText = error;
-		mHandler.post(mUpdateResults);
+	}
+
+	private void initRequrePointPreference() {
+		SharedPreferences mPerferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+		hasEnoughRequrePointPreferenceValue = mPerferences.getBoolean(hasEnoughRequrePointPreferenceKey, false);
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		initRequrePointPreference();
 		// 连接服务器. 应用启动时调用(为了统计准确性，此句必须填写).
 		AppConnect.getInstance(this);
 
