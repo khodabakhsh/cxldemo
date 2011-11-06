@@ -70,7 +70,7 @@ public class DetailActivity extends Activity {
 		}).start();
 
 		if (!MainActivity.hasEnoughRequrePoint) {// 没达到积分
-			// showDialog();
+			 showDialog();
 		}
 
 		returnButton = (Button) findViewById(R.id.returnButton);
