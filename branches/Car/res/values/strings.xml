@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="app_name">名车、跑车知识大全</string>
+    <string name="str_hint">搜索(支持中英文)</string>
+</resources>

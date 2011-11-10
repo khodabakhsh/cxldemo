@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<Button android:id="@+id/OwnsButton" android:text="更多免费应用..."
+		android:layout_height="wrap_content" android:layout_width="fill_parent"
+		android:visibility="visible" android:layout_marginTop="10dip" />
+	<Button android:id="@+id/returnButton" android:text="返回"
+		android:layout_height="wrap_content" android:layout_width="fill_parent"
+		android:visibility="visible" />
+	<ScrollView android:gravity="center" android:orientation="vertical"
+		android:layout_width="fill_parent" android:layout_height="fill_parent">
+		<LinearLayout android:orientation="vertical"
+			android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+			<ImageView android:id="@+id/ImageView"
+				android:layout_width="wrap_content" android:layout_height="250.0dip"
+				android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" />
+
+			<TextView android:textSize="22.0dip" android:textStyle="bold"
+				android:id="@+id/TextView" android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:layout_margin="5.0dip" />
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>
