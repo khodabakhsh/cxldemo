@@ -1,8 +1,0 @@
-
-
-1.下载官方的utf-8代码包，java代码是ansi编码，要转换成utf-8才能引入java代码到eclipse中，WebRoot/config.properties这个文件可以用记事本打开，然后复制内容到eclipse中。
-
-2.安装路径： http://localhost:8888/javacenter/install
-
-3.后台管理：
-http://localhost:8888/javacenter/admincp.jsp

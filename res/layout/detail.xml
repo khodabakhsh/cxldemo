@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<LinearLayout android:id="@+id/AdLinearLayout"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:gravity="center_horizontal" />
+	<TableLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_margin="10.0dip">
+		<TableRow android:layout_width="fill_parent"
+			android:layout_height="wrap_content">
+			<Button android:id="@+id/OwnsButton" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="更多免费应用..." />
+			<Button android:id="@+id/favoriteButton" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="收藏本页"
+				android:drawableLeft="@drawable/hot" />
+			<Button android:id="@+id/returnButton" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="返回" />
+		</TableRow>
+	</TableLayout>
+
+
+
+	<ScrollView android:gravity="center" android:orientation="vertical"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+		<LinearLayout android:orientation="vertical"
+			android:layout_width="fill_parent" android:layout_height="wrap_content">
+			<ImageView android:id="@+id/ImageView"
+				android:layout_width="wrap_content" android:layout_height="250.0dip"
+				android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" />
+			<TextView android:textSize="22.0dip" android:textStyle="bold"
+				android:id="@+id/TextView" android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:layout_margin="5.0dip" />
+
+		</LinearLayout>
+
+	</ScrollView>
+
+</LinearLayout>
