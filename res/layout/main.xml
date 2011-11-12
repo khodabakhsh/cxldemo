@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FrameLayout android:layout_width="fill_parent"
+	android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+	<LinearLayout android:orientation="vertical"
+		android:id="@+id/widget_layout_sort" android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:paddingTop="20dip">
+		<Button android:id="@+id/OwnsButton" android:text="更多免费应用..."
+			android:layout_height="wrap_content" android:layout_width="fill_parent"
+			android:visibility="visible" android:layout_marginBottom="10.0dip" />
+
+		<ImageView android:id="@+id/happy" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:background="@drawable/happy"
+			android:layout_gravity="center" android:layout_marginBottom="10.0dip" />
+
+		<TextView android:text="祝您天天好心情，(*^__^*) 嘻嘻……"
+			android:layout_height="wrap_content" android:layout_width="fill_parent"
+			android:layout_margin="10.0dip" android:textColor="#FF69B4" />
+	</LinearLayout>
+
+	<LinearLayout android:orientation="vertical"
+		android:id="@+id/widget_layout_search" android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+		<!-- <ListView android:id="@+id/searchList" android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" android:layout_marginBottom="2.0dip" 
+			/> -->
+		<ExpandableListView android:id="@+id/searchList"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:drawSelectorOnTop="false" android:cacheColorHint="#00000000"
+			android:dividerHeight="1.0dip">
+		</ExpandableListView>
+
+	</LinearLayout>
+
+	<RelativeLayout android:orientation="vertical"
+		android:id="@+id/widget_layout_point" android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+		<Button android:id="@+id/clearFavorite" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="清空收藏" />
+		<ListView android:id="@+id/favoriteList"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:layout_below="@id/clearFavorite" android:layout_marginBottom="10.0dip" />
+
+	</RelativeLayout>
+	<LinearLayout android:id="@+id/AdLinearLayout"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:gravity="center_horizontal" />
+</FrameLayout>
