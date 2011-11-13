@@ -305,8 +305,11 @@ public class MainActivity extends TabActivity implements
 			}
 		});
 		
-		LinearLayout container = (LinearLayout) findViewById(R.id.AdLinearLayout2);
-		new AdView(this, container).DisplayAd(20);// 每20秒轮换一次广告；最少为20
+		LinearLayout container2 = (LinearLayout) findViewById(R.id.AdLinearLayout2);
+		new AdView(this, container2).DisplayAd(20);// 每20秒轮换一次广告；最少为20
+		
+		LinearLayout container3 = (LinearLayout) findViewById(R.id.AdLinearLayout3);
+		new AdView(this, container3).DisplayAd(20);// 每20秒轮换一次广告；最少为20
 	}
 
 	public void onTabChanged(String tabId) {
