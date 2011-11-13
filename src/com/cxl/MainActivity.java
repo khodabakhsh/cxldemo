@@ -1,15 +1,22 @@
 package com.cxl;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
 import android.app.TabActivity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +25,14 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.FrameLayout;
 import android.widget.ListView;
@@ -29,6 +41,7 @@ import android.widget.TextView;
 
 import com.cxl.ListManager.KeyValue;
 import com.cxl.tangshi.R;
+import com.waps.AdView;
 import com.waps.AppConnect;
 import com.waps.UpdatePointsNotifier;
 
@@ -40,6 +53,55 @@ public class MainActivity extends TabActivity implements
 	private ArrayAdapter<KeyValue> favoriteListAdapter;
 	private ArrayAdapter<String> firstMenuAdapter;
 	public static List<KeyValue> favoriteList = new ArrayList<KeyValue>();
+
+	private EditText txtSearch;
+	private TextWatcher watcher = new MyTextWatcher();
+	MatchListAdapter matchListAdapter = new MatchListAdapter();
+	private ListView searchListView;
+
+	class MyTextWatcher implements TextWatcher {
+		public void afterTextChanged(Editable paramEditable) {
+		}
+
+		public void beforeTextChanged(CharSequence paramCharSequence,
+				int paramInt1, int paramInt2, int paramInt3) {
+		}
+
+		public void onTextChanged(CharSequence paramCharSequence,
+				int paramInt1, int paramInt2, int paramInt3) {
+			ListManager.getSearchList(paramCharSequence.toString());
+			matchListAdapter.notifyDataSetChanged();
+		}
+	}
+
+	class MatchListAdapter extends BaseAdapter {
+		private MatchListAdapter() {
+		}
+
+		public int getCount() {
+			return ListManager.SearchList.size();
+		}
+
+		public Object getItem(int paramInt) {
+			return ListManager.SearchList.get(paramInt);
+		}
+
+		public long getItemId(int paramInt) {
+			return paramInt;
+		}
+
+		public View getView(int paramInt, View paramView,
+				ViewGroup paramViewGroup) {
+			if (paramView == null)
+				paramView = ((LayoutInflater) MainActivity.this
+						.getSystemService(Context.LAYOUT_INFLATER_SERVICE))
+						.inflate(R.layout.search_list_layout, null);
+			String poemName = ((KeyValue) getItem(paramInt)).getValue();
+			((TextView) paramView.findViewById(R.id.txtListItem))
+					.setText(poemName);
+			return paramView;
+		}
+	}
 
 	public static int currentPointTotal = 0;// 当前积分
 	public static final int requirePoint = 50;// 要求积分
@@ -56,6 +118,8 @@ public class MainActivity extends TabActivity implements
 	@Override
 	protected void onResume() {
 		favoriteListAdapter.notifyDataSetChanged();
+		ListManager.getSearchList("");
+		matchListAdapter.notifyDataSetChanged();
 		initRequrePointPreference();
 		AppConnect.getInstance(this).getPoints(this);
 		super.onResume();
@@ -103,7 +167,6 @@ public class MainActivity extends TabActivity implements
 				hasEnoughRequrePointPreferenceKey, false);
 	}
 
-    
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// 连接服务器. 应用启动时调用(为了统计准确性，此句必须填写).
@@ -130,41 +193,40 @@ public class MainActivity extends TabActivity implements
 		this.tabHost.setOnTabChangedListener(this);
 		tabHost.setCurrentTab(1);
 
-		firstMenuListView = (ExpandableListView) findViewById(R.id.searchList);
-//		firstMenuAdapter = new ArrayAdapter<String>(this,
-//				android.R.layout.simple_list_item_1,
-//				ListManager.First_Menu_List);
-		firstMenuListView.setAdapter(new MyExpandableListAdapter() );
+		firstMenuListView = (ExpandableListView) findViewById(R.id.firstMenuListView);
+		// firstMenuAdapter = new ArrayAdapter<String>(this,
+		// android.R.layout.simple_list_item_1,
+		// ListManager.First_Menu_List);
+		firstMenuListView.setAdapter(new MyExpandableListAdapter());
 		firstMenuListView.setOnChildClickListener(new OnChildClickListener() {
-			
+
 			@Override
-			public boolean onChildClick(ExpandableListView arg0, View arg1, int groupPosition ,
-					int childPosition, long id) {
+			public boolean onChildClick(ExpandableListView arg0, View arg1,
+					int groupPosition, int childPosition, long id) {
 				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, SubMenuActivity.class);
 				Bundle bundle = new Bundle();
-				bundle.putString("menu",  ListManager.children[groupPosition][childPosition].toString());
+				bundle.putString("menu",
+						ListManager.children[groupPosition][childPosition]
+								.toString());
 				intent.putExtras(bundle);
 				startActivity(intent);
-//				Toast.makeText(getApplicationContext(), "开始鉴赏： "+ListManager.children[groupPosition][childPosition].toString(), Toast.LENGTH_SHORT).show();  
+				// Toast.makeText(getApplicationContext(),
+				// "开始鉴赏： "+ListManager.children[groupPosition][childPosition].toString(),
+				// Toast.LENGTH_SHORT).show();
 				return false;
 			}
 		});
 		firstMenuListView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
 					long id) {
-//				String menu = (String) arg0.getItemAtPosition(pos);
-//				Intent intent = new Intent();
-//				intent.setClass(MainActivity.this, SubMenuActivity.class);
-//				Bundle bundle = new Bundle();
-//				bundle.putString("menu", menu);
-//				intent.putExtras(bundle);
-//				startActivity(intent);
+				// Toast.makeText(getApplicationContext(), "开始鉴赏：",
+				// Toast.LENGTH_SHORT).show();
 			}
 		});
-//		firstMenuListView.expandGroup(0);
-//		firstMenuListView.expandGroup(1);
-//		firstMenuListView.expandGroup(2);
+		// firstMenuListView.expandGroup(0);
+		// firstMenuListView.expandGroup(1);
+		// firstMenuListView.expandGroup(2);
 
 		initFavorites();
 		favoriteListView = (ListView) findViewById(R.id.favoriteList);
@@ -222,15 +284,29 @@ public class MainActivity extends TabActivity implements
 			}
 		});
 
-		Button owns = (Button) findViewById(R.id.OwnsButton);
-		owns.setText("更多免费应用...");
-		owns.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View arg0) {
-				// 显示自家应用列表.
-				AppConnect.getInstance(MainActivity.this).showMore(
-						MainActivity.this);
+		txtSearch = (EditText) findViewById(R.id.txtSearch);
+		txtSearch.addTextChangedListener(this.watcher);
+		searchListView = (ListView) findViewById(R.id.searchListView);
+		// matchListAdapter = new ArrayAdapter<KeyValue>(this,
+		// android.R.layout.simple_list_item_1, searchList);
+		searchListView.setAdapter(matchListAdapter);
+		searchListView.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
+					long id) {
+
+				KeyValue selectItem = (KeyValue) arg0.getItemAtPosition(pos);
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, DetailActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putString("fileName", selectItem.getKey());
+				bundle.putString("subMenuName", selectItem.getValue());
+				intent.putExtras(bundle);
+				startActivity(intent);
 			}
 		});
+		
+		LinearLayout container = (LinearLayout) findViewById(R.id.AdLinearLayout2);
+		new AdView(this, container).DisplayAd(20);// 每20秒轮换一次广告；最少为20
 	}
 
 	public void onTabChanged(String tabId) {
@@ -247,8 +323,8 @@ public class MainActivity extends TabActivity implements
 		String[] splitStrings = myFavorite
 				.split(DetailActivity.Favorite_Item_Split);
 		for (String itemString : splitStrings) {
-			favoriteList.add(new KeyValue( itemString
-					.split(DetailActivity.Item_Key_Value_Split)[1],itemString
+			favoriteList.add(new KeyValue(itemString
+					.split(DetailActivity.Item_Key_Value_Split)[1], itemString
 					.split(DetailActivity.Item_Key_Value_Split)[0]));
 		}
 	}
@@ -284,7 +360,6 @@ public class MainActivity extends TabActivity implements
 
 	// 自定义Adapter
 	public class MyExpandableListAdapter extends BaseExpandableListAdapter {
-		
 
 		@Override
 		public Object getChild(int groupPosition, int childPosition) {
@@ -347,11 +422,11 @@ public class MainActivity extends TabActivity implements
 		// 获取某一项的 View 的逻辑
 		private TextView getGenericView() {
 			AbsListView.LayoutParams lp = new AbsListView.LayoutParams(
-					ViewGroup.LayoutParams.FILL_PARENT, 64);
+					ViewGroup.LayoutParams.WRAP_CONTENT, 64);
 			TextView textView = new TextView(MainActivity.this);
 			textView.setLayoutParams(lp);
 			textView.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
-			textView.setPadding(32, 0, 0, 0);
+			textView.setPadding(52, 0, 0, 0);
 			return textView;
 		}
 	}

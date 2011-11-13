@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FrameLayout android:layout_width="fill_parent"
 	android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
-	<LinearLayout android:orientation="vertical"
+	<RelativeLayout android:orientation="vertical"
 		android:id="@+id/widget_layout_sort" android:layout_width="fill_parent"
 		android:layout_height="fill_parent" android:paddingTop="20dip">
-		<Button android:id="@+id/OwnsButton" android:text="更多免费应用..."
-			android:layout_height="wrap_content" android:layout_width="fill_parent"
-			android:visibility="visible" android:layout_marginBottom="10.0dip" />
+		<EditText android:id="@+id/txtSearch" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:layout_marginLeft="5.0px"
+			android:layout_marginRight="5.0px" android:hint="@string/str_hint"
+			android:singleLine="true" android:layout_alignParentTop="true" />
+		<LinearLayout android:id="@+id/AdLinearLayout2"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:gravity="center_horizontal" android:layout_alignParentBottom="true" />
+		<ListView android:id="@+id/searchListView"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:layout_marginBottom="10.0dip" android:cacheColorHint="#00000000"
+			android:layout_below="@id/txtSearch" android:layout_above="@id/AdLinearLayout2" />
 
-		<ImageView android:id="@+id/happy" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:background="@drawable/happy"
-			android:layout_gravity="center" android:layout_marginBottom="10.0dip" />
-
-		<TextView android:text="祝您天天好心情，(*^__^*) 嘻嘻……"
-			android:layout_height="wrap_content" android:layout_width="fill_parent"
-			android:layout_margin="10.0dip" android:textColor="#FF69B4" />
-	</LinearLayout>
+	</RelativeLayout>
 
 	<LinearLayout android:orientation="vertical"
 		android:id="@+id/widget_layout_search" android:layout_width="fill_parent"
@@ -23,9 +24,9 @@
 		<!-- <ListView android:id="@+id/searchList" android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" android:layout_marginBottom="2.0dip" 
 			/> -->
-		<ExpandableListView android:id="@+id/searchList"
+		<ExpandableListView android:id="@+id/firstMenuListView"
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
-			android:cacheColorHint="#00000000" android:background="@drawable/bg" >
+			android:cacheColorHint="#00000000" android:background="@drawable/bg">
 		</ExpandableListView>
 
 	</LinearLayout>
@@ -37,10 +38,8 @@
 			android:layout_height="wrap_content" android:text="清空收藏" />
 		<ListView android:id="@+id/favoriteList"
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
-			android:layout_below="@id/clearFavorite" android:layout_marginBottom="10.0dip" android:background="@drawable/bg" android:cacheColorHint="#00000000"/>
+			android:layout_below="@id/clearFavorite" android:layout_marginBottom="10.0dip"
+			android:background="@drawable/bg" android:cacheColorHint="#00000000" />
 
 	</RelativeLayout>
-	<LinearLayout android:id="@+id/AdLinearLayout"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:gravity="center_horizontal" />
 </FrameLayout>

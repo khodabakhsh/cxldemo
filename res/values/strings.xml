@@ -2,5 +2,5 @@
 <resources>
     <string name="hello">Hello World, MainActivity!</string>
     <string name="app_name">唐诗·宋词·元曲300首</string>
-    <string name="str_hint">这里输入内容</string>
+    <string name="str_hint">这里输入诗人、诗词名称进行搜索</string>
 </resources>
