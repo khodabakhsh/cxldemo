@@ -9,17 +9,35 @@ public class ListManager {
 
 	public static final List<String> First_Menu_List = new ArrayList<String>();
 	public static Map<String, List<KeyValue>> Menu_File_Map = new HashMap<String, List<KeyValue>>();
+	public static List<KeyValue> AllList = new ArrayList<KeyValue>();
+	public static List<KeyValue> SearchList = new ArrayList<KeyValue>();
 
-	public static final  String[] groups = { "唐诗三百首", "宋词三百首", "元曲三百首" };
+	public static void getSearchList(String paramString) {
+		if ("".equals(paramString)) {
+			SearchList.addAll(new ArrayList<KeyValue>(AllList));
+			return  ;
+		}
+		if (SearchList != null) {
+			SearchList.clear();
+		}
+		for (int i = 0; i < AllList.size(); i++) {
+			String content = AllList.get(i).getValue();
+			if (content.indexOf(paramString) != -1) {
+				SearchList.add(AllList.get(i));
+			}
+		}
+	}
+
+	public static final String[] groups = { "唐诗三百首", "宋词三百首", "元曲三百首" };
 	// 子列表数据
-	public  static final String[][] children = {
-					{ "五言古诗", "五言乐府", "七言古诗", "七言乐府", "五言律诗", "七言律诗", "七言乐府",
-							"五言绝句", "五言乐府", "七言绝句", "七言乐府" }, {"宋词三百首"}, { "元曲三百首"} };
-	
+	public static final String[][] children = {
+			{ "五言古诗", "五言乐府", "七言古诗", "七言乐府", "五言律诗", "七言律诗", "七言乐府", "五言绝句",
+					"五言乐府", "七言绝句", "七言乐府" }, { "宋词三百首" }, { "元曲三百首" } };
+
 	static {
 
 		List<KeyValue> list = new ArrayList<KeyValue>();
-		
+
 		list.add(new KeyValue("钱惟演 木兰花", "sc_001.txt"));
 		list.add(new KeyValue("范仲淹 渔家傲", "sc_002.txt"));
 		list.add(new KeyValue("范仲淹 苏幕遮", "sc_003.txt"));
@@ -38,7 +56,7 @@ public class ListManager {
 		list.add(new KeyValue("晏殊   木兰花", "sc_016.txt"));
 		list.add(new KeyValue("晏殊   木兰花", "sc_017.txt"));
 		list.add(new KeyValue("晏殊   踏莎行", "sc_018.txt"));
-		list.add(new KeyValue("晏殊   木兰花"  , "sc_019.txt"));
+		list.add(new KeyValue("晏殊   木兰花", "sc_019.txt"));
 		list.add(new KeyValue("晏殊   踏莎行", "sc_020.txt"));
 		list.add(new KeyValue("晏殊   破阵子", "sc_021.txt"));
 		list.add(new KeyValue("宋祁   木兰花", "sc_022.txt"));
@@ -321,8 +339,7 @@ public class ListManager {
 		list.add(new KeyValue("张炎   月下笛", "sc_300.txt"));
 		list.add(new KeyValue("文天祥 满江红（代王夫人作）", "sc_301.txt"));
 		Menu_File_Map.put("宋词三百首", list);
-		
-		
+
 		list = new ArrayList<KeyValue>();
 		list.add(new KeyValue("阿里西瑛 【双调】殿前欢·懒云窝", "yq_001.txt"));
 		list.add(new KeyValue("阿里西瑛 【商调】凉亭乐·叹世", "yq_002.txt"));
@@ -626,7 +643,7 @@ public class ListManager {
 		list.add(new KeyValue("奥敦周卿 【双调】蟾宫曲·西湖", "yq_300.txt"));
 		list.add(new KeyValue("奥敦周卿 【双调】蟾宫曲·西湖", "yq_301.txt"));
 		Menu_File_Map.put("元曲三百首", list);
-		
+
 		list = new ArrayList<KeyValue>();
 		list.add(new KeyValue("王维   渭城曲", "ts_304.txt"));
 		list.add(new KeyValue("王维   秋夜曲", "ts_305.txt"));
@@ -637,9 +654,9 @@ public class ListManager {
 		list.add(new KeyValue("李白   清平调·其三", "ts_310.txt"));
 		list.add(new KeyValue("王之涣 出塞", "ts_311.txt"));
 		list.add(new KeyValue("杜秋娘 金缕衣", "ts_312.txt"));
-		//后加的
+		// 后加的
 		list.add(new KeyValue("沈全期 古意呈补阙乔知之", "ts_215.txt"));
-		//后加的
+		// 后加的
 		list.add(new KeyValue("李颀   古从军行", "ts_069.txt"));
 		list.add(new KeyValue("王维   洛阳女儿行", "ts_070.txt"));
 		list.add(new KeyValue("王维   老将行", "ts_071.txt"));
@@ -654,7 +671,7 @@ public class ListManager {
 		list.add(new KeyValue("杜甫   哀江头", "ts_080.txt"));
 		list.add(new KeyValue("杜甫   哀王孙", "ts_081.txt"));
 		Menu_File_Map.put("七言乐府", list);
-		
+
 		list = new ArrayList<KeyValue>();
 		list.add(new KeyValue("贺知章 回乡偶书", "ts_253.txt"));
 		list.add(new KeyValue("张旭   桃花溪", "ts_254.txt"));
@@ -708,273 +725,280 @@ public class ListManager {
 		list.add(new KeyValue("张泌   寄人", "ts_302.txt"));
 		list.add(new KeyValue("无名氏 杂诗", "ts_303.txt"));
 		Menu_File_Map.put("七言绝句", list);
-		
+
 		list = new ArrayList<KeyValue>();
-		list.add(new KeyValue("崔颢   长干行·其一" , "ts_245.txt"));
-		list.add(new KeyValue("崔颢   长干行·其二" , "ts_246.txt"));
-		list.add(new KeyValue("李白   玉阶怨" , "ts_247.txt"));
-		list.add(new KeyValue("卢纶   塞下曲·其一" , "ts_248.txt"));
-		list.add(new KeyValue("卢纶   塞下曲·其二" , "ts_249.txt"));
-		list.add(new KeyValue("卢纶   塞下曲·其三" , "ts_250.txt"));
-		list.add(new KeyValue("卢纶   塞下曲·其四" , "ts_251.txt"));
-		list.add(new KeyValue("李益   江南曲" , "ts_252.txt"));
-		//后加的
-		list.add(new KeyValue("王昌龄 塞下曲·其一"  , "ts_033.txt"));
-		list.add(new KeyValue("王昌龄 塞下曲·其二"  , "ts_034.txt"));
-		list.add(new KeyValue("李白   关山月"  , "ts_035.txt"));
-		list.add(new KeyValue("李白   子夜秋歌"  , "ts_036.txt"));
-		list.add(new KeyValue("李白   长干行"  , "ts_037.txt"));
-		list.add(new KeyValue("孟郊   列女操"  , "ts_038.txt"));
-		list.add(new KeyValue("孟郊   游子吟"  , "ts_039.txt"));
+		list.add(new KeyValue("崔颢   长干行·其一", "ts_245.txt"));
+		list.add(new KeyValue("崔颢   长干行·其二", "ts_246.txt"));
+		list.add(new KeyValue("李白   玉阶怨", "ts_247.txt"));
+		list.add(new KeyValue("卢纶   塞下曲·其一", "ts_248.txt"));
+		list.add(new KeyValue("卢纶   塞下曲·其二", "ts_249.txt"));
+		list.add(new KeyValue("卢纶   塞下曲·其三", "ts_250.txt"));
+		list.add(new KeyValue("卢纶   塞下曲·其四", "ts_251.txt"));
+		list.add(new KeyValue("李益   江南曲", "ts_252.txt"));
+		// 后加的
+		list.add(new KeyValue("王昌龄 塞下曲·其一", "ts_033.txt"));
+		list.add(new KeyValue("王昌龄 塞下曲·其二", "ts_034.txt"));
+		list.add(new KeyValue("李白   关山月", "ts_035.txt"));
+		list.add(new KeyValue("李白   子夜秋歌", "ts_036.txt"));
+		list.add(new KeyValue("李白   长干行", "ts_037.txt"));
+		list.add(new KeyValue("孟郊   列女操", "ts_038.txt"));
+		list.add(new KeyValue("孟郊   游子吟", "ts_039.txt"));
 		Menu_File_Map.put("五言乐府", list);
-		
-		
+
 		list = new ArrayList<KeyValue>();
-		list.add(new KeyValue("王维   鹿柴"  , "ts_216.txt"));
-		list.add(new KeyValue("王维   竹里馆"  , "ts_217.txt"));
-		list.add(new KeyValue("王维   送别"  , "ts_218.txt"));
-		list.add(new KeyValue("王维   相思"  , "ts_219.txt"));
-		list.add(new KeyValue("王维   杂诗"  , "ts_220.txt"));
-		list.add(new KeyValue("裴迪   送崔九"  , "ts_221.txt"));
-		list.add(new KeyValue("祖咏   终南望余雪"  , "ts_222.txt"));
-		list.add(new KeyValue("孟浩然 宿建德江"  , "ts_223.txt"));
-		list.add(new KeyValue("孟浩然 春晓"  , "ts_224.txt"));
-		list.add(new KeyValue("李白   夜思"  , "ts_225.txt"));
-		list.add(new KeyValue("李白   怨情"  , "ts_226.txt"));
-		list.add(new KeyValue("杜甫   八阵图"  , "ts_227.txt"));
-		list.add(new KeyValue("王之涣 登鹳雀楼"  , "ts_228.txt"));
-		list.add(new KeyValue("刘长卿 送灵澈"  , "ts_229.txt"));
-		list.add(new KeyValue("刘长卿 弹琴"  , "ts_230.txt"));
-		list.add(new KeyValue("刘长卿 送上人"  , "ts_231.txt"));
-		list.add(new KeyValue("韦应物 秋夜寄邱员外"  , "ts_232.txt"));
-		list.add(new KeyValue("李端   听筝"  , "ts_233.txt"));
-		list.add(new KeyValue("王建   新嫁娘"  , "ts_234.txt"));
-		list.add(new KeyValue("权德舆 玉台体"  , "ts_235.txt"));
-		list.add(new KeyValue("柳宗元 江雪"  , "ts_236.txt"));
-		list.add(new KeyValue("元稹   行宫"  , "ts_237.txt"));
-		list.add(new KeyValue("白居易 问刘十九"  , "ts_238.txt"));
-		list.add(new KeyValue("张祜   何满子"  , "ts_239.txt"));
-		list.add(new KeyValue("李商隐 登乐游原"  , "ts_240.txt"));
-		list.add(new KeyValue("贾岛   寻隐者不遇"  , "ts_241.txt"));
-		list.add(new KeyValue("李频   渡汉江"  , "ts_242.txt"));
-		list.add(new KeyValue("金昌绪 春怨"  , "ts_243.txt"));
-		list.add(new KeyValue("西鄙人 哥舒歌"  , "ts_244.txt"));
+		list.add(new KeyValue("王维   鹿柴", "ts_216.txt"));
+		list.add(new KeyValue("王维   竹里馆", "ts_217.txt"));
+		list.add(new KeyValue("王维   送别", "ts_218.txt"));
+		list.add(new KeyValue("王维   相思", "ts_219.txt"));
+		list.add(new KeyValue("王维   杂诗", "ts_220.txt"));
+		list.add(new KeyValue("裴迪   送崔九", "ts_221.txt"));
+		list.add(new KeyValue("祖咏   终南望余雪", "ts_222.txt"));
+		list.add(new KeyValue("孟浩然 宿建德江", "ts_223.txt"));
+		list.add(new KeyValue("孟浩然 春晓", "ts_224.txt"));
+		list.add(new KeyValue("李白   夜思", "ts_225.txt"));
+		list.add(new KeyValue("李白   怨情", "ts_226.txt"));
+		list.add(new KeyValue("杜甫   八阵图", "ts_227.txt"));
+		list.add(new KeyValue("王之涣 登鹳雀楼", "ts_228.txt"));
+		list.add(new KeyValue("刘长卿 送灵澈", "ts_229.txt"));
+		list.add(new KeyValue("刘长卿 弹琴", "ts_230.txt"));
+		list.add(new KeyValue("刘长卿 送上人", "ts_231.txt"));
+		list.add(new KeyValue("韦应物 秋夜寄邱员外", "ts_232.txt"));
+		list.add(new KeyValue("李端   听筝", "ts_233.txt"));
+		list.add(new KeyValue("王建   新嫁娘", "ts_234.txt"));
+		list.add(new KeyValue("权德舆 玉台体", "ts_235.txt"));
+		list.add(new KeyValue("柳宗元 江雪", "ts_236.txt"));
+		list.add(new KeyValue("元稹   行宫", "ts_237.txt"));
+		list.add(new KeyValue("白居易 问刘十九", "ts_238.txt"));
+		list.add(new KeyValue("张祜   何满子", "ts_239.txt"));
+		list.add(new KeyValue("李商隐 登乐游原", "ts_240.txt"));
+		list.add(new KeyValue("贾岛   寻隐者不遇", "ts_241.txt"));
+		list.add(new KeyValue("李频   渡汉江", "ts_242.txt"));
+		list.add(new KeyValue("金昌绪 春怨", "ts_243.txt"));
+		list.add(new KeyValue("西鄙人 哥舒歌", "ts_244.txt"));
 		Menu_File_Map.put("五言绝句", list);
-		
+
 		list = new ArrayList<KeyValue>();
-		list.add(new KeyValue("崔颢   黄鹤楼"  , "ts_162.txt"));
-		list.add(new KeyValue("崔颢   行经华阴"  , "ts_163.txt"));
-		list.add(new KeyValue("祖咏   望蓟门"  , "ts_164.txt"));
-		list.add(new KeyValue("崔曙   九月登望仙台呈刘明府容"  , "ts_165.txt"));
-		list.add(new KeyValue("李颀   送魏万之京"  , "ts_166.txt"));
-		list.add(new KeyValue("李白   登金陵凤凰台"  , "ts_167.txt"));
-		list.add(new KeyValue("高适   送李少府贬峡中王少府贬长沙"  , "ts_168.txt"));
-		list.add(new KeyValue("岑参   奉和中书舍人贾至早朝大明宫"  , "ts_169.txt"));
-		list.add(new KeyValue("王维   和贾至舍人早朝大明宫之作"  , "ts_170.txt"));
-		list.add(new KeyValue("王维   奉和圣制从蓬莱向兴庆阁道中留春雨中春望之作应制"  , "ts_171.txt"));
-		list.add(new KeyValue("王维   积雨辋川庄作"  , "ts_172.txt"));
-		list.add(new KeyValue("王维   赠郭给事"  , "ts_173.txt"));
-		list.add(new KeyValue("杜甫   蜀相"  , "ts_174.txt"));
-		list.add(new KeyValue("杜甫   客至"  , "ts_175.txt"));
-		list.add(new KeyValue("杜甫   野望"  , "ts_176.txt"));
-		list.add(new KeyValue("杜甫   闻官军收河南河北"  , "ts_177.txt"));
-		list.add(new KeyValue("杜甫   登高"  , "ts_178.txt"));
-		list.add(new KeyValue("杜甫   登楼"  , "ts_179.txt"));
-		list.add(new KeyValue("杜甫   宿府"  , "ts_180.txt"));
-		list.add(new KeyValue("杜甫   阁夜"  , "ts_181.txt"));
-		list.add(new KeyValue("杜甫   咏怀古迹·其一"  , "ts_182.txt"));
-		list.add(new KeyValue("杜甫   咏怀古迹·其二"  , "ts_183.txt"));
-		list.add(new KeyValue("杜甫   咏怀古迹·其三"  , "ts_184.txt"));
-		list.add(new KeyValue("杜甫   咏怀古迹·其四"  , "ts_185.txt"));
-		list.add(new KeyValue("杜甫   咏怀古迹·其五"  , "ts_186.txt"));
-		list.add(new KeyValue("刘长卿 江州重别薛六柳八二员外"  , "ts_187.txt"));
-		list.add(new KeyValue("刘长卿 长沙过贾谊宅"  , "ts_188.txt"));
-		list.add(new KeyValue("刘长卿 自夏口至鹦鹉洲夕望岳阳寄源中丞"  , "ts_189.txt"));
-		list.add(new KeyValue("钱起   赠阙下裴舍人"  , "ts_190.txt"));
-		list.add(new KeyValue("韦应物 寄李儋元锡"  , "ts_191.txt"));
-		list.add(new KeyValue("韩翃   同题仙游观"  , "ts_192.txt"));
-		list.add(new KeyValue("皇甫冉 春思"  , "ts_193.txt"));
-		list.add(new KeyValue("卢纶   晚次鄂州"  , "ts_194.txt"));
-		list.add(new KeyValue("柳宗元 登柳州城楼寄漳汀封连四州刺史"  , "ts_195.txt"));
-		list.add(new KeyValue("刘禹锡 西塞山怀古"  , "ts_196.txt"));
-		list.add(new KeyValue("元稹   遣悲怀·其一"  , "ts_197.txt"));
-		list.add(new KeyValue("元稹   遣悲怀·其二"  , "ts_198.txt"));
-		list.add(new KeyValue("元稹   遣悲怀·其三"  , "ts_199.txt"));
-		list.add(new KeyValue("白居易 自河南经乱,关内阻饥,兄弟离散,各在一处.因望月有感,聊书所怀,寄上浮梁大兄,于潜七兄,乌江十五兄,兼示符离及下邽弟妹"  , "ts_200.txt"));
-		list.add(new KeyValue("李商隐 锦瑟"  , "ts_201.txt"));
-		list.add(new KeyValue("李商隐 无题"  , "ts_202.txt"));
-		list.add(new KeyValue("李商隐 隋宫"  , "ts_203.txt"));
-		list.add(new KeyValue("李商隐 无题·其一"  , "ts_204.txt"));
-		list.add(new KeyValue("李商隐 无题·其二"  , "ts_205.txt"));
-		list.add(new KeyValue("李商隐 筹笔驿"  , "ts_206.txt"));
-		list.add(new KeyValue("李商隐 无题"  , "ts_207.txt"));
-		list.add(new KeyValue("李商隐 春雨"  , "ts_208.txt"));
-		list.add(new KeyValue("李商隐 无题·其一"  , "ts_209.txt"));
-		list.add(new KeyValue("李商隐 无题·其二"  , "ts_210.txt"));
-		list.add(new KeyValue("温庭筠 利州南渡"  , "ts_211.txt"));
-		list.add(new KeyValue("温庭筠 苏武庙"  , "ts_212.txt"));
-		list.add(new KeyValue("薛逢   宫词"  , "ts_213.txt"));
-		list.add(new KeyValue("秦韬玉 贫女"  , "ts_214.txt"));
+		list.add(new KeyValue("崔颢   黄鹤楼", "ts_162.txt"));
+		list.add(new KeyValue("崔颢   行经华阴", "ts_163.txt"));
+		list.add(new KeyValue("祖咏   望蓟门", "ts_164.txt"));
+		list.add(new KeyValue("崔曙   九月登望仙台呈刘明府容", "ts_165.txt"));
+		list.add(new KeyValue("李颀   送魏万之京", "ts_166.txt"));
+		list.add(new KeyValue("李白   登金陵凤凰台", "ts_167.txt"));
+		list.add(new KeyValue("高适   送李少府贬峡中王少府贬长沙", "ts_168.txt"));
+		list.add(new KeyValue("岑参   奉和中书舍人贾至早朝大明宫", "ts_169.txt"));
+		list.add(new KeyValue("王维   和贾至舍人早朝大明宫之作", "ts_170.txt"));
+		list.add(new KeyValue("王维   奉和圣制从蓬莱向兴庆阁道中留春雨中春望之作应制", "ts_171.txt"));
+		list.add(new KeyValue("王维   积雨辋川庄作", "ts_172.txt"));
+		list.add(new KeyValue("王维   赠郭给事", "ts_173.txt"));
+		list.add(new KeyValue("杜甫   蜀相", "ts_174.txt"));
+		list.add(new KeyValue("杜甫   客至", "ts_175.txt"));
+		list.add(new KeyValue("杜甫   野望", "ts_176.txt"));
+		list.add(new KeyValue("杜甫   闻官军收河南河北", "ts_177.txt"));
+		list.add(new KeyValue("杜甫   登高", "ts_178.txt"));
+		list.add(new KeyValue("杜甫   登楼", "ts_179.txt"));
+		list.add(new KeyValue("杜甫   宿府", "ts_180.txt"));
+		list.add(new KeyValue("杜甫   阁夜", "ts_181.txt"));
+		list.add(new KeyValue("杜甫   咏怀古迹·其一", "ts_182.txt"));
+		list.add(new KeyValue("杜甫   咏怀古迹·其二", "ts_183.txt"));
+		list.add(new KeyValue("杜甫   咏怀古迹·其三", "ts_184.txt"));
+		list.add(new KeyValue("杜甫   咏怀古迹·其四", "ts_185.txt"));
+		list.add(new KeyValue("杜甫   咏怀古迹·其五", "ts_186.txt"));
+		list.add(new KeyValue("刘长卿 江州重别薛六柳八二员外", "ts_187.txt"));
+		list.add(new KeyValue("刘长卿 长沙过贾谊宅", "ts_188.txt"));
+		list.add(new KeyValue("刘长卿 自夏口至鹦鹉洲夕望岳阳寄源中丞", "ts_189.txt"));
+		list.add(new KeyValue("钱起   赠阙下裴舍人", "ts_190.txt"));
+		list.add(new KeyValue("韦应物 寄李儋元锡", "ts_191.txt"));
+		list.add(new KeyValue("韩翃   同题仙游观", "ts_192.txt"));
+		list.add(new KeyValue("皇甫冉 春思", "ts_193.txt"));
+		list.add(new KeyValue("卢纶   晚次鄂州", "ts_194.txt"));
+		list.add(new KeyValue("柳宗元 登柳州城楼寄漳汀封连四州刺史", "ts_195.txt"));
+		list.add(new KeyValue("刘禹锡 西塞山怀古", "ts_196.txt"));
+		list.add(new KeyValue("元稹   遣悲怀·其一", "ts_197.txt"));
+		list.add(new KeyValue("元稹   遣悲怀·其二", "ts_198.txt"));
+		list.add(new KeyValue("元稹   遣悲怀·其三", "ts_199.txt"));
+		list.add(new KeyValue(
+				"白居易 自河南经乱,关内阻饥,兄弟离散,各在一处.因望月有感,聊书所怀,寄上浮梁大兄,于潜七兄,乌江十五兄,兼示符离及下邽弟妹",
+				"ts_200.txt"));
+		list.add(new KeyValue("李商隐 锦瑟", "ts_201.txt"));
+		list.add(new KeyValue("李商隐 无题", "ts_202.txt"));
+		list.add(new KeyValue("李商隐 隋宫", "ts_203.txt"));
+		list.add(new KeyValue("李商隐 无题·其一", "ts_204.txt"));
+		list.add(new KeyValue("李商隐 无题·其二", "ts_205.txt"));
+		list.add(new KeyValue("李商隐 筹笔驿", "ts_206.txt"));
+		list.add(new KeyValue("李商隐 无题", "ts_207.txt"));
+		list.add(new KeyValue("李商隐 春雨", "ts_208.txt"));
+		list.add(new KeyValue("李商隐 无题·其一", "ts_209.txt"));
+		list.add(new KeyValue("李商隐 无题·其二", "ts_210.txt"));
+		list.add(new KeyValue("温庭筠 利州南渡", "ts_211.txt"));
+		list.add(new KeyValue("温庭筠 苏武庙", "ts_212.txt"));
+		list.add(new KeyValue("薛逢   宫词", "ts_213.txt"));
+		list.add(new KeyValue("秦韬玉 贫女", "ts_214.txt"));
 		Menu_File_Map.put("七言律诗", list);
-		
+
 		list = new ArrayList<KeyValue>();
-		list.add(new KeyValue("唐玄宗 经邹鲁祭孔子而叹之"  , "ts_082.txt"));
-		list.add(new KeyValue("张九龄 望月怀远"  , "ts_083.txt"));
-		list.add(new KeyValue("王勃   送杜少府之任蜀州"  , "ts_084.txt"));
-		list.add(new KeyValue("骆宾王 在狱咏蝉·并序"  , "ts_085.txt"));
-		list.add(new KeyValue("杜审言 和晋陵陆丞相早春游望"  , "ts_086.txt"));
-		list.add(new KeyValue("沈期   杂诗"  , "ts_087.txt"));
-		list.add(new KeyValue("宋之问 题大庾岭北驿"  , "ts_088.txt"));
-		list.add(new KeyValue("王湾   次北固山下"  , "ts_089.txt"));
-		list.add(new KeyValue("常建   破山寺后禅院"  , "ts_090.txt"));
-		list.add(new KeyValue("岑参   寄左省杜拾遗"  , "ts_091.txt"));
-		list.add(new KeyValue("李白   赠孟浩然"  , "ts_092.txt"));
-		list.add(new KeyValue("李白   渡荆门送别"  , "ts_093.txt"));
-		list.add(new KeyValue("李白   送友人"  , "ts_094.txt"));
-		list.add(new KeyValue("李白   听蜀僧浚弹琴"  , "ts_095.txt"));
-		list.add(new KeyValue("李白   夜泊牛渚怀古"  , "ts_096.txt"));
-		list.add(new KeyValue("杜甫   春望"  , "ts_097.txt"));
-		list.add(new KeyValue("杜甫   月夜"  , "ts_098.txt"));
-		list.add(new KeyValue("杜甫   春宿左省"  , "ts_099.txt"));
-		list.add(new KeyValue("杜甫   至德二载,甫自京金光门出,间道归凤翔,乾元初从左拾遗移华州掾,与亲故别,因出此门,有悲往事"  , "ts_100.txt"));
-		list.add(new KeyValue("杜甫   月夜忆舍弟"  , "ts_101.txt"));
-		list.add(new KeyValue("杜甫   天末怀李白"  , "ts_102.txt"));
-		list.add(new KeyValue("杜甫   奉济驿重送严公四韵"  , "ts_103.txt"));
-		list.add(new KeyValue("杜甫   别房太尉墓"  , "ts_104.txt"));
-		list.add(new KeyValue("杜甫   旅夜书怀"  , "ts_105.txt"));
-		list.add(new KeyValue("杜甫   登岳阳楼"  , "ts_106.txt"));
-		list.add(new KeyValue("王维   辋川闲居赠裴秀才迪"  , "ts_107.txt"));
-		list.add(new KeyValue("王维   山居秋暝"  , "ts_108.txt"));
-		list.add(new KeyValue("王维   归嵩山作"  , "ts_109.txt"));
-		list.add(new KeyValue("王维   终南山"  , "ts_110.txt"));
-		list.add(new KeyValue("王维   酬张少府"  , "ts_111.txt"));
-		list.add(new KeyValue("王维   过香积寺"  , "ts_112.txt"));
-		list.add(new KeyValue("王维   送梓州李使君"  , "ts_113.txt"));
-		list.add(new KeyValue("王维   汉江临泛"  , "ts_114.txt"));
-		list.add(new KeyValue("王维   终南别业"  , "ts_115.txt"));
-		list.add(new KeyValue("孟浩然 临洞庭上张丞相"  , "ts_116.txt"));
-		list.add(new KeyValue("孟浩然 与诸子登岘山"  , "ts_117.txt"));
-		list.add(new KeyValue("孟浩然 宴梅道士山房"  , "ts_118.txt"));
-		list.add(new KeyValue("孟浩然 岁暮归南山"  , "ts_119.txt"));
-		list.add(new KeyValue("孟浩然 过故人庄"  , "ts_120.txt"));
-		list.add(new KeyValue("孟浩然 秦中感秋寄远上人"  , "ts_121.txt"));
-		list.add(new KeyValue("孟浩然 宿桐庐江寄广陵旧游"  , "ts_122.txt"));
-		list.add(new KeyValue("孟浩然 留别王维"  , "ts_123.txt"));
-		list.add(new KeyValue("孟浩然 早寒江上有怀"  , "ts_124.txt"));
-		list.add(new KeyValue("刘长卿 秋日登吴公台上寺远眺"  , "ts_125.txt"));
-		list.add(new KeyValue("刘长卿 送李中丞归汉阳别业"  , "ts_126.txt"));
-		list.add(new KeyValue("刘长卿 饯别王十一南游"  , "ts_127.txt"));
-		list.add(new KeyValue("刘长卿 寻南溪常山道人隐居"  , "ts_128.txt"));
-		list.add(new KeyValue("刘长卿 新年作"  , "ts_129.txt"));
-		list.add(new KeyValue("钱起   送僧归日本"  , "ts_130.txt"));
-		list.add(new KeyValue("钱起   谷口书斋寄杨补阙"  , "ts_131.txt"));
-		list.add(new KeyValue("韦应物 淮上喜会梁川故人"  , "ts_132.txt"));
-		list.add(new KeyValue("韦应物 赋得暮雨送李胄"  , "ts_133.txt"));
-		list.add(new KeyValue("韩翃   酬程延秋夜即事见赠"  , "ts_134.txt"));
-		list.add(new KeyValue("刘脊虚 阙题"  , "ts_135.txt"));
-		list.add(new KeyValue("戴叔伦 江乡故人偶集客舍"  , "ts_136.txt"));
-		list.add(new KeyValue("卢伦   送李端"  , "ts_137.txt"));
-		list.add(new KeyValue("李益   喜见外弟又言别"  , "ts_138.txt"));
-		list.add(new KeyValue("司空曙 云阳馆与韩绅宿别"  , "ts_139.txt"));
-		list.add(new KeyValue("司空曙 喜见外弟卢纶见宿"  , "ts_140.txt"));
-		list.add(new KeyValue("司空曙 贼平后送人北归"  , "ts_141.txt"));
-		list.add(new KeyValue("刘禹锡 蜀先主庙"  , "ts_142.txt"));
-		list.add(new KeyValue("张藉   没蕃故人"  , "ts_143.txt"));
-		list.add(new KeyValue("白居易 草"  , "ts_144.txt"));
-		list.add(new KeyValue("杜牧   旅宿"  , "ts_145.txt"));
-		list.add(new KeyValue("许浑   秋日赴阙题潼关驿楼"  , "ts_146.txt"));
-		list.add(new KeyValue("许浑   早秋"  , "ts_147.txt"));
-		list.add(new KeyValue("李商隐 蝉"  , "ts_148.txt"));
-		list.add(new KeyValue("李商隐 风雨"  , "ts_149.txt"));
-		list.add(new KeyValue("李商隐 落花"  , "ts_150.txt"));
-		list.add(new KeyValue("李商隐 凉思"  , "ts_151.txt"));
-		list.add(new KeyValue("李商隐 北青萝"  , "ts_152.txt"));
-		list.add(new KeyValue("温庭筠 送人东游"  , "ts_153.txt"));
-		list.add(new KeyValue("马戴   灞上秋居"  , "ts_154.txt"));
-		list.add(new KeyValue("马戴   楚江怀古"  , "ts_155.txt"));
-		list.add(new KeyValue("张乔   书边事"  , "ts_156.txt"));
-		list.add(new KeyValue("崔涂   除夜有怀"  , "ts_157.txt"));
-		list.add(new KeyValue("崔涂   孤雁"  , "ts_158.txt"));
-		list.add(new KeyValue("杜荀鹤 春宫怨"  , "ts_159.txt"));
-		list.add(new KeyValue("韦庄   章台夜思"  , "ts_160.txt"));
-		list.add(new KeyValue("僧皎然 寻陆鸿渐不遇"  , "ts_161.txt"));
+		list.add(new KeyValue("唐玄宗 经邹鲁祭孔子而叹之", "ts_082.txt"));
+		list.add(new KeyValue("张九龄 望月怀远", "ts_083.txt"));
+		list.add(new KeyValue("王勃   送杜少府之任蜀州", "ts_084.txt"));
+		list.add(new KeyValue("骆宾王 在狱咏蝉·并序", "ts_085.txt"));
+		list.add(new KeyValue("杜审言 和晋陵陆丞相早春游望", "ts_086.txt"));
+		list.add(new KeyValue("沈期   杂诗", "ts_087.txt"));
+		list.add(new KeyValue("宋之问 题大庾岭北驿", "ts_088.txt"));
+		list.add(new KeyValue("王湾   次北固山下", "ts_089.txt"));
+		list.add(new KeyValue("常建   破山寺后禅院", "ts_090.txt"));
+		list.add(new KeyValue("岑参   寄左省杜拾遗", "ts_091.txt"));
+		list.add(new KeyValue("李白   赠孟浩然", "ts_092.txt"));
+		list.add(new KeyValue("李白   渡荆门送别", "ts_093.txt"));
+		list.add(new KeyValue("李白   送友人", "ts_094.txt"));
+		list.add(new KeyValue("李白   听蜀僧浚弹琴", "ts_095.txt"));
+		list.add(new KeyValue("李白   夜泊牛渚怀古", "ts_096.txt"));
+		list.add(new KeyValue("杜甫   春望", "ts_097.txt"));
+		list.add(new KeyValue("杜甫   月夜", "ts_098.txt"));
+		list.add(new KeyValue("杜甫   春宿左省", "ts_099.txt"));
+		list.add(new KeyValue(
+				"杜甫   至德二载,甫自京金光门出,间道归凤翔,乾元初从左拾遗移华州掾,与亲故别,因出此门,有悲往事",
+				"ts_100.txt"));
+		list.add(new KeyValue("杜甫   月夜忆舍弟", "ts_101.txt"));
+		list.add(new KeyValue("杜甫   天末怀李白", "ts_102.txt"));
+		list.add(new KeyValue("杜甫   奉济驿重送严公四韵", "ts_103.txt"));
+		list.add(new KeyValue("杜甫   别房太尉墓", "ts_104.txt"));
+		list.add(new KeyValue("杜甫   旅夜书怀", "ts_105.txt"));
+		list.add(new KeyValue("杜甫   登岳阳楼", "ts_106.txt"));
+		list.add(new KeyValue("王维   辋川闲居赠裴秀才迪", "ts_107.txt"));
+		list.add(new KeyValue("王维   山居秋暝", "ts_108.txt"));
+		list.add(new KeyValue("王维   归嵩山作", "ts_109.txt"));
+		list.add(new KeyValue("王维   终南山", "ts_110.txt"));
+		list.add(new KeyValue("王维   酬张少府", "ts_111.txt"));
+		list.add(new KeyValue("王维   过香积寺", "ts_112.txt"));
+		list.add(new KeyValue("王维   送梓州李使君", "ts_113.txt"));
+		list.add(new KeyValue("王维   汉江临泛", "ts_114.txt"));
+		list.add(new KeyValue("王维   终南别业", "ts_115.txt"));
+		list.add(new KeyValue("孟浩然 临洞庭上张丞相", "ts_116.txt"));
+		list.add(new KeyValue("孟浩然 与诸子登岘山", "ts_117.txt"));
+		list.add(new KeyValue("孟浩然 宴梅道士山房", "ts_118.txt"));
+		list.add(new KeyValue("孟浩然 岁暮归南山", "ts_119.txt"));
+		list.add(new KeyValue("孟浩然 过故人庄", "ts_120.txt"));
+		list.add(new KeyValue("孟浩然 秦中感秋寄远上人", "ts_121.txt"));
+		list.add(new KeyValue("孟浩然 宿桐庐江寄广陵旧游", "ts_122.txt"));
+		list.add(new KeyValue("孟浩然 留别王维", "ts_123.txt"));
+		list.add(new KeyValue("孟浩然 早寒江上有怀", "ts_124.txt"));
+		list.add(new KeyValue("刘长卿 秋日登吴公台上寺远眺", "ts_125.txt"));
+		list.add(new KeyValue("刘长卿 送李中丞归汉阳别业", "ts_126.txt"));
+		list.add(new KeyValue("刘长卿 饯别王十一南游", "ts_127.txt"));
+		list.add(new KeyValue("刘长卿 寻南溪常山道人隐居", "ts_128.txt"));
+		list.add(new KeyValue("刘长卿 新年作", "ts_129.txt"));
+		list.add(new KeyValue("钱起   送僧归日本", "ts_130.txt"));
+		list.add(new KeyValue("钱起   谷口书斋寄杨补阙", "ts_131.txt"));
+		list.add(new KeyValue("韦应物 淮上喜会梁川故人", "ts_132.txt"));
+		list.add(new KeyValue("韦应物 赋得暮雨送李胄", "ts_133.txt"));
+		list.add(new KeyValue("韩翃   酬程延秋夜即事见赠", "ts_134.txt"));
+		list.add(new KeyValue("刘脊虚 阙题", "ts_135.txt"));
+		list.add(new KeyValue("戴叔伦 江乡故人偶集客舍", "ts_136.txt"));
+		list.add(new KeyValue("卢伦   送李端", "ts_137.txt"));
+		list.add(new KeyValue("李益   喜见外弟又言别", "ts_138.txt"));
+		list.add(new KeyValue("司空曙 云阳馆与韩绅宿别", "ts_139.txt"));
+		list.add(new KeyValue("司空曙 喜见外弟卢纶见宿", "ts_140.txt"));
+		list.add(new KeyValue("司空曙 贼平后送人北归", "ts_141.txt"));
+		list.add(new KeyValue("刘禹锡 蜀先主庙", "ts_142.txt"));
+		list.add(new KeyValue("张藉   没蕃故人", "ts_143.txt"));
+		list.add(new KeyValue("白居易 草", "ts_144.txt"));
+		list.add(new KeyValue("杜牧   旅宿", "ts_145.txt"));
+		list.add(new KeyValue("许浑   秋日赴阙题潼关驿楼", "ts_146.txt"));
+		list.add(new KeyValue("许浑   早秋", "ts_147.txt"));
+		list.add(new KeyValue("李商隐 蝉", "ts_148.txt"));
+		list.add(new KeyValue("李商隐 风雨", "ts_149.txt"));
+		list.add(new KeyValue("李商隐 落花", "ts_150.txt"));
+		list.add(new KeyValue("李商隐 凉思", "ts_151.txt"));
+		list.add(new KeyValue("李商隐 北青萝", "ts_152.txt"));
+		list.add(new KeyValue("温庭筠 送人东游", "ts_153.txt"));
+		list.add(new KeyValue("马戴   灞上秋居", "ts_154.txt"));
+		list.add(new KeyValue("马戴   楚江怀古", "ts_155.txt"));
+		list.add(new KeyValue("张乔   书边事", "ts_156.txt"));
+		list.add(new KeyValue("崔涂   除夜有怀", "ts_157.txt"));
+		list.add(new KeyValue("崔涂   孤雁", "ts_158.txt"));
+		list.add(new KeyValue("杜荀鹤 春宫怨", "ts_159.txt"));
+		list.add(new KeyValue("韦庄   章台夜思", "ts_160.txt"));
+		list.add(new KeyValue("僧皎然 寻陆鸿渐不遇", "ts_161.txt"));
 		Menu_File_Map.put("五言律诗", list);
-		
+
 		list = new ArrayList<KeyValue>();
-		list.add(new KeyValue("陈子昂 登幽州台歌"  , "ts_040.txt"));
-		list.add(new KeyValue("李颀   古意"  , "ts_041.txt"));
-		list.add(new KeyValue("李颀   送陈章甫"  , "ts_042.txt"));
-		list.add(new KeyValue("李颀   琴歌"  , "ts_043.txt"));
-		list.add(new KeyValue("李颀   听董大弹胡笳声兼寄语弄房给事"  , "ts_044.txt"));
-		list.add(new KeyValue("李颀   听安万善吹筚篥歌"  , "ts_045.txt"));
-		list.add(new KeyValue("孟浩然 夜归鹿门山歌"  , "ts_046.txt"));
-		list.add(new KeyValue("李白   庐山谣寄卢侍御虚舟"  , "ts_047.txt"));
-		list.add(new KeyValue("李白   梦游天姥吟留别"  , "ts_048.txt"));
-		list.add(new KeyValue("李白   金陵酒肆留别"  , "ts_049.txt"));
-		list.add(new KeyValue("李白   宣州谢朓楼饯别校书叔云"  , "ts_050.txt"));
-		list.add(new KeyValue("岑参   走马川行奉送封大夫出师西征"  , "ts_051.txt"));
-		list.add(new KeyValue("岑参   轮台歌奉送封大夫出师西征"  , "ts_052.txt"));
-		list.add(new KeyValue("岑参   白雪歌送武判官归京"  , "ts_053.txt"));
-		list.add(new KeyValue("杜甫   韦讽录事宅观曹将军画马图"  , "ts_054.txt"));
-		list.add(new KeyValue("杜甫   丹青引赠曹霸将军"  , "ts_055.txt"));
-		list.add(new KeyValue("杜甫   寄韩谏议"  , "ts_056.txt"));
-		list.add(new KeyValue("杜甫   古柏行"  , "ts_057.txt"));
-		list.add(new KeyValue("杜甫   观公孙大娘弟子舞剑器行·并序"  , "ts_058.txt"));
-		list.add(new KeyValue("元结   石鱼湖上醉歌·并序"  , "ts_059.txt"));
-		list.add(new KeyValue("韩愈   山石"  , "ts_060.txt"));
-		list.add(new KeyValue("韩愈   八月十五夜赠张功曹"  , "ts_061.txt"));
-		list.add(new KeyValue("韩愈   谒衡岳庙遂宿岳寺题门楼"  , "ts_062.txt"));
-		list.add(new KeyValue("韩愈   石鼓歌"  , "ts_063.txt"));
-		list.add(new KeyValue("柳宗元 渔翁夜傍西岩宿，晓汲清湘燃楚竹。 渔翁"  , "ts_064.txt"));
-		list.add(new KeyValue("白居易 长恨歌"  , "ts_065.txt"));
-		list.add(new KeyValue("白居易 琵琶行·并序"  , "ts_066.txt"));
-		list.add(new KeyValue("李商隐 韩碑"  , "ts_067.txt"));
-		list.add(new KeyValue("高适   燕歌行·并序"  , "ts_068.txt"));
+		list.add(new KeyValue("陈子昂 登幽州台歌", "ts_040.txt"));
+		list.add(new KeyValue("李颀   古意", "ts_041.txt"));
+		list.add(new KeyValue("李颀   送陈章甫", "ts_042.txt"));
+		list.add(new KeyValue("李颀   琴歌", "ts_043.txt"));
+		list.add(new KeyValue("李颀   听董大弹胡笳声兼寄语弄房给事", "ts_044.txt"));
+		list.add(new KeyValue("李颀   听安万善吹筚篥歌", "ts_045.txt"));
+		list.add(new KeyValue("孟浩然 夜归鹿门山歌", "ts_046.txt"));
+		list.add(new KeyValue("李白   庐山谣寄卢侍御虚舟", "ts_047.txt"));
+		list.add(new KeyValue("李白   梦游天姥吟留别", "ts_048.txt"));
+		list.add(new KeyValue("李白   金陵酒肆留别", "ts_049.txt"));
+		list.add(new KeyValue("李白   宣州谢朓楼饯别校书叔云", "ts_050.txt"));
+		list.add(new KeyValue("岑参   走马川行奉送封大夫出师西征", "ts_051.txt"));
+		list.add(new KeyValue("岑参   轮台歌奉送封大夫出师西征", "ts_052.txt"));
+		list.add(new KeyValue("岑参   白雪歌送武判官归京", "ts_053.txt"));
+		list.add(new KeyValue("杜甫   韦讽录事宅观曹将军画马图", "ts_054.txt"));
+		list.add(new KeyValue("杜甫   丹青引赠曹霸将军", "ts_055.txt"));
+		list.add(new KeyValue("杜甫   寄韩谏议", "ts_056.txt"));
+		list.add(new KeyValue("杜甫   古柏行", "ts_057.txt"));
+		list.add(new KeyValue("杜甫   观公孙大娘弟子舞剑器行·并序", "ts_058.txt"));
+		list.add(new KeyValue("元结   石鱼湖上醉歌·并序", "ts_059.txt"));
+		list.add(new KeyValue("韩愈   山石", "ts_060.txt"));
+		list.add(new KeyValue("韩愈   八月十五夜赠张功曹", "ts_061.txt"));
+		list.add(new KeyValue("韩愈   谒衡岳庙遂宿岳寺题门楼", "ts_062.txt"));
+		list.add(new KeyValue("韩愈   石鼓歌", "ts_063.txt"));
+		list.add(new KeyValue("柳宗元 渔翁夜傍西岩宿，晓汲清湘燃楚竹。 渔翁", "ts_064.txt"));
+		list.add(new KeyValue("白居易 长恨歌", "ts_065.txt"));
+		list.add(new KeyValue("白居易 琵琶行·并序", "ts_066.txt"));
+		list.add(new KeyValue("李商隐 韩碑", "ts_067.txt"));
+		list.add(new KeyValue("高适   燕歌行·并序", "ts_068.txt"));
 		Menu_File_Map.put("七言古诗", list);
-		
+
 		list = new ArrayList<KeyValue>();
-		list.add(new KeyValue("张九龄 感遇·其一"  , "ts_001.txt"));
-		list.add(new KeyValue("张九龄 感遇·其二"  , "ts_002.txt"));
-		list.add(new KeyValue("李白   下终南山过斛斯山人宿置酒"  , "ts_003.txt"));
-		list.add(new KeyValue("李白   月下独酌"  , "ts_004.txt"));
-		list.add(new KeyValue("李白   春思"  , "ts_005.txt"));
-		list.add(new KeyValue("杜甫   望岳"  , "ts_006.txt"));
-		list.add(new KeyValue("杜甫   赠卫八处士"  , "ts_007.txt"));
-		list.add(new KeyValue("杜甫   佳人"  , "ts_008.txt"));
-		list.add(new KeyValue("杜甫   梦李白·其一"  , "ts_009.txt"));
-		list.add(new KeyValue("杜甫   梦李白·其二"  , "ts_010.txt"));
-		list.add(new KeyValue("王维   送綦毋潜落第还乡"  , "ts_011.txt"));
-		list.add(new KeyValue("王维   送别"  , "ts_012.txt"));
-		list.add(new KeyValue("王维   青溪"  , "ts_013.txt"));
-		list.add(new KeyValue("王维   渭川田家"  , "ts_014.txt"));
-		list.add(new KeyValue("王维   西施咏"  , "ts_015.txt"));
-		list.add(new KeyValue("孟浩然 秋登兰山寄张五"  , "ts_016.txt"));
-		list.add(new KeyValue("孟浩然 夏日南亭怀辛大"  , "ts_017.txt"));
-		list.add(new KeyValue("孟浩然 宿业师山房待丁大不至"  , "ts_018.txt"));
-		list.add(new KeyValue("王昌龄 同从弟南斋玩月忆山阴崔少府"  , "ts_019.txt"));
-		list.add(new KeyValue("邱为   寻西山隐者不遇"  , "ts_020.txt"));
-		list.add(new KeyValue("綦毋潜 春泛若耶溪"  , "ts_021.txt"));
-		list.add(new KeyValue("岑参   与高适薛据登慈恩寺浮图"  , "ts_022.txt"));
-		list.add(new KeyValue("元结   贼退示官吏·并序"  , "ts_023.txt"));
-		list.add(new KeyValue("韦应物 郡斋雨中与诸文士燕集"  , "ts_024.txt"));
-		list.add(new KeyValue("韦应物 初发扬子寄元大校书"  , "ts_025.txt"));
-		list.add(new KeyValue("韦应物 寄全椒山中道士"  , "ts_026.txt"));
-		list.add(new KeyValue("韦应物 长安遇冯著"  , "ts_027.txt"));
-		list.add(new KeyValue("韦应物 夕次盱眙县"  , "ts_028.txt"));
-		list.add(new KeyValue("韦应物 东郊"  , "ts_029.txt"));
-		list.add(new KeyValue("韦应物 送杨氏女"  , "ts_030.txt"));
-		list.add(new KeyValue("柳宗元 晨诣超师院读禅经"  , "ts_031.txt"));
-		list.add(new KeyValue("柳宗元 溪居"  , "ts_032.txt"));
+		list.add(new KeyValue("张九龄 感遇·其一", "ts_001.txt"));
+		list.add(new KeyValue("张九龄 感遇·其二", "ts_002.txt"));
+		list.add(new KeyValue("李白   下终南山过斛斯山人宿置酒", "ts_003.txt"));
+		list.add(new KeyValue("李白   月下独酌", "ts_004.txt"));
+		list.add(new KeyValue("李白   春思", "ts_005.txt"));
+		list.add(new KeyValue("杜甫   望岳", "ts_006.txt"));
+		list.add(new KeyValue("杜甫   赠卫八处士", "ts_007.txt"));
+		list.add(new KeyValue("杜甫   佳人", "ts_008.txt"));
+		list.add(new KeyValue("杜甫   梦李白·其一", "ts_009.txt"));
+		list.add(new KeyValue("杜甫   梦李白·其二", "ts_010.txt"));
+		list.add(new KeyValue("王维   送綦毋潜落第还乡", "ts_011.txt"));
+		list.add(new KeyValue("王维   送别", "ts_012.txt"));
+		list.add(new KeyValue("王维   青溪", "ts_013.txt"));
+		list.add(new KeyValue("王维   渭川田家", "ts_014.txt"));
+		list.add(new KeyValue("王维   西施咏", "ts_015.txt"));
+		list.add(new KeyValue("孟浩然 秋登兰山寄张五", "ts_016.txt"));
+		list.add(new KeyValue("孟浩然 夏日南亭怀辛大", "ts_017.txt"));
+		list.add(new KeyValue("孟浩然 宿业师山房待丁大不至", "ts_018.txt"));
+		list.add(new KeyValue("王昌龄 同从弟南斋玩月忆山阴崔少府", "ts_019.txt"));
+		list.add(new KeyValue("邱为   寻西山隐者不遇", "ts_020.txt"));
+		list.add(new KeyValue("綦毋潜 春泛若耶溪", "ts_021.txt"));
+		list.add(new KeyValue("岑参   与高适薛据登慈恩寺浮图", "ts_022.txt"));
+		list.add(new KeyValue("元结   贼退示官吏·并序", "ts_023.txt"));
+		list.add(new KeyValue("韦应物 郡斋雨中与诸文士燕集", "ts_024.txt"));
+		list.add(new KeyValue("韦应物 初发扬子寄元大校书", "ts_025.txt"));
+		list.add(new KeyValue("韦应物 寄全椒山中道士", "ts_026.txt"));
+		list.add(new KeyValue("韦应物 长安遇冯著", "ts_027.txt"));
+		list.add(new KeyValue("韦应物 夕次盱眙县", "ts_028.txt"));
+		list.add(new KeyValue("韦应物 东郊", "ts_029.txt"));
+		list.add(new KeyValue("韦应物 送杨氏女", "ts_030.txt"));
+		list.add(new KeyValue("柳宗元 晨诣超师院读禅经", "ts_031.txt"));
+		list.add(new KeyValue("柳宗元 溪居", "ts_032.txt"));
 		Menu_File_Map.put("五言古诗", list);
-		
-		
+
+		for (Map.Entry<String, List<KeyValue>> entry : Menu_File_Map.entrySet()) {
+			AllList.addAll(entry.getValue());
+			SearchList.addAll(entry.getValue());
+		}
+
 	}
 
 	static class KeyValue {
 		private String value;
 		private String key;
 
-		public KeyValue( String value,String key) {
+		public KeyValue(String value, String key) {
 			this.key = key;
 			this.value = value;
 		}

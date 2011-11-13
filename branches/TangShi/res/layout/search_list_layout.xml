@@ -2,22 +2,7 @@
 <LinearLayout android:id="@+id/sortLayout"
 	android:layout_width="fill_parent" android:layout_height="fill_parent"
 	xmlns:android="http://schemas.android.com/apk/res/android">
-	<RelativeLayout android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:layout_marginTop="16.0dip"
-		xmlns:android="http://schemas.android.com/apk/res/android">
-		<ImageView android:id="@+id/flag_icon" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:layout_marginLeft="20.0dip"
-			android:background="@drawable/hot" />
-
-		<TextView android:textSize="18.0sp" android:id="@+id/txtSearchEnName"
-			android:layout_width="100dip" android:layout_height="wrap_content"
-			android:layout_marginLeft="20.0px" android:layout_toRightOf="@id/flag_icon" />
-
-		<ImageView android:id="@+id/carIcon" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:layout_marginLeft="20.0dip"
-			android:layout_toRightOf="@id/txtSearchEnName" android:maxHeight="50dip"
-			android:maxWidth="50dip" android:adjustViewBounds="true"
-			android:layout_marginBottom="10dip" />
-
-	</RelativeLayout>
+	<TextView android:textSize="18.0sp" android:id="@+id/txtListItem"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_marginLeft="20.0px"  />
 </LinearLayout>
