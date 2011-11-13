@@ -60,14 +60,6 @@ public class SubMenuActivity extends Activity {
 				finish();
 			}
 		});
-		Button owns = (Button) findViewById(R.id.OwnsButton);
-		owns.setText("更多免费应用...");
-		owns.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View arg0) {
-				// 显示自家应用列表.
-				AppConnect.getInstance(SubMenuActivity.this).showMore(SubMenuActivity.this);
-			}
-		});
 	}
 
 }

@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout android:orientation="vertical"
+<RelativeLayout android:orientation="vertical"
 	android:id="@+id/widget_layout_submenu" android:layout_width="fill_parent"
 	android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
-	<Button android:id="@+id/OwnsButton" android:text="更多免费应用..."
-		android:layout_height="wrap_content" android:layout_width="fill_parent"
-		android:visibility="visible" android:layout_marginTop="10dip" />
 	<Button android:id="@+id/returnButton" android:text="返回"
 		android:layout_height="wrap_content" android:layout_width="fill_parent"
-		android:visibility="visible" />
+		android:visibility="visible" android:layout_alignParentTop="true"
+		android:layout_marginTop="4.0dip" />
+	<LinearLayout android:id="@+id/AdLinearLayout2"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:gravity="center_horizontal" android:layout_alignParentBottom="true" />
 	<ListView android:id="@+id/subMenuList" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:layout_marginBottom="2.0dip" />
+		android:layout_height="wrap_content" android:layout_marginBottom="2.0dip"
+		android:layout_above="@id/AdLinearLayout2" android:layout_below="@id/returnButton" />
 
 
-</LinearLayout>
+</RelativeLayout>
