@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -22,18 +21,14 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cxl.ListManager.KeyValue;
 import com.cxl.tangshi.R;
-import com.waps.AdView;
 import com.waps.AppConnect;
 import com.waps.UpdatePointsNotifier;
 
@@ -151,7 +146,7 @@ public class MainActivity extends TabActivity implements
 				bundle.putString("menu",  ListManager.children[groupPosition][childPosition].toString());
 				intent.putExtras(bundle);
 				startActivity(intent);
-				Toast.makeText(getApplicationContext(), "开始鉴赏： "+ListManager.children[groupPosition][childPosition].toString(), Toast.LENGTH_SHORT).show();  
+//				Toast.makeText(getApplicationContext(), "开始鉴赏： "+ListManager.children[groupPosition][childPosition].toString(), Toast.LENGTH_SHORT).show();  
 				return false;
 			}
 		});
@@ -167,6 +162,9 @@ public class MainActivity extends TabActivity implements
 //				startActivity(intent);
 			}
 		});
+//		firstMenuListView.expandGroup(0);
+//		firstMenuListView.expandGroup(1);
+//		firstMenuListView.expandGroup(2);
 
 		initFavorites();
 		favoriteListView = (ListView) findViewById(R.id.favoriteList);
@@ -249,9 +247,9 @@ public class MainActivity extends TabActivity implements
 		String[] splitStrings = myFavorite
 				.split(DetailActivity.Favorite_Item_Split);
 		for (String itemString : splitStrings) {
-			favoriteList.add(new KeyValue(itemString
-					.split(DetailActivity.Item_Key_Value_Split)[0], itemString
-					.split(DetailActivity.Item_Key_Value_Split)[1]));
+			favoriteList.add(new KeyValue( itemString
+					.split(DetailActivity.Item_Key_Value_Split)[1],itemString
+					.split(DetailActivity.Item_Key_Value_Split)[0]));
 		}
 	}
 
@@ -349,7 +347,7 @@ public class MainActivity extends TabActivity implements
 		// 获取某一项的 View 的逻辑
 		private TextView getGenericView() {
 			AbsListView.LayoutParams lp = new AbsListView.LayoutParams(
-					ViewGroup.LayoutParams.FILL_PARENT, 48);
+					ViewGroup.LayoutParams.FILL_PARENT, 64);
 			TextView textView = new TextView(MainActivity.this);
 			textView.setLayoutParams(lp);
 			textView.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
