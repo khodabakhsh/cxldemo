@@ -126,7 +126,7 @@ public class MainActivity extends TabActivity implements
 
 		firstMenuListView = (ListView) findViewById(R.id.searchList);
 		firstMenuAdapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1,
+				 R.layout.simple_list_layout, R.id.txtListItem, 
 				ListManager.First_Menu_List);
 		firstMenuListView.setAdapter(firstMenuAdapter);
 		firstMenuListView.setOnItemClickListener(new OnItemClickListener() {
@@ -145,7 +145,7 @@ public class MainActivity extends TabActivity implements
 		initFavorites();
 		favoriteListView = (ListView) findViewById(R.id.favoriteList);
 		favoriteListAdapter = new ArrayAdapter<KeyValue>(this,
-				android.R.layout.simple_list_item_1, favoriteList);
+				 R.layout.simple_list_layout, R.id.txtListItem,  favoriteList);
 		favoriteListView.setAdapter(favoriteListAdapter);
 
 		favoriteListView.setOnItemClickListener(new OnItemClickListener() {
@@ -206,7 +206,7 @@ public class MainActivity extends TabActivity implements
 						MainActivity.this);
 			}
 		});
-		LinearLayout container = (LinearLayout) findViewById(R.id.AdLinearLayout);
+		LinearLayout container = (LinearLayout) findViewById(R.id.AdLinearLayout3);
 		new AdView(this, container).DisplayAd(20);// 每20秒轮换一次广告；最少为20
 	}
 
@@ -223,6 +223,7 @@ public class MainActivity extends TabActivity implements
 		}
 		String[] splitStrings = myFavorite
 				.split(DetailActivity.Favorite_Item_Split);
+		favoriteList.clear();
 		for (String itemString : splitStrings) {
 			favoriteList.add(new KeyValue(itemString
 					.split(DetailActivity.Item_Key_Value_Split)[0], itemString

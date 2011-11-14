@@ -32,12 +32,12 @@ public class SubMenuActivity extends Activity {
 		List<KeyValue> list = ListManager.Menu_File_Map.get(menu);
 
 		subMenuListView = (ListView) findViewById(R.id.subMenuList);
-		
-		subMenuAdapter = new ArrayAdapter<KeyValue>(this,  android.R.layout.simple_list_item_1,list);
+
+		subMenuAdapter = new ArrayAdapter<KeyValue>(this, R.layout.simple_list_layout, R.id.txtListItem, list);
 		subMenuListView.setAdapter(subMenuAdapter);
 		subMenuListView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
-				KeyValue selectItem =(KeyValue)arg0.getItemAtPosition(pos);
+				KeyValue selectItem = (KeyValue) arg0.getItemAtPosition(pos);
 				Intent intent = new Intent();
 				intent.setClass(SubMenuActivity.this, DetailActivity.class);
 				Bundle bundle = new Bundle();
