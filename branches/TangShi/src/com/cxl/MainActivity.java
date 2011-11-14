@@ -109,13 +109,13 @@ public class MainActivity extends TabActivity implements
 	public static final String hasEnoughRequrePointPreferenceKey = "hasEnoughRequrePointPreferenceKey";
 	public static boolean hasEnoughRequrePointPreferenceValue = false;// 保存在配置里
 
-	@Override
+	
 	protected void onDestroy() {
 		AppConnect.getInstance(this).finalize();
 		super.onDestroy();
 	}
 
-	@Override
+	
 	protected void onResume() {
 		favoriteListAdapter.notifyDataSetChanged();
 		ListManager.getSearchList("");
@@ -200,7 +200,6 @@ public class MainActivity extends TabActivity implements
 		firstMenuListView.setAdapter(new MyExpandableListAdapter());
 		firstMenuListView.setOnChildClickListener(new OnChildClickListener() {
 
-			@Override
 			public boolean onChildClick(ExpandableListView arg0, View arg1,
 					int groupPosition, int childPosition, long id) {
 				Intent intent = new Intent();
@@ -364,23 +363,23 @@ public class MainActivity extends TabActivity implements
 	// 自定义Adapter
 	public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
-		@Override
+		
 		public Object getChild(int groupPosition, int childPosition) {
 			return ListManager.children[groupPosition][childPosition];
 		}
 
-		@Override
+		
 		public long getChildId(int groupPosition, int childPosition) {
 			return childPosition;
 		}
 
-		@Override
+		
 		public int getChildrenCount(int groupPosition) {
 			return ListManager.children[groupPosition].length;
 		}
 
 		// 取子列表中的某一项的 View
-		@Override
+		
 		public View getChildView(int groupPosition, int childPosition,
 				boolean isLastChild, View convertView, ViewGroup parent) {
 			TextView textView = getGenericView();
@@ -388,23 +387,23 @@ public class MainActivity extends TabActivity implements
 			return textView;
 		}
 
-		@Override
+		
 		public Object getGroup(int groupPosition) {
 			return ListManager.groups[groupPosition];
 		}
 
-		@Override
+		
 		public int getGroupCount() {
 			return ListManager.groups.length;
 		}
 
-		@Override
+		
 		public long getGroupId(int groupPosition) {
 			return groupPosition;
 		}
 
 		// 取父列表中的某一项的 View
-		@Override
+		
 		public View getGroupView(int groupPosition, boolean isExpanded,
 				View convertView, ViewGroup parent) {
 			TextView textView = getGenericView();
@@ -412,12 +411,12 @@ public class MainActivity extends TabActivity implements
 			return textView;
 		}
 
-		@Override
+		
 		public boolean hasStableIds() {
 			return true;
 		}
 
-		@Override
+		
 		public boolean isChildSelectable(int groupPosition, int childPosition) {
 			return true;
 		}
