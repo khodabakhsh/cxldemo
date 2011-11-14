@@ -118,7 +118,7 @@ public class MainActivity extends TabActivity implements
 	
 	protected void onResume() {
 		favoriteListAdapter.notifyDataSetChanged();
-		ListManager.getSearchList("");
+		ListManager.getSearchList(txtSearch.getText().toString());
 		matchListAdapter.notifyDataSetChanged();
 		initRequrePointPreference();
 		AppConnect.getInstance(this).getPoints(this);
@@ -176,12 +176,12 @@ public class MainActivity extends TabActivity implements
 		LayoutInflater.from(this)
 				.inflate(R.layout.main, localFrameLayout, true);
 		TabHost.TabSpec oneTabSpec = this.tabHost.newTabSpec("One")
-				.setIndicator("", getResources().getDrawable(R.drawable.about))
+				.setIndicator("", getResources().getDrawable(R.drawable.search))
 				.setContent(R.id.widget_layout_sort);
 		((TabHost) tabHost).addTab(oneTabSpec);
 		TabHost.TabSpec twoTabSpec = this.tabHost
 				.newTabSpec("Two")
-				.setIndicator("", getResources().getDrawable(R.drawable.search))
+				.setIndicator("", getResources().getDrawable(R.drawable.list))
 				.setContent(R.id.widget_layout_search);
 		((TabHost) tabHost).addTab(twoTabSpec);
 		TabHost.TabSpec threeTabSpec = this.tabHost
@@ -230,7 +230,7 @@ public class MainActivity extends TabActivity implements
 		initFavorites();
 		favoriteListView = (ListView) findViewById(R.id.favoriteList);
 		favoriteListAdapter = new ArrayAdapter<KeyValue>(this,
-				android.R.layout.simple_list_item_1, favoriteList);
+				 R.layout.simple_list_layout, R.id.txtListItem, favoriteList);
 		favoriteListView.setAdapter(favoriteListAdapter);
 
 		favoriteListView.setOnItemClickListener(new OnItemClickListener() {
@@ -304,11 +304,13 @@ public class MainActivity extends TabActivity implements
 			}
 		});
 		
-		LinearLayout container2 = (LinearLayout) findViewById(R.id.AdLinearLayout2);
-		new AdView(this, container2).DisplayAd(20);// 每20秒轮换一次广告；最少为20
+		
 		
 		LinearLayout container3 = (LinearLayout) findViewById(R.id.AdLinearLayout3);
 		new AdView(this, container3).DisplayAd(20);// 每20秒轮换一次广告；最少为20
+		
+		LinearLayout container2 = (LinearLayout) findViewById(R.id.AdLinearLayout2);
+		new AdView(this, container2).DisplayAd(20);// 每20秒轮换一次广告；最少为20
 	}
 
 	public void onTabChanged(String tabId) {
@@ -324,6 +326,7 @@ public class MainActivity extends TabActivity implements
 		}
 		String[] splitStrings = myFavorite
 				.split(DetailActivity.Favorite_Item_Split);
+		favoriteList.clear();
 		for (String itemString : splitStrings) {
 			favoriteList.add(new KeyValue(itemString
 					.split(DetailActivity.Item_Key_Value_Split)[1], itemString
@@ -424,7 +427,7 @@ public class MainActivity extends TabActivity implements
 		// 获取某一项的 View 的逻辑
 		private TextView getGenericView() {
 			AbsListView.LayoutParams lp = new AbsListView.LayoutParams(
-					ViewGroup.LayoutParams.WRAP_CONTENT, 64);
+					ViewGroup.LayoutParams.FILL_PARENT, 64);
 			TextView textView = new TextView(MainActivity.this);
 			textView.setLayoutParams(lp);
 			textView.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);

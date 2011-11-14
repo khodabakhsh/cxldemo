@@ -36,7 +36,7 @@ public class SubMenuActivity extends Activity {
 		subMenuListView = (ListView) findViewById(R.id.subMenuList);
 
 		subMenuAdapter = new ArrayAdapter<KeyValue>(this,
-				android.R.layout.simple_list_item_1, list);
+				 R.layout.simple_list_layout, R.id.txtListItem,  list);
 		subMenuListView.setAdapter(subMenuAdapter);
 		subMenuListView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
@@ -64,17 +64,6 @@ public class SubMenuActivity extends Activity {
 				finish();
 			}
 		});
-		Button owns = (Button) findViewById(R.id.OwnsButton);
-		owns.setText("更多免费应用...");
-		owns.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View arg0) {
-				// 显示自家应用列表.
-				AppConnect.getInstance(SubMenuActivity.this).showMore(
-						SubMenuActivity.this);
-			}
-		});
-		LinearLayout container2 = (LinearLayout) findViewById(R.id.AdLinearLayout2);
-		new AdView(this, container2).DisplayAd(20);// 每20秒轮换一次广告；最少为20
 	}
 
 }

@@ -3,7 +3,7 @@
 	android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
 	<RelativeLayout android:orientation="vertical"
 		android:id="@+id/widget_layout_sort" android:layout_width="fill_parent"
-		android:layout_height="fill_parent" android:paddingTop="20dip">
+		android:layout_height="fill_parent" android:paddingTop="5dip">
 		<EditText android:id="@+id/txtSearch" android:layout_width="fill_parent"
 			android:layout_height="wrap_content" android:layout_marginLeft="5.0px"
 			android:layout_marginRight="5.0px" android:hint="@string/str_hint"

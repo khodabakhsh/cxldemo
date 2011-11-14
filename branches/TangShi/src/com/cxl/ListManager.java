@@ -14,6 +14,7 @@ public class ListManager {
 
 	public static void getSearchList(String paramString) {
 		if ("".equals(paramString)) {
+			SearchList.clear();
 			SearchList.addAll(new ArrayList<KeyValue>(AllList));
 			return  ;
 		}
