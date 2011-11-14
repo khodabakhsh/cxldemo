@@ -30,12 +30,17 @@
 		android:id="@+id/widget_layout_point" android:layout_width="fill_parent"
 		android:layout_height="fill_parent">
 		<Button android:id="@+id/clearFavorite" android:layout_width="fill_parent"
-			android:layout_height="wrap_content" android:text="清空收藏" />
-		<ListView android:id="@+id/favoriteList" android:layout_width="fill_parent" 
-			android:layout_height="wrap_content" android:layout_below="@id/clearFavorite" 
+			android:layout_height="wrap_content" android:text="清空收藏"
+			android:layout_alignParentTop="true" />
+		<LinearLayout android:id="@+id/AdLinearLayout3"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:gravity="center_horizontal" android:layout_alignParentBottom="true" />
+		<ListView android:id="@+id/favoriteList"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:layout_below="@id/clearFavorite" android:layout_above="@id/AdLinearLayout3"
 			android:layout_marginBottom="10.0dip" />
 
-	
+
 
 	</RelativeLayout>
 </FrameLayout>
