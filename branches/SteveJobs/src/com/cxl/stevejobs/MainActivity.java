@@ -90,7 +90,6 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 	public void getUpdatePointsFailed(String error) {
 	}
 
-
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -99,12 +98,10 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		// 连接服务器. 应用启动时调用(为了统计准确性，此句必须填写).
 		AppConnect.getInstance(this);
 		menuList = (ListView) findViewById(R.id.menuList);
-		menuAdapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, MENU_List);
+		menuAdapter = new ArrayAdapter<String>(this, R.layout.simple_list_layout, R.id.txtListItem, MENU_List);
 		menuList.setAdapter(menuAdapter);
 		menuList.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
-					long id) {
+			public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
 				String menu = (String) arg0.getItemAtPosition(pos);
 				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, DetailActivity.class);
