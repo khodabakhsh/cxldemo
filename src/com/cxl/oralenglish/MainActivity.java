@@ -22,11 +22,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.waps.AdView;
 import com.waps.AppConnect;
 import com.waps.UpdatePointsNotifier;
 
@@ -59,7 +61,9 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
 
 	@Override
 	protected void onResume() {
-		initRequrePointPreference();
+//		initRequrePointPreference();
+		searchList = ListManager.getSearchList(txtSearch.getText().toString());
+		matchListAdapter.notifyDataSetChanged();
 		AppConnect.getInstance(this).getPoints(this);
 		super.onResume();
 	}
@@ -163,6 +167,9 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
 				AppConnect.getInstance(MainActivity.this).showMore(MainActivity.this);
 			}
 		});
+		
+		LinearLayout container2 = (LinearLayout) findViewById(R.id.AdLinearLayout);
+		new AdView(this, container2).DisplayAd(20);// 每20秒轮换一次广告；最少为20
 
 	}
 
@@ -213,9 +220,6 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
 			ImageView imageView = (ImageView) paramView.findViewById(R.id.flag_icon);
 			imageView.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
-					if (!hasEnoughRequrePointPreferenceValue && !hasEnoughRequrePoint) {// 没达到积分
-						showDialog();
-					} else {
 						String id = content.substring(0, content.indexOf("."));
 
 						SharedPreferences mPerferences = PreferenceManager
@@ -231,7 +235,6 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
 						mEditor.commit();
 
 						Toast.makeText(MainActivity.this, "收藏成功", Toast.LENGTH_LONG).show();
-					}
 
 				}
 			});
@@ -273,6 +276,7 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
 			return;
 		}
 		String[] splitStrings = myFavorite.split(Favorite_Item_Split);
+		favoriteList.clear();
 		for (String itemString : splitStrings) {
 			favoriteList.add(itemString);
 		}
