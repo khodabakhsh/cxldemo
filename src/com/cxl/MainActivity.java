@@ -27,12 +27,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cxl.car.R;
+import com.waps.AdView;
 import com.waps.AppConnect;
 import com.waps.UpdatePointsNotifier;
 
@@ -65,7 +67,9 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
 
 	@Override
 	protected void onResume() {
-		initRequrePointPreference();
+//		initRequrePointPreference();
+		searchList = ListManager.getSearchList(txtSearch.getText().toString());
+		matchListAdapter.notifyDataSetChanged();
 		AppConnect.getInstance(this).getPoints(this);
 		super.onResume();
 	}
@@ -132,8 +136,8 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
 		searchListView.setAdapter(matchListAdapter);
 		searchListView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
-				String car =(String)arg0.getItemAtPosition(pos);
-				Toast.makeText(getApplicationContext(), "开始查看："+car, Toast.LENGTH_LONG).show();
+				String car = (String) arg0.getItemAtPosition(pos);
+//				Toast.makeText(getApplicationContext(), "开始查看：" + car, Toast.LENGTH_LONG).show();
 				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, DetailActivity.class);
 				Bundle bundle = new Bundle();
@@ -149,7 +153,7 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
 
 		favoriteListView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
-				String car =(String)arg0.getItemAtPosition(pos);
+				String car = (String) arg0.getItemAtPosition(pos);
 				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, DetailActivity.class);
 				Bundle bundle = new Bundle();
@@ -193,6 +197,8 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
 				AppConnect.getInstance(MainActivity.this).showMore(MainActivity.this);
 			}
 		});
+	
+
 	}
 
 	class MyTextWatcher implements TextWatcher {
@@ -240,35 +246,31 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
 			final String carName = getItem(paramInt).toString();
 			localTextView1.setText(carName);
 			ImageView imageView = (ImageView) paramView.findViewById(R.id.flag_icon);
-			
-			ImageView carIcon = (ImageView) paramView.findViewById(R.id.carIcon); 
+
+			ImageView carIcon = (ImageView) paramView.findViewById(R.id.carIcon);
 			AssetManager assets = getAssets();
 			try {
 				// 打开指定资源对应的输入流  
-				InputStream assetFile = assets.open("image/"+ListManager.CarImageMap.get(carName)+".jpg");
+				InputStream assetFile = assets.open("image/" + ListManager.CarImageMap.get(carName) + ".jpg");
 				carIcon.setImageBitmap(BitmapFactory.decodeStream(assetFile));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 			imageView.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
-					if (!hasEnoughRequrePointPreferenceValue && !hasEnoughRequrePoint) {// 没达到积分
-						showDialog();
-					} else {
-						SharedPreferences mPerferences = PreferenceManager
-								.getDefaultSharedPreferences(MainActivity.this);
-						String myFavorite = mPerferences.getString(My_Favorite_Key, "");
-						if (!exist(myFavorite, carName)) {
-							favoriteList.add(carName);
-						}
-						favoriteListAdapter.notifyDataSetChanged();
-						SharedPreferences.Editor mEditor = mPerferences.edit();
-						mEditor.putString(My_Favorite_Key, add(myFavorite, carName));
-						mEditor.commit();
-
-						Toast.makeText(MainActivity.this, "收藏成功", Toast.LENGTH_LONG).show();
+					SharedPreferences mPerferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+					String myFavorite = mPerferences.getString(My_Favorite_Key, "");
+					if (!exist(myFavorite, carName)) {
+						favoriteList.add(carName);
 					}
+					favoriteListAdapter.notifyDataSetChanged();
+					SharedPreferences.Editor mEditor = mPerferences.edit();
+					mEditor.putString(My_Favorite_Key, add(myFavorite, carName));
+					mEditor.commit();
+
+					Toast.makeText(MainActivity.this, "收藏成功", Toast.LENGTH_LONG).show();
+
 				}
 			});
 			return paramView;
@@ -298,12 +300,12 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
 			TextView localTextView1 = (TextView) paramView.findViewById(R.id.txtSearchEnName);
 			final String carName = getItem(paramInt).toString();
 			localTextView1.setText(carName);
-			
-			ImageView carIcon = (ImageView) paramView.findViewById(R.id.carIcon); 
+
+			ImageView carIcon = (ImageView) paramView.findViewById(R.id.carIcon);
 			AssetManager assets = getAssets();
 			try {
 				// 打开指定资源对应的输入流  
-				InputStream assetFile = assets.open("image/"+ListManager.CarImageMap.get(carName)+".jpg");
+				InputStream assetFile = assets.open("image/" + ListManager.CarImageMap.get(carName) + ".jpg");
 				carIcon.setImageBitmap(BitmapFactory.decodeStream(assetFile));
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -319,6 +321,7 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
 			return;
 		}
 		String[] splitStrings = myFavorite.split(Favorite_Item_Split);
+		favoriteList.clear();
 		for (String itemString : splitStrings) {
 			favoriteList.add(itemString);
 		}

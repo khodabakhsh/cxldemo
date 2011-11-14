@@ -10,9 +10,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cxl.car.R;
+import com.waps.AdView;
 import com.waps.AppConnect;
 
 public class DetailActivity extends Activity {
@@ -62,14 +64,8 @@ public class DetailActivity extends Activity {
 				AppConnect.getInstance(DetailActivity.this).showMore(DetailActivity.this);
 			}
 		});
-		// Button offers = (Button) findViewById(R.id.OffersButton);
-		// offers.setText("其他推荐的免费应用...");
-		// offers.setOnClickListener(new Button.OnClickListener() {
-		// public void onClick(View arg0) {
-		// // 显示推荐安装程序（Offer）.
-		// AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
-		// }
-		// });
+		LinearLayout container2 = (LinearLayout) findViewById(R.id.AdLinearLayout);
+		new AdView(this, container2).DisplayAd(20);// 每20秒轮换一次广告；最少为20
 	}
 
 }
