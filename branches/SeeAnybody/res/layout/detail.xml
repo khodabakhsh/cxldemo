@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:background="@drawable/bg">
+	<LinearLayout android:id="@+id/AdLinearLayout"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:gravity="center_horizontal" />
+	<RelativeLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_margin="10.0dip">
+		<Button android:id="@+id/previous" android:background="@drawable/an"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text="上一章" android:layout_alignParentLeft="true" />
+		<Button android:id="@+id/returnButton" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="返回目录"
+			android:layout_centerHorizontal="true" android:background="@drawable/an"/>
+		<Button android:id="@+id/next" android:background="@drawable/an"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text="下一章" android:layout_alignParentRight="true" />
+	</RelativeLayout>
+
+
+
+	<ScrollView android:gravity="center" android:orientation="vertical"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+		<LinearLayout android:orientation="vertical"
+			android:layout_width="fill_parent" android:layout_height="wrap_content">
+			<!-- <ImageView android:id="@+id/ImageView" android:layout_width="wrap_content" 
+				android:layout_height="250.0dip" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" 
+				/> -->
+			<TextView android:textSize="18.0dip" android:textStyle="bold"
+				android:textColor="#000000" android:id="@+id/TextView"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:layout_margin="5.0dip" />
+
+		</LinearLayout>
+
+	</ScrollView>
+
+</LinearLayout>
