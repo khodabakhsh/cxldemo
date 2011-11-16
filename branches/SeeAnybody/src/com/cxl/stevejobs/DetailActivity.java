@@ -6,10 +6,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.os.Handler;
+import android.text.method.ScrollingMovementMethod;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -26,17 +27,23 @@ public class DetailActivity extends Activity {
 	public static final String GBK = "GBK";
 	public static final String UTF8 = "UTF8";
 
-	public static final String Current_Page_Key = "Current_Page_Key";
 	public static int Current_Page_Value = 0;// 保存在配置里
 	TextView page;
 	Button btnPrevious;
 	Button btnNext;
-	public static final int Page_Sum = 6;// 保存在配置里
+	public static final int Page_Sum = 6;
+
+	Handler mHandler = new Handler();
+	private Runnable scrollViewRun = new Runnable() {
+		public void run() {
+			textView.scrollTo(0, 0);
+		}
+	};
 
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		initCurrentPagePreference();
+		this.getApplicationContext();
 		setContentView(R.layout.detail);
 
 		btnPrevious = (Button) findViewById(R.id.previous);
@@ -47,13 +54,12 @@ public class DetailActivity extends Activity {
 					AssetManager assets = getAssets();
 					InputStream assetFile;
 					assetFile = assets.open((--Current_Page_Value) + ".txt");
-
-					setButtonVisible();
 					textView.setText(genFileContent(assetFile));
+					mHandler.post(scrollViewRun);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				setButtonVisible();
+				setButtonVisibleAndSaveState();
 			}
 		});
 		btnNext = (Button) findViewById(R.id.next);
@@ -63,12 +69,12 @@ public class DetailActivity extends Activity {
 					AssetManager assets = getAssets();
 					InputStream assetFile;
 					assetFile = assets.open((++Current_Page_Value) + ".txt");
-					setButtonVisible();
 					textView.setText(genFileContent(assetFile));
+					mHandler.post(scrollViewRun);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				setButtonVisible();
+				setButtonVisibleAndSaveState();
 			}
 		});
 
@@ -78,17 +84,25 @@ public class DetailActivity extends Activity {
 		AssetManager assets = getAssets();
 		// 打开指定资源对应的输入流
 		InputStream assetFile;
+		//是否继续阅读
+		boolean continueRead = false;
 		try {
 			if ("前言".equals(menu)) {
 				Current_Page_Value = 0;
+			} else if ("继续上次阅读".equals(menu)) {
+				Current_Page_Value = Util.getTxtIndex(this);
+				continueRead = true;
 			} else {
-				Current_Page_Value = Integer.valueOf(menu.substring(1,
-						menu.length() - 1));
+				Current_Page_Value = Integer.valueOf(menu.substring(1, menu.lastIndexOf("章")));
 			}
 			assetFile = assets.open(Current_Page_Value + ".txt");
 			textView = (TextView) findViewById(R.id.TextView);
+			textView.setMovementMethod(ScrollingMovementMethod.getInstance());
 			textView.setText(genFileContent(assetFile));
-			setButtonVisible();
+			if (continueRead) {
+				textView.scrollTo(0, Util.getScrollY(this));
+			}
+			setButtonVisibleAndSaveState();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -99,6 +113,7 @@ public class DetailActivity extends Activity {
 		returnButton.setOnClickListener(new Button.OnClickListener() {
 
 			public void onClick(View arg0) {
+				setButtonVisibleAndSaveState();
 				finish();
 			}
 		});
@@ -108,25 +123,28 @@ public class DetailActivity extends Activity {
 
 	}
 
-	@Override
-	protected void onResume() {
-		setButtonVisible();
-		super.onResume();
+	protected void onPause() {
+		saveState();
+		super.onPause();
+
 	}
 
-	private void initCurrentPagePreference() {
-		SharedPreferences mPerferences = PreferenceManager
-				.getDefaultSharedPreferences(this);
-		Current_Page_Value = mPerferences.getInt(Current_Page_Key, 1);
+	//保存当前页和滚动位置
+	private void saveState() {
+		Util.setScrollY(this, textView.getScrollY());
+		Util.setTxtIndex(this, Current_Page_Value);
 	}
 
-	private void setButtonVisible() {
-		if (Current_Page_Value == 0) {
-			setTitle("前言");
-		} else {
-			setTitle("第" + Current_Page_Value + "章");
+	public boolean onKeyDown(int keyCode, KeyEvent keyEvent) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			saveState();
 		}
-		// page.setText("第【" + Current_Page_Value + "】页");
+		return super.onKeyDown(keyCode, keyEvent);
+	}
+
+	private void setButtonVisibleAndSaveState() {
+		saveState();
+		setTitle(MainActivity.MENU_List.get(Current_Page_Value + 1));
 		if (Current_Page_Value == 0) {
 			btnPrevious.setVisibility(View.INVISIBLE);
 		} else {
@@ -137,11 +155,6 @@ public class DetailActivity extends Activity {
 		} else {
 			btnNext.setVisibility(View.VISIBLE);
 		}
-		SharedPreferences mPerferences = PreferenceManager
-				.getDefaultSharedPreferences(this);
-		SharedPreferences.Editor mEditor = mPerferences.edit();
-		mEditor.putInt(Current_Page_Key, Current_Page_Value);
-		mEditor.commit();
 	}
 
 	public static String genFileContent(InputStream inputStream) {
