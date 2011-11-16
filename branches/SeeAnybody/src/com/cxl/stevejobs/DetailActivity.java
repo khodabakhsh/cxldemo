@@ -126,7 +126,6 @@ public class DetailActivity extends Activity {
 	protected void onPause() {
 		saveState();
 		super.onPause();
-
 	}
 
 	//保存当前页和滚动位置
