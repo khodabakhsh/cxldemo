@@ -22,10 +22,17 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 	ArrayAdapter<String> menuAdapter;
 	public static final ArrayList<String> MENU_List = new ArrayList<String>();
 	static {
+		MENU_List.add("继续上次阅读");
 		MENU_List.add("前言");
-		for (int i = 1; i <= 6; i++) {
-			MENU_List.add("第" + i + "章");
-		}
+//		for (int i = 1; i <= 6; i++) {
+//			MENU_List.add("第" + i + "章");
+//		}
+		MENU_List.add("第1章    这个人在隐瞒什么吗");
+		MENU_List.add("第2章    赞成还是反对：他喜欢还是不喜欢");
+		MENU_List.add("第3章    她是信心十足，还是仅仅在装酷");
+		MENU_List.add("第4章    这些都是真的吗");
+		MENU_List.add("第5章    测测兴趣等级：他是真的感兴趣，还是你在浪费时间");
+		MENU_List.add("第6章    同伙还是敌人：她到底是哪一边的");
 
 	}
 
@@ -37,7 +44,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 
 	@Override
 	protected void onResume() {
-		AppConnect.getInstance(this).getPoints(this);
+//		AppConnect.getInstance(this).getPoints(this);
 		super.onResume();
 	}
 
