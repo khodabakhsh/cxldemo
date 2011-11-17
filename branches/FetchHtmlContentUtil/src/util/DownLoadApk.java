@@ -36,6 +36,25 @@ public class DownLoadApk {
 	public static String CarKnowledge_ViewPageUrl = "/Aspx/UserApp/DownLoad.aspx?src=apkpage&apk=L3upL/1Mj/fYfEGWz322l0add0lpUbl0add0lWtttUJZX3qU82B2l0add0lKIbnl0add0lmHtRxS0S3v8eMJrgLDXHVnfKll0add0lPGImj4WJ8NaHJBDQadetpc3NRiAYPpqv5/GRTeCxIjpOWg==";
 	public static String CarKnowledge_DownLoadUrl = "http://down.apk.gfan.com/asdf/Pfiles/2011/11/14/191517_bf8528c9-2ab9-4a1d-8e9e-8f913a007e23.apk";
 
+	//
+	public static String BrainFun_ViewPageUrl = "/Aspx/UserApp/DownLoad.aspx?src=apkpage&apk=lwC5kqImNKv2gF6FerWrbb7uRtuvfYAgkzFt/EarT8Sd7eOCoGmTBE6KzHdjZnget1ZJIvZTSg2B7vKx9deTbyYI9HWdg1KUslqgx1AwHt9BOi0vAB9JLQ==";
+	public static String BrainFun_DownLoadUrl = "http://down.apk.gfan.com/asdf/Pfiles/2011/11/16/193015_ee585987-8d4b-4a19-8cd9-d01f75ed64b5.apk";
+
+	//
+	public static String SeeAnybody_ViewPageUrl = "/Aspx/UserApp/DownLoad.aspx?src=apkpage&apk=96apdVgEgtWN70k67Vbxqi3rbwDeU7aGbNfq92pPjwNgnGaQv1WCVZeLiEvl0add0l3l3tUMZW5oLpZuIu9sr0SVDQcUXezQJSECo9dW96Q0TFs6KsBVaPFStJRg==";
+	public static String SeeAnybody_DownLoadUrl = "http://down.apk.gfan.com/asdf/Pfiles/2011/11/17/193100_c605e335-b90d-4553-801d-fa220efda393.apk";
+
+	//
+	public static String Car_ViewPageUrl = "/Aspx/UserApp/DownLoad.aspx?src=apkpage&apk=neWJ/cOLEJVXLC0cVIdV9aJ3AbLpAx8lZucdCXMcgX/d45syZS3KOiLVH7xDXfJnyQv6VQNV/IVt9LAku4H6pS21oq3au10GRXXnUBvqnHl0add0lqF4V9MrAO/A==";
+	public static String Car_DownLoadUrl = "http://down.apk.gfan.com/asdf/Pfiles/2011/11/10/190563_bc01cbcd-a2a2-4514-b964-1cc3e80e2dc5.apk";
+
+	
+	//
+	public static String OralEnglish_ViewPageUrl = "/Aspx/UserApp/DownLoad.aspx?src=apkpage&apk=dZgql0add0lqzXHKzcEvBl0add0l84TRszvSFQhUOr3y7d0RQyHgxt1ol0add0lgZFa9Ut0IwXSTDn/vhiXbtbdkr8qIP4NJlBcqeG7kw8UKhq2hpWt3OMal0add0lC9YtPOEuqMj3S4FQ==";
+	public static String OralEnglish_DownLoadUrl = "http://down.apk.gfan.com/asdf/Pfiles/2011/11/17/190279_4b5c5dc7-1e53-4558-9e00-4d51ef537548.apk";
+	
+	
+			
 	public static int countSteveJobs = 0;
 	public static int countTangShi = 0;
 	public static int countSpeak = 0;
@@ -49,24 +68,32 @@ public class DownLoadApk {
 	}
 
 	public static void main(String[] args) {
-		//		System.out.println(getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + SteveJobs_ViewPageUrl)));
+		//				System.out.println(getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + SteveJobs_ViewPageUrl)));
 		//		downLoadApk(SteveJobs_DownLoadUrl,"SteveJobs.apk");
-		//		System.out.println(getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + TangShi_ViewPageUrl)));
+		//				System.out.println(getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + TangShi_ViewPageUrl)));
 		//		downLoadApk(TangShi_DownLoadUrl,"TangShi.apk");
-		//		System.out.println(getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + Speak_ViewPageUrl)));
+		//				System.out.println(getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + Speak_ViewPageUrl)));
 		//		downLoadApk(Speak_DownLoadUrl,"Speak.apk");
-		//		System.out.println(getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + CarKnowledge_ViewPageUrl)));
+		//				System.out.println(getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + CarKnowledge_ViewPageUrl)));
 		//		downLoadApk(CarKnowledge_DownLoadUrl,"CarKnowledge.apk");
+		//				System.out.println(getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + BrainFun_ViewPageUrl)));
+		//		downLoadApk(CarKnowledge_DownLoadUrl,"CarKnowledge.apk");
+//		System.out.println(getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + SeeAnybody_ViewPageUrl)));
+		
+//		System.out.println(getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + Car_ViewPageUrl)));
+//		System.out.println(getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + OralEnglish_ViewPageUrl)));
+		
 
 		//		long begin = System.currentTimeMillis();
-		for (int i = 0; i < 100; i++) {
-			startDownLoad(i);
-			try {
-				Thread.sleep(20000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
+				for (int i = 0; i < 20000; i++) {
+					System.out.println(i+1);
+					startThread();
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
 		/**
 		 * 因为是多线程，在下面统计执行时间可能不准确
 		 */
@@ -75,20 +102,25 @@ public class DownLoadApk {
 
 	}
 
-	private static void startThread(final String downLoadUrl, final String saveFileDir, final String saveFileName) {
+	private static void startThread() {
 		new Thread(new Runnable() {
 			public void run() {
-				downLoadApk(downLoadUrl, saveFileDir, saveFileName);
+				//				downLoadApk(downLoadUrl, saveFileDir, saveFileName);
+				getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + SteveJobs_ViewPageUrl));
+				getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + TangShi_ViewPageUrl));
+				getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + Speak_ViewPageUrl));
+				getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + CarKnowledge_ViewPageUrl));
+				
+				getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + BrainFun_ViewPageUrl));
+				getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + SeeAnybody_ViewPageUrl));
+				
+				getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + Car_ViewPageUrl));
+				getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + OralEnglish_ViewPageUrl));
+				
 			}
 		}).start();
 	}
 
-	private static void startDownLoad(final int i) {
-		startThread(SteveJobs_DownLoadUrl, "SteveJobs", "SteveJobs_" + i + ".apk");
-		startThread(TangShi_DownLoadUrl, "TangShi", "TangShi_" + i + ".apk");
-		startThread(Speak_DownLoadUrl, "Speak", "Speak_" + i + ".apk");
-		startThread(CarKnowledge_DownLoadUrl, "CarKnowledge", "CarKnowledge_" + i + ".apk");
-	}
 
 	public static String getDownLoadUrl(String html) {
 		int begin = html.indexOf("<script>javascript:window.location='")
