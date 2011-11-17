@@ -1,77 +1,41 @@
 package com.cxl;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.cxl.psychology.R;
+import com.waps.AdView;
 import com.waps.AppConnect;
 
 public class DetailActivity extends Activity {
-	private void showDialog() {
-		new AlertDialog.Builder(DetailActivity.this)
-				.setIcon(R.drawable.happy2)
-				.setTitle("当前积分：" + MainActivity.currentPointTotal)
-				.setMessage(
-						"只要积分满足" + MainActivity.requirePoint + "，就可以消除本提示信息！！ 您当前的积分不足" + MainActivity.requirePoint
-								+ "，所以会有此 提示。\n\n【免费获得积分方法】：请点击【确认键】进入推荐下载列表 , 【下载、安装并打开】软件获得相应积分，消除本提示！！")
-				.setPositiveButton("【确认】", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialoginterface, int i) {
-						// 显示推荐安装程序（Offer）.
-						AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
-					}
-				}).setNegativeButton("【取消】", new DialogInterface.OnClickListener() {
-
-					public void onClick(DialogInterface dialog, int which) {
-						// finish();
-					}
-				}).show();
-	}
 
 	private WebView mWebView;
 
 	private Button returnButton;
 
-	private ProgressDialog progressDialog = null;
-
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.detail);
-		progressDialog = new ProgressDialog(DetailActivity.this);
-		progressDialog.setTitle("请稍等...");
-		progressDialog.setMessage("获取数据中...");
-		progressDialog.setIndeterminate(true);
-		progressDialog.setIndeterminateDrawable(this.getResources().getDrawable(R.drawable.wait));
-		progressDialog.show();
-
-		new Thread(new Runnable() {
-			public void run() {
-				Bundle bundle = getIntent().getExtras();
-				mWebView = (WebView) findViewById(R.id.myWebView);
-				mWebView.getSettings().setJavaScriptEnabled(true);
-				mWebView.setScrollBarStyle(0);
-				mWebView.loadUrl("file:///android_asset/" + bundle.getString("indexPage"));
-				progressDialog.dismiss();
-
+		Bundle bundle = getIntent().getExtras();
+		mWebView = (WebView) findViewById(R.id.myWebView);
+		mWebView.getSettings().setJavaScriptEnabled(true);
+		mWebView.setScrollBarStyle(0);
+		mWebView.loadUrl("file:///android_asset/" + bundle.getString("indexPage"));
+		mWebView.setWebViewClient(new WebViewClient() {
+			/*   
+			此处能拦截超链接的url,即拦截href请求的内容.   
+			*/
+			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				mWebView.loadUrl( url);
+				return true;
 			}
-		}).start();
-
-		if (!MainActivity.hasEnoughRequrePointPreferenceValue && !MainActivity.hasEnoughRequrePoint) {// 没达到积分
-			showDialog();
-		}
+		});
 
 		returnButton = (Button) findViewById(R.id.returnButton);
 
@@ -93,39 +57,8 @@ public class DetailActivity extends Activity {
 				AppConnect.getInstance(DetailActivity.this).showMore(DetailActivity.this);
 			}
 		});
-	}
-
-	public String getFileContent(Context context, int x) {// 规划了file参数、ID参数，方便多文件写入。
-		InputStream in = null;
-		BufferedReader bufferedReader = null;
-		StringBuilder sBuffer = new StringBuilder("");
-		try {
-			in = context.getResources().openRawResource(x);
-
-			bufferedReader = new BufferedReader(new InputStreamReader(in));
-			String strLine;
-			while ((strLine = bufferedReader.readLine()) != null) {
-				sBuffer.append(strLine + "\n");
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (bufferedReader != null)
-				try {
-					bufferedReader.close();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			if (in != null)
-				try {
-					in.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-		}
-		return sBuffer.toString();
+		LinearLayout container = (LinearLayout) findViewById(R.id.AdLinearLayout);
+		new AdView(this, container).DisplayAd(20);// 每20秒轮换一次广告；最少为20
 	}
 
 	public boolean onKeyDown(int paramInt, KeyEvent paramKeyEvent) {
