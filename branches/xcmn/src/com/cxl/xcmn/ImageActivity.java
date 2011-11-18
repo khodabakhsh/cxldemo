@@ -26,14 +26,20 @@ public class ImageActivity extends Activity {
 
 	private static Map<Integer, Integer> ImageCount = new HashMap<Integer, Integer>();
 
+	private static boolean hasInited = false;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		typeIndex = Integer.parseInt(getIntent().getExtras().getString("position"));
+		typeIndex = Integer.parseInt(getIntent().getExtras().getString(
+				"position"));
 		imgCenter = (ImageView) findViewById(R.id.imgCenter);
-		imgCenter.setImageResource(getResourceId(getImgName(typeIndex, currentPageIndex), drawable));
-		getImageCount();
+		imgCenter.setImageResource(getResourceId(
+				getImgName(typeIndex, currentPageIndex), drawable));
+		if (!hasInited) {
+			getImageCount();
+		}
 		setTitle("香车美女（" + (typeIndex + 1) + "）");
 		text_num = (TextView) findViewById(R.id.text_num);
 		setTextNumber(currentPageIndex + 1, ImageCount.get(typeIndex));
@@ -42,11 +48,14 @@ public class ImageActivity extends Activity {
 		btn_previous.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				if (currentPageIndex == 0) {
-					Toast.makeText(getApplicationContext(), "这里已经是第一页哦", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "这里已经是第一页哦",
+							Toast.LENGTH_LONG).show();
 				} else {
 					currentPageIndex--;
-					imgCenter.setImageResource(getResourceId(getImgName(typeIndex, currentPageIndex), drawable));
-					setTextNumber(currentPageIndex + 1, ImageCount.get(typeIndex));
+					imgCenter.setImageResource(getResourceId(
+							getImgName(typeIndex, currentPageIndex), drawable));
+					setTextNumber(currentPageIndex + 1,
+							ImageCount.get(typeIndex));
 				}
 
 			}
@@ -55,11 +64,14 @@ public class ImageActivity extends Activity {
 		btn_next.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				if (currentPageIndex == ImageCount.get(typeIndex) - 1) {
-					Toast.makeText(getApplicationContext(), "这里已经是最后一页哦", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "这里已经是最后一页哦",
+							Toast.LENGTH_LONG).show();
 				} else {
 					currentPageIndex++;
-					imgCenter.setImageResource(getResourceId(getImgName(typeIndex, currentPageIndex), drawable));
-					setTextNumber(currentPageIndex + 1, ImageCount.get(typeIndex));
+					imgCenter.setImageResource(getResourceId(
+							getImgName(typeIndex, currentPageIndex), drawable));
+					setTextNumber(currentPageIndex + 1,
+							ImageCount.get(typeIndex));
 				}
 
 			}
@@ -79,9 +91,11 @@ public class ImageActivity extends Activity {
 	}
 
 	private void getImageCount() {
+		hasInited = true;
 		for (int j = 0; j < MainActivity.ICON_COUNT; j++) {
 			for (int i = 0; i < MaxCount; i++) {
-				if (getResources().getIdentifier(img + j + "_" + i, drawable, getPackageName()) == 0) {
+				if (getResources().getIdentifier(img + j + "_" + i, drawable,
+						getPackageName()) == 0) {
 					ImageCount.put(j, i);
 					break;
 				}
