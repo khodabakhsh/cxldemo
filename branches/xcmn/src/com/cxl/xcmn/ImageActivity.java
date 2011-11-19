@@ -1,10 +1,17 @@
 package com.cxl.xcmn;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
@@ -23,6 +30,8 @@ public class ImageActivity extends Activity {
 	private int MaxCount = 20;
 	private ImageButton btn_previous;
 	private ImageButton btn_next;
+
+	private final String basePath = "xcmn/";
 
 	private static Map<Integer, Integer> ImageCount = new HashMap<Integer, Integer>();
 
@@ -102,4 +111,82 @@ public class ImageActivity extends Activity {
 			}
 		}
 	}
+
+	public boolean onCreateOptionsMenu(Menu paramMenu) {
+		SubMenu localSubMenu1 = paramMenu.addSubMenu(0, 0, 0, "保存");
+		SubMenu localSubMenu2 = paramMenu.addSubMenu(0, 1, 0, "设为壁纸");
+		localSubMenu1.setIcon(R.drawable.save);
+		localSubMenu2.setIcon(R.drawable.set);
+		return super.onCreateOptionsMenu(paramMenu);
+	}
+
+	public boolean onOptionsItemSelected(MenuItem paramMenuItem) {
+		if (paramMenuItem.getItemId() == 0) {
+			new AlertDialog.Builder(ImageActivity.this)
+					// .setIcon(R.drawable.happy2)
+					.setTitle("保存图片")
+					.setMessage("确定要保存图片？")
+					.setPositiveButton("确认",
+							new DialogInterface.OnClickListener() {
+								public void onClick(
+										DialogInterface dialoginterface, int i) {
+									BitmapDrawaleTypeUtil.saveFile(
+											getBitmap(),
+											basePath + "香车美女（"
+													+ (typeIndex + 1) + "）/",
+											getImgName(typeIndex,
+													currentPageIndex) + ".jpg");
+									Toast.makeText(ImageActivity.this, "保存成功",
+											Toast.LENGTH_LONG).show();
+								}
+							})
+					.setNegativeButton("取消",
+							new DialogInterface.OnClickListener() {
+
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// finish();
+								}
+							}).show();
+
+		} else if (paramMenuItem.getItemId() == 1) {
+			new AlertDialog.Builder(ImageActivity.this)
+					// .setIcon(R.drawable.happy2)
+					.setTitle("设置图片")
+					.setMessage("确定要设置图片？")
+					.setPositiveButton("确认",
+							new DialogInterface.OnClickListener() {
+								public void onClick(
+										DialogInterface dialoginterface, int i) {
+									try {
+										getApplicationContext().setWallpaper(
+												getBitmap());
+										Toast.makeText(ImageActivity.this,
+												"设置成功", Toast.LENGTH_LONG)
+												.show();
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
+								}
+							})
+					.setNegativeButton("取消",
+							new DialogInterface.OnClickListener() {
+
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// finish();
+								}
+							}).show();
+
+		}
+		return super.onOptionsItemSelected(paramMenuItem);
+	}
+
+	private Bitmap getBitmap() {
+		return BitmapDrawaleTypeUtil.drawableToBitmap(getResources()
+				.getDrawable(
+						getResourceId(getImgName(typeIndex, currentPageIndex),
+								drawable)));
+	}
+
 }
