@@ -1,14 +1,16 @@
 package com.cxl.xcmn;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -159,12 +161,26 @@ public class ImageActivity extends Activity {
 								public void onClick(
 										DialogInterface dialoginterface, int i) {
 									try {
-										getApplicationContext().setWallpaper(
-												getBitmap());
+									Display display = getWindowManager().getDefaultDisplay();
+									int width = display.getWidth();
+									int height = display.getHeight();
+									Toast.makeText(getApplicationContext(), "width: "+ width +",height:  "+height, Toast.LENGTH_LONG).show();
+									
+										PaperManager
+												.setWallpaper(
+														getApplicationContext(),
+														getResourceId(
+																getImgName(
+																		typeIndex,
+																		currentPageIndex),
+																drawable), 384,
+																284, 220, 268);
+//										 getApplicationContext().setWallpaper(
+//										 getBitmap());
 										Toast.makeText(ImageActivity.this,
 												"设置成功", Toast.LENGTH_LONG)
 												.show();
-									} catch (IOException e) {
+									} catch (Exception e) {
 										e.printStackTrace();
 									}
 								}
