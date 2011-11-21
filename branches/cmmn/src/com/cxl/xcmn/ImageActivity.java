@@ -142,7 +142,7 @@ public class ImageActivity extends Activity {
 											getImgName(typeIndex, currentPageIndex) + ".jpg");
 								}
 							}).start();
-							Toast.makeText(ImageActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
+							Toast.makeText(ImageActivity.this, "已保存在SD卡："+saveBasePath, Toast.LENGTH_SHORT).show();
 						}
 					}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
