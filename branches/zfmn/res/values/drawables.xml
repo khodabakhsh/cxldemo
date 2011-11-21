@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <item type="drawable" name="transparent_background">#ff0000ff</item>
+    <item type="drawable" name="translucent_background">#ffc2ce99</item>
+    <item type="drawable" name="blue">#ff0000ff</item>
+    <item type="drawable" name="white">#ffffffff</item>
+    <item type="drawable" name="pink">#ffffc8ff</item>
+    <item type="drawable" name="darkgreen">#ff008800</item>
+    <item type="drawable" name="custom1">#ffa5be08</item>
+    <item type="drawable" name="green">#ffffffff</item>
+    <item type="drawable" name="image_button_background">#00000000</item>
+    <item type="drawable" name="text_color">#ff0000ff</item>
+</resources>
