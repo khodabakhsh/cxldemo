@@ -46,7 +46,7 @@ public class ImageActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.image);
 		typeIndex = getIntent().getExtras().getInt("typeIndex");
 		imgCenter = (ImageView) findViewById(R.id.imgCenter);
 		imgCenter.setImageResource(getResourceId(getImgName(typeIndex, currentPageIndex), drawable));
