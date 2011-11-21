@@ -37,7 +37,7 @@ public class ImageActivity extends Activity {
 
 	private final String saveBasePath = "车模美女/";
 
-	private int MaxCount = 20;//单个类型最大图片数（用于统计图像数目）
+	private int MaxCount = 30;//单个类型最大图片数（用于统计图像数目）
 	private static Map<Integer, Integer> ImageCount = new HashMap<Integer, Integer>();//保存各个类型的最大图片数
 	private static boolean hasInited = false;
 
