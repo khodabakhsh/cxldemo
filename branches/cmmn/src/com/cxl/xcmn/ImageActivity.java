@@ -112,9 +112,9 @@ public class ImageActivity extends Activity {
 		for (int j = 0; j < MainActivity.TYPE_COUNT; j++) {
 			for (int i = 0; i < MaxCount; i++) {
 				if (getResources().getIdentifier(img + j + "_" + i, drawable, getPackageName()) == 0) {
-					ImageCount.put(j, i);
 					break;
 				}
+				ImageCount.put(j, i+1);
 			}
 		}
 	}
