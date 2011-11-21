@@ -11,7 +11,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
-import android.widget.Toast;
 
 public class BitmapDrawaleTypeUtil {
 	private final static String ALBUM_PATH = Environment

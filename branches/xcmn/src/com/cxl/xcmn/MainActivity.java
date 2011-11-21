@@ -13,13 +13,12 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
 
-public class MainActivity extends Activity implements
-		AdapterView.OnItemClickListener {
+public class MainActivity extends Activity implements AdapterView.OnItemClickListener {
 
 	private static String img = "img";
 	private static String text = "text";
-	static final int ICON_COUNT = 8;
-	private static List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+	static final int TYPE_COUNT = 8;
+	private static List<Map<String, Object>> Grid_Adapter_List = new ArrayList<Map<String, Object>>();
 
 	private static boolean hasInited = false;
 
@@ -37,8 +36,8 @@ public class MainActivity extends Activity implements
 		int[] arrayOfInt = new int[2];
 		arrayOfInt[0] = R.id.gridtext;
 		arrayOfInt[1] = R.id.gridimg;
-		SimpleAdapter localSimpleAdapter = new SimpleAdapter(this, list,
-				R.layout.gridview_child, arrayOfString, arrayOfInt);
+		SimpleAdapter localSimpleAdapter = new SimpleAdapter(this, Grid_Adapter_List, R.layout.gridview_child, arrayOfString,
+				arrayOfInt);
 		GridView localGridView = (GridView) findViewById(R.id.gridview);
 		localGridView.setAdapter(localSimpleAdapter);
 		localGridView.setOnItemClickListener(this);
@@ -47,27 +46,23 @@ public class MainActivity extends Activity implements
 
 	private List<Map<String, Object>> getData() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		for (int i = 0; i < ICON_COUNT; i++) {
+		for (int i = 0; i < TYPE_COUNT; i++) {
 			map = new HashMap<String, Object>();
-			map.put(img,
-					getResources().getIdentifier(img + "_" + i, "drawable",
-							getPackageName()));
-			map.put(text, getString(getResources().getIdentifier("text"+(i + 1), "string", getPackageName())));
-			list.add(map);
+			map.put(img, getResources().getIdentifier(img + "_" + i, "drawable", getPackageName()));
+			map.put(text, getString(getResources().getIdentifier("text" + (i + 1), "string", getPackageName())));
+			Grid_Adapter_List.add(map);
 		}
 
-		return list;
+		return Grid_Adapter_List;
 	}
 
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		Intent localIntent = new Intent();
+		Intent imageIntent = new Intent();
 		Bundle localBundle = new Bundle();
-		String str = String.valueOf(arg2);
-		localBundle.putString("position", str);
-		localIntent.setClass(this, ImageActivity.class);
-		localIntent.putExtras(localBundle);
-		startActivity(localIntent);
+		localBundle.putInt("typeIndex", arg2);
+		imageIntent.setClass(this, ImageActivity.class);
+		imageIntent.putExtras(localBundle);
+		startActivity(imageIntent);
 	}
-
 
 }
