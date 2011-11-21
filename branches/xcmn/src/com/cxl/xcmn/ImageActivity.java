@@ -51,7 +51,7 @@ public class ImageActivity extends Activity {
 		if (!hasInited) {
 			getImageCount();
 		}
-		setTitle("香车美女（" + (typeIndex + 1) + "）");
+		setTitle("车模美女（" + (typeIndex + 1) + "）");
 		text_num = (TextView) findViewById(R.id.text_num);
 		setTextNumber(currentPageIndex + 1, ImageCount.get(typeIndex));
 
@@ -134,7 +134,7 @@ public class ImageActivity extends Activity {
 										DialogInterface dialoginterface, int i) {
 									BitmapDrawaleTypeUtil.saveFile(
 											getBitmap(),
-											basePath + "香车美女（"
+											basePath + "车模美女（"
 													+ (typeIndex + 1) + "）/",
 											getImgName(typeIndex,
 													currentPageIndex) + ".jpg");

@@ -54,7 +54,7 @@ public class MainActivity extends Activity implements
 			map.put(img,
 					getResources().getIdentifier(img + "_" + i, "drawable",
 							getPackageName()));
-			map.put(text, "香车美女（" + (i + 1) + "）");
+			map.put(text, "车模美女（" + (i + 1) + "）");
 			list.add(map);
 		}
 
