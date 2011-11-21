@@ -3,12 +3,10 @@ package com.cxl.xcmn;
 import java.util.HashMap;
 import java.util.Map;
 
-import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.Menu;
@@ -33,7 +31,7 @@ public class ImageActivity extends Activity {
 	private ImageButton btn_previous;
 	private ImageButton btn_next;
 
-	private final String basePath = "xcmn/";
+	private final String basePath = "车模美女/";
 
 	private static Map<Integer, Integer> ImageCount = new HashMap<Integer, Integer>();
 
@@ -51,7 +49,8 @@ public class ImageActivity extends Activity {
 		if (!hasInited) {
 			getImageCount();
 		}
-		setTitle("车模美女（" + (typeIndex + 1) + "）");
+		
+		setTitle(getResources().getIdentifier("text"+(typeIndex + 1), "string", getPackageName()));
 		text_num = (TextView) findViewById(R.id.text_num);
 		setTextNumber(currentPageIndex + 1, ImageCount.get(typeIndex));
 
@@ -134,8 +133,7 @@ public class ImageActivity extends Activity {
 										DialogInterface dialoginterface, int i) {
 									BitmapDrawaleTypeUtil.saveFile(
 											getBitmap(),
-											basePath + "车模美女（"
-													+ (typeIndex + 1) + "）/",
+											basePath + getString(getResources().getIdentifier("text"+(typeIndex + 1), "string", getPackageName()))+"/",
 											getImgName(typeIndex,
 													currentPageIndex) + ".jpg");
 									Toast.makeText(ImageActivity.this, "保存成功",
@@ -166,17 +164,17 @@ public class ImageActivity extends Activity {
 									int height = display.getHeight();
 									Toast.makeText(getApplicationContext(), "width: "+ width +",height:  "+height, Toast.LENGTH_LONG).show();
 									
-										PaperManager
-												.setWallpaper(
-														getApplicationContext(),
-														getResourceId(
-																getImgName(
-																		typeIndex,
-																		currentPageIndex),
-																drawable), 384,
-																284, 220, 268);
-//										 getApplicationContext().setWallpaper(
-//										 getBitmap());
+//										PaperManager
+//												.setWallpaper(
+//														getApplicationContext(),
+//														getResourceId(
+//																getImgName(
+//																		typeIndex,
+//																		currentPageIndex),
+//																drawable), 384,
+//																284, 220, 268);
+										 getApplicationContext().setWallpaper(
+										 getBitmap());
 										Toast.makeText(ImageActivity.this,
 												"设置成功", Toast.LENGTH_LONG)
 												.show();

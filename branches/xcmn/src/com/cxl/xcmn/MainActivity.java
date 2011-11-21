@@ -8,8 +8,6 @@ import java.util.Map;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.SubMenu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -54,7 +52,7 @@ public class MainActivity extends Activity implements
 			map.put(img,
 					getResources().getIdentifier(img + "_" + i, "drawable",
 							getPackageName()));
-			map.put(text, "车模美女（" + (i + 1) + "）");
+			map.put(text, getString(getResources().getIdentifier("text"+(i + 1), "string", getPackageName())));
 			list.add(map);
 		}
 
