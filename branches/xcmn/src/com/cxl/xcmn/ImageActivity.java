@@ -9,7 +9,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -17,8 +16,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.waps.AdView;
 
 public class ImageActivity extends Activity {
 
@@ -38,6 +40,8 @@ public class ImageActivity extends Activity {
 	private int MaxCount = 20;//单个类型最大图片数（用于统计图像数目）
 	private static Map<Integer, Integer> ImageCount = new HashMap<Integer, Integer>();//保存各个类型的最大图片数
 	private static boolean hasInited = false;
+
+	private static boolean firstComeIn = true;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -81,6 +85,15 @@ public class ImageActivity extends Activity {
 
 			}
 		});
+		if (firstComeIn) {
+			new AlertDialog.Builder(ImageActivity.this).setTitle("说明")
+					.setMessage("1.点击图片的【左下角、右下角】可翻页。\n2.按【手机菜单键(menu)】可以保存图片、设置图片为壁纸。")
+					.setPositiveButton("我知道了", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialoginterface, int i) {
+						}
+					}).show();
+			firstComeIn = false;
+		}
 	}
 
 	private int getResourceId(String name, String type) {
@@ -116,9 +129,7 @@ public class ImageActivity extends Activity {
 
 	public boolean onOptionsItemSelected(MenuItem paramMenuItem) {
 		if (paramMenuItem.getItemId() == 0) {
-			new AlertDialog.Builder(ImageActivity.this)
-					// .setIcon(R.drawable.happy2)
-					.setTitle("保存图片").setMessage("确定要保存图片？")
+			new AlertDialog.Builder(ImageActivity.this).setTitle("保存图片").setMessage("确定要保存图片？")
 					.setPositiveButton("确认", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialoginterface, int i) {
 							new Thread(new Runnable() {
@@ -131,25 +142,17 @@ public class ImageActivity extends Activity {
 											getImgName(typeIndex, currentPageIndex) + ".jpg");
 								}
 							}).start();
-
 							Toast.makeText(ImageActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
 						}
 					}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-
 						public void onClick(DialogInterface dialog, int which) {
-							// finish();
 						}
 					}).show();
 
 		} else if (paramMenuItem.getItemId() == 1) {
-			new AlertDialog.Builder(ImageActivity.this)
-					// .setIcon(R.drawable.happy2)
-					.setTitle("设置图片").setMessage("确定要设置图片？")
+			new AlertDialog.Builder(ImageActivity.this).setTitle("设置图片").setMessage("确定要设置图片？")
 					.setPositiveButton("确认", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialoginterface, int i) {
-							//							Display display = getWindowManager().getDefaultDisplay();
-							//							int width = display.getWidth();
-							//							int height = display.getHeight();
 							new Thread(new Runnable() {
 								public void run() {
 									try {
@@ -163,7 +166,6 @@ public class ImageActivity extends Activity {
 						}
 					}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
-							// finish();
 						}
 					}).show();
 
@@ -174,6 +176,12 @@ public class ImageActivity extends Activity {
 	private Bitmap getBitmap() {
 		return BitmapDrawaleTypeUtil.drawableToBitmap(getResources().getDrawable(
 				getResourceId(getImgName(typeIndex, currentPageIndex), drawable)));
+	}
+
+	protected void onResume() {
+		LinearLayout container = (LinearLayout) findViewById(R.id.AdLinearLayout2);
+		new AdView(this, container).DisplayAd(20);//每20秒轮换一次广告；最少为20 
+		super.onDestroy();
 	}
 
 }

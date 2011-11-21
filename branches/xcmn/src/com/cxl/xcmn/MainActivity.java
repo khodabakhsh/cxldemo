@@ -11,7 +11,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
+
+import com.waps.AdView;
+import com.waps.AppConnect;
 
 public class MainActivity extends Activity implements AdapterView.OnItemClickListener {
 
@@ -26,6 +30,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.gridview);
+		// 连接服务器. 应用启动时调用(为了统计准确性，此句必须填写).
+		AppConnect.getInstance(this);
+
 		String[] arrayOfString = new String[2];
 		arrayOfString[0] = text;
 		arrayOfString[1] = img;
@@ -36,8 +43,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 		int[] arrayOfInt = new int[2];
 		arrayOfInt[0] = R.id.gridtext;
 		arrayOfInt[1] = R.id.gridimg;
-		SimpleAdapter localSimpleAdapter = new SimpleAdapter(this, Grid_Adapter_List, R.layout.gridview_child, arrayOfString,
-				arrayOfInt);
+		SimpleAdapter localSimpleAdapter = new SimpleAdapter(this, Grid_Adapter_List, R.layout.gridview_child,
+				arrayOfString, arrayOfInt);
 		GridView localGridView = (GridView) findViewById(R.id.gridview);
 		localGridView.setAdapter(localSimpleAdapter);
 		localGridView.setOnItemClickListener(this);
@@ -63,6 +70,17 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 		imageIntent.setClass(this, ImageActivity.class);
 		imageIntent.putExtras(localBundle);
 		startActivity(imageIntent);
+	}
+
+	protected void onDestroy() {
+		AppConnect.getInstance(this).finalize();
+		super.onDestroy();
+	}
+
+	protected void onResume() {
+		LinearLayout container = (LinearLayout) findViewById(R.id.AdLinearLayout1);
+		new AdView(this, container).DisplayAd(20);//每20秒轮换一次广告；最少为20 
+		super.onDestroy();
 	}
 
 }

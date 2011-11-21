@@ -29,6 +29,9 @@
 			<LinearLayout android:orientation="horizontal"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:layout_below="@+id/set">
+				<LinearLayout android:id="@+id/AdLinearLayout2"
+					android:layout_width="fill_parent" android:layout_height="wrap_content"
+					android:gravity="center_horizontal" />
 			</LinearLayout>
 		</RelativeLayout>
 	</LinearLayout>
