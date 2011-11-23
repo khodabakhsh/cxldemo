@@ -109,6 +109,8 @@ public class ImageActivity extends Activity {
 					}).show();
 			firstComeIn = false;
 		}
+		LinearLayout container = (LinearLayout) findViewById(R.id.AdLinearLayout2);
+		new AdView(this, container).DisplayAd(20);//每20秒轮换一次广告；最少为20 
 	}
 
 	protected void onDestroy() {
@@ -201,8 +203,7 @@ public class ImageActivity extends Activity {
 	}
 
 	protected void onResume() {
-		LinearLayout container = (LinearLayout) findViewById(R.id.AdLinearLayout2);
-		new AdView(this, container).DisplayAd(20);//每20秒轮换一次广告；最少为20 
+		
 		super.onResume();
 	}
 

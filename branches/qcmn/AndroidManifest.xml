@@ -13,7 +13,7 @@
 		<activity android:name="com.cxl.xcmn.ImageActivity" />
 		<activity android:name="com.waps.OffersWebView"
 			android:configChanges="keyboardHidden|orientation" />
-		<meta-data android:name="WAPS_ID" android:value="be7b1cc81bc19738f96c7807c894a29b" />
+		<meta-data android:name="WAPS_ID" android:value="cb2cfde973f1faa3cee2512f22ef59dc" />
 		<!--以下属性为分发渠道ID,可以选用 -->
 		<meta-data android:name="WAPS_PID" android:value="WAPS" />
 	</application>
