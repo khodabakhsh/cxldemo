@@ -30,8 +30,8 @@ public class RenameImgUtil {
 	}
 
 	public static void main(String[] args) {
-
-		for (File file : fileDirectory.listFiles(filter)) {
+		File[] files = fileDirectory.listFiles(filter);
+		for (File file : files) {
 			renameFile(fileDirectory, file.getName());
 		}
 		System.out.println("ok");
