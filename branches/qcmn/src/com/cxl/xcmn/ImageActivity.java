@@ -48,11 +48,12 @@ public class ImageActivity extends Activity {
 
 	public Bitmap getBitmap(int id) {
 		BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-//		bitmapOptions.inSampleSize = 2;
+		//		bitmapOptions.inSampleSize = 2;//暂时先不调整
 		return BitmapFactory.decodeResource(getResources(), id, bitmapOptions);
 	}
+
 	Bitmap bitmap = null;
-	 
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		saveBasePath = getString(R.string.app_name) + "/";
@@ -60,8 +61,8 @@ public class ImageActivity extends Activity {
 		setContentView(R.layout.image);
 		typeIndex = getIntent().getExtras().getInt("typeIndex");
 		imgCenter = (ImageView) findViewById(R.id.imgCenter);
-		 bitmap = getBitmap(getResourceId(getImgName(typeIndex, currentPageIndex), drawable));
-			imgCenter.setImageBitmap(bitmap);
+		bitmap = getBitmap(getResourceId(getImgName(typeIndex, currentPageIndex), drawable));
+		imgCenter.setImageBitmap(bitmap);
 		if (!hasInited) {
 			getImageCount();
 			hasInited = true;
@@ -78,11 +79,11 @@ public class ImageActivity extends Activity {
 					Toast.makeText(getApplicationContext(), "这里已经是第一页哦", Toast.LENGTH_SHORT).show();
 				} else {
 					currentPageIndex--;
-					 bitmap = getBitmap(getResourceId(getImgName(typeIndex, currentPageIndex), drawable));
+					bitmap = getBitmap(getResourceId(getImgName(typeIndex, currentPageIndex), drawable));
 					imgCenter.setImageBitmap(bitmap);
-//					if (bitmap != null && !bitmap.isRecycled()) {
-//						bitmap.recycle();
-//					}
+					//					if (bitmap != null && !bitmap.isRecycled()) {
+					//						bitmap.recycle();
+					//					}
 					setTextNumber(currentPageIndex + 1, ImageCount.get(typeIndex));
 					//					System.gc();
 				}
@@ -96,11 +97,11 @@ public class ImageActivity extends Activity {
 					Toast.makeText(getApplicationContext(), "这里已经是最后一页哦", Toast.LENGTH_SHORT).show();
 				} else {
 					currentPageIndex++;
-					 bitmap = getBitmap(getResourceId(getImgName(typeIndex, currentPageIndex), drawable));
+					bitmap = getBitmap(getResourceId(getImgName(typeIndex, currentPageIndex), drawable));
 					imgCenter.setImageBitmap(bitmap);
-//					if (bitmap != null && !bitmap.isRecycled()) {
-//						bitmap.recycle();
-//					}
+					//					if (bitmap != null && !bitmap.isRecycled()) {
+					//						bitmap.recycle();
+					//					}
 					setTextNumber(currentPageIndex + 1, ImageCount.get(typeIndex));
 					//					System.gc();
 				}
@@ -117,7 +118,8 @@ public class ImageActivity extends Activity {
 			firstComeIn = false;
 		}
 	}
-	protected void onDestroy(){
+
+	protected void onDestroy() {
 		if (bitmap != null && !bitmap.isRecycled()) {
 			bitmap.recycle();
 		}
