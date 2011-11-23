@@ -9,7 +9,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,13 +45,14 @@ public class ImageActivity extends Activity {
 
 	private static boolean firstComeIn = true;
 
+	Bitmap bitmap = null;
+	
+	BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+
 	public Bitmap getBitmap(int id) {
-		BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
 		//		bitmapOptions.inSampleSize = 2;//暂时先不调整
 		return BitmapFactory.decodeResource(getResources(), id, bitmapOptions);
 	}
-
-	Bitmap bitmap = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -81,11 +81,7 @@ public class ImageActivity extends Activity {
 					currentPageIndex--;
 					bitmap = getBitmap(getResourceId(getImgName(typeIndex, currentPageIndex), drawable));
 					imgCenter.setImageBitmap(bitmap);
-					//					if (bitmap != null && !bitmap.isRecycled()) {
-					//						bitmap.recycle();
-					//					}
 					setTextNumber(currentPageIndex + 1, ImageCount.get(typeIndex));
-					//					System.gc();
 				}
 
 			}
@@ -99,11 +95,7 @@ public class ImageActivity extends Activity {
 					currentPageIndex++;
 					bitmap = getBitmap(getResourceId(getImgName(typeIndex, currentPageIndex), drawable));
 					imgCenter.setImageBitmap(bitmap);
-					//					if (bitmap != null && !bitmap.isRecycled()) {
-					//						bitmap.recycle();
-					//					}
 					setTextNumber(currentPageIndex + 1, ImageCount.get(typeIndex));
-					//					System.gc();
 				}
 
 			}

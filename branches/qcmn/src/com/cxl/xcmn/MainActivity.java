@@ -22,7 +22,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
 	private static String img = "img";
 	private static String text = "text";
-	static int TYPE_COUNT = 8;
+	static int TYPE_COUNT = 10;
 	private static List<Map<String, Object>> Grid_Adapter_List = new ArrayList<Map<String, Object>>();
 
 	private static boolean hasInitedAdapterData = false;
@@ -41,10 +41,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 		String[] arrayOfString = new String[2];
 		arrayOfString[0] = text;
 		arrayOfString[1] = img;
-		//		if (!hasInitedTypeCount) {
-		//			initTypeCount();
-		//			hasInitedTypeCount = true;
-		//		}
+		if (!hasInitedTypeCount) {
+			initTypeCount();
+			hasInitedTypeCount = true;
+		}
 		if (!hasInitedAdapterData) {
 			getData();
 			hasInitedAdapterData = true;
