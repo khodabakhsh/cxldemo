@@ -18,16 +18,18 @@ import com.cxl.qcmn.R;
 import com.waps.AdView;
 import com.waps.AppConnect;
 
-public class MainActivity extends Activity implements
-		AdapterView.OnItemClickListener {
+public class MainActivity extends Activity implements AdapterView.OnItemClickListener {
 
 	private static String img = "img";
 	private static String text = "text";
-	static int TYPE_COUNT = 10;
+	static int TYPE_COUNT = 8;
 	private static List<Map<String, Object>> Grid_Adapter_List = new ArrayList<Map<String, Object>>();
 
 	private static boolean hasInitedAdapterData = false;
 	private static boolean hasInitedTypeCount = false;
+
+	SimpleAdapter localSimpleAdapter;
+	GridView localGridView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -39,10 +41,10 @@ public class MainActivity extends Activity implements
 		String[] arrayOfString = new String[2];
 		arrayOfString[0] = text;
 		arrayOfString[1] = img;
-		if (!hasInitedTypeCount) {
-			initTypeCount();
-			hasInitedTypeCount = true;
-		}
+		//		if (!hasInitedTypeCount) {
+		//			initTypeCount();
+		//			hasInitedTypeCount = true;
+		//		}
 		if (!hasInitedAdapterData) {
 			getData();
 			hasInitedAdapterData = true;
@@ -50,10 +52,9 @@ public class MainActivity extends Activity implements
 		int[] arrayOfInt = new int[2];
 		arrayOfInt[0] = R.id.gridtext;
 		arrayOfInt[1] = R.id.gridimg;
-		SimpleAdapter localSimpleAdapter = new SimpleAdapter(this,
-				Grid_Adapter_List, R.layout.gridview_child, arrayOfString,
+		localSimpleAdapter = new SimpleAdapter(this, Grid_Adapter_List, R.layout.gridview_child, arrayOfString,
 				arrayOfInt);
-		GridView localGridView = (GridView) findViewById(R.id.gridview);
+		localGridView = (GridView) findViewById(R.id.gridview);
 		localGridView.setAdapter(localSimpleAdapter);
 		localGridView.setOnItemClickListener(this);
 
@@ -61,8 +62,7 @@ public class MainActivity extends Activity implements
 
 	private void initTypeCount() {
 		for (int i = 1; i < 15; i++) {
-			if (getResources().getIdentifier("text" + i, "string",
-					getPackageName()) == 0) {
+			if (getResources().getIdentifier("text" + i, "string", getPackageName()) == 0) {
 				break;
 			}
 			TYPE_COUNT = i;
@@ -73,12 +73,8 @@ public class MainActivity extends Activity implements
 		Map<String, Object> map = new HashMap<String, Object>();
 		for (int i = 0; i < TYPE_COUNT; i++) {
 			map = new HashMap<String, Object>();
-			map.put(img,
-					getResources().getIdentifier(img + i + "_0", "drawable",
-							getPackageName()));
-			map.put(text,
-					getString(getResources().getIdentifier("text" + (i + 1),
-							"string", getPackageName())));
+			map.put(img, getResources().getIdentifier(img + i + "_0", "drawable", getPackageName()));
+			map.put(text, getString(getResources().getIdentifier("text" + (i + 1), "string", getPackageName())));
 			Grid_Adapter_List.add(map);
 		}
 
@@ -102,7 +98,7 @@ public class MainActivity extends Activity implements
 	protected void onResume() {
 		LinearLayout container = (LinearLayout) findViewById(R.id.AdLinearLayout1);
 		new AdView(this, container).DisplayAd(20);// 每20秒轮换一次广告；最少为20
-		super.onDestroy();
+		super.onResume();
 	}
 
 }

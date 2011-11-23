@@ -8,6 +8,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,7 +38,7 @@ public class ImageActivity extends Activity {
 	private ImageButton btn_previous;
 	private ImageButton btn_next;
 
-	private static String saveBasePath ;
+	private static String saveBasePath;
 
 	private int MaxCount = 40;//单个类型最大图片数（用于统计图像数目）
 	private static Map<Integer, Integer> ImageCount = new HashMap<Integer, Integer>();//保存各个类型的最大图片数
@@ -44,15 +46,22 @@ public class ImageActivity extends Activity {
 
 	private static boolean firstComeIn = true;
 
+	public Bitmap getBitmap(int id) {
+		BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+//		bitmapOptions.inSampleSize = 2;
+		return BitmapFactory.decodeResource(getResources(), id, bitmapOptions);
+	}
+	Bitmap bitmap = null;
+	 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		saveBasePath = getString(R.string.app_name)+"/";
+		saveBasePath = getString(R.string.app_name) + "/";
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.image);
 		typeIndex = getIntent().getExtras().getInt("typeIndex");
 		imgCenter = (ImageView) findViewById(R.id.imgCenter);
-		imgCenter.setDrawingCacheEnabled(false);
-		imgCenter.setImageResource(getResourceId(getImgName(typeIndex, currentPageIndex), drawable));
+		 bitmap = getBitmap(getResourceId(getImgName(typeIndex, currentPageIndex), drawable));
+			imgCenter.setImageBitmap(bitmap);
 		if (!hasInited) {
 			getImageCount();
 			hasInited = true;
@@ -69,9 +78,13 @@ public class ImageActivity extends Activity {
 					Toast.makeText(getApplicationContext(), "这里已经是第一页哦", Toast.LENGTH_SHORT).show();
 				} else {
 					currentPageIndex--;
-					imgCenter.setImageResource(getResourceId(getImgName(typeIndex, currentPageIndex), drawable));
+					 bitmap = getBitmap(getResourceId(getImgName(typeIndex, currentPageIndex), drawable));
+					imgCenter.setImageBitmap(bitmap);
+//					if (bitmap != null && !bitmap.isRecycled()) {
+//						bitmap.recycle();
+//					}
 					setTextNumber(currentPageIndex + 1, ImageCount.get(typeIndex));
-					System.gc();
+					//					System.gc();
 				}
 
 			}
@@ -83,9 +96,13 @@ public class ImageActivity extends Activity {
 					Toast.makeText(getApplicationContext(), "这里已经是最后一页哦", Toast.LENGTH_SHORT).show();
 				} else {
 					currentPageIndex++;
-					imgCenter.setImageResource(getResourceId(getImgName(typeIndex, currentPageIndex), drawable));
+					 bitmap = getBitmap(getResourceId(getImgName(typeIndex, currentPageIndex), drawable));
+					imgCenter.setImageBitmap(bitmap);
+//					if (bitmap != null && !bitmap.isRecycled()) {
+//						bitmap.recycle();
+//					}
 					setTextNumber(currentPageIndex + 1, ImageCount.get(typeIndex));
-					System.gc();
+					//					System.gc();
 				}
 
 			}
@@ -99,6 +116,12 @@ public class ImageActivity extends Activity {
 					}).show();
 			firstComeIn = false;
 		}
+	}
+	protected void onDestroy(){
+		if (bitmap != null && !bitmap.isRecycled()) {
+			bitmap.recycle();
+		}
+		super.onDestroy();
 	}
 
 	private int getResourceId(String name, String type) {
@@ -119,7 +142,7 @@ public class ImageActivity extends Activity {
 				if (getResources().getIdentifier(img + j + "_" + i, drawable, getPackageName()) == 0) {
 					break;
 				}
-				ImageCount.put(j, i+1);
+				ImageCount.put(j, i + 1);
 			}
 		}
 	}
@@ -147,7 +170,7 @@ public class ImageActivity extends Activity {
 											getImgName(typeIndex, currentPageIndex) + ".jpg");
 								}
 							}).start();
-							Toast.makeText(ImageActivity.this, "已保存在SD卡："+saveBasePath, Toast.LENGTH_SHORT).show();
+							Toast.makeText(ImageActivity.this, "已保存在SD卡：" + saveBasePath, Toast.LENGTH_SHORT).show();
 						}
 					}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
@@ -186,7 +209,7 @@ public class ImageActivity extends Activity {
 	protected void onResume() {
 		LinearLayout container = (LinearLayout) findViewById(R.id.AdLinearLayout2);
 		new AdView(this, container).DisplayAd(20);//每20秒轮换一次广告；最少为20 
-		super.onDestroy();
+		super.onResume();
 	}
 
 }
