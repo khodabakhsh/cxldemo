@@ -6,11 +6,11 @@ import java.io.FileFilter;
 public class RenameImgUtil {
 	private static int typeIndex = 0;
 	private static int countIndex = 0;
-	static File fileDirectory = new File("C:/Documents and Settings/caixl/桌面/com.drandxq.beautygirl007-1/res/drawable");
+	static File fileDirectory = new File("C:/Documents and Settings/caixl/桌面/com.drandxq.gallery007-6/res/drawable");
 
 	static FileFilter filter = new FileFilter() {
 		public boolean accept(File pathname) {
-			return pathname.getName().startsWith("mmpic") && pathname.getName().endsWith(".jpg");
+			return pathname.getName().endsWith(".jpg");
 
 		}
 	};
@@ -22,7 +22,7 @@ public class RenameImgUtil {
 	}
 
 	private static String getNewImgName() {
-		if (countIndex == 20) {//每个类别最多20个
+		if (countIndex == 15) {//每个类别最多数目
 			typeIndex++;
 			countIndex = 0;
 		}
@@ -34,6 +34,7 @@ public class RenameImgUtil {
 		for (File file : fileDirectory.listFiles(filter)) {
 			renameFile(fileDirectory, file.getName());
 		}
+		System.out.println("ok");
 
 	}
 }
