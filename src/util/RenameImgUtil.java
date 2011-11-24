@@ -2,13 +2,14 @@ package util;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.UUID;
 
 public class RenameImgUtil {
 	private static int typeIndex = 0;
 	private static int countIndex = 0;
-	static File fileDirectory = new File("C:/Documents and Settings/caixl/桌面/com.drandxq.gallery007-6/res/drawable");
+	private static File fileDirectory = new File("C:/Documents and Settings/caixl/桌面/drawable");
 
-	static FileFilter filter = new FileFilter() {
+	private static FileFilter jpgFilter = new FileFilter() {
 		public boolean accept(File pathname) {
 			return pathname.getName().endsWith(".jpg");
 
@@ -20,9 +21,15 @@ public class RenameImgUtil {
 		File newFile = new File(oldFile.getParent(), getNewImgName());
 		oldFile.renameTo(newFile);
 	}
+	public static void renameFileByRandom(File parent, String oldFileName) {
+		
+		File oldFile = new File(parent, oldFileName);
+		File newFile = new File(oldFile.getParent(), UUID.randomUUID()+".jpg");
+		oldFile.renameTo(newFile);
+	}
 
 	private static String getNewImgName() {
-		if (countIndex == 15) {//每个类别最多数目
+		if (countIndex == 12) {//每个类别最多数目
 			typeIndex++;
 			countIndex = 0;
 		}
@@ -30,7 +37,11 @@ public class RenameImgUtil {
 	}
 
 	public static void main(String[] args) {
-		File[] files = fileDirectory.listFiles(filter);
+		File[] files = fileDirectory.listFiles(jpgFilter);
+		for (File file : files) {
+			renameFileByRandom(fileDirectory, file.getName());//先随机命名一下。
+		}
+		files = fileDirectory.listFiles(jpgFilter);
 		for (File file : files) {
 			renameFile(fileDirectory, file.getName());
 		}
