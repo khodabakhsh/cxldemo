@@ -7,7 +7,7 @@ import java.util.UUID;
 public class RenameImgUtil {
 	private static int typeIndex = 0;
 	private static int countIndex = 0;
-	private static File fileDirectory = new File("C:/Documents and Settings/caixl/桌面/screenshot");
+	private static File fileDirectory = new File("C:/Documents and Settings/caixl/桌面/drawable");
 	private final static int Max_Count = 12;
 
 	private static FileFilter jpgFilter = new FileFilter() {
