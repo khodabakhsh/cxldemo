@@ -7,7 +7,8 @@ import java.util.UUID;
 public class RenameImgUtil {
 	private static int typeIndex = 0;
 	private static int countIndex = 0;
-	private static File fileDirectory = new File("C:/Documents and Settings/caixl/桌面/drawable");
+	private static File fileDirectory = new File("C:/Documents and Settings/caixl/桌面/screenshot");
+	private final static int Max_Count = 12;
 
 	private static FileFilter jpgFilter = new FileFilter() {
 		public boolean accept(File pathname) {
@@ -21,19 +22,24 @@ public class RenameImgUtil {
 		File newFile = new File(oldFile.getParent(), getNewImgName());
 		oldFile.renameTo(newFile);
 	}
+
 	public static void renameFileByRandom(File parent, String oldFileName) {
-		
+
 		File oldFile = new File(parent, oldFileName);
-		File newFile = new File(oldFile.getParent(), UUID.randomUUID()+".jpg");
+		File newFile = new File(oldFile.getParent(), UUID.randomUUID() + ".jpg");
 		oldFile.renameTo(newFile);
 	}
 
 	private static String getNewImgName() {
-		if (countIndex == 12) {//每个类别最多数目
+		if (countIndex == Max_Count) {//每个类别最多数目
 			typeIndex++;
 			countIndex = 0;
 		}
 		return "img" + typeIndex + "_" + (countIndex++) + ".jpg";
+	}
+
+	private static String getIconImgName(int i) {
+		return "img" + i + "_0.jpg";
 	}
 
 	public static void main(String[] args) {
@@ -44,6 +50,10 @@ public class RenameImgUtil {
 		files = fileDirectory.listFiles(jpgFilter);
 		for (File file : files) {
 			renameFile(fileDirectory, file.getName());
+		}
+		PicCompression ps = new PicCompression();
+		for (int i = 0; i <= typeIndex; i++) {
+			ps.proceJPG(fileDirectory.getAbsolutePath() + File.separator + getIconImgName(i), 135, 180, 1, "_icon");
 		}
 		System.out.println("ok");
 

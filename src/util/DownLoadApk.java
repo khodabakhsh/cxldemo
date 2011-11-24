@@ -53,6 +53,14 @@ public class DownLoadApk {
 	public static String OralEnglish_ViewPageUrl = "/Aspx/UserApp/DownLoad.aspx?src=apkpage&apk=dZgql0add0lqzXHKzcEvBl0add0l84TRszvSFQhUOr3y7d0RQyHgxt1ol0add0lgZFa9Ut0IwXSTDn/vhiXbtbdkr8qIP4NJlBcqeG7kw8UKhq2hpWt3OMal0add0lC9YtPOEuqMj3S4FQ==";
 	public static String OralEnglish_DownLoadUrl = "http://down.apk.gfan.com/asdf/Pfiles/2011/11/17/190279_4b5c5dc7-1e53-4558-9e00-4d51ef537548.apk";
 	
+	public static String ColdJoke_ViewPageUrl = "/Aspx/UserApp/DownLoad.aspx?src=apkpage&apk=moiUTxhfWl0add0lok0YFrchtGgTh8rcGEIFl7ScKmRiwG4l0add0lBsssiduPn5o2obJlUGboysCu5T/kkGftreGqm88oWBcR7jk7q5WND5SnLnoqHSR0CZmXYzMJNuHA==";
+	public static String ColdJoke_DownLoadUrl = "http://down.apk.gfan.com/asdf/Pfiles/2011/11/17/189343_23821421-1977-4d6a-a5ae-a4658938f4a6.apk";
+	
+	
+	public static String Psychology_ViewPageUrl = "/Aspx/UserApp/DownLoad.aspx?src=apkpage&apk=ODdiftPWJsl9heXUsQV7JKll0add0lFjj/Otj28WX2K1dNUsr5SPujk/QgdkuYtU7W0s9ztTRrTk9nMqPI7SnEYPI/eg/vqhqsel0add0leTkNvb8v4aYGkV/dn8d0XFJw==";
+	public static String Psychology_DownLoadUrl = "http://down.apk.gfan.com/asdf/Pfiles/2011/11/17/189346_369cf622-be3b-43cf-8d47-28b324a4a9da.apk";
+	
+	
 	
 			
 	public static int countSteveJobs = 0;
@@ -82,14 +90,15 @@ public class DownLoadApk {
 		
 //		System.out.println(getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + Car_ViewPageUrl)));
 //		System.out.println(getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + OralEnglish_ViewPageUrl)));
+//		System.out.println(getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + ColdJoke_ViewPageUrl)));
+//		System.out.println(getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + Psychology_ViewPageUrl)));
 		
-
 		//		long begin = System.currentTimeMillis();
 				for (int i = 0; i < 20000; i++) {
 					System.out.println(i+1);
 					startThread();
 					try {
-						Thread.sleep(3000);
+						Thread.sleep(2000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -116,6 +125,10 @@ public class DownLoadApk {
 				
 				getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + Car_ViewPageUrl));
 				getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + OralEnglish_ViewPageUrl));
+				
+				getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + ColdJoke_ViewPageUrl));
+				getDownLoadUrl(CommonUtil.getDocumentContentByGet(host + Psychology_ViewPageUrl));
+				
 				
 			}
 		}).start();
