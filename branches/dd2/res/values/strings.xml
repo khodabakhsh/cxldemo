@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">但丁经典语录【第二辑】</string>
+	<string name="text1">但丁经典语录（一）</string>
+	<string name="text2">但丁经典语录（二）</string>
+	<string name="text3">但丁经典语录（三）</string>
+	<string name="text4">但丁经典语录（四）</string>
+	<string name="text5">但丁经典语录（五）</string>
+	<string name="text6">但丁经典语录（六）</string>
+	<string name="text7">但丁经典语录（七）</string>
+	<string name="text8">但丁经典语录（八）</string>
+	<string name="text9">但丁经典语录（九）</string>
+	<string name="text10">但丁经典语录（十）</string>
+	<string name="text11">但丁经典语录（十一）</string>
+</resources>
