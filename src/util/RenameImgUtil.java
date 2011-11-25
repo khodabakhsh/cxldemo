@@ -8,11 +8,11 @@ public class RenameImgUtil {
 	private static int typeIndex = 0;
 	private static int countIndex = 0;
 	private static File fileDirectory = new File("C:/Documents and Settings/caixl/桌面/drawable");
-	private final static int Max_Count = 12;
+	private final static int Max_Count = 15;
 
 	private static FileFilter jpgFilter = new FileFilter() {
 		public boolean accept(File pathname) {
-			return pathname.getName().endsWith(".jpg");
+			return pathname.getName().endsWith(".jpg") && !pathname.getName().endsWith("_icon.jpg");
 
 		}
 	};
@@ -53,7 +53,7 @@ public class RenameImgUtil {
 		}
 		PicCompression ps = new PicCompression();
 		for (int i = 0; i <= typeIndex; i++) {
-			ps.proceJPG(fileDirectory.getAbsolutePath() + File.separator + getIconImgName(i), 135, 180, 1, "_icon");
+			ps.proceJPG(fileDirectory.getAbsolutePath() + File.separator + getIconImgName(i), 0.5, 1, "_icon");
 		}
 		System.out.println("ok");
 

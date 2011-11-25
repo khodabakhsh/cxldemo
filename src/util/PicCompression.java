@@ -136,6 +136,61 @@ public class PicCompression {
 		}
 		return newImage;
 	}
+	/**
+	* 压缩图片方法
+	*
+	* @param oldFile
+	*            将要压缩的图片
+	* @param rate
+	*            压缩比例，小于1
+	* @param quality
+	*            压缩清晰度 <b>建议为1.0</b>
+	* @param affix
+	*            压缩图片后,添加的后缀
+	* @return
+	*/
+	public String proceJPG(String oldFile, double rate, float quality, String affix) {
+		if (oldFile == null) {
+			return null;
+		}
+		String newImage = null;
+		try {
+			File file = new File(oldFile);
+			if (!file.exists()) //文件不存在时
+				return null;
+			/** 对服务器上的临时文件进行处理 */
+			Image srcFile = ImageIO.read(file);
+			// 为等比缩放计算输出的图片宽度及高度
+			int new_w = (int) (((double) srcFile.getWidth(null)) * rate);
+			int new_h = (int) (((double) srcFile.getHeight(null)) * rate);
+			/** 宽,高设定 */
+			BufferedImage tag = new BufferedImage(new_w, new_h, BufferedImage.TYPE_INT_RGB);
+			tag.getGraphics().drawImage(srcFile, 0, 0, new_w, new_h, null);
+			String filePrex = oldFile.substring(0, oldFile.indexOf('.'));
+			/** 压缩后的文件名 */
+			// newImage =smallIcon + filePrex
+			// +oldFile.substring(filePrex.length());
+			newImage = filePrex + affix + oldFile.substring(filePrex.length());
+			// newImage = smallIcon;
+			/** 压缩之后临时存放位置 */
+			FileOutputStream out = new FileOutputStream(newImage);
+
+			JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+			JPEGEncodeParam jep = JPEGCodec.getDefaultJPEGEncodeParam(tag);
+			/** 压缩质量 */
+			jep.setQuality(quality, true);
+			encoder.encode(tag, jep);
+
+			out.close();
+			srcFile.flush();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return newImage;
+	}
 
 	//
 	public static void main(String str[]) {
