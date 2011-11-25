@@ -75,7 +75,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 		Map<String, Object> map = new HashMap<String, Object>();
 		for (int i = 0; i < TYPE_COUNT; i++) {
 			map = new HashMap<String, Object>();
-			map.put(img, getResources().getIdentifier(img + i + "_0", "drawable", getPackageName()));
+			map.put(img, getResources().getIdentifier(img + i + "_0_icon", "drawable", getPackageName()));
 			map.put(text, getString(getResources().getIdentifier("text" + (i + 1), "string", getPackageName())));
 			Grid_Adapter_List.add(map);
 		}
