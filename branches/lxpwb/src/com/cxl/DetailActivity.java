@@ -89,7 +89,7 @@ public class DetailActivity extends Activity {
 		setButtonVisibleAndSaveState();
 
 		Button offers = (Button) findViewById(R.id.OffersButton);
-		offers.setText("更多免费应用下载....");
+		offers.setText("更多免费精品下载....");
 		offers.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
 				// 显示推荐安装程序（Offer）.
@@ -150,7 +150,7 @@ public class DetailActivity extends Activity {
 
 	public boolean onCreateOptionsMenu(Menu paramMenu) {
 		SubMenu menu = paramMenu.addSubMenu(0, 0, 0, "郎咸平简介");
-		SubMenu menu2 = paramMenu.addSubMenu(0, 1, 0, "更多免费应用下载...");
+		SubMenu menu2 = paramMenu.addSubMenu(0, 1, 0, "更多免费精品下载...");
 		return super.onCreateOptionsMenu(paramMenu);
 	}
 
@@ -160,7 +160,7 @@ public class DetailActivity extends Activity {
 					.setTitle("郎咸平简介")
 					.setMessage(
 							"郎咸平，经济学家。他用开阔的视角，独到的分析阐述各种经济问题，并且像曼昆一样，用听的懂的语言解释经济现象。1956年6月21日生于中国台湾桃园县，父亲是国民党空军少将，母亲是高中化学名师，其父母系东北大学同学。郎咸平目前在香港中文大学任教，其父母回上海居住。1974-1978年就读于台湾东海大学经济系，之后就读台湾大学经济学研究所。1980年获台大经济学硕士学位，硕士毕业后，服过两年义务兵役，当过记者。1983年（时年27岁）在母亲的信任和大力支持下赴美留学，就读宾夕法尼亚大学沃顿商学院金融系。1985年获金融学硕士学位，1986年获金融学博士学位（corporate finance，即偏向公司金融）。 ")
-					.setPositiveButton("更多免费应用下载...",
+					.setPositiveButton("更多免费精品下载...",
 							new DialogInterface.OnClickListener() {
 								public void onClick(
 										DialogInterface dialoginterface, int i) {
