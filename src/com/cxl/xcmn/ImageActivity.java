@@ -6,11 +6,12 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -25,8 +26,9 @@ import android.widget.Toast;
 import com.cxl.gzczpc.R;
 import com.waps.AdView;
 import com.waps.AppConnect;
+import com.waps.UpdatePointsNotifier;
 
-public class ImageActivity extends Activity {
+public class ImageActivity extends Activity implements UpdatePointsNotifier {
 
 	TextView text_num;
 	ImageView imgCenter;
@@ -61,6 +63,7 @@ public class ImageActivity extends Activity {
 		saveBasePath = getString(R.string.app_name) + "/";
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.image);
+		initRequrePointPreference();
 		typeIndex = getIntent().getExtras().getInt("typeIndex");
 		imgCenter = (ImageView) findViewById(R.id.imgCenter);
 		bitmap = getBitmap(getResourceId(
@@ -114,7 +117,7 @@ public class ImageActivity extends Activity {
 			new AlertDialog.Builder(ImageActivity.this)
 					.setTitle("说明")
 					.setMessage(
-							"1.点击图片的【左下角、右下角】可翻页。\n2.按【手机菜单键(menu)】可以保存图片、设置图片为壁纸。")
+							"1.点击图片的【左下角、右下角】可翻页。\n2.按【手机菜单键(Menu)】可以保存图片、设置图片为壁纸。")
 					.setPositiveButton("我知道了",
 							new DialogInterface.OnClickListener() {
 								public void onClick(
@@ -159,56 +162,64 @@ public class ImageActivity extends Activity {
 	}
 
 	public boolean onCreateOptionsMenu(Menu paramMenu) {
+		SubMenu moreSubMenu = paramMenu.addSubMenu(0, 2, 0, "更多免费精品下载...");
 		SubMenu saveSubMenu = paramMenu.addSubMenu(0, 0, 0, "保存");
 		SubMenu pictureSubMenu = paramMenu.addSubMenu(0, 1, 0, "设为壁纸");
+
 		saveSubMenu.setIcon(R.drawable.save);
 		pictureSubMenu.setIcon(R.drawable.set);
+		moreSubMenu.setIcon(R.drawable.exit);
 		return super.onCreateOptionsMenu(paramMenu);
 	}
 
 	public boolean onOptionsItemSelected(MenuItem paramMenuItem) {
 		if (paramMenuItem.getItemId() == 0) {
-			new AlertDialog.Builder(ImageActivity.this)
-					.setTitle("保存图片")
-					.setMessage("确定要保存图片？")
-					.setPositiveButton("确认",
-							new DialogInterface.OnClickListener() {
-								public void onClick(
-										DialogInterface dialoginterface, int i) {
-									new Thread(new Runnable() {
-										public void run() {
-											BitmapDrawaleTypeUtil
-													.saveFile(
-															getBitmap(),
-															saveBasePath
-																	+ getString(getResources()
-																			.getIdentifier(
-																					"text"
-																							+ (typeIndex + 1),
-																					"string",
-																					getPackageName()))
-																	+ "/",
-															getImgName(
-																	typeIndex,
-																	currentPageIndex)
-																	+ ".jpg");
-										}
-									}).start();
-									Toast.makeText(ImageActivity.this,
-											"已保存在SD卡：" + saveBasePath,
-											Toast.LENGTH_SHORT).show();
-								}
-							})
-					.setNegativeButton("取消",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int which) {
-								}
-							}).show();
+			if (!hasEnoughRequrePointPreferenceValue) {
+				showGetPointDialog("保存图片");
+			} else {
+				new AlertDialog.Builder(ImageActivity.this)
+						.setTitle("保存图片")
+						.setMessage("确定要保存图片？")
+						.setPositiveButton("确认",
+								new DialogInterface.OnClickListener() {
+									public void onClick(
+											DialogInterface dialoginterface,
+											int i) {
+										new Thread(new Runnable() {
+											public void run() {
+												BitmapDrawaleTypeUtil
+														.saveFile(
+																getBitmap(),
+																saveBasePath
+																		+ getString(getResources()
+																				.getIdentifier(
+																						"text"
+																								+ (typeIndex + 1),
+																						"string",
+																						getPackageName()))
+																		+ "/",
+																getImgName(
+																		typeIndex,
+																		currentPageIndex)
+																		+ ".jpg");
+											}
+										}).start();
+										Toast.makeText(ImageActivity.this,
+												"已保存在SD卡：" + saveBasePath,
+												Toast.LENGTH_SHORT).show();
+									}
+								})
+						.setNegativeButton("取消",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int which) {
+									}
+								}).show();
+			}
 
 		} else if (paramMenuItem.getItemId() == 1) {
-			if (!MainActivity.hasEnoughRequrePointPreferenceValue) {
-				showDialog();
+			if (!hasEnoughRequrePointPreferenceValue) {
+				showGetPointDialog("设置壁纸");
 			} else {
 				new AlertDialog.Builder(ImageActivity.this)
 						.setTitle("设置图片")
@@ -230,7 +241,7 @@ public class ImageActivity extends Activity {
 											}
 										}).start();
 										Toast.makeText(ImageActivity.this,
-												"设置成功", Toast.LENGTH_LONG)
+												"设置成功", Toast.LENGTH_SHORT)
 												.show();
 									}
 								})
@@ -242,6 +253,10 @@ public class ImageActivity extends Activity {
 								}).show();
 			}
 
+		} else if (paramMenuItem.getItemId() == 2) {
+			// 显示推荐安装程序（Offer）.
+			AppConnect.getInstance(ImageActivity.this).showOffers(
+					ImageActivity.this);
 		}
 		return super.onOptionsItemSelected(paramMenuItem);
 	}
@@ -253,21 +268,14 @@ public class ImageActivity extends Activity {
 								drawable)));
 	}
 
-	protected void onResume() {
-
-		super.onResume();
-	}
-
-	private void showDialog() {
+	private void showGetPointDialog(String type) {
 		new AlertDialog.Builder(ImageActivity.this)
 				.setIcon(R.drawable.happy2)
-				.setTitle("当前积分：" + MainActivity.currentPointTotal)
+				.setTitle("当前积分：" + currentPointTotal)
 				.setMessage(
-						"只要积分满足" + MainActivity.requirePoint
-								+ "，就可以设置壁纸！！ 您当前的积分不足"
-								+ MainActivity.requirePoint
-								+ "。\n\n【免费获得积分方法】：请点击【确认键】获得相应积分！！")
-				.setPositiveButton("【确认】",
+						"只要积分满足" + requirePoint + "，就可以" + type + "！！ 您当前的积分不足"
+								+ requirePoint + "。")
+				.setPositiveButton("免费获得积分",
 						new DialogInterface.OnClickListener() {
 							public void onClick(
 									DialogInterface dialoginterface, int i) {
@@ -275,15 +283,50 @@ public class ImageActivity extends Activity {
 								AppConnect.getInstance(ImageActivity.this)
 										.showOffers(ImageActivity.this);
 							}
-						})
-				.setNegativeButton("【取消】",
-						new DialogInterface.OnClickListener() {
-
-							public void onClick(DialogInterface dialog,
-									int which) {
-								// finish();
-							}
 						}).show();
+	}
+
+	public static boolean hasEnoughRequrePointPreferenceValue = false;// 保存在配置里
+	public static final int requirePoint = 30;// 要求积分
+	public static int currentPointTotal = 0;// 当前积分
+
+	private void initRequrePointPreference() {
+		hasEnoughRequrePointPreferenceValue = PreferenceUtil
+				.getHasEnoughRequrePoint(ImageActivity.this);
+	}
+
+	protected void onResume() {
+		if (!hasEnoughRequrePointPreferenceValue) {
+			AppConnect.getInstance(this).getPoints(this);
+		}
+		super.onResume();
+	}
+
+	/**
+	 * AppConnect.getPoints()方法的实现，必须实现
+	 * 
+	 * @param currencyName
+	 *            虚拟货币名称.
+	 * @param pointTotal
+	 *            虚拟货币余额.
+	 */
+	public void getUpdatePoints(String currencyName, int pointTotal) {
+		currentPointTotal = pointTotal;
+		if (pointTotal >= requirePoint) {
+			hasEnoughRequrePointPreferenceValue = true;
+			PreferenceUtil.setHasEnoughRequrePoint(ImageActivity.this, true);
+		}
+	}
+
+	/**
+	 * AppConnect.getPoints() 方法的实现，必须实现
+	 * 
+	 * @param error
+	 *            请求失败的错误信息
+	 */
+
+	public void getUpdatePointsFailed(String error) {
+		hasEnoughRequrePointPreferenceValue = false;
 	}
 
 }
