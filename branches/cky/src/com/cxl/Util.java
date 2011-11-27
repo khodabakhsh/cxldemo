@@ -1,4 +1,4 @@
-package com.cxl.stevejobs;
+package com.cxl;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,6 +1,8 @@
-package com.cxl.stevejobs;
+package com.cxl;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Picture;
 import android.os.Bundle;
@@ -15,8 +17,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.cxl.seeanybody.R;
+import com.cxl.cky.R;
 import com.waps.AdView;
+import com.waps.AppConnect;
 
 public class DetailActivity extends Activity {
 
@@ -39,7 +42,6 @@ public class DetailActivity extends Activity {
 			textView.scrollTo(0, 0);
 		}
 	};
-	private TextView currentTextView;
 
 	class MyPictureListener implements PictureListener {
 		public void onNewPicture(WebView view, Picture arg1) {
@@ -98,22 +100,29 @@ public class DetailActivity extends Activity {
 
 			scrollY = Util.getScrollY(DetailActivity.this);
 		}
-		currentTextView = (TextView)findViewById(R.id.currentTextView);
 		setButtonVisibleAndSaveState();
 
-		
-		
-//		returnButton = (Button) findViewById(R.id.returnButton);
-//		returnButton.setOnClickListener(new Button.OnClickListener() {
-//			public void onClick(View arg0) {
-//				setButtonVisibleAndSaveState();
-//				// finish();
-//				Intent intent = new Intent();
-//				intent.setClass(DetailActivity.this, MainActivity.class);
-//				startActivity(intent);
-//				finish();
-//			}
-//		});
+		Button offers = (Button) findViewById(R.id.OffersButton);
+		offers.setText("更多免费应用下载...");
+		offers.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View arg0) {
+				// 显示推荐安装程序（Offer）.
+				AppConnect.getInstance(DetailActivity.this).showOffers(
+						DetailActivity.this);
+			}
+		});
+
+		// returnButton = (Button) findViewById(R.id.returnButton);
+		// returnButton.setOnClickListener(new Button.OnClickListener() {
+		// public void onClick(View arg0) {
+		// setButtonVisibleAndSaveState();
+		// // finish();
+		// Intent intent = new Intent();
+		// intent.setClass(DetailActivity.this, MainActivity.class);
+		// startActivity(intent);
+		// finish();
+		// }
+		// });
 
 		LinearLayout container = (LinearLayout) findViewById(R.id.AdLinearLayout);
 		new AdView(this, container).DisplayAd(20);// 每20秒轮换一次广告；最少为20
@@ -133,9 +142,9 @@ public class DetailActivity extends Activity {
 
 	private void setButtonVisibleAndSaveState() {
 		saveState();
-		String currentTitle = MainActivity.MENU_List.get(Current_Page_Value).getValue();
+		String currentTitle = MainActivity.MENU_List.get(Current_Page_Value)
+				.getValue();
 		setTitle(currentTitle);
-		currentTextView.setText(currentTitle);
 		if (Current_Page_Value == 0) {
 			btnPrevious.setVisibility(View.INVISIBLE);
 		} else {
@@ -150,6 +159,7 @@ public class DetailActivity extends Activity {
 
 	public boolean onCreateOptionsMenu(Menu paramMenu) {
 		SubMenu menu = paramMenu.addSubMenu(0, 0, 0, "目录");
+		SubMenu menu2 = paramMenu.addSubMenu(0, 1, 0, "更多免费应用下载...");
 		return super.onCreateOptionsMenu(paramMenu);
 	}
 
@@ -159,6 +169,10 @@ public class DetailActivity extends Activity {
 			intent.setClass(DetailActivity.this, MainActivity.class);
 			startActivity(intent);
 			finish();
+		} else if (paramMenuItem.getItemId() == 1) {
+			// 显示推荐安装程序（Offer）.
+			AppConnect.getInstance(DetailActivity.this).showOffers(
+					DetailActivity.this);
 		}
 		return super.onOptionsItemSelected(paramMenuItem);
 	}

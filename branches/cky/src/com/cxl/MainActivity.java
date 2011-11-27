@@ -1,4 +1,4 @@
-package com.cxl.stevejobs;
+package com.cxl;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.cxl.seeanybody.R;
+import com.cxl.cky.R;
 
 public class MainActivity extends Activity {
 	ListView menuList;

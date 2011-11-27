@@ -1,4 +1,4 @@
-package com.cxl.stevejobs;
+package com.cxl;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
-import com.cxl.seeanybody.R;
+import com.cxl.cky.R;
 import com.waps.AppConnect;
 
 public class CoverActivity extends Activity {
