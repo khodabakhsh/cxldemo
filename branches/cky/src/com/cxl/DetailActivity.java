@@ -72,7 +72,7 @@ public class DetailActivity extends Activity {
 		});
 
 		Bundle bundle = getIntent().getExtras();
-		textView = (WebView) findViewById(R.id.textView);
+		textView = (WebView) findViewById(R.id.webView);
 		textView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 
 		textView.setPictureListener(new MyPictureListener());
