@@ -22,7 +22,7 @@ import com.waps.AppConnect;
 import com.waps.UpdatePointsNotifier;
 
 public class MainActivity extends Activity implements
-		AdapterView.OnItemClickListener, UpdatePointsNotifier {
+		AdapterView.OnItemClickListener{
 
 	private static String img = "img";
 	private static String text = "text";
@@ -35,55 +35,7 @@ public class MainActivity extends Activity implements
 	SimpleAdapter localSimpleAdapter;
 	GridView localGridView;
 
-	public static final String hasEnoughRequrePointPreferenceKey = "hasEnoughRequrePointPreferenceKey";
-	public static boolean hasEnoughRequrePointPreferenceValue = false;// 保存在配置里
-	public static final int requirePoint = 30;// 要求积分
-	public static int currentPointTotal = 0;// 当前积分
-
-	private void initRequrePointPreference() {
-		SharedPreferences mPerferences = PreferenceManager
-				.getDefaultSharedPreferences(MainActivity.this);
-		hasEnoughRequrePointPreferenceValue = mPerferences.getBoolean(
-				hasEnoughRequrePointPreferenceKey, false);
-	}
-
-	protected void onResume() {
-		if (!hasEnoughRequrePointPreferenceValue) {
-			AppConnect.getInstance(this).getPoints(this);
-		}
-		super.onResume();
-	}
-
-	/**
-	 * AppConnect.getPoints()方法的实现，必须实现
-	 * 
-	 * @param currencyName
-	 *            虚拟货币名称.
-	 * @param pointTotal
-	 *            虚拟货币余额.
-	 */
-	public void getUpdatePoints(String currencyName, int pointTotal) {
-		currentPointTotal = pointTotal;
-		if (pointTotal >= requirePoint) {
-			hasEnoughRequrePointPreferenceValue = true;
-			SharedPreferences mPerferences = PreferenceManager
-					.getDefaultSharedPreferences(MainActivity.this);
-			SharedPreferences.Editor mEditor = mPerferences.edit();
-			mEditor.putBoolean(hasEnoughRequrePointPreferenceKey, true);
-			mEditor.commit();
-		}
-	}
-
-	/**
-	 * AppConnect.getPoints() 方法的实现，必须实现
-	 * 
-	 * @param error
-	 *            请求失败的错误信息
-	 */
-
-	public void getUpdatePointsFailed(String error) {
-		hasEnoughRequrePointPreferenceValue = false;
-	}
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -91,7 +43,6 @@ public class MainActivity extends Activity implements
 		setContentView(R.layout.gridview);
 		// 连接服务器. 应用启动时调用(为了统计准确性，此句必须填写).
 		AppConnect.getInstance(this);
-		initRequrePointPreference();
 
 		String[] arrayOfString = new String[2];
 		arrayOfString[0] = text;
