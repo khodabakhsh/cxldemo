@@ -39,6 +39,7 @@ public class DetailActivity extends Activity {
 			textView.scrollTo(0, 0);
 		}
 	};
+	private TextView currentTextView;
 
 	class MyPictureListener implements PictureListener {
 		public void onNewPicture(WebView view, Picture arg1) {
@@ -97,22 +98,22 @@ public class DetailActivity extends Activity {
 
 			scrollY = Util.getScrollY(DetailActivity.this);
 		}
-
+		currentTextView = (TextView)findViewById(R.id.currentTextView);
 		setButtonVisibleAndSaveState();
 
-		returnButton = (Button) findViewById(R.id.returnButton);
-
-		returnButton.setOnClickListener(new Button.OnClickListener() {
-
-			public void onClick(View arg0) {
-				setButtonVisibleAndSaveState();
-				// finish();
-				Intent intent = new Intent();
-				intent.setClass(DetailActivity.this, MainActivity.class);
-				startActivity(intent);
-				finish();
-			}
-		});
+		
+		
+//		returnButton = (Button) findViewById(R.id.returnButton);
+//		returnButton.setOnClickListener(new Button.OnClickListener() {
+//			public void onClick(View arg0) {
+//				setButtonVisibleAndSaveState();
+//				// finish();
+//				Intent intent = new Intent();
+//				intent.setClass(DetailActivity.this, MainActivity.class);
+//				startActivity(intent);
+//				finish();
+//			}
+//		});
 
 		LinearLayout container = (LinearLayout) findViewById(R.id.AdLinearLayout);
 		new AdView(this, container).DisplayAd(20);// 每20秒轮换一次广告；最少为20
@@ -132,7 +133,9 @@ public class DetailActivity extends Activity {
 
 	private void setButtonVisibleAndSaveState() {
 		saveState();
-		setTitle(MainActivity.MENU_List.get(Current_Page_Value).getValue());
+		String currentTitle = MainActivity.MENU_List.get(Current_Page_Value).getValue();
+		setTitle(currentTitle);
+		currentTextView.setText(currentTitle);
 		if (Current_Page_Value == 0) {
 			btnPrevious.setVisibility(View.INVISIBLE);
 		} else {
