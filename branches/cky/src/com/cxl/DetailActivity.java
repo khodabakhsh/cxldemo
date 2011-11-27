@@ -89,7 +89,7 @@ public class DetailActivity extends Activity {
 		setButtonVisibleAndSaveState();
 
 		Button offers = (Button) findViewById(R.id.OffersButton);
-		offers.setText("更多免费应用下载...");
+		offers.setText("更多免费精品下载...");
 		offers.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
 				// 显示推荐安装程序（Offer）.
@@ -151,7 +151,7 @@ public class DetailActivity extends Activity {
 
 	public boolean onCreateOptionsMenu(Menu paramMenu) {
 		SubMenu menu = paramMenu.addSubMenu(0, 0, 0, "目录");
-		SubMenu menu2 = paramMenu.addSubMenu(0, 1, 0, "更多免费应用下载...");
+		SubMenu menu2 = paramMenu.addSubMenu(0, 1, 0, "更多免费精品下载...");
 		return super.onCreateOptionsMenu(paramMenu);
 	}
 
