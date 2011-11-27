@@ -36,12 +36,6 @@ public class DetailActivity extends Activity {
 	public static final int Page_Sum = MainActivity.MENU_List.size() - 1;// 由0开始，减去1，
 	private int scrollY = 0;
 
-	Handler mHandler = new Handler();
-	private Runnable scrollViewRun = new Runnable() {
-		public void run() {
-			textView.scrollTo(0, 0);
-		}
-	};
 
 	class MyPictureListener implements PictureListener {
 		public void onNewPicture(WebView view, Picture arg1) {
@@ -63,8 +57,7 @@ public class DetailActivity extends Activity {
 				textView.loadUrl("file:///android_asset/chapter"
 						+ (--Current_Page_Value) + ".html");
 
-				textView.loadUrl("javascript:function(){alert(2);}");
-				textView.post(scrollViewRun);
+				scrollY = 0;
 				setButtonVisibleAndSaveState();
 			}
 		});
@@ -73,7 +66,7 @@ public class DetailActivity extends Activity {
 			public void onClick(View v) {
 				textView.loadUrl("file:///android_asset/chapter"
 						+ (++Current_Page_Value) + ".html");
-				textView.post(scrollViewRun);
+				scrollY = 0;
 				setButtonVisibleAndSaveState();
 			}
 		});
