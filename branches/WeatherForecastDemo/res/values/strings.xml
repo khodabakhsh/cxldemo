@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="hello">Hello World, WeatherForecastDemo!</string>
-    <string name="app_name">WeatherForecastDemo</string>
-    <string name="usagemethod">使用方法:(hangzhou/杭州)</string>
-    <string name="query">查询</string>
-</resources>
