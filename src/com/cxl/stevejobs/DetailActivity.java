@@ -1,126 +1,120 @@
 package com.cxl.stevejobs;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
+import android.R.bool;
 import android.app.Activity;
-import android.content.SharedPreferences;
-import android.content.res.AssetManager;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Picture;
 import android.os.Bundle;
-import android.os.Handler;
-import android.preference.PreferenceManager;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.text.method.ScrollingMovementMethod;
-import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebView.PictureListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 import com.cxl.brainfun.R;
 import com.waps.AdView;
+import com.waps.AppConnect;
+import com.waps.UpdatePointsNotifier;
 
-public class DetailActivity extends Activity {
+public class DetailActivity extends Activity implements UpdatePointsNotifier {
 
-	private Button returnButton;
-	private TextView textView;
+	private WebView webView;
 	private String menu;
 	public static final String GBK = "GBK";
 	public static final String UTF8 = "UTF8";
 
-	public static final String Current_Page_Key = "Current_Page_Key";
-	public static int Current_Page_Value = 1;// 保存在配置里
-	TextView page;
 	Button btnPrevious;
 	Button btnNext;
-	public static final int Page_Sum = 72;
 
-	Handler mHandler = new Handler();
-	private Runnable scrollViewRun = new Runnable() {
-		public void run() {
-			textView.scrollTo(0, 0);
+	public static int Requre_Point_Page_Index = 20;//需要积分才能查看的页面
+	public static int Current_Page_Index = 1;
+	public static final int Start_Page_Index = 1;//起始页索引
+	public static final int Max_Page_Index = MainActivity.MENU_List.size() + Start_Page_Index - 1;//最大页索引
+	private int scrollY = 0;
+
+	class MyPictureListener implements PictureListener {
+		public void onNewPicture(WebView view, Picture arg1) {
+			// put code here that needs to run when the page has finished
+			// loading and
+			// a new "picture" is on the webview.
+			webView.scrollTo(0, scrollY);
 		}
-	};
+	}
+
+	private boolean canView(int pageIndex) {
+		if ((pageIndex >= Requre_Point_Page_Index) && !hasEnoughRequrePointPreferenceValue) {
+			showGetPointDialog("浏览"+Requre_Point_Page_Index+"页到"+Max_Page_Index+"页");
+			return false;
+		} else {
+			return true;
+		}
+	}
 
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.detail);
 
+		initRequrePointPreference();
+
 		btnPrevious = (Button) findViewById(R.id.previous);
 		btnPrevious.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 
-				try {
-					AssetManager assets = getAssets();
-					InputStream assetFile;
-					assetFile = assets.open((--Current_Page_Value) + ".txt");
-					textView.setText(genFileContent(assetFile));
-					mHandler.post(scrollViewRun);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				webView.loadUrl("file:///android_asset/" + (--Current_Page_Index) + ".txt");
+				scrollY = 0;
 				setButtonVisibleAndSaveState();
 			}
 		});
 		btnNext = (Button) findViewById(R.id.next);
 		btnNext.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				try {
-					AssetManager assets = getAssets();
-					InputStream assetFile;
-					assetFile = assets.open((++Current_Page_Value) + ".txt");
-					textView.setText(genFileContent(assetFile));
-					mHandler.post(scrollViewRun);
-				} catch (IOException e) {
-					e.printStackTrace();
+				if (canView(Current_Page_Index + 1)) {
+					webView.loadUrl("file:///android_asset/" + (++Current_Page_Index) + ".txt");
+					scrollY = 0;
+					setButtonVisibleAndSaveState();
 				}
-				setButtonVisibleAndSaveState();
 			}
 		});
 
 		Bundle bundle = getIntent().getExtras();
-		menu = bundle.getString("menu");
+		webView = (WebView) findViewById(R.id.webView);
+		webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+		webView.getSettings().setDefaultFixedFontSize(16);
 
-		setTitle(menu);
+		webView.setPictureListener(new MyPictureListener());
 
-		AssetManager assets = getAssets();
-		// 打开指定资源对应的输入流
-		InputStream assetFile;
-		//是否继续阅读
-		boolean continueRead = false;
-		try {
-
-			if ("继续上次阅读".equals(menu)) {
-				Current_Page_Value = Util.getTxtIndex(this);
-				continueRead = true;
-			} else {
-				Current_Page_Value = Integer.valueOf(menu.substring(1, menu.length() - 1));
+		boolean startByMenu = bundle.getBoolean("startByMenu");
+		if (startByMenu) {
+			int selectMenu = Integer.valueOf(bundle.getString("menu"));
+			if (canView(selectMenu+ 1)) {
+				Current_Page_Index = selectMenu;
+				webView.loadUrl("file:///android_asset/" + Current_Page_Index + ".txt");
+				scrollY = 0;
+			}else {
+				Current_Page_Index = PreferenceUtil.getTxtIndex(this);
+				webView.loadUrl("file:///android_asset/" + Current_Page_Index + ".txt");
+				scrollY = PreferenceUtil.getScrollY(DetailActivity.this);
 			}
+		} else {
+			Current_Page_Index = PreferenceUtil.getTxtIndex(this);
+			webView.loadUrl("file:///android_asset/" + Current_Page_Index + ".txt");
 
-			assetFile = assets.open(Current_Page_Value + ".txt");
-			textView = (TextView) findViewById(R.id.TextView);
-			textView.setMovementMethod(ScrollingMovementMethod.getInstance());
-			textView.setText(genFileContent(assetFile));
-			if (continueRead) {
-				textView.scrollTo(0, Util.getScrollY(this));
-			}
-			setButtonVisibleAndSaveState();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			scrollY = PreferenceUtil.getScrollY(DetailActivity.this);
 		}
+		setButtonVisibleAndSaveState();
 
-		returnButton = (Button) findViewById(R.id.returnButton);
-
-		returnButton.setOnClickListener(new Button.OnClickListener() {
+		Button offers = (Button) findViewById(R.id.OffersButton);
+		offers.setText("更多免费精品下载...");
+		offers.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
-				setButtonVisibleAndSaveState();
-				finish();
+				// 显示推荐安装程序（Offer）.
+				AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
 			}
 		});
 
@@ -129,68 +123,111 @@ public class DetailActivity extends Activity {
 
 	}
 
+	protected void onDestroy() {
+		webView.destroyDrawingCache();
+		webView.destroy();
+		super.onDestroy();
+	}
 
 	protected void onPause() {
 		saveState();
 		super.onPause();
 	}
 
-	//保存当前页和滚动位置
+	// 保存当前页和滚动位置
 	private void saveState() {
-		Util.setScrollY(this, textView.getScrollY());
-		Util.setTxtIndex(this, Current_Page_Value);
-	}
-
-	public boolean onKeyDown(int keyCode, KeyEvent keyEvent) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			saveState();
-		}
-		return super.onKeyDown(keyCode, keyEvent);
+		PreferenceUtil.setScrollY(this, webView.getScrollY());
+		PreferenceUtil.setTxtIndex(this, Current_Page_Index);
 	}
 
 	private void setButtonVisibleAndSaveState() {
 		saveState();
-		setTitle("第" + Current_Page_Value + "章");
-		if (Current_Page_Value == 1) {
+		String currentTitle = MainActivity.MENU_List.get(Current_Page_Index-Start_Page_Index).getValue();
+		setTitle(currentTitle);
+		if (Current_Page_Index == Start_Page_Index) {
 			btnPrevious.setVisibility(View.INVISIBLE);
 		} else {
 			btnPrevious.setVisibility(View.VISIBLE);
 		}
-		if (Current_Page_Value == Page_Sum) {
+		if (Current_Page_Index == Max_Page_Index) {
 			btnNext.setVisibility(View.INVISIBLE);
 		} else {
 			btnNext.setVisibility(View.VISIBLE);
 		}
 	}
 
-	public static String genFileContent(InputStream inputStream) {
-		StringBuffer returnString = new StringBuffer("");
-		BufferedReader bufferedReader = null;
-		InputStreamReader inputStreamReader = null;
-		try {
-			inputStreamReader = new InputStreamReader(inputStream, UTF8);
-			bufferedReader = new BufferedReader(inputStreamReader);
-			String contentString = "";
-			while (null != (contentString = bufferedReader.readLine())) {
-				returnString.append(contentString + "\n");
+	public boolean onCreateOptionsMenu(Menu paramMenu) {
+		SubMenu menu = paramMenu.addSubMenu(0, 0, 0, "目录");
+		menu.setIcon(R.drawable.menu);
+		SubMenu menu2 = paramMenu.addSubMenu(0, 1, 0, "更多免费精品下载...");
+		menu2.setIcon(R.drawable.more);
+		return super.onCreateOptionsMenu(paramMenu);
+	}
 
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (bufferedReader != null) {
-					bufferedReader.close();
-				}
-				if (inputStreamReader != null) {
-					inputStreamReader.close();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
+	public boolean onOptionsItemSelected(MenuItem paramMenuItem) {
+		if (paramMenuItem.getItemId() == 0) {
+			Intent intent = new Intent();
+			intent.setClass(DetailActivity.this, MainActivity.class);
+			startActivity(intent);
+			finish();
+		} else if (paramMenuItem.getItemId() == 1) {
+			// 显示推荐安装程序（Offer）.
+			AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
 		}
-		return returnString.toString();
+		return super.onOptionsItemSelected(paramMenuItem);
+	}
+
+	private void showGetPointDialog(String type) {
+		new AlertDialog.Builder(DetailActivity.this).setIcon(R.drawable.happy2).setTitle("当前积分：" + currentPointTotal)
+				.setMessage("只要积分满足" + requirePoint + "，就可以" + type + "！！ 您当前的积分不足" + requirePoint + "哦。")
+				.setPositiveButton("免费获得积分", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialoginterface, int i) {
+						// 显示推荐安装程序（Offer）.
+						AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
+					}
+				}).show();
+	}
+
+	public static boolean hasEnoughRequrePointPreferenceValue = false;// 保存在配置里
+	public static final int requirePoint = 50;// 要求积分
+	public static int currentPointTotal = 0;// 当前积分
+
+	private void initRequrePointPreference() {
+		hasEnoughRequrePointPreferenceValue = PreferenceUtil.getHasEnoughRequrePoint(DetailActivity.this);
+	}
+
+	protected void onResume() {
+		if (!hasEnoughRequrePointPreferenceValue) {
+			AppConnect.getInstance(this).getPoints(this);
+		}
+		super.onResume();
+	}
+
+	/**
+	 * AppConnect.getPoints()方法的实现，必须实现
+	 * 
+	 * @param currencyName
+	 *            虚拟货币名称.
+	 * @param pointTotal
+	 *            虚拟货币余额.
+	 */
+	public void getUpdatePoints(String currencyName, int pointTotal) {
+		currentPointTotal = pointTotal;
+		if (pointTotal >= requirePoint) {
+			hasEnoughRequrePointPreferenceValue = true;
+			PreferenceUtil.setHasEnoughRequrePoint(DetailActivity.this, true);
+		}
+	}
+
+	/**
+	 * AppConnect.getPoints() 方法的实现，必须实现
+	 * 
+	 * @param error
+	 *            请求失败的错误信息
+	 */
+
+	public void getUpdatePointsFailed(String error) {
+		hasEnoughRequrePointPreferenceValue = false;
 	}
 
 }
