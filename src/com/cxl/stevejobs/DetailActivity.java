@@ -1,6 +1,5 @@
 package com.cxl.stevejobs;
 
-import android.R.bool;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -24,14 +23,13 @@ import com.waps.UpdatePointsNotifier;
 public class DetailActivity extends Activity implements UpdatePointsNotifier {
 
 	private WebView webView;
-	private String menu;
 	public static final String GBK = "GBK";
 	public static final String UTF8 = "UTF8";
 
 	Button btnPrevious;
 	Button btnNext;
 
-	public static int Requre_Point_Page_Index = 20;//需要积分才能查看的页面
+	public static final int Requre_Point_Page_Index = 20;//需要积分才能查看的页面
 	public static int Current_Page_Index = 1;
 	public static final int Start_Page_Index = 1;//起始页索引
 	public static final int Max_Page_Index = MainActivity.MENU_List.size() + Start_Page_Index - 1;//最大页索引
