@@ -150,7 +150,9 @@ public class DetailActivity extends Activity {
 
 	public boolean onCreateOptionsMenu(Menu paramMenu) {
 		SubMenu menu = paramMenu.addSubMenu(0, 0, 0, "郎咸平简介");
+		menu.setIcon(R.drawable.info);
 		SubMenu menu2 = paramMenu.addSubMenu(0, 1, 0, "更多免费精品下载...");
+		menu2.setIcon(R.drawable.more);
 		return super.onCreateOptionsMenu(paramMenu);
 	}
 
