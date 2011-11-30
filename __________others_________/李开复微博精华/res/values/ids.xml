@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <item type="id" name="adLayout">false</item>
+    <item type="id" name="list">false</item>
+    <item type="id" name="content">false</item>
+    <item type="id" name="head">false</item>
+    <item type="id" name="btn_begin">false</item>
+    <item type="id" name="btn_more">false</item>
+    <item type="id" name="btn_morex">false</item>
+    <item type="id" name="face_frame">false</item>
+    <item type="id" name="face">false</item>
+    <item type="id" name="title">false</item>
+    <item type="id" name="name">false</item>
+    <item type="id" name="color_group">false</item>
+    <item type="id" name="color1">false</item>
+    <item type="id" name="color2">false</item>
+    <item type="id" name="font_group">false</item>
+    <item type="id" name="font14">false</item>
+    <item type="id" name="font16">false</item>
+    <item type="id" name="font18">false</item>
+    <item type="id" name="font20">false</item>
+    <item type="id" name="font22">false</item>
+</resources>

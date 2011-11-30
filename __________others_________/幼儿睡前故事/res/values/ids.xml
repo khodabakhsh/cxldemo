@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <item type="id" name="adView">false</item>
+    <item type="id" name="ImageButtonGoForward">false</item>
+    <item type="id" name="ImageButtonGoBack">false</item>
+    <item type="id" name="webView">false</item>
+    <item type="id" name="SvTextContent">false</item>
+    <item type="id" name="TextView01">false</item>
+    <item type="id" name="ImageView01">false</item>
+    <item type="id" name="BtnBookCover">false</item>
+</resources>

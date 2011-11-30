@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res/com.hsj.ccae1">
+    <com.adwo.adsdk.AdwoAdView android:layout_gravity="bottom" android:id="@id/ad" android:layout_width="fill_parent" android:layout_height="wrap_content" app:backgroundColor="#ff000000" app:primaryTextColor="#ffffffff" app:secondaryTextColor="#ffcccccc" app:isTesting="false" />
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginBottom="50.0dip">
+        <ListView android:id="@id/ListView01" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    </LinearLayout>
+</FrameLayout>

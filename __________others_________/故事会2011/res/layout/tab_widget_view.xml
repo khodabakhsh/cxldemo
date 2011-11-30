@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FrameLayout android:background="#fff7f3e7" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RadioGroup android:orientation="horizontal" android:id="@id/bottomTabGroup" android:background="@drawable/tab_background" android:layout_width="fill_parent" android:layout_height="49.0dip">
+        <View android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0" />
+        <RadioButton android:id="@id/tab_review" android:background="@drawable/tab_review_selector" android:layout_width="64.0dip" android:layout_height="wrap_content" android:button="@null" android:layout_centerInParent="true" />
+        <View android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0" />
+        <RadioButton android:id="@id/tab_online" android:background="@drawable/tab_online_selector" android:layout_width="64.0dip" android:layout_height="wrap_content" android:button="@null" android:layout_centerInParent="true" />
+        <View android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0" />
+        <RadioButton android:id="@id/tab_offline" android:background="@drawable/tab_offline_selector" android:layout_width="64.0dip" android:layout_height="wrap_content" android:button="@null" android:layout_centerInParent="true" />
+        <View android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0" />
+        <RadioButton android:id="@id/tab_download" android:background="@drawable/tab_download_selector" android:layout_width="64.0dip" android:layout_height="wrap_content" android:button="@null" android:layout_centerInParent="true" />
+        <View android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0" />
+        <RadioButton android:id="@id/tab_more" android:background="@drawable/tab_more_selector" android:layout_width="64.0dip" android:layout_height="wrap_content" android:button="@null" android:layout_centerInParent="true" />
+        <View android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0" />
+    </RadioGroup>
+</FrameLayout>

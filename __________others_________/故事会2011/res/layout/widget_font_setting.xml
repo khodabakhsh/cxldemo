@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout android:orientation="vertical" android:background="#fff7f3e7" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/topBar" android:background="@drawable/top_bar_background" android:layout_width="fill_parent" android:layout_height="33.0dip">
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <TextView android:textSize="17.0dip" android:textStyle="bold" android:textColor="#ffffffff" android:id="@id/top_bar_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="字体设置" android:lines="1" android:singleLine="true" android:layout_centerHorizontal="true" android:layout_centerVertical="true" />
+            <Button android:id="@id/top_bar_navigate" android:background="@drawable/top_bar_home_selector" android:layout_width="53.0dip" android:layout_height="fill_parent" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+        </RelativeLayout>
+    </FrameLayout>
+    <FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+        <LinearLayout android:orientation="vertical" android:id="@id/linearLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <RelativeLayout android:background="#60000000" android:layout_width="fill_parent" android:layout_height="48.0dip">
+                <TextView android:textAppearance="?android:textAppearanceMedium" android:textColor="#ffffffff" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="以下是您阅读时的字体样式：" android:layout_centerHorizontal="true" android:layout_centerVertical="true" />
+            </RelativeLayout>
+            <com.ltz.ui.JTextView android:textAppearance="?android:textAppearanceMedium" android:textColor="#ff222222" android:id="@id/textViewSimple" android:paddingLeft="10.0dip" android:paddingTop="15.0dip" android:paddingRight="8.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:text="  这是文本显示样式字体，为保护您的双眼，请调整到适合您自己阅读的字体大小。   在此ltz team项目组全员祝您阅读愉快。" />
+        </LinearLayout>
+    </FrameLayout>
+    <FrameLayout android:id="@id/bottom_bar" android:background="@drawable/top_bar_background" android:layout_width="fill_parent" android:layout_height="33.0dip">
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <Button android:id="@id/bottom_bar_zoomout" android:background="@drawable/btn_zoom_out_selector" android:layout_width="57.0dip" android:layout_height="fill_parent" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+            <Button android:id="@id/bottom_bar_zoomin" android:background="@drawable/btn_zoom_in_selector" android:layout_width="57.0dip" android:layout_height="fill_parent" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+        </RelativeLayout>
+    </FrameLayout>
+    <FrameLayout android:id="@id/adFrameLayout" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+</LinearLayout>

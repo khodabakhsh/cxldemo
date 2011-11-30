@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout android:orientation="vertical" android:background="#fff7f3e7" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/topBar" android:background="@drawable/top_bar_background" android:layout_width="fill_parent" android:layout_height="33.0dip">
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <Button android:id="@id/top_bar_navigate" android:background="@drawable/top_bar_home_selector" android:layout_width="53.0dip" android:layout_height="fill_parent" android:layout_centerVertical="true" />
+            <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <TextView android:textSize="17.0dip" android:textStyle="bold" android:textColor="#ffffffff" android:id="@id/top_bar_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="故事会 sddddddddddddddddddddddddddddddddddddddddd" android:lines="1" android:singleLine="true" android:layout_centerHorizontal="true" android:layout_centerVertical="true" />
+            </RelativeLayout>
+            <FrameLayout android:layout_width="50.0dip" android:layout_height="fill_parent">
+                <Button android:id="@id/top_bar_modify" android:background="@drawable/btn_modify_selector" android:layout_width="50.0dip" android:layout_height="fill_parent" android:layout_centerVertical="true" />
+                <Button android:id="@id/top_bar_finished" android:background="@drawable/btn_finished_selector" android:visibility="invisible" android:layout_width="50.0dip" android:layout_height="fill_parent" android:layout_centerVertical="true" />
+            </FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+    <ListView android:id="@id/listView" android:layout_width="fill_parent" android:layout_height="fill_parent" android:cacheColorHint="#fff8f8f8" android:divider="@drawable/shape_div" android:dividerHeight="2.0px" android:layout_weight="1.0" />
+    <FrameLayout android:id="@id/adFrameLayout" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+</LinearLayout>
