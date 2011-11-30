@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="hello">Hello World, JDuZheBookMain!</string>
+    <string name="app_name">故事会2011</string>
+    <string name="is_last_page">已经为最后一页，请返回主目录查看其他篇章。</string>
+    <string name="is_first_page">这已经是第一页。</string>
+    <string name="app_exit">选择“确定”,将结束应用程序。</string>
+    <string name="app_exit_ok">确定</string>
+    <string name="app_exit_cancel">取消</string>
+</resources>

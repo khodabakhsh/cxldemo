@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="Server_URL">http://edietitian001.appspot.com/cbookserver</string>
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="app_name">Animal Kingdom - Land Mammals</string>
+</resources>

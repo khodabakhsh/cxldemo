@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout android:orientation="vertical" android:background="#fff7f3e7" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/topBar" android:background="@drawable/top_bar_background" android:layout_width="fill_parent" android:layout_height="@dimen/title_bar_height">
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <TextView android:textSize="17.0dip" android:textStyle="bold" android:textColor="#ffffffff" android:id="@id/top_bar_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="《故事会》 珍藏千篇" android:lines="1" android:singleLine="true" android:layout_centerHorizontal="true" android:layout_centerVertical="true" />
+            <Button android:id="@id/top_bar_navigate" android:background="@null" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+        </RelativeLayout>
+    </FrameLayout>
+    <ListView android:id="@id/listView" android:layout_width="fill_parent" android:layout_height="fill_parent" android:cacheColorHint="#fff8f8f8" android:divider="@drawable/shape_div" android:dividerHeight="2.0px" android:layout_weight="1.0" />
+    <com.ltz.ui.tabwidget.JTabViewManage android:id="@id/tab_widget" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+</LinearLayout>

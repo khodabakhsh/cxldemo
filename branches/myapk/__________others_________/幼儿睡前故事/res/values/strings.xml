@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="hello">Hello World</string>
+    <string name="app_name">睡前故事</string>
+    <string name="app_title">幼儿睡前故事(2-6岁)</string>
+    <string name="help_exit">我明白了</string>
+    <string name="ImageButtonChangePic">打乱</string>
+    <string name="ImageButtonSelectNext">换一张</string>
+    <string name="menu_about">关于</string>
+    <string name="menu_exit">退出</string>
+    <string name="menu_zcwm">支持我们</string>
+    <string name="menu_jcgx">检查最新版本</string>
+    <string name="menu_yhfk">用户反馈</string>
+    <string name="menu_closemusic">关闭音乐</string>
+    <string name="menu_openmusic">打开音乐</string>
+    <string name="quit_desc">是否退出《幼儿睡前故事》？</string>
+    <string name="quit_cancel">取消</string>
+    <string name="quit_confirm">确定</string>
+    <string name="menu_about_content">研发人员： 隔壁老杨 \n发布时间：2011年1月 \n邮箱:yangdafe@gmail.com \n特别献给我家宝贝儿子 - 丁丁 ！</string>
+    <string name="help_content">幼儿睡前故事(2-6岁)-1.6以上固件\n\n你知道吗？多给小孩子讲故事有很多好处的。\n1、培养孩子持之以恒的做事心态。\n2、可以极大地促进孩子的阅读兴趣。\n3、可以锻炼孩子的观察能力。\n4、提高孩子的口头表达能力和语言组织能力。\n如果你经常给宝宝讲故事，通过口头表述出来的情节，会让小宝宝在生活中主动观察和思考，还可以拉进父母和宝宝的关系。\n\n如果您有好的建议请联系我们：\n研发人员： 隔壁老杨 \n研发团队： 翔远工作室 \n即时通讯：QQ 442686037\n发布时间：2011年2月 \n电子邮箱：yangdafe@gmail.com\n团队主页：http://hi.csdn.net/yangdafe \n\n----V2.0(2010-02-26)----\n1、将故事由原来的300篇扩充到646篇，同时美化了主界面。\n2、修复了返回键不能退出的bug。\n\n----V3.0(2010-04-29)----\n1、增加书签和在线更新功能\n\n---V4.0(2011-8-23)---\n1.修改了极个别手机打开找不到正文内容的bug。\n2.调整文章获取路径函数。\n\n\n</string>
+    <string name="zcwm_content">支持我们\n\n 翔远工作室是2010年12月成立的，成员是几个Android爱好者，在工作之余我们一起开发Android应用。我们主要是致力于幼儿和青少年软件的开发(现在这块是很大的空白)，而且永久免费提供给您使用。\n\n 最近我们有开发远程视频教育的创意，需要新购存储空间和服务器。这是一笔较大费用，所以我们需要你的支持。在上面的广告上每天点击一次。虽然每次点击仅有1毛钱，但集少成多。会帮助我们实现梦想，我们会更加努力。\n\n有你的支持，是对我们更好的前进动力！\n亲爱的用户，再次感谢您对本软件的使用！\n\n 附：我们选用的广告公司是中国最正规最大的供应商。你点击只是弹出一个框打开网页或者启动一个下载(不安装即可)，不会对你的手机有任何影响。请放心！\n\n</string>
+</resources>
