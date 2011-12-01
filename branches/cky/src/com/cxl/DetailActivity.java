@@ -54,7 +54,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 
 	private boolean canView(int pageIndex) {
 		if ((pageIndex >= Requre_Point_Page_Index) && !hasEnoughRequrePointPreferenceValue) {
-			showGetPointDialog("浏览" + MainActivity.MENU_List.get(Requre_Point_Page_Index) + "之后的内容哦");
+			showGetPointDialog("浏览" + MainActivity.MENU_List.get(Requre_Point_Page_Index-Start_Page_Index) + "之后的内容哦");
 			return false;
 		} else {
 			return true;
