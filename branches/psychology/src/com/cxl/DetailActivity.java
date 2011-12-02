@@ -53,8 +53,8 @@ public class DetailActivity extends Activity {
 		owns.setText("更多免费应用...");
 		owns.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
-				// 显示自家应用列表.
-				AppConnect.getInstance(DetailActivity.this).showMore(DetailActivity.this);
+				// 显示推荐安装程序（Offer）.
+				AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
 			}
 		});
 		LinearLayout container = (LinearLayout) findViewById(R.id.AdLinearLayout);

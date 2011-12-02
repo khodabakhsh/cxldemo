@@ -8,7 +8,7 @@
 	<RelativeLayout android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:layout_margin="8.0dip">
 
-		<Button android:id="@+id/OwnsButton" android:text="更多免费应用..."
+		<Button android:id="@+id/OwnsButton" android:text="更多精品下载..."
 			android:layout_height="wrap_content" android:layout_width="wrap_content"
 			android:visibility="visible" android:layout_alignParentLeft="true"
 			android:background="@drawable/an" />
