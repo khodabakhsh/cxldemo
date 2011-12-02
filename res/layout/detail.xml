@@ -9,7 +9,7 @@
 		<TableRow android:layout_width="fill_parent"
 			android:layout_height="wrap_content">
 			<Button android:id="@+id/OwnsButton" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:text="更多免费应用..." />
+				android:layout_height="wrap_content" android:text="更多精品下载..." />
 
 			<Button android:id="@+id/returnButton" android:layout_width="100dip"
 				android:layout_height="wrap_content" android:text="返回" android:layout_marginLeft="5dip"/>
