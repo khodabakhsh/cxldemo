@@ -57,9 +57,8 @@ public class DetailActivity extends Activity {
 		Button owns = (Button) findViewById(R.id.OwnsButton);
 		owns.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
-				// 显示自家应用列表.
-				AppConnect.getInstance(DetailActivity.this).showMore(
-						DetailActivity.this);
+				// 显示推荐安装程序（Offer）.
+				AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
 			}
 		});
 
