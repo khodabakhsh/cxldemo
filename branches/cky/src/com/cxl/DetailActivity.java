@@ -22,7 +22,7 @@ import com.waps.UpdatePointsNotifier;
 
 public class DetailActivity extends Activity implements UpdatePointsNotifier {
 
-	private WebView webView;
+	private MyWebView webView;
 	Button btnPrevious;
 	Button btnNext;
 
@@ -90,7 +90,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		});
 
 		Bundle bundle = getIntent().getExtras();
-		webView = (WebView) findViewById(R.id.webView);
+		webView = (MyWebView) findViewById(R.id.webView);
 		webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 		webView.getSettings().setDefaultFixedFontSize(16);
 
