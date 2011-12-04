@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
-import com.cxl.gxdx5000.R;
+import com.cxl.yghgx.R;
 import com.waps.AppConnect;
 
 public class CoverActivity extends Activity {

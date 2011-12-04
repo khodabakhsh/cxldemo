@@ -11,7 +11,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.cxl.gxdx5000.R;
+import com.cxl.yghgx.R;
 
 public class MainActivity extends Activity {
 	ListView menuList;

@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.cxl.gxdx5000.R;
+import com.cxl.yghgx.R;
 import com.waps.AdView;
 import com.waps.AppConnect;
 import com.waps.UpdatePointsNotifier;
