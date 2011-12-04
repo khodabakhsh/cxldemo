@@ -21,6 +21,7 @@ import android.webkit.WebView;
 import android.webkit.WebView.PictureListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.cxl.youmo.R;
 import com.waps.AdView;
@@ -29,7 +30,7 @@ import com.waps.UpdatePointsNotifier;
 
 public class DetailActivity extends Activity implements UpdatePointsNotifier {
 
-	private WebView webView;
+	private MyWebView webView;
 	Button btnPrevious;
 	Button btnNext;
 
@@ -70,6 +71,9 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 	}
 
 	private void setPageInfo(String loadUrl, int scrollY) {
+		String currentTitle = MainActivity.MENU_List.get(Current_Page_Index - Start_Page_Index).getValue();
+		setTitle(currentTitle);
+		Toast.makeText(DetailActivity.this, "开始阅读：" + currentTitle, Toast.LENGTH_SHORT).show();
 		if (Is_Load_Page_By_Url) {
 			webView.loadUrl(loadUrl);
 		} else {
@@ -104,7 +108,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		});
 
 		Bundle bundle = getIntent().getExtras();
-		webView = (WebView) findViewById(R.id.webView);
+		webView = (MyWebView) findViewById(R.id.webView);
 		webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 		webView.getSettings().setDefaultFixedFontSize(18);
 
@@ -169,8 +173,6 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 
 	private void setButtonVisibleAndSaveState() {
 		saveState();
-		String currentTitle = MainActivity.MENU_List.get(Current_Page_Index - Start_Page_Index).getValue();
-		setTitle(currentTitle);
 		if (Current_Page_Index == Start_Page_Index) {
 			btnPrevious.setVisibility(View.INVISIBLE);
 		} else {
@@ -252,7 +254,8 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 	public void getUpdatePointsFailed(String error) {
 		hasEnoughRequrePointPreferenceValue = false;
 	}
-	public String getFileContent(Context context, String name ) {
+
+	public String getFileContent(Context context, String name) {
 		InputStream in = null;
 		BufferedReader bufferedReader = null;
 		StringBuilder sBuffer = new StringBuilder("");
