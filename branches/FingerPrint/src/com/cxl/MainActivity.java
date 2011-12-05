@@ -8,18 +8,15 @@ import java.util.Map;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.cxl.fingerprint.R;
 import com.waps.AppConnect;
-import com.waps.UpdatePointsNotifier;
 
-public class MainActivity extends Activity implements UpdatePointsNotifier {
+public class MainActivity extends Activity {
 
 	private SimpleAdapter fingerPrintAdapter;
 	Button queryButton;
@@ -28,71 +25,13 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 	Spinner wo3;
 	Spinner wo4;
 	Spinner wo5;
-	TextView pointsTextView;
-	String displayText;
-	boolean update_text = false;
-	public static int currentPointTotal = 0;// 当前积分
-	public static final int requirePoint = 60;// 要求积分
-	public static boolean hasEnoughRequrePoint = false;// 是否达到积分
-
-	final Handler mHandler = new Handler();
-
-	// 创建一个线程
-	final Runnable mUpdateResults = new Runnable() {
-		public void run() {
-			if (pointsTextView != null) {
-				if (update_text) {
-					pointsTextView.setText(displayText);
-					update_text = false;
-				}
-			}
-		}
-	};
-
+	
 	@Override
 	protected void onDestroy() {
 		AppConnect.getInstance(this).finalize();
 		super.onDestroy();
 	}
 
-	@Override
-	protected void onResume() {
-		AppConnect.getInstance(this).getPoints(this);
-		super.onResume();
-	}
-
-	/**
-	 * AppConnect.getPoints()方法的实现，必须实现
-	 * 
-	 * @param currencyName
-	 *            虚拟货币名称.
-	 * @param pointTotal
-	 *            虚拟货币余额.
-	 */
-	public void getUpdatePoints(String currencyName, int pointTotal) {
-
-		currentPointTotal = pointTotal;
-		if (currentPointTotal >= requirePoint) {
-			hasEnoughRequrePoint = true;
-		}
-		update_text = true;
-		displayText = currencyName + ": " + pointTotal;
-		mHandler.post(mUpdateResults);
-	}
-
-	/**
-	 * AppConnect.getPoints() 方法的实现，必须实现
-	 * 
-	 * @param error
-	 *            请求失败的错误信息
-	 */
-
-	public void getUpdatePointsFailed(String error) {
-		currentPointTotal = 0;
-		update_text = true;
-		displayText = error;
-		mHandler.post(mUpdateResults);
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -108,7 +47,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		wo5 = (Spinner) findViewById(R.id.wo5);
 
 		fingerPrintAdapter = new SimpleAdapter(this, getData(), R.layout.vlist, new String[] { "id", "name",
-				"dateRange", "img" }, new int[] { R.id.id, R.id.name, R.id.dateRange, R.id.img });
+				 "img" }, new int[] { R.id.id, R.id.name,  R.id.img });
 
 		wo1.setAdapter(fingerPrintAdapter);
 		wo2.setAdapter(fingerPrintAdapter);
@@ -153,14 +92,12 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		map = new HashMap<String, Object>();
 		map.put("id", "1");
 		map.put("name", "涡纹");
-		map.put("dateRange", "「涡纹」即指纹整体纹路，呈现似旋涡状，纹路由内一圈一圈向外");
 		map.put("img", R.drawable.one);
 		list.add(map);
 
 		map = new HashMap<String, Object>();
 		map.put("id", "0");
 		map.put("name", "流纹");
-		map.put("dateRange", "「流纹」意指其指纹之纹路是无法成为似旋涡状的纹路，其指纹纹路呈现似外流的现象");
 		map.put("img", R.drawable.zero);
 		list.add(map);
 		return list;
