@@ -27,9 +27,9 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 				.setIcon(R.drawable.happy2)
 				.setTitle("当前积分：" + currentPointTotal)
 				.setMessage(
-						"只要积分满足" + requirePoint + "，就可以消除本提示信息！！ 您当前的积分不足" + requirePoint
-								+ "，所以会有此 提示。\n\n【免费获得积分方法】：请点击【确认键】进入推荐下载列表 , 下载并安装软件获得相应积分，消除本提示！！")
-				.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+						"只要积分满足" + requirePoint + "，就可以消除本提示信息！！\n 您当前的积分不足" + requirePoint
+								+ "，所以会有此 提示。")
+				.setPositiveButton("免费获得积分", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialoginterface, int i) {
 						// 显示推荐安装程序（Offer）.
 						AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
