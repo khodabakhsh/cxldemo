@@ -15,11 +15,11 @@
     <td height="23">小指 </td> 
    </tr> 
    <tr> 
-    <td height="45"><img src="0.gif" /></td> 
-    <td height="45"><img src="1.gif" /></td> 
-    <td height="45"><img src="0.gif" /></td> 
-    <td height="45"><img src="1.gif" /></td> 
-    <td height="45"><img src="0.gif" /></td> 
+    <td height="45"><img src="file:///android_asset/zero.gif" /></td> 
+    <td height="45"><img src="file:///android_asset/one.gif" /></td> 
+    <td height="45"><img src="file:///android_asset/zero.gif" /></td> 
+    <td height="45"><img src="file:///android_asset/one.gif" /></td> 
+    <td height="45"><img src="file:///android_asset/zero.gif" /></td> 
    </tr> 
    <tr> 
     <td>流纹</td> 
