@@ -111,6 +111,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		webView = (MyWebView) findViewById(R.id.webView);
 		webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 		webView.getSettings().setDefaultFixedFontSize(18);
+		webView.getSettings().setDefaultFontSize(18);
 
 		webView.setPictureListener(new MyPictureListener());
 
