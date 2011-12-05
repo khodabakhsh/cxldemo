@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout android:id="@+id/sortLayout"
-	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	xmlns:android="http://schemas.android.com/apk/res/android">
-	<TextView android:textSize="18.0sp" android:id="@+id/txtListItem"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:layout_marginLeft="20.0px" android:paddingTop="12dip"
-		android:paddingBottom="12dip" android:textColor="#000000" />
-</LinearLayout>
