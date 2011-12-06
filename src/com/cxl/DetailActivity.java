@@ -95,7 +95,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 
 		String fileContent = getFileContent(DetailActivity.this,
 				getResources().getIdentifier(fileName, "raw", getPackageName()));
-		mWebView.loadDataWithBaseURL("", fileContent, "text/html", FingerPrintUtil.UTF8, "");
+		mWebView.loadDataWithBaseURL("", fileContent, "text/html", "UTF8", "");
 
 		if (!hasEnoughRequrePointPreferenceValue) {// 没达到积分
 			showDialog();
