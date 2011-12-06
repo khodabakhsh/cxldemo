@@ -5,7 +5,7 @@
 		android:layout_height="fill_parent" android:orientation="vertical">
 		<TextView android:text="请先在下面选择省份，然后选择相应的小吃 ，点击【查询】查看详细信息哦："
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:textColor="#FF69B4" android:textSize="25px"
+			android:textColor="#FF69B4" android:textSize="18sp"
 			android:paddingTop="10dip" android:paddingBottom="10dip" />
 
 		<TableLayout android:orientation="horizontal"
@@ -15,10 +15,10 @@
 				android:layout_height="wrap_content">
 				<TextView android:text="请选择省份：" android:layout_width="wrap_content"
 					android:layout_height="wrap_content" android:textColor="#FF69B4"
-					android:textSize="25px" android:padding="15dip" />
+					android:textSize="18sp" android:padding="15dip" />
 				<Spinner android:id="@+id/country" android:layout_width="fill_parent"
 					android:layout_height="fill_parent" android:drawSelectorOnTop="true"
-					android:paddingRight="15dip" android:textSize="20px" />
+					android:paddingRight="15dip" android:textSize="18sp" />
 			</TableRow>
 		</TableLayout>
 		<TableLayout android:orientation="horizontal"
@@ -28,16 +28,20 @@
 				android:layout_height="wrap_content">
 				<TextView android:text="请选择小吃：" android:layout_width="wrap_content"
 					android:layout_height="wrap_content" android:textColor="#FF69B4"
-					android:textSize="25px" android:padding="15dip" />
+					android:textSize="18sp" android:padding="15dip" />
 				<Spinner android:id="@+id/food" android:layout_width="fill_parent"
 					android:layout_height="fill_parent" android:drawSelectorOnTop="true"
-					android:textSize="20px" android:paddingRight="15dip" />
+					android:textSize="18sp" android:paddingRight="15dip" />
 			</TableRow>
 		</TableLayout>
 		<Button android:layout_height="wrap_content"
-			android:layout_width="fill_parent" android:text="查询" android:id="@+id/queryButton"
+			android:layout_width="fill_parent" android:text="查     询" android:id="@+id/queryButton"
 			android:visibility="visible" android:drawableLeft="@drawable/query"
 			android:drawableRight="@drawable/query" android:textSize="25px"
 			android:paddingTop="10dip" android:paddingBottom="10dip" />
+		<TextView
+			android:text="1.按全国各地33个省市分类，介绍每个地方的小吃历史、文化、做法、特色等等。\n2.收录将近1500种的小吃，相信一定有你熟悉的，有你喜欢的！"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:textColor="#87CEEB" android:textSize="18sp" android:padding="15dip" />
 	</LinearLayout>
 </LinearLayout>
