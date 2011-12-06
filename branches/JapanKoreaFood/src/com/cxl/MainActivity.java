@@ -21,37 +21,18 @@ import com.cxl.japankoreafood.R;
 import com.waps.AppConnect;
 import com.waps.UpdatePointsNotifier;
 
-public class MainActivity extends Activity implements UpdatePointsNotifier {
+public class MainActivity extends Activity {
 
 	private ArrayAdapter<String> countryAdapter;
 	private ArrayAdapter<KeyValue> foodAdapter;
 	Button queryButton;
 	Spinner country;
 	Spinner food;
-	TextView pointsTextView;
-	String displayText;
-	boolean update_text = false;
-	public static int currentPointTotal = 0;// 当前积分
-	public static final int requirePoint = 60;// 要求积分
-	public static boolean hasEnoughRequrePoint = false;// 是否达到积分
 
 	private static final String[] Country_Array = { "日本料理", "韩国料理" };
 
 	public static Map<String, List<KeyValue>> Country_food_Map = new HashMap<String, List<KeyValue>>();
 
-	final Handler mHandler = new Handler();
-
-	// 创建一个线程
-	final Runnable mUpdateResults = new Runnable() {
-		public void run() {
-			if (pointsTextView != null) {
-				if (update_text) {
-					pointsTextView.setText(displayText);
-					update_text = false;
-				}
-			}
-		}
-	};
 
 	@Override
 	protected void onDestroy() {
@@ -59,44 +40,6 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		super.onDestroy();
 	}
 
-	@Override
-	protected void onResume() {
-		AppConnect.getInstance(this).getPoints(this);
-		super.onResume();
-	}
-
-	/**
-	 * AppConnect.getPoints()方法的实现，必须实现
-	 * 
-	 * @param currencyName
-	 *            虚拟货币名称.
-	 * @param pointTotal
-	 *            虚拟货币余额.
-	 */
-	public void getUpdatePoints(String currencyName, int pointTotal) {
-
-		currentPointTotal = pointTotal;
-		if (currentPointTotal >= requirePoint) {
-			hasEnoughRequrePoint = true;
-		}
-		update_text = true;
-		displayText = currencyName + ": " + pointTotal;
-		mHandler.post(mUpdateResults);
-	}
-
-	/**
-	 * AppConnect.getPoints() 方法的实现，必须实现
-	 * 
-	 * @param error
-	 *            请求失败的错误信息
-	 */
-
-	public void getUpdatePointsFailed(String error) {
-		currentPointTotal = 0;
-		update_text = true;
-		displayText = error;
-		mHandler.post(mUpdateResults);
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -107,16 +50,14 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 
 		country = (Spinner) findViewById(R.id.country);
 
-		countryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Country_Array);
-		//设置下拉列表的风格  
-		countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+		countryAdapter = new ArrayAdapter<String>(this, R.layout.vlist,R.id.name,  Country_Array);
 		country.setAdapter(countryAdapter);
 		country.setSelection(0);
 		country.setPrompt("请选择");
 		country.setOnItemSelectedListener(new OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				Object selectedId = country.getSelectedItem();
-				foodAdapter = new ArrayAdapter<KeyValue>(MainActivity.this, android.R.layout.simple_spinner_item,
+				foodAdapter = new ArrayAdapter<KeyValue>(MainActivity.this, R.layout.vlist,R.id.name, 
 						Country_food_Map.get(selectedId));
 				food.setAdapter(foodAdapter);
 				food.setSelection(0);
@@ -127,11 +68,8 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		});
 		food = (Spinner) findViewById(R.id.food);
 		food.setPrompt("请选择");
-		foodAdapter = new ArrayAdapter<KeyValue>(this, android.R.layout.simple_spinner_item,
+		foodAdapter = new ArrayAdapter<KeyValue>(this,R.layout.vlist,R.id.name, 
 				Country_food_Map.get(country.getSelectedItem()));
-		//设置下拉列表的风格  
-		foodAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-
 		queryButton = (Button) findViewById(R.id.queryButton);
 		queryButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
