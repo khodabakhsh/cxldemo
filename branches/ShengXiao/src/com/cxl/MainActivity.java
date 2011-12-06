@@ -18,72 +18,14 @@ import com.cxl.shengxiao.R;
 import com.waps.AppConnect;
 import com.waps.UpdatePointsNotifier;
 
-public class MainActivity extends ListActivity implements UpdatePointsNotifier {
+public class MainActivity extends ListActivity  {
 
-	TextView pointsTextView;
-	String displayText;
-	boolean update_text = false;
-	public static int currentPointTotal = 0;// 当前积分
-	public static final int requirePoint = 60;// 要求积分
-	public static boolean hasEnoughRequrePoint = false;// 是否达到积分
 
-	final Handler mHandler = new Handler();
-
-	// 创建一个线程
-	final Runnable mUpdateResults = new Runnable() {
-		public void run() {
-			if (pointsTextView != null) {
-				if (update_text) {
-					pointsTextView.setText(displayText);
-					update_text = false;
-				}
-			}
-		}
-	};
 
 	@Override
 	protected void onDestroy() {
 		AppConnect.getInstance(this).finalize();
 		super.onDestroy();
-	}
-
-	@Override
-	protected void onResume() {
-		AppConnect.getInstance(this).getPoints(this);
-		super.onResume();
-	}
-
-	/**
-	 * AppConnect.getPoints()方法的实现，必须实现
-	 * 
-	 * @param currencyName
-	 *            虚拟货币名称.
-	 * @param pointTotal
-	 *            虚拟货币余额.
-	 */
-	public void getUpdatePoints(String currencyName, int pointTotal) {
-
-		currentPointTotal = pointTotal;
-		if (currentPointTotal >= requirePoint) {
-			hasEnoughRequrePoint = true;
-		}
-		update_text = true;
-		displayText = currencyName + ": " + pointTotal;
-		mHandler.post(mUpdateResults);
-	}
-
-	/**
-	 * AppConnect.getPoints() 方法的实现，必须实现
-	 * 
-	 * @param error
-	 *            请求失败的错误信息
-	 */
-
-	public void getUpdatePointsFailed(String error) {
-		currentPointTotal = 0;
-		update_text = true;
-		displayText = error;
-		mHandler.post(mUpdateResults);
 	}
 
 	@Override
