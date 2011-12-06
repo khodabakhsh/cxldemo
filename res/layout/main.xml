@@ -5,7 +5,7 @@
 		android:layout_height="fill_parent" android:orientation="vertical">
 		<TextView android:text="请先选择您要查询的民族，然后点击【查询】按钮查询它的风俗习惯哦："
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:textColor="#FF69B4" android:textSize="20px"
+			android:textColor="#FF69B4" android:textSize="18sp"
 			android:paddingTop="10dip" android:paddingBottom="10dip" />
 
 		<TableLayout android:orientation="horizontal"
@@ -13,21 +13,25 @@
 			android:stretchColumns="1">
 			<TableRow android:layout_width="fill_parent"
 				android:layout_height="wrap_content">
-				<TextView android:text="选择要您要查询的民族：" android:layout_width="wrap_content"
+				<TextView android:text="选择民族：" android:layout_width="wrap_content"
 					android:layout_height="wrap_content" android:textColor="#FF69B4"
-					android:textSize="20px" android:padding="15dip" />
+					android:textSize="18sp" android:padding="15dip" />
 				<Spinner android:id="@+id/yue" android:layout_width="fill_parent"
 					android:layout_height="fill_parent" android:drawSelectorOnTop="true"
-					android:paddingRight="15dip" android:textSize="14px" />
+					android:paddingRight="15dip" android:textSize="18sp" />
 			</TableRow>
 		</TableLayout>
 		<Button android:layout_height="wrap_content"
-			android:layout_width="fill_parent" android:text="查询" android:id="@+id/queryButton"
-			android:visibility="visible" android:drawableLeft="@drawable/query"
-			android:drawableRight="@drawable/query" android:textSize="20px"
-			android:paddingTop="10dip" android:paddingBottom="10dip" />
-			
-			<WebView android:id="@+id/nationBrowserWebView" android:layout_width="fill_parent"
-		android:layout_height="fill_parent" android:focusable="false" />
+			android:layout_width="fill_parent" android:text="查         询"
+			android:id="@+id/queryButton" android:visibility="visible"
+			android:drawableLeft="@drawable/query" android:drawableRight="@drawable/query"
+			android:textSize="20sp" android:paddingTop="10dip"
+			android:paddingBottom="10dip" />
+		<TextView
+			android:text="傣族的婚俗女权主义者一定比较喜欢，傣族和我们婚俗正好相反他们实行的是“女婚男嫁”男人要嫁到女方家成为女方家的成员。\n白族的婚俗汉族的男人一定很羡慕，他们结婚不但不用给女方财礼，女方还倒贴几万块的彩礼，"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:textColor="#87CEEB" android:textSize="18sp" android:padding="15dip" />
+		<ImageView android:src="@drawable/bg" android:scaleType="centerInside"
+			android:layout_width="fill_parent" android:layout_height="wrap_content" />
 	</LinearLayout>
 </LinearLayout>
