@@ -28,7 +28,7 @@
 			android:textSize="20sp" android:paddingTop="10dip"
 			android:paddingBottom="10dip" />
 		<TextView
-			android:text="傣族的婚俗女权主义者一定比较喜欢，傣族和我们婚俗正好相反他们实行的是“女婚男嫁”男人要嫁到女方家成为女方家的成员。\n白族的婚俗汉族的男人一定很羡慕，他们结婚不但不用给女方财礼，女方还倒贴几万块的彩礼，"
+			android:text="各种奇特的风俗:\n傣族的婚俗女权主义者一定比较喜欢，傣族和我们婚俗正好相反他们实行的是“女婚男嫁”男人要嫁到女方家成为女方家的成员。\n白族的婚俗汉族的男人一定很羡慕，他们结婚不但不用给女方财礼，女方还倒贴几万块的彩礼，"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:textColor="#87CEEB" android:textSize="18sp" android:padding="15dip" />
 		<ImageView android:src="@drawable/bg" android:scaleType="centerInside"
