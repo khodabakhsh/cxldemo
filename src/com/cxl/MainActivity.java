@@ -8,32 +8,23 @@ import java.util.Map;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.cxl.areacustom.R;
 import com.waps.AppConnect;
-import com.waps.UpdatePointsNotifier;
 
-public class MainActivity extends Activity implements UpdatePointsNotifier {
+public class MainActivity extends Activity  {
 
 	private ArrayAdapter<String> areaAdapter;
 	private ArrayAdapter<KeyValue> customAdapter;
 	Button queryButton;
 	Spinner area;
 	Spinner custom;
-	TextView pointsTextView;
-	String displayText;
-	boolean update_text = false;
-	public static int currentPointTotal = 0;// 当前积分
-	public static final int requirePoint = 60;// 要求积分
-	public static boolean hasEnoughRequrePoint = false;// 是否达到积分
 	public static Map<String, String> ConstellationNameIdMap = new HashMap<String, String>();
 
 	private static final String[] Area_Array = { "天津", "重庆", "上海", "河北", "山西", "山东", "河南", "陕西", "甘肃", "青海", "江苏",
@@ -42,19 +33,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 
 	public static Map<String, List<KeyValue>> area_custom_map = new HashMap<String, List<KeyValue>>();
 
-	final Handler mHandler = new Handler();
 
-	// 创建一个线程
-	final Runnable mUpdateResults = new Runnable() {
-		public void run() {
-			if (pointsTextView != null) {
-				if (update_text) {
-					pointsTextView.setText(displayText);
-					update_text = false;
-				}
-			}
-		}
-	};
 
 	@Override
 	protected void onDestroy() {
@@ -63,60 +42,19 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 	}
 
 	@Override
-	protected void onResume() {
-		AppConnect.getInstance(this).getPoints(this);
-		super.onResume();
-	}
-
-	/**
-	 * AppConnect.getPoints()方法的实现，必须实现
-	 * 
-	 * @param currencyName
-	 *            虚拟货币名称.
-	 * @param pointTotal
-	 *            虚拟货币余额.
-	 */
-	public void getUpdatePoints(String currencyName, int pointTotal) {
-
-		currentPointTotal = pointTotal;
-		if (currentPointTotal >= requirePoint) {
-			hasEnoughRequrePoint = true;
-		}
-		update_text = true;
-		displayText = currencyName + ": " + pointTotal;
-		mHandler.post(mUpdateResults);
-	}
-
-	/**
-	 * AppConnect.getPoints() 方法的实现，必须实现
-	 * 
-	 * @param error
-	 *            请求失败的错误信息
-	 */
-
-	public void getUpdatePointsFailed(String error) {
-		currentPointTotal = 0;
-		update_text = true;
-		displayText = error;
-		mHandler.post(mUpdateResults);
-	}
-
-	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		area = (Spinner) findViewById(R.id.area);
 
-		areaAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Area_Array);
-		//设置下拉列表的风格  
-		areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+		areaAdapter = new ArrayAdapter<String>(this, R.layout.vlist,R.id.name, Area_Array);
 		area.setAdapter(areaAdapter);
 		area.setSelection(0);
 		area.setPrompt("请选择地区");
 		area.setOnItemSelectedListener(new OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				Object selectedId = area.getSelectedItem();
-				customAdapter = new ArrayAdapter<KeyValue>(MainActivity.this, android.R.layout.simple_spinner_item,
+				customAdapter = new ArrayAdapter<KeyValue>(MainActivity.this, R.layout.vlist,R.id.name, 
 						area_custom_map.get(selectedId));
 				custom.setAdapter(customAdapter);
 				custom.setSelection(0);
@@ -127,11 +65,8 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		});
 		custom = (Spinner) findViewById(R.id.custom);
 		custom.setPrompt("请选择风俗");
-		customAdapter = new ArrayAdapter<KeyValue>(this, android.R.layout.simple_spinner_item, area_custom_map.get(area
+		customAdapter = new ArrayAdapter<KeyValue>(this, R.layout.vlist,R.id.name,  area_custom_map.get(area
 				.getSelectedItem()));
-		//设置下拉列表的风格  
-		customAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-
 		queryButton = (Button) findViewById(R.id.queryButton);
 		queryButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
@@ -145,7 +80,6 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 				startActivity(intent);
 			}
 		});
-		// queryButton.setBackgroundDrawable(d)
 
 		// 连接服务器. 应用启动时调用(为了统计准确性，此句必须填写).
 		AppConnect.getInstance(this);
