@@ -5,19 +5,19 @@
 	<uses-sdk android:minSdkVersion="4" />
 
 	<application android:icon="@drawable/icon" android:label="@string/app_name">
-		<activity android:name="com.cxl.stevejobs.CoverActivity" android:label="@string/app_name">
+		<activity android:name="com.cxl.CoverActivity" android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:name="com.cxl.stevejobs.DetailActivity" />
-		<activity android:name="com.cxl.stevejobs.MainActivity" />
+		<activity android:name="com.cxl.DetailActivity" />
+		<activity android:name="com.cxl.MainActivity" />
 		<activity android:name="com.waps.OffersWebView"
 			android:configChanges="keyboardHidden|orientation" />
 		<meta-data android:name="WAPS_ID" android:value="9eccde98def313c8bda09697c08c6559" />
 		<!--以下属性为分发渠道ID,可以选用 -->
-		<meta-data android:name="WAPS_PID" android:value="WAPS" />
+		<meta-data android:name="WAPS_PID" android:value="gfan" />
 
 	</application>
 	<uses-permission android:name="android.permission.INTERNET" />
