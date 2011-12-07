@@ -133,7 +133,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		}
 
 		Button offers = (Button) findViewById(R.id.OffersButton);
-		offers.setText("更多免费精品下载...");
+		offers.setText("更多精品下载...");
 		offers.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
 				// 显示推荐安装程序（Offer）.
