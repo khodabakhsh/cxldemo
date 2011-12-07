@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.cxl.birthsecret" android:versionCode="4"
-	android:versionName="4.0">
+	package="com.cxl.birthsecret" android:versionCode="5"
+	android:versionName="5.0">
 	<uses-sdk android:minSdkVersion="4" />
 
 	<application android:icon="@drawable/icon" android:label="@string/app_name">
@@ -16,11 +16,14 @@
 		<activity android:name="com.waps.OffersWebView"
 			android:configChanges="keyboardHidden|orientation" />
 		<meta-data android:name="WAPS_ID" android:value="e37ac36fea1db04bf7f2040d0c3162aa" />
-		<meta-data android:name="WAPS_PID" android:value="WAPS" />
+		<meta-data android:name="WAPS_PID" android:value="gfan" />
 	</application>
-	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.GET_TASKS" />
+	<!--以下权限为1.5.3版本新加权限 -->
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
 </manifest>
