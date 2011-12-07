@@ -16,9 +16,9 @@
 		<activity android:name="com.cxl.DetailActivity" />
 		<activity android:name="com.waps.OffersWebView"
 			android:configChanges="keyboardHidden|orientation" />
-		<meta-data android:name="WAPS_ID" android:value="18c558c5b1fda98ba66112a6c3f8e27a" />
+		<meta-data android:name="WAPS_ID" android:value="aa43df7612d075cbfe3bf5f22d61f5bf" />
 		<!--以下属性为分发渠道ID,可以选用 -->
-		<meta-data android:name="WAPS_PID" android:value="WAPS" />
+		<meta-data android:name="WAPS_PID" android:value="91" />
 
 	</application>
 	<uses-permission android:name="android.permission.INTERNET" />

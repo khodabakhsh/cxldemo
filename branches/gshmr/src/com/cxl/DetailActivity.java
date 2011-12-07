@@ -50,7 +50,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 	public static boolean hasEnoughRequrePointPreferenceValue = false;// 保存在配置里
 	public static final int requirePoint = 30;// 要求积分
 	public static int currentPointTotal = 0;// 当前积分
-	public static final int Requre_Point_Page_Index = 120;//需要积分才能查看的页面
+	public static final int Requre_Point_Page_Index = 100;//需要积分才能查看的页面
 
 	class MyPictureListener implements PictureListener {
 		public void onNewPicture(WebView view, Picture arg1) {
@@ -111,7 +111,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		webView = (MyWebView) findViewById(R.id.webView);
 		webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 		webView.getSettings().setDefaultFixedFontSize(18);
-
+		webView.getSettings().setDefaultFontSize(18);
 		webView.setPictureListener(new MyPictureListener());
 
 		boolean startByMenu = bundle.getBoolean("startByMenu");
@@ -132,7 +132,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		}
 
 		Button offers = (Button) findViewById(R.id.OffersButton);
-		offers.setText("更多免费精品下载...");
+		offers.setText("更多精品下载...");
 		offers.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
 				// 显示推荐安装程序（Offer）.
