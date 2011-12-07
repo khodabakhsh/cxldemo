@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent" android:background="@drawable/bg">
-	<LinearLayout android:id="@+id/AdLinearLayout"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:gravity="center_horizontal" />
+
 	<RelativeLayout android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:layout_marginTop="8.0dip" >
+		android:id="@+id/relativeLayout" android:layout_height="wrap_content"
+		android:layout_marginTop="5.0dip" android:layout_alignParentBottom="true">
 		<Button android:id="@+id/previous" android:background="@drawable/an"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="上一页" android:layout_alignParentLeft="true" />
+			android:text="上一页" android:layout_alignParentLeft="true"
+			android:layout_marginTop="5.0dip" />
 		<Button android:id="@+id/OffersButton" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:layout_centerHorizontal="true"
-			android:textColor="@android:color/black" />
+			android:textColor="@android:color/black" android:textSize="18sp" />
 		<Button android:id="@+id/next" android:background="@drawable/an"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="下一页" android:layout_alignParentRight="true" />
+			android:text="下一页" android:layout_alignParentRight="true"
+			android:layout_marginTop="5.0dip" />
 	</RelativeLayout>
 
-
-	<WebView android:id="@+id/webView"
+	<LinearLayout android:id="@+id/AdLinearLayout"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:layout_margin="5.0dip" />
+		android:gravity="center_horizontal" android:layout_above="@id/relativeLayout" />
 
-</LinearLayout>
+	<com.cxl.MyWebView android:textSize="18.0dip"
+		android:textStyle="bold" android:textColor="#000000" android:id="@+id/webView"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_margin="5.0dip" android:layout_above="@id/AdLinearLayout"
+		android:layout_alignParentTop="true" />
+
+</RelativeLayout>

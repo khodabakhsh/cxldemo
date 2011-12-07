@@ -1,4 +1,4 @@
-package com.cxl.stevejobs;
+package com.cxl;
 
 import android.app.Activity;
 import android.content.Intent;
