@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:layout_margin="3.0dip">
+
+	<RelativeLayout android:id="@+id/pageLayout"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_marginTop="3.0dip" android:layout_alignParentBottom="true">
+		<Button android:id="@+id/previous" android:background="@drawable/an"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text="上一页" android:layout_alignParentLeft="true"
+			android:textSize="18sp" />
+		<Button android:id="@+id/next" android:background="@drawable/an"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text="下一页" android:layout_alignParentRight="true"
+			android:textSize="18sp" />
+	</RelativeLayout>
+
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_marginTop="5dip"
+		android:id="@+id/buttonLayout" android:layout_above="@id/pageLayout">
+		<Button android:id="@+id/OwnsButton" android:layout_height="wrap_content"
+			android:layout_width="fill_parent" android:layout_weight="1"
+			android:textSize="18sp" />
+		<Button android:id="@+id/returnButton" android:text="返回"
+			android:layout_height="wrap_content" android:layout_width="fill_parent"
+			android:layout_weight="1" android:textSize="18sp" />
+	</LinearLayout>
+	<LinearLayout android:id="@+id/AdLinearLayout"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:gravity="center_horizontal" android:layout_above="@id/buttonLayout" />
+
+	<ScrollView android:gravity="center" android:orientation="vertical"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_above="@id/AdLinearLayout"
+		android:layout_alignParentTop="true">
+		<LinearLayout android:orientation="vertical"
+			android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+			<ImageView android:id="@+id/ImageView"
+				android:layout_width="fill_parent" android:layout_height="fill_parent"
+				android:scaleType="center" />
+
+			<TextView android:textSize="20sp" android:textStyle="bold"
+				android:id="@+id/TextView" android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:background="@drawable/bg"
+				android:textColor="@android:color/black" android:layout_marginTop="3dip"
+				android:padding="3dip" />
+		</LinearLayout>
+	</ScrollView>
+</RelativeLayout>
