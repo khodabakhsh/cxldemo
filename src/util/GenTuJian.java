@@ -4,10 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
 
 public class GenTuJian {
 	static FileFilter txtFilter = new FileFilter() {
@@ -41,7 +39,7 @@ public class GenTuJian {
 					bufferedReader = new BufferedReader(new InputStreamReader(fis, gb2312));
 					String contentString = "";
 					while (null != (contentString = bufferedReader.readLine())) {
-						System.out.println("list.add(\""
+						System.out.println("AllList.add(\""
 								+ file.getName().substring(0, file.getName().lastIndexOf(".txt")) + "、" + contentString
 								+ "\");");
 						break;
