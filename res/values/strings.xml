@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="app_name">著名国宝图鉴</string>
+    <string name="str_hint">这里输入关键字搜索</string>
+</resources>
