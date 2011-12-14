@@ -22,9 +22,9 @@
 		<Button android:id="@+id/OwnsButton" android:layout_height="wrap_content"
 			android:layout_width="fill_parent" android:layout_weight="1"
 			android:textSize="18sp" />
-		<Button android:id="@+id/returnButton" android:text="返回"
-			android:layout_height="wrap_content" android:layout_width="fill_parent"
-			android:layout_weight="1" android:textSize="18sp" />
+		<Button android:id="@+id/returnButton" android:layout_height="wrap_content"
+			android:layout_width="fill_parent" android:layout_weight="1"
+			android:textSize="18sp" />
 	</LinearLayout>
 	<LinearLayout android:id="@+id/AdLinearLayout"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
 
 			<ImageView android:id="@+id/ImageView"
 				android:layout_width="fill_parent" android:layout_height="fill_parent"
-				android:scaleType="center" />
+				android:scaleType="fitCenter" />
 
 			<TextView android:textSize="20sp" android:textStyle="bold"
 				android:id="@+id/TextView" android:layout_width="fill_parent"
