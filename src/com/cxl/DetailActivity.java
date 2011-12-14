@@ -35,6 +35,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 	private Button btnNext;
 	private Button btnGetPoint;
 	private ScrollView scrollView;
+	private LinearLayout adLinearLayout;
 
 	InputStream assetFile = null;
 	Bitmap bitmap = null;
@@ -85,17 +86,19 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		btnGetPoint = (Button) findViewById(R.id.OwnsButton);
 		scrollView = (ScrollView) findViewById(R.id.scrollView);
 
+		adLinearLayout = (LinearLayout) findViewById(R.id.AdLinearLayout);
+
 		returnButton.setText("返回目录");
 		btnGetPoint.setText("赚积分移除广告");
 
 		Bundle bundle = getIntent().getExtras();
-		String selectItem = bundle.getString("car");
+		String selectItem = bundle.getString("selectItem");
 		String itemIndex = selectItem.substring(0, selectItem.lastIndexOf(MainActivity.Separator));
 		boolean canRead = true;
 		if (!canView(Integer.parseInt(itemIndex))) {
 			canRead = false;
-			showGetPointDialog("浏览【" + ListManager.AllList.get(Read_Requre_Point_Page_Index - Start_Page_Index)
-					+ "】之后的内容哦!");
+			showGetPointDialog("阅读 【" + ListManager.AllList.get(Read_Requre_Point_Page_Index - Start_Page_Index)
+					+ "】 之后的内容哦!");
 			itemIndex = "01";
 		}
 
@@ -112,19 +115,19 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 
 		btnPrevious.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				String carIndex = getModifiedPage(--Current_Page_Index);
-				changePageContent(carIndex);
+				String itemIndex = getModifiedPage(--Current_Page_Index);
+				changePageContent(itemIndex);
 			}
 		});
 
 		btnNext.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (canView(Current_Page_Index + 1)) {
-					String carIndex = getModifiedPage(++Current_Page_Index);
-					changePageContent(carIndex);
+					String itemIndex = getModifiedPage(++Current_Page_Index);
+					changePageContent(itemIndex);
 				} else {
-					showGetPointDialog("浏览【" + ListManager.AllList.get(Read_Requre_Point_Page_Index - Start_Page_Index)
-							+ "】之后的内容哦!");
+					showGetPointDialog("阅读 【" + ListManager.AllList.get(Read_Requre_Point_Page_Index - Start_Page_Index)
+							+ "】 之后的内容哦!");
 				}
 
 			}
@@ -132,16 +135,14 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 
 		btnGetPoint.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
-				// 显示推荐安装程序（Offer）.
 				AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
 			}
 		});
 		if (canRead && !hasEnoughAdPointPreferenceValue) {
-			LinearLayout container2 = (LinearLayout) findViewById(R.id.AdLinearLayout);
-			new AdView(this, container2).DisplayAd(20);// 每20秒轮换一次广告；最少为20
+			new AdView(this, adLinearLayout).DisplayAd(20);// 每20秒轮换一次广告；最少为20
 
 			new AlertDialog.Builder(DetailActivity.this).setIcon(R.drawable.happy2).setTitle("永久移除所有广告")
-					.setMessage("只要积分满足" + requireAdPoint + "，就可以永久移除所有广告！")
+					.setMessage("当前积分：" + currentPointTotal + "。\n只要积分满足" + requireAdPoint + "，就可以永久移除所有广告！")
 					.setPositiveButton("免费获得积分", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialoginterface, int i) {
 							// 显示推荐安装程序（Offer）.
@@ -161,9 +162,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 	private void changePageContent(String itemIndex) {
 		AssetManager assets = getAssets();
 		try {
-			// 打开指定资源对应的输入流  
 			assetFile = assets.open("image/" + itemIndex + ".jpg");
-			// 改变ImageView显示的图片  
 			//			imageView.setImageBitmap(BitmapFactory.decodeStream(assetFile));
 			bitmap = BitMapUtil.adujstSizeByMax(assetFile);
 			imageView.setImageBitmap(bitmap);
@@ -181,9 +180,9 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		}
 		textView.setText(getFileContent(DetailActivity.this, itemIndex));
 		scrollView.post(new Runnable() {
-		    public void run() {
-		    	scrollView.scrollTo(0, 0);
-		    } 
+			public void run() {
+				scrollView.fullScroll(ScrollView.FOCUS_UP);
+			}
 		});
 
 		setButtonVisibleAndSaveState(getTitle(itemIndex));
@@ -252,8 +251,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		if (pointTotal >= requireAdPoint) {
 			hasEnoughAdPointPreferenceValue = true;
 			PreferenceUtil.setHasEnoughAdPoint(DetailActivity.this, true);
-			LinearLayout container2 = (LinearLayout) findViewById(R.id.AdLinearLayout);
-			container2.setVisibility(View.INVISIBLE);
+			adLinearLayout.setVisibility(View.INVISIBLE);
 			btnGetPoint.setText("更多精品下载...");
 		}
 		if (pointTotal >= requireReadPoint) {
@@ -274,13 +272,13 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		hasEnoughReadPointPreferenceValue = false;
 	}
 
-	public String getFileContent(Context context, String carIndex) {// 规划了file参数、ID参数，方便多文件写入。
+	public String getFileContent(Context context, String itemIndex) {// 规划了file参数、ID参数，方便多文件写入。
 		InputStream in = null;
 		BufferedReader bufferedReader = null;
 		StringBuilder sBuffer = new StringBuilder("");
 		try {
 			AssetManager assets = getAssets();
-			in = assets.open("txt/" + carIndex + txtSuffix);
+			in = assets.open("txt/" + itemIndex + txtSuffix);
 
 			bufferedReader = new BufferedReader(new InputStreamReader(in, gb2312));
 			String strLine;

@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -31,6 +32,7 @@ public class MainActivity extends Activity {
 	private EditText txtSearch;
 	MatchListAdapter matchListAdapter = new MatchListAdapter();
 	private TextWatcher watcher = new MyTextWatcher();
+	Bitmap bitmap = null;
 	public static List<String> searchList = ListManager.AllList;
 	public static List<String> favoriteList = new ArrayList<String>();
 	public static final String Separator = "、";
@@ -38,6 +40,9 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		AppConnect.getInstance(this).finalize();
+		if (bitmap != null) {
+			bitmap.recycle();
+		}
 		super.onDestroy();
 	}
 
@@ -58,11 +63,11 @@ public class MainActivity extends Activity {
 		searchListView.setAdapter(matchListAdapter);
 		searchListView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
-				String car = (String) arg0.getItemAtPosition(pos);
+				String selectItem = (String) arg0.getItemAtPosition(pos);
 				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, DetailActivity.class);
 				Bundle bundle = new Bundle();
-				bundle.putString("car", car);
+				bundle.putString("selectItem", selectItem);
 				intent.putExtras(bundle);
 				startActivity(intent);
 			}
@@ -111,17 +116,16 @@ public class MainActivity extends Activity {
 				paramView = ((LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE))
 						.inflate(R.layout.search_list_layout, null);
 			TextView localTextView1 = (TextView) paramView.findViewById(R.id.txtSearchEnName);
-			final String carName = getItem(paramInt).toString();
-			localTextView1.setText(carName);
+			final String itemName = getItem(paramInt).toString();
+			localTextView1.setText(itemName);
 
-			ImageView carIcon = (ImageView) paramView.findViewById(R.id.carIcon);
+			ImageView itemIcon = (ImageView) paramView.findViewById(R.id.itemIcon);
 			AssetManager assets = getAssets();
 
 			try {
-				// 打开指定资源对应的输入流  
-				assetFile = assets.open("image/" + carName.substring(0, carName.lastIndexOf(Separator)) + ".jpg");
-				//				carIcon.setImageBitmap(BitmapFactory.decodeStream(assetFile));
-				carIcon.setImageBitmap(BitMapUtil.adujstSizeByRate(assetFile));
+				assetFile = assets.open("image/" + itemName.substring(0, itemName.lastIndexOf(Separator)) + ".jpg");
+				bitmap = BitMapUtil.adujstSizeByRate(assetFile);
+				itemIcon.setImageBitmap(bitmap);
 			} catch (IOException e) {
 				e.printStackTrace();
 			} finally {
