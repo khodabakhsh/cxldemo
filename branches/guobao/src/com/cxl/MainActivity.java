@@ -34,7 +34,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private TextWatcher watcher = new MyTextWatcher();
 	public static List<String> searchList = ListManager.AllList;
 	public static List<String> favoriteList = new ArrayList<String>();
-	public static final String Separator ="、";
+	public static final String Separator = "、";
 
 	@Override
 	protected void onDestroy() {
@@ -71,7 +71,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 		txtSearch = (EditText) findViewById(R.id.txtSearch);
 		txtSearch.clearFocus();
-		txtSearch.addTextChangedListener(this.watcher);txtSearch.clearFocus();
+		txtSearch.addTextChangedListener(this.watcher);
+		txtSearch.clearFocus();
 
 	}
 
@@ -108,7 +109,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		public long getItemId(int paramInt) {
 			return paramInt;
 		}
-
+		InputStream assetFile = null;
 		public View getView(int paramInt, View paramView, ViewGroup paramViewGroup) {
 			if (paramView == null)
 				paramView = ((LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE))
@@ -119,12 +120,22 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 			ImageView carIcon = (ImageView) paramView.findViewById(R.id.carIcon);
 			AssetManager assets = getAssets();
+			
 			try {
 				// 打开指定资源对应的输入流  
-				InputStream assetFile = assets.open("image/" + carName.substring(0,carName.lastIndexOf(Separator)) + ".jpg");
-				carIcon.setImageBitmap(BitmapFactory.decodeStream(assetFile));
+				assetFile = assets.open("image/" + carName.substring(0, carName.lastIndexOf(Separator)) + ".jpg");
+//				carIcon.setImageBitmap(BitmapFactory.decodeStream(assetFile));
+				carIcon.setImageBitmap(BitMapUtil.adujstSizeByRate(assetFile));
 			} catch (IOException e) {
 				e.printStackTrace();
+			} finally {
+				if (assetFile != null) {
+					try {
+						assetFile.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 
 			return paramView;

@@ -81,7 +81,7 @@ public class ListManager {
 		AllList.add("50、人操蛇屏风铜托座");
 		AllList.add("51、青铜神树");
 		AllList.add("52、乳丁纹虑耳方鼎");
-		AllList.add("53、鹿耳四足�");
+		AllList.add("53、鹿耳四足甗");
 		AllList.add("54、曾侯乙墓外棺");
 		AllList.add("55、太阳神鸟金饰");
 		AllList.add("56、墙盘");
