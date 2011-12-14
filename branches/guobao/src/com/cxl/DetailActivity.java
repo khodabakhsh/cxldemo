@@ -180,7 +180,12 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 			}
 		}
 		textView.setText(getFileContent(DetailActivity.this, itemIndex));
-		scrollView.scrollTo(0, 0);
+		scrollView.post(new Runnable() {
+		    public void run() {
+		    	scrollView.scrollTo(0, 0);
+		    } 
+		});
+
 		setButtonVisibleAndSaveState(getTitle(itemIndex));
 	}
 
