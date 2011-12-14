@@ -9,7 +9,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -27,7 +26,7 @@ import android.widget.TextView;
 import com.cxl.guobao.R;
 import com.waps.AppConnect;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends Activity {
 	private ListView searchListView;
 	private EditText txtSearch;
 	MatchListAdapter matchListAdapter = new MatchListAdapter();
@@ -89,11 +88,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		}
 	}
 
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-
-	}
-
 	class MatchListAdapter extends BaseAdapter {
 		private MatchListAdapter() {
 		}
@@ -109,7 +103,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		public long getItemId(int paramInt) {
 			return paramInt;
 		}
+
 		InputStream assetFile = null;
+
 		public View getView(int paramInt, View paramView, ViewGroup paramViewGroup) {
 			if (paramView == null)
 				paramView = ((LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE))
@@ -120,11 +116,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 			ImageView carIcon = (ImageView) paramView.findViewById(R.id.carIcon);
 			AssetManager assets = getAssets();
-			
+
 			try {
 				// 打开指定资源对应的输入流  
 				assetFile = assets.open("image/" + carName.substring(0, carName.lastIndexOf(Separator)) + ".jpg");
-//				carIcon.setImageBitmap(BitmapFactory.decodeStream(assetFile));
+				//				carIcon.setImageBitmap(BitmapFactory.decodeStream(assetFile));
 				carIcon.setImageBitmap(BitMapUtil.adujstSizeByRate(assetFile));
 			} catch (IOException e) {
 				e.printStackTrace();

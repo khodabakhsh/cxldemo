@@ -1,9 +1,7 @@
 package com.cxl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ListManager {
 
@@ -27,8 +25,7 @@ public class ListManager {
 	}
 
 	static {
-			
-	
+
 		AllList.add("01、何尊");
 		AllList.add("02、四羊方尊");
 		AllList.add("03、针灸铜人");
@@ -96,7 +93,6 @@ public class ListManager {
 		AllList.add("65、太保鼎");
 		AllList.add("66、击鼓说唱陶俑");
 		AllList.add("67、舞马衔杯仿皮囊式银壶");
-		
-		
+
 	}
 }

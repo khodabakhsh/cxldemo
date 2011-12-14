@@ -12,13 +12,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +34,8 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 	private Button btnPrevious;
 	private Button btnNext;
 	private Button btnGetPoint;
+	private ScrollView scrollView;
+
 	InputStream assetFile = null;
 	Bitmap bitmap = null;
 	private static final String txtSuffix = ".txt";
@@ -82,8 +83,8 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		textView = (TextView) findViewById(R.id.TextView);
 		returnButton = (Button) findViewById(R.id.returnButton);
 		btnGetPoint = (Button) findViewById(R.id.OwnsButton);
+		scrollView = (ScrollView) findViewById(R.id.scrollView);
 
-		textView.setMovementMethod(ScrollingMovementMethod.getInstance());
 		returnButton.setText("返回目录");
 		btnGetPoint.setText("赚积分移除广告");
 
@@ -150,7 +151,8 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 						public void onClick(DialogInterface dialoginterface, int i) {
 						}
 					}).show();
-		} else {
+		}
+		if (hasEnoughAdPointPreferenceValue) {
 			btnGetPoint.setText("更多精品下载...");
 		}
 
@@ -178,6 +180,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 			}
 		}
 		textView.setText(getFileContent(DetailActivity.this, itemIndex));
+		scrollView.scrollTo(0, 0);
 		setButtonVisibleAndSaveState(getTitle(itemIndex));
 	}
 
