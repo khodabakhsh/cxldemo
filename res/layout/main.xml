@@ -9,9 +9,10 @@
 	<EditText android:id="@+id/txtSearch" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:layout_marginLeft="5.0px"
 		android:layout_marginRight="5.0px" android:hint="@string/str_hint"
-		android:singleLine="true" android:layout_marginTop="3dip"/>
+		android:singleLine="true" android:layout_marginTop="3dip" />
 
 	<ListView android:id="@+id/searchList" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:layout_marginBottom="2.0dip" />
+		android:layout_height="wrap_content" android:layout_marginBottom="2.0dip"
+		android:background="@drawable/bg" android:cacheColorHint="#00000000" />
 
 </LinearLayout>
