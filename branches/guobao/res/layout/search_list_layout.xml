@@ -7,7 +7,8 @@
 		xmlns:android="http://schemas.android.com/apk/res/android">
 		<TextView android:textSize="18.0sp" android:id="@+id/txtSearchEnName"
 			android:layout_width="120dip" android:layout_height="wrap_content"
-			android:layout_marginLeft="20.0px" android:layout_alignParentLeft="true" />
+			android:layout_marginLeft="20.0px" android:layout_alignParentLeft="true"
+			android:textColor="@android:color/black" />
 
 		<ImageView android:id="@+id/itemIcon" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:layout_marginLeft="3.0dip"

@@ -13,6 +13,7 @@ import android.content.DialogInterface;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -37,6 +38,8 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 	private ScrollView scrollView;
 	private LinearLayout adLinearLayout;
 
+	Handler handler = new Handler();
+
 	InputStream assetFile = null;
 	Bitmap bitmap = null;
 	private static final String txtSuffix = ".txt";
@@ -47,7 +50,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 	public static final int Max_Page_Index = ListManager.AllList.size() + Start_Page_Index - 1;//最大页索引
 
 	public static boolean hasEnoughAdPointPreferenceValue = false;
-	public static final int requireAdPoint = 400;
+	public static final int requireAdPoint = 100;
 	public static boolean hasEnoughReadPointPreferenceValue = false;
 	public static final int requireReadPoint = 400;
 	public static final int Read_Requre_Point_Page_Index = 40;
@@ -97,7 +100,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		boolean canRead = true;
 		if (!canView(Integer.parseInt(itemIndex))) {
 			canRead = false;
-			showGetPointDialog("阅读 【" + ListManager.AllList.get(Read_Requre_Point_Page_Index - Start_Page_Index)
+			showGetPointDialog("继续阅读 【" + ListManager.AllList.get(Read_Requre_Point_Page_Index - Start_Page_Index)
 					+ "】 之后的内容哦!");
 			itemIndex = "01";
 		}
@@ -126,8 +129,8 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 					String itemIndex = getModifiedPage(++Current_Page_Index);
 					changePageContent(itemIndex);
 				} else {
-					showGetPointDialog("阅读 【" + ListManager.AllList.get(Read_Requre_Point_Page_Index - Start_Page_Index)
-							+ "】 之后的内容哦!");
+					showGetPointDialog("继续阅读 【"
+							+ ListManager.AllList.get(Read_Requre_Point_Page_Index - Start_Page_Index) + "】 之后的内容哦!");
 				}
 
 			}
@@ -138,8 +141,8 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 				AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
 			}
 		});
+
 		if (canRead && !hasEnoughAdPointPreferenceValue) {
-			new AdView(this, adLinearLayout).DisplayAd(20);// 每20秒轮换一次广告；最少为20
 
 			new AlertDialog.Builder(DetailActivity.this).setIcon(R.drawable.happy2).setTitle("永久移除所有广告")
 					.setMessage("当前积分：" + currentPointTotal + "。\n只要积分满足" + requireAdPoint + "，就可以永久移除所有广告！")
@@ -156,7 +159,9 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		if (hasEnoughAdPointPreferenceValue) {
 			btnGetPoint.setText("更多精品下载...");
 		}
-
+		if (!hasEnoughAdPointPreferenceValue) {
+			new AdView(this, adLinearLayout).DisplayAd(20);// 每20秒轮换一次广告；最少为20
+		}
 	}
 
 	private void changePageContent(String itemIndex) {
@@ -251,8 +256,12 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		if (pointTotal >= requireAdPoint) {
 			hasEnoughAdPointPreferenceValue = true;
 			PreferenceUtil.setHasEnoughAdPoint(DetailActivity.this, true);
-			adLinearLayout.setVisibility(View.INVISIBLE);
-			btnGetPoint.setText("更多精品下载...");
+			handler.post(new Runnable() {
+				public void run() {
+					adLinearLayout.setVisibility(View.INVISIBLE);
+					btnGetPoint.setText("更多精品下载...");
+				}
+			});
 		}
 		if (pointTotal >= requireReadPoint) {
 			hasEnoughReadPointPreferenceValue = true;
