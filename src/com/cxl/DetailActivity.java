@@ -45,14 +45,15 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 	private static final String txtSuffix = ".txt";
 	private static final String gb2312 = "gb2312";
 
-	public static int Current_Page_Index = 1;
+	
 	public static final int Start_Page_Index = 1;//起始页索引
+	public static int Current_Page_Index = Start_Page_Index;
 	public static final int Max_Page_Index = ListManager.AllList.size() + Start_Page_Index - 1;//最大页索引
 
 	public static boolean hasEnoughAdPointPreferenceValue = false;
 	public static final int requireAdPoint = 100;
 	public static boolean hasEnoughReadPointPreferenceValue = false;
-	public static final int requireReadPoint = 400;
+	public static final int requireReadPoint = 30;
 	public static final int Read_Requre_Point_Page_Index = 40;
 
 	public static int currentPointTotal = 0;
@@ -141,7 +142,9 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 				AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
 			}
 		});
-
+		if (!hasEnoughAdPointPreferenceValue) {
+			new AdView(this, adLinearLayout).DisplayAd(20);// 每20秒轮换一次广告；最少为20
+		}
 		if (canRead && !hasEnoughAdPointPreferenceValue) {
 
 			new AlertDialog.Builder(DetailActivity.this).setIcon(R.drawable.happy2).setTitle("永久移除所有广告")
@@ -159,9 +162,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		if (hasEnoughAdPointPreferenceValue) {
 			btnGetPoint.setText("更多精品下载...");
 		}
-		if (!hasEnoughAdPointPreferenceValue) {
-			new AdView(this, adLinearLayout).DisplayAd(20);// 每20秒轮换一次广告；最少为20
-		}
+
 	}
 
 	private void changePageContent(String itemIndex) {
@@ -258,7 +259,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 			PreferenceUtil.setHasEnoughAdPoint(DetailActivity.this, true);
 			handler.post(new Runnable() {
 				public void run() {
-					adLinearLayout.setVisibility(View.INVISIBLE);
+					adLinearLayout.setVisibility(View.GONE);
 					btnGetPoint.setText("更多精品下载...");
 				}
 			});
