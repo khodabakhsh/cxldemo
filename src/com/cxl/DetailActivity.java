@@ -48,15 +48,15 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 	private static final String txt_charset = gb2312;
 
 	
-	public static final int Start_Page_Index = 1;//起始页索引
+	public static final int Start_Page_Index = 0;//起始页索引
 	public static int Current_Page_Index = Start_Page_Index;
 	public static final int Max_Page_Index = ListManager.AllList.size() + Start_Page_Index - 1;//最大页索引
 
 	public static boolean hasEnoughAdPointPreferenceValue = false;
-	public static final int requireAdPoint = 0;
+	public static final int requireAdPoint = 100;
 	public static boolean hasEnoughReadPointPreferenceValue = false;
-	public static final int requireReadPoint = 0;
-	public static final int Read_Requre_Point_Page_Index = 40;
+	public static final int requireReadPoint = 30;
+	public static final int Read_Requre_Point_Page_Index = 30;
 
 	public static int currentPointTotal = 0;
 
