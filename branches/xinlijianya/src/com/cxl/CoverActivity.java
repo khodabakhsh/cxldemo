@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.cxl.xinlijianya.R;
 import com.waps.AppConnect;
@@ -21,7 +22,7 @@ public class CoverActivity extends Activity {
 
 	@Override
 	protected void onResume() {
-		// AppConnect.getInstance(this).getPoints(this);
+		Toast.makeText(CoverActivity.this, "点击图片  开始阅读O(∩_∩)O~", Toast.LENGTH_SHORT).show();
 		super.onResume();
 	}
 
