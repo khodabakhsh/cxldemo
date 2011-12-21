@@ -33,6 +33,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 	private TextView textView;
 	Button btnPrevious;
 	Button btnNext;
+	private Button menuButton;
 
 	public static final String Txt_Charset = "utf8";
 
@@ -122,15 +123,24 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 			setPageInfo("file:///android_asset/" + Page_Prefix + Current_Page_Index + Page_Suffix,
 					PreferenceUtil.getScrollY(DetailActivity.this));
 		}
-
+		menuButton =(Button) findViewById(R.id.menuButton);
+		menuButton.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View arg0) {
+				Intent intent = new Intent();
+				intent.setClass(DetailActivity.this, MainActivity.class);
+				startActivity(intent);
+				finish();
+			}
+		});
 		Button offers = (Button) findViewById(R.id.OffersButton);
-		offers.setText("更多精品下载...");
+		offers.setText("更多下载");
 		offers.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
 				// 显示推荐安装程序（Offer）.
 				AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
 			}
 		});
+
 		if (firstComeIn) {
 			new AlertDialog.Builder(DetailActivity.this).setIcon(R.drawable.happy2).setTitle("说明")
 					.setMessage("1.按【手机菜单键(Menu)】可以选择目录。\n2.下载更多精品应用...")
