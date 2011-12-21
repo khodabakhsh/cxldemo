@@ -1,8 +1,6 @@
 package util;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
@@ -13,24 +11,22 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
-import org.jdom.output.XMLOutputter;
-
-import com.sun.org.apache.bcel.internal.classfile.Field;
 
 /**
  * JDOM 生成与解析XML文档 * 依赖jdom.jar
  */
 public class JDomDemo {
-	private static String titleFilePath = "D:\\my apk\\________other__________\\中华上下五千年\\res\\xml\\a00.xml";
-	private static String genFilePath = "D:\\my apk\\________other__________\\中华上下五千年\\res\\xml_new";
+	private static String baseFilePath = "D:\\cxl\\my apk\\__________others_________\\中华上下五千年\\res\\xml";
+	private static String titleFilePath = "D:\\cxl\\my apk\\__________others_________\\中华上下五千年\\res\\xml\\a00.xml";
+	private static String genFilePath = "D:\\cxl\\my apk\\__________others_________\\中华上下五千年\\res\\xml_new";
 	private static String suffix = ".txt";
 	private static Map<String, Integer> map = new HashMap<String, Integer>();
 	static {
 		File genFile = new File(genFilePath);
-		if(!genFile.exists()){
+		if (!genFile.exists()) {
 			genFile.mkdirs();
 		}
-		
+
 		map.put("前 　　言", 0);
 		map.put("００１　开天辟地的神话", 1);
 		map.put("００２　钻木取火的传说", 2);
@@ -297,9 +293,35 @@ public class JDomDemo {
 
 	}
 
-	public static void parseTitleXml(String fileName) {
+	
+	public static void genTitleKeyValue(String filePath) {
 		SAXBuilder builder = new SAXBuilder(false);
-		File file = new File(fileName);
+		File file = new File(filePath);
+		try {
+			Document document = builder.build(file);
+			Element root = document.getRootElement();
+			List<Element> titleList = root.getChildren("title");
+			Element element;
+			for (int i = 0; i < titleList.size(); i++) {
+				element = titleList.get(i);
+				String titleName = element.getAttributeValue("name");
+				// 前言在下面这句代码中不适用！
+				 titleName=
+				 titleName.substring(titleName.indexOf("　")+"　".length());
+				// System.out.println(" map.put(\""+titleName+"\", "+i+");");
+				System.out.println("MENU_List.add(new KeyValue(\""+i+"\", \""+i+"、"+titleName+"\"));");
+				;
+			}
+		} catch (JDOMException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void genTitleMap(String filePath) {
+		SAXBuilder builder = new SAXBuilder(false);
+		File file = new File(filePath);
 		try {
 			Document document = builder.build(file);
 			Element root = document.getRootElement();
@@ -322,9 +344,8 @@ public class JDomDemo {
 		}
 	}
 
-	public static void parseContentXml(String fileName) {
+	public static void parseContentXml(File orgFile) {
 		SAXBuilder builder = new SAXBuilder(false);
-		File orgFile = new File(fileName);
 		try {
 			Document document = builder.build(orgFile);
 			Element root = document.getRootElement();
@@ -335,12 +356,11 @@ public class JDomDemo {
 			for (int i = 0; i < titleList.size(); i++) {
 				element = titleList.get(i);
 				String titleName = element.getAttributeValue("name");
-				file = new File(genFilePath, map.get(titleName)
-						+ suffix);
-				if(!file.getParentFile().exists()){
+				file = new File(genFilePath, map.get(titleName) + suffix);
+				if (!file.getParentFile().exists()) {
 					file.getParentFile().mkdirs();
 				}
-				if(!file.exists()){
+				if (!file.exists()) {
 					file.createNewFile();
 				}
 				writer = new FileWriter(file);
@@ -356,11 +376,20 @@ public class JDomDemo {
 			e.printStackTrace();
 		}
 	}
-
-	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
-//		parseTitleXml(titleFilePath);
-		parseContentXml("D:\\my apk\\________other__________\\中华上下五千年\\res\\xml\\a01.xml");
+//				genTitleMap(titleFilePath);
+				genTitleKeyValue(titleFilePath);
+//		File baseFile = new File(baseFilePath);
+//		FileFilter filenameFilter = new FileFilter() {
+//			public boolean accept(File pathname) {
+//				return !pathname.equals("a00.xml");
+//			}
+//		};
+//		File[] fileList = baseFile.listFiles(filenameFilter);
+//		for (File file : fileList) {
+//
+//			parseContentXml(file);
+//		}
 
 	}
 }
