@@ -3,19 +3,22 @@
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent" android:background="@drawable/bg">
 
-	<RelativeLayout android:layout_width="fill_parent"
+    <LinearLayout android:layout_width="fill_parent"
 		android:id="@+id/relativeLayout" android:layout_height="wrap_content"
 		android:layout_marginTop="3.0dip" android:layout_alignParentBottom="true">
 		<Button android:id="@+id/previous" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:text="上一页"
-			android:layout_alignParentLeft="true" />
+			android:layout_weight="1"/>
+		<Button android:id="@+id/menuButton" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="目录"
+			android:textColor="@android:color/black" android:textSize="18sp" android:layout_weight="1" />
 		<Button android:id="@+id/OffersButton" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:layout_centerHorizontal="true"
-			android:textColor="@android:color/black" android:textSize="18sp" />
+			android:layout_height="wrap_content" 
+			android:textColor="@android:color/black" android:textSize="18sp" android:layout_weight="1"/>
 		<Button android:id="@+id/next" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:text="下一页"
-			android:layout_alignParentRight="true" />
-	</RelativeLayout>
+			android:layout_weight="1" />
+	</LinearLayout>
 
 	<LinearLayout android:id="@+id/AdLinearLayout"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
