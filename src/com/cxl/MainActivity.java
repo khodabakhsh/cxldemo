@@ -240,7 +240,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		});
 
 		btnGetPoint = (Button) findViewById(R.id.OffersButton);
-		btnGetPoint.setText("赚积分移除广告");
+		btnGetPoint.setText("移除广告");
 		btnGetPoint.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
 				// 显示推荐安装程序（Offer）.
