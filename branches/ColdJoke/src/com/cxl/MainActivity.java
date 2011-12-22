@@ -3,31 +3,101 @@ package com.cxl;
 import java.util.Random;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Picture;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebView.PictureListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.cxl.coldjoke.R;
 import com.waps.AdView;
 import com.waps.AppConnect;
+import com.waps.UpdatePointsNotifier;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements UpdatePointsNotifier {
 	Button btnPrevious;
 	Button btnNext;
 	private WebView mWebView;
 	private Button menuButton;
+	private Button btnGetPoint;
+	private LinearLayout adLinearLayout;
+
+	Handler handler = new Handler();
 
 	private int scrollY = 0;
 	public static int Current_Page_Value = 1;
 	public static final int Start_Page_Value = 1;
 	public static final int Page_Sum = 26;
+
+	public static boolean hasEnoughAdPointPreferenceValue = false;
+	public static final int requireAdPoint = 100;
+	public static boolean hasEnoughReadPointPreferenceValue = false;
+	public static final int requireReadPoint = 30;
+	public static final int Read_Requre_Point_Page_Index = 30;
+
+	public static int currentPointTotal = 0;
+
+	private void initRequrePointPreference() {
+		hasEnoughAdPointPreferenceValue = PreferenceUtil
+				.getHasEnoughAdPoint(MainActivity.this);
+		hasEnoughReadPointPreferenceValue = PreferenceUtil
+				.getHasEnoughReadPoint(MainActivity.this);
+	}
+
+	protected void onResume() {
+		if (!hasEnoughAdPointPreferenceValue
+				|| !hasEnoughReadPointPreferenceValue) {
+			AppConnect.getInstance(this).getPoints(this);
+		}
+		super.onResume();
+	}
+
+	/**
+	 * AppConnect.getPoints()方法的实现，必须实现
+	 * 
+	 * @param currencyName
+	 *            虚拟货币名称.
+	 * @param pointTotal
+	 *            虚拟货币余额.
+	 */
+	public void getUpdatePoints(String currencyName, int pointTotal) {
+		currentPointTotal = pointTotal;
+		if (pointTotal >= requireAdPoint) {
+			hasEnoughAdPointPreferenceValue = true;
+			PreferenceUtil.setHasEnoughAdPoint(MainActivity.this, true);
+			handler.post(new Runnable() {
+				public void run() {
+					adLinearLayout.setVisibility(View.GONE);
+					btnGetPoint.setText("更多精品下载...");
+				}
+			});
+		}
+		if (pointTotal >= requireReadPoint) {
+			hasEnoughReadPointPreferenceValue = true;
+			PreferenceUtil.setHasEnoughReadPoint(MainActivity.this, true);
+		}
+	}
+
+	/**
+	 * AppConnect.getPoints() 方法的实现，必须实现
+	 * 
+	 * @param error
+	 *            请求失败的错误信息
+	 */
+
+	public void getUpdatePointsFailed(String error) {
+		hasEnoughAdPointPreferenceValue = false;
+		hasEnoughReadPointPreferenceValue = false;
+	}
 
 	@Override
 	protected void onDestroy() {
@@ -35,11 +105,6 @@ public class MainActivity extends Activity {
 		super.onDestroy();
 	}
 
-	@Override
-	protected void onResume() {
-	
-		super.onResume();
-	}
 	class MyPictureListener implements PictureListener {
 		public void onNewPicture(WebView view, Picture arg1) {
 			// put code here that needs to run when the page has finished
@@ -48,6 +113,7 @@ public class MainActivity extends Activity {
 			mWebView.scrollTo(0, scrollY);
 		}
 	}
+
 	private static String[] moodStrings = new String[] { "^_^", "O(∩_∩)O~",
 			"(*^__^*) ……", "(～ o ～)~zZ", "(⊙o⊙)", "(⊙v⊙)", "( ⊙ o ⊙ )！",
 			"\\(^o^)/~" };
@@ -78,6 +144,7 @@ public class MainActivity extends Activity {
 		Current_Page_Value = PreferenceUtil.getCurrentPage(MainActivity.this);
 		;
 	}
+
 	protected void onPause() {
 		saveState();
 		super.onPause();
@@ -89,14 +156,34 @@ public class MainActivity extends Activity {
 		PreferenceUtil.setCurrentPage(this, Current_Page_Value);
 	}
 
+	private boolean canView(int pageIndex) {
+		if ((pageIndex >= Read_Requre_Point_Page_Index)
+				&& !hasEnoughReadPointPreferenceValue) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		initRequrePointPreference();
+		boolean canRead = true;
 		Bundle bundle = getIntent().getExtras();
 		if (bundle != null) {
 			String menu = bundle.getString("menu");
 			Current_Page_Value = Integer.parseInt(menu);
+			if (!canView(Current_Page_Value)) {
+				canRead = false;
+				showGetPointDialog("继续阅读 【"
+						+ MenuActivity.MENU_List
+								.get(Read_Requre_Point_Page_Index
+										- Start_Page_Value) + "】 之后的内容哦!");
+				Current_Page_Value = PreferenceUtil
+						.getCurrentPage(MainActivity.this);
+			}
 			PreferenceUtil
 					.setCurrentPage(MainActivity.this, Current_Page_Value);
 		}
@@ -113,13 +200,11 @@ public class MainActivity extends Activity {
 
 		mWebView.loadUrl("file:///android_asset/" + Current_Page_Value
 				+ ".html");
-		scrollY = 	PreferenceUtil.getScrollY(MainActivity.this);
+		scrollY = PreferenceUtil.getScrollY(MainActivity.this);
 
 		btnPrevious = (Button) findViewById(R.id.previous);
 		btnPrevious.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				mWebView.getSettings().setJavaScriptEnabled(true);
-				mWebView.setScrollBarStyle(0);
 				mWebView.loadUrl("file:///android_asset/"
 						+ (--Current_Page_Value) + ".html");
 				scrollY = 0;
@@ -130,14 +215,21 @@ public class MainActivity extends Activity {
 		btnNext = (Button) findViewById(R.id.next);
 		btnNext.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				mWebView.loadUrl("file:///android_asset/"
-						+ (++Current_Page_Value) + ".html");
-				scrollY = 0;
-				setButtonVisible();
 
+				if (canView(Current_Page_Value + 1)) {
+					mWebView.loadUrl("file:///android_asset/"
+							+ (++Current_Page_Value) + ".html");
+					scrollY = 0;
+					setButtonVisible();
+				} else {
+					showGetPointDialog("继续阅读 【"
+							+ MenuActivity.MENU_List
+									.get(Read_Requre_Point_Page_Index
+											- Start_Page_Value) + "】 之后的内容哦!");
+				}
 			}
 		});
-		menuButton =(Button)findViewById(R.id.menuButton);
+		menuButton = (Button) findViewById(R.id.menuButton);
 		menuButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				Intent intent = new Intent();
@@ -146,20 +238,67 @@ public class MainActivity extends Activity {
 				finish();
 			}
 		});
-		
-		
-		Button offers = (Button) findViewById(R.id.OffersButton);
-		offers.setText("更多下载");
-		offers.setOnClickListener(new Button.OnClickListener() {
+
+		btnGetPoint = (Button) findViewById(R.id.OffersButton);
+		btnGetPoint.setText("赚积分移除广告");
+		btnGetPoint.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
 				// 显示推荐安装程序（Offer）.
 				AppConnect.getInstance(MainActivity.this).showOffers(
 						MainActivity.this);
 			}
 		});
+
 		setButtonVisible();
-		LinearLayout container = (LinearLayout) findViewById(R.id.AdLinearLayout2);
-		new AdView(this, container).DisplayAd(20);// 每20秒轮换一次广告；最少为20
+		adLinearLayout = (LinearLayout) findViewById(R.id.AdLinearLayout2);
+
+		if (!hasEnoughAdPointPreferenceValue) {
+			new AdView(this, adLinearLayout).DisplayAd(20);// 每20秒轮换一次广告；最少为20
+		}
+		if (canRead && !hasEnoughAdPointPreferenceValue) {
+
+			new AlertDialog.Builder(MainActivity.this)
+					.setIcon(R.drawable.happy2)
+					.setTitle("永久移除所有广告")
+					.setMessage(
+							"当前积分：" + currentPointTotal + "。\n只要积分满足"
+									+ requireAdPoint + "，就可以永久移除所有广告！")
+					.setPositiveButton("免费获得积分",
+							new DialogInterface.OnClickListener() {
+								public void onClick(
+										DialogInterface dialoginterface, int i) {
+									// 显示推荐安装程序（Offer）.
+									AppConnect.getInstance(MainActivity.this)
+											.showOffers(MainActivity.this);
+								}
+							})
+					.setNegativeButton("取消",
+							new DialogInterface.OnClickListener() {
+								public void onClick(
+										DialogInterface dialoginterface, int i) {
+								}
+							}).show();
+		}
+		if (hasEnoughAdPointPreferenceValue) {
+			btnGetPoint.setText("更多精品下载...");
+		}
+
+	}
+
+	private void showGetPointDialog(String type) {
+		new AlertDialog.Builder(MainActivity.this)
+				.setIcon(R.drawable.happy2)
+				.setTitle("当前积分：" + currentPointTotal)
+				.setMessage("只要积分满足" + requireReadPoint + "，就可以" + type)
+				.setPositiveButton("免费获得积分",
+						new DialogInterface.OnClickListener() {
+							public void onClick(
+									DialogInterface dialoginterface, int i) {
+								// 显示推荐安装程序（Offer）.
+								AppConnect.getInstance(MainActivity.this)
+										.showOffers(MainActivity.this);
+							}
+						}).show();
 	}
 
 }
