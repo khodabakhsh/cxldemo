@@ -13,6 +13,8 @@
 		</activity>
 		<activity android:name="com.cxl.DetailActivity">
 		</activity>
+		<activity android:name="com.cxl.MenuActivity">
+		</activity>
 		<activity android:name="com.waps.OffersWebView"
 			android:configChanges="keyboardHidden|orientation" />
 		<meta-data android:name="WAPS_ID" android:value="367ee785b8dabb2a47ad7f776e496bc8" />
