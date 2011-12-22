@@ -18,7 +18,7 @@ public class MenuActivity extends Activity {
 	ArrayAdapter<KeyValue> menuAdapter;
 	public static final ArrayList<KeyValue> MENU_List = new ArrayList<KeyValue>();
 	static {
-		for(int i=1;i<MainActivity.Page_Sum;i++){
+		for(int i=1;i<=MainActivity.Page_Sum;i++){
 			MENU_List.add(new KeyValue(String.valueOf(i), "第"+i+"页"));
 		}
 		
