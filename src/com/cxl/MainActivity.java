@@ -157,11 +157,7 @@ public class MainActivity extends Activity {
 						MainActivity.this);
 			}
 		});
-//		mWebView.post(new Runnable() {
-//			public void run() {
-		
-//			}
-//		});
+		setButtonVisible();
 		LinearLayout container = (LinearLayout) findViewById(R.id.AdLinearLayout2);
 		new AdView(this, container).DisplayAd(20);// 每20秒轮换一次广告；最少为20
 	}
