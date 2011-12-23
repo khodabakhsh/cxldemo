@@ -17,32 +17,35 @@
 					android:layout_marginTop="8.0dip">
 					<Button android:id="@+id/btnXingge" android:background="@drawable/btn_selector"
 						android:layout_width="95.0dip" android:layout_height="95.0dip"
-						android:text="性格测试" android:drawableTop="@drawable/xingge" />
+						android:text="性格测试" android:drawableTop="@drawable/xingge"
+						android:textSize="18sp" />
 					<Button android:id="@+id/btnQinggan" android:background="@drawable/btn_selector"
 						android:layout_width="95.0dip" android:layout_height="95.0dip"
 						android:layout_marginLeft="8.0dip" android:text="情感测试"
-						android:drawableTop="@drawable/qinggan" />
+						android:drawableTop="@drawable/qinggan" android:textSize="18sp" />
 				</TableRow>
 				<TableRow android:gravity="center_vertical"
 					android:layout_width="wrap_content" android:layout_height="wrap_content"
 					android:layout_marginTop="8.0dip">
 					<Button android:id="@+id/btnChenggong" android:background="@drawable/btn_selector"
 						android:layout_width="95.0dip" android:layout_height="95.0dip"
-						android:text="事业测试" android:drawableTop="@drawable/chenggon" />
+						android:text="事业测试" android:drawableTop="@drawable/chenggon"
+						android:textSize="18sp" />
 					<Button android:id="@+id/btnLinglei" android:background="@drawable/btn_selector"
 						android:layout_width="95.0dip" android:layout_height="95.0dip"
 						android:layout_marginLeft="8.0dip" android:text="另类测试"
-						android:drawableTop="@drawable/linglei" />
+						android:drawableTop="@drawable/linglei" android:textSize="18sp" />
 				</TableRow>
 			</TableLayout>
 			<TextView android:textColor="#ee432104" android:id="@+id/textViewTips"
 				android:background="@drawable/text_corner" android:layout_width="fill_parent"
 				android:layout_height="wrap_content" android:layout_marginLeft="2.0dip"
 				android:layout_marginTop="8.0dip" android:layout_marginRight="2.0dip"
+				android:textSize="18sp"
 				android:text="心理学家认为,只要对心理测试给予有见地的解释,它们真能预测人们从事各种技能的实际本领。 心理测试（Psychological Test）的广泛使用始于1914~1918年的世界大战期间。当时英军、美军都需要一种快捷的方法来分出哪些新兵具有战斗力,哪些需要大量训练,又有哪些对自己部队比对敌军更具威胁。军队必须筛出那些无用之才。" />
 			<LinearLayout android:id="@+id/AdLinearLayout2"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"
-				android:gravity="center_horizontal" android:paddingTop="8dip"/>
+				android:gravity="center_horizontal" android:paddingTop="8dip" />
 		</LinearLayout>
 	</ScrollView>
 </LinearLayout>
