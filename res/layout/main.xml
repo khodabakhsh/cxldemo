@@ -43,9 +43,6 @@
 				android:layout_marginTop="8.0dip" android:layout_marginRight="2.0dip"
 				android:textSize="18sp"
 				android:text="心理学家认为,只要对心理测试给予有见地的解释,它们真能预测人们从事各种技能的实际本领。 心理测试（Psychological Test）的广泛使用始于1914~1918年的世界大战期间。当时英军、美军都需要一种快捷的方法来分出哪些新兵具有战斗力,哪些需要大量训练,又有哪些对自己部队比对敌军更具威胁。军队必须筛出那些无用之才。" />
-			<LinearLayout android:id="@+id/AdLinearLayout2"
-				android:layout_width="fill_parent" android:layout_height="wrap_content"
-				android:gravity="center_horizontal" android:paddingTop="8dip" />
 		</LinearLayout>
 	</ScrollView>
 </LinearLayout>
