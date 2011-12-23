@@ -15,7 +15,6 @@ import android.webkit.WebView;
 import android.webkit.WebView.PictureListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.cxl.coldjoke.R;
@@ -42,20 +41,17 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 	public static final int requireAdPoint = 100;
 	public static boolean hasEnoughReadPointPreferenceValue = false;
 	public static final int requireReadPoint = 30;
-	public static final int Read_Requre_Point_Page_Index = 30;
+	public static final int Read_Requre_Point_Page_Index = 10;
 
 	public static int currentPointTotal = 0;
 
 	private void initRequrePointPreference() {
-		hasEnoughAdPointPreferenceValue = PreferenceUtil
-				.getHasEnoughAdPoint(MainActivity.this);
-		hasEnoughReadPointPreferenceValue = PreferenceUtil
-				.getHasEnoughReadPoint(MainActivity.this);
+		hasEnoughAdPointPreferenceValue = PreferenceUtil.getHasEnoughAdPoint(MainActivity.this);
+		hasEnoughReadPointPreferenceValue = PreferenceUtil.getHasEnoughReadPoint(MainActivity.this);
 	}
 
 	protected void onResume() {
-		if (!hasEnoughAdPointPreferenceValue
-				|| !hasEnoughReadPointPreferenceValue) {
+		if (!hasEnoughAdPointPreferenceValue || !hasEnoughReadPointPreferenceValue) {
 			AppConnect.getInstance(this).getPoints(this);
 		}
 		super.onResume();
@@ -77,7 +73,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 			handler.post(new Runnable() {
 				public void run() {
 					adLinearLayout.setVisibility(View.GONE);
-					btnGetPoint.setText("更多精品下载...");
+					btnGetPoint.setText("更多下载");
 				}
 			});
 		}
@@ -114,25 +110,21 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		}
 	}
 
-	private static String[] moodStrings = new String[] { "^_^", "O(∩_∩)O~",
-			"(*^__^*) ……", "(～ o ～)~zZ", "(⊙o⊙)", "(⊙v⊙)", "( ⊙ o ⊙ )！",
-			"\\(^o^)/~" };
+	private static String[] moodStrings = new String[] { "^_^", "O(∩_∩)O~", "(*^__^*) ……", "(～ o ～)~zZ", "(⊙o⊙)",
+			"(⊙v⊙)", "( ⊙ o ⊙ )！", "\\(^o^)/~" };
 
 	private void setButtonVisible() {
 
-		setTitle("第【" + Current_Page_Value + "】页         "
-				+ moodStrings[new Random().nextInt(moodStrings.length)]);
+		setTitle("第【" + Current_Page_Value + "】页         " + moodStrings[new Random().nextInt(moodStrings.length)]);
 		if (Current_Page_Value == 1) {
-			Toast.makeText(this, "第一页哦 ，开始愉快之旅 ！ \\(^o^)/~", Toast.LENGTH_LONG)
-					.show();
+			Toast.makeText(this, "第一页哦 ，开始愉快之旅 ！ \\(^o^)/~", Toast.LENGTH_LONG).show();
 			btnPrevious.setVisibility(View.INVISIBLE);
 		} else {
 			btnPrevious.setVisibility(View.VISIBLE);
 		}
 		if (Current_Page_Value == Page_Sum) {
 			btnNext.setVisibility(View.INVISIBLE);
-			Toast.makeText(this, "最后一页了哦 ，祝您天天好心情哦 ！ (*^__^*) ……哈哈~",
-					Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "最后一页了哦 ，祝您天天好心情哦 ！ (*^__^*) ……哈哈~", Toast.LENGTH_LONG).show();
 		} else {
 			btnNext.setVisibility(View.VISIBLE);
 		}
@@ -140,9 +132,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 	}
 
 	private void initCurrentPagePreference() {
-
 		Current_Page_Value = PreferenceUtil.getCurrentPage(MainActivity.this);
-		;
 	}
 
 	protected void onPause() {
@@ -157,8 +147,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 	}
 
 	private boolean canView(int pageIndex) {
-		if ((pageIndex >= Read_Requre_Point_Page_Index)
-				&& !hasEnoughReadPointPreferenceValue) {
+		if ((pageIndex >= Read_Requre_Point_Page_Index) && !hasEnoughReadPointPreferenceValue) {
 			return false;
 		} else {
 			return true;
@@ -178,14 +167,10 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 			if (!canView(Current_Page_Value)) {
 				canRead = false;
 				showGetPointDialog("继续阅读 【"
-						+ MenuActivity.MENU_List
-								.get(Read_Requre_Point_Page_Index
-										- Start_Page_Value) + "】 之后的内容哦!");
-				Current_Page_Value = PreferenceUtil
-						.getCurrentPage(MainActivity.this);
+						+ MenuActivity.MENU_List.get(Read_Requre_Point_Page_Index - Start_Page_Value) + "】 之后的内容哦!");
+				Current_Page_Value = PreferenceUtil.getCurrentPage(MainActivity.this);
 			}
-			PreferenceUtil
-					.setCurrentPage(MainActivity.this, Current_Page_Value);
+			PreferenceUtil.setCurrentPage(MainActivity.this, Current_Page_Value);
 		}
 
 		initCurrentPagePreference();
@@ -198,15 +183,13 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		mWebView.getSettings().setDefaultFontSize(18);
 		mWebView.setBackgroundColor(Color.argb(0, 0, 0, 0));
 
-		mWebView.loadUrl("file:///android_asset/" + Current_Page_Value
-				+ ".html");
+		mWebView.loadUrl("file:///android_asset/" + Current_Page_Value + ".html");
 		scrollY = PreferenceUtil.getScrollY(MainActivity.this);
 
 		btnPrevious = (Button) findViewById(R.id.previous);
 		btnPrevious.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				mWebView.loadUrl("file:///android_asset/"
-						+ (--Current_Page_Value) + ".html");
+				mWebView.loadUrl("file:///android_asset/" + (--Current_Page_Value) + ".html");
 				scrollY = 0;
 				setButtonVisible();
 
@@ -217,15 +200,12 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 			public void onClick(View v) {
 
 				if (canView(Current_Page_Value + 1)) {
-					mWebView.loadUrl("file:///android_asset/"
-							+ (++Current_Page_Value) + ".html");
+					mWebView.loadUrl("file:///android_asset/" + (++Current_Page_Value) + ".html");
 					scrollY = 0;
 					setButtonVisible();
 				} else {
 					showGetPointDialog("继续阅读 【"
-							+ MenuActivity.MENU_List
-									.get(Read_Requre_Point_Page_Index
-											- Start_Page_Value) + "】 之后的内容哦!");
+							+ MenuActivity.MENU_List.get(Read_Requre_Point_Page_Index - Start_Page_Value) + "】 之后的内容哦!");
 				}
 			}
 		});
@@ -244,8 +224,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		btnGetPoint.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
 				// 显示推荐安装程序（Offer）.
-				AppConnect.getInstance(MainActivity.this).showOffers(
-						MainActivity.this);
+				AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
 			}
 		});
 
@@ -257,48 +236,33 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		}
 		if (canRead && !hasEnoughAdPointPreferenceValue) {
 
-			new AlertDialog.Builder(MainActivity.this)
-					.setIcon(R.drawable.happy2)
-					.setTitle("永久移除所有广告")
-					.setMessage(
-							"当前积分：" + currentPointTotal + "。\n只要积分满足"
-									+ requireAdPoint + "，就可以永久移除所有广告！")
-					.setPositiveButton("免费获得积分",
-							new DialogInterface.OnClickListener() {
-								public void onClick(
-										DialogInterface dialoginterface, int i) {
-									// 显示推荐安装程序（Offer）.
-									AppConnect.getInstance(MainActivity.this)
-											.showOffers(MainActivity.this);
-								}
-							})
-					.setNegativeButton("取消",
-							new DialogInterface.OnClickListener() {
-								public void onClick(
-										DialogInterface dialoginterface, int i) {
-								}
-							}).show();
+			new AlertDialog.Builder(MainActivity.this).setIcon(R.drawable.happy2).setTitle("永久移除所有广告")
+					.setMessage("当前积分：" + currentPointTotal + "。\n只要积分满足" + requireAdPoint + "，就可以永久移除所有广告！")
+					.setPositiveButton("免费获得积分", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialoginterface, int i) {
+							// 显示推荐安装程序（Offer）.
+							AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
+						}
+					}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialoginterface, int i) {
+						}
+					}).show();
 		}
 		if (hasEnoughAdPointPreferenceValue) {
-			btnGetPoint.setText("更多精品下载...");
+			btnGetPoint.setText("更多下载");
 		}
 
 	}
 
 	private void showGetPointDialog(String type) {
-		new AlertDialog.Builder(MainActivity.this)
-				.setIcon(R.drawable.happy2)
-				.setTitle("当前积分：" + currentPointTotal)
+		new AlertDialog.Builder(MainActivity.this).setIcon(R.drawable.happy2).setTitle("当前积分：" + currentPointTotal)
 				.setMessage("只要积分满足" + requireReadPoint + "，就可以" + type)
-				.setPositiveButton("免费获得积分",
-						new DialogInterface.OnClickListener() {
-							public void onClick(
-									DialogInterface dialoginterface, int i) {
-								// 显示推荐安装程序（Offer）.
-								AppConnect.getInstance(MainActivity.this)
-										.showOffers(MainActivity.this);
-							}
-						}).show();
+				.setPositiveButton("免费获得积分", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialoginterface, int i) {
+						// 显示推荐安装程序（Offer）.
+						AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
+					}
+				}).show();
 	}
 
 }
