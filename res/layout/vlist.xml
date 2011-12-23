@@ -21,11 +21,4 @@
 			android:textSize="15px" android:visibility="gone" />
 
 	</LinearLayout>
-	<!-- 
-	<Button android:id="@+id/OwnsButton" android:text="更多免费应用..."
-		android:layout_height="wrap_content" android:layout_width="fill_parent"
-		android:visibility="visible" />
-	<Button android:id="@+id/OffersButton" android:visibility="visible"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:text="其他推荐的免费应用..." /> -->
 </LinearLayout>

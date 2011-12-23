@@ -6,16 +6,16 @@
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:gravity="center_horizontal" />
 	<RelativeLayout android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:layout_margin="8.0dip">
+		android:layout_height="wrap_content" android:layout_margin="4.0dip">
 
 		<Button android:id="@+id/OwnsButton" android:text="更多精品下载..."
 			android:layout_height="wrap_content" android:layout_width="wrap_content"
 			android:visibility="visible" android:layout_alignParentLeft="true"
-			android:background="@drawable/an" />
-		<Button android:id="@+id/returnButton" android:text="返回"
+			android:textSize="18sp" android:layout_weight="1" />
+		<Button android:id="@+id/returnButton" android:text="    返回     "
 			android:layout_height="wrap_content" android:layout_width="wrap_content"
 			android:visibility="visible" android:layout_alignParentRight="true"
-			android:background="@drawable/an" />
+			android:textSize="18sp" android:layout_weight="1" />
 	</RelativeLayout>
 
 
