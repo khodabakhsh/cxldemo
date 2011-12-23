@@ -143,8 +143,6 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 				startActivity(intent);
 			}
 		});
-		LinearLayout container = (LinearLayout) findViewById(R.id.AdLinearLayout2);
-		new AdView(this, container).DisplayAd(20);// 每20秒轮换一次广告；最少为20
 	}
 
 }
