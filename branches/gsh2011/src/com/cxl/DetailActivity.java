@@ -36,6 +36,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 
 	Button btnPrevious;
 	Button btnNext;
+	Button menuButton;
 
 	public static final int Requre_Point_Page_Index = 41;//需要积分才能查看的页面
 	public static int Current_Page_Index = 1;
@@ -99,7 +100,8 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		Bundle bundle = getIntent().getExtras();
 		webView = (WebView) findViewById(R.id.webView);
 		webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-		webView.getSettings().setDefaultFixedFontSize(16);
+		webView.getSettings().setDefaultFixedFontSize(18);
+		webView.getSettings().setDefaultFontSize(18);
 
 		webView.setPictureListener(new MyPictureListener());
 
@@ -130,7 +132,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		setButtonVisibleAndSaveState();
 
 		Button offers = (Button) findViewById(R.id.OffersButton);
-		offers.setText("更多免费精品下载...");
+		offers.setText("更多精品下载");
 		offers.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
 				// 显示推荐安装程序（Offer）.
@@ -153,6 +155,16 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 
 		LinearLayout container = (LinearLayout) findViewById(R.id.AdLinearLayout);
 		new AdView(this, container).DisplayAd(20);// 每20秒轮换一次广告；最少为20
+		
+		menuButton = (Button) findViewById(R.id.menuButton);
+		menuButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(DetailActivity.this, MainActivity.class);
+				startActivity(intent);
+				finish();
+			}
+		});
 
 	}
 
