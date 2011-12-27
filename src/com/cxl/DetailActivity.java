@@ -69,9 +69,6 @@ public class DetailActivity extends Activity {
 			e.printStackTrace();
 		}
 
-		if (!MainActivity.hasEnoughRequrePoint) {// 没达到积分
-													// showDialog();
-		}
 
 		returnButton = (Button) findViewById(R.id.returnButton);
 

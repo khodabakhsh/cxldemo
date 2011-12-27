@@ -48,10 +48,6 @@ public class SubMenuActivity extends Activity {
 			}
 		});
 
-		if (!MainActivity.hasEnoughRequrePoint) {// 没达到积分
-													//			showDialog();
-		}
-
 		returnButton = (Button) findViewById(R.id.returnButton);
 
 		returnButton.setOnClickListener(new Button.OnClickListener() {

@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,8 +28,7 @@ import com.waps.AdView;
 import com.waps.AppConnect;
 import com.waps.UpdatePointsNotifier;
 
-public class MainActivity extends TabActivity implements
-		TabHost.OnTabChangeListener,  UpdatePointsNotifier {
+public class MainActivity extends TabActivity implements TabHost.OnTabChangeListener, UpdatePointsNotifier {
 	TabHost tabHost;
 	private ListView firstMenuListView;
 	private ListView favoriteListView;
@@ -36,23 +36,22 @@ public class MainActivity extends TabActivity implements
 	private ArrayAdapter<String> firstMenuAdapter;
 	public static List<KeyValue> favoriteList = new ArrayList<KeyValue>();
 
-	public static int currentPointTotal = 0;// 当前积分
-	public static final int requirePoint = 50;// 要求积分
-	public static boolean hasEnoughRequrePoint = false;// 是否达到积分
-	public static final String hasEnoughRequrePointPreferenceKey = "hasEnoughRequrePointPreferenceKey";
-	public static boolean hasEnoughRequrePointPreferenceValue = false;// 保存在配置里
+	Handler handler = new Handler();
 
-	@Override
-	protected void onDestroy() {
-		AppConnect.getInstance(this).finalize();
-		super.onDestroy();
+	public static boolean hasEnoughReadPointPreferenceValue = false;
+	public static final int requireReadPoint = 30;
+
+	public static int currentPointTotal = 0;
+
+	private void initRequrePointPreference() {
+		hasEnoughReadPointPreferenceValue = PreferenceUtil.getHasEnoughReadPoint(MainActivity.this);
 	}
 
-	@Override
 	protected void onResume() {
 		favoriteListAdapter.notifyDataSetChanged();
-		initRequrePointPreference();
-		AppConnect.getInstance(this).getPoints(this);
+		if (!hasEnoughReadPointPreferenceValue) {
+			AppConnect.getInstance(this).getPoints(this);
+		}
 		super.onResume();
 	}
 
@@ -65,18 +64,11 @@ public class MainActivity extends TabActivity implements
 	 *            虚拟货币余额.
 	 */
 	public void getUpdatePoints(String currencyName, int pointTotal) {
-
 		currentPointTotal = pointTotal;
-		if (currentPointTotal >= requirePoint) {
-			hasEnoughRequrePoint = true;
-			if (!hasEnoughRequrePointPreferenceValue) {
-				hasEnoughRequrePointPreferenceValue = true;
-				SharedPreferences mPerferences = PreferenceManager
-						.getDefaultSharedPreferences(MainActivity.this);
-				SharedPreferences.Editor mEditor = mPerferences.edit();
-				mEditor.putBoolean(hasEnoughRequrePointPreferenceKey, true);
-				mEditor.commit();
-			}
+
+		if (pointTotal >= requireReadPoint) {
+			hasEnoughReadPointPreferenceValue = true;
+			PreferenceUtil.setHasEnoughReadPoint(MainActivity.this, true);
 		}
 	}
 
@@ -88,71 +80,83 @@ public class MainActivity extends TabActivity implements
 	 */
 
 	public void getUpdatePointsFailed(String error) {
-		currentPointTotal = 0;
+		hasEnoughReadPointPreferenceValue = false;
 	}
 
-	private void initRequrePointPreference() {
-		SharedPreferences mPerferences = PreferenceManager
-				.getDefaultSharedPreferences(MainActivity.this);
-		hasEnoughRequrePointPreferenceValue = mPerferences.getBoolean(
-				hasEnoughRequrePointPreferenceKey, false);
+	@Override
+	protected void onDestroy() {
+		AppConnect.getInstance(this).finalize();
+		super.onDestroy();
+	}
+
+	private void showGetPointDialog(String type) {
+		new AlertDialog.Builder(MainActivity.this).setIcon(R.drawable.happy2).setTitle("当前积分：" + currentPointTotal)
+				.setMessage("只要积分满足" + requireReadPoint + "，就可以" + type)
+				.setPositiveButton("免费获得积分", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialoginterface, int i) {
+						// 显示推荐安装程序（Offer）.
+						AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
+					}
+				}).show();
 	}
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// 连接服务器. 应用启动时调用(为了统计准确性，此句必须填写).
 		AppConnect.getInstance(this);
+
+		initRequrePointPreference();
+
 		this.tabHost = getTabHost();
 		FrameLayout localFrameLayout = this.tabHost.getTabContentView();
-		LayoutInflater.from(this)
-				.inflate(R.layout.main, localFrameLayout, true);
+		LayoutInflater.from(this).inflate(R.layout.main, localFrameLayout, true);
 		TabHost.TabSpec oneTabSpec = this.tabHost.newTabSpec("One")
-				.setIndicator("", getResources().getDrawable(R.drawable.about))
-				.setContent(R.id.widget_layout_sort);
+				.setIndicator("", getResources().getDrawable(R.drawable.about)).setContent(R.id.widget_layout_sort);
 		((TabHost) tabHost).addTab(oneTabSpec);
-		TabHost.TabSpec twoTabSpec = this.tabHost
-				.newTabSpec("Two")
-				.setIndicator("", getResources().getDrawable(R.drawable.search))
-				.setContent(R.id.widget_layout_search);
+		TabHost.TabSpec twoTabSpec = this.tabHost.newTabSpec("Two")
+				.setIndicator("", getResources().getDrawable(R.drawable.search)).setContent(R.id.widget_layout_search);
 		((TabHost) tabHost).addTab(twoTabSpec);
-		TabHost.TabSpec threeTabSpec = this.tabHost
-				.newTabSpec("Three")
-				.setIndicator("",
-						getResources().getDrawable(R.drawable.favorite))
-				.setContent(R.id.widget_layout_point);
+		TabHost.TabSpec threeTabSpec = this.tabHost.newTabSpec("Three")
+				.setIndicator("", getResources().getDrawable(R.drawable.favorite)).setContent(R.id.widget_layout_point);
 		((TabHost) tabHost).addTab(threeTabSpec);
 		this.tabHost.setOnTabChangedListener(this);
 		tabHost.setCurrentTab(1);
 
 		firstMenuListView = (ListView) findViewById(R.id.searchList);
-		firstMenuAdapter = new ArrayAdapter<String>(this,
-				 R.layout.simple_list_layout, R.id.txtListItem, 
+		firstMenuAdapter = new ArrayAdapter<String>(this, R.layout.simple_list_layout, R.id.txtListItem,
 				ListManager.First_Menu_List);
 		firstMenuListView.setAdapter(firstMenuAdapter);
 		firstMenuListView.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
-					long id) {
-				String menu = (String) arg0.getItemAtPosition(pos);
-				Intent intent = new Intent();
-				intent.setClass(MainActivity.this, SubMenuActivity.class);
-				Bundle bundle = new Bundle();
-				bundle.putString("menu", menu);
-				intent.putExtras(bundle);
-				startActivity(intent);
+			public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
+				final String menu = (String) arg0.getItemAtPosition(pos);
+				if (("第五篇、保险".equals(menu)||"第六篇、其他补充资料".equals(menu))&&!hasEnoughReadPointPreferenceValue) {
+					
+					handler.post(new Runnable() {
+						public void run() {
+							showGetPointDialog("阅读【  "+menu+"】");
+						}
+					});
+				} else {
+					Intent intent = new Intent();
+					intent.setClass(MainActivity.this, SubMenuActivity.class);
+					Bundle bundle = new Bundle();
+					bundle.putString("menu", menu);
+					intent.putExtras(bundle);
+					startActivity(intent);
+				}
+
 			}
 		});
 
 		initFavorites();
 		favoriteListView = (ListView) findViewById(R.id.favoriteList);
-		favoriteListAdapter = new ArrayAdapter<KeyValue>(this,
-				 R.layout.simple_list_layout, R.id.txtListItem,  favoriteList);
+		favoriteListAdapter = new ArrayAdapter<KeyValue>(this, R.layout.simple_list_layout, R.id.txtListItem,
+				favoriteList);
 		favoriteListView.setAdapter(favoriteListAdapter);
 
 		favoriteListView.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
-					long id) {
-				KeyValue subMenuAndFileName = (KeyValue) arg0
-						.getItemAtPosition(pos);
+			public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
+				KeyValue subMenuAndFileName = (KeyValue) arg0.getItemAtPosition(pos);
 				Intent intent = new Intent();
 
 				intent.setClass(MainActivity.this, DetailActivity.class);
@@ -169,31 +173,22 @@ public class MainActivity extends TabActivity implements
 		clearFavorite.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
-				new AlertDialog.Builder(MainActivity.this)
-						.setMessage("确定清空收藏？")
-						.setPositiveButton("确定",
-								new DialogInterface.OnClickListener() {
-									public void onClick(
-											DialogInterface dialoginterface,
-											int i) {
-										SharedPreferences mPerferences = PreferenceManager
-												.getDefaultSharedPreferences(MainActivity.this);
-										SharedPreferences.Editor mEditor = mPerferences
-												.edit();
-										mEditor.putString(DetailActivity.Favorite_Key, "");
-										mEditor.commit();
-										favoriteList.clear();
-										favoriteListAdapter
-												.notifyDataSetChanged();
-									}
-								})
-						.setNegativeButton("取消",
-								new DialogInterface.OnClickListener() {
+				new AlertDialog.Builder(MainActivity.this).setMessage("确定清空收藏？")
+						.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialoginterface, int i) {
+								SharedPreferences mPerferences = PreferenceManager
+										.getDefaultSharedPreferences(MainActivity.this);
+								SharedPreferences.Editor mEditor = mPerferences.edit();
+								mEditor.putString(DetailActivity.Favorite_Key, "");
+								mEditor.commit();
+								favoriteList.clear();
+								favoriteListAdapter.notifyDataSetChanged();
+							}
+						}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
-									public void onClick(DialogInterface dialog,
-											int which) {
-									}
-								}).show();
+							public void onClick(DialogInterface dialog, int which) {
+							}
+						}).show();
 			}
 		});
 
@@ -213,51 +208,17 @@ public class MainActivity extends TabActivity implements
 	}
 
 	private void initFavorites() {
-		SharedPreferences mPerferences = PreferenceManager
-				.getDefaultSharedPreferences(MainActivity.this);
-		String myFavorite = mPerferences.getString(DetailActivity.Favorite_Key,
-				"");
+		SharedPreferences mPerferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+		String myFavorite = mPerferences.getString(DetailActivity.Favorite_Key, "");
 		if ("".equals(myFavorite)) {
 			return;
 		}
-		String[] splitStrings = myFavorite
-				.split(DetailActivity.Favorite_Item_Split);
+		String[] splitStrings = myFavorite.split(DetailActivity.Favorite_Item_Split);
 		favoriteList.clear();
 		for (String itemString : splitStrings) {
-			favoriteList.add(new KeyValue(itemString
-					.split(DetailActivity.Item_Key_Value_Split)[0], itemString
+			favoriteList.add(new KeyValue(itemString.split(DetailActivity.Item_Key_Value_Split)[0], itemString
 					.split(DetailActivity.Item_Key_Value_Split)[1]));
 		}
-	}
-
-
-	private void showDialog() {
-		new AlertDialog.Builder(MainActivity.this)
-				.setIcon(R.drawable.happy2)
-				.setTitle("当前积分：" + MainActivity.currentPointTotal)
-				.setMessage(
-						"只要积分满足"
-								+ MainActivity.requirePoint
-								+ "，就可以使用收藏功能！！ 您当前的积分不足"
-								+ MainActivity.requirePoint
-								+ "，暂时不能使用收藏功能。\n\n【免费获得积分方法】：请点击【确认键】进入推荐下载列表 , 【下载、安装并打开】软件获得相应积分，破解收藏功能！！")
-				.setPositiveButton("【确认】",
-						new DialogInterface.OnClickListener() {
-							public void onClick(
-									DialogInterface dialoginterface, int i) {
-								// 显示推荐安装程序（Offer）.
-								AppConnect.getInstance(MainActivity.this)
-										.showOffers(MainActivity.this);
-							}
-						})
-				.setNegativeButton("【取消】",
-						new DialogInterface.OnClickListener() {
-
-							public void onClick(DialogInterface dialog,
-									int which) {
-								// finish();
-							}
-						}).show();
 	}
 
 }
