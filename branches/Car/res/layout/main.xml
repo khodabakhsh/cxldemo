@@ -1,47 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<FrameLayout android:layout_width="fill_parent"
-	android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
-	<LinearLayout android:orientation="vertical"
-		android:id="@+id/widget_layout_sort" android:layout_width="fill_parent"
-		android:layout_height="fill_parent" android:paddingTop="20dip">
-		<Button android:id="@+id/OwnsButton" android:text="更多精品下载..."
-			android:layout_height="wrap_content" android:layout_width="fill_parent"
-			android:visibility="visible"  android:layout_marginBottom="10.0dip"/>
 
-		<ImageView android:id="@+id/happy" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:background="@drawable/happy"
-			android:layout_gravity="center" android:layout_marginBottom="10.0dip"/>
-			
-			<TextView  android:text="祝您天天好心情，(*^__^*) 嘻嘻……"
-			android:layout_height="wrap_content" android:layout_width="fill_parent"
-			 android:layout_margin="10.0dip" android:textColor="#FF69B4"/>
-	</LinearLayout>
+<LinearLayout android:orientation="vertical"
+	xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/widget_layout_search"
+	android:layout_width="fill_parent" android:layout_height="fill_parent">
+	<LinearLayout android:focusable="true"
+		android:focusableInTouchMode="true" android:layout_height="0px"
+		android:layout_width="0px" />
+	<EditText android:id="@+id/txtSearch" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_marginLeft="5.0px"
+		android:layout_marginRight="5.0px" android:hint="@string/str_hint"
+		android:singleLine="true" android:layout_marginTop="3dip" />
 
-	<LinearLayout android:orientation="vertical"
-		android:id="@+id/widget_layout_search" android:layout_width="fill_parent"
-		android:layout_height="fill_parent">
-		<EditText android:id="@+id/txtSearch" android:layout_width="fill_parent"
-			android:layout_height="wrap_content" android:layout_marginLeft="5.0px"
-			android:layout_marginRight="5.0px" android:hint="@string/str_hint"
-			android:singleLine="true" />
+	<ListView android:id="@+id/searchList" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_marginBottom="2.0dip"
+		android:background="@drawable/bg" android:cacheColorHint="#00000000" />
 
-		<ListView android:id="@+id/searchList" android:layout_width="fill_parent"
-			android:layout_height="wrap_content" android:layout_marginBottom="2.0dip" />
-
-
-	</LinearLayout>
-
-	<RelativeLayout android:orientation="vertical"
-		android:id="@+id/widget_layout_point" android:layout_width="fill_parent"
-		android:layout_height="fill_parent">
-		<Button android:id="@+id/clearFavorite" android:layout_width="fill_parent"
-			android:layout_height="wrap_content" android:text="清空收藏" />
-		<ListView android:id="@+id/favoriteList"
-			android:layout_width="fill_parent" android:layout_height="wrap_content"
-			android:layout_below="@id/clearFavorite" android:layout_marginBottom="10.0dip" />
-
-	</RelativeLayout>
-	<!-- <LinearLayout android:gravity="bottom" android:orientation="vertical" 
-		android:id="@+id/AdLinearLayout" android:layout_width="fill_parent" android:layout_height="fill_parent" 
-		/> -->
-</FrameLayout>
+</LinearLayout>

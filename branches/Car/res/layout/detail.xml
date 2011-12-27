@@ -1,38 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
+	android:layout_height="fill_parent" android:layout_margin="3.0dip">
 
-	<TableLayout android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:layout_margin="10.0dip"
-		android:id="@+id/tableLayout" android:layout_alignParentTop="true">
-		<TableRow android:layout_width="fill_parent"
-			android:layout_height="wrap_content">
-			<Button android:id="@+id/OwnsButton" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:text="更多精品下载..." />
+	<RelativeLayout android:id="@+id/pageLayout"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_marginTop="3.0dip" android:layout_alignParentBottom="true">
+		<Button android:id="@+id/previous" android:background="@drawable/an"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text="上一页" android:layout_alignParentLeft="true"
+			android:textSize="18sp" />
+		<Button android:id="@+id/next" android:background="@drawable/an"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text="下一页" android:layout_alignParentRight="true"
+			android:textSize="18sp" />
+	</RelativeLayout>
 
-			<Button android:id="@+id/returnButton" android:layout_width="100dip"
-				android:layout_height="wrap_content" android:text="返回" android:layout_marginLeft="5dip"/>
-		</TableRow>
-	</TableLayout>
-
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_marginTop="5dip"
+		android:id="@+id/buttonLayout" android:layout_above="@id/pageLayout">
+		<Button android:id="@+id/OwnsButton" android:layout_height="wrap_content"
+			android:layout_width="fill_parent" android:layout_weight="1"
+			android:textSize="18sp" />
+		<Button android:id="@+id/returnButton" android:layout_height="wrap_content"
+			android:layout_width="fill_parent" android:layout_weight="1"
+			android:textSize="18sp" />
+	</LinearLayout>
 	<LinearLayout android:id="@+id/AdLinearLayout"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:gravity="center_horizontal" android:layout_alignParentBottom="true" />
+		android:gravity="center_horizontal" android:layout_above="@id/buttonLayout" />
 
-	<ScrollView android:gravity="center" android:orientation="vertical"
+	<ScrollView android:id="@+id/scrollView" android:gravity="center" android:orientation="vertical"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:layout_below="@id/tableLayout" android:layout_above="@id/AdLinearLayout">
+		android:layout_above="@id/AdLinearLayout"
+		android:layout_alignParentTop="true">
 		<LinearLayout android:orientation="vertical"
 			android:layout_width="fill_parent" android:layout_height="wrap_content">
 
 			<ImageView android:id="@+id/ImageView"
-				android:layout_width="wrap_content" android:layout_height="250.0dip"
-				android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" />
+				android:layout_width="fill_parent" android:layout_height="fill_parent"
+				android:scaleType="fitCenter" />
 
-			<TextView android:textSize="18.0dip" android:textStyle="bold"
+			<TextView android:textSize="20sp" android:textStyle="bold"
 				android:id="@+id/TextView" android:layout_width="fill_parent"
-				android:layout_height="wrap_content" android:layout_margin="5.0dip" />
+				android:layout_height="wrap_content" android:background="@drawable/bg"
+				android:textColor="@android:color/black" android:layout_marginTop="3dip"
+				android:padding="3dip" />
 		</LinearLayout>
 	</ScrollView>
 </RelativeLayout>
