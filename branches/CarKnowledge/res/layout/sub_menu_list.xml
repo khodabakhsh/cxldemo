@@ -5,7 +5,7 @@
 	<Button android:id="@+id/returnButton" android:text="返回"
 		android:layout_height="wrap_content" android:layout_width="fill_parent"
 		android:visibility="visible" android:layout_alignParentTop="true"
-		android:layout_marginTop="4.0dip" />
+		android:layout_marginTop="4.0dip" android:textSize="18sp" />
 	<LinearLayout android:id="@+id/AdLinearLayout2"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:gravity="center_horizontal" android:layout_alignParentBottom="true" />

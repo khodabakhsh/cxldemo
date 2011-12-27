@@ -9,9 +9,10 @@
 			android:layout_height="wrap_content" android:layout_marginLeft="20.0dip"
 			android:background="@drawable/hot" />
 
-		<TextView android:textSize="18.0sp" android:id="@+id/txtSearchEnName"
+		<TextView android:textSize="20.0sp" android:id="@+id/txtSearchEnName"
 			android:layout_width="100dip" android:layout_height="wrap_content"
-			android:layout_marginLeft="20.0px" android:layout_toRightOf="@id/flag_icon" />
+			android:layout_marginLeft="20.0px" android:layout_toRightOf="@id/flag_icon"
+			android:paddingTop="5dip" android:paddingBottom="5dip" />
 
 		<ImageView android:id="@+id/carIcon" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:layout_marginLeft="20.0dip"
