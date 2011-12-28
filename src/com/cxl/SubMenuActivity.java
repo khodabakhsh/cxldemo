@@ -7,16 +7,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.cxl.ListManager.KeyValue;
 import com.cxl.tangshi.R;
-import com.waps.AdView;
-import com.waps.AppConnect;
 
 public class SubMenuActivity extends Activity {
 
@@ -35,12 +32,10 @@ public class SubMenuActivity extends Activity {
 
 		subMenuListView = (ListView) findViewById(R.id.subMenuList);
 
-		subMenuAdapter = new ArrayAdapter<KeyValue>(this,
-				 R.layout.simple_list_layout, R.id.txtListItem,  list);
+		subMenuAdapter = new ArrayAdapter<KeyValue>(this, R.layout.simple_list_layout, R.id.txtListItem, list);
 		subMenuListView.setAdapter(subMenuAdapter);
 		subMenuListView.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
-					long id) {
+			public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
 				KeyValue selectItem = (KeyValue) arg0.getItemAtPosition(pos);
 				Intent intent = new Intent();
 				intent.setClass(SubMenuActivity.this, DetailActivity.class);
@@ -51,10 +46,6 @@ public class SubMenuActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-
-		if (!MainActivity.hasEnoughRequrePoint) {// 没达到积分
-													// showDialog();
-		}
 
 		returnButton = (Button) findViewById(R.id.returnButton);
 

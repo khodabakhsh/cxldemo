@@ -3,20 +3,22 @@
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent" android:background="@drawable/bg">
 
-	<TableLayout android:layout_width="fill_parent"
+	<LinearLayout android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:layout_margin="10.0dip"
 		android:id="@+id/tableLayout" android:layout_alignParentTop="true">
-		<TableRow android:layout_width="fill_parent"
-			android:layout_height="wrap_content">
-			<Button android:id="@+id/OwnsButton" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:text="更多精品下载..." />
-			<Button android:id="@+id/favoriteButton" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:text="收藏本页"
-				android:drawableLeft="@drawable/hot" />
-			<Button android:id="@+id/returnButton" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:text="返回" />
-		</TableRow>
-	</TableLayout>
+
+		<Button android:id="@+id/OwnsButton" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="更多精品"
+			android:layout_weight="1" android:textSize="18sp" />
+		<Button android:id="@+id/favoriteButton" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="收藏"
+			android:drawableLeft="@drawable/hot" android:layout_weight="1"
+			android:textSize="18sp" />
+		<Button android:id="@+id/returnButton" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="返回"
+			android:layout_weight="1" android:textSize="18sp" />
+
+	</LinearLayout>
 	<LinearLayout android:id="@+id/AdLinearLayout"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:gravity="center_horizontal" android:layout_alignParentBottom="true" />
@@ -27,12 +29,10 @@
 		android:layout_below="@id/tableLayout" android:layout_above="@id/AdLinearLayout">
 		<LinearLayout android:orientation="vertical"
 			android:layout_width="fill_parent" android:layout_height="wrap_content">
-			<!-- <ImageView android:id="@+id/ImageView" android:layout_width="wrap_content" 
-				android:layout_height="250.0dip" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" 
-				/> -->
-			<TextView android:textSize="18.0dip" android:textStyle="bold"
-				android:id="@+id/TextView" android:layout_width="fill_parent"
-				android:layout_height="wrap_content" android:layout_margin="5.0dip" />
+			<TextView android:textSize="20.0sp" android:id="@+id/TextView"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:layout_margin="5.0dip" android:textColor="@android:color/black"
+				android:textStyle="bold" />
 
 		</LinearLayout>
 

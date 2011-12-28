@@ -5,7 +5,7 @@
 	
 	<Button android:id="@+id/returnButton" android:text="返回"
 		android:layout_height="wrap_content" android:layout_width="fill_parent"
-		android:visibility="visible" android:layout_marginTop="3.0dip"/>
+		android:visibility="visible" android:layout_marginTop="3.0dip" android:textSize="18sp"/>
 	<ListView android:id="@+id/subMenuList" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:layout_marginBottom="2.0dip"
 		android:background="@drawable/bg" android:cacheColorHint="#00000000" />
