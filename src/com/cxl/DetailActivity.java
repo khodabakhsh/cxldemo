@@ -137,6 +137,9 @@ public class DetailActivity extends Activity {
 				if (inputStreamReader != null) {
 					inputStreamReader.close();
 				}
+				if(inputStream!=null){
+					inputStream.close();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -283,6 +283,8 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
 
 	// 自定义Adapter
 	public class MyExpandableListAdapter extends BaseExpandableListAdapter {
+		AbsListView.LayoutParams lp;
+		TextView textView;
 
 		public Object getChild(int groupPosition, int childPosition) {
 			return ListManager.children[groupPosition][childPosition];
@@ -335,8 +337,8 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
 
 		// 获取某一项的 View 的逻辑
 		private TextView getGenericView() {
-			AbsListView.LayoutParams lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 64);
-			TextView textView = new TextView(MainActivity.this);
+			lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 64);
+			textView = new TextView(MainActivity.this);
 			textView.setTextColor(Color.BLACK);
 			textView.setTextSize(18);
 			textView.setLayoutParams(lp);
