@@ -32,10 +32,10 @@
 			<ImageView android:id="@+id/ImageView"
 				android:layout_width="wrap_content" android:layout_height="250.0dip"
 				android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" />
-			<TextView  android:textStyle="bold"
-				android:id="@+id/TextView" android:layout_width="fill_parent"
+			<TextView android:id="@+id/TextView" android:layout_width="fill_parent"
 				android:layout_height="wrap_content" android:layout_margin="5.0dip"
-				android:textSize="18sp" />
+				android:textSize="20sp" android:background="@drawable/bg"
+				android:textColor="@android:color/black" android:textStyle="bold" />
 
 		</LinearLayout>
 
