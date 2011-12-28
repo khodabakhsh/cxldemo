@@ -11,7 +11,8 @@
 		android:gravity="center_horizontal" android:layout_alignParentBottom="true" />
 	<ListView android:id="@+id/subMenuList" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:layout_marginBottom="2.0dip"
-		android:layout_above="@id/AdLinearLayout2" android:layout_below="@id/returnButton" />
+		android:layout_above="@id/AdLinearLayout2" android:layout_below="@id/returnButton"
+		android:background="@drawable/bg" android:cacheColorHint="#00000000" />
 
 
 </RelativeLayout>

@@ -4,9 +4,9 @@
 	<LinearLayout android:orientation="vertical"
 		android:id="@+id/widget_layout_sort" android:layout_width="fill_parent"
 		android:layout_height="fill_parent" android:paddingTop="20dip">
-		<Button android:id="@+id/OwnsButton" android:text="更多免费应用..."
+		<Button android:id="@+id/OwnsButton" 
 			android:layout_height="wrap_content" android:layout_width="fill_parent"
-			android:visibility="visible" android:layout_marginBottom="10.0dip" />
+			android:visibility="visible" android:layout_marginBottom="10.0dip"  android:textSize="25sp"/>
 
 		<ImageView android:id="@+id/happy" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:background="@drawable/happy"
@@ -14,7 +14,7 @@
 
 		<TextView android:text="祝您天天好心情，(*^__^*) 嘻嘻……"
 			android:layout_height="wrap_content" android:layout_width="fill_parent"
-			android:layout_margin="10.0dip" android:textColor="#FF69B4" />
+			android:layout_margin="10.0dip" android:textColor="#FF69B4" android:textSize="25sp"/>
 	</LinearLayout>
 
 	<LinearLayout android:orientation="vertical"
@@ -22,7 +22,8 @@
 		android:layout_height="fill_parent">
 
 		<ListView android:id="@+id/searchList" android:layout_width="fill_parent"
-			android:layout_height="wrap_content" android:layout_marginBottom="2.0dip" />
+			android:layout_height="wrap_content" android:layout_marginBottom="2.0dip"
+			android:background="@drawable/bg" android:cacheColorHint="#00000000" />
 
 	</LinearLayout>
 
@@ -38,7 +39,8 @@
 		<ListView android:id="@+id/favoriteList"
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
 			android:layout_below="@id/clearFavorite" android:layout_above="@id/AdLinearLayout3"
-			android:layout_marginBottom="10.0dip" />
+			android:layout_marginBottom="10.0dip" android:background="@drawable/bg"
+			android:cacheColorHint="#00000000" />
 
 
 
