@@ -6,10 +6,12 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -51,6 +53,12 @@ public class ImageActivity extends Activity implements UpdatePointsNotifier {
 
 	BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
 
+	LinearLayout container;
+	private Handler handler;
+	public static boolean hasEnoughRequrePointPreferenceValue = false;// 保存在配置里
+	public static final int requirePoint = 30;// 要求积分
+	public static int currentPointTotal = 0;// 当前积分
+
 	public Bitmap getBitmap(int id) {
 		// bitmapOptions.inSampleSize = 2;//暂时先不调整
 		return BitmapFactory.decodeResource(getResources(), id, bitmapOptions);
@@ -64,16 +72,14 @@ public class ImageActivity extends Activity implements UpdatePointsNotifier {
 		initRequrePointPreference();
 		typeIndex = getIntent().getExtras().getInt("typeIndex");
 		imgCenter = (ImageView) findViewById(R.id.imgCenter);
-		bitmap = getBitmap(getResourceId(
-				getImgName(typeIndex, currentPageIndex), drawable));
+		bitmap = getBitmap(getResourceId(getImgName(typeIndex, currentPageIndex), drawable));
 		imgCenter.setImageBitmap(bitmap);
 		if (!hasInited) {
 			getImageCount();
 			hasInited = true;
 		}
 
-		setTitle(getResources().getIdentifier("text" + (typeIndex + 1),
-				"string", getPackageName()));
+		setTitle(getResources().getIdentifier("text" + (typeIndex + 1), "string", getPackageName()));
 		text_num = (TextView) findViewById(R.id.text_num);
 		setTextNumber(currentPageIndex + 1, ImageCount.get(typeIndex));
 
@@ -81,15 +87,12 @@ public class ImageActivity extends Activity implements UpdatePointsNotifier {
 		btn_previous.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				if (currentPageIndex == 0) {
-					Toast.makeText(getApplicationContext(), "这里已经是第一页哦",
-							Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), "这里已经是第一页哦", Toast.LENGTH_SHORT).show();
 				} else {
 					currentPageIndex--;
-					bitmap = getBitmap(getResourceId(
-							getImgName(typeIndex, currentPageIndex), drawable));
+					bitmap = getBitmap(getResourceId(getImgName(typeIndex, currentPageIndex), drawable));
 					imgCenter.setImageBitmap(bitmap);
-					setTextNumber(currentPageIndex + 1,
-							ImageCount.get(typeIndex));
+					setTextNumber(currentPageIndex + 1, ImageCount.get(typeIndex));
 				}
 
 			}
@@ -98,34 +101,31 @@ public class ImageActivity extends Activity implements UpdatePointsNotifier {
 		btn_next.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				if (currentPageIndex == ImageCount.get(typeIndex) - 1) {
-					Toast.makeText(getApplicationContext(), "这里已经是最后一页哦",
-							Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), "这里已经是最后一页哦", Toast.LENGTH_SHORT).show();
 				} else {
 					currentPageIndex++;
-					bitmap = getBitmap(getResourceId(
-							getImgName(typeIndex, currentPageIndex), drawable));
+					bitmap = getBitmap(getResourceId(getImgName(typeIndex, currentPageIndex), drawable));
 					imgCenter.setImageBitmap(bitmap);
-					setTextNumber(currentPageIndex + 1,
-							ImageCount.get(typeIndex));
+					setTextNumber(currentPageIndex + 1, ImageCount.get(typeIndex));
 				}
 
 			}
 		});
 		if (firstComeIn) {
-			new AlertDialog.Builder(ImageActivity.this)
-					.setTitle("说明")
-					.setMessage(
-							"1.点击图片的【左下角、右下角】可翻页。\n2.按【手机菜单键(Menu)】可以保存图片、设置图片为壁纸。")
-					.setPositiveButton("我知道了",
-							new DialogInterface.OnClickListener() {
-								public void onClick(
-										DialogInterface dialoginterface, int i) {
-								}
-							}).show();
+			new AlertDialog.Builder(ImageActivity.this).setTitle("说明")
+					.setMessage("1.点击图片的【左下角、右下角】可翻页。\n2.按【手机菜单键(Menu)】可以保存图片、设置图片为壁纸。")
+					.setPositiveButton("我知道了", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialoginterface, int i) {
+						}
+					}).show();
 			firstComeIn = false;
 		}
-		LinearLayout container = (LinearLayout) findViewById(R.id.AdLinearLayout2);
-		new AdView(this, container).DisplayAd(20);// 每20秒轮换一次广告；最少为20
+		if (!hasEnoughRequrePointPreferenceValue) {
+			showGetPointDialog("【移除广告】", true);
+			container = (LinearLayout) findViewById(R.id.AdLinearLayout2);
+			new AdView(this, container).DisplayAd(20);// 每20秒轮换一次广告；最少为20
+		}
+
 	}
 
 	protected void onDestroy() {
@@ -150,8 +150,7 @@ public class ImageActivity extends Activity implements UpdatePointsNotifier {
 	private void getImageCount() {
 		for (int j = 0; j < MainActivity.TYPE_COUNT; j++) {
 			for (int i = 0; i < MaxCount; i++) {
-				if (getResources().getIdentifier(img + j + "_" + i, drawable,
-						getPackageName()) == 0) {
+				if (getResources().getIdentifier(img + j + "_" + i, drawable, getPackageName()) == 0) {
 					break;
 				}
 				ImageCount.put(j, i + 1);
@@ -173,124 +172,88 @@ public class ImageActivity extends Activity implements UpdatePointsNotifier {
 	public boolean onOptionsItemSelected(MenuItem paramMenuItem) {
 		if (paramMenuItem.getItemId() == 0) {
 			if (!hasEnoughRequrePointPreferenceValue) {
-				showGetPointDialog("保存图片");
+				showGetPointDialog("保存图片", false);
 			} else {
-				new AlertDialog.Builder(ImageActivity.this)
-						.setTitle("保存图片")
-						.setMessage("确定要保存图片？")
-						.setPositiveButton("确认",
-								new DialogInterface.OnClickListener() {
-									public void onClick(
-											DialogInterface dialoginterface,
-											int i) {
-										new Thread(new Runnable() {
-											public void run() {
-												BitmapDrawaleTypeUtil
-														.saveFile(
-																getBitmap(),
-																saveBasePath
-																		+ getString(getResources()
-																				.getIdentifier(
-																						"text"
-																								+ (typeIndex + 1),
-																						"string",
-																						getPackageName()))
-																		+ "/",
-																getImgName(
-																		typeIndex,
-																		currentPageIndex)
-																		+ ".jpg");
-											}
-										}).start();
-										Toast.makeText(ImageActivity.this,
-												"已保存在SD卡：" + saveBasePath,
-												Toast.LENGTH_SHORT).show();
+				new AlertDialog.Builder(ImageActivity.this).setTitle("保存图片").setMessage("确定要保存图片？")
+						.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialoginterface, int i) {
+								new Thread(new Runnable() {
+									public void run() {
+										BitmapDrawaleTypeUtil.saveFile(
+												getBitmap(),
+												saveBasePath
+														+ getString(getResources().getIdentifier(
+																"text" + (typeIndex + 1), "string", getPackageName()))
+														+ "/", getImgName(typeIndex, currentPageIndex) + ".jpg");
 									}
-								})
-						.setNegativeButton("取消",
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog,
-											int which) {
-									}
-								}).show();
+								}).start();
+								Toast.makeText(ImageActivity.this, "已保存在SD卡：" + saveBasePath, Toast.LENGTH_SHORT)
+										.show();
+							}
+						}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {
+							}
+						}).show();
 			}
 
 		} else if (paramMenuItem.getItemId() == 1) {
 			if (!hasEnoughRequrePointPreferenceValue) {
-				showGetPointDialog("设置壁纸");
+				showGetPointDialog("设置壁纸", false);
 			} else {
-				new AlertDialog.Builder(ImageActivity.this)
-						.setTitle("设置图片")
-						.setMessage("确定要设置图片？")
-						.setPositiveButton("确认",
-								new DialogInterface.OnClickListener() {
-									public void onClick(
-											DialogInterface dialoginterface,
-											int i) {
-										new Thread(new Runnable() {
-											public void run() {
-												try {
-													getApplicationContext()
-															.setWallpaper(
-																	getBitmap());
-												} catch (IOException e) {
-													e.printStackTrace();
-												}
-											}
-										}).start();
-										Toast.makeText(ImageActivity.this,
-												"设置成功", Toast.LENGTH_SHORT)
-												.show();
+				new AlertDialog.Builder(ImageActivity.this).setTitle("设置图片").setMessage("确定要设置图片？")
+						.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialoginterface, int i) {
+								new Thread(new Runnable() {
+									public void run() {
+										try {
+											getApplicationContext().setWallpaper(getBitmap());
+										} catch (IOException e) {
+											e.printStackTrace();
+										}
 									}
-								})
-						.setNegativeButton("取消",
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog,
-											int which) {
-									}
-								}).show();
+								}).start();
+								Toast.makeText(ImageActivity.this, "设置成功", Toast.LENGTH_SHORT).show();
+							}
+						}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {
+							}
+						}).show();
 			}
 
 		} else if (paramMenuItem.getItemId() == 2) {
 			// 显示推荐安装程序（Offer）.
-			AppConnect.getInstance(ImageActivity.this).showOffers(
-					ImageActivity.this);
+			AppConnect.getInstance(ImageActivity.this).showOffers(ImageActivity.this);
 		}
 		return super.onOptionsItemSelected(paramMenuItem);
 	}
 
 	private Bitmap getBitmap() {
-		return BitmapDrawaleTypeUtil.drawableToBitmap(getResources()
-				.getDrawable(
-						getResourceId(getImgName(typeIndex, currentPageIndex),
-								drawable)));
+		return BitmapDrawaleTypeUtil.drawableToBitmap(getResources().getDrawable(
+				getResourceId(getImgName(typeIndex, currentPageIndex), drawable)));
 	}
 
-	private void showGetPointDialog(String type) {
-		new AlertDialog.Builder(ImageActivity.this)
-				.setIcon(R.drawable.happy2)
+	private void showGetPointDialog(String type, boolean withCancleButton) {
+		Builder dialog = new AlertDialog.Builder(ImageActivity.this).setIcon(R.drawable.happy2)
 				.setTitle("当前积分：" + currentPointTotal)
-				.setMessage(
-						"只要积分满足" + requirePoint + "，就可以" + type + "！！ 您当前的积分不足"
-								+ requirePoint + "。")
-				.setPositiveButton("免费获得积分",
-						new DialogInterface.OnClickListener() {
-							public void onClick(
-									DialogInterface dialoginterface, int i) {
-								// 显示推荐安装程序（Offer）.
-								AppConnect.getInstance(ImageActivity.this)
-										.showOffers(ImageActivity.this);
-							}
-						}).show();
-	}
+				.setMessage("只要积分满足" + requirePoint + "，就可以" + type + "！！ 您当前的积分不足" + requirePoint + "。")
+				.setPositiveButton("免费获得积分", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialoginterface, int i) {
+						// 显示推荐安装程序（Offer）.
+						AppConnect.getInstance(ImageActivity.this).showOffers(ImageActivity.this);
+					}
+				});
+		if (withCancleButton) {
+			dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialoginterface, int i) {
+				}
+			});
+		}
 
-	public static boolean hasEnoughRequrePointPreferenceValue = false;// 保存在配置里
-	public static final int requirePoint = 30;// 要求积分
-	public static int currentPointTotal = 0;// 当前积分
+		dialog.show();
+	}
 
 	private void initRequrePointPreference() {
-		hasEnoughRequrePointPreferenceValue = PreferenceUtil
-				.getHasEnoughRequrePoint(ImageActivity.this);
+		hasEnoughRequrePointPreferenceValue = PreferenceUtil.getHasEnoughRequrePoint(ImageActivity.this);
 	}
 
 	protected void onResume() {
@@ -313,6 +276,11 @@ public class ImageActivity extends Activity implements UpdatePointsNotifier {
 		if (pointTotal >= requirePoint) {
 			hasEnoughRequrePointPreferenceValue = true;
 			PreferenceUtil.setHasEnoughRequrePoint(ImageActivity.this, true);
+			handler.post(new Runnable() {
+				public void run() {
+					container.setVisibility(View.GONE);
+				}
+			});
 		}
 	}
 
