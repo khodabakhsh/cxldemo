@@ -48,7 +48,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 	public static boolean hasEnoughRequrePointPreferenceValue = false;// 保存在配置里
 	public static final int requirePoint = 30;// 要求积分
 	public static int currentPointTotal = 0;// 当前积分
-	public static final int Requre_Point_Page_Index = 20;//需要积分才能查看的页面
+	public static final int Requre_Point_Page_Index = 15;//需要积分才能查看的页面
 
 	private boolean canView(int pageIndex) {
 		if ((pageIndex >= Requre_Point_Page_Index) && !hasEnoughRequrePointPreferenceValue) {
