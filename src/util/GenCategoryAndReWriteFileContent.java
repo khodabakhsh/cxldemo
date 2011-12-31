@@ -17,7 +17,8 @@ public class GenCategoryAndReWriteFileContent {
 			return pathname.getName().endsWith("txt");
 		}
 	};
-	private static String directoryPath = "D:/cxl/my apk/__________others_________/穷人缺什么/assets";
+	private static String fileContentdirectoryPath = "D:/cxl/my apk/__________others_________/穷人缺什么/assets";
+	private static String categoryFilePath = "D:/cxl/my apk/__________others_________/穷人缺什么/assets/catalog.txt";
 	private static String gb2312 = "gb2312";
 	private static String utf8 = "utf8";
 	private static String txt_charset = utf8;
@@ -26,13 +27,13 @@ public class GenCategoryAndReWriteFileContent {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		getTuJianList();
-		//		getCatelogy();
+		reWriteFileContent();
+		//		genCatelogy();
 		System.out.println("ok~~~~~~~~~~~~~~");
 	}
 
-	public static void getTuJianList() {
-		File fileDir = new File(directoryPath);
+	public static void reWriteFileContent() {
+		File fileDir = new File(fileContentdirectoryPath);
 		StringBuffer bf = null;
 		;
 		if (fileDir.isDirectory()) {
@@ -81,8 +82,8 @@ public class GenCategoryAndReWriteFileContent {
 
 	}
 
-	public static void getCatelogy() {
-		File fileDir = new File("D:/cxl/my apk/__________others_________/穷人缺什么/assets/catalog.txt");
+	public static void genCatelogy() {
+		File fileDir = new File(categoryFilePath);
 		int count = 0;
 		FileInputStream fis = null;
 		BufferedReader bufferedReader = null;
@@ -93,9 +94,6 @@ public class GenCategoryAndReWriteFileContent {
 			bufferedReader = new BufferedReader(new InputStreamReader(fis, txt_charset));
 			String contentString = "";
 			while (null != (contentString = bufferedReader.readLine())) {
-				//						System.out.println("AllList.add(\""
-				//								+ file.getName().substring(0, file.getName().lastIndexOf(".txt")) + "、" + contentString
-				//								+ "\");");
 				count++;
 				System.out.println("MENU_List.add(new KeyValue(\"" + count + "\", \"" + contentString + "\"));");
 			}
