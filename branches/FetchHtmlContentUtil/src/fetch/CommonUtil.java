@@ -46,6 +46,24 @@ public class CommonUtil {
 		}// 写入多行
 
 	}
+	public static void WriteFile(File file, String content) {
+		if (!file.getParentFile().exists()) {
+			file.getParentFile().mkdirs();
+		}
+		FileWriter filewriter;
+		try {
+			filewriter = new FileWriter(file, false);
+			PrintWriter printwriter = new PrintWriter(filewriter);
+			printwriter.println(content);
+			printwriter.flush();
+			printwriter.close();
+			filewriter.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}// 写入多行
+
+	}
 
 	public static String getDocumentContentByPost(String url, Map<String, String> queryParams) {
 		HttpClient client = new DefaultHttpClient();
