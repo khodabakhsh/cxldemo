@@ -27,8 +27,8 @@ public class GenCategoryAndReWriteFileContent {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		reWriteFileContent();
-		//		genCatelogy();
+//		reWriteFileContent();
+				genCatelogy();
 		System.out.println("ok~~~~~~~~~~~~~~");
 	}
 
@@ -95,7 +95,7 @@ public class GenCategoryAndReWriteFileContent {
 			String contentString = "";
 			while (null != (contentString = bufferedReader.readLine())) {
 				count++;
-				System.out.println("MENU_List.add(new KeyValue(\"" + count + "\", \"" + contentString + "\"));");
+				System.out.println("MENU_List.add(new KeyValue(\"" + count + "\", \"" +count+" 、"+ contentString + "\"));");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
