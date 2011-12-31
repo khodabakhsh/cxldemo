@@ -19,16 +19,17 @@ public class GenCategoryFromEachFile {
 	private static String gb2312 = "gb2312";
 	private static String utf8 = "utf8";
 	private static String txt_charset = gb2312;
+	private static  boolean isDeleteZero = true;//是否需要去除01,02...前面的0
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		getList();
+		getCategory();
 		System.out.println("ok~~~~~~~~~~~~~~");
 	}
 
-	public static void getList() {
+	public static void getCategory() {
 		File fileDir = new File(directoryPath);
 			for (File file : fileDir.listFiles(txtFilter)) {
 				FileInputStream fis = null;
@@ -41,6 +42,9 @@ public class GenCategoryFromEachFile {
 					String contentString = "";
 					while (null != (contentString = bufferedReader.readLine())) {
 						String fileNameIndexString = file.getName().substring(0, file.getName().lastIndexOf(".txt"));
+						if(isDeleteZero){
+							fileNameIndexString = deleteZero(fileNameIndexString);
+						}
 						System.out.println("MENU_List.add(new KeyValue(\"" + fileNameIndexString+ "\", \""
 								+ fileNameIndexString + "、" + contentString + "\"));");
 						break;
@@ -66,6 +70,12 @@ public class GenCategoryFromEachFile {
 				}
 			}
 
+	}
+	private static String deleteZero(String orgString){
+		if(orgString.startsWith("0")){
+			orgString= orgString.substring(1);
+		}
+		return orgString;
 	}
 
 }
