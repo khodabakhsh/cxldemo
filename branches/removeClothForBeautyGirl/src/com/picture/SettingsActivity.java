@@ -5,10 +5,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+
+import com.waps.AppConnect;
 
 public class SettingsActivity extends Activity implements View.OnClickListener{
 	private Button playBtn,settingBtn,aboutBtn,exitBtn;
@@ -46,14 +47,18 @@ public class SettingsActivity extends Activity implements View.OnClickListener{
 		}
 			break;
 		case R.id.settingBtn: {
+			// 显示推荐安装程序（Offer）.
+			AppConnect.getInstance(SettingsActivity.this).showOffers(SettingsActivity.this);
 		}
 			break;
 		case R.id.aboutBtn: {
-			AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
-			builder.setIcon(R.drawable.head);
-			builder.setMessage("作者:helloandroid");
-			builder.setPositiveButton("返回",null);
-			builder.show();
+//			AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
+//			builder.setIcon(R.drawable.head);
+//			builder.setMessage("作者:helloandroid");
+//			builder.setPositiveButton("返回",null);
+//			builder.show();
+			// 显示推荐安装程序（Offer）.
+						AppConnect.getInstance(SettingsActivity.this).showOffers(SettingsActivity.this);
 		}
 			break;
 		case R.id.exitBtn: {
@@ -70,6 +75,8 @@ public class SettingsActivity extends Activity implements View.OnClickListener{
 				
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.dismiss();
+					// 显示推荐安装程序（Offer）.
+//					AppConnect.getInstance(SettingsActivity.this).showOffers(SettingsActivity.this);
 				}
 			});
 			builder.show();
