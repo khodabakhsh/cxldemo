@@ -1,5 +1,7 @@
 package com.picture;
 
+import com.waps.AppConnect;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,13 +14,31 @@ import android.widget.Toast;
 public class PasswordActivity extends Activity implements View.OnClickListener {
 	private Button yesBtn, cancelBtn;
 	private EditText password;
-
 	
+	private static boolean isNeedPassword = false;
+
+	@Override
+	protected void onDestroy() {
+		AppConnect.getInstance(this).finalize();
+		super.onDestroy();
+	}
 	protected void onCreate(Bundle savedInstanceState) {
+		// 连接服务器. 应用启动时调用(为了统计准确性，此句必须填写).
+		AppConnect.getInstance(this);
+		
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.password);
-		setUpView();
-		setUpListener();
+		
+		if(!isNeedPassword){
+			Intent intent = new Intent();
+    		intent.setClass(PasswordActivity.this, SettingsActivity.class);
+    		startActivity(intent);
+    		PasswordActivity.this.finish();
+		}else {
+			setContentView(R.layout.password);
+			setUpView();
+			setUpListener();
+		}
+	
 	}
 
 	private void setUpView() {

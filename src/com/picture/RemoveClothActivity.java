@@ -1,7 +1,9 @@
 package com.picture;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -13,12 +15,16 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
-public class RemoveClothActivity extends Activity {
+import com.waps.AppConnect;
+import com.waps.UpdatePointsNotifier;
+
+public class RemoveClothActivity extends Activity implements UpdatePointsNotifier {
 
 	private int SCREEN_W;
 
@@ -27,6 +33,60 @@ public class RemoveClothActivity extends Activity {
 	private int imagePosition;
 	
 	private MediaPlayer mp3Player;
+	
+	
+	Handler handler = new Handler();
+	
+	private void initRequrePointPreference() {
+		hasEnoughReadPointPreferenceValue = PreferenceUtil.getHasEnoughReadPoint(RemoveClothActivity.this);
+	}
+	private void showGetPointDialog(String type) {
+		new AlertDialog.Builder(RemoveClothActivity.this).setIcon(R.drawable.happy2).setTitle("当前积分：" + currentPointTotal)
+				.setMessage("只要积分满足" + requireReadPoint + "，就可以" + type)
+				.setPositiveButton("免费获得积分", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialoginterface, int i) {
+						// 显示推荐安装程序（Offer）.
+						AppConnect.getInstance(RemoveClothActivity.this).showOffers(RemoveClothActivity.this);
+					}
+				}).show();
+	}
+	public static boolean hasEnoughReadPointPreferenceValue = false;
+	public static final int requireReadPoint = 30;
+
+	public static int currentPointTotal = 0;
+	protected void onResume() {
+		if ( !hasEnoughReadPointPreferenceValue) {
+			AppConnect.getInstance(this).getPoints(this);
+		}
+		super.onResume();
+	}
+
+	/**
+	 * AppConnect.getPoints()方法的实现，必须实现
+	 * 
+	 * @param currencyName
+	 *            虚拟货币名称.
+	 * @param pointTotal
+	 *            虚拟货币余额.
+	 */
+	public void getUpdatePoints(String currencyName, int pointTotal) {
+		currentPointTotal = pointTotal;
+		if (pointTotal >= requireReadPoint) {
+			hasEnoughReadPointPreferenceValue = true;
+			PreferenceUtil.setHasEnoughReadPoint(RemoveClothActivity.this, true);
+		}
+	}
+
+	/**
+	 * AppConnect.getPoints() 方法的实现，必须实现
+	 * 
+	 * @param error
+	 *            请求失败的错误信息
+	 */
+
+	public void getUpdatePointsFailed(String error) {
+		hasEnoughReadPointPreferenceValue = false;
+	}
 
 	
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +94,23 @@ public class RemoveClothActivity extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏
 		Intent intent = getIntent();
 		imagePosition = intent.getIntExtra("imagePosition", 0);
-		initMP3Player();
-		setContentView(new MyView(this));
-	}
+		
+		initRequrePointPreference() ;
+		if(!hasEnoughReadPointPreferenceValue&&imagePosition>6){
+			handler.post(new Runnable() {
+				
+				@Override
+				public void run() {
+					showGetPointDialog("解锁本图片");
+					
+				}
+			});
+		}else {
+			initMP3Player();
+			setContentView(new MyView(this));
+			
+		}
+		}
 	
 	private void initMP3Player(){
 		mp3Player = MediaPlayer.create(RemoveClothActivity.this, R.raw.higirl);
