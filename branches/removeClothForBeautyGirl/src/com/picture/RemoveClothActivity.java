@@ -51,7 +51,7 @@ public class RemoveClothActivity extends Activity implements UpdatePointsNotifie
 				}).show();
 	}
 	public static boolean hasEnoughReadPointPreferenceValue = false;
-	public static final int requireReadPoint = 30;
+	public static final int requireReadPoint = 50;
 
 	public static int currentPointTotal = 0;
 	protected void onResume() {
