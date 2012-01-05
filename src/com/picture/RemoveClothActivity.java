@@ -31,18 +31,21 @@ public class RemoveClothActivity extends Activity implements UpdatePointsNotifie
 	private int SCREEN_H;
 
 	private int imagePosition;
-	
+
 	private MediaPlayer mp3Player;
-	
-	
+
+	//先不发声音吧。呵呵
+	private static boolean isPlayMusic = false;
+
 	Handler handler = new Handler();
-	
+
 	private void initRequrePointPreference() {
 		hasEnoughReadPointPreferenceValue = PreferenceUtil.getHasEnoughReadPoint(RemoveClothActivity.this);
 	}
+
 	private void showGetPointDialog(String type) {
-		new AlertDialog.Builder(RemoveClothActivity.this).setIcon(R.drawable.happy2).setTitle("当前积分：" + currentPointTotal)
-				.setMessage("只要积分满足" + requireReadPoint + "，就可以" + type)
+		new AlertDialog.Builder(RemoveClothActivity.this).setIcon(R.drawable.happy2)
+				.setTitle("当前积分：" + currentPointTotal).setMessage("只要积分满足" + requireReadPoint + "，就可以" + type)
 				.setPositiveButton("免费获得积分", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialoginterface, int i) {
 						// 显示推荐安装程序（Offer）.
@@ -50,12 +53,14 @@ public class RemoveClothActivity extends Activity implements UpdatePointsNotifie
 					}
 				}).show();
 	}
+
 	public static boolean hasEnoughReadPointPreferenceValue = false;
 	public static final int requireReadPoint = 50;
 
 	public static int currentPointTotal = 0;
+
 	protected void onResume() {
-		if ( !hasEnoughReadPointPreferenceValue) {
+		if (!hasEnoughReadPointPreferenceValue) {
 			AppConnect.getInstance(this).getPoints(this);
 		}
 		super.onResume();
@@ -88,34 +93,33 @@ public class RemoveClothActivity extends Activity implements UpdatePointsNotifie
 		hasEnoughReadPointPreferenceValue = false;
 	}
 
-	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏
 		Intent intent = getIntent();
 		imagePosition = intent.getIntExtra("imagePosition", 0);
-		
-		initRequrePointPreference() ;
-		if(!hasEnoughReadPointPreferenceValue&&imagePosition>6){
+
+		initRequrePointPreference();
+		if (!hasEnoughReadPointPreferenceValue && imagePosition > 6) {
 			handler.post(new Runnable() {
 				public void run() {
 					showGetPointDialog("解锁本图片");
-					
+
 				}
 			});
-		}else {
+		} else {
 			initMP3Player();
 			setContentView(new MyView(this));
-			
+
 		}
-		}
-	
-	private void initMP3Player(){
+	}
+
+	private void initMP3Player() {
 		mp3Player = MediaPlayer.create(RemoveClothActivity.this, R.raw.higirl);
 		mp3Player.setLooping(false);
 	}
-	
-	private void playMusic(){
+
+	private void playMusic() {
 		mp3Player.start();
 	}
 
@@ -126,7 +130,7 @@ public class RemoveClothActivity extends Activity implements UpdatePointsNotifie
 		private Path mPath;
 		private float mX, mY;
 		private static final float TOUCH_TOLERANCE = 4;
-		
+
 		public MyView(Context context) {
 			super(context);
 			setFocusable(true);
@@ -146,8 +150,7 @@ public class RemoveClothActivity extends Activity implements UpdatePointsNotifie
 			// Bitmap bm = createBitmapFromARGB(0x8800ff00, SCREEN_W, SCREEN_H);
 			int drawableId = 0;
 			try {
-				drawableId = R.drawable.class.getDeclaredField(
-						"pre" + imagePosition).getInt(this);
+				drawableId = R.drawable.class.getDeclaredField("pre" + imagePosition).getInt(this);
 			} catch (IllegalArgumentException e) {
 				e.printStackTrace();
 			} catch (SecurityException e) {
@@ -176,8 +179,7 @@ public class RemoveClothActivity extends Activity implements UpdatePointsNotifie
 		}
 
 		private Bitmap createBitmapFromSRC() {
-			return BitmapFactory.decodeResource(getResources(),
-					R.drawable.icon1);
+			return BitmapFactory.decodeResource(getResources(), R.drawable.icon1);
 		}
 
 		/**
@@ -230,15 +232,13 @@ public class RemoveClothActivity extends Activity implements UpdatePointsNotifie
 		 */
 		private Bitmap setBitmapAlpha(Bitmap bm, int alpha) {
 			int[] argb = new int[bm.getWidth() * bm.getHeight()];
-			bm.getPixels(argb, 0, bm.getWidth(), 0, 0, bm.getWidth(),
-					bm.getHeight());
+			bm.getPixels(argb, 0, bm.getWidth(), 0, 0, bm.getWidth(), bm.getHeight());
 
 			for (int i = 0; i < argb.length; i++) {
 
 				argb[i] = ((alpha << 24) | (argb[i] & 0x00FFFFFF));
 			}
-			return Bitmap.createBitmap(argb, bm.getWidth(), bm.getHeight(),
-					Config.ARGB_8888);
+			return Bitmap.createBitmap(argb, bm.getWidth(), bm.getHeight(), Config.ARGB_8888);
 		}
 
 		/**
@@ -252,11 +252,10 @@ public class RemoveClothActivity extends Activity implements UpdatePointsNotifie
 			return Bitmap.createScaledBitmap(bm, SCREEN_W, SCREEN_H, true);
 		}
 
-		private void setBackGround(){
+		private void setBackGround() {
 			int drawableId = 0;
 			try {
-				drawableId = R.drawable.class.getDeclaredField(
-						"after" + imagePosition).getInt(this);
+				drawableId = R.drawable.class.getDeclaredField("after" + imagePosition).getInt(this);
 			} catch (IllegalArgumentException e) {
 				e.printStackTrace();
 			} catch (SecurityException e) {
@@ -300,7 +299,6 @@ public class RemoveClothActivity extends Activity implements UpdatePointsNotifie
 			mCanvas.drawBitmap(bm, 0, 0, null);
 		}
 
-		
 		protected void onDraw(Canvas canvas) {
 			canvas.drawBitmap(mBitmap, 0, 0, null);
 			mCanvas.drawPath(mPath, mPaint);
@@ -332,7 +330,6 @@ public class RemoveClothActivity extends Activity implements UpdatePointsNotifie
 			mPath.reset();
 		}
 
-		
 		public boolean onTouchEvent(MotionEvent event) {
 			float x = event.getX();
 			float y = event.getY();
@@ -349,7 +346,9 @@ public class RemoveClothActivity extends Activity implements UpdatePointsNotifie
 			case MotionEvent.ACTION_UP:
 				touch_up();
 				invalidate();
-				playMusic();
+				if (isPlayMusic) {
+					playMusic();
+				}
 				break;
 			}
 			return true;
