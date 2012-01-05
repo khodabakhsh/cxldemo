@@ -98,8 +98,6 @@ public class RemoveClothActivity extends Activity implements UpdatePointsNotifie
 		initRequrePointPreference() ;
 		if(!hasEnoughReadPointPreferenceValue&&imagePosition>6){
 			handler.post(new Runnable() {
-				
-				@Override
 				public void run() {
 					showGetPointDialog("解锁本图片");
 					
