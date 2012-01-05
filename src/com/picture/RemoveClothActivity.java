@@ -21,6 +21,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.cxl.removeClothForBeautyGirl.R;
 import com.waps.AppConnect;
 import com.waps.UpdatePointsNotifier;
 

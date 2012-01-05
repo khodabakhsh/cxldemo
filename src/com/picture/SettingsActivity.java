@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 
+import com.cxl.removeClothForBeautyGirl.R;
 import com.waps.AppConnect;
 
 public class SettingsActivity extends Activity implements View.OnClickListener{
@@ -75,8 +76,6 @@ public class SettingsActivity extends Activity implements View.OnClickListener{
 				
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.dismiss();
-					// 显示推荐安装程序（Offer）.
-//					AppConnect.getInstance(SettingsActivity.this).showOffers(SettingsActivity.this);
 				}
 			});
 			builder.show();
