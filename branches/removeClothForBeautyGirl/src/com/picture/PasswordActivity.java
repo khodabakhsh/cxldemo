@@ -1,5 +1,6 @@
 package com.picture;
 
+import com.cxl.removeClothForBeautyGirl.R;
 import com.waps.AppConnect;
 
 import android.app.Activity;

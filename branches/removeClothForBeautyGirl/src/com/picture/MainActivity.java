@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.Toast;
 import android.widget.ViewSwitcher.ViewFactory;
+import com.cxl.removeClothForBeautyGirl.R;
 
 public class MainActivity extends Activity implements ViewFactory {
 	private ImageSwitcher is;

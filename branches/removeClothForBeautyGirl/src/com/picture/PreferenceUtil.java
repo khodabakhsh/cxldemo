@@ -2,6 +2,7 @@ package com.picture;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import com.cxl.removeClothForBeautyGirl.R;
 
 public class PreferenceUtil {
 
