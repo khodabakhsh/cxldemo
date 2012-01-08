@@ -22,8 +22,6 @@ public class MainActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		
-		File localFile = getDatabasePath("data.db").getParentFile();
-		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
