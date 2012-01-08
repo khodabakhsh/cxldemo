@@ -298,7 +298,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 					.setIcon(R.drawable.happy2)
 					.setTitle("永久移除一切广告")
 					.setMessage(
-							"感谢您使用本程序O(∩_∩)O~\n当前积分：" + currentPointTotal + "。\n只要积分满足"
+							"感谢您使用本程序O(∩_∩)O！\n当前积分：" + currentPointTotal + "。\n只要积分满足"
 									+ requireAdPoint + "，就可以永久移除本程序的一切广告！")
 					.setPositiveButton("获取积分",
 							new DialogInterface.OnClickListener() {
