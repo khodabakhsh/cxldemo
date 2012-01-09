@@ -209,7 +209,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		shareButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				if (!hasEnoughSharePointPreferenceValue) {
-					showGetPointDialog("使用【蓝牙、短信】发送笑话分享给您的朋友!", requireSharePoint);
+					showGetPointDialog("使用【蓝牙、短信、微博】发送笑话分享给您的朋友!", requireSharePoint);
 
 				} else {
 
