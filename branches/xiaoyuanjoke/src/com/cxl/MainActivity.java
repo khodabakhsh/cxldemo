@@ -13,6 +13,7 @@ import android.view.SubMenu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,8 +34,8 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 	Handler handler = new Handler();
 
 	private int scrollY = 0;
-	private View shareButton;
-	private View scrollView;
+	private Button shareButton;
+	private ScrollView scrollView;
 	public static int Current_Page_Value = 1;
 	public static final int Start_Page_Value = 1;
 	public static int Page_Sum = 0;
@@ -172,7 +173,11 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 
 			titleTextView.setText(cursor.getString(0) + "、" + cursor.getString(1));
 			contentTextView.setText(cursor.getString(2).replaceAll("\\\\n", "\n"));
-			scrollView.scrollTo(0, scrollY);
+			scrollView.post(new Runnable() {
+				public void run() {
+					scrollView.scrollTo(0, scrollY);
+				}
+			});
 		}
 	}
 
@@ -200,7 +205,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		initCurrentPagePreference();
 		// 连接服务器. 应用启动时调用(为了统计准确性，此句必须填写).
 		AppConnect.getInstance(this);
-		shareButton = findViewById(R.id.shareButton);
+		shareButton = (Button) findViewById(R.id.shareButton);
 		shareButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				if (!hasEnoughSharePointPreferenceValue) {
@@ -217,7 +222,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 				}
 			}
 		});
-		scrollView = findViewById(R.id.scrollView);
+		scrollView = (ScrollView) findViewById(R.id.scrollView);
 		titleTextView = (TextView) findViewById(R.id.titleTextView);
 		contentTextView = (TextView) findViewById(R.id.contentTextView);
 

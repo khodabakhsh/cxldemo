@@ -41,7 +41,7 @@
 		android:layout_below="@id/titleTextView" android:layout_above="@id/toobalLayout">
 		<TextView android:id="@+id/contentTextView"
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
-			android:textSize="18sp" android:textColor="@color/black"
+			android:textSize="20sp" android:textColor="@color/black"
 			android:textStyle="bold" />
 	</ScrollView>
 
