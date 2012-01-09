@@ -50,17 +50,14 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 	public static int currentPointTotal = 0;
 
 	private void initRequrePointPreference() {
-		hasEnoughAdPointPreferenceValue = PreferenceUtil
-				.getHasEnoughAdPoint(MainActivity.this);
-		hasEnoughReadPointPreferenceValue = PreferenceUtil
-				.getHasEnoughReadPoint(MainActivity.this);
-		hasEnoughSharePointPreferenceValue = PreferenceUtil
-				.getHasEnoughSharePoint(MainActivity.this);
+		hasEnoughAdPointPreferenceValue = PreferenceUtil.getHasEnoughAdPoint(MainActivity.this);
+		hasEnoughReadPointPreferenceValue = PreferenceUtil.getHasEnoughReadPoint(MainActivity.this);
+		hasEnoughSharePointPreferenceValue = PreferenceUtil.getHasEnoughSharePoint(MainActivity.this);
 	}
 
 	protected void onResume() {
-		if (!hasEnoughAdPointPreferenceValue
-				|| !hasEnoughReadPointPreferenceValue|| !hasEnoughSharePointPreferenceValue) {
+		if (!hasEnoughAdPointPreferenceValue || !hasEnoughReadPointPreferenceValue
+				|| !hasEnoughSharePointPreferenceValue) {
 			AppConnect.getInstance(this).getPoints(this);
 		}
 		super.onResume();
@@ -119,16 +116,14 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 
 		setTitle("第【" + Current_Page_Value + "】页    / 共" + Page_Sum + "页");
 		if (Current_Page_Value == 1) {
-			Toast.makeText(this, "第一页哦 ，开始愉快之旅 ！ \\(^o^)/~", Toast.LENGTH_LONG)
-					.show();
+			Toast.makeText(this, "第一页哦 ，开始愉快之旅 ！ \\(^o^)/~", Toast.LENGTH_LONG).show();
 			btnPrevious.setVisibility(View.INVISIBLE);
 		} else {
 			btnPrevious.setVisibility(View.VISIBLE);
 		}
 		if (Current_Page_Value == Page_Sum) {
 			btnNext.setVisibility(View.INVISIBLE);
-			Toast.makeText(this, "最后一页了哦 ，祝您天天好心情哦 ！ (*^__^*) ……哈哈~",
-					Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "最后一页了哦 ，祝您天天好心情哦 ！ (*^__^*) ……哈哈~", Toast.LENGTH_LONG).show();
 		} else {
 			btnNext.setVisibility(View.VISIBLE);
 		}
@@ -151,8 +146,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 	}
 
 	private boolean canView(int pageIndex) {
-		if ((pageIndex >= Read_Requre_Point_Page_Index)
-				&& !hasEnoughReadPointPreferenceValue) {
+		if ((pageIndex >= Read_Requre_Point_Page_Index) && !hasEnoughReadPointPreferenceValue) {
 			return false;
 		} else {
 			return true;
@@ -160,8 +154,8 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 	}
 
 	private void initPageSume() {
-		Cursor cursor = DBUtil.getDatabase(MainActivity.this, R.raw.data)
-				.rawQuery("select count(*)as aa  from text", null);
+		Cursor cursor = DBUtil.getDatabase(MainActivity.this, R.raw.data).rawQuery("select count(*)as aa  from text",
+				null);
 		startManagingCursor(cursor);
 		if (cursor.moveToNext()) {
 
@@ -171,16 +165,13 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 
 	private void setContent() {
 
-		Cursor cursor = DBUtil.getDatabase(MainActivity.this, R.raw.data)
-				.rawQuery("select id,title,content from text where id=?",
-						new String[] { String.valueOf(Current_Page_Value) });
+		Cursor cursor = DBUtil.getDatabase(MainActivity.this, R.raw.data).rawQuery(
+				"select id,title,content from text where id=?", new String[] { String.valueOf(Current_Page_Value) });
 		startManagingCursor(cursor);
 		if (cursor.moveToNext()) {
 
-			titleTextView.setText(cursor.getString(0) + "、"
-					+ cursor.getString(1));
-			contentTextView.setText(cursor.getString(2).replaceAll("\\\\n",
-					"\n"));
+			titleTextView.setText(cursor.getString(0) + "、" + cursor.getString(1));
+			contentTextView.setText(cursor.getString(2).replaceAll("\\\\n", "\n"));
 			scrollView.scrollTo(0, scrollY);
 		}
 	}
@@ -198,15 +189,12 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 			Current_Page_Value = Integer.parseInt(menu);
 			if (!canView(Current_Page_Value)) {
 				canRead = false;
-				showGetPointDialog("继续阅读 【"
-						+ MenuActivity.MENU_List
-								.get(Read_Requre_Point_Page_Index
-										- Start_Page_Value) + "】 之后的内容哦!",requireReadPoint);
-				Current_Page_Value = PreferenceUtil
-						.getCurrentPage(MainActivity.this);
+				showGetPointDialog(
+						"继续阅读 【" + MenuActivity.MENU_List.get(Read_Requre_Point_Page_Index - Start_Page_Value)
+								+ "】 之后的内容哦!", requireReadPoint);
+				Current_Page_Value = PreferenceUtil.getCurrentPage(MainActivity.this);
 			}
-			PreferenceUtil
-					.setCurrentPage(MainActivity.this, Current_Page_Value);
+			PreferenceUtil.setCurrentPage(MainActivity.this, Current_Page_Value);
 		}
 
 		initCurrentPagePreference();
@@ -216,17 +204,15 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		shareButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				if (!hasEnoughSharePointPreferenceValue) {
-					showGetPointDialog("使用蓝牙、短信发送搞笑的笑话分享给您的朋友!",requireSharePoint);
+					showGetPointDialog("使用【蓝牙、短信】发送笑话分享给您的朋友!", requireSharePoint);
 
 				} else {
 
 					Intent sendIntent = new Intent("android.intent.action.SEND");
 					sendIntent.setType("text/plain");
 					sendIntent.putExtra("android.intent.extra.SUBJECT", "分享");
-					sendIntent.putExtra("android.intent.extra.TEXT",
-							contentTextView.getText());
-					Intent selectIntent = Intent.createChooser(sendIntent,
-							"使用以下方式发送");
+					sendIntent.putExtra("android.intent.extra.TEXT", contentTextView.getText());
+					Intent selectIntent = Intent.createChooser(sendIntent, "使用以下方式发送");
 					startActivity(selectIntent);
 				}
 			}
@@ -259,10 +245,9 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 					setContent();
 					setButtonVisible();
 				} else {
-					showGetPointDialog("继续阅读 【"
-							+ MenuActivity.MENU_List
-									.get(Read_Requre_Point_Page_Index
-											- Start_Page_Value) + "】 之后的内容哦!",requireReadPoint);
+					showGetPointDialog(
+							"继续阅读 【" + MenuActivity.MENU_List.get(Read_Requre_Point_Page_Index - Start_Page_Value)
+									+ "】 之后的内容哦!", requireReadPoint);
 				}
 			}
 		});
@@ -281,8 +266,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		btnGetPoint.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
 				// 显示推荐安装程序（Offer）.
-				AppConnect.getInstance(MainActivity.this).showOffers(
-						MainActivity.this);
+				AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
 			}
 		});
 
@@ -296,25 +280,19 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 
 			new AlertDialog.Builder(MainActivity.this)
 					.setIcon(R.drawable.happy2)
-					.setTitle("永久移除一切广告")
+					.setTitle("感谢您使用本程序！")
 					.setMessage(
-							"感谢您使用本程序O(∩_∩)O！\n当前积分：" + currentPointTotal + "。\n只要积分满足"
-									+ requireAdPoint + "，就可以永久移除本程序的一切广告！")
-					.setPositiveButton("获取积分",
-							new DialogInterface.OnClickListener() {
-								public void onClick(
-										DialogInterface dialoginterface, int i) {
-									// 显示推荐安装程序（Offer）.
-									AppConnect.getInstance(MainActivity.this)
-											.showOffers(MainActivity.this);
-								}
-							})
-					.setNegativeButton("取消",
-							new DialogInterface.OnClickListener() {
-								public void onClick(
-										DialogInterface dialoginterface, int i) {
-								}
-							}).show();
+							"说明：本程序的一切广告信息，在积分满足" + requireAdPoint + "后，自动清除！当前积分："
+									+ currentPointTotal)
+					.setPositiveButton("获取积分", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialoginterface, int i) {
+							// 显示推荐安装程序（Offer）.
+							AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
+						}
+					}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialoginterface, int i) {
+						}
+					}).show();
 		}
 		if (hasEnoughAdPointPreferenceValue) {
 			btnGetPoint.setText("更多下载");
@@ -338,26 +316,20 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 			finish();
 		} else if (paramMenuItem.getItemId() == 1) {
 			// 显示推荐安装程序（Offer）.
-			AppConnect.getInstance(MainActivity.this).showOffers(
-					MainActivity.this);
+			AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
 		}
 		return super.onOptionsItemSelected(paramMenuItem);
 	}
 
-	private void showGetPointDialog(String type,int score) {
-		new AlertDialog.Builder(MainActivity.this)
-				.setIcon(R.drawable.happy2)
-				.setTitle("当前积分：" + currentPointTotal)
-				.setMessage("只要积分满足" + score + "，就可以" + type)
-				.setPositiveButton("免费获得积分",
-						new DialogInterface.OnClickListener() {
-							public void onClick(
-									DialogInterface dialoginterface, int i) {
-								// 显示推荐安装程序（Offer）.
-								AppConnect.getInstance(MainActivity.this)
-										.showOffers(MainActivity.this);
-							}
-						}).show();
+	private void showGetPointDialog(String type, int score) {
+		new AlertDialog.Builder(MainActivity.this).setIcon(R.drawable.happy2).setTitle("当前积分：" + currentPointTotal)
+				.setMessage("说明：只要积分满足" + score + "，就可以" + type)
+				.setPositiveButton("获取积分", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialoginterface, int i) {
+						// 显示推荐安装程序（Offer）.
+						AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
+					}
+				}).show();
 	}
 
 }
