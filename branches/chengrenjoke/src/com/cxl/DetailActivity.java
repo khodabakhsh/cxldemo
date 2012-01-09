@@ -65,7 +65,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 	}
 
 	private void setPageInfo(String loadUrl, final int scrollY) {
-		String currentTitle = MainActivity.MENU_List.get(Current_Page_Index - Start_Page_Index).getValue();
+		String currentTitle = MainActivity.MENU_List.get(Current_Page_Index - Start_Page_Index).getValue()+"/共"+ MainActivity.MENU_List.size()+"页";;
 		setTitle(currentTitle);
 		textView.setText(getFileContent(DetailActivity.this, loadUrl.substring("file:///android_asset/".length())));
 		if (scrollY == 0) {
