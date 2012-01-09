@@ -17,9 +17,9 @@ import org.jdom.input.SAXBuilder;
  * JDOM 生成与解析XML文档 * 依赖jdom.jar
  */
 public class JDomDemo {
-	private static String baseFilePath = "D:/cxl/my apk/__________others_________/短篇笑话精选1/assets/";
+	private static String baseFilePath = "D:/cxl/my apk/__________others_________/中篇笑话精选1/assets/";
 	//	private static String titleFilePath = "D:\\cxl\\my apk\\__________others_________\\世界上下五千年\\res\\xml\\a00.xml";
-	private static String genFilePath = "D:/cxl/my apk/__________others_________/短篇笑话精选1/assets_new";
+	private static String genFilePath = "D:/cxl/my apk/__________others_________/中篇笑话精选1/assets_new";
 	private static String suffix = ".txt";
 	private static Map<String, Integer> map = new HashMap<String, Integer>();
 	static {
@@ -74,51 +74,13 @@ public class JDomDemo {
 		}
 	}
 
-	static int count = 0;
+	static int genFilecount = 0;
+	static int jokeIdcount = 0;
 	static StringBuffer bf = new StringBuffer();
 
+	
+
 	public static void parseContentXml(File orgFile) {
-		SAXBuilder builder = new SAXBuilder(false);
-		try {
-			Document document = builder.build(orgFile);
-			Element root = document.getRootElement();
-			List<Element> jokeList = root.getChildren("joke");
-			Element element;
-			FileWriter writer = null;
-			File file;
-			String titleName;
-			String content;
-			StringBuffer bf = new StringBuffer();
-			for (int i = 0; i < jokeList.size(); i++) {
-				element = jokeList.get(i);
-				//				element.getChildText("name");
-				titleName = element.getChildText("name");
-				content = element.getChildText("content").trim();
-				bf.append((i + 1) + "、" + titleName + "\n" + content + "\n\n\n");
-
-			}
-			System.out.println(bf);
-			//			file = new File(genFilePath,(++i) + suffix);
-			//			if (!file.getParentFile().exists()) {
-			//				file.getParentFile().mkdirs();
-			//			}
-			//			if (!file.exists()) {
-			//				file.createNewFile();
-			//			}
-			//			writer = new FileWriter(file);
-			//			writer.write(bf.toString());
-			//			writer.flush();
-			//			if (writer != null) {
-			//				writer.close();
-			//			}
-		} catch (JDOMException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void parseContentXml2(File orgFile) {
 		SAXBuilder builder = new SAXBuilder(false);
 		try {
 			Document document = builder.build(orgFile);
@@ -133,15 +95,16 @@ public class JDomDemo {
 
 			for (int i = 0; i < jokeList.size(); i++) {
 				element = jokeList.get(i);
-				id = element.getChildText("id");
+//				id = element.getChildText("id");
+				jokeIdcount++;
 				titleName = element.getChildText("title");
 				content = element.getChildText("text").trim();
 
-				bf.append(id + "、" + titleName + "\n" + content + "\n\n\n");
+				bf.append(jokeIdcount + "、" + titleName + "\n" + content + "\n\n\n");
 
-				if (Integer.parseInt(id) % 100 == 0) {
+				if (jokeIdcount % 100 == 0) {
 					System.out.println(bf);
-					file = new File(genFilePath, (++count) + suffix);
+					file = new File(genFilePath, (++genFilecount) + suffix);
 					if (!file.getParentFile().exists()) {
 						file.getParentFile().mkdirs();
 					}
@@ -186,7 +149,7 @@ public class JDomDemo {
 
 			//			parseContentXml(file);
 			//			break;
-			parseContentXml2(file);
+			parseContentXml(file);
 			//			break;
 		}
 
