@@ -216,7 +216,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 
 	private void showGetPointDialog(String type) {
 		new AlertDialog.Builder(DetailActivity.this).setIcon(R.drawable.happy2).setTitle("当前积分：" + currentPointTotal)
-				.setMessage("只要积分满足" + requireReadPoint + "，就可以" + type)
+				.setMessage("说明：只要积分满足" + requireReadPoint + "，就可以" + type)
 				.setPositiveButton("立刻获取积分", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialoginterface, int i) {
 						// 显示推荐安装程序（Offer）.
