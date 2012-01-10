@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:background="@drawable/bg">
+
+	<LinearLayout android:layout_width="fill_parent"
+		android:id="@+id/relativeLayout" android:layout_height="wrap_content"
+		android:layout_marginTop="3.0dip" android:layout_alignParentBottom="true">
+		<Button android:id="@+id/previous" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="上一页"
+			android:layout_weight="1"/>
+		<Button android:id="@+id/menuButton" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="目录"
+			android:textColor="@android:color/black" android:textSize="18sp" android:layout_weight="1" />
+		<Button android:id="@+id/OffersButton" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" 
+			android:textColor="@android:color/black" android:textSize="18sp" android:layout_weight="1"/>
+		<Button android:id="@+id/next" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="下一页"
+			android:layout_weight="1" />
+	</LinearLayout>
+
+	<LinearLayout android:id="@+id/AdLinearLayout2"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:gravity="center_horizontal" android:layout_above="@id/relativeLayout" />
+	<com.cxl.MyWebView android:id="@+id/myWebView" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:focusable="false" 		android:layout_above="@id/AdLinearLayout2"
+		android:layout_alignParentTop="true"/>
+</RelativeLayout>
