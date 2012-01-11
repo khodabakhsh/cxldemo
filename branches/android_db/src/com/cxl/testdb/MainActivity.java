@@ -16,10 +16,14 @@ import android.util.Log;
 public class MainActivity extends Activity {
 	private File file = null;
 	private File dir = null;
-	private static final String dbName = "data.db";
+	
+	/**param
+	 * */
+	private static final String dbName = "jokedata";
+	private static final int dbFileRawId = R.raw.jokedata;
 
-	/** Called when the activity is first created. */
-	@Override
+	/***/
+	
 	public void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
@@ -33,14 +37,14 @@ public class MainActivity extends Activity {
 		file = new File(dir,dbName);
 
 		if (!file.exists()) {
-			FileUtils.loadDbFile(R.raw.data, file, getResources(), getPackageName());
+			FileUtils.loadDbFile(dbFileRawId, file, getResources(), getPackageName());
 		}
 
 		// 读取数据库
 
 		SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(file, null);
 		//SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(path, null);
-		Cursor cursor = db.query("text", new String[] { "id", "title", "content"}, null, null, null, null,
+		Cursor cursor = db.query("joke", new String[] { "id", "data", "Fav"}, null, null, null, null,
 				null);
 		startManagingCursor((Cursor)cursor);
 
