@@ -1,7 +1,5 @@
 package com.cxl;
 
-import java.util.Random;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -110,12 +108,10 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		}
 	}
 
-	private static String[] moodStrings = new String[] { "^_^", "O(∩_∩)O~", "(*^__^*) ……", "(～ o ～)~zZ", "(⊙o⊙)",
-			"(⊙v⊙)", "( ⊙ o ⊙ )！", "\\(^o^)/~" };
 
 	private void setButtonVisible() {
 
-		setTitle("第【" + Current_Page_Value + "】页         " + moodStrings[new Random().nextInt(moodStrings.length)]);
+		setTitle("第【" + Current_Page_Value + "】页 / 共"+Page_Sum+"页");
 		if (Current_Page_Value == 1) {
 			Toast.makeText(this, "第一页哦 ，开始愉快之旅 ！ \\(^o^)/~", Toast.LENGTH_LONG).show();
 			btnPrevious.setVisibility(View.INVISIBLE);
@@ -236,9 +232,9 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		}
 		if (canRead && !hasEnoughAdPointPreferenceValue) {
 
-			new AlertDialog.Builder(MainActivity.this).setIcon(R.drawable.happy2).setTitle("永久移除所有广告")
-					.setMessage("当前积分：" + currentPointTotal + "。\n只要积分满足" + requireAdPoint + "，就可以永久移除所有广告！")
-					.setPositiveButton("免费获得积分", new DialogInterface.OnClickListener() {
+			new AlertDialog.Builder(MainActivity.this).setIcon(R.drawable.happy2).setTitle("移除一切广告")
+					.setMessage("说明： 当前积分：" + currentPointTotal + "。\n只要积分满足" + requireAdPoint + "，就可以移除本程序一切广告！")
+					.setPositiveButton("如何获取积分", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialoginterface, int i) {
 							// 显示推荐安装程序（Offer）.
 							AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
