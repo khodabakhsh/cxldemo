@@ -71,7 +71,6 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 			handler.post(new Runnable() {
 				public void run() {
 					adLinearLayout.setVisibility(View.GONE);
-					btnGetPoint.setText("更多下载");
 				}
 			});
 		}
@@ -216,7 +215,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		});
 
 		btnGetPoint = (Button) findViewById(R.id.OffersButton);
-		btnGetPoint.setText("移除广告");
+		btnGetPoint.setText("更多下载");
 		btnGetPoint.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
 				// 显示推荐安装程序（Offer）.
@@ -233,7 +232,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		if (canRead && !hasEnoughAdPointPreferenceValue) {
 
 			new AlertDialog.Builder(MainActivity.this).setIcon(R.drawable.happy2).setTitle("移除一切广告")
-					.setMessage("说明： 当前积分：" + currentPointTotal + "。\n只要积分满足" + requireAdPoint + "，就可以移除本程序一切广告！")
+					.setMessage("说明： 当前积分：" + currentPointTotal + "。\n只要积分满足" + requireAdPoint + "，就可以移除本程序一切广告和提示信息！")
 					.setPositiveButton("如何获取积分", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialoginterface, int i) {
 							// 显示推荐安装程序（Offer）.
@@ -243,9 +242,6 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 						public void onClick(DialogInterface dialoginterface, int i) {
 						}
 					}).show();
-		}
-		if (hasEnoughAdPointPreferenceValue) {
-			btnGetPoint.setText("更多下载");
 		}
 
 	}
