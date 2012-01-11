@@ -225,7 +225,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		});
 
 		setButtonVisible();
-		adLinearLayout = (LinearLayout) findViewById(R.id.AdLinearLayout2);
+		adLinearLayout = (LinearLayout) findViewById(R.id.AdLinearLayout);
 
 		if (!hasEnoughAdPointPreferenceValue) {
 			new AdView(this, adLinearLayout).DisplayAd(20);// 每20秒轮换一次广告；最少为20
