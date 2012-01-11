@@ -19,8 +19,8 @@ public class MainActivity extends Activity {
 	
 	/**param
 	 * */
-	private static final String dbName = "jokedata";
-	private static final int dbFileRawId = R.raw.jokedata;
+	private static final String dbName = "zainanjoke";
+	private static final int dbFileRawId = R.raw.zainanjoke;
 
 	/***/
 	
@@ -29,7 +29,6 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		// 第一次运行应用程序时，加载数据库到data/data/<pkg_name>/database/<db_name>
 		dir = new File("data/data/" + getPackageName() + "/databases");
 		if (!dir.exists() || !dir.isDirectory()) {
 			dir.mkdir();
@@ -40,7 +39,6 @@ public class MainActivity extends Activity {
 			FileUtils.loadDbFile(dbFileRawId, file, getResources(), getPackageName());
 		}
 
-		// 读取数据库
 
 		SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(file, null);
 		//SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(path, null);
