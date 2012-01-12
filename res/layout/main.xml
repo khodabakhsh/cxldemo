@@ -1,31 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout android:orientation="vertical"
-	android:background="@drawable/bg" android:layout_width="fill_parent"
-	android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
-	<LinearLayout android:gravity="center"
-		android:layout_gravity="top" android:id="@+id/img_LinearLayout06"
-		android:layout_width="fill_parent" android:layout_height="fill_parent" android:visibility="gone">
-		<ImageView android:id="@+id/welcome_ImageView01"
-			android:layout_width="fill_parent" android:layout_height="fill_parent" />
-	</LinearLayout>
-	<LinearLayout android:layout_gravity="top"
-		android:orientation="vertical" android:id="@+id/LinearLayout05"
-		android:paddingLeft="20.0px" android:paddingRight="20.0px"
-		android:layout_width="fill_parent" android:layout_height="310.0px"
-		android:layout_marginTop="60.0px">
+<RelativeLayout 
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android" android:background="@drawable/bg">
+	<LinearLayout android:layout_alignParentTop="true"
+		android:id="@+id/aboveLinearLayout" android:paddingLeft="5dip"
+		android:paddingRight="5dip" android:layout_width="fill_parent"
+		android:layout_marginTop="8dip" android:layout_height="495px">
 		<WebView android:id="@+id/more_webview" android:layout_width="fill_parent"
 			android:layout_height="fill_parent" />
 	</LinearLayout>
-	<LinearLayout android:gravity="center"
-		android:layout_gravity="bottom" android:orientation="vertical"
-		android:id="@+id/LinearLayout04" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:layout_marginTop="10.0px">
-		<LinearLayout android:gravity="center" android:id="@+id/LinearLayout01"
+	<LinearLayout 
+		android:id="@+id/LinearLayout04" android:layout_width="fill_parent" android:layout_alignParentBottom="true"
+		android:layout_height="wrap_content" android:layout_marginTop="10dip"
+		android:layout_marginBottom="5dip" android:layout_below="@id/aboveLinearLayout" >
+		<LinearLayout android:id="@+id/LinearLayout01"
 			android:layout_width="fill_parent" android:layout_height="wrap_content">
-			<Spinner android:id="@+id/Spinner01" android:layout_width="160.0px"
-				android:layout_height="wrap_content" />
-			<Spinner android:id="@+id/Spinner02" android:layout_width="160.0px"
-				android:layout_height="wrap_content" />
+			<Spinner android:id="@+id/Spinner01" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_weight="1" />
+			<Spinner android:id="@+id/Spinner02" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_weight="1" />
 		</LinearLayout>
 	</LinearLayout>
-</LinearLayout>
+
+</RelativeLayout>
