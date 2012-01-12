@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout android:orientation="vertical"
+	android:background="@drawable/bg" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+	<LinearLayout android:gravity="center"
+		android:layout_gravity="top" android:id="@+id/img_LinearLayout06"
+		android:layout_width="fill_parent" android:layout_height="fill_parent" android:visibility="gone">
+		<ImageView android:id="@+id/welcome_ImageView01"
+			android:layout_width="fill_parent" android:layout_height="fill_parent" />
+	</LinearLayout>
+	<LinearLayout android:layout_gravity="top"
+		android:orientation="vertical" android:id="@+id/LinearLayout05"
+		android:paddingLeft="20.0px" android:paddingRight="20.0px"
+		android:layout_width="fill_parent" android:layout_height="310.0px"
+		android:layout_marginTop="60.0px">
+		<WebView android:id="@+id/more_webview" android:layout_width="fill_parent"
+			android:layout_height="fill_parent" />
+	</LinearLayout>
+	<LinearLayout android:gravity="center"
+		android:layout_gravity="bottom" android:orientation="vertical"
+		android:id="@+id/LinearLayout04" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_marginTop="10.0px">
+		<LinearLayout android:gravity="center" android:id="@+id/LinearLayout01"
+			android:layout_width="fill_parent" android:layout_height="wrap_content">
+			<Spinner android:id="@+id/Spinner01" android:layout_width="160.0px"
+				android:layout_height="wrap_content" />
+			<Spinner android:id="@+id/Spinner02" android:layout_width="160.0px"
+				android:layout_height="wrap_content" />
+		</LinearLayout>
+	</LinearLayout>
+</LinearLayout>
