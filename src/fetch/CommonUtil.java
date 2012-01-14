@@ -3,9 +3,13 @@ package fetch;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -62,6 +66,36 @@ public class CommonUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}// 写入多行
+
+	}
+	public static void WriteFile(File file, String content,String charset,boolean append) {
+		if (!file.getParentFile().exists()) {
+			file.getParentFile().mkdirs();
+		}
+//		FileWriter filewriter;
+		
+		try {
+			FileOutputStream fileInputStream = new FileOutputStream(file,append);
+			OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileInputStream, charset);
+			outputStreamWriter.write(content);
+			outputStreamWriter.flush();
+			outputStreamWriter.close();
+			fileInputStream.close();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+//		try {
+//			filewriter = new FileWriter(file, append);
+//			PrintWriter printwriter = new PrintWriter(filewriter);
+//			printwriter.println(content);
+//			printwriter.flush();
+//			printwriter.close();
+//			filewriter.close();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}// 写入多行
+		
 
 	}
 
