@@ -1,39 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent" android:layout_margin="3.0dip">
+	android:layout_height="fill_parent">
 
-	<RelativeLayout android:id="@+id/pageLayout"
+	<LinearLayout android:id="@+id/AdLinearLayout"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:layout_marginTop="3.0dip" android:layout_alignParentBottom="true">
-		<Button android:id="@+id/previous" android:background="@drawable/an"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="上一页" android:layout_alignParentLeft="true"
-			android:textSize="18sp" />
-		<Button android:id="@+id/next" android:background="@drawable/an"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="下一页" android:layout_alignParentRight="true"
-			android:textSize="18sp" />
-	</RelativeLayout>
+		android:gravity="center_horizontal" android:layout_alignParentTop="true"
+		android:layout_marginBottom="5dip" android:layout_marginTop="5dip" />
 
 	<LinearLayout android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:layout_marginTop="5dip"
-		android:id="@+id/buttonLayout" android:layout_above="@id/pageLayout">
+		android:id="@+id/buttonLayout" android:layout_alignParentBottom="true">
+		<Button android:id="@+id/previous" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="上一页"
+			android:layout_alignParentLeft="true" android:layout_weight="1" />
 		<Button android:id="@+id/OwnsButton" android:layout_height="wrap_content"
-			android:layout_width="fill_parent" android:layout_weight="1"
-			android:textSize="18sp" />
+			android:layout_width="fill_parent" android:layout_weight="1" />
 		<Button android:id="@+id/returnButton" android:layout_height="wrap_content"
-			android:layout_width="fill_parent" android:layout_weight="1"
-			android:textSize="18sp" />
+			android:layout_width="fill_parent" android:layout_weight="1" />
+		<Button android:id="@+id/next" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="下一页"
+			android:layout_alignParentRight="true" android:layout_weight="1" />
 	</LinearLayout>
-	<LinearLayout android:id="@+id/AdLinearLayout"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:gravity="center_horizontal" android:layout_above="@id/buttonLayout" />
 
-	<ScrollView android:id="@+id/scrollView" android:gravity="center" android:orientation="vertical"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:layout_above="@id/AdLinearLayout"
-		android:layout_alignParentTop="true">
+
+	<ScrollView android:id="@+id/scrollView" android:gravity="center"
+		android:orientation="vertical" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_above="@id/buttonLayout"
+		android:layout_below="@id/AdLinearLayout">
 		<LinearLayout android:orientation="vertical"
 			android:layout_width="fill_parent" android:layout_height="wrap_content">
 
