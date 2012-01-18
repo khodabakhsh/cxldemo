@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -23,6 +26,7 @@ import android.widget.TextView;
 
 import com.cxl.baijiaxing.R;
 import com.waps.AppConnect;
+import com.waps.UpdatePointsNotifier;
 
 public class MainActivity extends Activity {
 	private ListView searchListView;
@@ -33,7 +37,9 @@ public class MainActivity extends Activity {
 	public static List<String> searchList = ListManager.AllList;
 	public static List<String> favoriteList = new ArrayList<String>();
 	public static final String Separator = "、";
+	
 
+	
 	@Override
 	protected void onDestroy() {
 		AppConnect.getInstance(this).finalize();
@@ -47,6 +53,7 @@ public class MainActivity extends Activity {
 	protected void onResume() {
 		searchList = ListManager.getSearchList(txtSearch.getText().toString());
 		matchListAdapter.notifyDataSetChanged();
+
 		super.onResume();
 	}
 
@@ -55,6 +62,7 @@ public class MainActivity extends Activity {
 		// 连接服务器. 应用启动时调用(为了统计准确性，此句必须填写).
 		AppConnect.getInstance(this);
 		setContentView(R.layout.main);
+		
 
 		searchListView = (ListView) findViewById(R.id.searchList);
 		searchListView.setAdapter(matchListAdapter);
@@ -118,5 +126,6 @@ public class MainActivity extends Activity {
 			return paramView;
 		}
 	}
+	
 
 }
