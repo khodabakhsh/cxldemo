@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class RenameImgInOrder {
 	private static int countIndex = 1;
-	private static File fileDirectory = new File("D:/cxl/my apk/e________________gao/download______neihan/8/assets/cartoon");
+	private static File fileDirectory = new File("D:/cxl/my apk/e________________gao/download______neihan/4/assets/cartoon");
 	private static String ImgPrefix = "mh";
 
 	private static FileFilter jpgFilter = new FileFilter() {
@@ -38,7 +38,7 @@ public class RenameImgInOrder {
 	public static void main(String[] args) {
 		File[] files = fileDirectory.listFiles(jpgFilter);
 //		for (File file : files) {
-//			renameFileByRandom(fileDirectory, file.getName());//先随机命名一下。
+//			renameFileByRandom(fileDirectory, file.getName());//
 //		}
 		files = fileDirectory.listFiles(jpgFilter);
 		for (File file : files) {
