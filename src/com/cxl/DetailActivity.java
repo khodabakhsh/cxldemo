@@ -36,7 +36,9 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 	private Button btnNext;
 	private Button btnGetPoint;
 	private ScrollView scrollView;
-	private LinearLayout adLinearLayout;
+	
+	private Button OwnsButton2; 
+	private Button OwnsButton3; 
 
 	Handler handler = new Handler();
 
@@ -53,38 +55,12 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 	public static final int Max_Page_Index = ListManager.AllList.size()
 			+ Start_Page_Index - 1;// 最大页索引
 
-	public static boolean hasEnoughAdPointPreferenceValue = false;
-	public static final int requireAdPoint = 50;
-	public static boolean hasEnoughReadPointPreferenceValue = false;
-	public static final int requireReadPoint = 30;
-	public static final int Read_Requre_Point_Page_Index = 3000;
+	Handler msgHandler = new Handler();
 
-	public static int currentPointTotal = 0;
+	public static boolean hasEnoughRequreAdPointPreferenceValue = false;// 保存在配置里
+	public static final int requireAdPoint = 70;// 要求积分
+	public static int currentPointTotal = 0;// 当前积分
 
-	private boolean canView(int pageIndex) {
-		if ((pageIndex >= Read_Requre_Point_Page_Index)
-				&& !hasEnoughReadPointPreferenceValue) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-
-	private void showGetPointDialog(String type) {
-		new AlertDialog.Builder(DetailActivity.this)
-				.setIcon(R.drawable.happy2)
-				.setTitle("当前积分：" + currentPointTotal)
-				.setMessage("只要积分满足" + requireReadPoint + "，就可以" + type)
-				.setPositiveButton("免费获得积分",
-						new DialogInterface.OnClickListener() {
-							public void onClick(
-									DialogInterface dialoginterface, int i) {
-								// 显示推荐安装程序（Offer）.
-								AppConnect.getInstance(DetailActivity.this)
-										.showOffers(DetailActivity.this);
-							}
-						}).show();
-	}
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -98,7 +74,6 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		btnGetPoint = (Button) findViewById(R.id.OwnsButton);
 		scrollView = (ScrollView) findViewById(R.id.scrollView);
 
-		adLinearLayout = (LinearLayout) findViewById(R.id.AdLinearLayout);
 
 		returnButton.setText("目录");
 		btnGetPoint.setText("更多下载");
@@ -108,13 +83,6 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		String itemIndex = selectItem.substring(0,
 				selectItem.lastIndexOf(MainActivity.Separator));
 		boolean canRead = true;
-		if (!canView(Integer.parseInt(itemIndex))) {
-			canRead = false;
-			showGetPointDialog("继续阅读 【"
-					+ ListManager.AllList.get(Read_Requre_Point_Page_Index
-							- Start_Page_Index) + "】 之后的内容哦!");
-			itemIndex = "01";
-		}
 
 		Current_Page_Index = Integer.parseInt(itemIndex);
 
@@ -136,16 +104,8 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 
 		btnNext.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				if (canView(Current_Page_Index + 1)) {
 					String itemIndex = getModifiedPage(++Current_Page_Index);
 					changePageContent(itemIndex);
-				} else {
-					showGetPointDialog("继续阅读 【"
-							+ ListManager.AllList
-									.get(Read_Requre_Point_Page_Index
-											- Start_Page_Index) + "】 之后的内容哦!");
-				}
-
 			}
 		});
 
@@ -155,58 +115,25 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 						DetailActivity.this);
 			}
 		});
-		if (!hasEnoughAdPointPreferenceValue) {
-			new AdView(this, adLinearLayout).DisplayAd(20);// 每20秒轮换一次广告；最少为20
-		}
-		if (canRead && !hasEnoughAdPointPreferenceValue) {
-
-			new AlertDialog.Builder(DetailActivity.this)
-					.setIcon(R.drawable.happy2)
-					.setTitle("永久移除所有广告")
-					.setMessage(
-							"当前积分：" + currentPointTotal + "。\n只要积分满足"
-									+ requireAdPoint + "，就可以永久移除所有广告！")
-					.setPositiveButton("免费获得积分",
-							new DialogInterface.OnClickListener() {
-								public void onClick(
-										DialogInterface dialoginterface, int i) {
-									// 显示推荐安装程序（Offer）.
-									AppConnect.getInstance(DetailActivity.this)
-											.showOffers(DetailActivity.this);
-								}
-							})
-					.setNegativeButton("取消",
-							new DialogInterface.OnClickListener() {
-								public void onClick(
-										DialogInterface dialoginterface, int i) {
-								}
-							}).show();
-		}
-		if (hasEnoughAdPointPreferenceValue) {
-			btnGetPoint.setText("更多下载");
-		}
+		OwnsButton2 = (Button) findViewById(R.id.OwnsButton2);
+		OwnsButton2.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View arg0) {
+				AppConnect.getInstance(DetailActivity.this).showOffers(
+						DetailActivity.this);
+			}
+		});
+		OwnsButton3 = (Button) findViewById(R.id.OwnsButton3);
+		OwnsButton3.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View arg0) {
+				AppConnect.getInstance(DetailActivity.this).showOffers(
+						DetailActivity.this);
+			}
+		});
 
 	}
 
 	private void changePageContent(String itemIndex) {
-		// AssetManager assets = getAssets();
-		// try {
-		// assetFile = assets.open("image/" + itemIndex + ".jpg");
-		// // imageView.setImageBitmap(BitmapFactory.decodeStream(assetFile));
-		// bitmap = BitMapUtil.adujstSizeByMax(assetFile);
-		// imageView.setImageBitmap(bitmap);
-		//
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// } finally {
-		// if (assetFile != null) {
-		// try {
-		// assetFile.close();
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
-		// }
-		// }
+		
 		myWebView.loadDataWithBaseURL(null,getFileContent(DetailActivity.this, itemIndex), "text/html", "UTF-8",
 				null);
 //		textView.setText(getFileContent(DetailActivity.this, itemIndex));
@@ -261,58 +188,17 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		return (pageIndex < 10) ? "0" + pageIndex : String.valueOf(pageIndex);
 	}
 
-	private void initRequrePointPreference() {
-		hasEnoughAdPointPreferenceValue = PreferenceUtil
-				.getHasEnoughAdPoint(DetailActivity.this);
-		hasEnoughReadPointPreferenceValue = PreferenceUtil
-				.getHasEnoughReadPoint(DetailActivity.this);
-	}
 
+	private void initRequrePointPreference() {
+		hasEnoughRequreAdPointPreferenceValue = PreferenceUtil.getHasEnoughAdPoint(DetailActivity.this);
+	}
 	protected void onResume() {
-		if (!hasEnoughAdPointPreferenceValue
-				|| !hasEnoughReadPointPreferenceValue) {
+		if (!hasEnoughRequreAdPointPreferenceValue) {
 			AppConnect.getInstance(this).getPoints(this);
 		}
 		super.onResume();
 	}
 
-	/**
-	 * AppConnect.getPoints()方法的实现，必须实现
-	 * 
-	 * @param currencyName
-	 *            虚拟货币名称.
-	 * @param pointTotal
-	 *            虚拟货币余额.
-	 */
-	public void getUpdatePoints(String currencyName, int pointTotal) {
-		currentPointTotal = pointTotal;
-		if (pointTotal >= requireAdPoint) {
-			hasEnoughAdPointPreferenceValue = true;
-			PreferenceUtil.setHasEnoughAdPoint(DetailActivity.this, true);
-			handler.post(new Runnable() {
-				public void run() {
-					adLinearLayout.setVisibility(View.GONE);
-					btnGetPoint.setText("更多下载...");
-				}
-			});
-		}
-		if (pointTotal >= requireReadPoint) {
-			hasEnoughReadPointPreferenceValue = true;
-			PreferenceUtil.setHasEnoughReadPoint(DetailActivity.this, true);
-		}
-	}
-
-	/**
-	 * AppConnect.getPoints() 方法的实现，必须实现
-	 * 
-	 * @param error
-	 *            请求失败的错误信息
-	 */
-
-	public void getUpdatePointsFailed(String error) {
-		hasEnoughAdPointPreferenceValue = false;
-		hasEnoughReadPointPreferenceValue = false;
-	}
 
 	public String getFileContent(Context context, String itemIndex) {// 规划了file参数、ID参数，方便多文件写入。
 		InputStream in = null;
@@ -349,4 +235,39 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		return sBuffer.toString();
 	}
 
+	public void getUpdatePoints(String currencyName, int pointTotal) {
+		currentPointTotal = pointTotal;
+		if (pointTotal >= requireAdPoint) {
+			hasEnoughRequreAdPointPreferenceValue = true;
+			PreferenceUtil.setHasEnoughAdPoint(DetailActivity.this, true);
+		}
+		if(!hasEnoughRequreAdPointPreferenceValue){
+			msgHandler.post(new Runnable() {
+				public void run() {
+					new AlertDialog.Builder(DetailActivity.this)
+							.setIcon(R.drawable.happy2)
+							.setTitle("感谢使用本程序")
+							.setMessage(
+									"说明：本程序的一切提示信息，在积分满足" + requireAdPoint
+											+ "后，自动消除！\n\n可通过【免费赚积分】，获得积分。\n\n通过【更多应用】，可以下载各种好玩应用。\n\n当前积分："
+											+ currentPointTotal)
+							.setPositiveButton("更多应用", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialoginterface, int i) {
+									AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
+								}
+							}).setNeutralButton("免费赚积分", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialoginterface, int i) {
+									AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
+								}
+							}).setNegativeButton("继续", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialoginterface, int i) {
+								}
+							}).show();
+				}
+			});
+		}
+	}
+	public void getUpdatePointsFailed(String error) {
+		hasEnoughRequreAdPointPreferenceValue = false;
+	}
 }
