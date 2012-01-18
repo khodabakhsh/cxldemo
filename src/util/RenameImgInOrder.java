@@ -6,19 +6,19 @@ import java.util.UUID;
 
 public class RenameImgInOrder {
 	private static int countIndex = 1;
-	private static File fileDirectory = new File("D:/cxl/my apk/e________________gao/download______neihan/4/assets/cartoon");
+	private static File fileDirectory = new File("D:/cxl/my apk/e________________gao/download______neihan/9/assets/cartoon");
 	private static String ImgPrefix = "mh";
 
 	private static FileFilter jpgFilter = new FileFilter() {
 		public boolean accept(File pathname) {
-			return pathname.getName().endsWith(".jpg");
+			return pathname.getName().toLowerCase().endsWith(".jpg");
 
 		}
 	};
 
 	public static void renameFile(File parent, String oldFileName) {
 		File oldFile = new File(parent, oldFileName);
-		File newFile = new File(oldFile.getParent(), getNewImgName());
+		File newFile = new File(oldFile.getParent(), ImgPrefix+oldFileName);
 		oldFile.renameTo(newFile);
 	}
 
