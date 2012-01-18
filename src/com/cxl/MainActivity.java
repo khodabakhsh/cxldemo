@@ -5,13 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -26,7 +23,6 @@ import android.widget.TextView;
 
 import com.cxl.baijiaxing.R;
 import com.waps.AppConnect;
-import com.waps.UpdatePointsNotifier;
 
 public class MainActivity extends Activity {
 	private ListView searchListView;
