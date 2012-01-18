@@ -12,7 +12,8 @@
     <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="40.0dip">
         <Button android:id="@+id/previous" android:background="@drawable/back" android:layout_width="40.0dip" android:layout_height="40.0dip" />
         <LinearLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="40.0dip" android:layout_weight="1.0">
-            <TextView android:textColor="#ff000000" android:gravity="center" android:id="@+id/app_store" android:layout_width="wrap_content" android:layout_height="40.0dip" android:text="更多应用" android:drawableLeft="@drawable/applist_icon" />
+             <Button android:id="@+id/moreOffer1" android:layout_width="100.0dip" android:layout_height="40.0dip" />
+             <Button android:id="@+id/moreOffer2" android:layout_width="100.0dip" android:layout_height="40.0dip" />
         </LinearLayout>
         <Button android:id="@+id/next" android:background="@drawable/next" android:layout_width="40.0dip" android:layout_height="40.0dip" />
     </LinearLayout>
