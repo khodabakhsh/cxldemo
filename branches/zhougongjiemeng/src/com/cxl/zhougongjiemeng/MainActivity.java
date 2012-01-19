@@ -14,6 +14,7 @@ import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
@@ -40,6 +41,8 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 
 	Handler msgHandler = new Handler();
 	Handler titleHandler = new Handler();
+	private Button moreOffer1;
+	private Button moreOffer2;
 
 	public static boolean hasEnoughRequreAdPointPreferenceValue = false;// 保存在配置里
 	public static final int requireAdPoint = 60;// 要求积分
@@ -119,6 +122,19 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		selectDetail = (String) s2_aspn.getItem(0);
 		web.loadDataWithBaseURL(null, dataParser.getResult(selectType, selectDetail), "text/html", "UTF-8", null);
 		initRequrePointPreference();
+		
+		moreOffer1 = (Button)findViewById(R.id.moreOffer1);
+		moreOffer1.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
+			}
+		});
+		moreOffer2 = (Button)findViewById(R.id.moreOffer2);
+		moreOffer2.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
+			}
+		});
 	}
 
 	@Override
