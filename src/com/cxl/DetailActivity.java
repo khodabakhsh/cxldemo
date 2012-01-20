@@ -44,7 +44,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 	}
 
 	public static boolean hasEnoughRequrePointPreferenceValue = false;// 保存在配置里
-	public static final int requirePoint = 30;// 要求积分
+	public static final int requirePoint = 40;// 要求积分
 	public static int currentPointTotal = 0;// 当前积分
 
 	/**
