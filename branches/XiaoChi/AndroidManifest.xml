@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.cxl.xiaochi" android:versionCode="5"
-	android:versionName="5.0">
+	android:versionName="5.1">
 	<uses-sdk android:minSdkVersion="4" />
 
 	<application android:icon="@drawable/icon" android:label="@string/app_name">
@@ -16,7 +16,7 @@
 		<activity android:name="com.waps.OffersWebView"
 			android:configChanges="keyboardHidden|orientation" />
 		<meta-data android:name="WAPS_ID" android:value="ca8fa357ff513a072e90d27b044e58fc" />
-		<meta-data android:name="WAPS_PID" android:value="WAPS" />
+		<meta-data android:name="WAPS_PID" android:value="gfan" />
 	</application>
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
