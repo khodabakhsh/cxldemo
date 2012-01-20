@@ -43,7 +43,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 	}
 
 	public static boolean hasEnoughRequrePointPreferenceValue = false;// 保存在配置里
-	public static final int requirePoint = 30;// 要求积分
+	public static final int requirePoint = 60;// 要求积分
 	public static int currentPointTotal = 0;// 当前积分
 
 	/**
@@ -110,7 +110,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 			}
 		});
 		Button owns = (Button) findViewById(R.id.OwnsButton);
-		owns.setText("更多精品下载...");
+		owns.setText("更多好玩应用...");
 		owns.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
 				// 显示推荐安装程序（Offer）.
