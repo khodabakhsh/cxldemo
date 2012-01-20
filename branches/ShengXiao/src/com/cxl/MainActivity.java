@@ -7,6 +7,7 @@ import java.util.Map;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -35,6 +36,8 @@ public class MainActivity extends ListActivity  {
 		SimpleAdapter adapter = new SimpleAdapter(this, getData(), R.layout.vlist, new String[] { "id", "name",
 				"dateRange", "img" }, new int[] { R.id.id, R.id.name, R.id.dateRange, R.id.img });
 		setListAdapter(adapter);
+		getListView().setBackgroundResource(R.drawable.bg);
+		getListView().setCacheColorHint(Color.parseColor("#00000000"));
 		// 连接服务器. 应用启动时调用(为了统计准确性，此句必须填写).
 		AppConnect.getInstance(this);
 
