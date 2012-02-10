@@ -41,7 +41,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 	public static int Page_Sum = 0;
 
 	public static boolean hasEnoughAdPointPreferenceValue = false;
-	public static final int requireAdPoint = 70;
+	public static final int requireAdPoint = 80;
 	public static boolean hasEnoughReadPointPreferenceValue = false;
 	public static final int requireReadPoint = 50;
 	public static final int Read_Requre_Point_Page_Index = 40;
@@ -284,21 +284,26 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		}
 		if (canRead && !hasEnoughAdPointPreferenceValue) {
 
+			
 			new AlertDialog.Builder(MainActivity.this)
-					.setIcon(R.drawable.happy2)
-					.setTitle("感谢您使用本程序！")
-					.setMessage(
-							"说明：本程序的一切广告信息，在积分满足" + requireAdPoint + "后，自动清除！当前积分："
-									+ currentPointTotal)
-					.setPositiveButton("获取积分", new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialoginterface, int i) {
-							// 显示推荐安装程序（Offer）.
-							AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
-						}
-					}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialoginterface, int i) {
-						}
-					}).show();
+			.setIcon(R.drawable.happy2)
+			.setTitle("感谢使用本程序")
+			.setMessage(
+					"说明：本程序的一切提示信息，在积分满足" + requireAdPoint
+							+ "后，自动消除！\n\n可通过【免费赚积分】，获得积分。\n\n通过【更多应用】，可以下载各种好玩应用。\n\n当前积分："
+							+ currentPointTotal)
+			.setPositiveButton("更多应用", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialoginterface, int i) {
+					AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
+				}
+			}).setNeutralButton("免费赚积分", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialoginterface, int i) {
+					AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
+				}
+			}).setNegativeButton("继续", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialoginterface, int i) {
+				}
+			}).show();
 		}
 	}
 
