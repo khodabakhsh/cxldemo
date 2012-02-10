@@ -231,17 +231,26 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		}
 		if (canRead && !hasEnoughAdPointPreferenceValue) {
 
-			new AlertDialog.Builder(MainActivity.this).setIcon(R.drawable.happy2).setTitle("移除一切广告")
-					.setMessage("说明： 当前积分：" + currentPointTotal + "。\n只要积分满足" + requireAdPoint + "，就可以移除本程序一切广告和提示信息！")
-					.setPositiveButton("如何获取积分", new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialoginterface, int i) {
-							// 显示推荐安装程序（Offer）.
-							AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
-						}
-					}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialoginterface, int i) {
-						}
-					}).show();
+			
+			new AlertDialog.Builder(MainActivity.this)
+			.setIcon(R.drawable.happy2)
+			.setTitle("感谢使用本程序")
+			.setMessage(
+					"说明：本程序的一切提示信息，在积分满足" + requireAdPoint
+							+ "后，自动消除！\n\n可通过【免费赚积分】，获得积分。\n\n通过【更多应用】，可以下载各种好玩应用。\n\n当前积分："
+							+ currentPointTotal)
+			.setPositiveButton("更多应用", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialoginterface, int i) {
+					AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
+				}
+			}).setNeutralButton("免费赚积分", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialoginterface, int i) {
+					AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
+				}
+			}).setNegativeButton("继续", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialoginterface, int i) {
+				}
+			}).show();
 		}
 
 	}
