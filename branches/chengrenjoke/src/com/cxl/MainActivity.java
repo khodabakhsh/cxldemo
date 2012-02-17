@@ -21,18 +21,18 @@ public class MainActivity extends Activity {
 	ArrayAdapter<KeyValue> menuAdapter;
 	public static final ArrayList<KeyValue> MENU_List = new ArrayList<KeyValue>();
 	static {
-		MENU_List.add(new KeyValue("1", "成人笑话（1）"));
-		MENU_List.add(new KeyValue("2", "成人笑话（2）"));
-		MENU_List.add(new KeyValue("3", "成人笑话（3）"));
-		MENU_List.add(new KeyValue("4", "成人笑话（4）"));
-		MENU_List.add(new KeyValue("5", "成人笑话（5）"));
-		MENU_List.add(new KeyValue("6", "成人笑话（6）"));
-		MENU_List.add(new KeyValue("7", "成人笑话（7）"));
-		MENU_List.add(new KeyValue("8", "成人笑话（8）"));
-		MENU_List.add(new KeyValue("9", "精选成人笑话（1）"));
-		MENU_List.add(new KeyValue("10", "精选成人笑话（2）"));
-		MENU_List.add(new KeyValue("11", "精选成人笑话（3）"));
-		MENU_List.add(new KeyValue("12", "精选成人笑话（4）"));
+		MENU_List.add(new KeyValue("1", "成人冷幽默（1）"));
+		MENU_List.add(new KeyValue("2", "成人冷幽默（2）"));
+		MENU_List.add(new KeyValue("3", "成人冷幽默（3）"));
+		MENU_List.add(new KeyValue("4", "成人冷幽默（4）"));
+		MENU_List.add(new KeyValue("5", "成人冷幽默（5）"));
+		MENU_List.add(new KeyValue("6", "成人冷幽默（6）"));
+		MENU_List.add(new KeyValue("7", "成人冷幽默（7）"));
+		MENU_List.add(new KeyValue("8", "成人冷幽默（8）"));
+		MENU_List.add(new KeyValue("9", "精选成人冷幽默（1）"));
+		MENU_List.add(new KeyValue("10", "精选成人冷幽默（2）"));
+		MENU_List.add(new KeyValue("11", "精选成人冷幽默（3）"));
+		MENU_List.add(new KeyValue("12", "精选成人冷幽默（4）"));
 
 	}
 
