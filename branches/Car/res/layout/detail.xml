@@ -3,18 +3,24 @@
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent" android:layout_margin="3.0dip">
 
-	<RelativeLayout android:id="@+id/pageLayout"
+	<LinearLayout android:id="@+id/pageLayout"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:layout_marginTop="3.0dip" android:layout_alignParentBottom="true">
-		<Button android:id="@+id/previous" android:background="@drawable/an"
+		<Button android:id="@+id/previous" 
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="上一页" android:layout_alignParentLeft="true"
-			android:textSize="18sp" />
-		<Button android:id="@+id/next" android:background="@drawable/an"
+			android:text="上一页" android:layout_weight="1"
+			android:textSize="16sp" />
+		<Button android:id="@+id/offerButton1" android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:layout_weight="1"
+			android:textSize="16sp" android:text="更多精彩" />
+		<Button android:id="@+id/offerButton2" android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:layout_weight="1"
+			android:textSize="16sp" android:text="更多乐趣"/>
+		<Button android:id="@+id/next" 
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="下一页" android:layout_alignParentRight="true"
-			android:textSize="18sp" />
-	</RelativeLayout>
+			android:text="下一页"  android:layout_weight="1"
+			android:textSize="16sp" />
+	</LinearLayout>
 
 	<LinearLayout android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:layout_marginTop="5dip"
@@ -28,7 +34,7 @@
 	</LinearLayout>
 	<LinearLayout android:id="@+id/AdLinearLayout"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:gravity="center_horizontal" android:layout_above="@id/buttonLayout" />
+		android:gravity="center_horizontal" android:layout_above="@id/buttonLayout" android:visibility="gone"/>
 
 	<ScrollView android:id="@+id/scrollView" android:gravity="center" android:orientation="vertical"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
