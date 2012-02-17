@@ -27,29 +27,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 
 	private Button returnButton;
 
-	private void showDialog() {
-		new AlertDialog.Builder(DetailActivity.this)
-				.setIcon(R.drawable.happy2)
-				.setTitle("当前积分：" + currentPointTotal)
-				.setMessage(
-						"只要积分满足" + requirePoint + "，就可以消除本提示信息！！\n 您当前的积分不足"
-								+ requirePoint + "，所以会有此 提示。")
-				.setPositiveButton("免费获得积分",
-						new DialogInterface.OnClickListener() {
-							public void onClick(
-									DialogInterface dialoginterface, int i) {
-								// 显示推荐安装程序（Offer）.
-								AppConnect.getInstance(DetailActivity.this)
-										.showOffers(DetailActivity.this);
-							}
-						})
-				.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-
-					public void onClick(DialogInterface dialog, int which) {
-						// finish();
-					}
-				}).show();
-	}
+	
 
 	public static boolean hasEnoughRequrePointPreferenceValue = false;// 保存在配置里
 	public static final int requirePoint = 60;// 要求积分
@@ -125,8 +103,17 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 			}
 		});
 		Button owns = (Button) findViewById(R.id.OwnsButton);
-		owns.setText("更多精品下载...");
+		owns.setText("更多精品");
 		owns.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View arg0) {
+				// 显示推荐安装程序（Offer）.
+				AppConnect.getInstance(DetailActivity.this).showOffers(
+						DetailActivity.this);
+			}
+		});
+		Button owns2 = (Button) findViewById(R.id.OwnsButton2);
+		owns2.setText("更多乐趣");
+		owns2.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
 				// 显示推荐安装程序（Offer）.
 				AppConnect.getInstance(DetailActivity.this).showOffers(
@@ -136,9 +123,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		LinearLayout container = (LinearLayout) findViewById(R.id.AdLinearLayout);
 		new AdView(this, container).DisplayAd(20);// 每20秒轮换一次广告；最少为20
 
-		if (!hasEnoughRequrePointPreferenceValue) {// 没达到积分
-			showDialog();
-		}
+		
 	}
 
 	public String getFileContent(Context context, int x) {// 规划了file参数、ID参数，方便多文件写入。
