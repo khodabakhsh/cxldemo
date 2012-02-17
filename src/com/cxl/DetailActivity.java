@@ -51,21 +51,11 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 	public static final int requireAdPoint = 80;// 要求积分
 	public static int currentPointTotal = 0;// 当前积分
 	public static final int Requre_Read_Point_Page_Index = 6;//需要积分才能查看的页面
-
-	Handler adHandler = new Handler();
-
-	private boolean canView(int pageIndex) {
-		if ((pageIndex >= Requre_Read_Point_Page_Index) && !hasEnoughRequreReadPointPreferenceValue) {
-			showGetPointDialog("浏览【" + MainActivity.MENU_List.get(Requre_Read_Point_Page_Index - Start_Page_Index)
-					+ "】之后的内容哦O(∩_∩)O~");
-			return false;
-		} else {
-			return true;
-		}
-	}
+	
+	Handler msgHandler = new Handler();
 
 	private void setPageInfo(String loadUrl, final int scrollY) {
-		String currentTitle = MainActivity.MENU_List.get(Current_Page_Index - Start_Page_Index).getValue()+"/共"+ MainActivity.MENU_List.size()+"页";;
+		String currentTitle = MainActivity.MENU_List.get(Current_Page_Index - Start_Page_Index).getValue()+"/共"+ MainActivity.MENU_List.size()+"专辑";;
 		setTitle(currentTitle);
 		textView.setText(getFileContent(DetailActivity.this, loadUrl.substring("file:///android_asset/".length())));
 		if (scrollY == 0) {
@@ -100,44 +90,34 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		btnNext = (Button) findViewById(R.id.next);
 		btnNext.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				if (canView(Current_Page_Index + 1)) {
 					setPageInfo("file:///android_asset/" + Page_Prefix + (++Current_Page_Index) + Page_Suffix, 0);
-				}
 			}
 		});
-
+ 
+	    
 		Bundle bundle = getIntent().getExtras();
 		scrollView = (ScrollView) findViewById(R.id.scrollView);
 		textView = (TextView) findViewById(R.id.textView);
+		
 
 		boolean startByMenu = bundle.getBoolean("startByMenu");
 		if (startByMenu) {
 			int selectMenu = Integer.valueOf(bundle.getString("menu"));
-			if (canView(selectMenu)) {
 				Current_Page_Index = selectMenu;
 				setPageInfo("file:///android_asset/" + Page_Prefix + Current_Page_Index + Page_Suffix, 0);
-			} else {
-				Current_Page_Index = PreferenceUtil.getTxtIndex(this);
-				setPageInfo("file:///android_asset/" + Page_Prefix + Current_Page_Index + Page_Suffix,
-						PreferenceUtil.getScrollY(DetailActivity.this));
-			}
 		} else {
 			Current_Page_Index = PreferenceUtil.getTxtIndex(this);
 			setPageInfo("file:///android_asset/" + Page_Prefix + Current_Page_Index + Page_Suffix,
 					PreferenceUtil.getScrollY(DetailActivity.this));
 		}
-		menuButton = (Button) findViewById(R.id.menuButton);
-		menuButton.setOnClickListener(new Button.OnClickListener() {
+		Button offers2 = (Button) findViewById(R.id.OffersButton2);
+		offers2.setText("更多精彩");
+		offers2.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
-				Intent intent = new Intent();
-				intent.setClass(DetailActivity.this, MainActivity.class);
-				Bundle bundle = new Bundle();
-				bundle.putBoolean("showMenu", true);
-				intent.putExtras(bundle);
-				startActivity(intent);
-				finish();
+				AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
 			}
 		});
+		
 		Button offers = (Button) findViewById(R.id.OffersButton);
 		offers.setText("更多下载");
 		offers.setOnClickListener(new Button.OnClickListener() {
@@ -145,22 +125,8 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 				AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
 			}
 		});
-		if (!hasEnoughRequreAdPointPreferenceValue) {
-			new AlertDialog.Builder(DetailActivity.this).setIcon(R.drawable.happy2).setTitle("谢谢使用本程序")
-					.setMessage("说明：本程序的一切广告信息，在积分满足" + requireAdPoint + "后，自动清除！当前积分：" + currentPointTotal)
-					.setPositiveButton("获取积分", new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialoginterface, int i) {
-							AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
-						}
-					}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialoginterface, int i) {
-						}
-					}).show();
-		}
 		container = (LinearLayout) findViewById(R.id.AdLinearLayout);
-		if (!hasEnoughRequreAdPointPreferenceValue) {
 			new AdView(this, container).DisplayAd(20);// 每20秒轮换一次广告；最少为20
-		}
 
 	}
 
@@ -214,16 +180,6 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		return super.onOptionsItemSelected(paramMenuItem);
 	}
 
-	private void showGetPointDialog(String type) {
-		new AlertDialog.Builder(DetailActivity.this).setIcon(R.drawable.happy2).setTitle("当前积分：" + currentPointTotal)
-				.setMessage("说明：只要积分满足" + requireReadPoint + "，就可以" + type)
-				.setPositiveButton("立刻获取积分", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialoginterface, int i) {
-						// 显示推荐安装程序（Offer）.
-						AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
-					}
-				}).show();
-	}
 
 	private void initRequrePointPreference() {
 		hasEnoughRequreReadPointPreferenceValue = PreferenceUtil.getHasEnoughRequreReadPoint(DetailActivity.this);
@@ -237,6 +193,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		super.onResume();
 	}
 
+	
 	/**
 	 * AppConnect.getPoints()方法的实现，必须实现
 	 * 
@@ -254,12 +211,30 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		if (pointTotal >= requireAdPoint) {
 			hasEnoughRequreAdPointPreferenceValue = true;
 			PreferenceUtil.setHasEnoughRequreAdPoint(DetailActivity.this, true);
-			adHandler.post(new Runnable() {
+		}
+		if(!hasEnoughRequreAdPointPreferenceValue){
+			msgHandler.post(new Runnable() {
 				public void run() {
-					container.setVisibility(View.GONE);
+					new AlertDialog.Builder(DetailActivity.this)
+							.setTitle("感谢使用本程序")
+							.setMessage(
+									"说明：本程序的一切提示信息，在积分满足" + requireAdPoint
+											+ "后，自动消除！\n\n可通过【免费赚积分】，获得积分。\n\n通过【更多应用】，可以下载各种好玩应用。\n\n当前积分："
+											+ currentPointTotal)
+							.setPositiveButton("更多应用", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialoginterface, int i) {
+									AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
+								}
+							}).setNeutralButton("免费赚积分", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialoginterface, int i) {
+									AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
+								}
+							}).setNegativeButton("继续", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialoginterface, int i) {
+								}
+							}).show();
 				}
 			});
-
 		}
 	}
 
