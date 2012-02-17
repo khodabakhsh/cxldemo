@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent" android:background="@drawable/bg">
 	<LinearLayout android:id="@+id/AdLinearLayout"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:gravity="center_horizontal" />
+		android:gravity="center_horizontal" android:layout_alignParentTop="true" />
+	
 	<LinearLayout android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:layout_marginTop="3.0dip" >
+		android:layout_height="wrap_content" android:layout_marginTop="3.0dip"  android:layout_alignParentBottom="true" android:id="@+id/toolbar">
 		<Button android:id="@+id/previous" 
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="上一章"  android:layout_weight="1"/>
 		<Button android:id="@+id/OffersButton" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" 
 			android:textColor="@android:color/black" android:layout_weight="1"/>
-		<Button android:id="@+id/menuButton" android:layout_width="wrap_content"
+		<Button android:id="@+id/OffersButton2" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:layout_centerHorizontal="true"
-			android:textColor="@android:color/black" android:text="目录" android:layout_weight="1"/>
+			android:textColor="@android:color/black" android:text="更多软件" android:layout_weight="1"/>
 		<Button android:id="@+id/next" 
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="下一章"  android:layout_weight="1"/>
 	</LinearLayout>
-
-
+	
 	<WebView android:textSize="18.0dip" android:textStyle="bold"
 		android:textColor="#000000" android:id="@+id/webView"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:layout_margin="5.0dip" />
+		android:layout_margin="5.0dip" android:layout_above="@id/toolbar" android:layout_below="@id/AdLinearLayout"/>
+		
+	
 
-</LinearLayout>
+</RelativeLayout>
