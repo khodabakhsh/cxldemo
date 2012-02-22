@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -37,9 +36,8 @@ import android.widget.TextView;
 import com.cxl.ListManager.KeyValue;
 import com.cxl.tangshi.R;
 import com.waps.AppConnect;
-import com.waps.UpdatePointsNotifier;
 
-public class MainActivity extends TabActivity implements TabHost.OnTabChangeListener, UpdatePointsNotifier {
+public class MainActivity extends TabActivity implements TabHost.OnTabChangeListener {
 	TabHost tabHost;
 	private ExpandableListView firstMenuListView;
 	private ListView favoriteListView;
@@ -50,11 +48,6 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
 	private TextWatcher watcher = new MyTextWatcher();
 	MatchListAdapter matchListAdapter = new MatchListAdapter();
 	private ListView searchListView;
-
-	public static boolean hasEnoughReadPointPreferenceValue = false;
-	public static final int requireReadPoint = 30;
-	public static int currentPointTotal = 0;
-	Handler handler = new Handler();
 
 	class MyTextWatcher implements TextWatcher {
 		public void afterTextChanged(Editable paramEditable) {
@@ -104,60 +97,13 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
 		favoriteListAdapter.notifyDataSetChanged();
 		ListManager.getSearchList(txtSearch.getText().toString());
 		matchListAdapter.notifyDataSetChanged();
-		if (!hasEnoughReadPointPreferenceValue) {
-			AppConnect.getInstance(this).getPoints(this);
-		}
 		super.onResume();
-	}
-
-	private void initRequrePointPreference() {
-		hasEnoughReadPointPreferenceValue = PreferenceUtil.getHasEnoughReadPoint(MainActivity.this);
-	}
-
-	/**
-	 * AppConnect.getPoints()方法的实现，必须实现
-	 * 
-	 * @param currencyName
-	 *            虚拟货币名称.
-	 * @param pointTotal
-	 *            虚拟货币余额.
-	 */
-	public void getUpdatePoints(String currencyName, int pointTotal) {
-		currentPointTotal = pointTotal;
-		if (pointTotal >= requireReadPoint) {
-			hasEnoughReadPointPreferenceValue = true;
-			PreferenceUtil.setHasEnoughReadPoint(MainActivity.this, true);
-		}
-	}
-
-	/**
-	 * AppConnect.getPoints() 方法的实现，必须实现
-	 * 
-	 * @param error
-	 *            请求失败的错误信息
-	 */
-
-	public void getUpdatePointsFailed(String error) {
-		hasEnoughReadPointPreferenceValue = false;
-	}
-
-	private void showGetPointDialog(String type) {
-		new AlertDialog.Builder(MainActivity.this).setIcon(R.drawable.happy2).setTitle("当前积分：" + currentPointTotal)
-				.setMessage("只要积分满足" + requireReadPoint + "，就可以" + type)
-				.setPositiveButton("免费获得积分", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialoginterface, int i) {
-						// 显示推荐安装程序（Offer）.
-						AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
-					}
-				}).show();
 	}
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// 连接服务器. 应用启动时调用(为了统计准确性，此句必须填写).
 		AppConnect.getInstance(this);
-
-		initRequrePointPreference();
 
 		this.tabHost = getTabHost();
 		FrameLayout localFrameLayout = this.tabHost.getTabContentView();
@@ -180,20 +126,12 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
 
 			public boolean onChildClick(ExpandableListView arg0, View arg1, final int groupPosition, int childPosition,
 					long id) {
-				if (groupPosition == 1 && !hasEnoughReadPointPreferenceValue) {
-					handler.post(new Runnable() {
-						public void run() {
-							showGetPointDialog("浏览【" + ListManager.groups[groupPosition] + "】");
-						}
-					});
-				} else {
-					Intent intent = new Intent();
-					intent.setClass(MainActivity.this, SubMenuActivity.class);
-					Bundle bundle = new Bundle();
-					bundle.putString("menu", ListManager.children[groupPosition][childPosition].toString());
-					intent.putExtras(bundle);
-					startActivity(intent);
-				}
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, SubMenuActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putString("menu", ListManager.children[groupPosition][childPosition].toString());
+				intent.putExtras(bundle);
+				startActivity(intent);
 
 				return false;
 			}
