@@ -6,9 +6,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
@@ -19,8 +22,9 @@ import android.widget.Toast;
 import com.cxl.tangshi.R;
 import com.waps.AdView;
 import com.waps.AppConnect;
+import com.waps.UpdatePointsNotifier;
 
-public class DetailActivity extends Activity {
+public class DetailActivity extends Activity implements UpdatePointsNotifier{
 
 	private Button returnButton;
 	private TextView textView;
@@ -30,11 +34,67 @@ public class DetailActivity extends Activity {
 	public static final String Favorite_Item_Split = "@@##";
 	public static final String Item_Key_Value_Split = "#===";
 	public static final String UTF8 = "UTF8";
+	
+	public static boolean hasEnoughAdPointPreferenceValue = false;
+	public static final int requireAdPoint = 60;
+
+	public static int currentPointTotal = 0;
+	Handler msgHandler = new Handler();
+	
+	protected void onResume() {
+		if (!hasEnoughAdPointPreferenceValue) {
+			AppConnect.getInstance(this).getPoints(this);
+		}
+		super.onResume();
+	}
+
+	private void initRequrePointPreference() {
+		hasEnoughAdPointPreferenceValue = PreferenceUtil.getHasEnoughAdPoint(DetailActivity.this);
+	}
+	
+	public void getUpdatePoints(String currencyName, int pointTotal) {
+		currentPointTotal = pointTotal;
+		if (pointTotal >= requireAdPoint) {
+			hasEnoughAdPointPreferenceValue = true;
+			PreferenceUtil.setHasEnoughAdPoint(DetailActivity.this, true);
+
+		}
+		if (!hasEnoughAdPointPreferenceValue) {
+
+			msgHandler.post(new Runnable() {
+				public void run() {
+					new AlertDialog.Builder(DetailActivity.this)
+							.setTitle("感谢使用本程序")
+							.setMessage(
+									"说明：本程序的一切提示信息，在积分满足" + requireAdPoint
+											+ "后，自动消除！\n\n可通过【免费赚积分】，获得积分。\n\n通过【更多应用】，可以下载各种好玩应用。\n\n当前积分："
+											+ currentPointTotal)
+							.setPositiveButton("更多应用", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialoginterface, int i) {
+									AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
+								}
+							}).setNeutralButton("免费赚积分", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialoginterface, int i) {
+									AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
+								}
+							}).setNegativeButton("继续", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialoginterface, int i) {
+								}
+							}).show();
+				}
+			});
+		}
+	}
+	public void getUpdatePointsFailed(String error) {
+		hasEnoughAdPointPreferenceValue = false;
+	}
 
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.detail);
+		
+		initRequrePointPreference();
 
 		Bundle bundle = getIntent().getExtras();
 		fileName = bundle.getString("fileName");
