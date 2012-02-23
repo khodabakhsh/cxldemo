@@ -36,7 +36,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 	public static final int Page_Sum = 12;
 
 	public static boolean hasEnoughAdPointPreferenceValue = false;
-	public static final int requireAdPoint = 70;
+	public static final int requireAdPoint = 60;
 	public static boolean hasEnoughReadPointPreferenceValue = false;
 	public static final int requireReadPoint = 50;
 	public static final int Read_Requre_Point_Page_Index = 6;
