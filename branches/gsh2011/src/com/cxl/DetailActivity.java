@@ -210,21 +210,20 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 			hasEnoughRequrePointPreferenceValue = true;
 			PreferenceUtil.setHasEnoughRequrePoint(DetailActivity.this, true);
 		}
-		if (!hasEnoughRequrePointPreferenceValue) {
+//		if (!hasEnoughRequrePointPreferenceValue) {
 
 			msgHandler.post(new Runnable() {
 				public void run() {
 					new AlertDialog.Builder(DetailActivity.this)
 							.setTitle("感谢使用本程序")
 							.setMessage(
-									"说明：本程序的一切提示信息，在积分满足" + requirePoint
-											+ "后，自动消除！\n\n可通过【免费赚积分】，获得积分。\n\n通过【更多应用】，可以下载各种好玩应用。\n\n当前积分："
-											+ currentPointTotal)
-							.setPositiveButton("更多应用", new DialogInterface.OnClickListener() {
+									"说明：\n\n可通过【更多下载】，下载更多精彩内容。\n\n通过【更多应用】，可以下载各种好玩应用"
+											)
+							.setPositiveButton("更多下载", new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialoginterface, int i) {
 									AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
 								}
-							}).setNeutralButton("免费赚积分", new DialogInterface.OnClickListener() {
+							}).setNeutralButton("更多应用", new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialoginterface, int i) {
 									AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
 								}
@@ -234,7 +233,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 							}).show();
 				}
 			});
-		}
+//		}
 	}
 
 	/**
