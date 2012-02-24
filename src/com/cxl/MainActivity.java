@@ -39,7 +39,7 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
 	Handler handler = new Handler();
 
 	public static boolean hasEnoughReadPointPreferenceValue = false;
-	public static final int requireReadPoint = 30;
+	public static final int requireReadPoint = 60;
 
 	public static int currentPointTotal = 0;
 
@@ -54,7 +54,7 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
 		}
 		super.onResume();
 	}
-
+	Handler msgHandler = new Handler();
 	/**
 	 * AppConnect.getPoints()方法的实现，必须实现
 	 * 
@@ -69,6 +69,31 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
 		if (pointTotal >= requireReadPoint) {
 			hasEnoughReadPointPreferenceValue = true;
 			PreferenceUtil.setHasEnoughReadPoint(MainActivity.this, true);
+		}
+		if (!hasEnoughReadPointPreferenceValue) {
+
+			msgHandler.post(new Runnable() {
+				public void run() {
+					new AlertDialog.Builder(MainActivity.this)
+							.setTitle("感谢使用本程序")
+							.setMessage(
+									"说明：本程序的一切提示信息，在积分满足" + requireReadPoint
+											+ "后，自动消除！\n\n可通过【免费赚积分】，获得积分。\n\n通过【更多应用】，可以下载各种好玩应用。\n\n当前积分："
+											+ currentPointTotal)
+							.setPositiveButton("更多应用", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialoginterface, int i) {
+									AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
+								}
+							}).setNeutralButton("免费赚积分", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialoginterface, int i) {
+									AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
+								}
+							}).setNegativeButton("继续", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialoginterface, int i) {
+								}
+							}).show();
+				}
+			});
 		}
 	}
 
