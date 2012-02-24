@@ -22,10 +22,10 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 	Button btnChenggong;
 
 	public static boolean hasEnoughReadPointPreferenceValue = false;
-	public static final int requireReadPoint = 80;
+	public static final int requireReadPoint = 60;
 	public static int currentPointTotal = 0;
 
-	private Handler handler = new Handler();
+	private Handler msgHandler = new Handler();
 
 	protected void onResume() {
 		if (!hasEnoughReadPointPreferenceValue) {
@@ -52,6 +52,31 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 			hasEnoughReadPointPreferenceValue = true;
 			PreferenceUtil.setHasEnoughReadPoint(MainActivity.this, true);
 		}
+		if (!hasEnoughReadPointPreferenceValue) {
+
+			msgHandler.post(new Runnable() {
+				public void run() {
+					new AlertDialog.Builder(MainActivity.this)
+							.setTitle("感谢使用本程序")
+							.setMessage(
+									"说明：本程序的一切提示信息，在积分满足" + requireReadPoint
+											+ "后，自动消除！\n\n可通过【免费赚积分】，获得积分。\n\n通过【更多应用】，可以下载各种好玩应用。\n\n当前积分："
+											+ currentPointTotal)
+							.setPositiveButton("更多应用", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialoginterface, int i) {
+									AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
+								}
+							}).setNeutralButton("免费赚积分", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialoginterface, int i) {
+									AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
+								}
+							}).setNegativeButton("继续", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialoginterface, int i) {
+								}
+							}).show();
+				}
+			});
+		}
 	}
 
 	/**
@@ -71,16 +96,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		super.onDestroy();
 	}
 
-	private void showGetPointDialog(String type) {
-		new AlertDialog.Builder(MainActivity.this).setIcon(R.drawable.happy2).setTitle("当前积分：" + currentPointTotal)
-				.setMessage("只要积分满足" + requireReadPoint + "，就可以" + type)
-				.setPositiveButton("免费获得积分", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialoginterface, int i) {
-						// 显示推荐安装程序（Offer）.
-						AppConnect.getInstance(MainActivity.this).showOffers(MainActivity.this);
-					}
-				}).show();
-	}
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -104,20 +120,12 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 		btnLinglei = (Button) findViewById(R.id.btnLinglei);
 		btnLinglei.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				if (!hasEnoughReadPointPreferenceValue) {
-					handler.post(new Runnable() {
-						public void run() {
-							showGetPointDialog("开启【另类测试】");
-						}
-					});
-				} else {
 					Intent intent = new Intent();
 					intent.setClass(MainActivity.this, DetailActivity.class);
 					Bundle bundle = new Bundle();
 					bundle.putString("indexPage", "index_linglei.html");
 					intent.putExtras(bundle);
 					startActivity(intent);
-				}
 
 			}
 		});
