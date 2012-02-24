@@ -11,6 +11,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -23,22 +24,7 @@ import com.waps.UpdatePointsNotifier;
 
 public class DetailActivity extends Activity implements UpdatePointsNotifier {
 
-	private void showDialog() {
-		new AlertDialog.Builder(DetailActivity.this).setIcon(R.drawable.happy2).setTitle("当前积分：" + currentPointTotal)
-				.setMessage("只要积分满足" + requirePoint + "，就可以消除本提示信息！！\n 您当前的积分不足" + requirePoint + "，所以会有此 提示。")
-				.setPositiveButton("免费获得积分", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialoginterface, int i) {
-						// 显示推荐安装程序（Offer）.
-						AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
-					}
-				}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-
-					public void onClick(DialogInterface dialog, int which) {
-						// finish();
-					}
-				}).show();
-	}
-
+	
 	public static boolean hasEnoughRequrePointPreferenceValue = false;// 保存在配置里
 	public static final int requirePoint = 50;// 要求积分
 	public static int currentPointTotal = 0;// 当前积分
@@ -56,6 +42,31 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		if (pointTotal >= requirePoint) {
 			hasEnoughRequrePointPreferenceValue = true;
 			PreferenceUtil.setHasEnoughRequrePoint(DetailActivity.this, true);
+		}
+		if (!hasEnoughRequrePointPreferenceValue) {
+
+			msgHandler.post(new Runnable() {
+				public void run() {
+					new AlertDialog.Builder(DetailActivity.this)
+							.setTitle("感谢使用本程序")
+							.setMessage(
+									"说明：本程序的一切提示信息，在积分满足" + requirePoint
+											+ "后，自动消除！\n\n可通过【免费赚积分】，获得积分。\n\n通过【更多应用】，可以下载各种好玩应用。\n\n当前积分："
+											+ currentPointTotal)
+							.setPositiveButton("更多应用", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialoginterface, int i) {
+									AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
+								}
+							}).setNeutralButton("免费赚积分", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialoginterface, int i) {
+									AppConnect.getInstance(DetailActivity.this).showOffers(DetailActivity.this);
+								}
+							}).setNegativeButton("继续", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialoginterface, int i) {
+								}
+							}).show();
+				}
+			});
 		}
 	}
 
@@ -79,6 +90,8 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 	private WebView mWebView;
 
 	private Button returnButton;
+	
+	Handler msgHandler = new Handler();
 
 	private void initRequrePointPreference() {
 		hasEnoughRequrePointPreferenceValue = PreferenceUtil.getHasEnoughRequrePoint(DetailActivity.this);
@@ -88,6 +101,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 		if (!hasEnoughRequrePointPreferenceValue) {
 			AppConnect.getInstance(this).getPoints(this);
 		}
+		
 		super.onResume();
 	}
 
@@ -106,9 +120,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier {
 
 		mWebView.loadDataWithBaseURL(null, fileContent, "text/html", "UTF8", "");
 
-		if (!hasEnoughRequrePointPreferenceValue) {// 没达到积分
-			showDialog();
-		}
+		
 
 		returnButton = (Button) findViewById(R.id.returnButton);
 
