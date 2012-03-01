@@ -45,7 +45,7 @@ public class MainActivity extends Activity implements UpdatePointsNotifier {
 	private Button moreOffer2;
 
 	public static boolean hasEnoughRequreAdPointPreferenceValue = false;// 保存在配置里
-	public static final int requireAdPoint = 80;// 要求积分
+	public static final int requireAdPoint = 70;// 要求积分
 	public static int currentPointTotal = 0;// 当前积分
 
 	public static boolean hasShowMyDialog = false;
