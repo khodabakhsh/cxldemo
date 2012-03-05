@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:id="@+id/all">
+
+	<TableLayout android:id="@+id/rl_set" android:background="@color/color001"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_alignParentTop="true">
+		<TableRow>
+			<TextView android:textSize="18.0dip" android:textColor="@color/txtblue"
+				android:gravity="center" android:id="@+id/rl_set1tv"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:layout_marginTop="5.0px" android:layout_marginBottom="5.0px"
+				android:text="字号" android:layout_weight="1.0" />
+			<TextView android:textSize="18.0dip" android:textColor="@color/txtblue"
+				android:gravity="center" android:id="@+id/rl_set2tv"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:layout_marginTop="5.0px" android:layout_marginBottom="5.0px"
+				android:text="模式" android:layout_weight="1.0" />
+			<TextView android:textSize="18.0dip" android:textColor="@color/txtblue"
+				android:gravity="center" android:id="@+id/rl_set3tv"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:layout_marginTop="5.0px" android:layout_marginBottom="5.0px"
+				android:text="分享" android:layout_weight="1.0" />
+			<TextView android:textSize="18.0dip" android:textColor="@color/txtblue"
+				android:gravity="center" android:id="@+id/rl_set4tv"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:layout_marginTop="5.0px" android:layout_marginBottom="5.0px"
+				android:text="关于" android:layout_weight="1.0" />
+		</TableRow>
+	</TableLayout>
+	<!-- <LinearLayout android:id="@+id/AdLinearLayout" android:layout_width="fill_parent" 
+		android:layout_height="wrap_content" android:gravity="center_horizontal" 
+		android:layout_alignParentTop="true" /> -->
+
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_marginTop="3.0dip"
+		android:layout_alignParentBottom="true" android:id="@+id/toolbar">
+		<Button android:id="@+id/previous" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="上一章"
+			android:layout_weight="1" />
+		<Button android:id="@+id/OffersButton" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:textColor="@android:color/black"
+			android:layout_weight="1" />
+		<Button android:id="@+id/OffersButton2" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:layout_centerHorizontal="true"
+			android:textColor="@android:color/black" android:text="更多软件"
+			android:layout_weight="1" />
+		<Button android:id="@+id/next" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="下一章"
+			android:layout_weight="1" />
+	</LinearLayout>
+
+	<TextView android:textStyle="bold" android:textColor="#000000"
+		android:id="@+id/textView" android:singleLine="false"
+		android:maxLines="100" android:scrollbars="vertical"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_margin="5.0dip" android:layout_above="@id/toolbar"
+		android:layout_below="@id/rl_set" />
+
+
+
+</RelativeLayout>
