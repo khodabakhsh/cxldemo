@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <color name="white">#ffffffff</color>
+    <color name="black">#ff000000</color>
+    <color name="blue">#ff2b82af</color>
+    <color name="touming">#ffffffff</color>
+    <color name="txtblue">#ff578daa</color>
+    <color name="red">#ffff0000</color>
+    <color name="color001">#fff0f0f0</color>
+    <color name="listcolor1">#ff000000</color>
+    <color name="listcolor2">#ff808080</color>
+</resources>

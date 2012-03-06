@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string-array name="dash_display_mode">
+        <item>白天模式</item>
+        <item>晚上模式</item>
+    </string-array>
+    <string-array name="dash_display_font">
+        <item>12dip</item>
+        <item>16dip</item>
+        <item>20dip</item>
+        <item>24dip</item>
+        <item>28dip</item>
+        <item>32dip</item>
+    </string-array>
+    <string-array name="dash_display_share">
+        <item>短信</item>
+        <item>新浪微博</item>
+        <item>腾讯微博</item>
+    </string-array>
+</resources>
