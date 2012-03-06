@@ -17,10 +17,10 @@ import org.jdom.input.SAXBuilder;
  * JDOM 生成与解析XML文档 * 依赖jdom.jar
  */
 public class JDomDemo {
-	private static String baseFilePath = "D:/cxl/my apk/__________others_________/中篇笑话精选1/assets/";
+	private static String baseFilePath = "C:/Documents and Settings/Administrator/桌面/笑话一箩筐/res/xml/a31.xml";
 	//	private static String titleFilePath = "D:\\cxl\\my apk\\__________others_________\\世界上下五千年\\res\\xml\\a00.xml";
-	private static String genFilePath = "D:/cxl/my apk/__________others_________/中篇笑话精选1/assets_new";
-	private static String suffix = ".txt";
+	private static String genFilePath = "C:/Documents and Settings/Administrator/桌面/笑话一箩筐/res_new/a31";
+	private static String suffix = "";
 	private static Map<String, Integer> map = new HashMap<String, Integer>();
 	static {
 		File genFile = new File(genFilePath);
@@ -85,7 +85,7 @@ public class JDomDemo {
 		try {
 			Document document = builder.build(orgFile);
 			Element root = document.getRootElement();
-			List<Element> jokeList = root.getChildren("joke");
+			List<Element> jokeList = root.getChildren("title");
 			Element element;
 			FileWriter writer = null;
 			File file;
@@ -97,14 +97,14 @@ public class JDomDemo {
 				element = jokeList.get(i);
 //				id = element.getChildText("id");
 				jokeIdcount++;
-				titleName = element.getChildText("title");
-				content = element.getChildText("text").trim();
-
+				titleName = element.getAttributeValue("name");
+				content = element.getText().trim();
+				System.out.println("MENU_List.add(new KeyValue(\"" + jokeIdcount + "\", \"" + jokeIdcount + "、" + titleName + "\"));");
 				bf.append(jokeIdcount + "、" + titleName + "\n" + content + "\n\n\n");
 
-				if (jokeIdcount % 100 == 0) {
-					System.out.println(bf);
-					file = new File(genFilePath, (++genFilecount) + suffix);
+//				if (jokeIdcount % 1 == 0) {
+//					System.out.println(bf);
+					file = new File(genFilePath, jokeIdcount+ suffix);
 					if (!file.getParentFile().exists()) {
 						file.getParentFile().mkdirs();
 					}
@@ -118,7 +118,7 @@ public class JDomDemo {
 						writer.close();
 					}
 					bf = new StringBuffer("");
-				}
+//				}
 			}
 
 		} catch (JDOMException e) {
@@ -144,14 +144,15 @@ public class JDomDemo {
 		//				return !pathname.equals("a00.xml");
 		//			}
 		//		};
-		File[] fileList = new File(baseFilePath).listFiles(xmlFileFilter);
-		for (File file : fileList) {
+//		File[] fileList = new File(baseFilePath).listFiles(xmlFileFilter);
+//		int filecount =1;
+//		for (File file : fileList) {
 
 			//			parseContentXml(file);
 			//			break;
-			parseContentXml(file);
-			//			break;
-		}
+			parseContentXml(new File(baseFilePath));
+			
+//		}
 
 	}
 }
