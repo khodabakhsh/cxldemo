@@ -31,13 +31,12 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier,
 		View.OnClickListener {
 
 	private TextView textView;
-	public static final String utf8 = "utf-8";
+	public static final String txtChartset = "utf-8";
 
 	Button btnPrevious;
 	Button btnNext;
 	Button menuButton;
 
-	public static final int Requre_Point_Page_Index = 41;// 需要积分才能查看的页面
 	public static int Current_Page_Index = 1;
 	public static final int Start_Page_Index = 1;// 起始页索引
 	public static final int Max_Page_Index = MainActivity.MENU_List.size()
@@ -45,7 +44,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier,
 	private int scrollY = 0;
 
 	public static boolean hasEnoughRequrePointPreferenceValue = false;// 保存在配置里
-	public static final int requirePoint = 80;// 要求积分
+	public static final int requirePoint = 100;// 要求积分
 	public static int currentPointTotal = 0;// 当前积分
 
 	@Override
@@ -120,7 +119,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier,
 	private void setTitleAndSaveState() {
 		saveState();
 		String currentTitle = MainActivity.MENU_List.get(
-				Current_Page_Index - Start_Page_Index).getValue();
+				Current_Page_Index - Start_Page_Index).getValue()+" / "+MainActivity.MENU_List.size();
 		setTitle(currentTitle);
 	}
 
@@ -328,6 +327,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier,
 						--Current_Page_Index);
 				textView.setText(fileContent);
 				scrollY = 0;
+				textView.scrollTo(0, scrollY);
 				setTitleAndSaveState();
 			}
 
@@ -342,6 +342,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier,
 						++Current_Page_Index);
 				textView.setText(fileContent);
 				scrollY = 0;
+				textView.scrollTo(0, scrollY);
 				setTitleAndSaveState();
 			}
 

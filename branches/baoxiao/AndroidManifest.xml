@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.cxl.baoxiao" android:versionCode="5"
-	android:versionName="6.0">
+	package="com.cxl.baoxiao" android:versionCode="1"
+	android:versionName="1.2">
 	<uses-sdk android:minSdkVersion="4" />
 
 	<application android:icon="@drawable/icon" android:label="@string/app_name">
@@ -16,9 +16,9 @@
 		<activity android:name="com.cxl.AboutActivity" />
 		<activity android:name="com.waps.OffersWebView"
 			android:configChanges="keyboardHidden|orientation" />
-		<meta-data android:name="WAPS_ID" android:value="c6780739b21b46b79c8a9e9c9df1fb5c" />
+		<meta-data android:name="WAPS_ID" android:value="346691e44729c2d278f8bacb6620a219" />
 		<!--以下属性为分发渠道ID,可以选用 -->
-		<meta-data android:name="WAPS_PID" android:value="WAPS" />
+		<meta-data android:name="WAPS_PID" android:value="gfan" />
 
 	</application>
 	<uses-permission android:name="android.permission.INTERNET" />
