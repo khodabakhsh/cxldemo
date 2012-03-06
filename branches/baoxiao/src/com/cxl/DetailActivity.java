@@ -21,6 +21,7 @@ import android.view.SubMenu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cxl.baoxiao.R;
 import com.waps.AppConnect;
@@ -47,6 +48,12 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier,
 	public static final int requirePoint = 80;// 要求积分
 	public static int currentPointTotal = 0;// 当前积分
 
+	@Override
+	protected void onDestroy() {
+		AppConnect.getInstance(this).finalize();
+		super.onDestroy();
+	}
+
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
@@ -54,27 +61,11 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier,
 
 		initRequrePointPreference();
 
-		btnPrevious = (Button) findViewById(R.id.previous);
-		btnPrevious.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View v) {
-				String fileContent = getFileContent(DetailActivity.this,
-						--Current_Page_Index);
-				textView.setText(fileContent);
-				scrollY = 0;
-				setButtonVisibleAndSaveState();
-			}
-		});
-		btnNext = (Button) findViewById(R.id.next);
-		btnNext.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View v) {
-				String fileContent = getFileContent(DetailActivity.this,
-						++Current_Page_Index);
-				textView.setText(fileContent);
-				scrollY = 0;
-				setButtonVisibleAndSaveState();
-			}
-		});
+		// 连接服务器. 应用启动时调用(为了统计准确性，此句必须填写).
+		AppConnect.getInstance(this);
 
+		btnPrevious = (Button) findViewById(R.id.previous);
+		btnNext = (Button) findViewById(R.id.next);
 		Bundle bundle = getIntent().getExtras();
 		textView = (TextView) findViewById(R.id.textView);
 		textView.setMovementMethod(ScrollingMovementMethod.getInstance());
@@ -82,8 +73,7 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier,
 		textView.setTextSize(PreferenceUtil.getFontSize(this));
 		setMode(PreferenceUtil.getMode(this));
 
-		boolean startByMenu = bundle.getBoolean("startByMenu");
-		if (startByMenu) {
+		if (bundle != null && bundle.getBoolean("startByMenu")) {
 			int selectMenu = Integer.valueOf(bundle.getString("menu"));
 			Current_Page_Index = selectMenu;
 			String fileContent = getFileContent(DetailActivity.this,
@@ -99,37 +89,21 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier,
 			scrollY = PreferenceUtil.getScrollY(DetailActivity.this);
 			textView.scrollTo(0, scrollY);
 		}
-		setButtonVisibleAndSaveState();
-
-		Button offers = (Button) findViewById(R.id.OffersButton);
-		offers.setText("更多下载");
-		offers.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View arg0) {
-				AppConnect.getInstance(DetailActivity.this).showOffers(
-						DetailActivity.this);
-			}
-		});
-		Button offers2 = (Button) findViewById(R.id.OffersButton2);
-		offers2.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View arg0) {
-				AppConnect.getInstance(DetailActivity.this).showOffers(
-						DetailActivity.this);
-			}
-		});
+		setTitleAndSaveState();
 
 		// LinearLayout container = (LinearLayout)
 		// findViewById(R.id.AdLinearLayout);
 		// new AdView(this, container).DisplayAd(20);// 每20秒轮换一次广告；最少为20
 
+		findViewById(R.id.previous).setOnClickListener(this);
+		findViewById(R.id.next).setOnClickListener(this);
+
+		findViewById(R.id.OffersButton).setOnClickListener(this);
+		findViewById(R.id.OffersButton2).setOnClickListener(this);
 		findViewById(R.id.rl_set1tv).setOnClickListener(this);
 		findViewById(R.id.rl_set2tv).setOnClickListener(this);
 		findViewById(R.id.rl_set3tv).setOnClickListener(this);
 		findViewById(R.id.rl_set4tv).setOnClickListener(this);
-	}
-
-	protected void onDestroy() {
-		textView.destroyDrawingCache();
-		super.onDestroy();
 	}
 
 	protected void onPause() {
@@ -143,21 +117,11 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier,
 		PreferenceUtil.setTxtIndex(this, Current_Page_Index);
 	}
 
-	private void setButtonVisibleAndSaveState() {
+	private void setTitleAndSaveState() {
 		saveState();
 		String currentTitle = MainActivity.MENU_List.get(
 				Current_Page_Index - Start_Page_Index).getValue();
 		setTitle(currentTitle);
-		if (Current_Page_Index == Start_Page_Index) {
-			btnPrevious.setVisibility(View.INVISIBLE);
-		} else {
-			btnPrevious.setVisibility(View.VISIBLE);
-		}
-		if (Current_Page_Index == Max_Page_Index) {
-			btnNext.setVisibility(View.INVISIBLE);
-		} else {
-			btnNext.setVisibility(View.VISIBLE);
-		}
 	}
 
 	public boolean onCreateOptionsMenu(Menu paramMenu) {
@@ -205,45 +169,48 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier,
 			hasEnoughRequrePointPreferenceValue = true;
 			PreferenceUtil.setHasEnoughRequrePoint(DetailActivity.this, true);
 		}
-		// if (!hasEnoughRequrePointPreferenceValue) {
+		if (!hasEnoughRequrePointPreferenceValue) {
 
-		msgHandler.post(new Runnable() {
-			public void run() {
-				new AlertDialog.Builder(DetailActivity.this)
-						.setTitle("感谢使用本程序")
-						.setMessage(
-								"说明：\n\n可通过【更多下载】，下载更多精彩内容。\n\n通过【更多应用】，可以下载各种好玩应用")
-						.setPositiveButton("更多下载",
-								new DialogInterface.OnClickListener() {
-									public void onClick(
-											DialogInterface dialoginterface,
-											int i) {
-										AppConnect
-												.getInstance(
-														DetailActivity.this)
-												.showOffers(DetailActivity.this);
-									}
-								})
-						.setNeutralButton("更多应用",
-								new DialogInterface.OnClickListener() {
-									public void onClick(
-											DialogInterface dialoginterface,
-											int i) {
-										AppConnect
-												.getInstance(
-														DetailActivity.this)
-												.showOffers(DetailActivity.this);
-									}
-								})
-						.setNegativeButton("继续",
-								new DialogInterface.OnClickListener() {
-									public void onClick(
-											DialogInterface dialoginterface,
-											int i) {
-									}
-								}).show();
-			}
-		});
+			msgHandler.post(new Runnable() {
+				public void run() {
+					new AlertDialog.Builder(DetailActivity.this)
+							.setTitle("感谢使用本程序")
+							.setMessage(
+									"说明：\n 1.按menu键可以进入目录。\n\n 2.可通过【更多下载】，下载更多精彩内容。\n\n3.支持我们，通过【更多应用】，下载各种好玩应用")
+							.setPositiveButton("更多下载",
+									new DialogInterface.OnClickListener() {
+										public void onClick(
+												DialogInterface dialoginterface,
+												int i) {
+											AppConnect
+													.getInstance(
+															DetailActivity.this)
+													.showOffers(
+															DetailActivity.this);
+										}
+									})
+							.setNeutralButton("更多应用",
+									new DialogInterface.OnClickListener() {
+										public void onClick(
+												DialogInterface dialoginterface,
+												int i) {
+											AppConnect
+													.getInstance(
+															DetailActivity.this)
+													.showOffers(
+															DetailActivity.this);
+										}
+									})
+							.setNegativeButton("继续",
+									new DialogInterface.OnClickListener() {
+										public void onClick(
+												DialogInterface dialoginterface,
+												int i) {
+										}
+									}).show();
+				}
+			});
+		}
 	}
 
 	public void getUpdatePointsFailed(String error) {
@@ -284,10 +251,10 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier,
 		return sBuffer.toString();
 	}
 
-	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.rl_set1tv:
+		int id = v.getId();
+		switch (id) {
+		case R.id.rl_set1tv: {
 			AlertDialog.Builder localBuilder = new AlertDialog.Builder(this);
 			localBuilder.setTitle(R.string.app_set_font_title);
 			localBuilder.setSingleChoiceItems(R.array.dash_display_font, 0,
@@ -302,8 +269,10 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier,
 						}
 					});
 			localBuilder.create().show();
+
+		}
 			break;
-		case R.id.rl_set2tv:
+		case R.id.rl_set2tv: {
 			AlertDialog.Builder localBuilder1 = new AlertDialog.Builder(this);
 			localBuilder1.setTitle(R.string.app_set_mode_title);
 			localBuilder1.setSingleChoiceItems(R.array.dash_display_mode, 0,
@@ -316,8 +285,10 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier,
 						}
 					});
 			localBuilder1.create().show();
+
+		}
 			break;
-		case R.id.rl_set3tv:
+		case R.id.rl_set3tv: {
 
 			Intent sendIntent = new Intent("android.intent.action.SEND");
 			sendIntent.setType("image/*");
@@ -326,16 +297,57 @@ public class DetailActivity extends Activity implements UpdatePointsNotifier,
 					.toString());
 			Intent selectIntent = Intent.createChooser(sendIntent, "使用以下方式发送");
 			startActivity(selectIntent);
-			break;
 
-		case R.id.rl_set4tv:
+		}
+			break;
+		case R.id.rl_set4tv: {
 			Intent intent = new Intent();
 			intent.setClass(DetailActivity.this, AboutActivity.class);
 			startActivity(intent);
+
+		}
+			break;
+		case R.id.OffersButton: {
+			AppConnect.getInstance(DetailActivity.this).showOffers(
+					DetailActivity.this);
+
+		}
+			break;
+		case R.id.OffersButton2: {
+			AppConnect.getInstance(DetailActivity.this).showOffers(
+					DetailActivity.this);
+
+		}
+			break;
+		case R.id.previous: {
+			if (Current_Page_Index == Start_Page_Index) {
+				Toast.makeText(DetailActivity.this, "已经是第一页",
+						Toast.LENGTH_SHORT).show();
+			} else {
+				String fileContent = getFileContent(DetailActivity.this,
+						--Current_Page_Index);
+				textView.setText(fileContent);
+				scrollY = 0;
+				setTitleAndSaveState();
+			}
+
+		}
+			break;
+		case R.id.next: {
+			if (Current_Page_Index == Max_Page_Index) {
+				Toast.makeText(DetailActivity.this, "已经是最后一页",
+						Toast.LENGTH_SHORT).show();
+			} else {
+				String fileContent = getFileContent(DetailActivity.this,
+						++Current_Page_Index);
+				textView.setText(fileContent);
+				scrollY = 0;
+				setTitleAndSaveState();
+			}
+
+		}
 			break;
 
-		default:
-			break;
 		}
 
 	}

@@ -1,25 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<RelativeLayout android:id="@+id/rl_main"
+<RelativeLayout 
 	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res/com.sinosoft.xiaohua">
-	<TableLayout android:id="@+id/rl_set" android:background="@color/color001"
-		android:layout_width="fill_parent" android:layout_height="wrap_content">
-		<TableRow>
-			<TextView android:textSize="18.0dip" android:textColor="@color/txtblue"
-				android:gravity="center" android:id="@+id/rl_daohang_middle"
-				android:layout_width="fill_parent" android:layout_height="wrap_content"
-				android:layout_marginTop="5.0px" android:layout_marginBottom="5.0px"
-				android:text="返回" android:layout_weight="1.0" />
-		</TableRow>
-	</TableLayout>
-	<RelativeLayout android:id="@+id/rl_comments_content"
+	xmlns:android="http://schemas.android.com/apk/res/android" >
+	
+	<RelativeLayout android:id="@+id/rl_comments_content" android:layout_alignParentTop="true" 
 		android:background="@color/color001" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:layout_below="@id/rl_set">
+		android:layout_height="wrap_content" >
 		<TextView android:textSize="20.0dip" android:textColor="@color/blue"
 			android:id="@+id/tv_title" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:layout_marginTop="30.0px"
 			android:layout_marginBottom="10.0px"
-			android:text="   如果支持我们，广告的点击就是对我们创作的最大支持！~_~ \n\n  或者点击下面按钮，下载更多产品，支持我们!!   "
+			android:text="   如果支持我们，点击下面按钮，下载更多产品，支持我们!!   "
 			android:layout_centerHorizontal="true" android:padding="5dip"/>
 	</RelativeLayout>
 	<LinearLayout android:layout_marginTop="10dip"
