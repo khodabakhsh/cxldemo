@@ -31,11 +31,6 @@ public class AboutActivity extends Activity {
 						AboutActivity.this);
 			}
 		});
-		returnButton = (TextView) findViewById(R.id.rl_daohang_middle);
-		returnButton.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View arg0) {
-				finish();
-			}
-		});
+		
 	}
 }
