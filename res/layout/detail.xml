@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:id="@+id/all">
+
+	<LinearLayout android:id="@+id/rl_set" android:background="@color/color001"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_alignParentTop="true" android:gravity="center_horizontal">
+
+		<TextView android:textSize="18.0dip" android:textColor="@color/txtblue"
+			android:gravity="center" android:id="@+id/rl_set1tv"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:layout_marginTop="5.0px" android:layout_marginBottom="5.0px"
+			android:text="字号" android:layout_weight="1" />
+		<TextView android:textSize="18.0dip" android:textColor="@color/txtblue"
+			android:gravity="center" android:id="@+id/rl_set2tv"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:layout_marginTop="5.0px" android:layout_marginBottom="5.0px"
+			android:text="模式" android:layout_weight="1" />
+		<TextView android:textSize="18.0dip" android:textColor="@color/txtblue"
+			android:gravity="center" android:id="@+id/rl_set3tv"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:layout_marginTop="5.0px" android:layout_marginBottom="5.0px"
+			android:text="分享" android:layout_weight="1" />
+		<TextView android:textSize="18.0dip" android:textColor="@color/txtblue"
+			android:gravity="center" android:id="@+id/rl_set4tv"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:layout_marginTop="5.0px" android:layout_marginBottom="5.0px"
+			android:text="关于" android:layout_weight="1" />
+
+	</LinearLayout>
+	<!-- <LinearLayout android:id="@+id/AdLinearLayout" android:layout_width="fill_parent" 
+		android:layout_height="wrap_content" android:gravity="center_horizontal" 
+		android:layout_alignParentTop="true" /> -->
+	<TableLayout android:background="@color/color001"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:id="@+id/toolbar" android:layout_alignParentBottom="true">
+		<TableRow>
+			<Button android:textSize="16.0dip" android:textColor="@color/txtblue"
+				android:id="@+id/previous" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_marginTop="5.0px"
+				android:layout_marginBottom="5.0px" android:text="上一页"
+				android:layout_weight="1.0" />
+			<Button android:textSize="16.0dip" android:textColor="@color/txtblue"
+				android:id="@+id/OffersButton" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_marginTop="5.0px"
+				android:layout_marginBottom="5.0px" android:text="下载更多"
+				android:layout_weight="1.0" />
+			<Button android:textSize="16.0dip" android:textColor="@color/txtblue"
+				android:id="@+id/OffersButton2" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_marginTop="5.0px"
+				android:layout_marginBottom="5.0px" android:text="更多精彩"
+				android:layout_weight="1.0" />
+			<Button android:textSize="16.0dip" android:textColor="@color/txtblue"
+				android:id="@+id/next" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_marginTop="5.0px"
+				android:layout_marginBottom="5.0px" android:text="下一页"
+				android:layout_weight="1.0" />
+		</TableRow>
+	</TableLayout>
+
+
+	<TextView android:textStyle="bold" android:textColor="#000000"
+		android:id="@+id/textView" android:singleLine="false"
+		android:maxLines="100" android:scrollbars="vertical"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_margin="5.0dip" android:layout_above="@id/toolbar"
+		android:layout_below="@id/rl_set" />
+
+
+
+</RelativeLayout>
