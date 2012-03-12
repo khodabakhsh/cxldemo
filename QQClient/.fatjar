@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Mon Oct 18 10:29:43 CST 2010
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=QQClient.jar
+manifest.mergeall=true
+manifest.mainclass=mainclass.LaunchClient
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=
