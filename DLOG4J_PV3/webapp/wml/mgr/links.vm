@@ -1,0 +1,49 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  links managment
+##
+###############################################################################
+#parse("/wml/_sub/_global.vm")
+#set($page_title="友情链接管理")
+<p>
+	#invoke("_opt_bar.vm") 友情链接<br/>
+#if(!$dlog.is_owner($g_site, $g_user))
+	对不起，你没有足够的访问权限，点击<a href="$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())">$text.ui("label.login")</a>使用其他帐号进入。<br /><br /><a href="#" onclick="history.go(-1);return false;">返回上页</a>
+#else
+    #set($PAGE_SIZE = 10)
+    #set($p_page = $dlog.param("p",1))
+    #set($pre_page = $p_page - 1)
+    #set($next_page = $p_page + 1)
+    #set($lnk_count = $link.link_count($g_site))
+    #set($page_count = $dlog.page_count($lnk_count, $PAGE_SIZE))
+	共有${lnk_count}个友情链接#if($page_count>1)，每页${PAGE_SIZE}个，共${page_count}页#end.<a href="link_add.vm?sid=$g_site_id">添加链接</a><br/>	
+    #if($p_page > 1)<a href="links.vm?sid=${g_site_id}">首页</a>#end
+    #if($p_page>1)<a href="links.vm?sid=${g_site_id}&amp;p=$pre_page">上页</a>#end
+    #if($p_page < $page_count)<a href="links.vm?sid=${g_site_id}&amp;p=$next_page">下页</a>#end
+    #if($p_page < $page_count)<a href="links.vm?sid=${g_site_id}&amp;p=$page_count">尾页</a>#end	
+</p>
+<p>
+	#set($links = $link.links($g_site,$p_page, $PAGE_SIZE))
+	#set($base_idx = ($p_page - 1)*$PAGE_SIZE)
+    #foreach($lnk in ${links})
+	#set($idx = $base_idx + $velocityCount)
+	${idx}.$escape.html(${lnk.title})
+	#if($idx != 1)<a href="$link.setAction("wml/link")?sid=$g_site_id&amp;eventSubmit_MoveUp=${lnk.id}">上移</a>#end
+	#if($idx < ${lnk_count})<a href="$link.setAction("wml/link")?sid=$g_site_id&amp;eventSubmit_MoveDown=${lnk.id}">下移</a>#end
+	<a href="$link.setAction("wml/link")?sid=$g_site_id&amp;eventSubmit_Delete=${lnk.id}">删除</a><br/>
+	#end
+#end
+</p>

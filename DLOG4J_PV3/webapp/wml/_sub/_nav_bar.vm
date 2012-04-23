@@ -1,0 +1,1 @@
+<a href="$dlog.root()/wml/?sid=$g_site_id">$escape.html(${g_site.friendlyName})</a>

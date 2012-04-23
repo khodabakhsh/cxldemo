@@ -1,0 +1,19 @@
+#if(!$scope)#set($scope=0)#end
+搜索范围: 
+<select name="scope" ivalue="$scope">
+    <option value="0">&#8226;&nbsp;日记</option>
+    <option value="1">&#8226;&nbsp;相册</option>
+    <option value="2">&#8226;&nbsp;音乐</option>
+    <option value="3">&#8226;&nbsp;论坛</option>
+    <option value="4">个人网记</option>
+    <option value="5">注册用户</option>
+</select>
+关键字：
+<input type="text" name="key" size="15" emptyok="true"/>
+<anchor>现在搜索
+    <go href="$dlog.root()/wml/search.vm" method="get">
+        <postfield name="sid" value="$g_site_id"/>
+        <postfield name="scope" value="$(scope)"/>
+        <postfield name="key" value="$(key)"/>
+    </go>
+</anchor>

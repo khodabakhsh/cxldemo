@@ -1,0 +1,20 @@
+<h2>DLOG4J snoop</h2>
+<hr/>
+<h3>&nbsp;Database</h3>
+<ul>
+#set($db = $snoop.getDatabaseMetadata())
+#if($db)
+<li><b>Database</b>: ${db.databaseProductName} ${db.databaseProductVersion} </li>
+<li><b>Driver</b>: ${db.driverName} (${db.driverVersion})</li>
+<li><b>Username</b>: ${db.userName}</li>
+<li><b>URL</b>: ${db.URL}</li>
+#else
+<li><font color=red>Database error , check the db config (hibernate.cfg.xml)</font></li>
+#end
+</ul>
+<h3>&nbsp;System Properties</h3>
+<ul>
+#foreach($env in $snoop.envs().keys())
+<li><b>$env</b>: $snoop.env($env)</li>
+#end
+</ul>

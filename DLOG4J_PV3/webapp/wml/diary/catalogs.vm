@@ -1,0 +1,35 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  diary catalogs manage
+##
+###############################################################################
+#parse("/wml/_sub/_global.vm")
+#set($page_title="日记分类管理")
+<p>
+#if($dlog.is_owner($g_site, $g_user))
+	<a href="$dlog.root()/wml/diary/catalog_add.vm?sid=$g_site_id">添加分类</a><br/>
+	--我的日记分类--<br/>
+	#foreach($cat in ${g_site.catalogs})
+	<a href="$dlog.root()/wml/diary/catalog_edit.vm?sid=$g_site_id&amp;cat_id=${cat.id}">$velocityCount.$escape.html(${cat.name})(${cat.articleCount})</a>	
+	#if($velocityCount != 1)<a href="$link.setAction("wml/catalog")?sid=$g_site_id&amp;eventSubmit_MoveUp=$cat.id">上移</a>#end
+    #if($velocityCount < $g_site.catalogs.size())<a href="$link.setAction("wml/catalog")?sid=$g_site_id&amp;eventSubmit_MoveDown=$cat.id">下移</a>#end
+	#if(${cat.articleCount}<1)<a href="$link.setAction("wml/catalog")?sid=$g_site_id&amp;eventSubmit_Delete=$cat.id">删除</a>#end
+	<br/>
+	#end
+#else
+    对不起，你没有操作权限！
+#end
+</p>

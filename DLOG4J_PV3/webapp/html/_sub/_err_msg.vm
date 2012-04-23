@@ -1,0 +1,6 @@
+#set($msg = $request.getAttribute("msg"))
+<div class="msgbox">
+	${msg}<br /><br />
+	<a href="#" onclick="history.go(-1);return false;">$text.ui("back_to_prev")</a><br />
+	<a href="$dlog.root()/">$text.ui("back_to_home")</a>
+</div>

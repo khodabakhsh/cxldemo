@@ -1,0 +1,8 @@
+ËÑË÷±êÇ©:
+<input type="text" name="tag" value="$!{tag}" emptyok="true"/>
+<anchor>ËÑË÷
+    <go href="$dlog.get_request_file()" method="get">
+        <postfield name="sid" value="$g_site_id"/>
+        <postfield name="tag" value="$(tag)"/>
+    </go>
+</anchor>

@@ -1,0 +1,5 @@
+#set($objs = $SEARCH_tool.search_user($key))
+共有${objs.size()}项符合"${key}"的查询结果，(搜索用时${SEARCH_tool.get_search_time()}毫秒)<br/>
+#foreach($obj in $objs)
+	${velocityCount}.<a href="$dlog.root()/wml/viewuser.vm?sid=$g_site_id&amp;uid=${obj.id}">$text.html(${obj.nickname})</a><br/>
+#end

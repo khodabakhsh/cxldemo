@@ -1,0 +1,41 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  music channel
+##
+###############################################################################
+#parse("/wml/_sub/_global.vm")
+#set($page_title=$text.ui("channel.music"))
+<p>
+	ÍøÕ¾:<a href="$dlog.root()/wml/index.vm?sid=$g_site_id">$text.html(${g_site.friendlyName})</a><br/>
+	¹²ÓÐ${g_site.musicBoxes.size()}¸öÒôÀÖºÐ£¬${g_site.songs.size()}Ê×¸èÇú¡£<br/>
+#set($songs = $MUSIC_tool.songs_without_box($g_site))
+#foreach($song in $songs)
+	${velocityCount}.
+    #if($dlog.not_empty(${song.url}))
+    	<a href="show.vm?sid=$g_site_id&amp;mid=${song.id}">$text.html(${song.title})</a>
+    #else
+    	$text.html(${song.title})
+    #end
+    #if($dlog.not_empty(${song.singer}))(${song.singer})#end
+	<br/>
+#end
+#foreach($box in $g_site.musicBoxes)
+	<b>+$text.html(${box.name})(${box.songs.size()})</b><br/>
+	#foreach($song in ${box.songs})
+		${velocityCount}.<a href="show.vm?sid=$g_site_id&amp;mid=${song.id}">$text.html(${song.title})</a>#if($dlog.not_empty(${song.singer}))(${song.singer})#end<br/>
+	#end
+#end
+</p>
