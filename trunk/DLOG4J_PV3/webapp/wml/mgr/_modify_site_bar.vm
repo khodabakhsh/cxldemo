@@ -1,0 +1,2 @@
+#invoke("_opt_bar.vm")
+<a href="$dlog.root()/wml/mgr/editsite.vm?sid=$g_site_id">»ù±¾ÉèÖÃ</a> &gt; 

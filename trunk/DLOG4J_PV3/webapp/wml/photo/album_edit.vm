@@ -1,0 +1,48 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  modify album
+##
+###############################################################################
+#parse("/wml/_sub/_global.vm")
+#set($page_title="修改相簿")
+<p>
+#if(!$dlog.is_owner($g_site, $g_user))
+	对不起，你没有足够的访问权限，点击<a href="$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())">$text.ui("label.login")</a>使用其他帐号进入。<br /><br /><a href="#" onclick="history.go(-1);return false;">返回上页</a>
+#else
+	#wml_error_msg()
+	#set($cform = $form.getBean())
+	#set($album_id = $dlog.param("aid", -1))
+	#set($album = ${g_site.album($album_id)})
+	#set($rnd=$math.random(1,10000))
+	相簿名:<input type="text" name="name_$rnd" value="$!{album.name}"/><br/>
+	权限:<select name="type"><option value="0">完全公开</option><option value="2">私人相簿</option><option value="1">需要密码验证</option></select><br/>
+	如果您选择了”需要密码验证“请在下面框中输入相簿访问密码!
+    <input type="text" name="verifyCode_$rnd" value="$!{album.verifyCode}"/><br/>	
+	
+    <anchor>修改相簿
+        <go href="$link.setAction("wml/album")" method="post">
+            <postfield name="id" value="$album_id"/>
+            <postfield name="aid" value="$album_id"/>
+            <postfield name="sid" value="$g_site_id"/>
+            <postfield name="name" value="$(name_$rnd)"/>
+            <postfield name="type" value="$(types)"/>
+            <postfield name="verifyCode" value="$(verifyCode_$rnd)"/>
+            <postfield name="__ClientId" value="$dlog.gen_client_id()"/>
+            <postfield name="eventSubmit_Update" value="WML"/>
+        </go>
+    </anchor>
+#end
+</p>

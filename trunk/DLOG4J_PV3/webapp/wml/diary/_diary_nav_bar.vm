@@ -1,0 +1,1 @@
+#parse("/wml/_sub/_nav_bar.vm")&gt;<a href="$dlog.root()/wml/diary/?sid=$g_site_id">$text.diary($g_site)</a><br/>

@@ -1,0 +1,51 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  layout of wap 2.0 (xhtml)
+##
+###############################################################################
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>$text.html($!{page_title})</title>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+	<link rel="stylesheet" href="$dlog.root()/css/xhtml.css" type="text/css"/>
+</head>
+<body>
+	<a name="top"></a>
+	<div id="screen_content">
+	${screen_content}
+	</div>
+	<div id="navigator">
+    	----------<br/>
+		<a name="bottom"></a>
+		<a href="#top">&lt;$text.wml("back_to_top")</a><br/>
+    #if($g_site)
+		<a href="$wap_home_url/?sid=$g_site_id#top">&lt;$text.wml("back_to",$text.html(${g_site.friendlyName}))</a><br/>
+		<a href="$dlog.root()/wml/site.vm?sid=$g_site_id">&lt;$text.wml("site_info")</a><br/>
+    #end
+    #if($g_user && $g_user.ownSiteId>0 && $g_user.ownSiteId!=$g_site_id)
+		#set($my_site = $dlog.site($g_user.ownSiteId))
+		<a href="$wap_home_url/?sid=${my_site.id}#top">&lt;$text.wml("back_to",$text.html(${my_site.friendlyName}))</a><br/>
+    #end
+    	<a href="$wap_home_url">&lt;$text.wml("to_home",${app_name})</a>
+    </div>
+	<div id="copyright">
+    	Powered by DLOG4J ${app_version}<br/>
+    	$date.get("yyyy/MM/dd HH:mm")
+	</div>
+</body>
+</html>

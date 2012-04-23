@@ -1,0 +1,43 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  modify site's detail
+##
+###############################################################################
+#parse("/wml/_sub/_global.vm")
+#set($page_title="修改网站宣言")
+<p>
+	#invoke("_modify_site_bar.vm") 修改宣言<br/>
+#if(!$dlog.is_owner($g_site, $g_user))
+	对不起，你没有足够的访问权限，点击<a href="$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())">$text.ui("label.login")</a>使用其他帐号进入。<br /><br /><a href="#" onclick="history.go(-1);return false;">返回上页</a>
+#else
+	#if(${g_site.detail})
+		原有网站宣言:$escape.html($!{g_site.detail})
+	#else
+		网站宣言尚未设置
+	#end
+	<br/>
+    #wml_error_msg()
+	请输入新的宣言:<input type="text" name="detail"/>
+    <anchor>现在修改
+        <go href="$link.setAction("/wml/sitemgr/site")" method="post">
+            <postfield name="sid" value="$g_site_id"/>
+            <postfield name="detail" value="$(detail)"/>
+            <postfield name="__ClientId" value="$dlog.gen_client_id()"/>
+            <postfield name="eventSubmit_UpdateDetail" value="WML"/>
+        </go>
+    </anchor>
+#end
+</p>

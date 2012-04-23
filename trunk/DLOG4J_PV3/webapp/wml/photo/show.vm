@@ -1,0 +1,101 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  show a photo
+##
+###############################################################################
+#parse("/wml/_sub/_global.vm")
+#set($page_title="查看照片")
+#set($PAGE_SIZE = 5)
+#set($album_id = $dlog.param("aid", -1))
+#set($photo_id = $dlog.param("pid", -1))
+#set($photo = $PHOTO_tool.photo($g_site, $g_user, $photo_id))
+<p>
+	#invoke("_photo_nav_bar.vm")
+#if($photo && ${photo.status}==0)
+	<img src="$dlog.root()${photo.previewURL}" alt=""/><br/>
+	相簿: <a href="$dlog.root()/wml/photo/photos.vm?sid=$g_site_id&amp;aid=${photo.album.id}">$escape.html(${photo.album.name})</a><br/>
+	上传时间: $date.format("yyyy/MM/dd HH:mm", $photo.createTime)<br/>
+	照片名称: $escape.html($photo.name)<br/>
+	#if($dlog.not_empty(${photo.photoInfo.manufacturer})||$dlog.not_empty(${photo.photoInfo.model}))
+	相机:$escape.html($!{photo.photoInfo.model}) ($text.html($!{photo.photoInfo.manufacturer}))<br/>	
+	#end
+	#if($dlog.not_empty(${photo.photoInfo.focalLength}))
+	焦距:$escape.html($!{photo.photoInfo.focalLength})<br/>
+	#end
+	#if(${photo.photoInfo.ISO}>0)
+	ISO:$!{photo.photoInfo.ISO}<br/>
+	#end
+	#if($dlog.not_empty(${photo.photoInfo.aperture}))
+	光圈:$!{photo.photoInfo.aperture}<br/>
+	#end
+	#if($dlog.not_empty(${photo.photoInfo.exposureTime}))
+	曝光:$!{photo.photoInfo.exposureTime}<br/>
+	#end
+	#set($photo_size = ${photo.photoInfo.size} / 1024)
+	<a href="$dlog.root()${photo.imageURL}">下载原图</a>(${photo.photoInfo.width}*${photo.photoInfo.height} ${photo_size}K)<br/>
+	<a href="$dlog.root()${photo.previewURL}">下载缩略图</a><br/>
+	#if($dlog.not_empty(${photo.desc}))
+	内容: $dlog.plain_text(${photo.desc})<br/>
+	#end
+	评论: <a href="$dlog.root()/wml/photo/photo_rpls.vm?sid=$g_site_id&amp;aid=$album_id&amp;pid=$photo_id">${photo.replyCount}</a><a href="reply.vm?sid=$g_site_id&amp;pid=$photo_id&amp;r=$math.random(1,1000)">[我要评论]</a><br/>
+</p>
+<p>
+#if($dlog.not_empty(${photo.keyword}))
+	标签:
+	#foreach($tag in ${photo.keywords})
+		#if($velocityCount>1),#end
+		<a href="$dlog.root()/wml/showtag.vm?sid=$g_site_id&amp;type=2&amp;tag=$link.encodeURL($tag)">${tag}</a>
+	#end
+	<br/>
+#end
+	----------<br/>	
+	(#if(${photo.user.id}==$g_user_id || $dlog.is_owner($g_site, $g_user))
+	<a href="$dlog.root()/wml/photo/edit.vm?sid=$g_site_id&amp;pid=$photo_id">编辑</a>/<a href="$link.setAction("wml/photo")?sid=$g_site_id&amp;id=$photo_idd&amp;eventSubmit_Delete=$photo_id">删除</a>/#end
+	<a href="$link.setAction("wml/bookmark")?sid=$g_site_id&amp;parentId=${photo_id}&amp;parentType=2&amp;eventSubmit_Add=WML&amp;title=$link.encodeURL(${photo.name})&amp;fromPage=$link.encodeURL($dlog.get_request_url())">添加到书签</a>)<br/>
+#set($prev_photo = $PHOTO_tool.prev_photo($g_site, $g_user, $album_id, $photo_id))
+#if($prev_photo)
+	上一张:<a href="$dlog.root()/wml/photo/show.vm?sid=$g_site_id&amp;aid=$album_id&amp;pid=${prev_photo.id}">$escape.html(${prev_photo.name})</a><br/>
+#end
+#set($next_photo = $PHOTO_tool.next_photo($g_site, $g_user, $album_id, $photo_id))
+#if($next_photo)
+	下一张:<a href="$dlog.root()/wml/photo/show.vm?sid=$g_site_id&amp;aid=$album_id&amp;pid=${next_photo.id}">$escape.html(${next_photo.name})</a><br/>
+#end
+
+#if(${photo.replyCount}>0)	
+	+最新评论<br/>
+	#set($rpls = $PHOTO_tool.replies($g_site,$g_user,$photo,1,3))
+	#foreach($rpl in $rpls)
+	#set($content = $dlog.plain_text(${rpl.content}))
+	#set($rc = $dlog.abbreviate($content, 50))
+	#if($dlog.is_empty($rc))#set($rc="[无文本内容]")#end
+	${velocityCount}.$escape.html(${rc})
+	#if($rc.length() < $content.length())
+		<a href="$dlog.root()/wml/photo/rpl.vm?sid=$g_site_id&amp;log_id=$log_id&amp;rpl_id=${rpl.id}">[详细内容]</a>
+	#end($escape.html(${rpl.author}),$date.format("MM-dd HH:mm",${rpl.replyTime}))<br/>
+	#end
+	#if($rpls.size()<${photo.replyCount})
+	<a href="$dlog.root()/wml/photo/photo_rpls.vm?sid=$g_site_id&amp;pid=$photo_id">$text.wml("more")</a>
+	#end
+#end
+<a href="$dlog.root()/wml/photo/reply.vm?sid=$g_site_id&amp;pid=$photo_id&amp;r=$math.random(1,1000)">[我要评论]</a>
+#if(${photo.status}==0)
+	#set($nothing = $PHOTO_tool.visit_photo($g_site, $g_user, $photo))
+#end
+#else
+	#set($page_title="出错啦！！！")
+	您访问的照片不存在或是您没有阅读该照片的权限！
+#end
+</p>

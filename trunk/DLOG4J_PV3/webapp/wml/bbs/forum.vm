@@ -1,0 +1,71 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  showing a forum
+##
+###############################################################################
+#parse("/wml/_sub/_global.vm")
+#set($forum_id = $dlog.param("fid",-1))
+#set($forum = $BBS_tool.forum($g_site, $forum_id))
+<p>
+#if(!$forum)
+	论坛不存在！
+#elseif(${forum.status}==3 && ${forum.site.owner.id} != ${g_user.id})
+	论坛已被站长关闭，暂时不可用！
+#else
+#set($page_title=${forum.name})
+###############################################################################
+#set($PAGE_SIZE = 10)
+#set($p_page = $dlog.param("page", 1))
+#set($pre_page = $p_page - 1)
+#set($next_page = $p_page + 1)
+#set($page_count = $dlog.page_count(${forum.topicCount}, $PAGE_SIZE))
+#set($topics = $BBS_tool.topics($g_site, $forum, $p_page, $PAGE_SIZE))
+<a href="$dlog.root()/wml/bbs/index.vm?sid=$g_site_id">论坛首页</a>&gt;${forum.name}&gt;<br/>
+共有帖子${forum.topicCount}篇 每页显示${PAGE_SIZE}篇 页次:${p_page}/${page_count}<br/>
+最后发表时间：$!date.format("yy/MM/dd HH:mm", $forum.lastPostTime)&nbsp;&nbsp;作者：<a href="$dlog.root()/html/bbs/topic.vm?sid=$g_site_id&amp;fid=${forum.id}&amp;tid=${forum.lastTopic.id}">$text.html($forum.lastUsername)&nbsp;&raquo;</a><br/>
+#if($forum.status!=1)
+<a href="new_topic.vm?sid=$g_site_id&amp;fid=${forum.id}">发新帖</a>
+#end
+<a href="search.vm?sid=$g_site_id&amp;fid=${forum.id}">搜索论坛</a>
+<a href="elite.vm?sid=$g_site_id&amp;fid=${forum.id}">精华区</a>
+<a href="$dlog.root()/wml/bbs/index.vm?sid=$g_site_id">返回论坛列表</a><br/>
+#if($page_count > 1)
+	#if($p_page > 1)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}">首页</a>#end
+	#if($p_page>1)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}&amp;page=$pre_page">上页</a>#end
+	#if($p_page < $page_count)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}&amp;page=$next_page">下页</a>#end
+	#if($p_page < $page_count)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}&amp;page=$page_count">尾页</a>#end
+#end
+</p>
+<p>
+#foreach($topic in $topics)
+#set($record_idx = $velocityCount + $p_page * $PAGE_SIZE)
+#set($record_idx = $record_idx - $PAGE_SIZE)
+	${record_idx}.
+	<a href="topic.vm?sid=$g_site_id&amp;fid=${forum.id}&amp;tid=${topic.id}">
+		#if($topic.top)[顶]#elseif($topic.elite)[精]#end
+		$text.html(${topic.title})
+	</a>(${topic.replyCount}评/${topic.viewCount}阅,$date.format("MM-dd HH:mm",${topic.createTime}) 作者:<a href="$dlog.root()/dlog/viewuser.vm?sid=$g_site_id&amp;uid=${topic.user.id}">$text.html($topic.username)</a>)<br/>
+#end
+#end
+</p>
+<p>
+#if($page_count > 1)
+	#if($p_page > 1)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}">首页</a>#end
+	#if($p_page>1)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}&amp;page=$pre_page">上页</a>#end
+	#if($p_page < $page_count)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}&amp;page=$next_page">下页</a>#end
+	#if($p_page < $page_count)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}&amp;page=$page_count">尾页</a>#end
+#end
+</p>

@@ -1,0 +1,34 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  managment system
+##
+###############################################################################
+#parse("/wml/_sub/_global.vm")
+#set($page_title="网站管理")
+<p>
+#if(!$dlog.is_owner($g_site, $g_user))
+	对不起，你没有足够的访问权限，点击<a href="$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())">$text.ui("label.login")</a>使用其他帐号进入。<br /><br /><a href="#" onclick="history.go(-1);return false;">返回上页</a>
+#else
+	--请选择设置项目--<br/>
+	<a href="$dlog.root()/wml/myprofile.vm?sid=$g_site_id">1.个人资料设置</a><br/>
+	<a href="editsite.vm?sid=$g_site_id">2.网站基本设置</a><br/>
+	<a href="funcs.vm?sid=$g_site_id">3.网站功能设置</a><br/>
+	<a href="links.vm?sid=$g_site_id">4.友情链接管理</a><br/>
+#end
+</p>
+<p>
+	#parse("/wml/_sub/_channel_bar.vm")
+</p>
