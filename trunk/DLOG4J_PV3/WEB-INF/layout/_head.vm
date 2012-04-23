@@ -1,0 +1,8 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>$!{g_site.siteTitle}#if($dlog.not_empty($page_title)) | ${page_title}#end</title>
+<script type="text/javascript" src="$dlog.root()/js/common.js"></script>
+<script type="text/javascript" src="$dlog.root()/js/prototype.js"></script>
+<script type="text/javascript" src="$dlog.root()/fckeditor.js"></script>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="$link.getContextURL()/rss.vm?sid=$g_site_id" />
+<link href="$dlog.root()/styles/global.css" rel="stylesheet" type="text/css" />
+<link href="$dlog.root()/styles/1/main.css" rel="stylesheet" type="text/css" /> 
