@@ -18,7 +18,7 @@
 ###############################################################################
 #invoke("_sub/_global.vm")
 #set($PAGE_SIZE = 20)
-#set($page_title="ËùÓĞ±êÇ©")
+#set($page_title="æ‰€æœ‰æ ‡ç­¾")
 #set($p_page = $dlog.param("p", 1))
 #set($pre_page = $p_page - 1)
 #set($next_page = $p_page + 1)
@@ -26,15 +26,15 @@
 #set($page_count = $dlog.page_count($tag_count, $PAGE_SIZE))
 <p>
 	#invoke("_tag_bar.vm")
-    ¹²ÓĞ${tag_count}¸ö±êÇ©,Ã¿Ò³${PAGE_SIZE}Ìõ,µÚ${p_page}Ò³,¹²${page_count}Ò³.<br/>
+    å…±æœ‰${tag_count}ä¸ªæ ‡ç­¾,æ¯é¡µ${PAGE_SIZE}æ¡,ç¬¬${p_page}é¡µ,å…±${page_count}é¡µ.<br/>
 #if($page_count > 1)
 	#if($p_page>1)
-		<a href="$dlog.root()/wml/list_tags.vm?sid=$g_site_id">Ê×Ò³</a>
-		<a href="$dlog.root()/wml/list_tags.vm?sid=$g_site_id&amp;p=$pre_page">ÉÏÒ³</a>
+		<a href="$dlog.root()/wml/list_tags.vm?sid=$g_site_id">é¦–é¡µ</a>
+		<a href="$dlog.root()/wml/list_tags.vm?sid=$g_site_id&amp;p=$pre_page">ä¸Šé¡µ</a>
 	#end
 	#if($p_page < $page_count)
-		<a href="$dlog.root()/wml/list_tags.vm?sid=$g_site_id&amp;p=$next_page">ÏÂÒ³</a>
-		<a href="$dlog.root()/wml/list_tags.vm?sid=$g_site_id&amp;p=$page_count">Î²Ò³</a>
+		<a href="$dlog.root()/wml/list_tags.vm?sid=$g_site_id&amp;p=$next_page">ä¸‹é¡µ</a>
+		<a href="$dlog.root()/wml/list_tags.vm?sid=$g_site_id&amp;p=$page_count">å°¾é¡µ</a>
 	#end
 	<br/>
 #end
@@ -48,12 +48,12 @@
 <p>
 #if($page_count > 1)
 	#if($p_page>1)
-		<a href="$dlog.root()/wml/list_tags.vm?sid=$g_site_id">Ê×Ò³</a>
-		<a href="$dlog.root()/wml/list_tags.vm?sid=$g_site_id&amp;p=$pre_page">ÉÏÒ³</a>
+		<a href="$dlog.root()/wml/list_tags.vm?sid=$g_site_id">é¦–é¡µ</a>
+		<a href="$dlog.root()/wml/list_tags.vm?sid=$g_site_id&amp;p=$pre_page">ä¸Šé¡µ</a>
 	#end
 	#if($p_page < $page_count)
-		<a href="$dlog.root()/wml/list_tags.vm?sid=$g_site_id&amp;p=$next_page">ÏÂÒ³</a>
-		<a href="$dlog.root()/wml/list_tags.vm?sid=$g_site_id&amp;p=$page_count">Î²Ò³</a>
+		<a href="$dlog.root()/wml/list_tags.vm?sid=$g_site_id&amp;p=$next_page">ä¸‹é¡µ</a>
+		<a href="$dlog.root()/wml/list_tags.vm?sid=$g_site_id&amp;p=$page_count">å°¾é¡µ</a>
 	#end
 	<br/>
 #end

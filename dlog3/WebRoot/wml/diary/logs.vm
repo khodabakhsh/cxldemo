@@ -24,7 +24,7 @@
 #if($catalog)
 	#set($page_title=${catalog.name})
 #else
-	#set($page_title="ËùÓĞÈÕ¼Ç")
+	#set($page_title="æ‰€æœ‰æ—¥è®°")
 #end
 #set($pre_page = $p_page - 1)
 #set($next_page = $p_page + 1)
@@ -32,17 +32,17 @@
 #set($page_count = $dlog.page_count($log_count, $PAGE_SIZE))
 <p>
 	#invoke("_diary_bar.vm")    
-    $text.html($!{catalog.name})¹²ÓĞ${log_count}ÆªÈÕ¼Ç<br/>
-	µÚ${p_page}Ò³,¹²${page_count}Ò³,Ã¿Ò³${PAGE_SIZE}Ìõ.<br/>
+    $text.html($!{catalog.name})å…±æœ‰${log_count}ç¯‡æ—¥è®°<br/>
+	ç¬¬${p_page}é¡µ,å…±${page_count}é¡µ,æ¯é¡µ${PAGE_SIZE}æ¡.<br/>
 #macro(diary_page_navigator)
 #if($page_count > 1)
 	#if($p_page>1)
-		<a href="$dlog.root()/wml/diary/logs.vm?sid=$g_site_id&amp;cat_id=$cat_id">Ê×Ò³</a>
-		<a href="$dlog.root()/wml/diary/logs.vm?sid=$g_site_id&amp;cat_id=$cat_id&amp;p=$pre_page">ÉÏÒ³</a>
+		<a href="$dlog.root()/wml/diary/logs.vm?sid=$g_site_id&amp;cat_id=$cat_id">é¦–é¡µ</a>
+		<a href="$dlog.root()/wml/diary/logs.vm?sid=$g_site_id&amp;cat_id=$cat_id&amp;p=$pre_page">ä¸Šé¡µ</a>
 	#end
 	#if($p_page < $page_count)
-		<a href="$dlog.root()/wml/diary/logs.vm?sid=$g_site_id&amp;cat_id=$cat_id&amp;p=$next_page">ÏÂÒ³</a>
-		<a href="$dlog.root()/wml/diary/logs.vm?sid=$g_site_id&amp;cat_id=$cat_id&amp;p=$page_count">Î²Ò³</a>
+		<a href="$dlog.root()/wml/diary/logs.vm?sid=$g_site_id&amp;cat_id=$cat_id&amp;p=$next_page">ä¸‹é¡µ</a>
+		<a href="$dlog.root()/wml/diary/logs.vm?sid=$g_site_id&amp;cat_id=$cat_id&amp;p=$page_count">å°¾é¡µ</a>
 	#end
 	<br/>
 #end
@@ -50,7 +50,7 @@
 	#diary_page_navigator()
 #set($logs = $DIARY_tool.list_diary($g_site, $g_user, $cat_id, -1,-1,-1, $p_page, $PAGE_SIZE, false))
 #foreach($log in $logs)
-	${velocityCount}.<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;log_id=${log.id}">$escape.html(${log.title})</a>(<a href="diary_rpls.vm?sid=$g_site_id&amp;log_id=${log.id}">${log.replyCount}</a>ÆÀ/${log.viewCount}ÔÄ/$date.format("yy-MM-dd HH:mm",${log.writeTime}))<br/>
+	${velocityCount}.<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;log_id=${log.id}">$escape.html(${log.title})</a>(<a href="diary_rpls.vm?sid=$g_site_id&amp;log_id=${log.id}">${log.replyCount}</a>è¯„/${log.viewCount}é˜…/$date.format("yy-MM-dd HH:mm",${log.writeTime}))<br/>
 #end
 	#diary_page_navigator()
 </p>

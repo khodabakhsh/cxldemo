@@ -27,44 +27,44 @@
 #set($topic = $BBS_tool.topic($g_site, $g_user, $topic_id))
 <p>
 #if(!$topic)
-	»°Ìâ²»´æÔÚ£¡
+	è¯é¢˜ä¸å­˜åœ¨ï¼
 #elseif(${topic.forum.status}==3 && ${topic.site.owner.id} != ${g_user.id})
-	ÂÛÌ³ÒÑ±»Õ¾³¤¹Ø±Õ£¬ÔİÊ±²»¿ÉÓÃ£¡
+	è®ºå›å·²è¢«ç«™é•¿å…³é—­ï¼Œæš‚æ—¶ä¸å¯ç”¨ï¼
 #else
     #set($replies = $BBS_tool.replies($topic, $p_page, $PAGE_SIZE))
     #set($page_title=${topic.title})
     #set($page_count = $dlog.page_count(${topic.replyCount}, $PAGE_SIZE))
-	»°Ìâ:<a href="topic.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id">$text.html(${topic.title})</a><br/>
-	ÆÀÂÛ${topic.replyCount}Ìõ,µÚ${p_page}Ò³,¹²${page_count}Ò³,Ã¿Ò³${PAGE_SIZE}Ìõ.<br/>
+	è¯é¢˜:<a href="topic.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id">$text.html(${topic.title})</a><br/>
+	è¯„è®º${topic.replyCount}æ¡,ç¬¬${p_page}é¡µ,å…±${page_count}é¡µ,æ¯é¡µ${PAGE_SIZE}æ¡.<br/>
     #if($page_count > 1)
     	#if($p_page>1)
-    		<a href="topic_rpls.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id">Ê×Ò³</a>
-    		<a href="topic_rpls.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id&amp;p=$pre_page">ÉÏÒ³</a>
+    		<a href="topic_rpls.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id">é¦–é¡µ</a>
+    		<a href="topic_rpls.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id&amp;p=$pre_page">ä¸Šé¡µ</a>
     	#end
     	#if($p_page < $page_count)
-    		<a href="topic_rpls.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id&amp;p=$next_page">ÏÂÒ³</a>
-    		<a href="topic_rpls.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id&amp;p=$page_count">Î²Ò³</a>
+    		<a href="topic_rpls.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id&amp;p=$next_page">ä¸‹é¡µ</a>
+    		<a href="topic_rpls.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id&amp;p=$page_count">å°¾é¡µ</a>
     	#end
     	<br/>
     #end
     #foreach($rpl in $replies)
     	#set($content = $dlog.plain_text(${rpl.content}))
     	#set($rc = $dlog.abbreviate($content, $PREVIEW_SIZE))
-    	#if($dlog.is_empty($rc))#set($rc="[ÎŞÎÄ±¾ÄÚÈİ]")#end
+    	#if($dlog.is_empty($rc))#set($rc="[æ— æ–‡æœ¬å†…å®¹]")#end
     	${velocityCount}.$text.html($rpl.author)($date.format("MM-dd HH:mm",$rpl.replyTime)):${rc}
     	#if($rc.length() < $content.length())
-    		<a href="rpl.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id&amp;rpl_id=${rpl.id}">[ÏêÏ¸ÄÚÈİ]</a>
+    		<a href="rpl.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id&amp;rpl_id=${rpl.id}">[è¯¦ç»†å†…å®¹]</a>
     	#end
     	<br/>
     #end
     #if($page_count > 1)
     	#if($p_page>1)
-    		<a href="topic_rpls.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id">Ê×Ò³</a>
-    		<a href="topic_rpls.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id&amp;p=$pre_page">ÉÏÒ³</a>
+    		<a href="topic_rpls.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id">é¦–é¡µ</a>
+    		<a href="topic_rpls.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id&amp;p=$pre_page">ä¸Šé¡µ</a>
     	#end
     	#if($p_page < $page_count)
-    		<a href="topic_rpls.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id&amp;p=$next_page">ÏÂÒ³</a>
-    		<a href="topic_rpls.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id&amp;p=$page_count">Î²Ò³</a>
+    		<a href="topic_rpls.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id&amp;p=$next_page">ä¸‹é¡µ</a>
+    		<a href="topic_rpls.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id&amp;p=$page_count">å°¾é¡µ</a>
     	#end
     #end
 #end

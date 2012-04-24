@@ -24,16 +24,16 @@
 #if($album)
 	#set($page_title=${album.name})
 #else
-	#set($page_title="ËùÓĞÕÕÆ¬")
+	#set($page_title="æ‰€æœ‰ç…§ç‰‡")
 #end
 #set($vc_key = "ALBUM_${album_id}")
 #set($verify_code = $request.getSession(false).getAttribute($vc_key))
 <p>
 #if($album && ${album.type}==2 && !$dlog.is_owner($g_site,$g_user))
-	##Ë½ÓĞ·ÖÀà£¬µ«È´²»ÊÇÕ¾³¤
-	´ËÏà²áÖ»ÓĞÕ¾³¤±¾ÈË¿ÉÒÔ²é¿´£¡£¡
+	##ç§æœ‰åˆ†ç±»ï¼Œä½†å´ä¸æ˜¯ç«™é•¿
+	æ­¤ç›¸å†Œåªæœ‰ç«™é•¿æœ¬äººå¯ä»¥æŸ¥çœ‹ï¼ï¼
 #elseif($album && ${album.type}==1 && !$PHOTO_tool.can_access_album($g_site,$g_user,$album,$request))
-	##ÃÜÂëÑéÖ¤£¬µ«ÊÇÓÃ»§»¹Ã»ÊäÈëÃÜÂë
+	##å¯†ç éªŒè¯ï¼Œä½†æ˜¯ç”¨æˆ·è¿˜æ²¡è¾“å…¥å¯†ç 
 	#invoke("_album_verify.vm")
 #else
     #set($pre_page = $p_page - 1)
@@ -52,33 +52,33 @@
 		(#foreach($abm in $album.childs)#if($velocityCount>1),#end<a href="photos.vm?sid=$g_site_id&amp;aid=${abm.id}">$escape.html(${abm.name})</a> #end)
 		#end
 	#end 
-	¹²ÓĞ${photo_count}ÕÅÕÕÆ¬.<br/>
+	å…±æœ‰${photo_count}å¼ ç…§ç‰‡.<br/>
 	#if($page_count>1)
-	µÚ${p_page}Ò³,¹²${page_count}Ò³,Ã¿Ò³${PAGE_SIZE}Ìõ.<br/>
+	ç¬¬${p_page}é¡µ,å…±${page_count}é¡µ,æ¯é¡µ${PAGE_SIZE}æ¡.<br/>
 	#end
 	#if($page_count > 1)
     	#if($p_page>1)
-    		<a href="photos.vm?sid=$g_site_id&amp;aid=$album_id">Ê×Ò³</a>
-    		<a href="photos.vm?sid=$g_site_id&amp;aid=$album_id&amp;p=$pre_page">ÉÏÒ³</a>
+    		<a href="photos.vm?sid=$g_site_id&amp;aid=$album_id">é¦–é¡µ</a>
+    		<a href="photos.vm?sid=$g_site_id&amp;aid=$album_id&amp;p=$pre_page">ä¸Šé¡µ</a>
     	#end
     	#if($p_page < $page_count)
-    		<a href="photos.vm?sid=$g_site_id&amp;aid=$album_id&amp;p=$next_page">ÏÂÒ³</a>
-    		<a href="photos.vm?sid=$g_site_id&amp;aid=$album_id&amp;p=$page_count">Î²Ò³</a>
+    		<a href="photos.vm?sid=$g_site_id&amp;aid=$album_id&amp;p=$next_page">ä¸‹é¡µ</a>
+    		<a href="photos.vm?sid=$g_site_id&amp;aid=$album_id&amp;p=$page_count">å°¾é¡µ</a>
     	#end
     	<br/>
 	#end
     #set($photos = $PHOTO_tool.list_photos($g_site, $g_user, $album_id, -1, $p_page, $PAGE_SIZE))
     #foreach($photo in $photos)
-    	${velocityCount}.<img src="$dlog.root()${photo.previewURL}" alt=""/><a href="$dlog.root()/wml/photo/show.vm?sid=$g_site_id&amp;aid=$album_id&amp;pid=${photo.id}">$text.html(${photo.name})</a>(<a href="photo_rpls.vm?sid=$g_site_id&amp;pid=${photo.id}">${photo.replyCount}</a>ÆÀ/${photo.viewCount}ÔÄ/$date.format("yy-MM-dd HH:mm",${photo.createTime}))<br/>
+    	${velocityCount}.<img src="$dlog.root()${photo.previewURL}" alt=""/><a href="$dlog.root()/wml/photo/show.vm?sid=$g_site_id&amp;aid=$album_id&amp;pid=${photo.id}">$text.html(${photo.name})</a>(<a href="photo_rpls.vm?sid=$g_site_id&amp;pid=${photo.id}">${photo.replyCount}</a>è¯„/${photo.viewCount}é˜…/$date.format("yy-MM-dd HH:mm",${photo.createTime}))<br/>
     #end
 	#if($page_count > 1)
     	#if($p_page>1)
-    		<a href="photos.vm?sid=$g_site_id&amp;aid=$album_id">Ê×Ò³</a>
-    		<a href="photos.vm?sid=$g_site_id&amp;aid=$album_id&amp;p=$pre_page">ÉÏÒ³</a>
+    		<a href="photos.vm?sid=$g_site_id&amp;aid=$album_id">é¦–é¡µ</a>
+    		<a href="photos.vm?sid=$g_site_id&amp;aid=$album_id&amp;p=$pre_page">ä¸Šé¡µ</a>
     	#end
     	#if($p_page < $page_count)
-    		<a href="photos.vm?sid=$g_site_id&amp;aid=$album_id&amp;p=$next_page">ÏÂÒ³</a>
-    		<a href="photos.vm?sid=$g_site_id&amp;aid=$album_id&amp;p=$page_count">Î²Ò³</a>
+    		<a href="photos.vm?sid=$g_site_id&amp;aid=$album_id&amp;p=$next_page">ä¸‹é¡µ</a>
+    		<a href="photos.vm?sid=$g_site_id&amp;aid=$album_id&amp;p=$page_count">å°¾é¡µ</a>
     	#end
     	<br/>
 	#end

@@ -1,5 +1,5 @@
 #set($objs = $SEARCH_tool.search_site($key))
-¹²ÓĞ${objs.size()}Ïî·ûºÏ"${key}"µÄ²éÑ¯½á¹û£¬(ËÑË÷ÓÃÊ±${SEARCH_tool.get_search_time()}ºÁÃë)<br/>
+å…±æœ‰${objs.size()}é¡¹ç¬¦åˆ"${key}"çš„æŸ¥è¯¢ç»“æœï¼Œ(æœç´¢ç”¨æ—¶${SEARCH_tool.get_search_time()}æ¯«ç§’)<br/>
 #foreach($obj in $objs)
 	${velocityCount}.<a href="$dlog.root()/wml/index.vm?sid=${obj.id}">$text.html(${obj.friendlyName})</a><br/>
 #end

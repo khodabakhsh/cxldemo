@@ -17,11 +17,11 @@
 ##
 ###############################################################################
 #parse("/wml/_sub/_global.vm")
-#set($page_title="ÓÑÇéÁ´½Ó¹ÜÀí")
+#set($page_title="å‹æƒ…é“¾æ¥ç®¡ç†")
 <p>
-	#invoke("_opt_bar.vm") ÓÑÇéÁ´½Ó<br/>
+	#invoke("_opt_bar.vm") å‹æƒ…é“¾æ¥<br/>
 #if(!$dlog.is_owner($g_site, $g_user))
-	¶Ô²»Æğ£¬ÄãÃ»ÓĞ×ã¹»µÄ·ÃÎÊÈ¨ÏŞ£¬µã»÷<a href="$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())">$text.ui("label.login")</a>Ê¹ÓÃÆäËûÕÊºÅ½øÈë¡£<br /><br /><a href="#" onclick="history.go(-1);return false;">·µ»ØÉÏÒ³</a>
+	å¯¹ä¸èµ·ï¼Œä½ æ²¡æœ‰è¶³å¤Ÿçš„è®¿é—®æƒé™ï¼Œç‚¹å‡»<a href="$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())">$text.ui("label.login")</a>ä½¿ç”¨å…¶ä»–å¸å·è¿›å…¥ã€‚<br /><br /><a href="#" onclick="history.go(-1);return false;">è¿”å›ä¸Šé¡µ</a>
 #else
     #set($PAGE_SIZE = 10)
     #set($p_page = $dlog.param("p",1))
@@ -29,11 +29,11 @@
     #set($next_page = $p_page + 1)
     #set($lnk_count = $link.link_count($g_site))
     #set($page_count = $dlog.page_count($lnk_count, $PAGE_SIZE))
-	¹²ÓĞ${lnk_count}¸öÓÑÇéÁ´½Ó#if($page_count>1)£¬Ã¿Ò³${PAGE_SIZE}¸ö£¬¹²${page_count}Ò³#end.<a href="link_add.vm?sid=$g_site_id">Ìí¼ÓÁ´½Ó</a><br/>	
-    #if($p_page > 1)<a href="links.vm?sid=${g_site_id}">Ê×Ò³</a>#end
-    #if($p_page>1)<a href="links.vm?sid=${g_site_id}&amp;p=$pre_page">ÉÏÒ³</a>#end
-    #if($p_page < $page_count)<a href="links.vm?sid=${g_site_id}&amp;p=$next_page">ÏÂÒ³</a>#end
-    #if($p_page < $page_count)<a href="links.vm?sid=${g_site_id}&amp;p=$page_count">Î²Ò³</a>#end	
+	å…±æœ‰${lnk_count}ä¸ªå‹æƒ…é“¾æ¥#if($page_count>1)ï¼Œæ¯é¡µ${PAGE_SIZE}ä¸ªï¼Œå…±${page_count}é¡µ#end.<a href="link_add.vm?sid=$g_site_id">æ·»åŠ é“¾æ¥</a><br/>	
+    #if($p_page > 1)<a href="links.vm?sid=${g_site_id}">é¦–é¡µ</a>#end
+    #if($p_page>1)<a href="links.vm?sid=${g_site_id}&amp;p=$pre_page">ä¸Šé¡µ</a>#end
+    #if($p_page < $page_count)<a href="links.vm?sid=${g_site_id}&amp;p=$next_page">ä¸‹é¡µ</a>#end
+    #if($p_page < $page_count)<a href="links.vm?sid=${g_site_id}&amp;p=$page_count">å°¾é¡µ</a>#end	
 </p>
 <p>
 	#set($links = $link.links($g_site,$p_page, $PAGE_SIZE))
@@ -41,9 +41,9 @@
     #foreach($lnk in ${links})
 	#set($idx = $base_idx + $velocityCount)
 	${idx}.$escape.html(${lnk.title})
-	#if($idx != 1)<a href="$link.setAction("wml/link")?sid=$g_site_id&amp;eventSubmit_MoveUp=${lnk.id}">ÉÏÒÆ</a>#end
-	#if($idx < ${lnk_count})<a href="$link.setAction("wml/link")?sid=$g_site_id&amp;eventSubmit_MoveDown=${lnk.id}">ÏÂÒÆ</a>#end
-	<a href="$link.setAction("wml/link")?sid=$g_site_id&amp;eventSubmit_Delete=${lnk.id}">É¾³ı</a><br/>
+	#if($idx != 1)<a href="$link.setAction("wml/link")?sid=$g_site_id&amp;eventSubmit_MoveUp=${lnk.id}">ä¸Šç§»</a>#end
+	#if($idx < ${lnk_count})<a href="$link.setAction("wml/link")?sid=$g_site_id&amp;eventSubmit_MoveDown=${lnk.id}">ä¸‹ç§»</a>#end
+	<a href="$link.setAction("wml/link")?sid=$g_site_id&amp;eventSubmit_Delete=${lnk.id}">åˆ é™¤</a><br/>
 	#end
 #end
 </p>

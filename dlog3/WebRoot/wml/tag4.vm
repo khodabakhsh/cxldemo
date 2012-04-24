@@ -20,7 +20,7 @@
 #invoke("_sub/_global.vm")
 #set($tag = $dlog.param("tag",""))
 #set($p_page = $dlog.param("page",1))
-#set($page_title="±êÇ©:$tag")
+#set($page_title="æ ‡ç­¾:$tag")
 
 #set($start_time = $dlog.current_timestamp())
 #set($diary_c = $TAG_tool.topic_count_of_tag($g_site, $tag))
@@ -30,10 +30,10 @@
 #set($time_used = $dlog.time_consume($start_time))
 <p>
 	#invoke("_tag_bar.vm")
-	¹²ÓĞ<b>${diary_c}</b>Æª»°Ìâ£¬²éÑ¯ºÄÊ±<b>${time_used}</b>ºÁÃë¡£<br/>
+	å…±æœ‰<b>${diary_c}</b>ç¯‡è¯é¢˜ï¼ŒæŸ¥è¯¢è€—æ—¶<b>${time_used}</b>æ¯«ç§’ã€‚<br/>
 #if($diarys)
 	#set($page_count = $dlog.page_count($diary_c, $PAGE_SITE))
-	#if($page_count > 1)Ò³´Î:
+	#if($page_count > 1)é¡µæ¬¡:
 	#foreach($p_idx in [1..$page_count])
 	#if($velocityCount>1),#end#if($p_page!=$p_idx)<a href="tag4.vm?sid=$g_site_id&amp;page=${p_idx}&amp;tag=$link.encodeURL($tag)">#end${p_idx}#if($p_page!=$p_idx)</a>#end#end
 	<br/>
@@ -41,7 +41,7 @@
 	#foreach($topic in $diarys)
 		${velocityCount}.<a href="$dlog.root()/wml/bbs/topic.vm?sid=${topic.site.id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}">$escape.html(${topic.title})</a><br/>
 	#end
-	#if($page_count > 1)Ò³´Î:
+	#if($page_count > 1)é¡µæ¬¡:
 	#foreach($p_idx in [1..$page_count])
 	#if($velocityCount>1),#end#if($p_page!=$p_idx)<a href="tag4.vm?sid=$g_site_id&amp;page=${p_idx}&amp;tag=$link.encodeURL($tag)">#end${p_idx}#if($p_page!=$p_idx)</a>#end#end
 	<br/>

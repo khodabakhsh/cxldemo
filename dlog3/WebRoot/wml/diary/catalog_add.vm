@@ -17,21 +17,21 @@
 ##
 ###############################################################################
 #parse("/wml/_sub/_global.vm")
-#set($page_title="´´½¨ÈÕ¼Ç·ÖÀà")
+#set($page_title="åˆ›å»ºæ—¥è®°åˆ†ç±»")
 <p>
 #if($dlog.is_owner($g_site, $g_user))
 	#wml_error_msg()
 	#set($cform = $form.getBean())
-	·ÖÀàÃû:<input type="text" size="20" maxlength="20" name="name" value="$!{cform.name}"/><br/>
-	È¨ÏŞ:<select name="type"><option value="1">¹«¿ª</option><option value="0">Ë½ÈË</option></select><br/>
-	Î»ÖÃ:<select name="id">#foreach($cat in $g_site.catalogs)<option value="$cat.id">${cat.name}</option>#end</select><select name="direction"><option value="1">Ö®Ç°</option><option value="2">Ö®ºó</option></select><br/>
-	Àà±ğ:<select name="catalog">	<option value="-1">[ÇëÑ¡ÔñÀà±ğ]</option>
+	åˆ†ç±»å:<input type="text" size="20" maxlength="20" name="name" value="$!{cform.name}"/><br/>
+	æƒé™:<select name="type"><option value="1">å…¬å¼€</option><option value="0">ç§äºº</option></select><br/>
+	ä½ç½®:<select name="id">#foreach($cat in $g_site.catalogs)<option value="$cat.id">${cat.name}</option>#end</select><select name="direction"><option value="1">ä¹‹å‰</option><option value="2">ä¹‹å</option></select><br/>
+	ç±»åˆ«:<select name="catalog">	<option value="-1">[è¯·é€‰æ‹©ç±»åˆ«]</option>
 	#set($__root_types = $TYPE_tool.root_types())
     #foreach($__type in $__root_types)
     <option value="$__type.id">${__type.name}</option>
 	#end
 	</select>	
-    <anchor>´´½¨·ÖÀà
+    <anchor>åˆ›å»ºåˆ†ç±»
         <go href="$link.setAction("wml/catalog")" method="post">
             <postfield name="sid" value="$g_site_id"/>
             <postfield name="name" value="$(name)"/>
@@ -44,6 +44,6 @@
         </go>
     </anchor>
 #else	
-    ¶Ô²»Æğ£¬ÄãÃ»ÓĞ²Ù×÷È¨ÏŞ£¡
+    å¯¹ä¸èµ·ï¼Œä½ æ²¡æœ‰æ“ä½œæƒé™ï¼
 #end
 </p>

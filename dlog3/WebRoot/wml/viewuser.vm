@@ -17,35 +17,35 @@
 ##
 ###############################################################################
 #invoke("_sub/_global.vm")
-#set($page_title="ÓÃ»§×ÊÁÏ")
+#set($page_title="ç”¨æˆ·èµ„æ–™")
 #set($uid = $dlog.param("uid",-1))
 #set($user = $USER_tool.user($uid))
 <p>
-    <b>+ÓÃ»§»ù±¾×ÊÁÏ</b><br/>
-    ÓÃ»§Ãû£º$text.html($user.name)<br/>
-    êÇ³Æ£º$text.html($user.nickname)<br/>
+    <b>+ç”¨æˆ·åŸºæœ¬èµ„æ–™</b><br/>
+    ç”¨æˆ·åï¼š$text.html($user.name)<br/>
+    æ˜µç§°ï¼š$text.html($user.nickname)<br/>
 	$text.wml("sex")#if($g_site.owner.sex==1)$text.wml("male")#elseif($g_site.owner.sex==2)$text.wml("female")#else$text.wml("unknown")#end&nbsp;
 	$text.wml("age")#if($g_site.owner.age>0)${g_site.owner.age}#else$text.wml("unknown")#end <br/>
-    ×¢²áÊ±¼ä£º$date.format("yyyy/MM/dd HH:mm",$user.regTime)<br/>
-    ×î½ü·ÃÎÊÊ±¼ä£º$!date.format("yyyy/MM/dd HH:mm",$user.lastTime)<br/>
-    <b>+ÁªÏµĞÅÏ¢</b><br/>
-    µØÇø(Ê¡/ÊĞ):$!{user.province} $!{user.city}<br/>
-    µç×ÓÓÊ¼ş£º#if(!$dlog.is_empty($user.contactInfo.email))<a href="mailto:${user.contactInfo.email}">$!{user.contactInfo.email}</a>#end<br/>
-    QQ£º$!{user.contactInfo.qq}<br/>
-    MSN£º$!{user.contactInfo.msn}<br/>
-    ¸öÈËÍøÕ¾£º#if(!$dlog.is_empty($user.contactInfo.homePage))<a href="${user.contactInfo.homePage}" target="_blank">$!{user.contactInfo.homePage}</a>#end<br/>
-    <b>+²ÎÓëÇé¿ö</b><br/>
-    ×¢²áÍøÕ¾£º
+    æ³¨å†Œæ—¶é—´ï¼š$date.format("yyyy/MM/dd HH:mm",$user.regTime)<br/>
+    æœ€è¿‘è®¿é—®æ—¶é—´ï¼š$!date.format("yyyy/MM/dd HH:mm",$user.lastTime)<br/>
+    <b>+è”ç³»ä¿¡æ¯</b><br/>
+    åœ°åŒº(çœ/å¸‚):$!{user.province} $!{user.city}<br/>
+    ç”µå­é‚®ä»¶ï¼š#if(!$dlog.is_empty($user.contactInfo.email))<a href="mailto:${user.contactInfo.email}">$!{user.contactInfo.email}</a>#end<br/>
+    QQï¼š$!{user.contactInfo.qq}<br/>
+    MSNï¼š$!{user.contactInfo.msn}<br/>
+    ä¸ªäººç½‘ç«™ï¼š#if(!$dlog.is_empty($user.contactInfo.homePage))<a href="${user.contactInfo.homePage}" target="_blank">$!{user.contactInfo.homePage}</a>#end<br/>
+    <b>+å‚ä¸æƒ…å†µ</b><br/>
+    æ³¨å†Œç½‘ç«™ï¼š
 	#if($user.ownSiteId>0)
 		#set($his_site = $dlog.site($user.ownSiteId))
 		<a href="index.vm?sid=${his_site.id}">$text.html(${his_site.friendlyName})</a>
 	#else 
-		ÎŞ
+		æ— 
 	#end<br/>
-    <b>+¸öÈËĞûÑÔ</b><br/>#if($dlog.not_empty($user.resume))${user.resume}#else ÕâÈËºÜÀÁ£¬Ê²Ã´Ò²Ã»Ğ´¡£#end<br/>
+    <b>+ä¸ªäººå®£è¨€</b><br/>#if($dlog.not_empty($user.resume))${user.resume}#else è¿™äººå¾ˆæ‡’ï¼Œä»€ä¹ˆä¹Ÿæ²¡å†™ã€‚#end<br/>
 	----------<br/>
-    <a href="sendmsg.vm?sid=$g_site_id&amp;uid=${user.id}&amp;r=$math.random(1,1000)">·¢ËÍ¶ÌÏûÏ¢&gt;</a><br/>
-	<anchor>¼ÓÎªºÃÓÑ&gt;
+    <a href="sendmsg.vm?sid=$g_site_id&amp;uid=${user.id}&amp;r=$math.random(1,1000)">å‘é€çŸ­æ¶ˆæ¯&gt;</a><br/>
+	<anchor>åŠ ä¸ºå¥½å‹&gt;
         <go href="$link.setAction("wml/user")" method="post">
             <postfield name="sid" value="$g_site_id"/>
             <postfield name="uid" value="$uid"/>

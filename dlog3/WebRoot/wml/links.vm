@@ -36,15 +36,15 @@
 ##set($lnk_count = $link.link_count($g_site))
 #set($page_count = $dlog.page_count($lnk_count, $PAGE_SIZE))
 <p>
-	<a href="$wap_home_url">Ê×Ò³</a>
+	<a href="$wap_home_url">é¦–é¡µ</a>
 	#if($g_site)&gt;<a href="$dlog.root()/wml/?sid=$g_site_id">$escape.html(${g_site.friendlyName})</a>#end
-	&gt;ÓÑÇéÁ´½Ó#if($dlog.is_owner($g_site,$g_user))(<a href="$dlog.root()/wml/mgr/links.vm?sid=$g_site_id">¹ÜÀí</a>)#end<br/>
-	¹²ÓĞ${lnk_count}¸öÓÑÇéÁ´½Ó.<br/>
+	&gt;å‹æƒ…é“¾æ¥#if($dlog.is_owner($g_site,$g_user))(<a href="$dlog.root()/wml/mgr/links.vm?sid=$g_site_id">ç®¡ç†</a>)#end<br/>
+	å…±æœ‰${lnk_count}ä¸ªå‹æƒ…é“¾æ¥.<br/>
 	
-    #if($p_page > 1)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}">Ê×Ò³</a>#end
-    #if($p_page>1)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}&amp;page=$pre_page">ÉÏÒ³</a>#end
-    #if($p_page < $page_count)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}&amp;page=$next_page">ÏÂÒ³</a>#end
-    #if($p_page < $page_count)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}&amp;page=$page_count">Î²Ò³</a>#end
+    #if($p_page > 1)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}">é¦–é¡µ</a>#end
+    #if($p_page>1)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}&amp;page=$pre_page">ä¸Šé¡µ</a>#end
+    #if($p_page < $page_count)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}&amp;page=$next_page">ä¸‹é¡µ</a>#end
+    #if($p_page < $page_count)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}&amp;page=$page_count">å°¾é¡µ</a>#end
 </p>
 <p>
     #foreach($lnk in ${links})
@@ -60,8 +60,8 @@
 	#end
 </p>
 <p>
-    #if($p_page > 1)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}">Ê×Ò³</a>#end
-    #if($p_page>1)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}&amp;page=$pre_page">ÉÏÒ³</a>#end
-    #if($p_page < $page_count)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}&amp;page=$next_page">ÏÂÒ³</a>#end
-    #if($p_page < $page_count)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}&amp;page=$page_count">Î²Ò³</a>#end
+    #if($p_page > 1)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}">é¦–é¡µ</a>#end
+    #if($p_page>1)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}&amp;page=$pre_page">ä¸Šé¡µ</a>#end
+    #if($p_page < $page_count)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}&amp;page=$next_page">ä¸‹é¡µ</a>#end
+    #if($p_page < $page_count)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}&amp;page=$page_count">å°¾é¡µ</a>#end
 </p>

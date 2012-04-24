@@ -17,10 +17,10 @@
 ##
 ###############################################################################
 #parse("/wml/_sub/_xhtml_global.vm")
-#set($page_title="¸ü¸ÄÍ·Ïñ")
+#set($page_title="æ›´æ”¹å¤´åƒ")
 <div>
 #if($dlog.not_empty(${g_user.portrait}))
-	ÄãÏÖÔÚµÄÍ·ÏñÊÇ:<br/>
+	ä½ ç°åœ¨çš„å¤´åƒæ˜¯:<br/>
 	<img src="$dlog.root()/uploads/portrait/${g_user.portrait}" alt=""/>
 #end
 </div>
@@ -30,9 +30,9 @@
 	<input type="hidden" name="sid" value="$g_site_id"/>
 	<input type="hidden" name="id" value="$g_user_id"/>
 	<input type="hidden" name="__ClientId" value="$dlog.gen_client_id()"/>
-	ÇëÊäÈëÄãµÄÃÜÂë:<input type="text" name="password" size="15"/><br/>
-	ÇëÑ¡ÔñĞÂµÄÍ·Ïñ(Èç¹ûÄã²»ÏëÒªÍ·ÏñÇëÑ¡ÖĞµ×ÏÂµÄ¡®Çå³ıÍ¼Ïó¡¯):<input type="file" name="portrait"/><br/>
-	<input type="checkbox" name="removePortrait" value="1"/> Çå³ıÍ·Ïñ<br/>
-    <input type="submit" name="eventSubmit_UpdatePortrait" value="ÏÖÔÚ¸üĞÂ"/>
+	è¯·è¾“å…¥ä½ çš„å¯†ç :<input type="text" name="password" size="15"/><br/>
+	è¯·é€‰æ‹©æ–°çš„å¤´åƒ(å¦‚æœä½ ä¸æƒ³è¦å¤´åƒè¯·é€‰ä¸­åº•ä¸‹çš„â€˜æ¸…é™¤å›¾è±¡â€™):<input type="file" name="portrait"/><br/>
+	<input type="checkbox" name="removePortrait" value="1"/> æ¸…é™¤å¤´åƒ<br/>
+    <input type="submit" name="eventSubmit_UpdatePortrait" value="ç°åœ¨æ›´æ–°"/>
 	</form>
 </div>

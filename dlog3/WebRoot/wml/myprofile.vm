@@ -17,27 +17,27 @@
 ##
 ###############################################################################
 #invoke("_sub/_global.vm")
-#set($page_title="ÎÒµÄ×ÊÁÏ")
+#set($page_title="æˆ‘çš„èµ„æ–™")
 <p>
-	#invoke("_sub/_nav_bar.vm")&gt;ÎÒµÄ×ÊÁÏ(µã»÷Á´½Ó½øĞĞĞŞ¸Ä)<br/>
+	#invoke("_sub/_nav_bar.vm")&gt;æˆ‘çš„èµ„æ–™(ç‚¹å‡»é“¾æ¥è¿›è¡Œä¿®æ”¹)<br/>
 	#wml_error_msg()
 #if($dlog.not_empty(${g_user.portrait}))
 	<img src="$dlog.root()/uploads/portrait/${g_user.portrait}" alt=""/>
-	<a href="user/modify_portrait.vm?sid=$g_site_id&amp;uid=${g_user.id}">ĞŞ¸ÄÍ·Ïñ</a><br/>
+	<a href="user/modify_portrait.vm?sid=$g_site_id&amp;uid=${g_user.id}">ä¿®æ”¹å¤´åƒ</a><br/>
 #else	
-	<a href="user/modify_portrait.vm?sid=$g_site_id&amp;uid=${g_user.id}">ÉÏ´«Í·Ïñ</a><br/>
+	<a href="user/modify_portrait.vm?sid=$g_site_id&amp;uid=${g_user.id}">ä¸Šä¼ å¤´åƒ</a><br/>
 #end
-	ÓÃ»§Ãû: $text.html(${g_user.name})<br/>
-	êÇ³Æ: <a href="user/modify_nickname.vm?sid=$g_site_id">$text.html(${g_user.nickname})</a><br/>
-	ÃÜÂë: <a href="user/modify_pwd.vm?sid=$g_site_id">****</a><br/>
-	ĞÔ±ğ: <a href="user/modify_sex.vm?sid=$g_site_id">#if($g_user.sex==0)±£ÃÜ#elseif($g_user.sex==1)ÄĞ#elseif($g_user.sex==2)Å®#end</a><br/>
-	ÉúÈÕ: <a href="user/modify_birth.vm?sid=$g_site_id">#if($g_user.birth)$date.format("yyyy-M-d",${g_user.birth})#else Î´ÌîĞ´#end</a><br/>
-	ĞûÑÔ: <a href="user/modify_resume.vm?sid=$g_site_id">#if($dlog.not_empty(${g_user.resume}))${g_user.resume}#else Î´ÌîĞ´#end</a>
+	ç”¨æˆ·å: $text.html(${g_user.name})<br/>
+	æ˜µç§°: <a href="user/modify_nickname.vm?sid=$g_site_id">$text.html(${g_user.nickname})</a><br/>
+	å¯†ç : <a href="user/modify_pwd.vm?sid=$g_site_id">****</a><br/>
+	æ€§åˆ«: <a href="user/modify_sex.vm?sid=$g_site_id">#if($g_user.sex==0)ä¿å¯†#elseif($g_user.sex==1)ç”·#elseif($g_user.sex==2)å¥³#end</a><br/>
+	ç”Ÿæ—¥: <a href="user/modify_birth.vm?sid=$g_site_id">#if($g_user.birth)$date.format("yyyy-M-d",${g_user.birth})#else æœªå¡«å†™#end</a><br/>
+	å®£è¨€: <a href="user/modify_resume.vm?sid=$g_site_id">#if($dlog.not_empty(${g_user.resume}))${g_user.resume}#else æœªå¡«å†™#end</a>
 </p>
 <p>
-	+ÁªÏµĞÅÏ¢ <br/>
-	µçÓÊ: <a href="user/modify_email.vm?sid=$g_site_id">#if($dlog.not_empty(${g_user.contactInfo.email}))${g_user.contactInfo.email}#else Î´ÌîĞ´#end</a><br/>
-	MSN: <a href="user/modify_msn.vm?sid=$g_site_id">#if($dlog.not_empty(${g_user.contactInfo.msn}))${g_user.contactInfo.msn}#else Î´ÌîĞ´#end</a><br/>
-	QQ: <a href="user/modify_qq.vm?sid=$g_site_id">#if($dlog.not_empty(${g_user.contactInfo.qq}))${g_user.contactInfo.qq}#else Î´ÌîĞ´#end</a><br/>
-	ÍøÖ·: <a href="user/modify_homepage.vm?sid=$g_site_id">#if($dlog.not_empty(${g_user.contactInfo.homePage}))${g_user.contactInfo.homePage}#else Î´ÌîĞ´#end</a>
+	+è”ç³»ä¿¡æ¯ <br/>
+	ç”µé‚®: <a href="user/modify_email.vm?sid=$g_site_id">#if($dlog.not_empty(${g_user.contactInfo.email}))${g_user.contactInfo.email}#else æœªå¡«å†™#end</a><br/>
+	MSN: <a href="user/modify_msn.vm?sid=$g_site_id">#if($dlog.not_empty(${g_user.contactInfo.msn}))${g_user.contactInfo.msn}#else æœªå¡«å†™#end</a><br/>
+	QQ: <a href="user/modify_qq.vm?sid=$g_site_id">#if($dlog.not_empty(${g_user.contactInfo.qq}))${g_user.contactInfo.qq}#else æœªå¡«å†™#end</a><br/>
+	ç½‘å€: <a href="user/modify_homepage.vm?sid=$g_site_id">#if($dlog.not_empty(${g_user.contactInfo.homePage}))${g_user.contactInfo.homePage}#else æœªå¡«å†™#end</a>
 </p>

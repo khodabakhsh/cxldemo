@@ -17,71 +17,71 @@
 ##
 ###############################################################################
 #parse("/wml/_sub/_global.vm")
-#set($page_title="ÍøÕ¾¹¦ÄÜÉèÖÃ")
+#set($page_title="ç½‘ç«™åŠŸèƒ½è®¾ç½®")
 <p>
-	#invoke("_opt_bar.vm") ¹¦ÄÜÉèÖÃ<br/>
+	#invoke("_opt_bar.vm") åŠŸèƒ½è®¾ç½®<br/>
 #if(!$dlog.is_owner($g_site, $g_user))
-	¶Ô²»Æğ£¬ÄãÃ»ÓĞ×ã¹»µÄ·ÃÎÊÈ¨ÏŞ£¬µã»÷<a href="$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())">$text.ui("label.login")</a>Ê¹ÓÃÆäËûÕÊºÅ½øÈë¡£<br /><br /><a href="#" onclick="history.go(-1);return false;">·µ»ØÉÏÒ³</a>
+	å¯¹ä¸èµ·ï¼Œä½ æ²¡æœ‰è¶³å¤Ÿçš„è®¿é—®æƒé™ï¼Œç‚¹å‡»<a href="$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())">$text.ui("label.login")</a>ä½¿ç”¨å…¶ä»–å¸å·è¿›å…¥ã€‚<br /><br /><a href="#" onclick="history.go(-1);return false;">è¿”å›ä¸Šé¡µ</a>
 #else
-	Äã¿ÉÒÔ¹Ø±Õ»òÕßÆôÓÃÍøÕ¾µÄÄ³¸ö¹¦ÄÜ£¡
-	Í¬Ê±Äã¿ÉÒÔ×Ô¼º¸ø¹¦ÄÜÆğ¸öÃû³Æ,Ãû³Æ²»ÄÜ³¬¹ı8¸öºº×Ö»òÕß16¸ö×Ö·û.
+	ä½ å¯ä»¥å…³é—­æˆ–è€…å¯ç”¨ç½‘ç«™çš„æŸä¸ªåŠŸèƒ½ï¼
+	åŒæ—¶ä½ å¯ä»¥è‡ªå·±ç»™åŠŸèƒ½èµ·ä¸ªåç§°,åç§°ä¸èƒ½è¶…è¿‡8ä¸ªæ±‰å­—æˆ–è€…16ä¸ªå­—ç¬¦.
 	<br/>----------<br/>
 	<input type="text" name="diaryName" value="$text.diary($g_site)" size="6" maxlength="16"/>
 	<select name="statusDiary">
 	#if(${g_site.functionStatus.diary}!=2)
-		<option value="1">¿ªÆô</option>
-		<option value="0">¹Ø±Õ</option>
+		<option value="1">å¼€å¯</option>
+		<option value="0">å…³é—­</option>
 	#else
-		<option value="0">¹Ø±Õ</option>
-		<option value="1">¿ªÆô</option>
+		<option value="0">å…³é—­</option>
+		<option value="1">å¼€å¯</option>
 	#end
 	</select>
 	<br/>
 	<input type="text" name="photoName" value="$text.photo($g_site)" size="6" maxlength="16"/>
 	<select name="statusPhoto">
 	#if(${g_site.functionStatus.photo}!=2)
-		<option value="1">¿ªÆô</option>
-		<option value="0">¹Ø±Õ</option>
+		<option value="1">å¼€å¯</option>
+		<option value="0">å…³é—­</option>
 	#else
-		<option value="0">¹Ø±Õ</option>
-		<option value="1">¿ªÆô</option>
+		<option value="0">å…³é—­</option>
+		<option value="1">å¼€å¯</option>
 	#end
 	</select>
 	<br/>
 	<input type="text" name="musicName" value="$text.music($g_site)" size="6" maxlength="16"/>
 	<select name="statusMusic">
 	#if(${g_site.functionStatus.music}!=2)
-		<option value="1">¿ªÆô</option>
-		<option value="0">¹Ø±Õ</option>
+		<option value="1">å¼€å¯</option>
+		<option value="0">å…³é—­</option>
 	#else
-		<option value="0">¹Ø±Õ</option>
-		<option value="1">¿ªÆô</option>
+		<option value="0">å…³é—­</option>
+		<option value="1">å¼€å¯</option>
 	#end
 	</select>
 	<br/>
 	<input type="text" name="forumName" value="$text.bbs($g_site)" size="6" maxlength="16"/>
 	<select name="statusForum">
 	#if(${g_site.functionStatus.forum}!=2)
-		<option value="1">¿ªÆô</option>
-		<option value="0">¹Ø±Õ</option>
+		<option value="1">å¼€å¯</option>
+		<option value="0">å…³é—­</option>
 	#else
-		<option value="0">¹Ø±Õ</option>
-		<option value="1">¿ªÆô</option>
+		<option value="0">å…³é—­</option>
+		<option value="1">å¼€å¯</option>
 	#end
 	</select>
 	<br/>
 	<input type="text" name="guestbookName" value="$text.guestbook($g_site)" size="6" maxlength="16"/>
 	<select name="statusGuestbook">
 	#if(${g_site.functionStatus.guestbook}!=2)
-		<option value="1">¿ªÆô</option>
-		<option value="0">¹Ø±Õ</option>
+		<option value="1">å¼€å¯</option>
+		<option value="0">å…³é—­</option>
 	#else
-		<option value="0">¹Ø±Õ</option>
-		<option value="1">¿ªÆô</option>
+		<option value="0">å…³é—­</option>
+		<option value="1">å¼€å¯</option>
 	#end
 	</select><br/>
 #end
-    <anchor>ÏÖÔÚĞŞ¸Ä
+    <anchor>ç°åœ¨ä¿®æ”¹
         <go href="$link.setAction("/wml/sitemgr/site")" method="post">
             <postfield name="sid" value="$g_site_id"/>
             

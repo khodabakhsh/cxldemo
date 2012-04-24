@@ -17,22 +17,22 @@
 ##
 ###############################################################################
 #parse("/wml/_sub/_global.vm")
-#set($page_title="ĞŞ¸ÄÏà²¾")
+#set($page_title="ä¿®æ”¹ç›¸ç°¿")
 <p>
 #if(!$dlog.is_owner($g_site, $g_user))
-	¶Ô²»Æğ£¬ÄãÃ»ÓĞ×ã¹»µÄ·ÃÎÊÈ¨ÏŞ£¬µã»÷<a href="$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())">$text.ui("label.login")</a>Ê¹ÓÃÆäËûÕÊºÅ½øÈë¡£<br /><br /><a href="#" onclick="history.go(-1);return false;">·µ»ØÉÏÒ³</a>
+	å¯¹ä¸èµ·ï¼Œä½ æ²¡æœ‰è¶³å¤Ÿçš„è®¿é—®æƒé™ï¼Œç‚¹å‡»<a href="$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())">$text.ui("label.login")</a>ä½¿ç”¨å…¶ä»–å¸å·è¿›å…¥ã€‚<br /><br /><a href="#" onclick="history.go(-1);return false;">è¿”å›ä¸Šé¡µ</a>
 #else
 	#wml_error_msg()
 	#set($cform = $form.getBean())
 	#set($album_id = $dlog.param("aid", -1))
 	#set($album = ${g_site.album($album_id)})
 	#set($rnd=$math.random(1,10000))
-	Ïà²¾Ãû:<input type="text" name="name_$rnd" value="$!{album.name}"/><br/>
-	È¨ÏŞ:<select name="type"><option value="0">ÍêÈ«¹«¿ª</option><option value="2">Ë½ÈËÏà²¾</option><option value="1">ĞèÒªÃÜÂëÑéÖ¤</option></select><br/>
-	Èç¹ûÄúÑ¡ÔñÁË¡±ĞèÒªÃÜÂëÑéÖ¤¡°ÇëÔÚÏÂÃæ¿òÖĞÊäÈëÏà²¾·ÃÎÊÃÜÂë!
+	ç›¸ç°¿å:<input type="text" name="name_$rnd" value="$!{album.name}"/><br/>
+	æƒé™:<select name="type"><option value="0">å®Œå…¨å…¬å¼€</option><option value="2">ç§äººç›¸ç°¿</option><option value="1">éœ€è¦å¯†ç éªŒè¯</option></select><br/>
+	å¦‚æœæ‚¨é€‰æ‹©äº†â€éœ€è¦å¯†ç éªŒè¯â€œè¯·åœ¨ä¸‹é¢æ¡†ä¸­è¾“å…¥ç›¸ç°¿è®¿é—®å¯†ç !
     <input type="text" name="verifyCode_$rnd" value="$!{album.verifyCode}"/><br/>	
 	
-    <anchor>ĞŞ¸ÄÏà²¾
+    <anchor>ä¿®æ”¹ç›¸ç°¿
         <go href="$link.setAction("wml/album")" method="post">
             <postfield name="id" value="$album_id"/>
             <postfield name="aid" value="$album_id"/>

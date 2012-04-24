@@ -1,7 +1,7 @@
 #if($messages.exist())$!messages.getAll()<br/>#end
-此相册需要密码验证正确后才能查看，请输入验证码：
+姝ょ浉鍐岄渶瑕佸瘑鐮侀獙璇佹纭悗鎵嶈兘鏌ョ湅锛岃杈撳叆楠岃瘉鐮侊細
 <input type="text" name="verifyCode" value=""/>
-<anchor>验证
+<anchor>楠岃瘉
     <go href="$link.setAction("wml/album")" method="post">
         <postfield name="sid" value="$g_site_id"/>
         <postfield name="id" value="$album_id"/>

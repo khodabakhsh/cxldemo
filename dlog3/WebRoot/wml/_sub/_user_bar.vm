@@ -7,7 +7,7 @@
     <a href="$dlog.root()/wml/">$text.wml("my_site",${app_name})</a>#end
     <a href="$dlog.root()/wml/listmsg.vm?sid=$g_site_id">$text.wml("message")($new_msg_count,$msg_count)</a>
     <a href="$dlog.root()/wml/bookmark.vm?sid=$g_site_id">$text.wml("bookmark")</a>
-    <a href="$dlog.root()/wml/friends.vm?sid=$g_site_id">∫√”—</a>
+    <a href="$dlog.root()/wml/friends.vm?sid=$g_site_id">Â•ΩÂèã</a>
     <a href="$dlog.root()/wml/search.vm?sid=$g_site_id">$text.wml("search")</a>
     <a href="$dlog.root()/wml/myprofile.vm?sid=$g_site_id">$text.wml("profile")</a>
     <a href="$dlog.root()/wml/user.do?sid=$g_site_id&amp;eventSubmit_Logout=${__this_url}">$text.wml("logout")</a>

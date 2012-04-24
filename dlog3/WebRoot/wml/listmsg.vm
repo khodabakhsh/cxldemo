@@ -17,10 +17,10 @@
 ##
 ###############################################################################
 #invoke("_sub/_global.vm")
-#set($page_title="ÎÒµÄ¶ÌÏûÏ¢")
+#set($page_title="æˆ‘çš„çŸ­æ¶ˆæ¯")
 #set($MSG_COUNT_PER_PAGE = 1)
 <p>
-	#invoke("_sub/_nav_bar.vm")&gt;¶ÌÏûÏ¢<br/>
+	#invoke("_sub/_nav_bar.vm")&gt;çŸ­æ¶ˆæ¯<br/>
 #if($g_user)
 	#set($msg_count = $USER_tool.msg_count($g_user))
 	#if($msg_count > 0)
@@ -29,39 +29,39 @@
 		#set($next_page = $p_page + 1)
 		#set($page_count = $dlog.page_count($msg_count, $MSG_COUNT_PER_PAGE))
 		#if($p_page > $page_count)#set($p_page = $page_count)#end
-		ÄúÓĞ¶ÌÏûÏ¢${msg_count}Ìõ,Ò³´Î: ${p_page}/${page_count}<br/>
+		æ‚¨æœ‰çŸ­æ¶ˆæ¯${msg_count}æ¡,é¡µæ¬¡: ${p_page}/${page_count}<br/>
 		#if($page_count > 1)
         	#if($p_page>1)
-        		<a href="$dlog.root()/wml/listmsg.vm?sid=$g_site_id">Ê×Ò³</a><a href="$dlog.root()/wml/listmsg.vm?sid=$g_site_id&amp;p=$pre_page">ÉÏÒ³</a>
+        		<a href="$dlog.root()/wml/listmsg.vm?sid=$g_site_id">é¦–é¡µ</a><a href="$dlog.root()/wml/listmsg.vm?sid=$g_site_id&amp;p=$pre_page">ä¸Šé¡µ</a>
         	#end
         	#if($p_page < $page_count)
-        		<a href="$dlog.root()/wml/listmsg.vm?sid=$g_site_id&amp;p=$next_page">ÏÂÒ³</a><a href="$dlog.root()/wml/listmsg.vm?sid=$g_site_id&amp;p=$page_count">Î²Ò³</a>
+        		<a href="$dlog.root()/wml/listmsg.vm?sid=$g_site_id&amp;p=$next_page">ä¸‹é¡µ</a><a href="$dlog.root()/wml/listmsg.vm?sid=$g_site_id&amp;p=$page_count">å°¾é¡µ</a>
         	#end
         	<br/>
 		#end
 		#set($msgs = $USER_tool.msgs($g_user, $p_page, $MSG_COUNT_PER_PAGE))
 		#foreach($msg in $msgs)
-			·¢¼şÈË:<a href="viewuser.vm?sid=$g_site_id&amp;uid=${msg.fromUser.id}">$text.html(${msg.fromUser.nickname})</a><br/>
-			Ê±¼ä:$date.format("yyyy/MM/dd HH:mm", ${msg.sendTime})#if(${msg.status}==0)[ĞÂ]#end<br/>
-			<a href="sendmsg.vm?sid=$g_site_id&amp;uid=${msg.fromUser.id}&amp;r=$math.random(1,1000)">»Ø¸´</a>
-			<a href="$link.setAction("wml/message")?sid=$g_site_id&amp;eventSubmit_Delete=${msg.id}&amp;p=$p_page">É¾³ı´ËÌõÁôÑÔ</a><br/>
-			ÄÚÈİ:$text.friendly_text(${msg.content})<br/>
+			å‘ä»¶äºº:<a href="viewuser.vm?sid=$g_site_id&amp;uid=${msg.fromUser.id}">$text.html(${msg.fromUser.nickname})</a><br/>
+			æ—¶é—´:$date.format("yyyy/MM/dd HH:mm", ${msg.sendTime})#if(${msg.status}==0)[æ–°]#end<br/>
+			<a href="sendmsg.vm?sid=$g_site_id&amp;uid=${msg.fromUser.id}&amp;r=$math.random(1,1000)">å›å¤</a>
+			<a href="$link.setAction("wml/message")?sid=$g_site_id&amp;eventSubmit_Delete=${msg.id}&amp;p=$p_page">åˆ é™¤æ­¤æ¡ç•™è¨€</a><br/>
+			å†…å®¹:$text.friendly_text(${msg.content})<br/>
 			----------<br/>
 			#if(${msg.status}==0)$USER_tool.read_msg($msg))#end
 		#end		
 		#if($page_count > 1)
         	#if($p_page>1)
-        		<a href="$dlog.root()/wml/listmsg.vm?sid=$g_site_id">Ê×Ò³</a><a href="$dlog.root()/wml/listmsg.vm?sid=$g_site_id&amp;p=$pre_page">ÉÏÒ³</a>
+        		<a href="$dlog.root()/wml/listmsg.vm?sid=$g_site_id">é¦–é¡µ</a><a href="$dlog.root()/wml/listmsg.vm?sid=$g_site_id&amp;p=$pre_page">ä¸Šé¡µ</a>
         	#end
         	#if($p_page < $page_count)
-        		<a href="$dlog.root()/wml/listmsg.vm?sid=$g_site_id&amp;p=$next_page">ÏÂÒ³</a><a href="$dlog.root()/wml/listmsg.vm?sid=$g_site_id&amp;p=$page_count">Î²Ò³</a>
+        		<a href="$dlog.root()/wml/listmsg.vm?sid=$g_site_id&amp;p=$next_page">ä¸‹é¡µ</a><a href="$dlog.root()/wml/listmsg.vm?sid=$g_site_id&amp;p=$page_count">å°¾é¡µ</a>
         	#end
         	<br/>
 		#end
 	#else
-		ÄúÃ»ÓĞ¶ÌÏûÏ¢¡£
+		æ‚¨æ²¡æœ‰çŸ­æ¶ˆæ¯ã€‚
 	#end
 #else
-	ÓÃ»§ÉĞÎ´µÇÂ¼,µã»÷<a href='$dlog.root()/wml/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())'>ÕâÀï</a>µÇÂ¼¡£
+	ç”¨æˆ·å°šæœªç™»å½•,ç‚¹å‡»<a href='$dlog.root()/wml/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())'>è¿™é‡Œ</a>ç™»å½•ã€‚
 #end
 </p>

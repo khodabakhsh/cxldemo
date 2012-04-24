@@ -17,23 +17,23 @@
 ##
 ###############################################################################
 #parse("/wml/_sub/_global.vm")
-#set($page_title="Ìí¼ÓÓÑÇéÁ´½Ó")
+#set($page_title="æ·»åŠ å‹æƒ…é“¾æ¥")
 <p>
-	#invoke("_opt_bar.vm") <a href="$dlog.root()/wml/mgr/links.vm?sid=$g_site_id">ÓÑÇéÁ´½Ó</a> &gt; Ìí¼ÓÁ´½Ó<br/>
+	#invoke("_opt_bar.vm") <a href="$dlog.root()/wml/mgr/links.vm?sid=$g_site_id">å‹æƒ…é“¾æ¥</a> &gt; æ·»åŠ é“¾æ¥<br/>
 #if(!$dlog.is_owner($g_site, $g_user))
-	¶Ô²»Æğ£¬ÄãÃ»ÓĞ×ã¹»µÄ·ÃÎÊÈ¨ÏŞ£¬µã»÷<a href="$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())">$text.ui("label.login")</a>Ê¹ÓÃÆäËûÕÊºÅ½øÈë¡£<br /><br /><a href="#" onclick="history.go(-1);return false;">·µ»ØÉÏÒ³</a>
+	å¯¹ä¸èµ·ï¼Œä½ æ²¡æœ‰è¶³å¤Ÿçš„è®¿é—®æƒé™ï¼Œç‚¹å‡»<a href="$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())">$text.ui("label.login")</a>ä½¿ç”¨å…¶ä»–å¸å·è¿›å…¥ã€‚<br /><br /><a href="#" onclick="history.go(-1);return false;">è¿”å›ä¸Šé¡µ</a>
 #else
 	#wml_error_msg()
-	--ÇëÊäÈëÁ´½ÓĞÅÏ¢--<br/>	
+	--è¯·è¾“å…¥é“¾æ¥ä¿¡æ¯--<br/>	
 	#set($cform = $form.getBean())
-	Á´½ÓÃû³Æ:<input type="text" maxlength="20" name="title" value="$!{cform.title}"/><br/>
-	ÍøÖ·(URL):<input type="text" maxlength="100" name="url" value="$!{cform.url}"/><br/>
-	ÀàĞÍ:<select name="type"><option value="6">WAP</option><option value="2">XML(RDF,RSS,ATOM)</option><option value="1">HTML</option></select><br/>
+	é“¾æ¥åç§°:<input type="text" maxlength="20" name="title" value="$!{cform.title}"/><br/>
+	ç½‘å€(URL):<input type="text" maxlength="100" name="url" value="$!{cform.url}"/><br/>
+	ç±»å‹:<select name="type"><option value="6">WAP</option><option value="2">XML(RDF,RSS,ATOM)</option><option value="1">HTML</option></select><br/>
 	#if(${g_site.links.size()}>0)
-	Î»ÖÃ:<select name="id">#foreach($lnk in ${g_site.links})<option value="$lnk.id">$text.html($lnk.title)</option>#end</select><select name="direction"><option value="2">Ö®ºó</option><option value="1">Ö®Ç°</option></select><br/>
+	ä½ç½®:<select name="id">#foreach($lnk in ${g_site.links})<option value="$lnk.id">$text.html($lnk.title)</option>#end</select><select name="direction"><option value="2">ä¹‹å</option><option value="1">ä¹‹å‰</option></select><br/>
 	#end
 	
-    <anchor>Ìí¼ÓÁ´½Ó
+    <anchor>æ·»åŠ é“¾æ¥
         <go href="$link.setAction("wml/link")" method="post">
             <postfield name="sid" value="$g_site_id"/>
             <postfield name="title" value="$(title)"/>

@@ -32,46 +32,46 @@
 	#set($page_count = $dlog.page_count($content.length(), $WORD_COUNT))
 	
 	#if($p_page == 1 || $p_page == $page_count)
-	±êÌâ: $escape.html(${diary.title})<br/>
-	×÷Õß: $escape.html(${diary.author})<br/>
-	Ê±¼ä: $date.format("yyyy-MM-dd HH:mm", ${diary.writeTime})<br/>
-	·ÖÀà: <a href="$dlog.root()/wml/diary/logs.vm?sid=$g_site_id&amp;cat_id=${diary.catalog.id}">$escape.html(${diary.catalog.name})</a><br/>
-	ÆÀÂÛ: <a href="$dlog.root()/wml/diary/diary_rpls.vm?sid=$g_site_id&amp;log_id=$log_id">${diary.replyCount}</a><a href="reply.vm?sid=$g_site_id&amp;log_id=$log_id&amp;r=$math.random(1,1000)">[ÎÒÒªÆÀÂÛ]</a><br/>
+	æ ‡é¢˜: $escape.html(${diary.title})<br/>
+	ä½œè€…: $escape.html(${diary.author})<br/>
+	æ—¶é—´: $date.format("yyyy-MM-dd HH:mm", ${diary.writeTime})<br/>
+	åˆ†ç±»: <a href="$dlog.root()/wml/diary/logs.vm?sid=$g_site_id&amp;cat_id=${diary.catalog.id}">$escape.html(${diary.catalog.name})</a><br/>
+	è¯„è®º: <a href="$dlog.root()/wml/diary/diary_rpls.vm?sid=$g_site_id&amp;log_id=$log_id">${diary.replyCount}</a><a href="reply.vm?sid=$g_site_id&amp;log_id=$log_id&amp;r=$math.random(1,1000)">[æˆ‘è¦è¯„è®º]</a><br/>
 	#end
 	
 	#if($page_count > 1)
 		#set($pre_page = $p_page - 1)
 		#set($next_page = $p_page + 1)
-		µÚ${p_page}Ò³,¹²${page_count}Ò³.<br/>
+		ç¬¬${p_page}é¡µ,å…±${page_count}é¡µ.<br/>
 		#if($p_page>1)
-			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id">Ê×Ò³</a>
-			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id&amp;p=$pre_page">ÉÏÒ³</a>
+			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id">é¦–é¡µ</a>
+			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id&amp;p=$pre_page">ä¸Šé¡µ</a>
 		#end
 		#if($p_page < $page_count)
-			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id&amp;p=$next_page">ÏÂÒ³</a>
-			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id&amp;p=$page_count">Î²Ò³</a>
+			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id&amp;p=$next_page">ä¸‹é¡µ</a>
+			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id&amp;p=$page_count">å°¾é¡µ</a>
 		#end
 		<br/>
 	#end
-	ÎÄ±¾ÄÚÈİ(<a href="$dlog.root()/wml/diary/show_html.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id">HTML°æ±¾</a>): $text.html($dlog.split($content,$p_page,$WORD_COUNT))<br/>
+	æ–‡æœ¬å†…å®¹(<a href="$dlog.root()/wml/diary/show_html.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id">HTMLç‰ˆæœ¬</a>): $text.html($dlog.split($content,$p_page,$WORD_COUNT))<br/>
 	#if($page_count > 1)
 		#set($pre_page = $p_page - 1)
 		#set($next_page = $p_page + 1)
-		µÚ${p_page}Ò³,¹²${page_count}Ò³.<br/>
+		ç¬¬${p_page}é¡µ,å…±${page_count}é¡µ.<br/>
 		#if($p_page>1)
-			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id">Ê×Ò³</a>
-			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id&amp;p=$pre_page">ÉÏÒ³</a>
+			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id">é¦–é¡µ</a>
+			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id&amp;p=$pre_page">ä¸Šé¡µ</a>
 		#end
 		#if($p_page < $page_count)
-			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id&amp;p=$next_page">ÏÂÒ³</a>
-			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id&amp;p=$page_count">Î²Ò³</a>
+			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id&amp;p=$next_page">ä¸‹é¡µ</a>
+			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id&amp;p=$page_count">å°¾é¡µ</a>
 		#end
 		<br/>
 	#end
 </p>
 <p>
 #if($dlog.not_empty(${diary.keyword}))
-	±êÇ©:
+	æ ‡ç­¾:
 	#foreach($tag in ${diary.keywords})
 		#if($velocityCount>1),#end
 		<a href="$dlog.root()/wml/showtag.vm?sid=$g_site_id&amp;tag=$link.encodeURL($tag)">${tag}</a>
@@ -80,41 +80,41 @@
 #end
 	----------<br/>
 	(#if(${diary.owner.id}==${g_user_id} || $dlog.is_owner($g_site, $g_user))
-	<a href="$dlog.root()/wml/diary/edit.vm?sid=$g_site_id&amp;log_id=$log_id">±à¼­</a>/<a href="$link.setAction("wml/diary")?sid=$g_site_id&amp;id=$log_id&amp;eventSubmit_Delete=$log_id">É¾³ı</a>/
+	<a href="$dlog.root()/wml/diary/edit.vm?sid=$g_site_id&amp;log_id=$log_id">ç¼–è¾‘</a>/<a href="$link.setAction("wml/diary")?sid=$g_site_id&amp;id=$log_id&amp;eventSubmit_Delete=$log_id">åˆ é™¤</a>/
 	#end
-	<a href="$link.setAction("wml/bookmark")?sid=$g_site_id&amp;parentId=${log_id}&amp;parentType=1&amp;eventSubmit_Add=WML&amp;title=$link.encodeURL(${diary.title})&amp;fromPage=$link.encodeURL($dlog.get_request_url())">Ìí¼Óµ½ÊéÇ©</a>)<br/>
+	<a href="$link.setAction("wml/bookmark")?sid=$g_site_id&amp;parentId=${log_id}&amp;parentType=1&amp;eventSubmit_Add=WML&amp;title=$link.encodeURL(${diary.title})&amp;fromPage=$link.encodeURL($dlog.get_request_url())">æ·»åŠ åˆ°ä¹¦ç­¾</a>)<br/>
 #if($prev_diary)
-	ÉÏÒ»Æª:<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=${prev_diary.id}">$escape.html(${prev_diary.title})</a><br/>
+	ä¸Šä¸€ç¯‡:<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=${prev_diary.id}">$escape.html(${prev_diary.title})</a><br/>
 #end
 #if($next_diary)
-	ÏÂÒ»Æª:<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=${next_diary.id}">$escape.html(${next_diary.title})</a><br/>
+	ä¸‹ä¸€ç¯‡:<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=${next_diary.id}">$escape.html(${next_diary.title})</a><br/>
 #end
 
 #if(${diary.replyCount}>0)	
-	+×îĞÂÆÀÂÛ<br/>
+	+æœ€æ–°è¯„è®º<br/>
 	#set($rpls = $DIARY_tool.replies($g_site,$g_user,$diary,1,3,true))
 	#foreach($rpl in $rpls)
 	#set($content = $dlog.plain_text(${rpl.content}))
 	#set($rc = $dlog.abbreviate($content, 50))
-	#if($dlog.is_empty($rc))#set($rc="[ÎŞÎÄ±¾ÄÚÈİ]")#end
+	#if($dlog.is_empty($rc))#set($rc="[æ— æ–‡æœ¬å†…å®¹]")#end
 	${velocityCount}.$text.html(${rc})
 	#if($dlog.is_owner($g_site,$g_user))
-	<a href="$link.setAction("wml/reply")?sid=$g_site_id&amp;log_id=${diary.id}&amp;eventSubmit_DeleteDiaryReply=$rpl_id">[É¾³ı]</a>
+	<a href="$link.setAction("wml/reply")?sid=$g_site_id&amp;log_id=${diary.id}&amp;eventSubmit_DeleteDiaryReply=$rpl_id">[åˆ é™¤]</a>
 	#end
 	#if($rc.length() < $content.length())
-		<a href="$dlog.root()/wml/diary/rpl.vm?sid=$g_site_id&amp;log_id=$log_id&amp;rpl_id=${rpl.id}">[ÏêÏ¸ÄÚÈİ]</a>
+		<a href="$dlog.root()/wml/diary/rpl.vm?sid=$g_site_id&amp;log_id=$log_id&amp;rpl_id=${rpl.id}">[è¯¦ç»†å†…å®¹]</a>
 	#end($text.html(${rpl.author}),$date.format("MM-dd HH:mm",${rpl.replyTime}))<br/>
 	#end
 	#if($rpls.size()<${diary.replyCount})
 	<a href="$dlog.root()/wml/diary/diary_rpls.vm?sid=$g_site_id&amp;log_id=$log_id">$text.wml("more")</a>
 	#end
 #end
-<a href="$dlog.root()/wml/diary/reply.vm?sid=$g_site_id&amp;log_id=$log_id&amp;r=$math.random(1,1000)">[ÎÒÒªÆÀÂÛ]</a>
+<a href="$dlog.root()/wml/diary/reply.vm?sid=$g_site_id&amp;log_id=$log_id&amp;r=$math.random(1,1000)">[æˆ‘è¦è¯„è®º]</a>
 #if(${diary.status}==0)
 	$DIARY_tool.visit_diary($g_site, $g_user, $diary)
 #end
 #else
-	#set($page_title="³ö´íÀ²£¡£¡£¡")
-	Äú·ÃÎÊµÄÈÕ¼Ç²»´æÔÚ»òÊÇÄúÃ»ÓĞÔÄ¶Á¸ÃÈÕ¼ÇµÄÈ¨ÏŞ£¡
+	#set($page_title="å‡ºé”™å•¦ï¼ï¼ï¼")
+	æ‚¨è®¿é—®çš„æ—¥è®°ä¸å­˜åœ¨æˆ–æ˜¯æ‚¨æ²¡æœ‰é˜…è¯»è¯¥æ—¥è®°çš„æƒé™ï¼
 #end
 </p>

@@ -18,11 +18,11 @@
 ###############################################################################
 #invoke("_sub/_global.vm")
 #select_layout("p_main.vm")
-#set($page_title="ÎÒµÄ¶ÌÏûÏ¢")
+#set($page_title="æˆ‘çš„çŸ­æ¶ˆæ¯")
 #set($skip_new_msg = 0)
 
 #if($g_user)
 	#invoke("_listmsg.vm")
 #else
-	#show_msg_box("ÓÃ»§ÉĞÎ´µÇÂ¼,µã»÷<a href='$dlog.root()/dlog/login.vm?sid=$g_site_id'>ÕâÀï</a>µÇÂ¼")
+	#show_msg_box("ç”¨æˆ·å°šæœªç™»å½•,ç‚¹å‡»<a href='$dlog.root()/dlog/login.vm?sid=$g_site_id'>è¿™é‡Œ</a>ç™»å½•")
 #end

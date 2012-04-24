@@ -20,7 +20,7 @@
 #invoke("_sub/_global.vm")
 #set($tag = $dlog.param("tag",""))
 #set($p_page = $dlog.param("page",1))
-#set($page_title="±êÇ©:$tag")
+#set($page_title="æ ‡ç­¾:$tag")
 
 #set($pre_page = $p_page - 1)
 #set($next_page = $p_page + 1)
@@ -34,13 +34,13 @@
 #set($time_used = $dlog.time_consume($start_time))
 <p>
 	#invoke("_tag_bar.vm")
-¹²ÓĞÕÕÆ¬<b>${diary_c}</b>ÕÅ#if($page_count>0)£¬µ±Ç°µÚ<b>$p_page</b>Ò³£¬¹²<b>$page_count</b>Ò³#end£¬²éÑ¯ºÄÊ±<b>${time_used}</b>ºÁÃë¡£<br/>
+å…±æœ‰ç…§ç‰‡<b>${diary_c}</b>å¼ #if($page_count>0)ï¼Œå½“å‰ç¬¬<b>$p_page</b>é¡µï¼Œå…±<b>$page_count</b>é¡µ#endï¼ŒæŸ¥è¯¢è€—æ—¶<b>${time_used}</b>æ¯«ç§’ã€‚<br/>
 #if($diarys)	
 	#if($page_count > 1)
-        #if($p_page > 1)<a href="$dlog.root()/wml/tag2.vm?sid=${g_site_id}&amp;tag=$link.encodeURL($tag)">Ê×Ò³</a>#end
-        #if($p_page>1)<a href="$dlog.root()/wml/tag2.vm?sid=${g_site_id}&amp;page=$pre_page&amp;tag=$link.encodeURL($tag)">ÉÏÒ³</a>#end
-        #if($p_page < $page_count)<a href="$dlog.root()/wml/tag2.vm?sid=${g_site_id}&amp;page=$next_page&amp;tag=$link.encodeURL($tag)">ÏÂÒ³</a>#end
-        #if($p_page < $page_count)<a href="$dlog.root()/wml/tag2.vm?sid=${g_site_id}&amp;page=$page_count&amp;tag=$link.encodeURL($tag)">Î²Ò³</a>#end
+        #if($p_page > 1)<a href="$dlog.root()/wml/tag2.vm?sid=${g_site_id}&amp;tag=$link.encodeURL($tag)">é¦–é¡µ</a>#end
+        #if($p_page>1)<a href="$dlog.root()/wml/tag2.vm?sid=${g_site_id}&amp;page=$pre_page&amp;tag=$link.encodeURL($tag)">ä¸Šé¡µ</a>#end
+        #if($p_page < $page_count)<a href="$dlog.root()/wml/tag2.vm?sid=${g_site_id}&amp;page=$next_page&amp;tag=$link.encodeURL($tag)">ä¸‹é¡µ</a>#end
+        #if($p_page < $page_count)<a href="$dlog.root()/wml/tag2.vm?sid=${g_site_id}&amp;page=$page_count&amp;tag=$link.encodeURL($tag)">å°¾é¡µ</a>#end
 		<br/>
 	#end
 	#foreach($photo in $diarys)
@@ -48,10 +48,10 @@
 	#end
 	#if($page_count > 1)
 		<br />
-        #if($p_page > 1)<a href="$dlog.root()/wml/tag2.vm?sid=${g_site_id}&amp;tag=$link.encodeURL($tag)">Ê×Ò³</a>#end
-        #if($p_page>1)<a href="$dlog.root()/wml/tag2.vm?sid=${g_site_id}&amp;page=$pre_page&amp;tag=$link.encodeURL($tag)">ÉÏÒ³</a>#end
-        #if($p_page < $page_count)<a href="$dlog.root()/wml/tag2.vm?sid=${g_site_id}&amp;page=$next_page&amp;tag=$link.encodeURL($tag)">ÏÂÒ³</a>#end
-        #if($p_page < $page_count)<a href="$dlog.root()/wml/tag2.vm?sid=${g_site_id}&amp;page=$page_count&amp;tag=$link.encodeURL($tag)">Î²Ò³</a>#end
+        #if($p_page > 1)<a href="$dlog.root()/wml/tag2.vm?sid=${g_site_id}&amp;tag=$link.encodeURL($tag)">é¦–é¡µ</a>#end
+        #if($p_page>1)<a href="$dlog.root()/wml/tag2.vm?sid=${g_site_id}&amp;page=$pre_page&amp;tag=$link.encodeURL($tag)">ä¸Šé¡µ</a>#end
+        #if($p_page < $page_count)<a href="$dlog.root()/wml/tag2.vm?sid=${g_site_id}&amp;page=$next_page&amp;tag=$link.encodeURL($tag)">ä¸‹é¡µ</a>#end
+        #if($p_page < $page_count)<a href="$dlog.root()/wml/tag2.vm?sid=${g_site_id}&amp;page=$page_count&amp;tag=$link.encodeURL($tag)">å°¾é¡µ</a>#end
 	#end
 #end
 </p>

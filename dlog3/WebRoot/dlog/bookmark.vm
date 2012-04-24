@@ -18,14 +18,14 @@
 ###############################################################################
 #invoke("_sub/_global.vm")
 #select_layout("p_main.vm")
-#set($page_title="ÎÒµÄÊéÇ©")
+#set($page_title="æˆ‘çš„ä¹¦ç­¾")
 
 #if($g_user)
 	#set($bookmarks = $dlog.bookmarks($g_user))
 	#if($bookmarks.size()>0)
-        <div class="page_top" align="right">Äú¹²ÓĞ${bookmarks.size()}¸öÊéÇ©£¡</div>
+        <div class="page_top" align="right">æ‚¨å…±æœ‰${bookmarks.size()}ä¸ªä¹¦ç­¾ï¼</div>
         <hr size="1" noshade color="#CCCCCC">
-		<form action="$link.setAction("html/bookmark")" method="post" onsubmit="return confirm('ÊÇ·ñÕæµÄ°ÑÑ¡ÖĞµÄÊéÇ©¶¼É¾³ıÂğ£¿');">
+		<form action="$link.setAction("html/bookmark")" method="post" onsubmit="return confirm('æ˜¯å¦çœŸçš„æŠŠé€‰ä¸­çš„ä¹¦ç­¾éƒ½åˆ é™¤å—ï¼Ÿ');">
         <input type="hidden" name="__ClientId" value="$dlog.gen_client_id()"/>
         <input type="hidden" name="fromPage" value="/dlog/bookmark.vm?sid=$g_site_id"/>
         <input type="hidden" name="sid" value="$g_site_id"/>		
@@ -34,11 +34,11 @@
 		<tr class="table_head">
 			<td nowrap></td>
 			<td nowrap></td>
-			<td nowrap>ÊéÇ©Ãû</td>
+			<td nowrap>ä¹¦ç­¾å</td>
 			<td nowrap></td>
-			<td nowrap>Ìí¼ÓÊ±¼ä</td>
-			<td nowrap>À´×Ô</td>
-    		<td nowrap>É¾³ı</td>
+			<td nowrap>æ·»åŠ æ—¶é—´</td>
+			<td nowrap>æ¥è‡ª</td>
+    		<td nowrap>åˆ é™¤</td>
 		</tr>
         #foreach($bm in $bookmarks)
         <tr class="table_cell">
@@ -50,18 +50,18 @@
 			</a>
 			</td>
 			<td nowrap>
-				#if(${bm.parentType}==5)[Õ¾µã]#end
-				#if(${bm.parentType}==1)[ÈÕ¼Ç]#end
-				#if(${bm.parentType}==2)[ÕÕÆ¬]#end
-				#if(${bm.parentType}==3)[ÒôÀÖ]#end
-				#if(${bm.parentType}==4)[ÌÖÂÛ]#end
+				#if(${bm.parentType}==5)[ç«™ç‚¹]#end
+				#if(${bm.parentType}==1)[æ—¥è®°]#end
+				#if(${bm.parentType}==2)[ç…§ç‰‡]#end
+				#if(${bm.parentType}==3)[éŸ³ä¹]#end
+				#if(${bm.parentType}==4)[è®¨è®º]#end
 			</td>
 			<td nowrap>$date.format("yyyy/MM/dd HH:mm",$bm.createTime)</td>
 			<td align="right" nowrap>
-    		[<a href="$dlog.root()/?sid=${bm.site.id}">#if(${bm.site.id}==$g_site_id)±¾Õ¾#else${bm.site.friendlyName}#end</a>]
+    		[<a href="$dlog.root()/?sid=${bm.site.id}">#if(${bm.site.id}==$g_site_id)æœ¬ç«™#else${bm.site.friendlyName}#end</a>]
 			</td>
 			<td align="center">
-				<a href="$link.setAction("html/bookmark")?sid=${g_site_id}&amp;eventSubmit_Delete=$bm.id" onclick="return confirm('ÕæµÄÒªÉ¾³ı¸ÃÊéÇ©Âï£¿');">
+				<a href="$link.setAction("html/bookmark")?sid=${g_site_id}&amp;eventSubmit_Delete=$bm.id" onclick="return confirm('çœŸçš„è¦åˆ é™¤è¯¥ä¹¦ç­¾å˜›ï¼Ÿ');">
 					$html.img("icon_delete.gif")
 				</a>
 			</td>
@@ -70,12 +70,12 @@
         </table>
 		</div>
 		<div class="page_footer">
-            <input type="checkbox" name="bt_all" value="" onclick="return select_all('bid',this.checked)"/>È«Ñ¡		
-            <input type="submit" name="eventSubmit_DeleteBookmarks" value="É¾³ıÑ¡ÖĞ"/>
+            <input type="checkbox" name="bt_all" value="" onclick="return select_all('bid',this.checked)"/>å…¨é€‰		
+            <input type="submit" name="eventSubmit_DeleteBookmarks" value="åˆ é™¤é€‰ä¸­"/>
 		</div>
 		</form>
 	#else
-		#show_msg_box("Äú»¹ÓĞÌí¼ÓÈÎºÎÊéÇ©¡£")  
+		#show_msg_box("æ‚¨è¿˜æœ‰æ·»åŠ ä»»ä½•ä¹¦ç­¾ã€‚")  
 	#end                         
 #else
 	#show_msg_box($text.ui("login.tip","$dlog.root()/dlog/login.vm?sid=$g_site_id&fromPage=$link.encodeURL($dlog.get_request_url())"))

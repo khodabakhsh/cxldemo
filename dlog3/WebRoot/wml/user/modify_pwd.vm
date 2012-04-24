@@ -17,13 +17,13 @@
 ##
 ###############################################################################
 #invoke("../_sub/_global.vm")
-#set($page_title="ĞŞ¸ÄÃÜÂë")
+#set($page_title="ä¿®æ”¹å¯†ç ")
 <p>    
     #wml_error_msg()
 	#set($uform = $form.getBean())
-	ÇëÊäÈëĞÂµÄÃÜÂë:<input type="text" name="password2" size="15" value="$!{uform.password}"/>
-	ÇëÊäÈë¾ÉµÄÃÜÂë:<input type="text" name="password" size="15"/>
-    <anchor>ÏÖÔÚĞŞ¸Ä
+	è¯·è¾“å…¥æ–°çš„å¯†ç :<input type="text" name="password2" size="15" value="$!{uform.password}"/>
+	è¯·è¾“å…¥æ—§çš„å¯†ç :<input type="text" name="password" size="15"/>
+    <anchor>ç°åœ¨ä¿®æ”¹
         <go href="$link.setAction("wml/user")" method="post">
             <postfield name="fromPage" value="modify_pwd.vm"/>
             <postfield name="sid" value="$g_site_id"/>

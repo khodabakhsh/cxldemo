@@ -24,18 +24,18 @@
 #if($linkbean)
     #set($channel = $dlog.fetch_channel(${linkbean.type}, ${linkbean.url}))
     #if($channel)
-        <a href="rssview.vm?sid=$g_site_id&amp;linkid=$linkid">$text.html(${linkbean.title})</a>¹²ÓĞ$dlog.sizeof(${channel.items})ÆªÎÄÕÂ¡£<br/>
+        <a href="rssview.vm?sid=$g_site_id&amp;linkid=$linkid">$text.html(${linkbean.title})</a>å…±æœ‰$dlog.sizeof(${channel.items})ç¯‡æ–‡ç« ã€‚<br/>
 		#set($itemURL = $request.getParameter("itemURL"))
 		#foreach($item in $channel.items)
 			#if(${item.link} == $itemURL)
-				±êÌâ: $text.html(${item.title})(<a href="$dlog.replace(${item.link},"&","&amp;")">Ô­ÎÄ</a>)<br/>
-				¸ÅÒª(<a href="rssitem_html.vm?sid=$g_site_id&amp;linkid=$linkid&amp;itemURL=$link.encodeURL(${item.link})">HTML°æ±¾</a>): $text.html(${item.description})
+				æ ‡é¢˜: $text.html(${item.title})(<a href="$dlog.replace(${item.link},"&","&amp;")">åŸæ–‡</a>)<br/>
+				æ¦‚è¦(<a href="rssitem_html.vm?sid=$g_site_id&amp;linkid=$linkid&amp;itemURL=$link.encodeURL(${item.link})">HTMLç‰ˆæœ¬</a>): $text.html(${item.description})
 			#end
 		#end
     #else
-        ÆµµÀ×¥È¡Ê§°Ü£¬Çë¼ì²éÊÇ·ñÌî´íÆµµÀµÄÀàĞÍ»òÕßÊÇĞ´´íURLµØÖ·¡£
+        é¢‘é“æŠ“å–å¤±è´¥ï¼Œè¯·æ£€æŸ¥æ˜¯å¦å¡«é”™é¢‘é“çš„ç±»å‹æˆ–è€…æ˜¯å†™é”™URLåœ°å€ã€‚
     #end
 #else
-	±àºÅÎª#${linkid}µÄÁ´½ÓÃ»ÕÒµ½¡£
+	ç¼–å·ä¸º#${linkid}çš„é“¾æ¥æ²¡æ‰¾åˆ°ã€‚
 #end
 </p>

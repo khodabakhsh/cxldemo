@@ -38,7 +38,7 @@
  
 #macro(show_msg_box $__msg)
 <div class="msgbox">
-	${__msg}<br/><br/><a href="#" onclick="history.go(-1);return false;">╥╣╩ьиорЁ</a>
+	${__msg}<br/><br/><a href="#" onclick="history.go(-1);return false;">Х©■Е⌡·Д╦┼И║╣</a>
 </div>
 <div class="spacer_1"></div>
 #end

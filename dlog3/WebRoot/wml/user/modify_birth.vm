@@ -17,15 +17,15 @@
 ##
 ###############################################################################
 #invoke("../_sub/_global.vm")
-#set($page_title="ĞŞ¸ÄÉúÈÕ")
+#set($page_title="ä¿®æ”¹ç”Ÿæ—¥")
 <p>    
     #wml_error_msg()
 	#if(${g_user.birth})
-	ÄúÏÖÔÚµÄÉúÈÕÊÇ: ${g_user.birth}<br/>#end
+	æ‚¨ç°åœ¨çš„ç”Ÿæ—¥æ˜¯: ${g_user.birth}<br/>#end
 	#set($uform = $form.getBean())
-	ÇëÊäÈëÄúµÄÉúÈÕ(ÀıÈç19800608):<input type="text" name="birth" size="15" value="$!{uform.sbirth}" format="*N"/>
-	ÇëÊäÈëÄãµÄÃÜÂë:<input type="text" name="password" size="15"/>
-    <anchor>ÏÖÔÚĞŞ¸Ä
+	è¯·è¾“å…¥æ‚¨çš„ç”Ÿæ—¥(ä¾‹å¦‚19800608):<input type="text" name="birth" size="15" value="$!{uform.sbirth}" format="*N"/>
+	è¯·è¾“å…¥ä½ çš„å¯†ç :<input type="text" name="password" size="15"/>
+    <anchor>ç°åœ¨ä¿®æ”¹
         <go href="$link.setAction("wml/user")" method="post">
             <postfield name="fromPage" value="modify_birth.vm"/>
             <postfield name="sid" value="$g_site_id"/>

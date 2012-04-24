@@ -19,9 +19,9 @@
 #invoke("_sub/_global.vm")
 #set($key = $dlog.param("key",""))
 #set($scope = $dlog.param("scope",0))
-#set($page_title="ËÑË÷#if($dlog.not_empty($key)):${key}#end")
+#set($page_title="æœç´¢#if($dlog.not_empty($key)):${key}#end")
 
-<p>#invoke("_sub/_nav_bar.vm")&gt;ËÑË÷</p>
+<p>#invoke("_sub/_nav_bar.vm")&gt;æœç´¢</p>
 <p>#invoke("_search/_form.vm")</p>
 #if($dlog.not_empty($key))
 <p>

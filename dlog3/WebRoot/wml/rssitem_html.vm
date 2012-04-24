@@ -25,13 +25,13 @@
     #set($channel = $dlog.fetch_channel(${linkbean.type}, ${linkbean.url}))
     #if($channel)
 		<div id="rssitem">
-        <a href="rssview.vm?sid=$g_site_id&amp;linkid=$linkid">$text.html(${linkbean.title})</a>¹²ÓĞ$dlog.sizeof(${channel.items})ÆªÎÄÕÂ¡£
+        <a href="rssview.vm?sid=$g_site_id&amp;linkid=$linkid">$text.html(${linkbean.title})</a>å…±æœ‰$dlog.sizeof(${channel.items})ç¯‡æ–‡ç« ã€‚
 		</div>
 		#set($itemURL = $request.getParameter("itemURL"))
 		#foreach($item in $channel.items)
 			#if(${item.link} == $itemURL)
 				<div id="rss_item_title">
-				±êÌâ: ${item.title}(<a href="$dlog.replace(${item.link},"&","&amp;")">Ô­ÎÄ</a>)
+				æ ‡é¢˜: ${item.title}(<a href="$dlog.replace(${item.link},"&","&amp;")">åŸæ–‡</a>)
 				</div>
 				<div id="rss_item_description">
 				${item.description}
@@ -39,8 +39,8 @@
 			#end
 		#end
     #else
-        <div id="rss_error">ÆµµÀ×¥È¡Ê§°Ü£¬Çë¼ì²éÊÇ·ñÌî´íÆµµÀµÄÀàĞÍ»òÕßÊÇĞ´´íURLµØÖ·¡£</div>
+        <div id="rss_error">é¢‘é“æŠ“å–å¤±è´¥ï¼Œè¯·æ£€æŸ¥æ˜¯å¦å¡«é”™é¢‘é“çš„ç±»å‹æˆ–è€…æ˜¯å†™é”™URLåœ°å€ã€‚</div>
     #end
 #else
-	<div id="rss_error">±àºÅÎª#${linkid}µÄÁ´½ÓÃ»ÕÒµ½¡£</div>
+	<div id="rss_error">ç¼–å·ä¸º#${linkid}çš„é“¾æ¥æ²¡æ‰¾åˆ°ã€‚</div>
 #end

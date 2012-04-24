@@ -18,14 +18,14 @@
 ###############################################################################
 #invoke("_sub/_global.vm")
 #select_layout("p_main.vm")
-#set($page_title="ÎÒµÄºÚÃûµ¥")
+#set($page_title="æˆ‘çš„é»‘åå•")
 
 #if($g_user)
     #set($friend_count = $USER_tool.black_user_count(${g_user.id}))
     #if($friend_count>0)
-        <div class="page_top" align="right">ÄúµÄºÚÃûµ¥¹²ÓĞ${friend_count}¸öÈËÔ±£¡</div>
+        <div class="page_top" align="right">æ‚¨çš„é»‘åå•å…±æœ‰${friend_count}ä¸ªäººå‘˜ï¼</div>
         <hr size="1" noshade color="#CCCCCC"/>
-        <form action="$link.setAction("dlog/user")" method="post" onsubmit="return confirm('ÊÇ·ñÕæµÄ°ÑÑ¡ÖĞµÄÓÃ»§´ÓºÚÃûµ¥ÖĞÉ¾³ıÂğ£¿');">
+        <form action="$link.setAction("dlog/user")" method="post" onsubmit="return confirm('æ˜¯å¦çœŸçš„æŠŠé€‰ä¸­çš„ç”¨æˆ·ä»é»‘åå•ä¸­åˆ é™¤å—ï¼Ÿ');">
         <input type="hidden" name="__ClientId" value="$dlog.gen_client_id()"/>
         <input type="hidden" name="fromPage" value="$dlog.get_request_url()"/>
         <input type="hidden" name="sid" value="$g_site_id"/>		
@@ -33,11 +33,11 @@
         <table cellspacing="1" cellpadding="3" border="0" class="table" width="100%">
 		<tr class="table_head">
 			<td nowrap></td>
-			<td nowrap>Ãû³Æ</td>
-			<td nowrap>µçÓÊ</td>
-			<td align="center" nowrap>ÔÚÏß×´Ì¬</td>
-			<td nowrap>×î½üµÇÂ¼Ê±¼ä</td>
-    		<td align="center" nowrap>¶ÌÏûÏ¢</td>
+			<td nowrap>åç§°</td>
+			<td nowrap>ç”µé‚®</td>
+			<td align="center" nowrap>åœ¨çº¿çŠ¶æ€</td>
+			<td nowrap>æœ€è¿‘ç™»å½•æ—¶é—´</td>
+    		<td align="center" nowrap>çŸ­æ¶ˆæ¯</td>
 		</tr>
         #set($friends = $USER_tool.black_users(${g_user.id}, 1, -1))
         #foreach($user in $friends)
@@ -52,14 +52,14 @@
                 <td><a href="mailto:$!{user.other.contactInfo.email}">$!{user.other.contactInfo.email}</a></td>
                 <td align="center">
 					#if(${user.other.onlineStatus}==1)
-						$html.img("online.gif","µ±Ç°ÔÚÏß",null,"absmiddle",0)
+						$html.img("online.gif","å½“å‰åœ¨çº¿",null,"absmiddle",0)
             		#else
-						$html.img("offline.gif","µ±Ç°ÀëÏß",null,"absmiddle",0)
+						$html.img("offline.gif","å½“å‰ç¦»çº¿",null,"absmiddle",0)
             		#end
 				</td>
                 <td>$!date.format("yyyy-MM-dd HH:mm",${user.other.lastTime})</td>
                 <td align="center">
-                    <a href="$dlog.root()/dlog/sendmsg.vm?sid=$g_site_id&amp;uid=${user.other.id}" title="¸ø¸ÃÓÃ»§·¢ËÍ¶ÌÏûÏ¢">
+                    <a href="$dlog.root()/dlog/sendmsg.vm?sid=$g_site_id&amp;uid=${user.other.id}" title="ç»™è¯¥ç”¨æˆ·å‘é€çŸ­æ¶ˆæ¯">
 						$html.img("msg.gif")
                     </a>
                 </td>
@@ -68,12 +68,12 @@
         </table>
 		</div>
 		<div class="page_footer">
-            <input type="checkbox" name="bt_all" value="" onclick="return select_all('uid',this.checked)"/>È«Ñ¡		
-            <input type="submit" name="eventSubmit_UnblockUser" value="É¾³ıÑ¡ÖĞ"/>
+            <input type="checkbox" name="bt_all" value="" onclick="return select_all('uid',this.checked)"/>å…¨é€‰		
+            <input type="submit" name="eventSubmit_UnblockUser" value="åˆ é™¤é€‰ä¸­"/>
 		</div>
         </form>
     #else
-    	#show_msg_box("Äú»¹ÓĞÌí¼ÓÈÎºÎÓÃ»§µ½ºÚÃûµ¥£¬Äã¿ÉÒÔÔÚ²é¿´Ä³¸öÓÃ»§×ÊÁÏÊ±µã»÷°´Å¥¡®×èÖ¹¡¯¼´¿É¡£")             
+    	#show_msg_box("æ‚¨è¿˜æœ‰æ·»åŠ ä»»ä½•ç”¨æˆ·åˆ°é»‘åå•ï¼Œä½ å¯ä»¥åœ¨æŸ¥çœ‹æŸä¸ªç”¨æˆ·èµ„æ–™æ—¶ç‚¹å‡»æŒ‰é’®â€˜é˜»æ­¢â€™å³å¯ã€‚")             
     #end         
 #else
 	#show_msg_box($text.ui("login.tip","$dlog.root()/dlog/login.vm?sid=$g_site_id&fromPage=$link.encodeURL($dlog.get_request_url())"))

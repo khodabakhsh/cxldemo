@@ -19,7 +19,7 @@
 #parse("/wml/_sub/_global.vm")
 #set($PAGE_SIZE = 5)
 #set($PREVIEW_SIZE = 100)
-#set($page_title="ËùÓĞÆÀÂÛ")
+#set($page_title="æ‰€æœ‰è¯„è®º")
 #set($p_page = $dlog.param("p", 1))
 #set($pre_page = $p_page - 1)
 #set($next_page = $p_page + 1)
@@ -27,16 +27,16 @@
 #set($page_count = $dlog.page_count($rpl_count, $PAGE_SIZE))
 <p>
 	#invoke("_diary_nav_bar.vm")
-    ÈÕ¼ÇÆÀÂÛ:${rpl_count}<br/>
-	µÚ${p_page}Ò³,¹²${page_count}Ò³,Ã¿Ò³${PAGE_SIZE}Ìõ.<br/>
+    æ—¥è®°è¯„è®º:${rpl_count}<br/>
+	ç¬¬${p_page}é¡µ,å…±${page_count}é¡µ,æ¯é¡µ${PAGE_SIZE}æ¡.<br/>
 #if($page_count > 1)
 	#if($p_page>1)
-		<a href="$dlog.root()/wml/diary/rpls.vm?sid=$g_site_id">Ê×Ò³</a>
-		<a href="$dlog.root()/wml/diary/rpls.vm?sid=$g_site_id&amp;p=$pre_page">ÉÏÒ³</a>
+		<a href="$dlog.root()/wml/diary/rpls.vm?sid=$g_site_id">é¦–é¡µ</a>
+		<a href="$dlog.root()/wml/diary/rpls.vm?sid=$g_site_id&amp;p=$pre_page">ä¸Šé¡µ</a>
 	#end
 	#if($p_page < $page_count)
-		<a href="$dlog.root()/wml/diary/rpls.vm?sid=$g_site_id&amp;p=$next_page">ÏÂÒ³</a>
-		<a href="$dlog.root()/wml/diary/rpls.vm?sid=$g_site_id&amp;p=$page_count">Î²Ò³</a>
+		<a href="$dlog.root()/wml/diary/rpls.vm?sid=$g_site_id&amp;p=$next_page">ä¸‹é¡µ</a>
+		<a href="$dlog.root()/wml/diary/rpls.vm?sid=$g_site_id&amp;p=$page_count">å°¾é¡µ</a>
 	#end
 	<br/>
 #end
@@ -44,22 +44,22 @@
 #foreach($rpl in $replies)
 	#set($content = $dlog.plain_text(${rpl.content}))
 	#set($rc = $dlog.abbreviate($content, $PREVIEW_SIZE))
-	#if($dlog.is_empty($rc))#set($rc="[ÎŞÎÄ±¾ÄÚÈİ]")#end
+	#if($dlog.is_empty($rc))#set($rc="[æ— æ–‡æœ¬å†…å®¹]")#end
 	${velocityCount}.$text.html(${rpl.author})($date.format("MM-dd HH:mm",${rpl.replyTime})):$text.html(${rc})
 	#if($rc.length() < $content.length())
-		<a href="$dlog.root()/wml/diary/rpl.vm?sid=$g_site_id&amp;log_id=$log_id&amp;rpl_id=${rpl.id}">[ÏêÏ¸ÄÚÈİ]</a>
+		<a href="$dlog.root()/wml/diary/rpl.vm?sid=$g_site_id&amp;log_id=$log_id&amp;rpl_id=${rpl.id}">[è¯¦ç»†å†…å®¹]</a>
 	#end
 	<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;log_id=${rpl.diary.id}">[$text.html(${rpl.diary.title})]</a>
 	<br/>
 #end
 #if($page_count > 1)
 	#if($p_page>1)
-		<a href="$dlog.root()/wml/diary/rpls.vm?sid=$g_site_id">Ê×Ò³</a>
-		<a href="$dlog.root()/wml/diary/rpls.vm?sid=$g_site_id&amp;p=$pre_page">ÉÏÒ³</a>
+		<a href="$dlog.root()/wml/diary/rpls.vm?sid=$g_site_id">é¦–é¡µ</a>
+		<a href="$dlog.root()/wml/diary/rpls.vm?sid=$g_site_id&amp;p=$pre_page">ä¸Šé¡µ</a>
 	#end
 	#if($p_page < $page_count)
-		<a href="$dlog.root()/wml/diary/rpls.vm?sid=$g_site_id&amp;p=$next_page">ÏÂÒ³</a>
-		<a href="$dlog.root()/wml/diary/rpls.vm?sid=$g_site_id&amp;p=$page_count">Î²Ò³</a>
+		<a href="$dlog.root()/wml/diary/rpls.vm?sid=$g_site_id&amp;p=$next_page">ä¸‹é¡µ</a>
+		<a href="$dlog.root()/wml/diary/rpls.vm?sid=$g_site_id&amp;p=$page_count">å°¾é¡µ</a>
 	#end
 	<br/>
 #end

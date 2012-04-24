@@ -26,33 +26,33 @@
 #set($page_count = $dlog.page_count($log_count, $PAGE_SIZE))
 <p>
 	#invoke("_diary_nav_bar.vm")
-    À¬»øÕ¾¹²ÓĞ${log_count}Æª<a href="$dlog.root()/wml/diary/?sid=$g_site_id">ÈÕ¼Ç</a>.(ÇëÍ×ÉÆµã»÷É¾³ı£¬É¾³ıºóÎŞ·¨»Ö¸´)<br/>
+    åƒåœ¾ç«™å…±æœ‰${log_count}ç¯‡<a href="$dlog.root()/wml/diary/?sid=$g_site_id">æ—¥è®°</a>.(è¯·å¦¥å–„ç‚¹å‡»åˆ é™¤ï¼Œåˆ é™¤åæ— æ³•æ¢å¤)<br/>
 #if($page_count > 1)
-	µÚ${p_page}Ò³,¹²${page_count}Ò³,Ã¿Ò³${PAGE_SIZE}Ìõ.<br/>
+	ç¬¬${p_page}é¡µ,å…±${page_count}é¡µ,æ¯é¡µ${PAGE_SIZE}æ¡.<br/>
 	#if($p_page>1)
-		<a href="$dlog.root()/wml/diary/trash.vm?sid=$g_site_id">Ê×Ò³</a>
-		<a href="$dlog.root()/wml/diary/trash.vm?sid=$g_site_id&amp;p=$pre_page">ÉÏÒ³</a>
+		<a href="$dlog.root()/wml/diary/trash.vm?sid=$g_site_id">é¦–é¡µ</a>
+		<a href="$dlog.root()/wml/diary/trash.vm?sid=$g_site_id&amp;p=$pre_page">ä¸Šé¡µ</a>
 	#end
 	#if($p_page < $page_count)
-		<a href="$dlog.root()/wml/diary/trash.vm?sid=$g_site_id&amp;p=$next_page">ÏÂÒ³</a>
-		<a href="$dlog.root()/wml/diary/trash.vm?sid=$g_site_id&amp;p=$page_count">Î²Ò³</a>
+		<a href="$dlog.root()/wml/diary/trash.vm?sid=$g_site_id&amp;p=$next_page">ä¸‹é¡µ</a>
+		<a href="$dlog.root()/wml/diary/trash.vm?sid=$g_site_id&amp;p=$page_count">å°¾é¡µ</a>
 	#end
 	<br/>
 #end
 #set($logs = $DIARY_tool.list_trash($g_site, $g_user, $p_page, $PAGE_SIZE ))
 #foreach($log in $logs)
 	${velocityCount}.$text.html(${log.title})
-	(<a href="$link.setAction("wml/diary")?sid=$g_site_id&amp;eventSubmit_Undelete=${log.id}">»¹Ô­</a>/<a href="$link.setAction("wml/diary")?sid=$g_site_id&amp;id=${log.id}&amp;eventSubmit_DeleteFromTrash=${log.id}">É¾³ı</a>)
+	(<a href="$link.setAction("wml/diary")?sid=$g_site_id&amp;eventSubmit_Undelete=${log.id}">è¿˜åŸ</a>/<a href="$link.setAction("wml/diary")?sid=$g_site_id&amp;id=${log.id}&amp;eventSubmit_DeleteFromTrash=${log.id}">åˆ é™¤</a>)
 	<br/>
 #end
 #if($page_count > 1)
 	#if($p_page>1)
-		<a href="$dlog.root()/wml/diary/trash.vm?sid=$g_site_id">Ê×Ò³</a>
-		<a href="$dlog.root()/wml/diary/trash.vm?sid=$g_site_id&amp;p=$pre_page">ÉÏÒ³</a>
+		<a href="$dlog.root()/wml/diary/trash.vm?sid=$g_site_id">é¦–é¡µ</a>
+		<a href="$dlog.root()/wml/diary/trash.vm?sid=$g_site_id&amp;p=$pre_page">ä¸Šé¡µ</a>
 	#end
 	#if($p_page < $page_count)
-		<a href="$dlog.root()/wml/diary/trash.vm?sid=$g_site_id&amp;p=$next_page">ÏÂÒ³</a>
-		<a href="$dlog.root()/wml/diary/trash.vm?sid=$g_site_id&amp;p=$page_count">Î²Ò³</a>
+		<a href="$dlog.root()/wml/diary/trash.vm?sid=$g_site_id&amp;p=$next_page">ä¸‹é¡µ</a>
+		<a href="$dlog.root()/wml/diary/trash.vm?sid=$g_site_id&amp;p=$page_count">å°¾é¡µ</a>
 	#end
 	<br/>
 #end

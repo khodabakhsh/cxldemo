@@ -17,16 +17,16 @@
 ##
 ###############################################################################
 #parse("/wml/_sub/_global.vm")
-#set($page_title="ÍøÕ¾»ù±¾ÉèÖÃ")
+#set($page_title="ç½‘ç«™åŸºæœ¬è®¾ç½®")
 <p>
-	#invoke("_opt_bar.vm") »ù±¾ÉèÖÃ<br/>
+	#invoke("_opt_bar.vm") åŸºæœ¬è®¾ç½®<br/>
 #if(!$dlog.is_owner($g_site, $g_user))
-	¶Ô²»Æğ£¬ÄãÃ»ÓĞ×ã¹»µÄ·ÃÎÊÈ¨ÏŞ£¬µã»÷<a href="$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())">$text.ui("label.login")</a>Ê¹ÓÃÆäËûÕÊºÅ½øÈë¡£<br /><br /><a href="#" onclick="history.go(-1);return false;">·µ»ØÉÏÒ³</a>
+	å¯¹ä¸èµ·ï¼Œä½ æ²¡æœ‰è¶³å¤Ÿçš„è®¿é—®æƒé™ï¼Œç‚¹å‡»<a href="$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())">$text.ui("label.login")</a>ä½¿ç”¨å…¶ä»–å¸å·è¿›å…¥ã€‚<br /><br /><a href="#" onclick="history.go(-1);return false;">è¿”å›ä¸Šé¡µ</a>
 #else
-	ÏÂÃæÊÇÄãµÄÍøÕ¾×ÊÁÏ£¬µã»÷Á´½Ó½øĞĞĞŞ¸Ä.<br/>----------<br/>
-    ÍøÕ¾Ó¢ÎÄÃû:$!escape.html(${g_site.uniqueName})[²»¿ÉĞŞ¸Ä]<br/>
-    ÍøÕ¾ÖĞÎÄÃû:$!escape.html($!{g_site.friendlyName})<a href="modify_name.vm?sid=$g_site_id">[ĞŞ¸Ä]</a><br/>	
-	¸öĞÔ»¯ÍøÕ¾±êÌâ:$!escape.html($!{g_site.title})<a href="modify_title.vm?sid=$g_site_id">[ĞŞ¸Ä]</a><br/>
-    ÍøÕ¾ĞûÑÔ:$!escape.html($!{g_site.detail})<a href="modify_detail.vm?sid=$g_site_id">[ĞŞ¸Ä]</a>
+	ä¸‹é¢æ˜¯ä½ çš„ç½‘ç«™èµ„æ–™ï¼Œç‚¹å‡»é“¾æ¥è¿›è¡Œä¿®æ”¹.<br/>----------<br/>
+    ç½‘ç«™è‹±æ–‡å:$!escape.html(${g_site.uniqueName})[ä¸å¯ä¿®æ”¹]<br/>
+    ç½‘ç«™ä¸­æ–‡å:$!escape.html($!{g_site.friendlyName})<a href="modify_name.vm?sid=$g_site_id">[ä¿®æ”¹]</a><br/>	
+	ä¸ªæ€§åŒ–ç½‘ç«™æ ‡é¢˜:$!escape.html($!{g_site.title})<a href="modify_title.vm?sid=$g_site_id">[ä¿®æ”¹]</a><br/>
+    ç½‘ç«™å®£è¨€:$!escape.html($!{g_site.detail})<a href="modify_detail.vm?sid=$g_site_id">[ä¿®æ”¹]</a>
 #end
 </p>

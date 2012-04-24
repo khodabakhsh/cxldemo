@@ -18,34 +18,34 @@
 ###############################################################################
 #parse("/wml/_sub/_global.vm")
 #set($WORD_COUNT = 500)
-#set($page_title="ÆÀÂÛÏêÏ¸ÄÚÈİ")
+#set($page_title="è¯„è®ºè¯¦ç»†å†…å®¹")
 #set($forum_id = $dlog.param("fid", -1))
 #set($reply_id = $dlog.param("rpl_id", -1))
 #set($p_page = $dlog.param("p", 1))
 #set($reply = $BBS_tool.reply($g_site, $reply_id))
 <p>
 #if($reply)
-	»°Ìâ:<a href="topic.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=${reply.photo.id}">$text.html(${reply.topic.title})</a><br/>
-	ÆÀÂÛÕß:$text.html(${reply.user.nickname})<br/>
-	Ê±¼ä:$date.format("yyyy-MM-dd HH:mm",${reply.replyTime})<br/>
+	è¯é¢˜:<a href="topic.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=${reply.photo.id}">$text.html(${reply.topic.title})</a><br/>
+	è¯„è®ºè€…:$text.html(${reply.user.nickname})<br/>
+	æ—¶é—´:$date.format("yyyy-MM-dd HH:mm",${reply.replyTime})<br/>
 	#set($content = $dlog.plain_text(${reply.content}))
 	#set($page_count = $dlog.page_count($content.length(), $WORD_COUNT))
 	#if($page_count > 1)
 		#set($pre_page = $p_page - 1)
 		#set($next_page = $p_page + 1)
-		µÚ${p_page}Ò³,¹²${page_count}Ò³.<br/>
+		ç¬¬${p_page}é¡µ,å…±${page_count}é¡µ.<br/>
 		#if($p_page>1)
-			<a href="rpl.vm?sid=$g_site_id&amp;fid=$forum_id&amp;rpl_id=$reply_id">Ê×Ò³</a>
-			<a href="rpl.vm?sid=$g_site_id&amp;fid=$forum_id&amp;rpl_id=$reply_id&amp;p=$pre_page">ÉÏÒ³</a>
+			<a href="rpl.vm?sid=$g_site_id&amp;fid=$forum_id&amp;rpl_id=$reply_id">é¦–é¡µ</a>
+			<a href="rpl.vm?sid=$g_site_id&amp;fid=$forum_id&amp;rpl_id=$reply_id&amp;p=$pre_page">ä¸Šé¡µ</a>
 		#end
 		#if($p_page < $page_count)
-			<a href="rpl.vm?sid=$g_site_id&amp;fid=$forum_id&amp;rpl_id=$reply_id&amp;p=$next_page">ÏÂÒ³</a>
-			<a href="rpl.vm?sid=$g_site_id&amp;fid=$forum_id&amp;rpl_id=$reply_id&amp;p=$page_count">Î²Ò³</a>
+			<a href="rpl.vm?sid=$g_site_id&amp;fid=$forum_id&amp;rpl_id=$reply_id&amp;p=$next_page">ä¸‹é¡µ</a>
+			<a href="rpl.vm?sid=$g_site_id&amp;fid=$forum_id&amp;rpl_id=$reply_id&amp;p=$page_count">å°¾é¡µ</a>
 		#end
 		<br/>
 	#end
-	ÄÚÈİ:$text.html($dlog.split($content,$p_page,$WORD_COUNT))
+	å†…å®¹:$text.html($dlog.split($content,$p_page,$WORD_COUNT))
 #else
-	ÆÀÂÛ²»´æÔÚ£¡
+	è¯„è®ºä¸å­˜åœ¨ï¼
 #end
 </p>

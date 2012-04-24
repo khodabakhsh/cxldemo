@@ -18,7 +18,7 @@
 ###############################################################################
 #invoke("_sub/_global.vm")
 #select_layout("p_main.vm")
-#set($page_title="·¢ËÍ¶ÌÏûÏ¢")
+#set($page_title="å‘é€çŸ­æ¶ˆæ¯")
 #set($skip_new_msg = 0)
 #set($uid = $dlog.param("uid",-1))
 #set($msgid = $dlog.param("msgid",-1))
@@ -31,12 +31,12 @@
 <script type="text/javascript" src="$dlog.root()/js/calendar-setup.js"></script>
 
 #if(!$g_user || ${g_user.status}!=0)
-	#show_msg_box("Òª·¢ËÍ¶ÌÏûÏ¢±ØĞëÏÈµÇÂ¼£¬ÏÖÔÚ¾Í<a href='login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())'>µÇÂ¼</a>¡£")
+	#show_msg_box("è¦å‘é€çŸ­æ¶ˆæ¯å¿…é¡»å…ˆç™»å½•ï¼Œç°åœ¨å°±<a href='login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())'>ç™»å½•</a>ã€‚")
 #elseif(!$user || ${user.status}!=0)    
-    #show_msg_box("ÄúÒª·¢ËÍÁôÑÔµÄÓÃ»§ÎŞĞ§£¡")
+    #show_msg_box("æ‚¨è¦å‘é€ç•™è¨€çš„ç”¨æˆ·æ— æ•ˆï¼")
 #else
     <form action="$link.setAction("dlog/message")" method="post">
-    <h3>ÇëÊäÈëÒª·¢ËÍ¸ø<a href="viewuser.vm?sid=$g_site_id&amp;uid=${user.id}">$text.html(${user.nickname})</a>µÄ¶ÌÏûÏ¢ÄÚÈİ£º</h3><br/>                                        
+    <h3>è¯·è¾“å…¥è¦å‘é€ç»™<a href="viewuser.vm?sid=$g_site_id&amp;uid=${user.id}">$text.html(${user.nickname})</a>çš„çŸ­æ¶ˆæ¯å†…å®¹ï¼š</h3><br/>                                        
     #if($messages.exist())<font color="red"><b>$!messages.getAll()</b></font>#end
     <input type="hidden" name="sid" value="$g_site_id"/>
     <input type="hidden" name="receiverId" value="$uid"/>
@@ -48,21 +48,21 @@
         #if($msgform)
         $!{msgform.content}
         #elseif($msgbean)
-            <br/><br/>-----¶ÌÏûÏ¢Ô­¼ş-----<br/>
-            ·¢ËÍÊ±¼ä: $date.format("yyyyÄêMMÔÂddÈÕ HH:mm",$msgbean.sendTime)<br/>
-            ÄÚÈİ: ${msgbean.content}
+            <br/><br/>-----çŸ­æ¶ˆæ¯åŸä»¶-----<br/>
+            å‘é€æ—¶é—´: $date.format("yyyyå¹´MMæœˆddæ—¥ HH:mm",$msgbean.sendTime)<br/>
+            å†…å®¹: ${msgbean.content}
         #end
     </textarea><br/>                                        
-	ÓĞĞ§Ê±¼äÉèÖÃ£º<span id="show_birth">$!{msgform.expiredTime}</span>
+	æœ‰æ•ˆæ—¶é—´è®¾ç½®ï¼š<span id="show_birth">$!{msgform.expiredTime}</span>
     <input type="hidden" name="expiredTime" id="f_expired_time" value="$!{msgform.expiredTime}"/>
-    <img id="f_trigger_time" src="$html.image_src("date_sel.gif")" border="0" align="absMiddle"/>&nbsp;&lt;--µã»÷ÕâÀïÉèÖÃÓĞĞ§Ê±¼ä
+    <img id="f_trigger_time" src="$html.image_src("date_sel.gif")" border="0" align="absMiddle"/>&nbsp;&lt;--ç‚¹å‡»è¿™é‡Œè®¾ç½®æœ‰æ•ˆæ—¶é—´
     #calendar_setup("f_expired_time" "show_birth" "f_trigger_time")
     <p align="center">
-    <input type="submit" class="button" name="eventSubmit_SendMsg" value="·¢ËÍ¶ÌÏûÏ¢">&nbsp;&nbsp;
+    <input type="submit" class="button" name="eventSubmit_SendMsg" value="å‘é€çŸ­æ¶ˆæ¯">&nbsp;&nbsp;
 	#if($msgbean)
-    <input type="submit" class="button" name="eventSubmit_ReplyMsgAndDeleteOld" value="»Ø¸´²¢É¾³ı´ËÌõ¶ÌÏûÏ¢">&nbsp;&nbsp;#end
-    <input type="button" class="button" name="btn_return" value="·µ»Ø¶ÌÏûÏ¢Ïä" onclick="location.href='listmsg.vm?sid=$g_site_id'">
-    <input type="button" class="button" name="btn_return" value="·µ»ØÉÏÒ³" onclick="history.go(-1)">
+    <input type="submit" class="button" name="eventSubmit_ReplyMsgAndDeleteOld" value="å›å¤å¹¶åˆ é™¤æ­¤æ¡çŸ­æ¶ˆæ¯">&nbsp;&nbsp;#end
+    <input type="button" class="button" name="btn_return" value="è¿”å›çŸ­æ¶ˆæ¯ç®±" onclick="location.href='listmsg.vm?sid=$g_site_id'">
+    <input type="button" class="button" name="btn_return" value="è¿”å›ä¸Šé¡µ" onclick="history.go(-1)">
     </p>
     </form>
 	<script type="text/javascript" type="text/javascript">
