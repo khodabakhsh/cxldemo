@@ -1,0 +1,62 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  Index page of DLOG4J v3
+##  It redirect to the corresponse page according to the request parameter named sid.
+##
+###############################################################################
+#invoke("_sub/_global.vm")
+#set($page_title=${g_site.friendlyName})
+<p>
+	#invoke("_sub/_user_bar.vm")<br/>
+	----------<br/>
+	#invoke("_sub/_channel_bar.vm")<br/>
+	#if(${g_site.functionStatus.diary}!=2)
+	#set($logs = $DIARY_tool.list_diary($g_site, $g_user, -1, -1,-1,-1, 1, 5, false))
+	#if($logs.size()>0)
+    	<b>+$text.wml("newest_diary",${logs.size()})</b><br/>
+    	#foreach($log in $logs)
+    		${velocityCount}.<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;log_id=${log.id}">$text.html(${log.title})</a>(<a href="$dlog.root()/wml/diary/diary_rpls.vm?sid=$g_site_id&amp;log_id=${log.id}">${log.replyCount}</a>,${log.viewCount})<br/>
+    	#end
+		<a href="$dlog.root()/wml/diary/logs.vm?sid=$g_site_id">$text.wml("more")</a><br/>
+	#else
+		+$text.wml("no_diary")<br/>
+	#end
+	#end
+	#if(${g_site.functionStatus.photo}!=2)
+	#set($photos = $PHOTO_tool.list_photos($g_site, $g_user, -1, 0, 1, 2))
+	#if($photos.size()>0)
+    	<b>+$text.wml("newest_photo",${photos.size()})</b><br/>
+    	#foreach($photo in $photos)
+    		${velocityCount}.<a href="$dlog.root()/wml/photo/show.vm?sid=$g_site_id&amp;pid=${photo.id}"><img src="$dlog.root()${photo.previewURL}" alt=""/>$text.html(${photo.name})</a>(<a href="$dlog.root()/wml/photo/photo_rpls.vm?sid=$g_site_id&amp;pid=${photo.id}">${photo.replyCount}</a>,${photo.viewCount})<br/>
+		#end
+		<a href="$dlog.root()/wml/photo/photos.vm?sid=$g_site_id">$text.wml("more").</a><br/>
+	#else
+		+$text.wml("no_photo")<br/>
+	#end
+	#end
+	#if(${g_site.functionStatus.music}!=2)
+	#set($songs = $MUSIC_tool.list_new_songs($g_site, 5))
+	#if($songs.size()>0)
+    	<b>+$text.wml("newest_song",${songs.size()})</b><br/>
+    	#foreach($song in $songs)
+    		${velocityCount}.<a href="$dlog.root()/wml/music/show.vm?sid=$g_site_id&amp;mid=${song.id}">$text.html(${song.title})</a><br/>
+    	#end
+		<a href="$dlog.root()/wml/music/index.vm?sid=$g_site_id">$text.wml("more")</a><br/>
+	#else
+		+$text.wml("no_song")<br/>
+	#end
+	#end
+</p>

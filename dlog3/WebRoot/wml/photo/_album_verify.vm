@@ -1,0 +1,13 @@
+#if($messages.exist())$!messages.getAll()<br/>#end
+此相册需要密码验证正确后才能查看，请输入验证码：
+<input type="text" name="verifyCode" value=""/>
+<anchor>验证
+    <go href="$link.setAction("wml/album")" method="post">
+        <postfield name="sid" value="$g_site_id"/>
+        <postfield name="id" value="$album_id"/>
+        <postfield name="aid" value="$album_id"/>
+        <postfield name="verifyCode" value="$(verifyCode)"/>
+        <postfield name="__ClientId" value="$dlog.gen_client_id()"/>
+        <postfield name="eventSubmit_AlbumVerify" value="WML"/>
+    </go>
+</anchor>

@@ -1,0 +1,120 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  show detail of diary
+##
+###############################################################################
+#parse("/wml/_sub/_global.vm")
+#set($WORD_COUNT = 500)
+#set($p_page = $dlog.param("p", 1))
+#set($log_id = $dlog.param("log_id",-1))
+#set($catalog_id = $dlog.param("cat_id", -1))
+#set($diary = $DIARY_tool.diary($g_site, $g_user, $log_id))
+#set($page_title=${diary.title})
+#set($prev_diary = $DIARY_tool.prev_diary($g_site, $g_user, $catalog_id, $log_id))
+#set($next_diary = $DIARY_tool.next_diary($g_site, $g_user, $catalog_id, $log_id))
+<p>
+	#invoke("_diary_nav_bar.vm")
+#if($diary && ($diary.status==0 || (($diary.status==5) && (${diary.owner.id}==$g_user_id))))
+	#set($content = $dlog.plain_text(${diary.content}))
+	#set($page_count = $dlog.page_count($content.length(), $WORD_COUNT))
+	
+	#if($p_page == 1 || $p_page == $page_count)
+	标题: $escape.html(${diary.title})<br/>
+	作者: $escape.html(${diary.author})<br/>
+	时间: $date.format("yyyy-MM-dd HH:mm", ${diary.writeTime})<br/>
+	分类: <a href="$dlog.root()/wml/diary/logs.vm?sid=$g_site_id&amp;cat_id=${diary.catalog.id}">$escape.html(${diary.catalog.name})</a><br/>
+	评论: <a href="$dlog.root()/wml/diary/diary_rpls.vm?sid=$g_site_id&amp;log_id=$log_id">${diary.replyCount}</a><a href="reply.vm?sid=$g_site_id&amp;log_id=$log_id&amp;r=$math.random(1,1000)">[我要评论]</a><br/>
+	#end
+	
+	#if($page_count > 1)
+		#set($pre_page = $p_page - 1)
+		#set($next_page = $p_page + 1)
+		第${p_page}页,共${page_count}页.<br/>
+		#if($p_page>1)
+			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id">首页</a>
+			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id&amp;p=$pre_page">上页</a>
+		#end
+		#if($p_page < $page_count)
+			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id&amp;p=$next_page">下页</a>
+			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id&amp;p=$page_count">尾页</a>
+		#end
+		<br/>
+	#end
+	文本内容(<a href="$dlog.root()/wml/diary/show_html.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id">HTML版本</a>): $text.html($dlog.split($content,$p_page,$WORD_COUNT))<br/>
+	#if($page_count > 1)
+		#set($pre_page = $p_page - 1)
+		#set($next_page = $p_page + 1)
+		第${p_page}页,共${page_count}页.<br/>
+		#if($p_page>1)
+			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id">首页</a>
+			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id&amp;p=$pre_page">上页</a>
+		#end
+		#if($p_page < $page_count)
+			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id&amp;p=$next_page">下页</a>
+			<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=$log_id&amp;p=$page_count">尾页</a>
+		#end
+		<br/>
+	#end
+</p>
+<p>
+#if($dlog.not_empty(${diary.keyword}))
+	标签:
+	#foreach($tag in ${diary.keywords})
+		#if($velocityCount>1),#end
+		<a href="$dlog.root()/wml/showtag.vm?sid=$g_site_id&amp;tag=$link.encodeURL($tag)">${tag}</a>
+	#end
+	<br/>
+#end
+	----------<br/>
+	(#if(${diary.owner.id}==${g_user_id} || $dlog.is_owner($g_site, $g_user))
+	<a href="$dlog.root()/wml/diary/edit.vm?sid=$g_site_id&amp;log_id=$log_id">编辑</a>/<a href="$link.setAction("wml/diary")?sid=$g_site_id&amp;id=$log_id&amp;eventSubmit_Delete=$log_id">删除</a>/
+	#end
+	<a href="$link.setAction("wml/bookmark")?sid=$g_site_id&amp;parentId=${log_id}&amp;parentType=1&amp;eventSubmit_Add=WML&amp;title=$link.encodeURL(${diary.title})&amp;fromPage=$link.encodeURL($dlog.get_request_url())">添加到书签</a>)<br/>
+#if($prev_diary)
+	上一篇:<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=${prev_diary.id}">$escape.html(${prev_diary.title})</a><br/>
+#end
+#if($next_diary)
+	下一篇:<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=${next_diary.id}">$escape.html(${next_diary.title})</a><br/>
+#end
+
+#if(${diary.replyCount}>0)	
+	+最新评论<br/>
+	#set($rpls = $DIARY_tool.replies($g_site,$g_user,$diary,1,3,true))
+	#foreach($rpl in $rpls)
+	#set($content = $dlog.plain_text(${rpl.content}))
+	#set($rc = $dlog.abbreviate($content, 50))
+	#if($dlog.is_empty($rc))#set($rc="[无文本内容]")#end
+	${velocityCount}.$text.html(${rc})
+	#if($dlog.is_owner($g_site,$g_user))
+	<a href="$link.setAction("wml/reply")?sid=$g_site_id&amp;log_id=${diary.id}&amp;eventSubmit_DeleteDiaryReply=$rpl_id">[删除]</a>
+	#end
+	#if($rc.length() < $content.length())
+		<a href="$dlog.root()/wml/diary/rpl.vm?sid=$g_site_id&amp;log_id=$log_id&amp;rpl_id=${rpl.id}">[详细内容]</a>
+	#end($text.html(${rpl.author}),$date.format("MM-dd HH:mm",${rpl.replyTime}))<br/>
+	#end
+	#if($rpls.size()<${diary.replyCount})
+	<a href="$dlog.root()/wml/diary/diary_rpls.vm?sid=$g_site_id&amp;log_id=$log_id">$text.wml("more")</a>
+	#end
+#end
+<a href="$dlog.root()/wml/diary/reply.vm?sid=$g_site_id&amp;log_id=$log_id&amp;r=$math.random(1,1000)">[我要评论]</a>
+#if(${diary.status}==0)
+	$DIARY_tool.visit_diary($g_site, $g_user, $diary)
+#end
+#else
+	#set($page_title="出错啦！！！")
+	您访问的日记不存在或是您没有阅读该日记的权限！
+#end
+</p>

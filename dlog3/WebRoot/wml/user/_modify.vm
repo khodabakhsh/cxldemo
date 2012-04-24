@@ -1,0 +1,6 @@
+#set($fromPage = $request.getParameter("fromPage"))
+#if($dlog.not_empty($fromPage))
+#invoke($fromPage)
+#else
+#invoke("../myprofile.vm")
+#end

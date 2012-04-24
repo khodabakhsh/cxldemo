@@ -1,0 +1,70 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  show replies of diary
+##
+###############################################################################
+#parse("/wml/_sub/_global.vm")
+#set($PAGE_SIZE = 5)
+#set($PREVIEW_SIZE = 100)
+#set($p_page = $dlog.param("p", 1))
+#set($pre_page = $p_page - 1)
+#set($next_page = $p_page + 1)
+#set($log_id = $dlog.param("log_id",-1))
+#set($diary = $DIARY_tool.diary($g_site, $g_user, $log_id))
+#if($diary && ${diary.status}==0)
+#set($replies = $DIARY_tool.replies($g_site, $g_user, $diary, $p_page, $PAGE_SIZE, true))
+#set($page_title=${diary.title})
+#set($page_count = $dlog.page_count(${diary.replyCount}, $PAGE_SIZE))
+<p>
+	#invoke("_diary_nav_bar.vm")
+	日记:<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;log_id=${diary.id}">$escape.html(${diary.title})</a><br/>
+	评论:${diary.replyCount}<a href="$dlog.root()/wml/diary/reply.vm?sid=$g_site_id&amp;log_id=$log_id&amp;r=$math.random(1,1000)">[我要评论]</a><br/>
+	第${p_page}页,共${page_count}页,每页${PAGE_SIZE}条.<br/>
+#if($page_count > 1)
+	#if($p_page>1)
+		<a href="$dlog.root()/wml/diary/diary_rpls.vm?sid=$g_site_id&amp;log_id=$log_id">首页</a>
+		<a href="$dlog.root()/wml/diary/diary_rpls.vm?sid=$g_site_id&amp;log_id=$log_id&amp;p=$pre_page">上页</a>
+	#end
+	#if($p_page < $page_count)
+		<a href="$dlog.root()/wml/diary/diary_rpls.vm?sid=$g_site_id&amp;log_id=$log_id&amp;p=$next_page">下页</a>
+		<a href="$dlog.root()/wml/diary/diary_rpls.vm?sid=$g_site_id&amp;log_id=$log_id&amp;p=$page_count">尾页</a>
+	#end
+	<br/>
+#end
+#foreach($rpl in $replies)
+	#set($content = $dlog.plain_text(${rpl.content}))
+	#set($rc = $dlog.abbreviate($content, $PREVIEW_SIZE))
+	#if($dlog.is_empty($rc))#set($rc="[无文本内容]")#end
+	${velocityCount}.$escape.html(${rpl.author})($date.format("MM-dd HH:mm",${rpl.replyTime})):$escape.html(${rc})
+	#if($rc.length() < $content.length())
+		<a href="$dlog.root()/wml/diary/rpl.vm?sid=$g_site_id&amp;log_id=$log_id&amp;rpl_id=${rpl.id}">[详细内容]</a>
+	#end
+	<br/>
+#end
+#if($page_count > 1)
+	#if($p_page>1)
+		<a href="$dlog.root()/wml/diary/diary_rpls.vm?sid=$g_site_id&amp;log_id=$log_id">首页</a>
+		<a href="$dlog.root()/wml/diary/diary_rpls.vm?sid=$g_site_id&amp;log_id=$log_id&amp;p=$pre_page">上页</a>
+	#end
+	#if($p_page < $page_count)
+		<a href="$dlog.root()/wml/diary/diary_rpls.vm?sid=$g_site_id&amp;log_id=$log_id&amp;p=$next_page">下页</a>
+		<a href="$dlog.root()/wml/diary/diary_rpls.vm?sid=$g_site_id&amp;log_id=$log_id&amp;p=$page_count">尾页</a>
+	#end
+#end
+</p>
+#else
+<p>日记没找到！！！</p>
+#end

@@ -1,0 +1,67 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  links of site
+##
+###############################################################################
+#invoke("_sub/_global.vm")
+#set($page_title=$text.wml("links"))
+#set($PAGE_SIZE = 10)
+#set($p_page = $dlog.param("page",1))
+#set($pre_page = $p_page - 1)
+#set($next_page = $p_page + 1)
+#set($links = $link.links($g_site,$p_page, $PAGE_SIZE))
+#set($lnk_count = 0)
+#foreach($lnk in ${g_site.links})
+	#if(${lnk.status}!=1 || ${g_site.owner.id}==$g_user_id)
+        #if(${lnk.type}>=2 && ${lnk.type}<=4)
+            #set($lnk_count = $lnk_count + 1)
+    	#elseif(${lnk.type}==5 || ${lnk.type}==6)
+            #set($lnk_count = $lnk_count + 1)
+    	#end
+	#end
+#end
+##set($lnk_count = $link.link_count($g_site))
+#set($page_count = $dlog.page_count($lnk_count, $PAGE_SIZE))
+<p>
+	<a href="$wap_home_url">首页</a>
+	#if($g_site)&gt;<a href="$dlog.root()/wml/?sid=$g_site_id">$escape.html(${g_site.friendlyName})</a>#end
+	&gt;友情链接#if($dlog.is_owner($g_site,$g_user))(<a href="$dlog.root()/wml/mgr/links.vm?sid=$g_site_id">管理</a>)#end<br/>
+	共有${lnk_count}个友情链接.<br/>
+	
+    #if($p_page > 1)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}">首页</a>#end
+    #if($p_page>1)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}&amp;page=$pre_page">上页</a>#end
+    #if($p_page < $page_count)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}&amp;page=$next_page">下页</a>#end
+    #if($p_page < $page_count)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}&amp;page=$page_count">尾页</a>#end
+</p>
+<p>
+    #foreach($lnk in ${links})
+    	#if(${lnk.status}!=1 || ${g_site.owner.id}==$g_user_id)
+            #if(${lnk.type}>=2 && ${lnk.type}<=4)
+                <a href="$dlog.root()/wml/rssview.vm?sid=$g_site_id&amp;linkid=$lnk.id">$text.html(${lnk.title})</a>(RSS)<br/>
+        	#elseif(${lnk.type}==5)
+        		<a href="$dlog.root()/wml/?sid=${lnk.url}">$text.html(${lnk.title})</a>(DLOG)<br/>
+        	#elseif(${lnk.type}==6)
+        		<a href="$dlog.root()/redirect.vm?${lnk.url}">$text.html(${lnk.title})</a>(WAP)<br/>
+        	#end
+    	#end
+	#end
+</p>
+<p>
+    #if($p_page > 1)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}">首页</a>#end
+    #if($p_page>1)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}&amp;page=$pre_page">上页</a>#end
+    #if($p_page < $page_count)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}&amp;page=$next_page">下页</a>#end
+    #if($p_page < $page_count)<a href="$dlog.root()/wml/links.vm?sid=${g_site_id}&amp;page=$page_count">尾页</a>#end
+</p>

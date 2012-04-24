@@ -1,0 +1,38 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  rssview
+##
+###############################################################################
+#invoke("_sub/_global.vm")
+#set($linkid=$dlog.param("linkid",-1))
+#set($linkbean = $dlog.get_link($linkid))
+#set($page_title="RSSVIEW")
+<p>
+#if($linkbean)
+    #set($channel = $dlog.fetch_channel(${linkbean.type}, ${linkbean.url}))
+    #if($channel)
+        <a href="links.vm?sid=$g_site_id">友链</a>:$text.html(${linkbean.title})共有$dlog.sizeof(${channel.items})篇文章。<br/>
+    	$!{channel.description}<br/>==========<br/>
+        #foreach($item in $channel.items)
+        <b>${velocityCount}. $text.html($!{item.title})</b>(<a href="rssitem.vm?sid=$g_site_id&amp;linkid=$linkid&amp;itemURL=$link.encodeURL(${item.link})">WML</a>,<a href="rssitem_html.vm?sid=$g_site_id&amp;linkid=$linkid&amp;itemURL=$link.encodeURL(${item.link})">HTML</a>)<br/>
+        #end
+    #else
+        频道抓取失败，请检查是否填错频道的类型或者是写错URL地址。
+    #end
+#else
+	编号为#${linkid}的链接没找到。
+#end
+</p>

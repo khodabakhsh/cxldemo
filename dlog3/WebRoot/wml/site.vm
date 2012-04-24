@@ -1,0 +1,50 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  detail of a site
+##
+###############################################################################
+#invoke("_sub/_global.vm")
+#set($page_title=${g_site.friendlyName})
+#set($site_url = $link.getContextURL())
+<p>
+	$text.wml("url") ${site_url} <br/>
+	$text.wml("site_friendlyName") $text.html(${g_site.friendlyName}) <br/>
+	$text.wml("site_createTime") $date.format("yyyy-MM-dd HH:mm", $g_site.createTime) <br/>
+	$text.wml("site_owner") <a href="viewuser.vm?sid=$g_site_id&amp;uid=${g_site.owner.id}">$text.html(${g_site.owner.nickname})</a> <br/>
+#if($dlog.not_empty(${g_site.owner.portrait}))
+	<img src="$dlog.root()/uploads/portrait/${g_site.owner.portrait}" alt=""/><br/>
+#end
+	$text.wml("sex")#if($g_site.owner.sex==1)$text.wml("male")#elseif($g_site.owner.sex==2)$text.wml("female")#else$text.wml("unknown")#end&nbsp;
+	$text.wml("age")#if($g_site.owner.age>0)${g_site.owner.age}#else$text.wml("unknown")#end <br/>
+	$text.wml("online_status") #if($g_site.owner.onlineStatus==1)$text.wml("online")#else$text.wml("offline")#end <br/>
+	##$text.wml("last_login_time") $date.format("yyyy-MM-dd HH:mm", $g_site.owner.lastTime) <br/>
+	##$text.wml("last_login_addr") $g_site.owner.lastAddr <br/>
+#if($dlog.not_empty($g_site.detail))
+	$text.wml("site_desc") $text.html($dlog.plain_text(${g_site.detail})) <br/>#end
+</p>
+<p>	
+	#set($ssi = $STAT_tool.get_site_stat_info($g_site))
+	#set($dsi = $STAT_tool.get_dlog_stat_info($g_site))
+	日记：<a href="diary/logs.vm?sid=$g_site_id">$!{dsi.article}</a> 篇<br/>
+	照片：<a href="photo/photos.vm?sid=$g_site_id">$!{dsi.photo}</a> 张<br/>
+	话题：$!{dsi.topic} 篇<br/>
+	评论：$!{dsi.replyCount} 篇<br/>
+	注册用户：$!{dsi.user}<br/>
+	今日访问：$!{ssi.uvToday}<br/>
+	本周访问：$!{ssi.uvThisWeek}<br/>
+	本月访问：$!{ssi.uvThisMonth}<br/>
+	全部访问：$!{ssi.uvTotal}<br/>
+</p>

@@ -1,0 +1,54 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  show detail of diary's reply
+##
+###############################################################################
+#parse("/wml/_sub/_global.vm")
+#set($WORD_COUNT = 500)
+#set($page_title="评论详细内容")
+#set($reply_id = $dlog.param("rpl_id", -1))
+#set($p_page = $dlog.param("p", 1))
+#set($reply = $DIARY_tool.reply($reply_id))
+<p>
+	#invoke("_diary_nav_bar.vm")
+#if($reply)
+	日记:<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;log_id=${reply.diary.id}">$text.html(${reply.diary.title})</a><br/>
+	评论者:$text.html(${reply.author})<br/>
+	#if($dlog.is_owner($g_site,$g_user))
+	<a href="$link.setAction("wml/reply")?sid=$g_site_id&amp;log_id=${reply.diary.id}&amp;eventSubmit_DeleteDiaryReply=$reply_id">删除此条评论</a><br/>
+	#end
+	时间:$date.format("yyyy-MM-dd HH:mm",${reply.replyTime})<br/>
+	#set($content = $dlog.plain_text(${reply.content}))
+	#set($page_count = $dlog.page_count($content.length(), $WORD_COUNT))
+	#if($page_count > 1)
+		#set($pre_page = $p_page - 1)
+		#set($next_page = $p_page + 1)
+		第${p_page}页,共${page_count}页.<br/>
+		#if($p_page>1)
+			<a href="$dlog.root()/wml/diary/rpl.vm?sid=$g_site_id&amp;rpl_id=$reply_id">首页</a>
+			<a href="$dlog.root()/wml/diary/rpl.vm?sid=$g_site_id&amp;rpl_id=$reply_id&amp;p=$pre_page">上页</a>
+		#end
+		#if($p_page < $page_count)
+			<a href="$dlog.root()/wml/diary/rpl.vm?sid=$g_site_id&amp;rpl_id=$reply_id&amp;p=$next_page">下页</a>
+			<a href="$dlog.root()/wml/diary/rpl.vm?sid=$g_site_id&amp;rpl_id=$reply_id&amp;p=$page_count">尾页</a>
+		#end
+		<br/>
+	#end
+	内容:$text.html($dlog.split($content,$p_page,$WORD_COUNT))
+#else
+	评论不存在！
+#end
+</p>

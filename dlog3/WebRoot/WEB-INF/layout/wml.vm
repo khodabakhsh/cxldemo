@@ -1,0 +1,55 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  layout of wap
+##
+###############################################################################
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<head>
+	<meta http-equiv="Content-Type" content="text/vnd.wap.wml;charset=UTF-8"/>
+	<meta http-equiv="Cache-Control" content="max-age=0"/>
+#if($close_search_robots)<meta name="robots" content="noindex,nofollow"/>#end
+</head>
+##main card
+#if($dlog.is_empty($page_title))
+	#set($__wml_title = $app_name)
+#else
+	#set($__wml_title = $page_title)
+#end
+<card id="top" title="$escape.html($__wml_title)">
+${screen_content}
+##navigator links
+<p>
+	----------<br/>
+	<a href="#top">&lt;$text.wml("back_to_top")</a><br/>
+	#if($dlog.is_get())#back()<br/>#end
+#if($g_site)
+	<a href="$dlog.root()/wml/site.vm?sid=$g_site_id">&lt;$text.wml("site_info")</a><br/>
+	<a href="$dlog.root()/wml/">&lt;$text.wml("back_to",$escape.html(${g_site.friendlyName}))</a><br/>
+#end
+	<a href="http://wap.dlog.cn">&lt;$text.wml("to_home",${app_name})</a><br/>
+	Powered by DLOG4J ${app_version}<br/>
+	$date.get("yyyy/MM/dd HH:mm")
+</p>
+</card>
+##extend card
+#if($page_title_bottom && $screen_extend_template)
+<card id="bottom" title="$escape.html($page_title_bottom)">
+#if($dlog.not_empty($screen_extend_template))#parse($screen_extend_template)#end
+</card>
+#end
+</wml>

@@ -1,0 +1,14 @@
+#if($g_site.functionStatus.diary!=2)
+<a href="$dlog.root()/wml/diary/?sid=$g_site_id">$text.diary($g_site)</a> #end
+#if($g_site.functionStatus.photo!=2)
+<a href="$dlog.root()/wml/photo/?sid=$g_site_id">$text.photo($g_site)</a> #end
+#if($g_site.functionStatus.music!=2)
+<a href="$dlog.root()/wml/music/?sid=$g_site_id">$text.music($g_site)</a> #end
+#if($g_site.functionStatus.forum!=2)
+<a href="$dlog.root()/wml/bbs/?sid=$g_site_id">$text.bbs($g_site)</a> #end
+#if($g_site.functionStatus.guestbook!=2)
+<a href="$dlog.root()/wml/guestbook.vm?sid=$g_site_id">$text.guestbook($g_site)</a> #end
+<a href="$dlog.root()/wml/links.vm?sid=$g_site_id">$text.wml("links")</a>
+<a href="$dlog.root()/wml/list_tags.vm?sid=$g_site_id">±Í«©</a>
+#if($dlog.is_owner($g_site,$g_user))
+<a href="$dlog.root()/wml/mgr/?sid=$g_site_id">π‹¿Ì</a>#end
