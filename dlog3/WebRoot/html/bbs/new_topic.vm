@@ -18,13 +18,13 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_bbs.vm")
-#set($page_title="Ğ´ĞÂÌù")
+#set($page_title="å†™æ–°è´´")
 ###############################################################################
 #set($forum_id = $dlog.param("fid",-1))
 #if(!$g_user)
 	#set($prev_page = "$dlog.root()/html/bbs/new_topic.vm?sid=$g_site_id&fid=$forum_id")
 	#set($prev_page = $link.encodeURL($prev_page))
-    #show_msg_box("ÓÃ»§ÉĞÎ´µÇÂ¼,µã»÷<a href='$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$prev_page'>ÕâÀï</a>µÇÂ¼")
+    #show_msg_box("ç”¨æˆ·å°šæœªç™»å½•,ç‚¹å‡»<a href='$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$prev_page'>è¿™é‡Œ</a>ç™»å½•")
 #else
 #set($topicForm = $form.getBean())
 <form action="$link.setAction("html/bbs/topic")" onsubmit="return validateTopicForm(this)" method="post" name="topicForm">
@@ -36,10 +36,10 @@
 	<div class="adcontent"></div>
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			<b>Ğ´ĞÂÌù</b>
+			<b>å†™æ–°è´´</b>
 		</div>
 		<div class="pagecontent_right fright">
-			½ñÌìÊÇ: $date.get("MMMMM d, yyyy  EEEEE")
+			ä»Šå¤©æ˜¯: $date.get("MMMMM d, yyyy  EEEEE")
 		</div>
 	</div>
 	<div class="spacer_1"></div>
@@ -51,19 +51,19 @@
 	<div class="form">
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				±êÌâ
+				æ ‡é¢˜
     		</div>
     		<div class="form_row_content">
-				<input type="text" name="title" maxlength="100" size="59" value="$!request.getParameter("title")" />&nbsp;&nbsp;{±ØĞëÌîĞ´}
+				<input type="text" name="title" maxlength="100" size="59" value="$!request.getParameter("title")" />&nbsp;&nbsp;{å¿…é¡»å¡«å†™}
 			</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				¹Ø¼ü×Ö
+				å…³é”®å­—
     		</div>
     		<div class="form_row_content">
-				<input type="text" name="searchKey" maxlength="40" size="40" value="$!request.getParameter("searchKey")" />&nbsp;&nbsp;{¶à¸ö¹Ø¼ü×ÖÇëÓÃ¿Õ¸ñ¸ô¿ª}
+				<input type="text" name="searchKey" maxlength="40" size="40" value="$!request.getParameter("searchKey")" />&nbsp;&nbsp;{å¤šä¸ªå…³é”®å­—è¯·ç”¨ç©ºæ ¼éš”å¼€}
 			</div>
     	</div>
 		<div class="spacer_1"></div>
@@ -77,19 +77,19 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
 			<div class="form_row_content">
-				<input type="checkbox" name="bookmark" value="1" />±êÖ¾ÎªÊéÇ©&nbsp;&nbsp;
+				<input type="checkbox" name="bookmark" value="1" />æ ‡å¿—ä¸ºä¹¦ç­¾&nbsp;&nbsp;
 				#if($dlog.is_owner($g_site,$g_user))
-                <input type="checkbox" name="top" value="1" />ÖÃ¶¥&nbsp;&nbsp;
-                <input type="checkbox" name="elite" value="1" />ÉèÎª¾«»ª
+                <input type="checkbox" name="top" value="1" />ç½®é¡¶&nbsp;&nbsp;
+                <input type="checkbox" name="elite" value="1" />è®¾ä¸ºç²¾å
 				#end
 			</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
 			<div class="form_row_submit">
-				<input type="submit" name="eventSubmit_PublishTopic" value="·¢±í" />
-                <input type="reset" value="ÖØÖÃ" onclick="topicForm.title.focus();" />
-                <input type="button" value="·µ»Ø" onclick="history.go(-1)" />
+				<input type="submit" name="eventSubmit_PublishTopic" value="å‘è¡¨" />
+                <input type="reset" value="é‡ç½®" onclick="topicForm.title.focus();" />
+                <input type="button" value="è¿”å›" onclick="history.go(-1)" />
 			</div>
     	</div>
 	</div>

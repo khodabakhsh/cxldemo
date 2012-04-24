@@ -5,15 +5,15 @@
     $text.ui("label.diary.trackback")(#if(${log.trackBackCount}>0)<a href="$dlog.root()/html/trackbacks.vm?sid=$g_site_id&amp;log_id=${log.id}">#end${log.trackBackCount}#if(${log.trackBackCount}>0)</a>#end) |
     #if(!$no_bookmark_link)
     <a href="#" onclick="bookmark('${log.id}','$link.encodeURL(${log.title})') ;return false;">
-		$html.img("bookmark.gif","±£´æ´ËÎÄÎªÊéÇ©",null,"absmiddle",0)
+		$html.img("bookmark.gif","ä¿å­˜æ­¤æ–‡ä¸ºä¹¦ç­¾",null,"absmiddle",0)
     </a>
     #end
     #if($DIARY_tool.can_user_edit_diary($g_user, $log))
-    <a href="$link.setAction("html/diary")?sid=${g_site_id}&amp;id=${log.id}&amp;eventSubmit_Delete=${log.id}&amp;fromPage=$link.encodeURL($dlog.get_request_url())" onclick="return confirm('ÄúÈ·ÊµÒª½«¸ÃÈÕ¼ÇÒÆµ½À¬»øÏäÂğ£¿');">
-		$html.img("icon_delete.gif","ÒÆµ½À¬»øÏä",null,"absmiddle",0)
+    <a href="$link.setAction("html/diary")?sid=${g_site_id}&amp;id=${log.id}&amp;eventSubmit_Delete=${log.id}&amp;fromPage=$link.encodeURL($dlog.get_request_url())" onclick="return confirm('æ‚¨ç¡®å®è¦å°†è¯¥æ—¥è®°ç§»åˆ°åƒåœ¾ç®±å—ï¼Ÿ');">
+		$html.img("icon_delete.gif","ç§»åˆ°åƒåœ¾ç®±",null,"absmiddle",0)
     </a>
     <a href="$dlog.root()/html/diary/editlog.vm?sid=$g_site_id&amp;log_id=$log.id">
-		$html.img("icon_edit.gif","±à¼­´ËÎÄ",null,"absmiddle",0)
+		$html.img("icon_edit.gif","ç¼–è¾‘æ­¤æ–‡",null,"absmiddle",0)
     </a>
     #end
     #if(!$prototype_enabled)	

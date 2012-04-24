@@ -18,15 +18,15 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_diary.vm")
-#set($page_title="À¬»øÏä")
+#set($page_title="åƒåœ¾ç®±")
 ###############################################################################
 #set($logs = $DIARY_tool.list_trash($g_site, $g_user))
 #set($catalog_id=-1)
 <div class="page_top">
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			<b>À¬»øÏäÖĞ¹²ÓĞÈÕ¼Ç $!{logs.size()} Æª.</b>
-			#if(${logs.size()}>0)&nbsp;&nbsp;|&nbsp;<a href="$link.setAction("html/diary")?sid=$g_site_id&amp;eventSubmit_CleanupTrash" onclick="return confirm('ÕæµÄÒªÇå¿ÕÀ¬»øÏäÂğ£¬¸Ã²Ù×÷ÎŞ·¨»Ö¸´£¡');">Çå¿ÕÀ¬»øÏä</a>#end
+			<b>åƒåœ¾ç®±ä¸­å…±æœ‰æ—¥è®° $!{logs.size()} ç¯‡.</b>
+			#if(${logs.size()}>0)&nbsp;&nbsp;|&nbsp;<a href="$link.setAction("html/diary")?sid=$g_site_id&amp;eventSubmit_CleanupTrash" onclick="return confirm('çœŸçš„è¦æ¸…ç©ºåƒåœ¾ç®±å—ï¼Œè¯¥æ“ä½œæ— æ³•æ¢å¤ï¼');">æ¸…ç©ºåƒåœ¾ç®±</a>#end
 		</div>
 		<div class="pagecontent_right fright"></div>        
 	</div>
@@ -35,7 +35,7 @@
 #if($logs && $logs.size()>0)
 <div class="page_content">
 	<hr size="1" noshade color="#CCCCCC">
-	#set($no_bookmark_link = true) ##²»ÏÔÊ¾´æÎªÊéÇ©µÄÁ´½Ó
+	#set($no_bookmark_link = true) ##ä¸æ˜¾ç¤ºå­˜ä¸ºä¹¦ç­¾çš„é“¾æ¥
 	#foreach($log in $logs)
     #set($show_log_url = "$dlog.root()/html/diary/showlog.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=${log.id}")
 	<div class="diary">
@@ -48,11 +48,11 @@
     		<p>$preview_content</p>
 			</div>
 			#if($preview_content.length() < $log.content.length())
-    		<div><a href="$show_log_url" class="more">ÔÄ¶ÁÈ«ÎÄ...</a></div>
+    		<div><a href="$show_log_url" class="more">é˜…è¯»å…¨æ–‡...</a></div>
 			#end
 			#if($dlog.not_empty($log.keyword))
 			<div>
-				<b>¹Ø¼ü×Ö: </b>&nbsp;
+				<b>å…³é”®å­—: </b>&nbsp;
 				#foreach($tag in $log.keywords)
 					<a href="$dlog.root()/html/showtag.vm?sid=$g_site_id&amp;type=1&amp;tag=$link.encodeURL($tag)"><b>${tag}</b></a>&nbsp;&nbsp;
 				#end

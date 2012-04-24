@@ -1,39 +1,39 @@
 #set($uform = $form.getBean())
-<p><h3>×¢²áĞÂÓÃ»§</h3></p>
+<p><h3>æ³¨å†Œæ–°ç”¨æˆ·</h3></p>
 <form method="POST" action="$link.setAction("html/user")" onsubmit="return validateUserForm(this);">
     <input type="hidden" name="__ClientId" value="$dlog.gen_client_id()" />
     <input type="hidden" name="sid" value="$g_site_id" />
-    <p><strong>ÓÃ»§»ù±¾ĞÅÏ¢(±ØÌî):</strong></p>
+    <p><strong>ç”¨æˆ·åŸºæœ¬ä¿¡æ¯(å¿…å¡«):</strong></p>
     <dl>
         <dd>
         <table>
             <tr>
-                <td>ÓÃ»§Ãû:</td>
+                <td>ç”¨æˆ·å:</td>
                 <td>
                     <input type="text" size="20" maxlength="20" name="name" value="$!{uform.name}" />
                     #struts_message("name")
                 </td>
             </tr>
             <tr>
-                <td>êÇ³Æ:</td>
+                <td>æ˜µç§°:</td>
                 <td>
                     <input type="text" size="20" maxlength="20" name="nickname" value="$!{uform.nickname}" />
                     #struts_message("nickname")
                 </td>
             </tr>
             <tr>
-                <td>ÃÜÂë:</td>
+                <td>å¯†ç :</td>
                 <td>
                     <input type="password" size="20" maxlength="20" name="password" />
                     #struts_message("password")
                 </td>
             </tr>
             <tr>
-                <td>ÃÜÂëÈ·ÈÏ:</td>
+                <td>å¯†ç ç¡®è®¤:</td>
                 <td><input type="password" size="20" maxlength="20" name="password2" /></td>
             </tr>
             <tr>
-                <td>Ğ£ÑéÂë:</td>
+                <td>æ ¡éªŒç :</td>
                 <td>
                     <input type="text" size="5" maxlength="4" name="verifyCode" />
                     <img src="$dlog.root()/servlet/verify.img" alt="verify" />
@@ -43,15 +43,15 @@
         </table>
         </dd>
     </dl>
-    <p><strong>ÁªÏµĞÅÏ¢(¿ÉÑ¡):</strong></p>
+    <p><strong>è”ç³»ä¿¡æ¯(å¯é€‰):</strong></p>
     <dl>
         <dd>
         <table>
             <tr>
-                <td colspan="2"><font color="red">ÌáÊ¾£ºÇëÈÏÕæÌîĞ´µç×ÓÓÊ¼ş£¬ÒÔ±ãÄúÍü¼ÇÃÜÂëÊ±ÏµÍ³¿ÉÒÔ½«ÃÜÂë·¢ËÍµ½¸ÃÓÊÏä¡£</font></td>
+                <td colspan="2"><font color="red">æç¤ºï¼šè¯·è®¤çœŸå¡«å†™ç”µå­é‚®ä»¶ï¼Œä»¥ä¾¿æ‚¨å¿˜è®°å¯†ç æ—¶ç³»ç»Ÿå¯ä»¥å°†å¯†ç å‘é€åˆ°è¯¥é‚®ç®±ã€‚</font></td>
             </tr>
             <tr>
-                <td>µç×ÓÓÊ¼ş:</td>
+                <td>ç”µå­é‚®ä»¶:</td>
                 <td>
                     <input type="text" size="30" maxlength="50" name="email" value="$!{uform.email}" />                    
                     #struts_message("email")
@@ -72,7 +72,7 @@
                 </td>
             </tr>
             <tr>
-                <td>¸öÈËÍøÖ·:</td>
+                <td>ä¸ªäººç½‘å€:</td>
                 <td>
                     <input type="text" size="50" maxlength="50" name="homePage" value="$!{uform.homePage}" />                    
                     #struts_message("homePage")
@@ -82,36 +82,36 @@
         </dd>
     </dl>
     <p>
-        <strong>ÄúµÄĞÔ±ğ£¿</strong>
-        <input type="radio" name="sex" value="0" #if(!$uform || $uform.sex==0)checked#end />±£ÃÜ
-        <input type="radio" name="sex" value="1" #if($uform.sex==1)checked#end />ÄĞ 
-        <input type="radio" name="sex" value="2" #if($uform.sex==2)checked#end />Å®
+        <strong>æ‚¨çš„æ€§åˆ«ï¼Ÿ</strong>
+        <input type="radio" name="sex" value="0" #if(!$uform || $uform.sex==0)checked#end />ä¿å¯†
+        <input type="radio" name="sex" value="1" #if($uform.sex==1)checked#end />ç”· 
+        <input type="radio" name="sex" value="2" #if($uform.sex==2)checked#end />å¥³
     </p>
     <p>
-        <strong>ÄúµÄÉúÈÕ£¿</strong>
+        <strong>æ‚¨çš„ç”Ÿæ—¥ï¼Ÿ</strong>
         <span id="show_birth">$!{uform.birth}</span>
         <input type="hidden" name="birth" id="f_date_birth" value="$!{uform.birth}" />
-		<img src="$dlog.style($g_site, "pic/date_sel.gif")" alt="date" align="absmiddle" id="f_trigger_birth" border="0" />&nbsp;&lt;--µã»÷ÕâÀï½øĞĞÉèÖÃ
+		<img src="$dlog.style($g_site, "pic/date_sel.gif")" alt="date" align="absmiddle" id="f_trigger_birth" border="0" />&nbsp;&lt;--ç‚¹å‡»è¿™é‡Œè¿›è¡Œè®¾ç½®
         #calendar_setup("f_date_birth" "show_birth" "f_trigger_birth")
     </p>
-    <p><strong>¸öÈËĞûÑÔ(¿ÉÑ¡):</strong>#struts_message("resume")</p>
+    <p><strong>ä¸ªäººå®£è¨€(å¯é€‰):</strong>#struts_message("resume")</p>
     <dl>
         <dd><textarea name="resume" rows="5" cols="42">$!{uform.resume}</textarea></dd>
     </dl>
-    <p><strong>µÇÂ¼ĞÅÏ¢:</strong>
+    <p><strong>ç™»å½•ä¿¡æ¯:</strong>
         <select name="keepDays">
-            <option value="-1">²»±£´æ</option>
-            <option value="1">±£´æÒ»Ìì</option>
-            <option value="7">±£´æÒ»ÖÜ</option>
-            <option value="30">±£´æÒ»ÔÂ</option>
-            <option value="365">±£´æÒ»Äê</option>
+            <option value="-1">ä¸ä¿å­˜</option>
+            <option value="1">ä¿å­˜ä¸€å¤©</option>
+            <option value="7">ä¿å­˜ä¸€å‘¨</option>
+            <option value="30">ä¿å­˜ä¸€æœˆ</option>
+            <option value="365">ä¿å­˜ä¸€å¹´</option>
         </select>
     </p>
     <table width="70%">
         <tr>
             <td align="center">
-                <input type="submit" name="eventSubmit_Create" value="Ìá½»×¢²á" />&nbsp;&nbsp;
-                <input type="reset" value="ÖØĞÂÌîĞ´" />
+                <input type="submit" name="eventSubmit_Create" value="æäº¤æ³¨å†Œ" />&nbsp;&nbsp;
+                <input type="reset" value="é‡æ–°å¡«å†™" />
             </td>
         </tr>
     </table>

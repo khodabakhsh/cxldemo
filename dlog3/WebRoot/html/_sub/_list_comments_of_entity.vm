@@ -13,10 +13,10 @@
 ##  along with this program; if not, write to the Free Software
 ##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 ##
-##  ÏÔÊ¾Ä³¸öÊµÌåµÄËùÓĞÆÀÂÛĞÅÏ¢
-##  Èë¿Ú²ÎÊı
-##  entity_id : ÊµÌå±àºÅ
-##  entity_type : ÊµÌåÀàĞÍ
+##  æ˜¾ç¤ºæŸä¸ªå®ä½“çš„æ‰€æœ‰è¯„è®ºä¿¡æ¯
+##  å…¥å£å‚æ•°
+##  entity_id : å®ä½“ç¼–å·
+##  entity_type : å®ä½“ç±»å‹
 ##
 ###############################################################################
 #set($entity_id = 1482)

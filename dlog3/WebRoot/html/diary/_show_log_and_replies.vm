@@ -11,12 +11,12 @@
 		#if($prev_diary || $next_diary)
 		<div class="pagecontent_left fleft">
 			#if($next_diary)
-				<a href="?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=${next_diary.id}" class="cprevious">ÉÏÆª£º${next_diary.title}</a>
+				<a href="?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=${next_diary.id}" class="cprevious">ä¸Šç¯‡ï¼š${next_diary.title}</a>
 			#end
 		</div>
 		<div class="pagecontent_right fright">
 			#if($prev_diary)
-				<a href="?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=${prev_diary.id}" class="cnext">ÏÂÆª£º${prev_diary.title}</a>
+				<a href="?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=${prev_diary.id}" class="cnext">ä¸‹ç¯‡ï¼š${prev_diary.title}</a>
 			#end
 		</div>
 		#end
@@ -47,9 +47,9 @@
                 enablecontextmenu="0" clicktoplay="0" invokeurls="1"
                 defaultframe="datawindow">
             </embed><br />
-			Èç¹ûÄúÎŞ·¨²¥·Å¸èÇú,ÇëÏÈÈ·¶¨ÊÇ·ñÒÑ¾­°²×°<a href="http://download.microsoft.com/download/9/4/0/94072943-9188-4a60-b31f-3031f18404e4/mpsetup.exe" target="_blank"><b>Windows media player</b></a>Èí¼ş<br/>
-			»òÕß¸èÇúÀàĞÍÊÇ·ñ±»<b>Microsoft Media Player</b>ËùÖ§³Ö¡£<br/>
-			ÁíÍâÇëÊ¹ÓÃIEä¯ÀÀÆ÷¡£
+			å¦‚æœæ‚¨æ— æ³•æ’­æ”¾æ­Œæ›²,è¯·å…ˆç¡®å®šæ˜¯å¦å·²ç»å®‰è£…<a href="http://download.microsoft.com/download/9/4/0/94072943-9188-4a60-b31f-3031f18404e4/mpsetup.exe" target="_blank"><b>Windows media player</b></a>è½¯ä»¶<br/>
+			æˆ–è€…æ­Œæ›²ç±»å‹æ˜¯å¦è¢«<b>Microsoft Media Player</b>æ‰€æ”¯æŒã€‚<br/>
+			å¦å¤–è¯·ä½¿ç”¨IEæµè§ˆå™¨ã€‚
             </div>
 			
 			<div class="spacer_20"></div>
@@ -57,7 +57,7 @@
 			<div class="spacer_20"></div>
 			#if($dlog.not_empty(${log.keyword}))
 			<div class="keyword">
-				<b>¹Ø¼ü×Ö:</b>
+				<b>å…³é”®å­—:</b>
 				#foreach($tag in ${log.keywords})
 					<a href="$dlog.root()/html/showtag.vm?sid=$g_site_id&amp;type=1&amp;tag=$link.encodeURL($tag)"><b>$text.html(${tag})</b></a>&nbsp;
 				#end
@@ -65,9 +65,9 @@
 			
 			#end
 			<div class="trackback">
-				<b>ÒıÓÃµØÖ·:</b>
+				<b>å¼•ç”¨åœ°å€:</b>
 				<span class="en9pt">
-				$link.getContextURL()/html/trackback.do?id=${log.id}&amp;type=1 (<a href="#" onclick="return copy_to_clipboard('$link.getContextURL()/html/trackback.do?log_id=${log.id}&amp;type=1')">¸´ÖÆµØÖ·</a>)
+				$link.getContextURL()/html/trackback.do?id=${log.id}&amp;type=1 (<a href="#" onclick="return copy_to_clipboard('$link.getContextURL()/html/trackback.do?log_id=${log.id}&amp;type=1')">å¤åˆ¶åœ°å€</a>)
 				</span>
 			</div>
 			
@@ -85,26 +85,26 @@
 	#if(${log.replyCount} > 0)
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			<a name="#replies"></a><b>¡Ô¡Ô¡Ô ÍøÓÑÆÀÂÛ ¡Ô¡Ô¡Ô</b>
+			<a name="#replies"></a><b>â‰¡â‰¡â‰¡ ç½‘å‹è¯„è®º â‰¡â‰¡â‰¡</b>
 		</div>
 		<div class="pagecontent_right fright">
-			##ÈÕ¼ÇÆÀÂÛ·ÖÒ³
+			##æ—¥è®°è¯„è®ºåˆ†é¡µ
 			#if($page_count > 1)
-				<form name="dform" action="#replies"><!-- ·­Ò³¿ØÖÆÌõ -->
-				µÚ<b>${p_page}</b>Ò³,¹²<b>${page_count}</b>Ò³
+				<form name="dform" action="#replies"><!-- ç¿»é¡µæ§åˆ¶æ¡ -->
+				ç¬¬<b>${p_page}</b>é¡µ,å…±<b>${page_count}</b>é¡µ
 				<input type="hidden" name="sid" value="$g_site_id" />
                 <input type="hidden" name="cat_id" value="$log.catalog.id" />
                 <input type="hidden" name="log_id" value="$log.id" />
 				#set($base_url = "?sid=${g_site_id}&amp;cat_id=${log.catalog.id}&amp;log_id=${log.id}")
-                #if($p_page > 1)<a href="$base_url#replies">Ê×Ò³</a>#end
-                #if($p_page>1)<a href="${base_url}&amp;page=$pre_page#replies">ÉÏÒ³</a>#end
-                #if($p_page < $page_count)<a href="${base_url}&amp;page=$next_page#replies">ÏÂÒ³</a>#end
-                #if($p_page < $page_count)<a href="${base_url}&amp;page=$page_count#replies">Î²Ò³</a>#end
-                    µ½ <select name="page" onchange="dform.submit();">
+                #if($p_page > 1)<a href="$base_url#replies">é¦–é¡µ</a>#end
+                #if($p_page>1)<a href="${base_url}&amp;page=$pre_page#replies">ä¸Šé¡µ</a>#end
+                #if($p_page < $page_count)<a href="${base_url}&amp;page=$next_page#replies">ä¸‹é¡µ</a>#end
+                #if($p_page < $page_count)<a href="${base_url}&amp;page=$page_count#replies">å°¾é¡µ</a>#end
+                    åˆ° <select name="page" onchange="dform.submit();">
                     #foreach($p in [1..$page_count])
                     <option value="$p"#if($p_page==$p) selected#end>$p</option>
                     #end
-					</select> Ò³
+					</select> é¡µ
 				</form>
 			#end
 		</div>
@@ -125,7 +125,7 @@
 			#else
 				<b>$text.html($reply.author)</b>
     		#end
-    		ÍøÓÑËµ£º
+    		ç½‘å‹è¯´ï¼š
 			#if($reply.client.type == 1)
 				$html.img("mobile.gif",null,"wap","absmiddle",0)
 			#end
@@ -133,7 +133,7 @@
 			<div class="fright">
 			$date.format("yyyy/MM/dd HH:mm",${reply.replyTime}) &nbsp;&nbsp;
             #if($g_user && ($dlog.is_owner($g_site,$g_user) || (${reply.user} && ${reply.user.id}==$g_user_id)))
-              <a href="#" onclick="if(confirm('ÄúÕæµÄÒªÉ¾³ı¸ÃÆÀÂÛÂğ£¿')) deleteRForm_${reply.id}.submit(); return false;"">$html.img("icon_delete.gif",null,"del","absmiddle",0)</a>
+              <a href="#" onclick="if(confirm('æ‚¨çœŸçš„è¦åˆ é™¤è¯¥è¯„è®ºå—ï¼Ÿ')) deleteRForm_${reply.id}.submit(); return false;"">$html.img("icon_delete.gif",null,"del","absmiddle",0)</a>
               <a href="showlog.vm?sid=$g_site_id&amp;log_id=${reply.diary.id}&reply_id=${reply.id}#reply">$html.img("icon_edit.gif",null,"edit","absmiddle",0)</a> 
             <form name="deleteRForm_${reply.id}" action="$link.setAction("html/reply")" method="post">
                 <input type="hidden" name="sid" value="${g_site_id}" />
@@ -148,7 +148,7 @@
 			#if(${reply.ownerOnly}==0 || $dlog.is_owner($g_site,$g_user) || ($g_user && ${g_user.id}==${reply.user.id})) 
                 ${reply.content}
             #else
-                <i>[´ËÆÀÂÛÖ»ÄÜÓÉÆÀÂÛÕß»òÕßÊÇĞ´ÈÕ¼ÇµÄÈË¿ÉÒÔ²éÔÄ¡£]</i>
+                <i>[æ­¤è¯„è®ºåªèƒ½ç”±è¯„è®ºè€…æˆ–è€…æ˜¯å†™æ—¥è®°çš„äººå¯ä»¥æŸ¥é˜…ã€‚]</i>
             #end
 		</div>
 		<div class="comment_footer"></div>
@@ -171,7 +171,7 @@
         #end
 		
         <div class="comment_form">
-			<a name="#reply"></a><b>¡Ô¡Ô¡Ô ·¢±íÆÀÂÛ ¡Ô¡Ô¡Ô</b><br/>
+			<a name="#reply"></a><b>â‰¡â‰¡â‰¡ å‘è¡¨è¯„è®º â‰¡â‰¡â‰¡</b><br/>
 			#if($reply_to_edit)<input type="hidden" name="reply_id" value="${reply_to_edit.id}"/>#end
 			<input type="hidden" name="alexa" id="IsAlexaUser"/>
             <input type="hidden" name="clientType" value="0" />
@@ -185,23 +185,23 @@
             <input type="hidden" value="HTML" name="eventSubmit_AddDiaryReply" />
 			#end
 			<div class="comment_form_item">
-       			³Æºô:&nbsp;<input type="text" name="author" value="$!escape.html($author)" size="10" maxlength="20" />
+       			ç§°å‘¼:&nbsp;<input type="text" name="author" value="$!escape.html($author)" size="10" maxlength="20" />
         	</div>
 			<div class="comment_form_item">
-				ÓÊÏä:&nbsp;<input type="text" name="authorEmail" value="$!author_email" size="20" maxlength="50" />&nbsp;{¿ÉÑ¡}
+				é‚®ç®±:&nbsp;<input type="text" name="authorEmail" value="$!author_email" size="20" maxlength="50" />&nbsp;{å¯é€‰}
         	</div>
             <div class="comment_form_item">
-				ÍøÖ·:&nbsp;<input type="text" name="authorURL" value="$!author_url" size="20" maxlength="50" />&nbsp;{¿ÉÑ¡}
-				<input type="checkbox" name="ownerOnly" value="1" #if($reply_to_edit && ${reply_to_edit.ownerOnly}==1)checked#end/>´ËÆÀÂÛÖ»ÓĞÎÒºÍĞ´ÈÕ¼ÇµÄÈË²éÔÄ
+				ç½‘å€:&nbsp;<input type="text" name="authorURL" value="$!author_url" size="20" maxlength="50" />&nbsp;{å¯é€‰}
+				<input type="checkbox" name="ownerOnly" value="1" #if($reply_to_edit && ${reply_to_edit.ownerOnly}==1)checked#end/>æ­¤è¯„è®ºåªæœ‰æˆ‘å’Œå†™æ—¥è®°çš„äººæŸ¥é˜…
         	</div>
 			<div class="comment_form_item">
         		<textarea name="content" style="height:150px;width:100%">$!{reply_to_edit.content}</textarea>
         	</div>
             <div class="comment_form_item">
 				#if($reply_to_edit)
-                <input type="submit" value="¸üĞÂÆÀÂÛ" class="button" name="eventSubmit_UpdateDiaryReply" />
+                <input type="submit" value="æ›´æ–°è¯„è®º" class="button" name="eventSubmit_UpdateDiaryReply" />
                 #else
-                <input type="submit" value="Ìí¼ÓÆÀÂÛ" class="button" name="eventSubmit_AddDiaryReply" />
+                <input type="submit" value="æ·»åŠ è¯„è®º" class="button" name="eventSubmit_AddDiaryReply" />
 				#end
         	</div>
 		</div>

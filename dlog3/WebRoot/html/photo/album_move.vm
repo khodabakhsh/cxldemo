@@ -18,7 +18,7 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_photo.vm")
-#set($page_title="ÒÆ¶¯Ïà²¾")
+#set($page_title="ç§»åŠ¨ç›¸ç°¿")
 ###############################################################################
 #set($album_id = $dlog.param("aid",-1))
 #if(!$dlog.is_owner($g_site, $g_user))
@@ -35,7 +35,7 @@
 	<div class="adcontent"></div>
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			<b>¶ÔÕû¸öÏà²¾µÄÏàÆ¬½øĞĞ×ªÒÆ</b>
+			<b>å¯¹æ•´ä¸ªç›¸ç°¿çš„ç›¸ç‰‡è¿›è¡Œè½¬ç§»</b>
 		</div>
 		<div class="pagecontent_right fright">
 		</div>        
@@ -46,10 +46,10 @@
 	<div class="form">
     	<div class="form_row">
 			<div class="form_row_title fleft">
-    			ÒÆ¶¯Ïà²¾:
+    			ç§»åŠ¨ç›¸ç°¿:
     		</div>
     		<div class="form_row_content">
-				&nbsp;&nbsp;ÄúÒª½« [${g_site.album($album_id).name}] Ïà²¾ÖĞµÄËùÓĞÕÕÆ¬ÒÆ¶¯µ½:
+				&nbsp;&nbsp;æ‚¨è¦å°† [${g_site.album($album_id).name}] ç›¸ç°¿ä¸­çš„æ‰€æœ‰ç…§ç‰‡ç§»åŠ¨åˆ°:
         		<select name="toAlbum">
                 	#foreach($album in $g_site.albums)
                         #set($url = "$dlog.root()/html/photo/?sid=$g_site_id&amp;aid=${album.id}")
@@ -65,8 +65,8 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
 			<div class="form_row_submit">
-				<input type="submit" name="eventSubmit_MoveToAlbum" value="ÒÆ¶¯" />
-				<input type="button" value="·µ»Ø" onclick="history.go(-1)" />
+				<input type="submit" name="eventSubmit_MoveToAlbum" value="ç§»åŠ¨" />
+				<input type="button" value="è¿”å›" onclick="history.go(-1)" />
 			</div>
     	</div>
     </div>

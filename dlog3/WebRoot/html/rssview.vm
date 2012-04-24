@@ -21,7 +21,7 @@
 #set($linkid=$dlog.param("linkid",-1))
 
 <div id="rss_channel_items">
-	#show_msg_box("ÕıÔÚÍ¨¹ıRSS×¥È¡ÍøÕ¾ÕªÒª,ÇëÉÔºò...")
+	#show_msg_box("æ­£åœ¨é€šè¿‡RSSæŠ“å–ç½‘ç«™æ‘˜è¦,è¯·ç¨å€™...")
 </div>
 
 <script src="$dlog.root()/js/prototype.js" type="text/javascript"></script>

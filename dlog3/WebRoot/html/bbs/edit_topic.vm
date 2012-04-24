@@ -18,16 +18,16 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_bbs.vm")
-#set($page_title="ĞŞ¸Ä·¢Ìû")
+#set($page_title="ä¿®æ”¹å‘å¸–")
 ###############################################################################
 #if(!$g_user)
-    #show_msg_box("ÓÃ»§ÉĞÎ´µÇÂ¼,µã»÷<a href='$dlog.root()/dlog/login.vm?sid=$g_site_id'>ÕâÀï</a>µÇÂ¼")
+    #show_msg_box("ç”¨æˆ·å°šæœªç™»å½•,ç‚¹å‡»<a href='$dlog.root()/dlog/login.vm?sid=$g_site_id'>è¿™é‡Œ</a>ç™»å½•")
 #else
 #set($forum_id = $dlog.param("fid",-1))
 #set($topic_id = $dlog.param("tid",-1))
 #set($topic = $BBS_tool.topic($g_site, $g_user, $topic_id))
 #if($topic.user.id != $g_user.id)
-	#show_msg_box("¶Ô²»Æğ£¬ÄãÃ»ÓĞ±à¼­¸ÃÌû×ÓµÄÈ¨ÏŞ¡£")
+	#show_msg_box("å¯¹ä¸èµ·ï¼Œä½ æ²¡æœ‰ç¼–è¾‘è¯¥å¸–å­çš„æƒé™ã€‚")
 #else
 <form action="$link.setAction("html/bbs/topic")" onsubmit="return validateTopicForm(this)" method="post" name="topicForm">
 <input type="hidden" name="sid" value="$g_site_id" />
@@ -39,10 +39,10 @@
 <div class="page_top">
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			<b>ĞŞ¸Ä·¢Ìû</b>
+			<b>ä¿®æ”¹å‘å¸–</b>
 		</div>
 		<div class="pagecontent_right fright">
-			½ñÌìÊÇ: $date.get("MMMMM d, yyyy  EEEEE")
+			ä»Šå¤©æ˜¯: $date.get("MMMMM d, yyyy  EEEEE")
 		</div>
 	</div>
 	<div class="spacer_1"></div>
@@ -52,19 +52,19 @@
 	<div class="form">
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				±êÌâ
+				æ ‡é¢˜
     		</div>
     		<div class="form_row_content">
-				<input type="text" name="title" maxlength="100" size="59" value="$!{topic.title}" />&nbsp;&nbsp;{±ØĞëÌîĞ´}
+				<input type="text" name="title" maxlength="100" size="59" value="$!{topic.title}" />&nbsp;&nbsp;{å¿…é¡»å¡«å†™}
 			</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				¹Ø¼ü×Ö
+				å…³é”®å­—
     		</div>
     		<div class="form_row_content">
-				<input type="text" name="searchKey" maxlength="40" size="40" value="$!{topic.keyword}" />&nbsp;&nbsp;{¶à¸ö¹Ø¼ü×ÖÇëÓÃ¿Õ¸ñ¸ô¿ª}
+				<input type="text" name="searchKey" maxlength="40" size="40" value="$!{topic.keyword}" />&nbsp;&nbsp;{å¤šä¸ªå…³é”®å­—è¯·ç”¨ç©ºæ ¼éš”å¼€}
 			</div>
     	</div>
 		<div class="spacer_1"></div>
@@ -78,16 +78,16 @@
 		#if($dlog.is_owner($g_site,$g_user))
 		<div class="form_row">
 			<div class="form_row_content">
-				<input type="checkbox" name="top" value="1" #if($topic.top)checked#end/>ÖÃ¶¥&nbsp;&nbsp;
-				<input type="checkbox" name="elite" value="1" #if($topic.elite)checked#end/>ÉèÎª¾«»ª
+				<input type="checkbox" name="top" value="1" #if($topic.top)checked#end/>ç½®é¡¶&nbsp;&nbsp;
+				<input type="checkbox" name="elite" value="1" #if($topic.elite)checked#end/>è®¾ä¸ºç²¾å
 			</div>
     	</div>
 		#end
 		<div class="form_row">
 			<div class="form_row_submit">
-				<input type="submit" name="eventSubmit_EditTopic" value="¸üĞÂ" />
-                <input type="reset" value="ÖØÖÃ" onclick="topicForm.title.focus();" />
-                <input type="button" value="·µ»Ø" onclick="history.go(-1)" />
+				<input type="submit" name="eventSubmit_EditTopic" value="æ›´æ–°" />
+                <input type="reset" value="é‡ç½®" onclick="topicForm.title.focus();" />
+                <input type="button" value="è¿”å›" onclick="history.go(-1)" />
 			</div>
     	</div>
 	</div>

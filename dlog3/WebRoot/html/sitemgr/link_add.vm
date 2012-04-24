@@ -18,17 +18,17 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_setting.vm")
-#set($page_title="Ìí¼ÓÓÑÇéÁ´½Ó")
+#set($page_title="æ·»åŠ å‹æƒ…é“¾æ¥")
 ###############################################################################
 #alert_msg("link")
 #set($lform = $form.getBean())
 <div class="page_top">
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			<b>Ôö¼ÓÓÑÇéÁ´½Ó</b>
+			<b>å¢åŠ å‹æƒ…é“¾æ¥</b>
 		</div>
 		<div class="pagecontent_right fright">
-			½ñÌìÊÇ: $date.get("MMMMM d, yyyy  EEEEE")
+			ä»Šå¤©æ˜¯: $date.get("MMMMM d, yyyy  EEEEE")
 		</div>
 	</div>
 	<div class="spacer_1"></div>
@@ -42,7 +42,7 @@
 	<div class="form">
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				ÍøÕ¾Ãû³Æ
+				ç½‘ç«™åç§°
     		</div>
     		<div class="form_row_content">
 				<input type="text" size="20" maxlength="20" name="title" value="$!{lform.title}">
@@ -52,7 +52,7 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				ÍøÖ·
+				ç½‘å€
     		</div>
     		<div class="form_row_content">
 				<input type="text" size="40" maxlength="100" name="url" value="$!{lform.url}">
@@ -62,20 +62,20 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				Á´½ÓÀàĞÍ
+				é“¾æ¥ç±»å‹
     		</div>
     		<div class="form_row_content">
                 <select name="type">
                     <option value="1">HTML</option>
                     <option value="2">XML(RDF,RSS,ATOM)</option>
                     <option value="6">WAP</option>
-                </select>WAPÁ´½ÓÖ»ÄÜÔÚWAPÒ³Ãæä¯ÀÀ
+                </select>WAPé“¾æ¥åªèƒ½åœ¨WAPé¡µé¢æµè§ˆ
 			</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				Á´½ÓÎ»ÖÃ
+				é“¾æ¥ä½ç½®
     		</div>
     		<div class="form_row_content">
 				<select name="id">
@@ -84,8 +84,8 @@
                 #end
                 </select>
                 <select name="direction">
-                    <option value="1">Ö®Ç°</option>
-                    <option value="2">Ö®ºó</option>
+                    <option value="1">ä¹‹å‰</option>
+                    <option value="2">ä¹‹å</option>
                 </select>
 			</div>
     	</div>
@@ -93,15 +93,15 @@
 		<div class="form_row">
     		<div class="form_row_title fleft">&nbsp;</div>
     		<div class="form_row_content">
-			<input type="checkbox" name="status" value="1"/>Ö»ÓĞÎÒ±¾ÈË²ÅÄÜ¿´µ½¸ÃÁ´½Ó
+			<input type="checkbox" name="status" value="1"/>åªæœ‰æˆ‘æœ¬äººæ‰èƒ½çœ‹åˆ°è¯¥é“¾æ¥
 			</div>
 		</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
 			<div class="form_row_submit">
-				<input type="submit" name="eventSubmit_CreateLink" value="Ôö¼ÓÁ´½Ó" />
-				<input type="reset" value="ÖØĞÂÌîĞ´" />
-				<input type="reset" value="·µ»ØÉÏÒ³" onclick="history.go(-1)" />
+				<input type="submit" name="eventSubmit_CreateLink" value="å¢åŠ é“¾æ¥" />
+				<input type="reset" value="é‡æ–°å¡«å†™" />
+				<input type="reset" value="è¿”å›ä¸Šé¡µ" onclick="history.go(-1)" />
 			</div>
     	</div>
 	</div>

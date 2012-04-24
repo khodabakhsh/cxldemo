@@ -18,7 +18,7 @@
 ###############################################################################
 #invoke("_sub/_global.vm")
 #select_layout("p_guestbook.vm")
-#set($page_title="ÁôÑÔ±¾")
+#set($page_title="ç•™è¨€æœ¬")
 ###############################################################################
 #set($MSGS_PER_PAGE = 10)
 #set($p_page = $dlog.param("page",1))
@@ -31,22 +31,22 @@
 <div class="page_top">
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			¹²ÓĞÁôÑÔ<b>${msg_count}</b>Æª,Ã¿Ò³ÏÔÊ¾<b>${MSGS_PER_PAGE}</b>Æª,µÚ<b>${p_page}</b>Ò³,¹²<b>${page_count}</b>Ò³
+			å…±æœ‰ç•™è¨€<b>${msg_count}</b>ç¯‡,æ¯é¡µæ˜¾ç¤º<b>${MSGS_PER_PAGE}</b>ç¯‡,ç¬¬<b>${p_page}</b>é¡µ,å…±<b>${page_count}</b>é¡µ
 		</div>
 		<div class="pagecontent_right fright">
 			#if($page_count > 1)
-            <form name="dform" action=""><!-- ·­Ò³¿ØÖÆÌõ -->
+            <form name="dform" action=""><!-- ç¿»é¡µæ§åˆ¶æ¡ -->
             <input type="hidden" name="sid" value="$g_site_id"/>
                 #if($p_page > 1)
-                <a href="?sid=${g_site_id}">Ê×Ò³</a>#end
-                #if($p_page>1)<a href="?sid=${g_site_id}&amp;page=$pre_page">ÉÏÒ³</a>#end
-                #if($p_page < $page_count)<a href="?sid=${g_site_id}&amp;page=$next_page">ÏÂÒ³</a>#end
-                #if($p_page < $page_count)<a href="?sid=${g_site_id}&amp;page=$page_count">Î²Ò³</a>#end
-                    µ½<select name="page" onchange="dform.submit();">
+                <a href="?sid=${g_site_id}">é¦–é¡µ</a>#end
+                #if($p_page>1)<a href="?sid=${g_site_id}&amp;page=$pre_page">ä¸Šé¡µ</a>#end
+                #if($p_page < $page_count)<a href="?sid=${g_site_id}&amp;page=$next_page">ä¸‹é¡µ</a>#end
+                #if($p_page < $page_count)<a href="?sid=${g_site_id}&amp;page=$page_count">å°¾é¡µ</a>#end
+                    åˆ°<select name="page" onchange="dform.submit();">
                     #foreach($p in [1..$page_count])
                     <option value="$p"#if($p_page==$p) selected#end>$p</option>
                     #end
-                </select>&nbsp;Ò³
+                </select>&nbsp;é¡µ
             </form>
             #end
 		</div>        
@@ -55,7 +55,7 @@
 </div>
 #if($msg_count > 0)
 <div class="page_content">
-    <div align="right"><a href="#rplform">&lt;ÎÒÒªÁôÑÔ&gt;</a></div>
+    <div align="right"><a href="#rplform">&lt;æˆ‘è¦ç•™è¨€&gt;</a></div>
     #set($msgs = $dlog.list_guest_msgs($g_site, $p_page, $MSGS_PER_PAGE))
     #set($is_owner = $dlog.is_owner($g_site, $g_user))
 	$dlog.set_cookie("guestbook",${msgs.get(0).id},31536000)
@@ -63,13 +63,13 @@
 	<div class="guestbook">
 		<div class="module_guestbook_title">
 			<div>
-			<div class="fleft"><b>ÁôÑÔÕß:</b>
+			<div class="fleft"><b>ç•™è¨€è€…:</b>
 			<a href="$dlog.root()/dlog/viewuser.vm?sid=$g_site_id&amp;uid=${msg.user.id}">${msg.user.nickname}</a>
-			(#if(${msg.user.onlineStatus}==1)ÔÚÏß#elseÀëÏß#end,<a href="$dlog.root()/dlog/sendmsg.vm?sid=$g_site_id&amp;uid=${msg.user.id}">·¢ÏûÏ¢</a>)
+			(#if(${msg.user.onlineStatus}==1)åœ¨çº¿#elseç¦»çº¿#end,<a href="$dlog.root()/dlog/sendmsg.vm?sid=$g_site_id&amp;uid=${msg.user.id}">å‘æ¶ˆæ¯</a>)
 			&nbsp;&nbsp;<span class="en8pt"><b>$date.format("yyyy/MM/dd HH:mm",${msg.createTime})</b></span>
 			</div>
 			#if($is_owner)
-            <div class="fright"><a href="$link.setAction("html/guestbook")?sid=${g_site_id}&amp;page=${p_page}&amp;eventSubmit_Delete=${msg.id}" onclick="return confirm('ÄúÈ·ÈÏÒªÉ¾³ı´ËÌõÁôÑÔĞÅÏ¢Âï£¿');">$html.img("icon_delete.gif",null,"DEL","absmiddle",0)</a></div>
+            <div class="fright"><a href="$link.setAction("html/guestbook")?sid=${g_site_id}&amp;page=${p_page}&amp;eventSubmit_Delete=${msg.id}" onclick="return confirm('æ‚¨ç¡®è®¤è¦åˆ é™¤æ­¤æ¡ç•™è¨€ä¿¡æ¯å˜›ï¼Ÿ');">$html.img("icon_delete.gif",null,"DEL","absmiddle",0)</a></div>
 			#end
 			</div>
 			<div class="spacer_1"></div>
@@ -79,9 +79,9 @@
 		<div class="line_dashed"></div>
 		<div class="module_guestbook_reply">
 		#if(!$dlog.is_empty($msg.reply))
-			<i><b>Õ¾³¤´ğ¸´<span class="en8pt">($date.format("yyyy/MM/dd HH:mm",$msg.replyTime))</span>£º</b>${msg.reply}</i>
+			<i><b>ç«™é•¿ç­”å¤<span class="en8pt">($date.format("yyyy/MM/dd HH:mm",$msg.replyTime))</span>ï¼š</b>${msg.reply}</i>
         #elseif($is_owner)
-            <a href="" onclick="javascript:show_div('replyForm${msg.id}');return false;">&lt;ÎÒÒª´ğ¸´&gt;</a>
+            <a href="" onclick="javascript:show_div('replyForm${msg.id}');return false;">&lt;æˆ‘è¦ç­”å¤&gt;</a>
             <div class="bvsection" id="replyForm${msg.id}">
                 <form action="$link.setAction("html/guestbook")" method="post">
 				<input type="hidden" name="__ClientId" value="$dlog.gen_client_id()"/>
@@ -89,8 +89,8 @@
                 <input type="hidden" name="sid" value="$g_site_id"/>
                 <input type="hidden" name="page" value="$p_page"/>
                 <textarea name="reply" style="width:99%; height:50px; background-color:#ffffdd" id="ta_gb_reply"></textarea><br/>
-				<input class="button" type="button" value="È¡Ïû" onclick="javascript:hide_div('replyForm${msg.id}');"/>
-                <input class="button" type="submit" name="eventSubmit_Reply" value="´ğ¸´"/>
+				<input class="button" type="button" value="å–æ¶ˆ" onclick="javascript:hide_div('replyForm${msg.id}');"/>
+                <input class="button" type="submit" name="eventSubmit_Reply" value="ç­”å¤"/>
                 </form>
             </div>
 		#end
@@ -102,13 +102,13 @@
 #end
 <div class="page_footer">
 	<form name="rpl_form" action="$link.setAction("html/guestbook")#rpl_form" method="post">
-	<a name="rplform"></a><b>&nbsp;ÇëÊäÈëÄúµÄÁôÑÔÄÚÈİ</b>
+	<a name="rplform"></a><b>&nbsp;è¯·è¾“å…¥æ‚¨çš„ç•™è¨€å†…å®¹</b>
     #if($messages.exist())<font color="red"><b>$!messages.getAll()</b></font>#end
     <input type="hidden" name="sid" value="$g_site_id"/>
     <input type="hidden" name="__ClientId" value="$dlog.gen_client_id()"/>
 	<textarea name="content" style="width: 99%; height: 150px">$!{form.getBean().content}</textarea><br/>
-	<input type="submit" class="button" name="eventSubmit_Create" value="·¢±íÁôÑÔ" />
-	<input type="button" class="button" name="btn_return" value="·µ»ØÉÏÒ³" onclick="history.go(-1)" />
+	<input type="submit" class="button" name="eventSubmit_Create" value="å‘è¡¨ç•™è¨€" />
+	<input type="button" class="button" name="btn_return" value="è¿”å›ä¸Šé¡µ" onclick="history.go(-1)" />
 	</form>
 </div>
 <script type="text/javascript">

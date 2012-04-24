@@ -12,14 +12,14 @@
     <input type="hidden" name="fromPage" value="/html/diary/_upload_file.vm">	
     <input type="hidden" name="Type" value="Image">
     <input type="file" name="NewFile" size="38" class="button">
-    <input type="submit" value="上传" name="eventSubmit_UploadImage" class="button">
+    <input type="submit" value="涓婁紶" name="eventSubmit_UploadImage" class="button">
 </form>
 </body>
 <script type="text/javascript" src="$dlog.root()/js/common.js"></script>
 <script language="javascript">
 function check(theForm){
 	if(is_empty(theForm.NewFile.value)){
-		alert("请选择要上传的图片.");
+		alert("璇烽�夋嫨瑕佷笂浼犵殑鍥剧墖.");
 		return false;
 	}
 	theForm.eventSubmit_UploadImage.disabled = true;

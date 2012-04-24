@@ -18,7 +18,7 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_music.vm")
-#set($page_title="ĞŞ¸ÄÒôÀÖºĞ")
+#set($page_title="ä¿®æ”¹éŸ³ä¹ç›’")
 ###############################################################################
 #if(!$dlog.is_owner($g_site, $g_user))
 #invoke("_illegal_access.vm")
@@ -34,10 +34,10 @@
 <div class="page_top">
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			<b>ĞŞ¸ÄÒôÀÖºĞ</b>
+			<b>ä¿®æ”¹éŸ³ä¹ç›’</b>
 		</div>
 		<div class="pagecontent_right fright">
-			½ñÌìÊÇ: $date.get("MMMMM d, yyyy  EEEEE")
+			ä»Šå¤©æ˜¯: $date.get("MMMMM d, yyyy  EEEEE")
 		</div>        
 	</div>
 	<div class="spacer_1"></div>
@@ -46,19 +46,19 @@
 	<div class="form">
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				ÒôÀÖºĞÃû³Æ
+				éŸ³ä¹ç›’åç§°
     		</div>
     		<div class="form_row_content">
-				<input type="text" name="name" value="$!{mbox.name}"/>&nbsp;&nbsp;×î¶à20¸ö×Ö
+				<input type="text" name="name" value="$!{mbox.name}"/>&nbsp;&nbsp;æœ€å¤š20ä¸ªå­—
 			</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				ÒôÀÖºĞÃèÊö
+				éŸ³ä¹ç›’æè¿°
     		</div>
     		<div class="form_row_content">
-				&nbsp;&nbsp;×î¶à100¸ö×Ö
+				&nbsp;&nbsp;æœ€å¤š100ä¸ªå­—
 			</div>
     	</div>
 		<div class="spacer_1"></div>
@@ -72,9 +72,9 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
 			<div class="form_row_submit">
-				<input type="submit" name="eventSubmit_UpdateBox" value="¸üĞÂÒôÀÖºĞ"/>&nbsp;&nbsp;
-                <input type="reset" value="Çå³ı"/>&nbsp;&nbsp;
-                <input type="button" value="·µ»ØÉÏÒ³" onclick="history.go(-1)"/>
+				<input type="submit" name="eventSubmit_UpdateBox" value="æ›´æ–°éŸ³ä¹ç›’"/>&nbsp;&nbsp;
+                <input type="reset" value="æ¸…é™¤"/>&nbsp;&nbsp;
+                <input type="button" value="è¿”å›ä¸Šé¡µ" onclick="history.go(-1)"/>
 			</div>
     	</div>
 	</div>

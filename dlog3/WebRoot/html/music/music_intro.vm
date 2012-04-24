@@ -18,7 +18,7 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_music.vm")
-#set($page_title="¸èÇúÍÆ¼ö")
+#set($page_title="æ­Œæ›²æ¨è")
 ###############################################################################
 #set($mboxid = $dlog.param("box",-1))
 
@@ -30,10 +30,10 @@
 <div class="page_top">
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			<b>¸èÇúÍÆ¼ö</b>
+			<b>æ­Œæ›²æ¨è</b>
 		</div>
 		<div class="pagecontent_right fright">
-			½ñÌìÊÇ: $date.get("MMMMM d, yyyy  EEEEE")
+			ä»Šå¤©æ˜¯: $date.get("MMMMM d, yyyy  EEEEE")
 		</div>        
 	</div>
 	<div class="spacer_1"></div>
@@ -42,7 +42,7 @@
 	<div class="form">
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				ÒôÀÖºĞ
+				éŸ³ä¹ç›’
     		</div>
     		<div class="form_row_content">
 				<select name="box">
@@ -55,16 +55,16 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				¸èÇúÃû
+				æ­Œæ›²å
     		</div>
     		<div class="form_row_content">
-				<input type="text" name="title" value="$!{mform.title}"/>&nbsp;&nbsp;(±ØĞëÌîĞ´)
+				<input type="text" name="title" value="$!{mform.title}"/>&nbsp;&nbsp;(å¿…é¡»å¡«å†™)
 			</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				×¨¼­
+				ä¸“è¾‘
     		</div>
     		<div class="form_row_content">
 				<input type="text" name="album" value="$!{mform.album}"/>
@@ -73,7 +73,7 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				¸èÊÖ
+				æ­Œæ‰‹
     		</div>
     		<div class="form_row_content">
 				<input type="text" name="singer" value="$!{mform.singer}"/>
@@ -82,7 +82,7 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				Á´½ÓµØÖ·
+				é“¾æ¥åœ°å€
     		</div>
     		<div class="form_row_content">
 				<input type="text" name="url" value="$!{mform.url}" size="50"/>
@@ -91,10 +91,10 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				¸è´Ê
+				æ­Œè¯
     		</div>
     		<div class="form_row_content">
-				&nbsp;&nbsp;·¢²¼¸è´ÊÍâ,Ò²Ì¸Ì¸¸ĞÏë°É!
+				&nbsp;&nbsp;å‘å¸ƒæ­Œè¯å¤–,ä¹Ÿè°ˆè°ˆæ„Ÿæƒ³å§!
 			</div>
     	</div>	
 		<div class="spacer_1"></div>			
@@ -108,9 +108,9 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
 			<div class="form_row_submit">
-				<input type="submit" name="eventSubmit_Recommend" value="ÍÆ¼ö"/>
-                <input type="reset" value="Çå³ı"/>
-                <input type="button" value="·µ»ØÉÏÒ³" onclick="history.go(-1)"/>
+				<input type="submit" name="eventSubmit_Recommend" value="æ¨è"/>
+                <input type="reset" value="æ¸…é™¤"/>
+                <input type="button" value="è¿”å›ä¸Šé¡µ" onclick="history.go(-1)"/>
 			</div>
     	</div>
     </div>

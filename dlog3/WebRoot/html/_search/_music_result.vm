@@ -1,17 +1,17 @@
 #set($objs = $SEARCH_tool.search_music($g_site, $g_user, $key))
-<b>ÒôÀÖ:</b>¹²ÓĞ<b>$!{objs.size()}</b>Ïî·ûºÏ<b>${key}</b>µÄ²éÑ¯½á¹û£¬(ËÑË÷ÓÃÊ±<b>${SEARCH_tool.get_search_time()}</b>ºÁÃë)<br/><br/>
+<b>éŸ³ä¹:</b>å…±æœ‰<b>$!{objs.size()}</b>é¡¹ç¬¦åˆ<b>${key}</b>çš„æŸ¥è¯¢ç»“æœï¼Œ(æœç´¢ç”¨æ—¶<b>${SEARCH_tool.get_search_time()}</b>æ¯«ç§’)<br/><br/>
 #if($objs && $objs.size() > 0)
 <div>
 <table cellspacing=1 cellpadding=3 width="100%" border="0" class="table">
 <tr class="table_head">
-    <td nowrap><b>ĞòºÅ</b></td>
-    <td align="center" nowrap><b>¸èÇúÃû</b></td>
-    <td align="center" nowrap><b>Ìí¼ÓÊ±¼ä</b></td>
-    <td align="center" nowrap><b>¸èÊÖ</b></td>
-    <td align="center" nowrap><b>×¨¼­</b></td>
-    <td align="center" nowrap><b>ÍøÕ¾</b></td>
-    <td width="1%" nowrap>²¥·Å</td>
-    <td width="1%" nowrap>ÏÂÔØ</td> 
+    <td nowrap><b>åºå·</b></td>
+    <td align="center" nowrap><b>æ­Œæ›²å</b></td>
+    <td align="center" nowrap><b>æ·»åŠ æ—¶é—´</b></td>
+    <td align="center" nowrap><b>æ­Œæ‰‹</b></td>
+    <td align="center" nowrap><b>ä¸“è¾‘</b></td>
+    <td align="center" nowrap><b>ç½‘ç«™</b></td>
+    <td width="1%" nowrap>æ’­æ”¾</td>
+    <td width="1%" nowrap>ä¸‹è½½</td> 
 </tr>
 #foreach($obj in $objs)
 <tr class="table_cell">
@@ -27,12 +27,12 @@
     </td>
     <td width="1%" align="center">
     #if(${obj.url})
-    	<a href="#" onclick="return play('${obj.url}');">$html.img("music/icon_play.gif","µã»÷²¥·Å","play","absmiddle",0)</a>
+    	<a href="#" onclick="return play('${obj.url}');">$html.img("music/icon_play.gif","ç‚¹å‡»æ’­æ”¾","play","absmiddle",0)</a>
 	#end
 	</td>
     <td width="1%" align="center">
     #if(${obj.url})
-    	<a href="${obj.url}">$html.img("music/icon_down.gif","µã»÷ÏÂÔØ","download","absmiddle",0)</a>
+    	<a href="${obj.url}">$html.img("music/icon_down.gif","ç‚¹å‡»ä¸‹è½½","download","absmiddle",0)</a>
 	#end
 	</td> 
 </tr>

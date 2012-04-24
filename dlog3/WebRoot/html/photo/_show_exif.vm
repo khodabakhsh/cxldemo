@@ -1,7 +1,7 @@
 <div class="photo_info">
 	<div class="photo_info_row">
 		<div class="photo_info_title fleft">
-			相机:
+			鐩告満:
 		</div>
 		<div class="photo_info_content">
 			&nbsp;$!{_photo.photoInfo.model} ($!{_photo.photoInfo.manufacturer} )
@@ -9,7 +9,7 @@
 	</div>
 	<div class="photo_info_row">
 		<div class="photo_info_title fleft">
-			焦距:
+			鐒﹁窛:
 		</div>
 		<div class="photo_info_content">
 			&nbsp;$!{_photo.photoInfo.focalLength}
@@ -25,7 +25,7 @@
 	</div>
 	<div class="photo_info_row">
 		<div class="photo_info_title fleft">
-			光圈:
+			鍏夊湀:
 		</div>
 		<div class="photo_info_content">
 			&nbsp;$!{_photo.photoInfo.aperture}
@@ -33,7 +33,7 @@
 	</div>
 	<div class="photo_info_row">
 		<div class="photo_info_title fleft">
-			曝光:
+			鏇濆厜:
 		</div>
 		<div class="photo_info_content">
 			&nbsp;$!{_photo.photoInfo.exposureTime}

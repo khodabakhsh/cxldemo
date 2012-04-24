@@ -9,30 +9,30 @@
 	</div>
 	<div id="site_owner_info">
 		<b>$!{g_site.friendlyName}</b>
-		<br /><b>Õ¾³¤£º</b> <a href="$dlog.root()/dlog/viewuser.vm?sid=${g_site.id}&amp;uid=${owner.id}">$!{owner.nickname}</a>
+		<br /><b>ç«™é•¿ï¼š</b> <a href="$dlog.root()/dlog/viewuser.vm?sid=${g_site.id}&amp;uid=${owner.id}">$!{owner.nickname}</a>
 		#if(${owner.onlineStatus}==1)
-		$html.img("online.gif","µ±Ç°ÔÚÏß",null,"absmiddle",0)
+		$html.img("online.gif","å½“å‰åœ¨çº¿",null,"absmiddle",0)
 		#else
-		$html.img("offline.gif","µ±Ç°ÀëÏß",null,"absmiddle",0)
+		$html.img("offline.gif","å½“å‰ç¦»çº¿",null,"absmiddle",0)
 		#end
-		<br/><b>ĞÔ±ğ£º</b> 
+		<br/><b>æ€§åˆ«ï¼š</b> 
 		#if($owner.sex==1) 
 		$html.img("male.gif",$text.ui("sex.desc.1"),$text.ui("sex.desc.1"),"absmiddle",0)		
 		#elseif($owner.sex==2)
 		$html.img("female.gif",$text.ui("sex.desc.2"),$text.ui("sex.desc.2"),"absmiddle",0)
 		#else
-		±£ÃÜ
-		#end&nbsp;<b>ÄêÁä£º</b> #if(${owner.age}>0)${owner.age}&nbsp;Ëê#else Î´Öª#end<br/>
+		ä¿å¯†
+		#end&nbsp;<b>å¹´é¾„ï¼š</b> #if(${owner.age}>0)${owner.age}&nbsp;å²#else æœªçŸ¥#end<br/>
 		#if($dlog.not_empty(${owner.province}) || $dlog.not_empty(${owner.city}))
-		<b>µØÇø£º</b>${owner.province} ${owner.city}<br/>
+		<b>åœ°åŒºï¼š</b>${owner.province} ${owner.city}<br/>
 		#end
-		<b>ĞûÑÔ£º</b>#if($dlog.not_empty(${owner.resume}))${owner.resume}#else ÎŞ#end
+		<b>å®£è¨€ï¼š</b>#if($dlog.not_empty(${owner.resume}))${owner.resume}#else æ— #end
 	</div>
 	<div id="site_opt_panel">
-		<a href="$dlog.root()/html/guestbook.vm?sid=${g_site_id}#rplform">$html.img("addguestbook.gif","·¢±íÁôÑÔ",null,"absmiddle",0)</a>
-    	<a href="$dlog.root()/dlog/sendmsg.vm?sid=$g_site_id&amp;uid=${owner.id}">$html.img("sendmsg.gif","·¢ËÍ¶ÌÏûÏ¢",null,"absmiddle",0)</a>
-    	<a href="#" onclick="add_friend();return false;">$html.img("addfriend.gif","¼ÓÕ¾³¤ÎªºÃÓÑ",null,"absmiddle",0)</a>
-    	<a href="#" onclick="add_link();return false;">$html.img("addlink.gif","Ìí¼Ó¸ÃÕ¾µ½ÎÒµÄÓÑÇéÁ´½Ó",null,"absmiddle",0)</a>
+		<a href="$dlog.root()/html/guestbook.vm?sid=${g_site_id}#rplform">$html.img("addguestbook.gif","å‘è¡¨ç•™è¨€",null,"absmiddle",0)</a>
+    	<a href="$dlog.root()/dlog/sendmsg.vm?sid=$g_site_id&amp;uid=${owner.id}">$html.img("sendmsg.gif","å‘é€çŸ­æ¶ˆæ¯",null,"absmiddle",0)</a>
+    	<a href="#" onclick="add_friend();return false;">$html.img("addfriend.gif","åŠ ç«™é•¿ä¸ºå¥½å‹",null,"absmiddle",0)</a>
+    	<a href="#" onclick="add_link();return false;">$html.img("addlink.gif","æ·»åŠ è¯¥ç«™åˆ°æˆ‘çš„å‹æƒ…é“¾æ¥",null,"absmiddle",0)</a>
 	</div>
 </div>
 <div class="module_foot"></div>
@@ -47,7 +47,7 @@
 	}
 	function add_link(){
 		#if($owner.id==$g_user_id)
-			alert("²»ÄÜ¼Ó×Ô¼ºÕ¾µ½ÓÑÇéÁ´½Ó");
+			alert("ä¸èƒ½åŠ è‡ªå·±ç«™åˆ°å‹æƒ…é“¾æ¥");
 		#else
 		var random = Math.random()+'';
 		var url = '$link.setAction("html/sitemgr/link")?sid=${g_site_id}&eventSubmit_AddSiteToLink=${g_site_id}&__ClientId=$dlog.gen_client_id()';

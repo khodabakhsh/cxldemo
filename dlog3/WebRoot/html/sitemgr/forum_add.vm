@@ -18,16 +18,16 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_setting.vm")
-#set($page_title="Ôö¼ÓÂÛÌ³")
+#set($page_title="å¢åŠ è®ºå›")
 ###############################################################################
 <div class="page_top">
 	<div class="adcontent"></div>
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			<b>Ôö¼ÓÂÛÌ³</b>
+			<b>å¢åŠ è®ºå›</b>
 		</div>
 		<div class="pagecontent_right fright">
-			½ñÌìÊÇ: $date.get("MMMMM d, yyyy  EEEEE")
+			ä»Šå¤©æ˜¯: $date.get("MMMMM d, yyyy  EEEEE")
 		</div>
 	</div>
 	<div class="spacer_1"></div>
@@ -44,7 +44,7 @@
 	<div class="form">
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				ÂÛÌ³Ãû
+				è®ºå›å
     		</div>
     		<div class="form_row_content">
 				<input type="text" size="30" maxlength="20" name="name" value="$!{cform.name}">
@@ -54,7 +54,7 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				Î»ÖÃ
+				ä½ç½®
     		</div>
     		<div class="form_row_content">
 				<select name="id">
@@ -63,31 +63,31 @@
                     #end
                 </select>
                 <select name="direction">
-                    <option value="1">Ö®Ç°</option>
-                    <option value="2">Ö®ºó</option>
+                    <option value="1">ä¹‹å‰</option>
+                    <option value="2">ä¹‹å</option>
                 </select>
 			</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				ÌÖÂÛÀàĞÍ
+				è®¨è®ºç±»å‹
     		</div>
     		<div class="form_row_content">
                 <select name="">
-                    <option value="1">¿ª·Å</option>
-                    <option value="2">Òş²Ø</option>
-					<option value="3">Ëø¶¨</option>
+                    <option value="1">å¼€æ”¾</option>
+                    <option value="2">éšè—</option>
+					<option value="3">é”å®š</option>
                 </select>
 			</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				ÂÛÌ³ËµÃ÷
+				è®ºå›è¯´æ˜
     		</div>
     		<div class="form_row_content">
-				&nbsp;&nbsp;100×ÖÒÔÄÚ£¡
+				&nbsp;&nbsp;100å­—ä»¥å†…ï¼
 			</div>
     	</div>
 		<div class="spacer_1"></div>
@@ -100,9 +100,9 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
 			<div class="form_row_submit">
-				<input type="submit" name="eventSubmit_CreateForum" value="´´½¨ÂÛÌ³" />
-                <input type="reset" value="ÖØĞÂÌîĞ´" />
-                <input type="button" value="·µ»Ø" onclick="history.go(-1)" />
+				<input type="submit" name="eventSubmit_CreateForum" value="åˆ›å»ºè®ºå›" />
+                <input type="reset" value="é‡æ–°å¡«å†™" />
+                <input type="button" value="è¿”å›" onclick="history.go(-1)" />
 			</div>
     	</div>
 	</div>

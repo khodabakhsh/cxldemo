@@ -18,7 +18,7 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_setting.vm")
-#set($page_title="ÍøÕ¾»ù±¾ĞÅÏ¢ÉèÖÃ")
+#set($page_title="ç½‘ç«™åŸºæœ¬ä¿¡æ¯è®¾ç½®")
 ###############################################################################
 #alert_msg("site")
 #set($sform = $form.getBean())
@@ -31,10 +31,10 @@
 <div class="page_top">
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			<b>ÍøÕ¾»ù±¾ĞÅÏ¢</b>
+			<b>ç½‘ç«™åŸºæœ¬ä¿¡æ¯</b>
 		</div>
 		<div class="pagecontent_right fright">
-			½ñÌìÊÇ: $date.get("MMMMM d, yyyy  EEEEE")
+			ä»Šå¤©æ˜¯: $date.get("MMMMM d, yyyy  EEEEE")
 		</div>
 	</div>
 	<div class="spacer_1"></div>
@@ -42,13 +42,13 @@
 <div class="page_content">
 	<div class="form">
 		<div class="form_note">
-			<li><b>´ÖÌå×Ö</b> ²¿·Ö±ØĞëÌîĞ´</li>
-			<li>Èç¹ûÍøÕ¾±êÌâÃ»ÓĞÌîĞ´Ôò±êÌâ»á±ğ×Ô¶¯ÉèÖÃÎªÍøÕ¾µÄÖĞÎÄÃû</li>
+			<li><b>ç²—ä½“å­—</b> éƒ¨åˆ†å¿…é¡»å¡«å†™</li>
+			<li>å¦‚æœç½‘ç«™æ ‡é¢˜æ²¡æœ‰å¡«å†™åˆ™æ ‡é¢˜ä¼šåˆ«è‡ªåŠ¨è®¾ç½®ä¸ºç½‘ç«™çš„ä¸­æ–‡å</li>
 		</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				<b>ÍøÕ¾ÏÔÊ¾Ãû</b>
+				<b>ç½‘ç«™æ˜¾ç¤ºå</b>
     		</div>
     		<div class="form_row_content">
 				<input type="text" size="20" maxlength="20" name="friendlyName" value="$!{sform.friendlyName}">
@@ -58,7 +58,7 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				ÍøÕ¾±êÌâ
+				ç½‘ç«™æ ‡é¢˜
     		</div>
     		<div class="form_row_content">
 				<input type="text" size="40" maxlength="100" name="title" value="$!{sform.title}">
@@ -68,7 +68,7 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				ICPÖ¤ºÅ
+				ICPè¯å·
     		</div>
     		<div class="form_row_content">
 				<input type="text" size="20" maxlength="20" name="icpNumber" value="$!{sform.icpNumber}">(Just for Chinese)
@@ -78,10 +78,10 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				ÍøÕ¾ĞûÑÔ
+				ç½‘ç«™å®£è¨€
     		</div>
     		<div class="form_row_content">
-				&nbsp;&nbsp;100×ÖÒÔÄÚ£¡
+				&nbsp;&nbsp;100å­—ä»¥å†…ï¼
 			</div>
     	</div>
 		<div class="spacer_1"></div>
@@ -95,8 +95,8 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
 			<div class="form_row_submit">
-				<input type="submit" name="eventSubmit_UpdateSite" value="Ìá½»¸ü¸Ä" />
-				<input type="reset" value="ÖØĞÂÌîĞ´" />
+				<input type="submit" name="eventSubmit_UpdateSite" value="æäº¤æ›´æ”¹" />
+				<input type="reset" value="é‡æ–°å¡«å†™" />
 			</div>
     	</div>
 	</div>

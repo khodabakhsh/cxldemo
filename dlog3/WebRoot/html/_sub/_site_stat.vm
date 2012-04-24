@@ -3,16 +3,16 @@
 	<ul>
     	#set($ssi = $STAT_tool.get_site_stat_info($g_site))
     	#set($dsi = $STAT_tool.get_dlog_stat_info($g_site))
-    	<li>½¨Õ¾Ê±¼ä: $date.format("yyyy/MM/dd", ${g_site.createTime})</li>
-    	<li>ÈÕ¼Ç£º$!{dsi.article} Æª</li>
-    	<li>ÕÕÆ¬£º$!{dsi.photo} ÕÅ</li>
-    	<li>»°Ìâ£º$!{dsi.topic} Æª</li>
-    	<li>ÆÀÂÛ£º$!{dsi.replyCount} Æª</li>
-    	<li>×¢²áÓÃ»§£º<a href="$dlog.root()/html/users.vm?sid=${g_site.id}">$!{dsi.user}</a></li>
-    	<li>½ñÈÕ·ÃÎÊ£º$!{ssi.uvToday}</li>
-    	<li>±¾ÖÜ·ÃÎÊ£º$!{ssi.uvThisWeek}</li>
-    	<li>±¾ÔÂ·ÃÎÊ£º$!{ssi.uvThisMonth}</li>
-    	<li>È«²¿·ÃÎÊ£º$!{ssi.uvTotal}</li>
+    	<li>å»ºç«™æ—¶é—´: $date.format("yyyy/MM/dd", ${g_site.createTime})</li>
+    	<li>æ—¥è®°ï¼š$!{dsi.article} ç¯‡</li>
+    	<li>ç…§ç‰‡ï¼š$!{dsi.photo} å¼ </li>
+    	<li>è¯é¢˜ï¼š$!{dsi.topic} ç¯‡</li>
+    	<li>è¯„è®ºï¼š$!{dsi.replyCount} ç¯‡</li>
+    	<li>æ³¨å†Œç”¨æˆ·ï¼š<a href="$dlog.root()/html/users.vm?sid=${g_site.id}">$!{dsi.user}</a></li>
+    	<li>ä»Šæ—¥è®¿é—®ï¼š$!{ssi.uvToday}</li>
+    	<li>æœ¬å‘¨è®¿é—®ï¼š$!{ssi.uvThisWeek}</li>
+    	<li>æœ¬æœˆè®¿é—®ï¼š$!{ssi.uvThisMonth}</li>
+    	<li>å…¨éƒ¨è®¿é—®ï¼š$!{ssi.uvTotal}</li>
 	</ul>
 </div>
 <div class="module_foot"></div>

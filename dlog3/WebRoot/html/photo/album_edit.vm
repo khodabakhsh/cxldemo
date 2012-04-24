@@ -18,7 +18,7 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_photo.vm")
-#set($page_title="ĞŞ¸ÄÏà²¾ĞÅÏ¢")
+#set($page_title="ä¿®æ”¹ç›¸ç°¿ä¿¡æ¯")
 #set($close_left_menu=true)
 ###############################################################################
 #if(!$dlog.is_owner($g_site, $g_user))
@@ -29,7 +29,7 @@
 	<div class="page_top">
     	<div class="pagecontent">
     		<div class="pagecontent_left fleft">
-    			<b>ĞŞ¸ÄÏà²¾ĞÅÏ¢: ${album.name}</b>
+    			<b>ä¿®æ”¹ç›¸ç°¿ä¿¡æ¯: ${album.name}</b>
     		</div>
     		<div class="pagecontent_right fright">
     		</div>        
@@ -48,7 +48,7 @@
 		<div class="form">
         	<div class="form_row">
 				<div class="form_row_title fleft">
-        			Ïà²¾Ãû:
+        			ç›¸ç°¿å:
         		</div>
         		<div class="form_row_content">
 					<input type="text" size="20" maxlength="20" name="name" value="$!{album.name}">
@@ -58,30 +58,30 @@
 			<div class="spacer_1"></div>
     		<div class="form_row">
         		<div class="form_row_title fleft">
-        			Ïà²¾ÊôĞÔ:
+        			ç›¸ç°¿å±æ€§:
         		</div>
         		<div class="form_row_content">
-					&nbsp;&nbsp;¸ù¾İ¸öÈËĞèÒªĞŞ¸ÄÏà²¾ÊôĞÔ!
+					&nbsp;&nbsp;æ ¹æ®ä¸ªäººéœ€è¦ä¿®æ”¹ç›¸ç°¿å±æ€§!
     			</div>
         	</div>
 			<div class="spacer_1"></div>
 			<div class="form_row">
 				<div class="form_row_content">
 					<div class="spacer_5"></div>
-    				<input type="radio" name="type" value="0" #if($album.type==0)checked#end> ÍêÈ«¹«¿ª <br/>
-                    <input type="radio" name="type" value="2" #if($album.type==2)checked#end> Ë½ÈËÏà²¾ <br/>
-                    <input type="radio" name="type" value="1" #if($album.type==1)checked#end> ĞèÒªÃÜÂëÑéÖ¤&nbsp;&nbsp;
-                    <input type="text" size="10" maxlength="20" name="verifyCode" value="$!{album.verifyCode}">#struts_message("password"){ÊäÈë·ÃÎÊÃÜÂë!}
+    				<input type="radio" name="type" value="0" #if($album.type==0)checked#end> å®Œå…¨å…¬å¼€ <br/>
+                    <input type="radio" name="type" value="2" #if($album.type==2)checked#end> ç§äººç›¸ç°¿ <br/>
+                    <input type="radio" name="type" value="1" #if($album.type==1)checked#end> éœ€è¦å¯†ç éªŒè¯&nbsp;&nbsp;
+                    <input type="text" size="10" maxlength="20" name="verifyCode" value="$!{album.verifyCode}">#struts_message("password"){è¾“å…¥è®¿é—®å¯†ç !}
             		<div class="spacer_5"></div>
     			</div>
     		</div>
 			<div class="spacer_1"></div>
     		<div class="form_row">
         		<div class="form_row_title fleft">
-        			Ïà²¾ÃèÊö:
+        			ç›¸ç°¿æè¿°:
         		</div>
         		<div class="form_row_content">
-    				&nbsp;&nbsp;Ö§³Ö´¿ÎÄ×Ö½éÉÜ 100×ÖÒÔÄÚ!
+    				&nbsp;&nbsp;æ”¯æŒçº¯æ–‡å­—ä»‹ç» 100å­—ä»¥å†…!
     			</div>
         	</div>
 			<div class="spacer_1"></div>
@@ -95,9 +95,9 @@
 			<div class="spacer_1"></div>
     		<div class="form_row">
     			<div class="form_row_submit">
-					<input type="submit" name="eventSubmit_Update" value="¸üĞÂÏà²¾"/>
-                    <input type="reset" value="ÖØĞÂÌîĞ´" />
-                    <input type="button" value="·µ»Ø" onclick="history.go(-1)" />
+					<input type="submit" name="eventSubmit_Update" value="æ›´æ–°ç›¸ç°¿"/>
+                    <input type="reset" value="é‡æ–°å¡«å†™" />
+                    <input type="button" value="è¿”å›" onclick="history.go(-1)" />
     			</div>
         	</div>
         </div>

@@ -1,21 +1,21 @@
 <table border="0" width="100%" class="log_bottom_bar">
  <tr>
   #if($log.lastTime)
-  <td>É¾³ıÊ±¼ä:$date.format("yyyy-MM-dd HH:mm",$log.lastTime)</td>
+  <td>åˆ é™¤æ—¶é—´:$date.format("yyyy-MM-dd HH:mm",$log.lastTime)</td>
   #end
   <td align="right" class="log_bottom_bar" nowrap>
-    ×÷Õß£º<a href="$dlog.root()/dlog/viewuser.vm?sid=$g_site_id&amp;uid=$log.owner.id"><span class="log_bottom_bar">${log.owner.nickname}</span></a> |
-    ·ÖÀà£º<a href="$dlog.root()/html/diary/?sid=$g_site_id&amp;cat_id=$log.catalog.id"><span class="log_bottom_bar">${log.catalog.name}</span></a></a> |
-    ÆÀÂÛ(<a href="showlog.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=${log.id}#replies"><span class="log_bottom_bar">${log.replyCount}</span></a></a>) |
-    ÔÄ¶Á(${log.viewCount}) |
-    ÒıÓÃ(<a href="$dlog.root()/html/trackbacks.vm?sid=$g_site_id&amp;log_id=${log.id}"><span class="log_bottom_bar">${log.trackBackCount}</span></a></a>)
+    ä½œè€…ï¼š<a href="$dlog.root()/dlog/viewuser.vm?sid=$g_site_id&amp;uid=$log.owner.id"><span class="log_bottom_bar">${log.owner.nickname}</span></a> |
+    åˆ†ç±»ï¼š<a href="$dlog.root()/html/diary/?sid=$g_site_id&amp;cat_id=$log.catalog.id"><span class="log_bottom_bar">${log.catalog.name}</span></a></a> |
+    è¯„è®º(<a href="showlog.vm?sid=$g_site_id&amp;cat_id=$catalog_id&amp;log_id=${log.id}#replies"><span class="log_bottom_bar">${log.replyCount}</span></a></a>) |
+    é˜…è¯»(${log.viewCount}) |
+    å¼•ç”¨(<a href="$dlog.root()/html/trackbacks.vm?sid=$g_site_id&amp;log_id=${log.id}"><span class="log_bottom_bar">${log.trackBackCount}</span></a></a>)
     |
     #if($DIARY_tool.can_user_edit_diary($g_user, $log))
-    <a href="#" onclick="if(confirm('ÄúÈ·ÊµÒª³¹µ×É¾³ı¸ÃÈÕ¼ÇÂğ£¿')) deleteForm_${log.id}.submit(); return false;">
-		$html.img("icon_delete.gif","³¹µ×É¾³ı","del","absmiddle",0)
+    <a href="#" onclick="if(confirm('æ‚¨ç¡®å®è¦å½»åº•åˆ é™¤è¯¥æ—¥è®°å—ï¼Ÿ')) deleteForm_${log.id}.submit(); return false;">
+		$html.img("icon_delete.gif","å½»åº•åˆ é™¤","del","absmiddle",0)
     </a>
     <a href="$link.setAction("html/diary")?sid=$g_site_id&amp;eventSubmit_Undelete=$log.id">
-		$html.img("icon_undelete.gif","»Ö¸´´ËÎÄ","restore","absmiddle",0)
+		$html.img("icon_undelete.gif","æ¢å¤æ­¤æ–‡","restore","absmiddle",0)
     </a>
     #end
   </td>

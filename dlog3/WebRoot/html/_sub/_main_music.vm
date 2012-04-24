@@ -1,21 +1,21 @@
 <div>
-	<div class="fleft tleft"><b>×îĞÂ¸èÇú</b></div>
+	<div class="fleft tleft"><b>æœ€æ–°æ­Œæ›²</b></div>
 	<div class="fright tright">
-		<a href="#" onclick="return play_selected('mid')">²¥·ÅÑ¡ÖĞ</a>&nbsp;&nbsp;
-		<a href="#" onclick="return select_all('mid',true)">È«Ñ¡</a>&nbsp;&nbsp;
-		<a href="#" onclick="return select_all('mid',false)">È¡Ïû</a>&nbsp;&nbsp;
+		<a href="#" onclick="return play_selected('mid')">æ’­æ”¾é€‰ä¸­</a>&nbsp;&nbsp;
+		<a href="#" onclick="return select_all('mid',true)">å…¨é€‰</a>&nbsp;&nbsp;
+		<a href="#" onclick="return select_all('mid',false)">å–æ¶ˆ</a>&nbsp;&nbsp;
 	</div>	
 </div>
 <div class="spacer_10"></div>
 <table width="100%" border="0" cellpadding="3" cellspacing="1" class="music_table">
 <tr class="music_table_head">
     <td width="1%" align="center" nowrap><a href="#" onclick="select_all('mid',true);return false;">$html.img("music_check.gif",null,"check","absmiddle",0)</a></td>
-    <td width="30%" nowrap>¸èÇúÃû³Æ</td>
-    <td width="15%" nowrap>¸èÊÖ</td>
-    <td width="15%" nowrap>×¨¼­</td>
-	<td width="1%" nowrap>²¥·Å</td>
-	<td width="1%" nowrap>ÏÂÔØ</td> 
-    <td width="1%" nowrap>¸è´Ê</td>
+    <td width="30%" nowrap>æ­Œæ›²åç§°</td>
+    <td width="15%" nowrap>æ­Œæ‰‹</td>
+    <td width="15%" nowrap>ä¸“è¾‘</td>
+	<td width="1%" nowrap>æ’­æ”¾</td>
+	<td width="1%" nowrap>ä¸‹è½½</td> 
+    <td width="1%" nowrap>æ­Œè¯</td>
 </tr>
 #set($songs = $MUSIC_tool.list_new_songs($g_site, 10))
 #foreach($song in $songs)
@@ -25,27 +25,27 @@
     </td>
     <td nowrap>${song.title}
 		<div class="bvsection" id="song_${song.id}">
-			·¢²¼Ê±¼ä:$date.format("yy/MM/dd", ${song.createTime})
+			å‘å¸ƒæ—¶é—´:$date.format("yy/MM/dd", ${song.createTime})
             <DIV Class="spacer_5"></DIV>
             <DIV Class="line_dashed"></DIV>
             <DIV Class="spacer_5"></DIV>
-    		¸è´Ê:(<a href="#" onclick="hide_div('song_$song.id');return false;">¹Ø±Õ</a>)<br />$!{song.word}
+    		æ­Œè¯:(<a href="#" onclick="hide_div('song_$song.id');return false;">å…³é—­</a>)<br />$!{song.word}
 		</div></td>
 		<td width="15%" nowrap>$!{song.singer}</td>
 		<td width="15%" nowrap>$!{song.album}</td>
 		<td width="1%" align="center" nowrap>
 		#if($dlog.not_empty(${song.url}))
-			<a href="#" onclick="return play('$link.getContextURL()/mlist.vm?sid=${g_site_id}&mid=${song.id}');">$html.img("music/icon_play.gif","µã»÷²¥·Å","play","absmiddle",0)</a>
+			<a href="#" onclick="return play('$link.getContextURL()/mlist.vm?sid=${g_site_id}&mid=${song.id}');">$html.img("music/icon_play.gif","ç‚¹å‡»æ’­æ”¾","play","absmiddle",0)</a>
 		#end
 		</td>
 		<td width="1%" align="center" nowrap>
 		#if($dlog.not_empty(${song.url}))
-			<a href="${song.url}">$html.img("music/icon_down.gif","µã»÷ÏÂÔØ","download","absmiddle",0)</a>
+			<a href="${song.url}">$html.img("music/icon_down.gif","ç‚¹å‡»ä¸‹è½½","download","absmiddle",0)</a>
 		#end
 		</td> 
 		<td width="1%" align="center" nowrap>
 		#if($dlog.not_empty(${song.word}))
-			<a href="#" title="µã»÷²é¿´¸è´Ê" onclick="show_div('song_$song.id');return false;">$html.img("music/icon_word.gif","²é¿´¸è´Ê",null,"absmiddle",0)</a>
+			<a href="#" title="ç‚¹å‡»æŸ¥çœ‹æ­Œè¯" onclick="show_div('song_$song.id');return false;">$html.img("music/icon_word.gif","æŸ¥çœ‹æ­Œè¯",null,"absmiddle",0)</a>
 		#end
 		</td>
 	</tr>

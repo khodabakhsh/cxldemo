@@ -18,38 +18,38 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_photo.vm")
-#set($page_title="ËùÓĞÕÕÆ¬ÆÀÂÛ")
+#set($page_title="æ‰€æœ‰ç…§ç‰‡è¯„è®º")
 ###############################################################################
 #set($LOGS_PER_PAGE = 10)
 #set($p_page = $dlog.param("page",1))
 #set($pre_page = $p_page - 1)
 #set($next_page = $p_page + 1)
-#set($_photo = 1) ## ÓÃÓÚ¿ØÖÆ_reply_bottom_bar.vmµÄĞĞÎª
+#set($_photo = 1) ## ç”¨äºæ§åˆ¶_reply_bottom_bar.vmçš„è¡Œä¸º
 #set($reply_count = $PHOTO_tool.photo_reply_count($g_site, $g_user))
 #set($page_count = $dlog.page_count($reply_count, $LOGS_PER_PAGE))
 <div class="page_top">
 	<div class="adcontent"></div>
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			Ïà²áÖĞ¹²ÓĞÆÀÂÛ${reply_count}Ìõ Ã¿Ò³ÏÔÊ¾${LOGS_PER_PAGE}Ìõ µÚ${p_page}Ò³ ¹²${page_count}Ò³
+			ç›¸å†Œä¸­å…±æœ‰è¯„è®º${reply_count}æ¡ æ¯é¡µæ˜¾ç¤º${LOGS_PER_PAGE}æ¡ ç¬¬${p_page}é¡µ å…±${page_count}é¡µ
 		</div>
 		<div class="pagecontent_right fright">
 			#if($page_count > 1)
-				#if($p_page > 1)<a href="?sid=$g_site_id">Ê×Ò³</a>#end
-                #if($p_page>1)<a href="?sid=$g_site_id&amp;page=$pre_page">ÉÏÒ³</a>#end
-                #if($p_page < $page_count)<a href="?sid=$g_site_id&amp;page=$next_page">ÏÂÒ³</a>#end
-                #if($p_page < $page_count)<a href="?sid=$g_site_id&amp;page=$page_count">Î²Ò³</a>#end
-				µ½<select name="page">
+				#if($p_page > 1)<a href="?sid=$g_site_id">é¦–é¡µ</a>#end
+                #if($p_page>1)<a href="?sid=$g_site_id&amp;page=$pre_page">ä¸Šé¡µ</a>#end
+                #if($p_page < $page_count)<a href="?sid=$g_site_id&amp;page=$next_page">ä¸‹é¡µ</a>#end
+                #if($p_page < $page_count)<a href="?sid=$g_site_id&amp;page=$page_count">å°¾é¡µ</a>#end
+				åˆ°<select name="page">
                 #foreach($p in [1..$page_count])
                 <option value="$p" #if($p_page==$p)selected#end>$p</option>
                 #end
-                </select>Ò³
+                </select>é¡µ
 			#end
 		</div>        
 	</div>
 	<div class="spacer_1"></div>
 </div>
-## $catalog_id ÒÑ¾­ÔÚ_catalog_and_calendar.vmÖĞ¶¨Òå
+## $catalog_id å·²ç»åœ¨_catalog_and_calendar.vmä¸­å®šä¹‰
 #set($replies = $PHOTO_tool.list_photo_replies($g_site, $p_page, $LOGS_PER_PAGE, $g_user))
 <div class="page_content">
 	#foreach($reply in $replies)
@@ -58,12 +58,12 @@
 		<div class="comment_title">
 			<a name="${reply.id}"></a>
 			<div class="fleft">
-			#if($reply.authorURL)<a href="$reply.authorURL">#end<span class="log_reply_author">$text.html($reply.author)</span>#if($reply.authorURL)</a>#end ÍøÓÑËµ£º
+			#if($reply.authorURL)<a href="$reply.authorURL">#end<span class="log_reply_author">$text.html($reply.author)</span>#if($reply.authorURL)</a>#end ç½‘å‹è¯´ï¼š
 			</div>
 			<div class="fright">
 			$date.format("yyyy/MM/dd HH:mm",${reply.replyTime}) &nbsp;&nbsp;
             #if($g_user && (${g_site.owner.id}==$g_user_id || (${reply.user} && ${reply.user.id}==$g_user_id)))
-              <a href="#" onclick="if(confirm('ÄúÕæµÄÒªÉ¾³ı¸ÃÆÀÂÛÂğ£¿')) deleteRForm_${reply.id}.submit(); return false;"">
+              <a href="#" onclick="if(confirm('æ‚¨çœŸçš„è¦åˆ é™¤è¯¥è¯„è®ºå—ï¼Ÿ')) deleteRForm_${reply.id}.submit(); return false;"">
         		  $html.img("icon_delete.gif",null,"DEL","absmiddle",0)
               </a>
               <a href="$dlog.root()/html/photo/show.vm?sid=$g_site_id&amp;pid=${reply.photo.id}&reply_id=${reply.id}#reply">

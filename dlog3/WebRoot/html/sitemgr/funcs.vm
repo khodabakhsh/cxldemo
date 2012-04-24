@@ -18,15 +18,15 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_setting.vm")
-#set($page_title="ÍøÕ¾¹¦ÄÜÉèÖÃ")
+#set($page_title="ç½‘ç«™åŠŸèƒ½è®¾ç½®")
 ###############################################################################
 <div class="page_top">
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			<b>ÍøÕ¾¹¦ÄÜÉèÖÃ</b>
+			<b>ç½‘ç«™åŠŸèƒ½è®¾ç½®</b>
 		</div>
 		<div class="pagecontent_right fright">
-			½ñÌìÊÇ: $date.get("MMMMM d, yyyy  EEEEE")
+			ä»Šå¤©æ˜¯: $date.get("MMMMM d, yyyy  EEEEE")
 		</div>
 	</div>
 	<div class="spacer_1"></div>
@@ -37,8 +37,8 @@
 			<div class="line_dashed"></div>
 			<div class="spacer_5"></div>
 			<div class="form_row_content">
-				<li>Äã¿ÉÒÔ¹Ø±Õ»òÕßÆôÓÃÍøÕ¾µÄÄ³¸ö¹¦ÄÜ£¡</li>
-				<li>Í¬Ê±Äã¿ÉÒÔ×Ô¼º¸ø¹¦ÄÜÆð¸öÃû³Æ,Ãû³Æ²»ÄÜ³¬¹ý8¸öºº×Ö»òÕß16¸ö×Ö·û.</li>
+				<li>ä½ å¯ä»¥å…³é—­æˆ–è€…å¯ç”¨ç½‘ç«™çš„æŸä¸ªåŠŸèƒ½ï¼</li>
+				<li>åŒæ—¶ä½ å¯ä»¥è‡ªå·±ç»™åŠŸèƒ½èµ·ä¸ªåç§°,åç§°ä¸èƒ½è¶…è¿‡8ä¸ªæ±‰å­—æˆ–è€…16ä¸ªå­—ç¬¦.</li>
 			</div>
 		</div>
     	<div class="setting_body">
@@ -50,59 +50,59 @@
         	<div class="form">
         		<div class="form_row">
             		<div class="form_row_title fleft">
-						ÈÕ¼Ç
+						æ—¥è®°
             		</div>
             		<div class="form_row_content">
-						ÏÔÊ¾Ãû³Æ<input type="text" name="diaryName" value="$text.diary($g_site)"/>
-        				<input type="checkbox" name="statusDiary" value="1" #if(${g_site.functionStatus.diary}!=2)checked#end>¿ªÆô
+						æ˜¾ç¤ºåç§°<input type="text" name="diaryName" value="$text.diary($g_site)"/>
+        				<input type="checkbox" name="statusDiary" value="1" #if(${g_site.functionStatus.diary}!=2)checked#end>å¼€å¯
         			</div>
             	</div>
 				<div class="spacer_1"></div>
         		<div class="form_row">
             		<div class="form_row_title fleft">
-						Ïà²á
+						ç›¸å†Œ
             		</div>
             		<div class="form_row_content">
-						ÏÔÊ¾Ãû³Æ<input type="text" name="photoName" value="$text.photo($g_site)"/>
-        				<input type="checkbox" name="statusPhoto" value="1" #if(${g_site.functionStatus.photo}!=2)checked#end>¿ªÆô
+						æ˜¾ç¤ºåç§°<input type="text" name="photoName" value="$text.photo($g_site)"/>
+        				<input type="checkbox" name="statusPhoto" value="1" #if(${g_site.functionStatus.photo}!=2)checked#end>å¼€å¯
         			</div>
             	</div>
 				<div class="spacer_1"></div>
         		<div class="form_row">
             		<div class="form_row_title fleft">
-						ÒôÀÖ
+						éŸ³ä¹
             		</div>
             		<div class="form_row_content">
-						ÏÔÊ¾Ãû³Æ<input type="text" name="musicName" value="$text.music($g_site)"/>
-        				<input type="checkbox" name="statusMusic" value="1" #if(${g_site.functionStatus.music}!=2)checked#end>¿ªÆô
+						æ˜¾ç¤ºåç§°<input type="text" name="musicName" value="$text.music($g_site)"/>
+        				<input type="checkbox" name="statusMusic" value="1" #if(${g_site.functionStatus.music}!=2)checked#end>å¼€å¯
         			</div>
             	</div>
 				<div class="spacer_1"></div>
         		<div class="form_row">
             		<div class="form_row_title fleft">
-						ÌÖÂÛ
+						è®¨è®º
             		</div>
             		<div class="form_row_content">
-						ÏÔÊ¾Ãû³Æ<input type="text" name="forumName" value="$text.bbs($g_site)"/>
-        				<input type="checkbox" name="statusForum" value="1" #if(${g_site.functionStatus.forum}!=2)checked#end>¿ªÆô
+						æ˜¾ç¤ºåç§°<input type="text" name="forumName" value="$text.bbs($g_site)"/>
+        				<input type="checkbox" name="statusForum" value="1" #if(${g_site.functionStatus.forum}!=2)checked#end>å¼€å¯
         			</div>
             	</div>
 				<div class="spacer_1"></div>
         		<div class="form_row">
             		<div class="form_row_title fleft">
-						ÁôÑÔ²¾
+						ç•™è¨€ç°¿
             		</div>
             		<div class="form_row_content">
-						ÏÔÊ¾Ãû³Æ<input type="text" name="guestbookName" value="$text.guestbook($g_site)"/>
-        				<input type="checkbox" name="statusGuestbook" value="1" #if(${g_site.functionStatus.guestbook}!=2)checked#end>¿ªÆô
+						æ˜¾ç¤ºåç§°<input type="text" name="guestbookName" value="$text.guestbook($g_site)"/>
+        				<input type="checkbox" name="statusGuestbook" value="1" #if(${g_site.functionStatus.guestbook}!=2)checked#end>å¼€å¯
         			</div>
             	</div>
 				<div class="spacer_1"></div>
         		<div class="form_row">
         			<div class="form_row_submit">
-        				<input type="submit" name="eventSubmit_UpdateFuncs" value="ÏÖÔÚÌá½»" />
-        				<input type="reset" value="ÖØÐÂÌîÐ´" />
-        				<input type="reset" value="·µ»ØÉÏÒ³" onclick="history.go(-1)" />
+        				<input type="submit" name="eventSubmit_UpdateFuncs" value="çŽ°åœ¨æäº¤" />
+        				<input type="reset" value="é‡æ–°å¡«å†™" />
+        				<input type="reset" value="è¿”å›žä¸Šé¡µ" onclick="history.go(-1)" />
         			</div>
             	</div>
         	</div>

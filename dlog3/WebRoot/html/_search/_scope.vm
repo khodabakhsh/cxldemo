@@ -1,10 +1,10 @@
 #if(!$scope)#set($scope=0)#end
 <select name="scope">
-    <option value="0" #if($scope==0)selected#end>ËùÓĞÄÚÈİ</option>
-    <option value="100" #if($scope==100)selected#end>&nbsp;&#8226;&nbsp;×¢²áÓÃ»§</option>
-    <option value="101" #if($scope==101)selected#end>&nbsp;&#8226;&nbsp;¸öÈËÍø¼Ç</option>
-    <option value="1" #if($scope==1)selected#end>&nbsp;&#8226;&nbsp;&#8226;&nbsp;ÈÕ¼Ç</option>
-    <option value="3" #if($scope==3)selected#end>&nbsp;&#8226;&nbsp;&#8226;&nbsp;ÕÕÆ¬</option>
-    <option value="5" #if($scope==5)selected#end>&nbsp;&#8226;&nbsp;&#8226;&nbsp;ÒôÀÖ</option>
-    <option value="4" #if($scope==4)selected#end>&nbsp;&#8226;&nbsp;&#8226;&nbsp;ÂÛÌ³</option>
+    <option value="0" #if($scope==0)selected#end>æ‰€æœ‰å†…å®¹</option>
+    <option value="100" #if($scope==100)selected#end>&nbsp;&#8226;&nbsp;æ³¨å†Œç”¨æˆ·</option>
+    <option value="101" #if($scope==101)selected#end>&nbsp;&#8226;&nbsp;ä¸ªäººç½‘è®°</option>
+    <option value="1" #if($scope==1)selected#end>&nbsp;&#8226;&nbsp;&#8226;&nbsp;æ—¥è®°</option>
+    <option value="3" #if($scope==3)selected#end>&nbsp;&#8226;&nbsp;&#8226;&nbsp;ç…§ç‰‡</option>
+    <option value="5" #if($scope==5)selected#end>&nbsp;&#8226;&nbsp;&#8226;&nbsp;éŸ³ä¹</option>
+    <option value="4" #if($scope==4)selected#end>&nbsp;&#8226;&nbsp;&#8226;&nbsp;è®ºå›</option>
 </select>

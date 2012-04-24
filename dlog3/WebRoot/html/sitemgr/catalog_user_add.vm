@@ -18,16 +18,16 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_setting.vm")
-#set($page_title="Ôö¼ÓÌØÈ¨ÓÃ»§")
+#set($page_title="å¢åŠ ç‰¹æƒç”¨æˆ·")
 #set($catalog_id = $dlog.param("cat_id", -1))
 #set($catalog = $DIARY_tool.catalog($g_site, $g_user, $catalog_id))
 <div class="page_top">
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			<b>Ôö¼ÓÌØÈ¨ÓÃ»§</b>&nbsp;|&nbsp;${catalog.name}
+			<b>å¢åŠ ç‰¹æƒç”¨æˆ·</b>&nbsp;|&nbsp;${catalog.name}
 		</div>
 		<div class="pagecontent_right fright">
-			½ñÌìÊÇ: $date.get("MMMMM d, yyyy  EEEEE")
+			ä»Šå¤©æ˜¯: $date.get("MMMMM d, yyyy  EEEEE")
 		</div>
 	</div>
 	<div class="spacer_1"></div>
@@ -42,31 +42,31 @@
 	<div class="form">
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				ÓÃ»§±àºÅ
+				ç”¨æˆ·ç¼–å·
     		</div>
     		<div class="form_row_content">
-				<input type="text" size="10" name="userid" value="$dlog.param("userid","")">&nbsp&nbsp;{ÓÃ»§µÄIDºÅÂë£¡}
+				<input type="text" size="10" name="userid" value="$dlog.param("userid","")">&nbsp&nbsp;{ç”¨æˆ·çš„IDå·ç ï¼}
 				#struts_message("userid")
 			</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				·ÃÎÊÈ¨ÏŞ
+				è®¿é—®æƒé™
     		</div>
     		<div class="form_row_content">
 				<select name="role">
-                    #if($catalog.type==0)<option value="1">¶ÁÈ¨ÏŞ</option>#end
-                    <option value="4">¶ÁĞ´È¨ÏŞ</option>
+                    #if($catalog.type==0)<option value="1">è¯»æƒé™</option>#end
+                    <option value="4">è¯»å†™æƒé™</option>
                 </select>
 			</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
 			<div class="form_row_submit">
-				<input type="submit" name="eventSubmit_CreateCatalogUser" value="Ìí¼ÓÈ¨ÏŞ" />
-				<input type="reset" value="ÖØĞÂÌîĞ´" />
-				<input type="button" value="·µ»Ø" onclick="history.go(-1)" />
+				<input type="submit" name="eventSubmit_CreateCatalogUser" value="æ·»åŠ æƒé™" />
+				<input type="reset" value="é‡æ–°å¡«å†™" />
+				<input type="button" value="è¿”å›" onclick="history.go(-1)" />
 			</div>
     	</div>
 	</div>

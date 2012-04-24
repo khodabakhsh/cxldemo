@@ -18,12 +18,12 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_photo.vm")
-#set($page_title="ÉÏ´«ÕÕÆ¬")
+#set($page_title="ä¸Šä¼ ç…§ç‰‡")
 ###############################################################################
 #if(!$dlog.is_owner($g_site, $g_user))
 	#parse("/html/_illegal_access.vm")
 #elseif($g_site.albums.size()==0)
-    #show_msg_box("Äú»¹Ã»ÓĞ´´½¨Ïà²¾£¬ÏÖÔÚ¾Í[<a href='$dlog.root()/html/photo/album_add.vm?sid=$g_site_id'>´´½¨Ïà²¾</a>]£¡")
+    #show_msg_box("æ‚¨è¿˜æ²¡æœ‰åˆ›å»ºç›¸ç°¿ï¼Œç°åœ¨å°±[<a href='$dlog.root()/html/photo/album_add.vm?sid=$g_site_id'>åˆ›å»ºç›¸ç°¿</a>]ï¼")
 #else
     #set($album_id = $dlog.param("aid", -1))
     #set($fbean = $form.getBean())
@@ -33,12 +33,12 @@
     			#if($messages.exist())<b><font color='red'>$messages.getAll()</font></b>#end
     		</div>
     		<div class="pagecontent_right fright">
-    			Ïà²á×Ü¿Õ¼ä: <b>${g_site.capacity.photoTotalFriendly}</b>&nbsp;&nbsp;
-    			ÒÑÓÃ¿Õ¼ä: <b>${g_site.capacity.photoUsedFriendly}</b>&nbsp;&nbsp;
+    			ç›¸å†Œæ€»ç©ºé—´: <b>${g_site.capacity.photoTotalFriendly}</b>&nbsp;&nbsp;
+    			å·²ç”¨ç©ºé—´: <b>${g_site.capacity.photoUsedFriendly}</b>&nbsp;&nbsp;
 				#if(${g_site.capacity.photoUsed} > ${g_site.capacity.photoTotal})
-				<font color=red><b>ÎŞ¿ÉÓÃ¿Õ¼ä£¡</b></font>
+				<font color=red><b>æ— å¯ç”¨ç©ºé—´ï¼</b></font>
 				#else
-    			¿Õ¼äÀûÓÃÂÊ: <b>${g_site.capacity.photoSpacePercent}%</b>
+    			ç©ºé—´åˆ©ç”¨ç‡: <b>${g_site.capacity.photoSpacePercent}%</b>
 				#end
     		</div>
     	</div>
@@ -53,23 +53,23 @@
 		<div class="form">
 			<div class="form_note">
     			<div class="spacer_5"></div>
-				<li>·²ÉÏ´«°üº¬²»Á¼ÄÚÈİ£¨ÈçÉ«Çé¡¢·´¶¯ÀàµÈ£©µÄÍ¼Æ¬£¬ÏµÍ³½«²»ÁíĞĞÍ¨Öª¶ÔÆäĞĞÉ¾³ı£¬ÑÏÖØÇé¿ö½«¹Ø±ÕÕ¾µã¡£</li>
-				<li>·²ÉÏ´«ÈÎºÎ·ÇÍ¼Æ¬ÄÚÈİµÄÎÄ¼ş£¨ÈçÈí¼ş¡¢ÊÓÆµ¼°Êı¾İÎÄ¼ş£©£¬ÏµÍ³½«ÔÚ²»ÁíĞĞÍ¨ÖªÇé¿öÏÂ¶ÔÆäÉ¾³ı¡£</li>
+				<li>å‡¡ä¸Šä¼ åŒ…å«ä¸è‰¯å†…å®¹ï¼ˆå¦‚è‰²æƒ…ã€ååŠ¨ç±»ç­‰ï¼‰çš„å›¾ç‰‡ï¼Œç³»ç»Ÿå°†ä¸å¦è¡Œé€šçŸ¥å¯¹å…¶è¡Œåˆ é™¤ï¼Œä¸¥é‡æƒ…å†µå°†å…³é—­ç«™ç‚¹ã€‚</li>
+				<li>å‡¡ä¸Šä¼ ä»»ä½•éå›¾ç‰‡å†…å®¹çš„æ–‡ä»¶ï¼ˆå¦‚è½¯ä»¶ã€è§†é¢‘åŠæ•°æ®æ–‡ä»¶ï¼‰ï¼Œç³»ç»Ÿå°†åœ¨ä¸å¦è¡Œé€šçŸ¥æƒ…å†µä¸‹å¯¹å…¶åˆ é™¤ã€‚</li>
         		<div class="spacer_5"></div>
     		</div>
 			<div class="spacer_1"></div>
         	<div class="form_row">
 				<div class="form_row_title fleft">
-        			×¢ÒâÊÂÏî:
+        			æ³¨æ„äº‹é¡¹:
         		</div>
         		<div class="form_row_content">
-					&nbsp;&nbsp;ÕÕÆ¬Ö§³ÖÉÏ´«".jpg"ºÍ".gif"ºÍ¸ñÊ½µÄÍ¼Æ¬;
+					&nbsp;&nbsp;ç…§ç‰‡æ”¯æŒä¸Šä¼ ".jpg"å’Œ".gif"å’Œæ ¼å¼çš„å›¾ç‰‡;
     			</div>
         	</div>
 			<div class="spacer_1"></div>
     		<div class="form_row">
         		<div class="form_row_title fleft">
-        			ÕÕÆ¬Ãû³Æ:
+        			ç…§ç‰‡åç§°:
         		</div>
         		<div class="form_row_content">
 					<input type="text" name="name" value="$!{fbean.name}" />
@@ -78,12 +78,12 @@
 			<div class="spacer_1"></div>
         	<div class="form_row">
 				<br/>
-				&nbsp;&nbsp;<b>ÉÏ´«µÄÕÕÆ¬×Ü´óĞ¡Çë²»Òª³¬¹ı1Õ×¡£</b>
+				&nbsp;&nbsp;<b>ä¸Šä¼ çš„ç…§ç‰‡æ€»å¤§å°è¯·ä¸è¦è¶…è¿‡1å…†ã€‚</b>
         	</div>
 			<div class="spacer_1"></div>
     		<div class="form_row">
         		<div class="form_row_title fleft">
-        			ÕÕÆ¬ÎÄ¼ş1:
+        			ç…§ç‰‡æ–‡ä»¶1:
         		</div>
         		<div class="form_row_content">
 					<input type="file" name="image" size="50" />
@@ -92,7 +92,7 @@
 			<div class="spacer_1"></div>
     		<div class="form_row">
         		<div class="form_row_title fleft">
-        			ÕÕÆ¬ÎÄ¼ş2:
+        			ç…§ç‰‡æ–‡ä»¶2:
         		</div>
         		<div class="form_row_content">
 					<input type="file" name="image2" size="50" />
@@ -101,7 +101,7 @@
 			<div class="spacer_1"></div>
     		<div class="form_row">
         		<div class="form_row_title fleft">
-        			ÕÕÆ¬ÎÄ¼ş3:
+        			ç…§ç‰‡æ–‡ä»¶3:
         		</div>
         		<div class="form_row_content">
 					<input type="file" name="image3" size="50" />
@@ -110,7 +110,7 @@
 			<div class="spacer_1"></div>
     		<div class="form_row">
         		<div class="form_row_title fleft">
-        			ÕÕÆ¬ÎÄ¼ş4:
+        			ç…§ç‰‡æ–‡ä»¶4:
         		</div>
         		<div class="form_row_content">
 					<input type="file" name="image4" size="50" />
@@ -119,7 +119,7 @@
 			<div class="spacer_1"></div>
     		<div class="form_row">
         		<div class="form_row_title fleft">
-        			ÕÕÆ¬ÎÄ¼ş5:
+        			ç…§ç‰‡æ–‡ä»¶5:
         		</div>
         		<div class="form_row_content">
 					<input type="file" name="image5" size="50" />
@@ -128,19 +128,19 @@
 			<div class="spacer_1"></div>
     		<div class="form_row">
         		<div class="form_row_title fleft">
-        			ÕÕÆ¬¹Ø¼ü×Ö:
+        			ç…§ç‰‡å…³é”®å­—:
         		</div>
         		<div class="form_row_content">
-    				<input type="text" name="keyword" size="30" value="$!{fbean.keyword}" /> ¶à¸ö¹Ø¼ü×ÖÓÃ¿Õ¸ñ¸ô¿ª
+    				<input type="text" name="keyword" size="30" value="$!{fbean.keyword}" /> å¤šä¸ªå…³é”®å­—ç”¨ç©ºæ ¼éš”å¼€
     			</div>
         	</div>
 			<div class="spacer_1"></div>
     		<div class="form_row">
         		<div class="form_row_title fleft">
-        			ÕÕÆ¬ÃèÊö:
+        			ç…§ç‰‡æè¿°:
         		</div>
         		<div class="form_row_content">
-					&nbsp;&nbsp;Ö§³Ö´¿ÎÄ×Ö½éÉÜ 100×ÖÒÔÄÚ!
+					&nbsp;&nbsp;æ”¯æŒçº¯æ–‡å­—ä»‹ç» 100å­—ä»¥å†…!
     			</div>
         	</div>
 			<div class="spacer_1"></div>
@@ -154,7 +154,7 @@
 			<div class="spacer_1"></div>
     		<div class="form_row">
         		<div class="form_row_title fleft">
-        			´æ·ÅÏà²¾:
+        			å­˜æ”¾ç›¸ç°¿:
         		</div>
         		<div class="form_row_content">
     				<select name="album">
@@ -165,31 +165,31 @@
                         #end
                         #end
                     </select>
-                    <input type="checkbox" name="cover" value="1" /> ÉèÎªÏà²¾·âÃæ
+                    <input type="checkbox" name="cover" value="1" /> è®¾ä¸ºç›¸ç°¿å°é¢
     			</div>
         	</div>
 			<div class="spacer_1"></div>
     		<div class="form_row">
         		<div class="form_row_title fleft">
-        			ÕÕÆ¬ÊôĞÔ:
+        			ç…§ç‰‡å±æ€§:
         		</div>
         		<div class="form_row_content">
-					<input type="radio" name="status" value="0" checked /> ¹«¿ª 
-					<input type="radio" name="status" value="2" /> Ë½ÈË 
+					<input type="radio" name="status" value="0" checked /> å…¬å¼€ 
+					<input type="radio" name="status" value="2" /> ç§äºº 
     			</div>
         	</div>
 			<div class="spacer_1"></div>
     		<div class="form_row">
         		<div class="form_row_title fleft">&nbsp;</div>
         		<div class="form_row_content">
-					<input type="checkbox" name="autoRotate" value="0"/>¹Ø±Õ×Ô¶¯µ÷ÕûÕÕÆ¬·½ÏòµÄ¹¦ÄÜ
+					<input type="checkbox" name="autoRotate" value="0"/>å…³é—­è‡ªåŠ¨è°ƒæ•´ç…§ç‰‡æ–¹å‘çš„åŠŸèƒ½
     			</div>
         	</div>
 			<div class="spacer_1"></div>
     		<div class="form_row">
     			<div class="form_row_submit">
-					<input type="submit" name="eventSubmit_Upload" value="ÉÏ´«ÕÕÆ¬" #if(${g_site.capacity.photoUsed} > ${g_site.capacity.photoTotal})disabled="true"#end/>    
-					<input type="button" value="·µ»ØÉÏÒ³" onclick="history.go(-1)" />
+					<input type="submit" name="eventSubmit_Upload" value="ä¸Šä¼ ç…§ç‰‡" #if(${g_site.capacity.photoUsed} > ${g_site.capacity.photoTotal})disabled="true"#end/>    
+					<input type="button" value="è¿”å›ä¸Šé¡µ" onclick="history.go(-1)" />
     			</div>
         	</div>
     	</div>

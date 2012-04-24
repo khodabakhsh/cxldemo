@@ -25,19 +25,19 @@
 <div class="page_top">
 <form action="">
 	<input type="hidden" name="sid" value="$g_site_id" />
-	¹Ø¼ü×Ö:
+	å…³é”®å­—:
 	<input type="text" name="tag" value="$!{tag}" size="20" />
 	<select name="type">
-		<option value="0" #if($tag_type==0)selected#end>È«²¿</option>
-		<option value="1" #if($tag_type==1)selected#end>ÈÕ¼Ç</option>
-		<option value="2" #if($tag_type==2)selected#end>ÕÕÆ¬</option>
-		<option value="4" #if($tag_type==4)selected#end>ÌÖÂÛ</option>
+		<option value="0" #if($tag_type==0)selected#end>å…¨éƒ¨</option>
+		<option value="1" #if($tag_type==1)selected#end>æ—¥è®°</option>
+		<option value="2" #if($tag_type==2)selected#end>ç…§ç‰‡</option>
+		<option value="4" #if($tag_type==4)selected#end>è®¨è®º</option>
 	</select>
-	<input type="submit" name="" value="ËÑË÷¹Ø¼ü×Ö" />
+	<input type="submit" name="" value="æœç´¢å…³é”®å­—" />
 </form>
 #set($hot_tags = $TAG_tool.list_hot_tags($g_site, 10))
 #if($hot_tags.size()>0)
-	<b>ÈÈÃÅ¹Ø¼ü×Ö:</b>
+	<b>çƒ­é—¨å…³é”®å­—:</b>
 	#foreach($t_tag in $hot_tags)
 		#if($velocityCount>1),#end
 		<a href="?sid=$g_site_id&amp;type=$tag_type&amp;tag=${t_tag}">${t_tag}</a>
@@ -48,31 +48,31 @@
 <hr size="1" color="#cccccc" noshade/>
 #set($start_time = $dlog.current_timestamp())
 #if($tag_type==0 || $tag_type==1)
-	##ÈÕ¼Ç
+	##æ—¥è®°
 	#set($diary_c = $TAG_tool.diary_count_of_tag($g_site, $tag))
 	#if($diary_c>0)
 		#set($diarys = $TAG_tool.diarys_of_tag($g_site, $tag, 1, 10))
 	#end
 #end
 #if($tag_type==0 || $tag_type==2)
-	##ÕÕÆ¬
+	##ç…§ç‰‡
 	#set($photo_c = $TAG_tool.photo_count_of_tag($g_site, $tag))
 	#if($photo_c>0)
 		#set($photos = $TAG_tool.photos_of_tag($g_site, $tag, 1, 5))
 	#end
 #end
 #if($tag_type==0 || $tag_type==4)
-	##ÌÖÂÛ
+	##è®¨è®º
 	#set($topic_c = $TAG_tool.topic_count_of_tag($g_site, $tag))
 	#if($topic_c>0)
 		#set($topics = $TAG_tool.topics_of_tag($g_site, $tag, 1, 10))
 	#end
 #end
 #set($time_used = $dlog.time_consume($start_time))
-¹²ÓÐ#if($diary_c)ÈÕ¼Ç <b>${diary_c}</b> Æª£¬#end#if($photo_c)ÕÕÆ¬ <b>${photo_c}</b> ÕÅ£¬#end#if($topic_c)ÌÖÂÛ <b>${topic_c}</b> Æª£¬#end ²éÑ¯ºÄÊ± <b>${time_used}</b> ºÁÃë¡£					
+å…±æœ‰#if($diary_c)æ—¥è®° <b>${diary_c}</b> ç¯‡ï¼Œ#end#if($photo_c)ç…§ç‰‡ <b>${photo_c}</b> å¼ ï¼Œ#end#if($topic_c)è®¨è®º <b>${topic_c}</b> ç¯‡ï¼Œ#end æŸ¥è¯¢è€—æ—¶ <b>${time_used}</b> æ¯«ç§’ã€‚					
 <hr size="1" color="#cccccc" noshade/>
 #if($diarys)
-	ÈÕ¼Ç${diary_c}Æª#if($diary_c>$diarys.size())(<a href="tag1.vm?sid=$g_site_id&amp;tag=$link.encodeURL($tag)">¸ü¶à...</a>)#end<br /><br />
+	æ—¥è®°${diary_c}ç¯‡#if($diary_c>$diarys.size())(<a href="tag1.vm?sid=$g_site_id&amp;tag=$link.encodeURL($tag)">æ›´å¤š...</a>)#end<br /><br />
 	#foreach($diary in $diarys)
 		<li>${velocityCount}.
 			<a href="$dlog.root()/html/diary/showlog.vm?sid=${diary.site.id}&amp;log_id=${diary.id}">$text.html($diary.title)</a>
@@ -81,14 +81,14 @@
 	<br />
 #end
 #if($photos)
-	<br/><b>ÕÕÆ¬${photo_c}ÕÅ</b>#if($photo_c>$photos.size())(<a href="tag2.vm?sid=$g_site_id&amp;tag=$link.encodeURL($tag)">¸ü¶à...</a>)#end<br /><br />
+	<br/><b>ç…§ç‰‡${photo_c}å¼ </b>#if($photo_c>$photos.size())(<a href="tag2.vm?sid=$g_site_id&amp;tag=$link.encodeURL($tag)">æ›´å¤š...</a>)#end<br /><br />
 	#foreach($photo in $photos)
 		<a href="$dlog.root()/html/photo/show.vm?sid=${photo.site.id}&amp;aid=${photo.album.id}&amp;pid=${photo.id}" title="$text.html(${photo.name})"><img src="$dlog.root()$photo.previewURL" border="0" alt="${photo.name}" /></a>
 	#end
 	<br />
 #end
 #if($topics)
-	<br/><b>ÌÖÂÛ${topic_c}Æª</b>#if($topic_c>$topics.size())(<a href="tag4.vm?sid=$g_site_id&amp;tag=$link.encodeURL($tag)">¸ü¶à...</a>)#end<br /><br />
+	<br/><b>è®¨è®º${topic_c}ç¯‡</b>#if($topic_c>$topics.size())(<a href="tag4.vm?sid=$g_site_id&amp;tag=$link.encodeURL($tag)">æ›´å¤š...</a>)#end<br /><br />
 	#foreach($topic in $topics)
 		<li>${velocityCount}.
 			<a href="$dlog.root()/html/bbs/topic.vm?sid=${topic.site.id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}">$text.html($topic.title)</a>

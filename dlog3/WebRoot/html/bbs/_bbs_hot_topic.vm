@@ -1,6 +1,6 @@
 #set($hot_topics = $BBS_tool.hot_topics($g_site, null,1,10,7))
 #if($hot_topics.size()>0)
-<div class="module_title"><b>╥╗╓▄╚╚╡у╠╓┬█</b></div>
+<div class="module_title"><b>ф╕АхСичГнчВ╣шоишо║</b></div>
 <div class="module_content">
 	<ul>
     #foreach($topic in $hot_topics)

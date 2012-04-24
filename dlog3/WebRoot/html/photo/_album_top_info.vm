@@ -1,13 +1,13 @@
 #set($replies = $PHOTO_tool.list_photo_replies($g_site, 1, 11, $g_user))
 #if($replies.size()>0)
-##×îĞÂÏà²áÆÀÂÛ
+##æœ€æ–°ç›¸å†Œè¯„è®º
 <div class="module_title"><b>$text.ui("label.diary.top_comment")</b></div>
 <div class="module_content">
 	<ul>
     	#foreach($reply in $replies)
             #if($velocityCount<=10)
     		#set($rc = $dlog.abbreviate($dlog.plain_text(${reply.content}), 14))
-    		#if($dlog.is_empty($rc))#set($rc="[ÎŞÎÄ±¾ÄÚÈİ]")#end
+    		#if($dlog.is_empty($rc))#set($rc="[æ— æ–‡æœ¬å†…å®¹]")#end
     			<li><a href="$dlog.root()/html/photo/show.vm?sid=$g_site_id&amp;pid=${reply.photo.id}#${reply.id}">${rc}</a></li>
             #end                
         #end
