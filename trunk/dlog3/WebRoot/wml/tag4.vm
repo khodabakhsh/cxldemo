@@ -1,0 +1,52 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  tag for bbs
+##
+###############################################################################
+#set($PAGE_SITE = 10)
+#invoke("_sub/_global.vm")
+#set($tag = $dlog.param("tag",""))
+#set($p_page = $dlog.param("page",1))
+#set($page_title="标签:$tag")
+
+#set($start_time = $dlog.current_timestamp())
+#set($diary_c = $TAG_tool.topic_count_of_tag($g_site, $tag))
+#if($diary_c>0)
+	#set($diarys = $TAG_tool.topics_of_tag($g_site, $tag, $p_page, $PAGE_SITE))
+#end
+#set($time_used = $dlog.time_consume($start_time))
+<p>
+	#invoke("_tag_bar.vm")
+	共有<b>${diary_c}</b>篇话题，查询耗时<b>${time_used}</b>毫秒。<br/>
+#if($diarys)
+	#set($page_count = $dlog.page_count($diary_c, $PAGE_SITE))
+	#if($page_count > 1)页次:
+	#foreach($p_idx in [1..$page_count])
+	#if($velocityCount>1),#end#if($p_page!=$p_idx)<a href="tag4.vm?sid=$g_site_id&amp;page=${p_idx}&amp;tag=$link.encodeURL($tag)">#end${p_idx}#if($p_page!=$p_idx)</a>#end#end
+	<br/>
+	#end
+	#foreach($topic in $diarys)
+		${velocityCount}.<a href="$dlog.root()/wml/bbs/topic.vm?sid=${topic.site.id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}">$escape.html(${topic.title})</a><br/>
+	#end
+	#if($page_count > 1)页次:
+	#foreach($p_idx in [1..$page_count])
+	#if($velocityCount>1),#end#if($p_page!=$p_idx)<a href="tag4.vm?sid=$g_site_id&amp;page=${p_idx}&amp;tag=$link.encodeURL($tag)">#end${p_idx}#if($p_page!=$p_idx)</a>#end#end
+	<br/>
+	#end
+#end
+</p>
+<p>#invoke("_tag/_hot_tag.vm")</p>
+<p>#invoke("_tag/_tag_search.vm")</p>

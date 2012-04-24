@@ -1,0 +1,51 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  login
+##
+###############################################################################
+#invoke("_sub/_global.vm")
+#set($page_title=$text.wml("login.title"))
+#set($next_uri=$dlog.param("fromPage",""))
+#set($close_search_robots = true)
+<p>
+	#if(!$next_uri)
+    	#set($next_uri = $dlog.get_request_url())
+    #end
+    #wml_error_msg()
+    $text.wml("login.prompt")<br/>
+    $text.wml("username"):<input type="text" name="name" size="15"/>
+    $text.wml("password"):<input type="text" name="pwd" size="15"/>
+    $text.wml("login_info"): 
+    <select name="keepDays">
+        <option value="365">$text.wml("keep_one_year")</option>
+        <option value="-1">$text.wml("keep_nothing")</option>
+        <option value="1">$text.wml("keep_one_day")</option>
+        <option value="7">$text.wml("keep_one_week")</option>
+        <option value="30">$text.wml("keep_one_month")</option>
+    </select>
+    <anchor>$text.wml("button.login")
+        <go href="$link.setAction("wml/user")" method="post">
+            <postfield name="sid" value="$g_site_id"/>
+            <postfield name="name" value="$(name)"/>
+            <postfield name="password" value="$(pwd)"/>
+            <postfield name="keepDays" value="$(keepDays)"/>
+            <postfield name="__ClientId" value="$dlog.gen_client_id()"/>
+            <postfield name="fromPage" value="$dlog.replace(${next_uri},"&","&amp;")"/>
+            <postfield name="eventSubmit_Login" value="WML"/>
+        </go>
+    </anchor>
+    <a href="reguser.vm?sid=$g_site_id">$text.wml("register")</a>
+</p>

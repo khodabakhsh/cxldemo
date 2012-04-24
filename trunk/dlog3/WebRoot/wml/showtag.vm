@@ -1,0 +1,86 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  show tag (wml)
+##
+###############################################################################
+#invoke("_sub/_global.vm")
+#set($tag_type = $dlog.param("type",0))
+#set($tag = $dlog.param("tag",""))
+#set($page_title="标签:$tag")
+#set($start_time = $dlog.current_timestamp())
+#if($tag_type==0 || $tag_type==1)
+	##日记
+	#set($diary_c = $TAG_tool.diary_count_of_tag($g_site, $tag))
+	#if($diary_c>0)
+		#set($diarys = $TAG_tool.diarys_of_tag($g_site, $tag, 1, 5))
+	#end
+#end
+#if($tag_type==0 || $tag_type==2)
+	##照片
+	#set($photo_c = $TAG_tool.photo_count_of_tag($g_site, $tag))
+	#if($photo_c>0)
+		#set($photos = $TAG_tool.photos_of_tag($g_site, $tag, 1, 3))
+	#end
+#end
+#if($tag_type==0 || $tag_type==4)
+	##讨论
+	#set($topic_c = $TAG_tool.topic_count_of_tag($g_site, $tag))
+	#if($topic_c>0)
+		#set($topics = $TAG_tool.topics_of_tag($g_site, $tag, 1, 5))
+	#end
+#end
+#set($time_used = $dlog.time_consume($start_time))
+<p>
+	#invoke("_tag_bar.vm")
+    共有#if($diary_c)日记<b>${diary_c}</b>篇，#end#if($photo_c)照片<b>${photo_c}</b>张，#end#if($topic_c)讨论<b>${topic_c}</b>篇，#end 查询耗时<b>${time_used}</b>毫秒。					
+    <br/>----------<br/>
+    #if($diarys)
+    	日记${diary_c}篇#if($diary_c>$diarys.size())(<a href="$dlog.root()/wml/tag1.vm?sid=$g_site_id&amp;tag=$link.encodeURL($tag)">更多...</a>)#end<br/>
+    	#foreach($diary in $diarys)
+    		${velocityCount}.<a href="$dlog.root()/wml/diary/showlog.vm?sid=${diary.site.id}&amp;log_id=${diary.id}">$escape.html($dlog.plain_text(${diary.title}))</a><br/>
+    	#end
+    #end
+    #if($photos)
+    	照片${photo_c}张#if($photo_c>$photos.size())(<a href="$dlog.root()/wml/tag2.vm?sid=$g_site_id&amp;tag=$link.encodeURL($tag)">更多...</a>)#end<br/>
+    	#foreach($photo in $photos)
+    		<a href="$dlog.root()/wml/photo/show.vm?sid=${photo.site.id}&amp;aid=${photo.album.id}&amp;pid=${photo.id}" title="$text.html(${photo.name})"><img src="$dlog.root()$photo.previewURL" alt="$escape.html(${photo.name})" /></a>
+    	#end
+    #end
+    #if($topics)
+    	讨论${topic_c}篇#if($topic_c>$topics.size())(<a href="$dlog.root()/wml/tag4.vm?sid=$g_site_id&amp;tag=$link.encodeURL($tag)">更多...</a>)#end<br/>
+    	#foreach($topic in $topics)
+    		${velocityCount}.<a href="$dlog.root()/html/bbs/topic.vm?sid=${topic.site.id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}">$text.html($dlog.plain_text(${topic.title}))</a><br/>
+    	#end
+    #end
+</p>
+<p>#invoke("_tag/_hot_tag.vm")</p>
+<p>
+	搜索标签:
+	<input type="text" name="tag" value="$!{tag}" emptyok="true"/>
+	<select name="type">
+		<option value="0">全部</option>
+		<option value="1">日记</option>
+		<option value="2">照片</option>
+		<option value="4">讨论</option>
+	</select>	
+    <anchor>搜索
+        <go href="$dlog.root()/wml/showtag.vm" method="get">
+            <postfield name="sid" value="$g_site_id"/>
+            <postfield name="tag" value="$(tag)"/>
+            <postfield name="type" value="$(type)"/>
+        </go>
+    </anchor>
+</p>

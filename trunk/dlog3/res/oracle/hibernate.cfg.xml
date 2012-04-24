@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	
+	<session-factory>
+		
+        <property name="connection.provider_class">com.liusoft.dlog4j.db.DataSourceConnectionProvider</property>
+		
+        <!-- ********** database relative settings ********** -->
+		
+		<!-- Oracle -->		
+    	<property name="dialect">org.hibernate.dialect.Oracle9Dialect</property>
+		<property name="dscp.driverClassName">oracle.jdbc.driver.OracleDriver</property>
+        <property name="dscp.url">jdbc:oracle:thin:@localhost:1521:dlog</property>				
+        <property name="dscp.username">ora</property>
+        <property name="dscp.password"></property>				
+		
+		<!-- ********** database independence settings ********** -->
+		<!-- Connection Pool using DBCP -->		
+        <property name="dscp.datasource">org.apache.commons.dbcp.BasicDataSource</property>
+        <property name="dscp.initialSize">1</property>
+        <property name="dscp.maxActive">200</property>
+        <property name="dscp.maxIdle">10</property>
+        <property name="dscp.maxWait">2000</property>
+        <property name="dscp.defaultAutoCommit">false</property>
+        <property name="dscp.poolPreparedStatements">true</property>
+        <property name="dscp.maxOpenPreparedStatements">1000</property>
+		
+		<!-- ********** global settings ********** -->
+        <property name="show_sql">false</property>
+        <property name="jdbc.batch_size">0</property>
+        <property name="use_outer_join">false</property>
+        <property name="cache.use_query_cache">true</property>
+        <property name="default_batch_fetch_size">20</property>
+        <property name="jdbc.use_scrollable_resultset">true</property>
+        <property name="jdbc.use_reflection_optimizer">true</property>
+		
+		<!-- ********** beans mapping ********** -->
+        <mapping resource="oracle/dlog.hbm.xml"/>
+        <mapping resource="oracle/core.hbm.xml"/>
+        <mapping resource="oracle/diary.hbm.xml"/>	
+        <mapping resource="oracle/photo.hbm.xml"/>
+        <mapping resource="oracle/music.hbm.xml"/>		
+        <mapping resource="oracle/bbs.hbm.xml"/>
+        <mapping resource="oracle/query.hbm.xml"/>
+        <mapping resource="oracle/other.hbm.xml"/>
+				
+	</session-factory>
+	
+</hibernate-configuration>

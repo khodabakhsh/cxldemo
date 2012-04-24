@@ -1,0 +1,104 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  modify site's funcs
+##
+###############################################################################
+#parse("/wml/_sub/_global.vm")
+#set($page_title="网站功能设置")
+<p>
+	#invoke("_opt_bar.vm") 功能设置<br/>
+#if(!$dlog.is_owner($g_site, $g_user))
+	对不起，你没有足够的访问权限，点击<a href="$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())">$text.ui("label.login")</a>使用其他帐号进入。<br /><br /><a href="#" onclick="history.go(-1);return false;">返回上页</a>
+#else
+	你可以关闭或者启用网站的某个功能！
+	同时你可以自己给功能起个名称,名称不能超过8个汉字或者16个字符.
+	<br/>----------<br/>
+	<input type="text" name="diaryName" value="$text.diary($g_site)" size="6" maxlength="16"/>
+	<select name="statusDiary">
+	#if(${g_site.functionStatus.diary}!=2)
+		<option value="1">开启</option>
+		<option value="0">关闭</option>
+	#else
+		<option value="0">关闭</option>
+		<option value="1">开启</option>
+	#end
+	</select>
+	<br/>
+	<input type="text" name="photoName" value="$text.photo($g_site)" size="6" maxlength="16"/>
+	<select name="statusPhoto">
+	#if(${g_site.functionStatus.photo}!=2)
+		<option value="1">开启</option>
+		<option value="0">关闭</option>
+	#else
+		<option value="0">关闭</option>
+		<option value="1">开启</option>
+	#end
+	</select>
+	<br/>
+	<input type="text" name="musicName" value="$text.music($g_site)" size="6" maxlength="16"/>
+	<select name="statusMusic">
+	#if(${g_site.functionStatus.music}!=2)
+		<option value="1">开启</option>
+		<option value="0">关闭</option>
+	#else
+		<option value="0">关闭</option>
+		<option value="1">开启</option>
+	#end
+	</select>
+	<br/>
+	<input type="text" name="forumName" value="$text.bbs($g_site)" size="6" maxlength="16"/>
+	<select name="statusForum">
+	#if(${g_site.functionStatus.forum}!=2)
+		<option value="1">开启</option>
+		<option value="0">关闭</option>
+	#else
+		<option value="0">关闭</option>
+		<option value="1">开启</option>
+	#end
+	</select>
+	<br/>
+	<input type="text" name="guestbookName" value="$text.guestbook($g_site)" size="6" maxlength="16"/>
+	<select name="statusGuestbook">
+	#if(${g_site.functionStatus.guestbook}!=2)
+		<option value="1">开启</option>
+		<option value="0">关闭</option>
+	#else
+		<option value="0">关闭</option>
+		<option value="1">开启</option>
+	#end
+	</select><br/>
+#end
+    <anchor>现在修改
+        <go href="$link.setAction("/wml/sitemgr/site")" method="post">
+            <postfield name="sid" value="$g_site_id"/>
+            
+			<postfield name="diaryName" value="$(diaryName)"/>
+            <postfield name="photoName" value="$(photoName)"/>
+            <postfield name="musicName" value="$(musicName)"/>
+            <postfield name="forumName" value="$(forumName)"/>
+            <postfield name="guestbookName" value="$(guestbookName)"/>
+			
+			<postfield name="statusDiary" value="$(statusDiary)"/>
+			<postfield name="statusPhoto" value="$(statusPhoto)"/>
+			<postfield name="statusMusic" value="$(statusMusic)"/>
+			<postfield name="statusForum" value="$(statusForum)"/>
+			<postfield name="statusGuestbook" value="$(statusGuestbook)"/>
+			
+            <postfield name="__ClientId" value="$dlog.gen_client_id()"/>
+            <postfield name="eventSubmit_UpdateFuncs" value="WML"/>
+        </go>
+    </anchor>
+</p>

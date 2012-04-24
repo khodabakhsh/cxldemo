@@ -1,0 +1,79 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  photo upload (xhtml)
+##
+###############################################################################
+#parse("/wml/_sub/_xhtml_global.vm")
+#set($page_title="上传照片")
+#set($album_id = $dlog.param("aid", -1))
+#set($fbean = $form.getBean())
+#if(!$dlog.is_owner($g_site, $g_user))
+	对不起，你没有足够的访问权限，点击<a href="$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())">$text.ui("label.login")</a>使用其他帐号进入。<br /><br /><a href="#" onclick="history.go(-1);return false;">返回上页</a>
+#elseif(${g_site.albums.size()}==0)
+    您还没有创建相簿，现在就[<a href='$dlog.root()/wml/photo/album_add.vm?sid=$g_site_id'>创建相簿</a>]！
+#else
+<div>
+	相册总空间: <b>${g_site.capacity.photoTotalFriendly}</b>&nbsp;
+	已用空间: <b>${g_site.capacity.photoUsedFriendly}</b>&nbsp;
+	空间利用率: <b>${g_site.capacity.photoSpacePercent}%</b>
+</div>
+<!--
+<div>
+	<li>凡上传包含不良内容（如色情、反动类等）的图片，系统将在不另行通知情况下对其行删除，严重情况将关闭站点。</li>
+	<li>凡上传任何非图片内容的文件（如软件、视频及数据文件），系统将在不另行通知情况下对其删除。</li>
+</div>
+-->
+#if($messages.exist())
+<div><b>$!messages.getAll()</b></div>
+#else
+<div>注意事项:照片支持上传".jpg"和".gif"和格式的图片。</div>
+#end
+<form action="$link.setAction("wml/photo")" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="sid" value="$g_site_id"/>
+	<input type="hidden" name="__ClientId" value="$dlog.gen_client_id()"/>
+    <div>
+    	照片名称:<input type="text" name="name" value="$!{fbean.name}" />
+    </div>
+    <div>
+    	照片文件:<input type="file" name="image"/>
+    </div>
+    <div>
+    	照片关键字:<input type="text" name="keyword" value="$!{fbean.keyword}" />
+    </div>
+    <div>
+    	照片描述:<input type="text" name="desc" value="$!{fbean.desc}" />
+    </div>
+    <div>
+    	存放相簿:
+    	<select name="album">
+            #foreach($album in $g_site.albums)
+            <option value="${album.id}" #if(${album.id}==$album_id)selected#end>$text.html(${album.name})</option>
+            #foreach($s_album in $album.childs)
+            <option value="${s_album.id}" #if(${s_album.id}==$album_id)selected#end>&nbsp;&#8226;&nbsp;$text.html(${s_album.name})</option>
+            #end
+            #end
+        </select>
+    </div>
+    <div>
+    	照片属性:
+    	<input type="radio" name="status" value="0" checked="true" /> 公开 
+    	<input type="radio" name="status" value="2"/> 隐藏 
+    </div>
+    <div>
+    	<input type="submit" name="eventSubmit_Upload" value="上传照片" />
+    </div>
+</form>
+#end

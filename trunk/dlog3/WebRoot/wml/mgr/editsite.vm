@@ -1,0 +1,32 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  modify site info
+##
+###############################################################################
+#parse("/wml/_sub/_global.vm")
+#set($page_title="网站基本设置")
+<p>
+	#invoke("_opt_bar.vm") 基本设置<br/>
+#if(!$dlog.is_owner($g_site, $g_user))
+	对不起，你没有足够的访问权限，点击<a href="$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())">$text.ui("label.login")</a>使用其他帐号进入。<br /><br /><a href="#" onclick="history.go(-1);return false;">返回上页</a>
+#else
+	下面是你的网站资料，点击链接进行修改.<br/>----------<br/>
+    网站英文名:$!escape.html(${g_site.uniqueName})[不可修改]<br/>
+    网站中文名:$!escape.html($!{g_site.friendlyName})<a href="modify_name.vm?sid=$g_site_id">[修改]</a><br/>	
+	个性化网站标题:$!escape.html($!{g_site.title})<a href="modify_title.vm?sid=$g_site_id">[修改]</a><br/>
+    网站宣言:$!escape.html($!{g_site.detail})<a href="modify_detail.vm?sid=$g_site_id">[修改]</a>
+#end
+</p>

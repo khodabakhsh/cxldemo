@@ -1,0 +1,43 @@
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 2 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU Library General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##
+##  user profile edit
+##
+###############################################################################
+#invoke("_sub/_global.vm")
+#set($page_title="我的资料")
+<p>
+	#invoke("_sub/_nav_bar.vm")&gt;我的资料(点击链接进行修改)<br/>
+	#wml_error_msg()
+#if($dlog.not_empty(${g_user.portrait}))
+	<img src="$dlog.root()/uploads/portrait/${g_user.portrait}" alt=""/>
+	<a href="user/modify_portrait.vm?sid=$g_site_id&amp;uid=${g_user.id}">修改头像</a><br/>
+#else	
+	<a href="user/modify_portrait.vm?sid=$g_site_id&amp;uid=${g_user.id}">上传头像</a><br/>
+#end
+	用户名: $text.html(${g_user.name})<br/>
+	昵称: <a href="user/modify_nickname.vm?sid=$g_site_id">$text.html(${g_user.nickname})</a><br/>
+	密码: <a href="user/modify_pwd.vm?sid=$g_site_id">****</a><br/>
+	性别: <a href="user/modify_sex.vm?sid=$g_site_id">#if($g_user.sex==0)保密#elseif($g_user.sex==1)男#elseif($g_user.sex==2)女#end</a><br/>
+	生日: <a href="user/modify_birth.vm?sid=$g_site_id">#if($g_user.birth)$date.format("yyyy-M-d",${g_user.birth})#else 未填写#end</a><br/>
+	宣言: <a href="user/modify_resume.vm?sid=$g_site_id">#if($dlog.not_empty(${g_user.resume}))${g_user.resume}#else 未填写#end</a>
+</p>
+<p>
+	+联系信息 <br/>
+	电邮: <a href="user/modify_email.vm?sid=$g_site_id">#if($dlog.not_empty(${g_user.contactInfo.email}))${g_user.contactInfo.email}#else 未填写#end</a><br/>
+	MSN: <a href="user/modify_msn.vm?sid=$g_site_id">#if($dlog.not_empty(${g_user.contactInfo.msn}))${g_user.contactInfo.msn}#else 未填写#end</a><br/>
+	QQ: <a href="user/modify_qq.vm?sid=$g_site_id">#if($dlog.not_empty(${g_user.contactInfo.qq}))${g_user.contactInfo.qq}#else 未填写#end</a><br/>
+	网址: <a href="user/modify_homepage.vm?sid=$g_site_id">#if($dlog.not_empty(${g_user.contactInfo.homePage}))${g_user.contactInfo.homePage}#else 未填写#end</a>
+</p>
