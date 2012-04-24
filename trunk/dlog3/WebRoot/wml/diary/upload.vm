@@ -17,28 +17,28 @@
 ##
 ###############################################################################
 #parse("/wml/_sub/_xhtml_global.vm")
-#set($page_title="ÉÏ´«Í¼Æ¬")
+#set($page_title="ä¸Šä¼ å›¾ç‰‡")
 #set($fromPage = $dlog.param("fromPage","/wml/diary/write.vm?sid=$g_site_id"))
 <div>
-	Í¼Æ¬ÉÏ´«×Ü¿Õ¼ä: <b>${g_site.capacity.diaryTotalFriendly}</b>&nbsp;
-	ÒÑÓÃ¿Õ¼ä: <b>${g_site.capacity.diaryUsedFriendly}</b>&nbsp;
-	¿Õ¼äÀûÓÃÂÊ: <b>${g_site.capacity.diarySpacePercent} %</b>
+	å›¾ç‰‡ä¸Šä¼ æ€»ç©ºé—´: <b>${g_site.capacity.diaryTotalFriendly}</b>&nbsp;
+	å·²ç”¨ç©ºé—´: <b>${g_site.capacity.diaryUsedFriendly}</b>&nbsp;
+	ç©ºé—´åˆ©ç”¨ç‡: <b>${g_site.capacity.diarySpacePercent} %</b>
 </div>
 <!--
 <div>
-	<li>·²ÉÏ´«°üº¬²»Á¼ÄÚÈİ£¨ÈçÉ«Çé¡¢·´¶¯ÀàµÈ£©µÄÍ¼Æ¬£¬ÏµÍ³½«ÔÚ²»ÁíĞĞÍ¨ÖªÇé¿öÏÂ¶ÔÆäĞĞÉ¾³ı£¬ÑÏÖØÇé¿ö½«¹Ø±ÕÕ¾µã¡£</li>
-	<li>·²ÉÏ´«ÈÎºÎ·ÇÍ¼Æ¬ÄÚÈİµÄÎÄ¼ş£¨ÈçÈí¼ş¡¢ÊÓÆµ¼°Êı¾İÎÄ¼ş£©£¬ÏµÍ³½«ÔÚ²»ÁíĞĞÍ¨ÖªÇé¿öÏÂ¶ÔÆäÉ¾³ı¡£</li>
+	<li>å‡¡ä¸Šä¼ åŒ…å«ä¸è‰¯å†…å®¹ï¼ˆå¦‚è‰²æƒ…ã€ååŠ¨ç±»ç­‰ï¼‰çš„å›¾ç‰‡ï¼Œç³»ç»Ÿå°†åœ¨ä¸å¦è¡Œé€šçŸ¥æƒ…å†µä¸‹å¯¹å…¶è¡Œåˆ é™¤ï¼Œä¸¥é‡æƒ…å†µå°†å…³é—­ç«™ç‚¹ã€‚</li>
+	<li>å‡¡ä¸Šä¼ ä»»ä½•éå›¾ç‰‡å†…å®¹çš„æ–‡ä»¶ï¼ˆå¦‚è½¯ä»¶ã€è§†é¢‘åŠæ•°æ®æ–‡ä»¶ï¼‰ï¼Œç³»ç»Ÿå°†åœ¨ä¸å¦è¡Œé€šçŸ¥æƒ…å†µä¸‹å¯¹å…¶åˆ é™¤ã€‚</li>
 </div>
 -->
 #if($messages.exist())
 <div><b>$!messages.getAll()</b></div>
 #else
-<div>×¢ÒâÊÂÏî:Ö»ÄÜÉÏ´«".jpg"ºÍ".gif"ºÍ¸ñÊ½µÄÍ¼Æ¬¡£</div>
+<div>æ³¨æ„äº‹é¡¹:åªèƒ½ä¸Šä¼ ".jpg"å’Œ".gif"å’Œæ ¼å¼çš„å›¾ç‰‡ã€‚</div>
 #end
 <form action="$dlog.root()/servlet/fckeditor_upload" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="sid" value="$g_site_id"/>
 	<input type="hidden" name="Type" value="Image"/>
 	<input type="hidden" name="toPage" value="$fromPage"/>
-   	Í¼Æ¬ÎÄ¼ş:<input type="file" name="NewFile"/>
-   	<input type="submit" name="eventSubmit_Upload" value="ÉÏ´«Í¼Æ¬" />
+   	å›¾ç‰‡æ–‡ä»¶:<input type="file" name="NewFile"/>
+   	<input type="submit" name="eventSubmit_Upload" value="ä¸Šä¼ å›¾ç‰‡" />
 </form>

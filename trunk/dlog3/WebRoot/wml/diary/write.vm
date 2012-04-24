@@ -24,47 +24,47 @@
 #set($catalogs = $DIARY_tool.catalogs($g_site, $g_user, true))
 <p>
 #if(!$g_user)
-    ÓÃ»§ÉĞÎ´µÇÂ¼,µã»÷<a href='$dlog.root()/wml/login.vm?sid=$g_site_id'>ÕâÀï</a>µÇÂ¼¡£
+    ç”¨æˆ·å°šæœªç™»å½•,ç‚¹å‡»<a href='$dlog.root()/wml/login.vm?sid=$g_site_id'>è¿™é‡Œ</a>ç™»å½•ã€‚
 #elseif($catalogs.size()==0)
 	#if($dlog.is_owner($g_site, $g_user))
-    Äú»¹Ã»ÓĞÌí¼ÓÈÕ¼Ç·ÖÀà£¬ÇëÑ¡Ôñ:<br/>
-	<a href='$dlog.root()/wml/diary.do?sid=$g_site_id&amp;eventSubmit_AutoCreateCatalogAndWrite&amp;catalog=$link.encodeURL("ÎÒµÄÈÕ¼Ç")'>×Ô¶¯´´½¨·ÖÀà²¢¿ªÊ¼Ğ´ÈÕ¼Ç</a>
-	<a href='$dlog.root()/wml/diary/catalog_add.vm?sid=$g_site_id'>ÊÖ¹¤Ìí¼ÓÈÕ¼Ç·ÖÀà</a><br/>
+    æ‚¨è¿˜æ²¡æœ‰æ·»åŠ æ—¥è®°åˆ†ç±»ï¼Œè¯·é€‰æ‹©:<br/>
+	<a href='$dlog.root()/wml/diary.do?sid=$g_site_id&amp;eventSubmit_AutoCreateCatalogAndWrite&amp;catalog=$link.encodeURL("æˆ‘çš„æ—¥è®°")'>è‡ªåŠ¨åˆ›å»ºåˆ†ç±»å¹¶å¼€å§‹å†™æ—¥è®°</a>
+	<a href='$dlog.root()/wml/diary/catalog_add.vm?sid=$g_site_id'>æ‰‹å·¥æ·»åŠ æ—¥è®°åˆ†ç±»</a><br/>
 	#else
-    ÄúÃ»ÓĞÔÚ<b>[${g_site.friendlyName}]</b>Ğ´ÈÕ¼ÇµÄÈ¨ÏŞ£¡
+    æ‚¨æ²¡æœ‰åœ¨<b>[${g_site.friendlyName}]</b>å†™æ—¥è®°çš„æƒé™ï¼
 	#end
 #else
-	ÍøÕ¾:<a href="$dlog.root()/wml/?sid=$g_site_id">$text.html(${g_site.friendlyName})</a>&nbsp;<a href="$dlog.root()/wml/diary/?sid=$g_site_id">$text.diary($g_site)</a><br/>
-	·ÖÀà:<select name="catalogId" ivalue="0">
+	ç½‘ç«™:<a href="$dlog.root()/wml/?sid=$g_site_id">$text.html(${g_site.friendlyName})</a>&nbsp;<a href="$dlog.root()/wml/diary/?sid=$g_site_id">$text.diary($g_site)</a><br/>
+	åˆ†ç±»:<select name="catalogId" ivalue="0">
 		#if($catalogs.size()==0)
-			<option value="-1">ÎÒµÄÈÕ¼Ç</option>
+			<option value="-1">æˆ‘çš„æ—¥è®°</option>
 		#end
         #foreach($cat in $catalogs)
             <option value="${cat.id}">$text.html(${cat.name})</option>
 		#end
 		</select><br/>
-	##ÏÔÊ¾ÒÑÉÏ´«µÃ¸½¼ş
+	##æ˜¾ç¤ºå·²ä¸Šä¼ å¾—é™„ä»¶
 	#set($files = $DIARY_tool.attachments($g_user, $dlog.dlog_session_id($request)))
 	#if($files.size()>0)
-	ÒÑÉÏ´«¸½¼ş:<br/>==========<br/>
+	å·²ä¸Šä¼ é™„ä»¶:<br/>==========<br/>
 	#foreach($file in $files)
-		${velocityCount}.<a href="$dlog.root()/wml/showimg.vm?sid=$g_site_id&amp;uri=$link.encodeURL(${file.uri})">$dlog.file_name(${file.savePath})</a>&nbsp;<a href="$link.setAction("wml/diary")?sid=$g_site_id&amp;file_id=${file.id}&amp;eventSubmit_DeleteAttachement=${file.id}">É¾³ı</a><br/>
+		${velocityCount}.<a href="$dlog.root()/wml/showimg.vm?sid=$g_site_id&amp;uri=$link.encodeURL(${file.uri})">$dlog.file_name(${file.savePath})</a>&nbsp;<a href="$link.setAction("wml/diary")?sid=$g_site_id&amp;file_id=${file.id}&amp;eventSubmit_DeleteAttachement=${file.id}">åˆ é™¤</a><br/>
 	#end
 	#else
-		ÇëÏÈ²åÈëÍ¼Æ¬ÔÙ±à¼­ÎÄ×Ö,·ñÔò»áµ¼ÖÂÎÄ×Ö¶ªÊ§.<br/>
+		è¯·å…ˆæ’å…¥å›¾ç‰‡å†ç¼–è¾‘æ–‡å­—,å¦åˆ™ä¼šå¯¼è‡´æ–‡å­—ä¸¢å¤±.<br/>
 	#end
-	<a href="$dlog.root()/wml/diary/upload.vm?sid=$g_site_id">&lt;²åÈëÍ¼Æ¬&gt;</a><br/>
+	<a href="$dlog.root()/wml/diary/upload.vm?sid=$g_site_id">&lt;æ’å…¥å›¾ç‰‡&gt;</a><br/>
 	#if($messages.exist())<b>$!messages.getAll()</b><br/>#end
-	±êÌâ:<input type="text" name="title" value="$!{log.title}"/><br/>
-	×÷Õß:<input type="text" name="author" value="#if($log.author)${log.author}#else$text.html(${g_user.nickname})#end"/><br/>
-	ÄÚÈİ:<input type="text" name="content" value="$!{log.content}"/><br/>	
+	æ ‡é¢˜:<input type="text" name="title" value="$!{log.title}"/><br/>
+	ä½œè€…:<input type="text" name="author" value="#if($log.author)${log.author}#else$text.html(${g_user.nickname})#end"/><br/>
+	å†…å®¹:<input type="text" name="content" value="$!{log.content}"/><br/>	
 	#set($weathers = ["sunny","ptcloudy","cloudy","showers","rain","storms","snow","flurries","ice","dark"])
-	ÌìÆø:<select name="weather">
+	å¤©æ°”:<select name="weather">
         #foreach($w in $weathers)
             <option value="$w">$w</option>
         #end
         </select><br/>
-	<anchor>Ìá½»ÈÕ¼Ç
+	<anchor>æäº¤æ—¥è®°
         <go href="$link.setAction("wml/diary")" method="post">
             <postfield name="sid" value="$g_site_id"/>
             <postfield name="catalogId" value="$(catalogId)"/>
@@ -77,7 +77,7 @@
             <postfield name="eventSubmit_PublishLog" value="WML"/>
         </go>
     </anchor>
-	<anchor>´æÎª²İ¸å
+	<anchor>å­˜ä¸ºè‰ç¨¿
         <go href="$link.setAction("wml/diary")" method="post">
             <postfield name="sid" value="$g_site_id"/>
             <postfield name="catalogId" value="$(catalogId)"/>

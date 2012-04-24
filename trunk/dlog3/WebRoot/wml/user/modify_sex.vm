@@ -17,18 +17,18 @@
 ##
 ###############################################################################
 #invoke("../_sub/_global.vm")
-#set($page_title="ĞŞ¸ÄĞÔ±ğ")
+#set($page_title="ä¿®æ”¹æ€§åˆ«")
 <p>    
     #wml_error_msg()
 	#set($uform = $form.getBean())
-	ÇëÑ¡ÔñÄãµÄĞÔ±ğ:
+	è¯·é€‰æ‹©ä½ çš„æ€§åˆ«:
 	<select name="sex" ivalue="${g_user.sex}">
-		<option value="0">±£ÃÜ</option>
-		<option value="1">ÄĞ</option>
-		<option value="2">Å®</option>
+		<option value="0">ä¿å¯†</option>
+		<option value="1">ç”·</option>
+		<option value="2">å¥³</option>
 	</select>
-	ÇëÊäÈëÄãµÄÃÜÂë:<input type="text" name="password" size="15"/>
-    <anchor>ÏÖÔÚĞŞ¸Ä
+	è¯·è¾“å…¥ä½ çš„å¯†ç :<input type="text" name="password" size="15"/>
+    <anchor>ç°åœ¨ä¿®æ”¹
         <go href="$link.setAction("wml/user")" method="post">
             <postfield name="fromPage" value="modify_sex.vm"/>
             <postfield name="sid" value="$g_site_id"/>

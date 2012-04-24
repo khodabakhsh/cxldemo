@@ -17,19 +17,19 @@
 ##
 ###############################################################################
 #parse("/wml/_sub/_global.vm")
-#set($page_title="日记分类管理")
+#set($page_title="鏃ヨ鍒嗙被绠＄悊")
 <p>
 #if($dlog.is_owner($g_site, $g_user))
-	<a href="$dlog.root()/wml/diary/catalog_add.vm?sid=$g_site_id">添加分类</a><br/>
-	--我的日记分类--<br/>
+	<a href="$dlog.root()/wml/diary/catalog_add.vm?sid=$g_site_id">娣诲姞鍒嗙被</a><br/>
+	--鎴戠殑鏃ヨ鍒嗙被--<br/>
 	#foreach($cat in ${g_site.catalogs})
 	<a href="$dlog.root()/wml/diary/catalog_edit.vm?sid=$g_site_id&amp;cat_id=${cat.id}">$velocityCount.$escape.html(${cat.name})(${cat.articleCount})</a>	
-	#if($velocityCount != 1)<a href="$link.setAction("wml/catalog")?sid=$g_site_id&amp;eventSubmit_MoveUp=$cat.id">上移</a>#end
-    #if($velocityCount < $g_site.catalogs.size())<a href="$link.setAction("wml/catalog")?sid=$g_site_id&amp;eventSubmit_MoveDown=$cat.id">下移</a>#end
-	#if(${cat.articleCount}<1)<a href="$link.setAction("wml/catalog")?sid=$g_site_id&amp;eventSubmit_Delete=$cat.id">删除</a>#end
+	#if($velocityCount != 1)<a href="$link.setAction("wml/catalog")?sid=$g_site_id&amp;eventSubmit_MoveUp=$cat.id">涓婄Щ</a>#end
+    #if($velocityCount < $g_site.catalogs.size())<a href="$link.setAction("wml/catalog")?sid=$g_site_id&amp;eventSubmit_MoveDown=$cat.id">涓嬬Щ</a>#end
+	#if(${cat.articleCount}<1)<a href="$link.setAction("wml/catalog")?sid=$g_site_id&amp;eventSubmit_Delete=$cat.id">鍒犻櫎</a>#end
 	<br/>
 	#end
 #else
-    对不起，你没有操作权限！
+    瀵逛笉璧凤紝浣犳病鏈夋搷浣滄潈闄愶紒
 #end
 </p>

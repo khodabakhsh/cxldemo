@@ -24,15 +24,15 @@
 #if($linkbean)
     #set($channel = $dlog.fetch_channel(${linkbean.type}, ${linkbean.url}))
     #if($channel)
-        <a href="links.vm?sid=$g_site_id">ÓÑÁ´</a>:$text.html(${linkbean.title})¹²ÓĞ$dlog.sizeof(${channel.items})ÆªÎÄÕÂ¡£<br/>
+        <a href="links.vm?sid=$g_site_id">å‹é“¾</a>:$text.html(${linkbean.title})å…±æœ‰$dlog.sizeof(${channel.items})ç¯‡æ–‡ç« ã€‚<br/>
     	$!{channel.description}<br/>==========<br/>
         #foreach($item in $channel.items)
         <b>${velocityCount}. $text.html($!{item.title})</b>(<a href="rssitem.vm?sid=$g_site_id&amp;linkid=$linkid&amp;itemURL=$link.encodeURL(${item.link})">WML</a>,<a href="rssitem_html.vm?sid=$g_site_id&amp;linkid=$linkid&amp;itemURL=$link.encodeURL(${item.link})">HTML</a>)<br/>
         #end
     #else
-        ÆµµÀ×¥È¡Ê§°Ü£¬Çë¼ì²éÊÇ·ñÌî´íÆµµÀµÄÀàĞÍ»òÕßÊÇĞ´´íURLµØÖ·¡£
+        é¢‘é“æŠ“å–å¤±è´¥ï¼Œè¯·æ£€æŸ¥æ˜¯å¦å¡«é”™é¢‘é“çš„ç±»å‹æˆ–è€…æ˜¯å†™é”™URLåœ°å€ã€‚
     #end
 #else
-	±àºÅÎª#${linkid}µÄÁ´½ÓÃ»ÕÒµ½¡£
+	ç¼–å·ä¸º#${linkid}çš„é“¾æ¥æ²¡æ‰¾åˆ°ã€‚
 #end
 </p>

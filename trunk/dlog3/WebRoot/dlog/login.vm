@@ -18,11 +18,11 @@
 ###############################################################################
 #invoke("_sub/_global.vm")
 #select_layout("p_main.vm")
-#set($page_title="µÇÂ¼")
+#set($page_title="ç™»å½•")
 #set($next_uri=$dlog.param("fromPage",""))
 #set($site_id=$dlog.param("sid",-1))
 <div class="page_top">
-	<h3>&nbsp;ÎÒÒªµÇÂ¼</h3>
+	<h3>&nbsp;æˆ‘è¦ç™»å½•</h3>
 </div>
 <div class="page_content">
 	#show_error_msg()
@@ -35,7 +35,7 @@
 	<div class="form">
 	<div class="form_row">
 		<div class="form_row_title fleft">
-			ÓÃ»§Ãû:
+			ç”¨æˆ·å:
 		</div>
 		<div class="form_row_content">
 			<input type="text" name="name" value=""/>
@@ -44,7 +44,7 @@
 	<div class="spacer_1"></div>
 	<div class="form_row">
 		<div class="form_row_title fleft">
-			¿ÚÁî:
+			å£ä»¤:
 		</div>
 		<div class="form_row_content">
 			<input type="password" name="password" value=""/>
@@ -53,30 +53,30 @@
 	<div class="spacer_1"></div>
 	<div class="form_row">
 		<div class="form_row_title fleft">
-			µÇÂ¼ĞÅÏ¢:
+			ç™»å½•ä¿¡æ¯:
 		</div>
 		<div class="form_row_content">
             <select name="keepDays">
-                <option value="-1">²»±£´æ</option>
-                <option value="1">±£´æÒ»Ìì</option>
-                <option value="7">±£´æÒ»ÖÜ</option>
-                <option value="30">±£´æÒ»ÔÂ</option>
-                <option value="365" selected>±£´æÒ»Äê</option>
+                <option value="-1">ä¸ä¿å­˜</option>
+                <option value="1">ä¿å­˜ä¸€å¤©</option>
+                <option value="7">ä¿å­˜ä¸€å‘¨</option>
+                <option value="30">ä¿å­˜ä¸€æœˆ</option>
+                <option value="365" selected>ä¿å­˜ä¸€å¹´</option>
             </select>
 		</div>
 	</div>
 	<div class="spacer_1"></div>
 	<div class="form_row">
 		<p>
-		<a href="#" onclick="fetchpwd();return false;">ÎÒÍüÁËµÇÂ¼ÃÜÂë</a>
+		<a href="#" onclick="fetchpwd();return false;">æˆ‘å¿˜äº†ç™»å½•å¯†ç </a>
 		</p>
 	</div>
 	<div class="form_row">
 		<div class="form_row_submit">
-            <input type="submit" name="eventSubmit_Login" value="µÇÂ¼"/>
-            <input type="button" name="btn_reg" value="×¢²áĞÂÓÃ»§" onclick="location.href='$dlog.root()/dlog/reguser.vm?sid=$g_site_id&fromPage=$link.encodeURL($next_uri)';"/>			
-			<input type="button" value="·µ»ØÉÏÒ³" onclick="history.go(-1)"/>
-    		<input type="button" value="·µ»ØÊ×Ò³" onclick="location.href='$dlog.root()/#if($g_site)?sid=${g_site_id}#end';"/>
+            <input type="submit" name="eventSubmit_Login" value="ç™»å½•"/>
+            <input type="button" name="btn_reg" value="æ³¨å†Œæ–°ç”¨æˆ·" onclick="location.href='$dlog.root()/dlog/reguser.vm?sid=$g_site_id&fromPage=$link.encodeURL($next_uri)';"/>			
+			<input type="button" value="è¿”å›ä¸Šé¡µ" onclick="history.go(-1)"/>
+    		<input type="button" value="è¿”å›é¦–é¡µ" onclick="location.href='$dlog.root()/#if($g_site)?sid=${g_site_id}#end';"/>
 		</div>
 	</div>
 	</div>

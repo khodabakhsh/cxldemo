@@ -17,23 +17,23 @@
 ##
 ###############################################################################
 #parse("/wml/_sub/_global.vm")
-#set($page_title="ĞŞ¸ÄÕÕÆ¬")
+#set($page_title="ä¿®æ”¹ç…§ç‰‡")
 #set($photo_id = $dlog.param("pid", -1))
 #set($photo = $PHOTO_tool.photo($g_site, $g_user, $photo_id))
 <p>
 #if(!$dlog.is_owner($g_site, $g_user))
-	¶Ô²»Æğ£¬ÄãÃ»ÓĞ×ã¹»µÄ·ÃÎÊÈ¨ÏŞ£¬µã»÷<a href="$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())">$text.ui("label.login")</a>Ê¹ÓÃÆäËûÕÊºÅ½øÈë¡£<br /><br /><a href="#" onclick="history.go(-1);return false;">·µ»ØÉÏÒ³</a>
+	å¯¹ä¸èµ·ï¼Œä½ æ²¡æœ‰è¶³å¤Ÿçš„è®¿é—®æƒé™ï¼Œç‚¹å‡»<a href="$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())">$text.ui("label.login")</a>ä½¿ç”¨å…¶ä»–å¸å·è¿›å…¥ã€‚<br /><br /><a href="#" onclick="history.go(-1);return false;">è¿”å›ä¸Šé¡µ</a>
 #else
-	Ïà²á×Ü¿Õ¼ä: <b>${g_site.capacity.photoTotalFriendly}</b>&nbsp;
-	ÒÑÓÃ¿Õ¼ä: <b>${g_site.capacity.photoUsedFriendly}</b>&nbsp;
-	¿Õ¼äÀûÓÃÂÊ: <b>${g_site.capacity.photoSpacePercent}%</b><br/>
+	ç›¸å†Œæ€»ç©ºé—´: <b>${g_site.capacity.photoTotalFriendly}</b>&nbsp;
+	å·²ç”¨ç©ºé—´: <b>${g_site.capacity.photoUsedFriendly}</b>&nbsp;
+	ç©ºé—´åˆ©ç”¨ç‡: <b>${g_site.capacity.photoSpacePercent}%</b><br/>
 	#if($messages.exist())<b>$!messages.getAll()</b><br/>#end
 
 	<img src="$dlog.root()${photo.previewURL}" alt=""/><br/>
-   	ÕÕÆ¬Ãû³Æ:<input type="text" name="name" value="$text.html($!{photo.name})" /><br/>
-   	ÕÕÆ¬¹Ø¼ü×Ö:<input type="text" name="keyword" value="$text.html($!{photo.keyword})" /><br/>
-   	ÕÕÆ¬ÃèÊö:<input type="text" name="desc" value="$text.html($!{photo.desc})" /><br/>    
-	´æ·ÅÏà²¾:
+   	ç…§ç‰‡åç§°:<input type="text" name="name" value="$text.html($!{photo.name})" /><br/>
+   	ç…§ç‰‡å…³é”®å­—:<input type="text" name="keyword" value="$text.html($!{photo.keyword})" /><br/>
+   	ç…§ç‰‡æè¿°:<input type="text" name="desc" value="$text.html($!{photo.desc})" /><br/>    
+	å­˜æ”¾ç›¸ç°¿:
 	<select name="album">
         #foreach($album in $g_site.albums)
         <option value="${album.id}">$text.html(${album.name})</option>
@@ -42,12 +42,12 @@
         #end
         #end
     </select><br/>
-	ÕÕÆ¬ÊôĞÔ:
+	ç…§ç‰‡å±æ€§:
 	<select name="status">
-		<option value="0">¹«¿ª</option>
-		<option value="2">Òş²Ø</option>
+		<option value="0">å…¬å¼€</option>
+		<option value="2">éšè—</option>
 	</select>
-    <anchor>ĞŞ¸ÄÕÕÆ¬
+    <anchor>ä¿®æ”¹ç…§ç‰‡
         <go href="$link.setAction("wml/photo")" method="post">
             <postfield name="sid" value="$g_site_id"/>
             <postfield name="id" value="$photo_id"/>

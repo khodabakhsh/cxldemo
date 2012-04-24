@@ -17,15 +17,15 @@
 ##
 ###############################################################################
 #invoke("_sub/_global.vm")
-#set($page_title="·¢ËÍ¶ÌÏûÏ¢")
+#set($page_title="å‘é€çŸ­æ¶ˆæ¯")
 #set($user_id = $dlog.param("uid",-1))
 #set($user = $USER_tool.user($user_id))
 <p>
-	#parse("/wml/_sub/_nav_bar.vm")&gt;<a href="$dlog.root()/wml/listmsg.vm?sid=$g_site_id">¶ÌÏûÏ¢</a><br/>
-	ÇëÊäÈëÒª·¢ËÍ¸ø<a href="$dlog.root()/wml/viewuser.vm?sid=$g_site_id&amp;uid=${user.id}">$text.html(${user.nickname})</a>µÄ¶ÌÏûÏ¢ÄÚÈİ£º<br/>                                        
+	#parse("/wml/_sub/_nav_bar.vm")&gt;<a href="$dlog.root()/wml/listmsg.vm?sid=$g_site_id">çŸ­æ¶ˆæ¯</a><br/>
+	è¯·è¾“å…¥è¦å‘é€ç»™<a href="$dlog.root()/wml/viewuser.vm?sid=$g_site_id&amp;uid=${user.id}">$text.html(${user.nickname})</a>çš„çŸ­æ¶ˆæ¯å†…å®¹ï¼š<br/>                                        
 	#if($messages.exist())<b>$!messages.getAll()</b>#end
 	<input type="text" name="content" value=""/><br/>		
-    <anchor>ÏÖÔÚ·¢ËÍ
+    <anchor>ç°åœ¨å‘é€
         <go href="$link.setAction("wml/message")" method="post">
             <postfield name="sid" value="$g_site_id"/>
             <postfield name="uid" value="$user_id"/>

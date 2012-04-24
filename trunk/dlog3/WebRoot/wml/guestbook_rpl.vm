@@ -1,11 +1,11 @@
 #invoke("_sub/_global.vm")
-#set($page_title="´ğ¸´ÁôÑÔ")
+#set($page_title="ç­”å¤ç•™è¨€")
 #set($msg_id = $dlog.param("msgid",-1))
 #set($p_page = $dlog.param("page",-1))
 <p>
-	ÇëÊäÈë´ğ¸´ÄÚÈİ:
+	è¯·è¾“å…¥ç­”å¤å†…å®¹:
 	<input type="text" name="reply" value=""/><br/>	
-    <anchor>È·¶¨
+    <anchor>ç¡®å®š
         <go href="$link.setAction("wml/guestbook")" method="post">
             <postfield name="sid" value="$g_site_id"/>
             <postfield name="id" value="$msg_id"/>

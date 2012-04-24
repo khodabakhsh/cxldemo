@@ -18,16 +18,16 @@
 ###############################################################################
 #parse("/wml/_sub/_global.vm")
 #set($close_search_robots = true)
-#set($page_title="ÎÒÒªÆÀÂÛ")
+#set($page_title="æˆ‘è¦è¯„è®º")
 #set($log_id = $dlog.param("log_id", -1))
 #set($log = $DIARY_tool.diary($g_site, $g_user, $log_id))
 <p>
 #if($log && ${log.status}==0)
     #wml_error_msg()
-	ÈÕ¼Ç:<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;log_id=${log.id}">$text.html(${log.title})</a><br/>
-	ÄÚÈİ:<input type="text" name="content" value=""/><br/>
-	ÆÀÂÛÕß:<input type="text" name="author" value="$text.html($!{g_user.nickname})"/><br/>
-	<anchor>Ìá½»ÆÀÂÛ
+	æ—¥è®°:<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;log_id=${log.id}">$text.html(${log.title})</a><br/>
+	å†…å®¹:<input type="text" name="content" value=""/><br/>
+	è¯„è®ºè€…:<input type="text" name="author" value="$text.html($!{g_user.nickname})"/><br/>
+	<anchor>æäº¤è¯„è®º
         <go href="$link.setAction("wml/reply")" method="post">
             <postfield name="sid" value="$g_site_id"/>
             <postfield name="log_id" value="$log_id"/>
@@ -39,6 +39,6 @@
         </go>
     </anchor>
 #else
-	ÈÕ¼Ç²»´æÔÚ£¡
+	æ—¥è®°ä¸å­˜åœ¨ï¼
 #end
 </p>

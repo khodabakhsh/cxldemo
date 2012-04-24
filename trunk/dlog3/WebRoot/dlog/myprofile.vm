@@ -22,7 +22,7 @@
 #else
 #select_layout("p_main.vm")
 #end
-#set($page_title="ĞŞ¸Ä¸öÈË×ÊÁÏ")
+#set($page_title="ä¿®æ”¹ä¸ªäººèµ„æ–™")
 <link rel="stylesheet" type="text/css" media="all" href="$dlog.root()/css/calendar-blue.css" title="win2k-cold-1" />
 <script type="text/javascript" src="$dlog.root()/js/calendar.js"></script>
 <script type="text/javascript" src="$dlog.root()/js/calendar_lang/calendar-en.js"></script>
@@ -30,10 +30,10 @@
 <div class="page_top">
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			<b>ĞŞ¸ÄÎÒµÄ¸öÈË×ÊÁÏ</b>
+			<b>ä¿®æ”¹æˆ‘çš„ä¸ªäººèµ„æ–™</b>
 		</div>
 		<div class="pagecontent_right fright">
-			½ñÌìÊÇ: $date.get("MMMMM d, yyyy  EEEEE")
+			ä»Šå¤©æ˜¯: $date.get("MMMMM d, yyyy  EEEEE")
 		</div>
 	</div>
 	<div class="spacer_1"></div>
@@ -46,33 +46,33 @@
 	<div class="form">
 		<div class="form_row">
     		<div class="form_note">
-				<li>{±ØĞëÌîĞ´} ´Ë¶Ô»°¿ò²»¿ÉÒÔÎª¿Õ£¡</li>
-				<li>Òª¸ü¸Ä×ÊÁÏ£¬±ØĞëÌîĞ´ÃÜÂë£¡</li>
-				<li>Í·ÏñÍ¼Æ¬³ß´çÈç¹û³¬¹ı155*200Ê±»á×Ô¶¯ËõĞ¡£¬ÇëÉÏ´«Ê±ÏÈ¶ÔÏàÆ¬½øĞĞ´¦Àí£¡</li>
+				<li>{å¿…é¡»å¡«å†™} æ­¤å¯¹è¯æ¡†ä¸å¯ä»¥ä¸ºç©ºï¼</li>
+				<li>è¦æ›´æ”¹èµ„æ–™ï¼Œå¿…é¡»å¡«å†™å¯†ç ï¼</li>
+				<li>å¤´åƒå›¾ç‰‡å°ºå¯¸å¦‚æœè¶…è¿‡155*200æ—¶ä¼šè‡ªåŠ¨ç¼©å°ï¼Œè¯·ä¸Šä¼ æ—¶å…ˆå¯¹ç›¸ç‰‡è¿›è¡Œå¤„ç†ï¼</li>
 			</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				±àºÅ
+				ç¼–å·
     		</div>
     		<div class="form_row_content">
-				<input type="text" size="4" value="$!{g_user.id}" disabled />&nbsp;&nbsp;{ÓÃ»§IDºÅ}
+				<input type="text" size="4" value="$!{g_user.id}" disabled />&nbsp;&nbsp;{ç”¨æˆ·IDå·}
 			</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				ÓÃ»§Ãû
+				ç”¨æˆ·å
     		</div>
     		<div class="form_row_content">
-				<input type="text" size="8" value="$!{g_user.name}" disabled />&nbsp;&nbsp;{²»¿ÉÒÔ¸ü¸Ä£¡}
+				<input type="text" size="8" value="$!{g_user.name}" disabled />&nbsp;&nbsp;{ä¸å¯ä»¥æ›´æ”¹ï¼}
 			</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				êÇ³Æ
+				æ˜µç§°
     		</div>
     		<div class="form_row_content">
 				<input type="text" size="20" maxlength="20" name="nickname" value="$!{g_user.nickname}" />
@@ -82,22 +82,22 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				ÃÜÂë
+				å¯†ç 
     		</div>
     		<div class="form_row_content">
-				<input type="password" size="20" maxlength="20" name="password" />&nbsp;&nbsp;{¸ü¸Ä×ÊÁÏ£¬ÇëÏÈÊäÈëÃÜÂë£¡}
+				<input type="password" size="20" maxlength="20" name="password" />&nbsp;&nbsp;{æ›´æ”¹èµ„æ–™ï¼Œè¯·å…ˆè¾“å…¥å¯†ç ï¼}
 				#struts_message("password")
 			</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_field_tip">
-    			<B>Èç¹ûĞèÒªĞŞ¸ÄÃÜÂë,ÇëÌîĞ´:</B>
+    			<B>å¦‚æœéœ€è¦ä¿®æ”¹å¯†ç ,è¯·å¡«å†™:</B>
     		</div>
     	</div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				ĞÂÃÜÂë
+				æ–°å¯†ç 
     		</div>
     		<div class="form_row_content">
 				<input type="password" size="20" maxlength="20" name="password2" />
@@ -106,7 +106,7 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				ÃÜÂëÈ·ÈÏ
+				å¯†ç ç¡®è®¤
     		</div>
     		<div class="form_row_content">
 				<input type="password" size="20" maxlength="20" name="password3" />
@@ -115,13 +115,13 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_field_tip">
-    			<B>ÁªÏµĞÅÏ¢(¿ÉÑ¡):</B>
+    			<B>è”ç³»ä¿¡æ¯(å¯é€‰):</B>
     		</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				µç×ÓÓÊ¼ş
+				ç”µå­é‚®ä»¶
     		</div>
     		<div class="form_row_content">
 				<input type="text" size="30" maxlength="50" name="email" value="$!{g_user.contactInfo.email}" />
@@ -151,7 +151,7 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				¸öÈËÍøÖ·
+				ä¸ªäººç½‘å€
     		</div>
     		<div class="form_row_content">
 				<input type="text" size="50" maxlength="50" name="homePage" value="$!{g_user.contactInfo.homePage}">                    
@@ -161,36 +161,36 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				µØÇø(Ê¡/ÊĞ)
+				åœ°åŒº(çœ/å¸‚)
     		</div>
     		<div class="form_row_content">#invoke("_sub/_area.vm")</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_field_tip">
-    			<B>ÏêÏ¸×ÊÁÏ(¿ÉÑ¡):</B>
+    			<B>è¯¦ç»†èµ„æ–™(å¯é€‰):</B>
     		</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				ÄúµÄĞÔ±ğ£¿
+				æ‚¨çš„æ€§åˆ«ï¼Ÿ
     		</div>
     		<div class="form_row_content">
-				<input type="radio" name="sex" value="0" #if($!{g_user.sex}==0)checked#end>±£ÃÜ
-                <input type="radio" name="sex" value="1" #if($!{g_user.sex}==1)checked#end>ÄĞ 
-                <input type="radio" name="sex" value="2" #if($!{g_user.sex}==2)checked#end>Å®
+				<input type="radio" name="sex" value="0" #if($!{g_user.sex}==0)checked#end>ä¿å¯†
+                <input type="radio" name="sex" value="1" #if($!{g_user.sex}==1)checked#end>ç”· 
+                <input type="radio" name="sex" value="2" #if($!{g_user.sex}==2)checked#end>å¥³
 			</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				ÄúµÄÉúÈÕ£¿
+				æ‚¨çš„ç”Ÿæ—¥ï¼Ÿ
     		</div>
     		<div class="form_row_content">
 				&nbsp;&nbsp;<span id="show_birth">$!{g_user.birth}</span>&nbsp;&nbsp;
                 <input type="hidden" name="birth" id="f_date_birth" value="$!{g_user.birth}"/>
-                <img id="f_trigger_birth" src="$html.image_src("date_sel.gif")" align="absmiddle" border="0" />&nbsp;&lt;--µã»÷ÕâÀï½øĞĞÉèÖÃ                                            
+                <img id="f_trigger_birth" src="$html.image_src("date_sel.gif")" align="absmiddle" border="0" />&nbsp;&lt;--ç‚¹å‡»è¿™é‡Œè¿›è¡Œè®¾ç½®                                            
                 <script type="text/javascript" type="text/javascript">
                     Calendar.setup({
                         inputField     :    "f_date_birth",     // id of the input field
@@ -207,7 +207,7 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-    			<b>¸öÈËĞûÑÔ(¿ÉÑ¡):#struts_message("resume")</b>
+    			<b>ä¸ªäººå®£è¨€(å¯é€‰):#struts_message("resume")</b>
     		</div>
 			<div class="form_row_content">
 				<textarea name="resume" rows="5" cols="40">$!{g_user.resume}</textarea>
@@ -224,21 +224,21 @@
     		</div>
     		<div class="form_row_content">
 				<div class="form_field_tip">
-        			<B>ÎÒµÄÍ·Ïñ(¿ÉÑ¡):</B>
+        			<B>æˆ‘çš„å¤´åƒ(å¯é€‰):</B>
         		</div>
 				<div class="form_row_content">
     				<input type="file" size="40" name="portrait"/>#struts_message("portrait")
-    				<br><input type="checkbox" name="removePortrait" value="1"/>Çå³ıÍ·ÏñÉèÖÃ.
+    				<br><input type="checkbox" name="removePortrait" value="1"/>æ¸…é™¤å¤´åƒè®¾ç½®.
     			</div>
 			</div>
     	</div>
 		<div class="spacer_5"></div>			
 		<div class="form_row">
 			<div class="form_row_submit">
-				<input type="submit" name="eventSubmit_Update" value="Ìá½»ĞŞ¸Ä" />
-                <input type="reset" value="ÖØĞÂÌîĞ´" />
-                <input type="button" value="·µ»ØÉÏÒ³" onclick="history.go(-1)" />
-				<input type="button" value="·µ»ØÊ×Ò³" onclick="location.href='$dlog.root()/#if($g_site)?sid=${g_site_id}#end';"/>
+				<input type="submit" name="eventSubmit_Update" value="æäº¤ä¿®æ”¹" />
+                <input type="reset" value="é‡æ–°å¡«å†™" />
+                <input type="button" value="è¿”å›ä¸Šé¡µ" onclick="history.go(-1)" />
+				<input type="button" value="è¿”å›é¦–é¡µ" onclick="location.href='$dlog.root()/#if($g_site)?sid=${g_site_id}#end';"/>
 			</div>
     	</div>
 	</div>

@@ -21,11 +21,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="Keywords" content="DLOG4J,Blog,${g_site.friendlyName}"/>
-    <title>ȡ�ص�¼����</title>
+    <title>取回登录密码</title>
 </head>
 <body>
 <p>
-<b>�����������û�����ϵͳ���Ὣ���ĵ�¼�������ʼ��ķ�ʽ���͵���ע��ʱ����д�������С�</b>
+<b>请输入您的用户名，系统将会将您的登录密码以邮件的方式发送到你注册时候填写的邮箱中。</b>
 </p>
 #if($messages.exist())
 <p>
@@ -33,10 +33,10 @@
 </p>
 #end
 <form action="$link.setAction("dlog/user")" method="post">
-    �û���: 
+    用户名: 
 	<input type="text" name="name"/>
-	<input type="submit" name="eventSubmit_FetchPwd" value="��ȡ��¼����" class="button"/>
-	<input type="button" value="�ر�" onclick="window.close()" class="button"/>
+	<input type="submit" name="eventSubmit_FetchPwd" value="获取登录密码" class="button"/>
+	<input type="button" value="关闭" onclick="window.close()" class="button"/>
     <input type="hidden" name="__ClientId" value="$dlog.gen_client_id()"/>
 </form>
 </body>

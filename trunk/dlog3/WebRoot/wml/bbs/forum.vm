@@ -21,9 +21,9 @@
 #set($forum = $BBS_tool.forum($g_site, $forum_id))
 <p>
 #if(!$forum)
-	ÂÛÌ³²»´æÔÚ£¡
+	è®ºå›ä¸å­˜åœ¨ï¼
 #elseif(${forum.status}==3 && ${forum.site.owner.id} != ${g_user.id})
-	ÂÛÌ³ÒÑ±»Õ¾³¤¹Ø±Õ£¬ÔİÊ±²»¿ÉÓÃ£¡
+	è®ºå›å·²è¢«ç«™é•¿å…³é—­ï¼Œæš‚æ—¶ä¸å¯ç”¨ï¼
 #else
 #set($page_title=${forum.name})
 ###############################################################################
@@ -33,20 +33,20 @@
 #set($next_page = $p_page + 1)
 #set($page_count = $dlog.page_count(${forum.topicCount}, $PAGE_SIZE))
 #set($topics = $BBS_tool.topics($g_site, $forum, $p_page, $PAGE_SIZE))
-<a href="$dlog.root()/wml/bbs/index.vm?sid=$g_site_id">ÂÛÌ³Ê×Ò³</a>&gt;${forum.name}&gt;<br/>
-¹²ÓĞÌû×Ó${forum.topicCount}Æª Ã¿Ò³ÏÔÊ¾${PAGE_SIZE}Æª Ò³´Î:${p_page}/${page_count}<br/>
-×îºó·¢±íÊ±¼ä£º$!date.format("yy/MM/dd HH:mm", $forum.lastPostTime)&nbsp;&nbsp;×÷Õß£º<a href="$dlog.root()/html/bbs/topic.vm?sid=$g_site_id&amp;fid=${forum.id}&amp;tid=${forum.lastTopic.id}">$text.html($forum.lastUsername)&nbsp;&raquo;</a><br/>
+<a href="$dlog.root()/wml/bbs/index.vm?sid=$g_site_id">è®ºå›é¦–é¡µ</a>&gt;${forum.name}&gt;<br/>
+å…±æœ‰å¸–å­${forum.topicCount}ç¯‡ æ¯é¡µæ˜¾ç¤º${PAGE_SIZE}ç¯‡ é¡µæ¬¡:${p_page}/${page_count}<br/>
+æœ€åå‘è¡¨æ—¶é—´ï¼š$!date.format("yy/MM/dd HH:mm", $forum.lastPostTime)&nbsp;&nbsp;ä½œè€…ï¼š<a href="$dlog.root()/html/bbs/topic.vm?sid=$g_site_id&amp;fid=${forum.id}&amp;tid=${forum.lastTopic.id}">$text.html($forum.lastUsername)&nbsp;&raquo;</a><br/>
 #if($forum.status!=1)
-<a href="new_topic.vm?sid=$g_site_id&amp;fid=${forum.id}">·¢ĞÂÌû</a>
+<a href="new_topic.vm?sid=$g_site_id&amp;fid=${forum.id}">å‘æ–°å¸–</a>
 #end
-<a href="search.vm?sid=$g_site_id&amp;fid=${forum.id}">ËÑË÷ÂÛÌ³</a>
-<a href="elite.vm?sid=$g_site_id&amp;fid=${forum.id}">¾«»ªÇø</a>
-<a href="$dlog.root()/wml/bbs/index.vm?sid=$g_site_id">·µ»ØÂÛÌ³ÁĞ±í</a><br/>
+<a href="search.vm?sid=$g_site_id&amp;fid=${forum.id}">æœç´¢è®ºå›</a>
+<a href="elite.vm?sid=$g_site_id&amp;fid=${forum.id}">ç²¾ååŒº</a>
+<a href="$dlog.root()/wml/bbs/index.vm?sid=$g_site_id">è¿”å›è®ºå›åˆ—è¡¨</a><br/>
 #if($page_count > 1)
-	#if($p_page > 1)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}">Ê×Ò³</a>#end
-	#if($p_page>1)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}&amp;page=$pre_page">ÉÏÒ³</a>#end
-	#if($p_page < $page_count)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}&amp;page=$next_page">ÏÂÒ³</a>#end
-	#if($p_page < $page_count)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}&amp;page=$page_count">Î²Ò³</a>#end
+	#if($p_page > 1)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}">é¦–é¡µ</a>#end
+	#if($p_page>1)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}&amp;page=$pre_page">ä¸Šé¡µ</a>#end
+	#if($p_page < $page_count)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}&amp;page=$next_page">ä¸‹é¡µ</a>#end
+	#if($p_page < $page_count)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}&amp;page=$page_count">å°¾é¡µ</a>#end
 #end
 </p>
 <p>
@@ -55,17 +55,17 @@
 #set($record_idx = $record_idx - $PAGE_SIZE)
 	${record_idx}.
 	<a href="topic.vm?sid=$g_site_id&amp;fid=${forum.id}&amp;tid=${topic.id}">
-		#if($topic.top)[¶¥]#elseif($topic.elite)[¾«]#end
+		#if($topic.top)[é¡¶]#elseif($topic.elite)[ç²¾]#end
 		$text.html(${topic.title})
-	</a>(${topic.replyCount}ÆÀ/${topic.viewCount}ÔÄ,$date.format("MM-dd HH:mm",${topic.createTime}) ×÷Õß:<a href="$dlog.root()/dlog/viewuser.vm?sid=$g_site_id&amp;uid=${topic.user.id}">$text.html($topic.username)</a>)<br/>
+	</a>(${topic.replyCount}è¯„/${topic.viewCount}é˜…,$date.format("MM-dd HH:mm",${topic.createTime}) ä½œè€…:<a href="$dlog.root()/dlog/viewuser.vm?sid=$g_site_id&amp;uid=${topic.user.id}">$text.html($topic.username)</a>)<br/>
 #end
 #end
 </p>
 <p>
 #if($page_count > 1)
-	#if($p_page > 1)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}">Ê×Ò³</a>#end
-	#if($p_page>1)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}&amp;page=$pre_page">ÉÏÒ³</a>#end
-	#if($p_page < $page_count)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}&amp;page=$next_page">ÏÂÒ³</a>#end
-	#if($p_page < $page_count)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}&amp;page=$page_count">Î²Ò³</a>#end
+	#if($p_page > 1)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}">é¦–é¡µ</a>#end
+	#if($p_page>1)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}&amp;page=$pre_page">ä¸Šé¡µ</a>#end
+	#if($p_page < $page_count)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}&amp;page=$next_page">ä¸‹é¡µ</a>#end
+	#if($p_page < $page_count)<a href="forum.vm?sid=${g_site_id}&amp;fid=${forum.id}&amp;page=$page_count">å°¾é¡µ</a>#end
 #end
 </p>

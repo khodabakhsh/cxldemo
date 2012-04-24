@@ -19,22 +19,22 @@
 #invoke("_sub/_global.vm")
 #set($PAGE_SIZE = 10)
 #set($p_page = $dlog.param("p", 1))
-#set($page_title="ÎÒµÄºÃÓÑ")
+#set($page_title="æˆ‘çš„å¥½å‹")
 #set($pre_page = $p_page - 1)
 #set($next_page = $p_page + 1)
 #set($friend_count = $USER_tool.friend_count($g_user_id))
 #set($page_count = $dlog.page_count($friend_count, $PAGE_SIZE))
 <p>
-	#invoke("_sub/_nav_bar.vm")&gt;ÎÒµÄºÃÓÑ<br/>
-    ¹²ÓĞ${friend_count}¸öºÃÓÑ. µÚ${p_page}Ò³,¹²${page_count}Ò³,Ã¿Ò³${PAGE_SIZE}Ìõ.<br/>
+	#invoke("_sub/_nav_bar.vm")&gt;æˆ‘çš„å¥½å‹<br/>
+    å…±æœ‰${friend_count}ä¸ªå¥½å‹. ç¬¬${p_page}é¡µ,å…±${page_count}é¡µ,æ¯é¡µ${PAGE_SIZE}æ¡.<br/>
 #if($page_count > 1)
 	#if($p_page>1)
-		<a href="friends.vm?sid=${g_site_id}">Ê×Ò³</a>
-		<a href="friends.vm?sid=${g_site_id}&amp;p=$pre_page">ÉÏÒ³</a>
+		<a href="friends.vm?sid=${g_site_id}">é¦–é¡µ</a>
+		<a href="friends.vm?sid=${g_site_id}&amp;p=$pre_page">ä¸Šé¡µ</a>
 	#end
 	#if($p_page < $page_count)
-		<a href="friends.vm?sid=${g_site_id}&amp;p=$next_page">ÏÂÒ³</a>
-		<a href="friends.vm?sid=${g_site_id}&amp;p=$page_count">Î²Ò³</a>
+		<a href="friends.vm?sid=${g_site_id}&amp;p=$next_page">ä¸‹é¡µ</a>
+		<a href="friends.vm?sid=${g_site_id}&amp;p=$page_count">å°¾é¡µ</a>
 	#end
 #end
 </p>
@@ -43,18 +43,18 @@
 	#set($base_idx = ($p_page - 1)*$PAGE_SIZE)
 #foreach($user in $friends)
 	#set($idx = $base_idx + $velocityCount)
-	${idx}.<a href="viewuser.vm?sid=${g_site_id}&amp;uid=${user.friend.id}">$text.html(${user.friend.nickname})</a>(#if(${user.friend.onlineStatus}==1)ÔÚÏß#elseÀëÏß#end,<a href="sendmsg.vm?sid=${g_site_id}&amp;uid=${user.friend.id}&amp;r=$math.random(1,1000)">·¢ÏûÏ¢</a>,<a href="$link.setAction("wml/user")?sid=$g_site_id&amp;uid=${user.friend.id}&amp;eventSubmit_DelFriend=WML&amp;__ClientId=$dlog.gen_client_id()">É¾³ı</a>)<br/>
+	${idx}.<a href="viewuser.vm?sid=${g_site_id}&amp;uid=${user.friend.id}">$text.html(${user.friend.nickname})</a>(#if(${user.friend.onlineStatus}==1)åœ¨çº¿#elseç¦»çº¿#end,<a href="sendmsg.vm?sid=${g_site_id}&amp;uid=${user.friend.id}&amp;r=$math.random(1,1000)">å‘æ¶ˆæ¯</a>,<a href="$link.setAction("wml/user")?sid=$g_site_id&amp;uid=${user.friend.id}&amp;eventSubmit_DelFriend=WML&amp;__ClientId=$dlog.gen_client_id()">åˆ é™¤</a>)<br/>
 #end
 </p>
 <p>
 #if($page_count > 1)
 	#if($p_page>1)
-		<a href="friends.vm?sid=${g_site_id}">Ê×Ò³</a>
-		<a href="friends.vm?sid=${g_site_id}&amp;p=$pre_page">ÉÏÒ³</a>
+		<a href="friends.vm?sid=${g_site_id}">é¦–é¡µ</a>
+		<a href="friends.vm?sid=${g_site_id}&amp;p=$pre_page">ä¸Šé¡µ</a>
 	#end
 	#if($p_page < $page_count)
-		<a href="friends.vm?sid=${g_site_id}&amp;p=$next_page">ÏÂÒ³</a>
-		<a href="friends.vm?sid=${g_site_id}&amp;p=$page_count">Î²Ò³</a>
+		<a href="friends.vm?sid=${g_site_id}&amp;p=$next_page">ä¸‹é¡µ</a>
+		<a href="friends.vm?sid=${g_site_id}&amp;p=$page_count">å°¾é¡µ</a>
 	#end
 #end
 </p>

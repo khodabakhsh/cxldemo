@@ -9,11 +9,11 @@
 	#set($next_page = $p_page + 1)
 	#set($page_count = $dlog.page_count($msg_count, $MSG_COUNT_PER_PAGE))
 	#if($p_page > $page_count)#set($p_page = $page_count)#end
-    <div><b>¹²ÓĞ${msg_count}Ìõ¶ÌÏûÏ¢#if(${msg_count}>0)</b>,
-        <a href="$link.setAction("dlog/message")?sid=${g_site_id}&amp;eventSubmit_DeleteAll=1" onclick="return confirm('ÄúÈ·ÈÏÒªÉ¾³ıËùÓĞµÄ¶ÌÏûÏ¢Âğ£¿');"><b>Çå³ıËùÓĞ¶ÌÏûÏ¢</b></a>£¡#end
+    <div><b>å…±æœ‰${msg_count}æ¡çŸ­æ¶ˆæ¯#if(${msg_count}>0)</b>,
+        <a href="$link.setAction("dlog/message")?sid=${g_site_id}&amp;eventSubmit_DeleteAll=1" onclick="return confirm('æ‚¨ç¡®è®¤è¦åˆ é™¤æ‰€æœ‰çš„çŸ­æ¶ˆæ¯å—ï¼Ÿ');"><b>æ¸…é™¤æ‰€æœ‰çŸ­æ¶ˆæ¯</b></a>ï¼#end
     </div>
     <hr size="1" noshade color="#CCCCCC">
-    <form action="$link.setAction("dlog/message")" method="post" onsubmit="return confirm('ÊÇ·ñÕæµÄÒªÉ¾³ıËùÓĞÑ¡ÖĞµÄ¶ÌÏûÏ¢Âğ£¿');">
+    <form action="$link.setAction("dlog/message")" method="post" onsubmit="return confirm('æ˜¯å¦çœŸçš„è¦åˆ é™¤æ‰€æœ‰é€‰ä¸­çš„çŸ­æ¶ˆæ¯å—ï¼Ÿ');">
     <input type="hidden" name="__ClientId" value="$dlog.gen_client_id()"/>
     <input type="hidden" name="fromPage" value="/dlog/listmsg.vm?sid=$g_site_id"/>
     <input type="hidden" name="sid" value="$g_site_id"/>		
@@ -21,15 +21,15 @@
     <table cellspacing="1" cellpadding="3" border="0" class="table" width="100%">
     <tr class="table_head">
 		<td align="right">
-			µÚ<b>${p_page}</b>Ò³,¹²<b>${page_count}</b>Ò³,Ã¿Ò³<b>${MSG_COUNT_PER_PAGE}</b>Ìõ
+			ç¬¬<b>${p_page}</b>é¡µ,å…±<b>${page_count}</b>é¡µ,æ¯é¡µ<b>${MSG_COUNT_PER_PAGE}</b>æ¡
 			#if($page_count > 1)|
         	#if($p_page>1)
-        		<a href="#" onclick="return go_page(1);">Ê×Ò³</a>
-				<a href="#" onclick="return go_page($pre_page);">ÉÏÒ³</a>
+        		<a href="#" onclick="return go_page(1);">é¦–é¡µ</a>
+				<a href="#" onclick="return go_page($pre_page);">ä¸Šé¡µ</a>
         	#end
         	#if($p_page < $page_count)
-        		<a href="#" onclick="return go_page($next_page);">ÏÂÒ³</a>
-				<a href="#" onclick="return go_page($page_count);">Î²Ò³</a>
+        		<a href="#" onclick="return go_page($next_page);">ä¸‹é¡µ</a>
+				<a href="#" onclick="return go_page($page_count);">å°¾é¡µ</a>
         	#end
 		#end
 		</td>
@@ -46,13 +46,13 @@
     					$date.format("yyyy/MM/dd HH:mm",${msg.sendTime})
     				</td>
     				<td style="border-bottom:#cccccc 1px dashed" align="right">
-    					<input type="checkbox" name="mid" value="${msg.id}"/>Ñ¡ÖĞ
+    					<input type="checkbox" name="mid" value="${msg.id}"/>é€‰ä¸­
     					<a href="$dlog.root()/dlog/sendmsg.vm?sid=$g_site_id&amp;uid=${msg.fromUser.id}&amp;msgid=${msg.id}">
-            				$html.img("msg.gif")»Ø¸´
+            				$html.img("msg.gif")å›å¤
                         </a>
     					&nbsp;&nbsp;
-            			<a href="$link.setAction("dlog/message")?sid=${g_site_id}&amp;eventSubmit_Delete=$msg.id&amp;p=$p_page" onclick="return confirm('ÕæµÄÒªÉ¾³ı¸Ã¶ÌÏûÏ¢Âï£¿');">
-            				$html.img("icon_delete.gif")É¾³ı
+            			<a href="$link.setAction("dlog/message")?sid=${g_site_id}&amp;eventSubmit_Delete=$msg.id&amp;p=$p_page" onclick="return confirm('çœŸçš„è¦åˆ é™¤è¯¥çŸ­æ¶ˆæ¯å˜›ï¼Ÿ');">
+            				$html.img("icon_delete.gif")åˆ é™¤
                         </a>
     				</td>
     			</tr>
@@ -69,8 +69,8 @@
     </table>
     </div>
     <div class="page_footer">
-        <input type="checkbox" name="bt_all" value="" onclick="select_all('mid',this.checked)"/>È«Ñ¡		
-        <input type="submit" name="eventSubmit_DeleteMessages" value="É¾³ıÑ¡ÖĞ"/>
+        <input type="checkbox" name="bt_all" value="" onclick="select_all('mid',this.checked)"/>å…¨é€‰		
+        <input type="submit" name="eventSubmit_DeleteMessages" value="åˆ é™¤é€‰ä¸­"/>
     </div>
     </form>
 	<script src="$dlog.root()/js/prototype.js" type="text/javascript"></script>
@@ -81,6 +81,6 @@
     	}
     </script>
 #else
-	#show_msg_box("ÄúÃ»ÓĞ¶ÌÏûÏ¢¡£")  
+	#show_msg_box("æ‚¨æ²¡æœ‰çŸ­æ¶ˆæ¯ã€‚")  
 #end
 </div>

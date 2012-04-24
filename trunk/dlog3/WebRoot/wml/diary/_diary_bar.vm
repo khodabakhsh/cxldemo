@@ -12,5 +12,5 @@
 #if($g_trash_count>=0)
 <a href="$dlog.root()/wml/diary/trash.vm?sid=$g_site_id">$text.ui("label.diary.trash")($g_trash_count)</a>#end
 #if($dlog.is_owner($g_site,$g_user))
-<a href="$dlog.root()/wml/diary/catalogs.vm?sid=$g_site_id">分类管理</a>#end
+<a href="$dlog.root()/wml/diary/catalogs.vm?sid=$g_site_id">鍒嗙被绠＄悊</a>#end
 <br/>----------<br/>

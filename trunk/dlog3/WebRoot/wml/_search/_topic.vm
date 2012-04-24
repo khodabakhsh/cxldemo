@@ -1,5 +1,5 @@
 #set($objs = $SEARCH_tool.search_topic($g_site, $g_user, $key))
-¹²ÓĞ${objs.size()}Ïî·ûºÏ"${key}"µÄ²éÑ¯½á¹û£¬(ËÑË÷ÓÃÊ±${SEARCH_tool.get_search_time()}ºÁÃë)<br/>
+å…±æœ‰${objs.size()}é¡¹ç¬¦åˆ"${key}"çš„æŸ¥è¯¢ç»“æœï¼Œ(æœç´¢ç”¨æ—¶${SEARCH_tool.get_search_time()}æ¯«ç§’)<br/>
 #foreach($obj in $objs)
 	${velocityCount}.<a href="$dlog.root()/wml/bbs/topic.vm?sid=${obj.site.id}&amp;fid=${obj.forum.id}&amp;tid=${obj.id}">$text.html(${obj.title})</a>($date.format("yyyy/MM/dd HH:mm",${obj.createTime}))<br/>
 #end

@@ -24,60 +24,60 @@
 #set($topic = $BBS_tool.topic($g_site, $g_user, $topic_id))
 <p>
 #if(!$topic)
-	»°Ìâ²»´æÔÚ£¡
+	è¯é¢˜ä¸å­˜åœ¨ï¼
 #elseif(${topic.forum.status}==3 && ${topic.site.owner.id} != ${g_user.id})
-	ÂÛÌ³ÒÑ±»Õ¾³¤¹Ø±Õ£¬ÔİÊ±²»¿ÉÓÃ£¡
+	è®ºå›å·²è¢«ç«™é•¿å…³é—­ï¼Œæš‚æ—¶ä¸å¯ç”¨ï¼
 #else
 	#set($page_title=${topic.forum.name})
-    ±êÌâ:$text.html(${topic.title})<br/>    
+    æ ‡é¢˜:$text.html(${topic.title})<br/>    
     #set($content = $dlog.plain_text(${topic.content}))
     #set($page_count = $dlog.page_count($content.length(), $WORD_COUNT))
     #if($page_count > 1)
     	#set($pre_page = $p_page - 1)
     	#set($next_page = $p_page + 1)
-    	µÚ${p_page}Ò³,¹²${page_count}Ò³.<br/>
+    	ç¬¬${p_page}é¡µ,å…±${page_count}é¡µ.<br/>
     	#if($p_page>1)
-    		<a href="topic.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id">Ê×Ò³</a>
-    		<a href="topic.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id&amp;p=$pre_page">ÉÏÒ³</a>
+    		<a href="topic.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id">é¦–é¡µ</a>
+    		<a href="topic.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id&amp;p=$pre_page">ä¸Šé¡µ</a>
     	#end
     	#if($p_page < $page_count)
-    		<a href="topic.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id&amp;p=$next_page">ÏÂÒ³</a>
-    		<a href="topic.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id&amp;p=$page_count">Î²Ò³</a>
+    		<a href="topic.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id&amp;p=$next_page">ä¸‹é¡µ</a>
+    		<a href="topic.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=$topic_id&amp;p=$page_count">å°¾é¡µ</a>
     	#end
     	<br/>
 	#end	
-    ÎÄ±¾ÄÚÈİ:<br/>$text.html($dlog.split($content,$p_page,$WORD_COUNT))
+    æ–‡æœ¬å†…å®¹:<br/>$text.html($dlog.split($content,$p_page,$WORD_COUNT))
 </p>
 <p>
-	×÷Õß:<a href="$dlog.root()/wml/viewuser.vm?sid=$g_site_id&amp;uid=${topic.owner.id}">$text.html($topic.owner.nickname)</a><br/>
-	Ê±¼ä:$date.format("yy-MM-dd HH:mm", ${topic.createTime})<br/>
-	ÌÖÂÛÇø:<a href="forum.vm?sid=$g_site_id&amp;fid=${topic.forum.id}">$text.html(${topic.forum.name})</a><br/>
-	ÆÀÂÛ:<a href="topic_rpls.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=${topic.id}">${topic.replyCount}</a>&nbsp;<a href="reply.vm?sid=$g_site_id&amp;tid=${topic.id}">[ÎÒÒªÆÀÂÛ]</a><br/>
+	ä½œè€…:<a href="$dlog.root()/wml/viewuser.vm?sid=$g_site_id&amp;uid=${topic.owner.id}">$text.html($topic.owner.nickname)</a><br/>
+	æ—¶é—´:$date.format("yy-MM-dd HH:mm", ${topic.createTime})<br/>
+	è®¨è®ºåŒº:<a href="forum.vm?sid=$g_site_id&amp;fid=${topic.forum.id}">$text.html(${topic.forum.name})</a><br/>
+	è¯„è®º:<a href="topic_rpls.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=${topic.id}">${topic.replyCount}</a>&nbsp;<a href="reply.vm?sid=$g_site_id&amp;tid=${topic.id}">[æˆ‘è¦è¯„è®º]</a><br/>
 </p>
 <p>
 	----------<br/>
 	#if(${topic.owner.id}==${g_user_id} || $dlog.is_owner($g_site, $g_user))
-	(<a href="edit_topic.vm?sid=$g_site_id&amp;tid=$topic_id">±à¼­</a>/<a href="$link.setAction("wml/topic")?sid=$g_site_id&amp;id=$topic_id&amp;eventSubmit_Delete=$topic_id">É¾³ı</a>)<br/>
+	(<a href="edit_topic.vm?sid=$g_site_id&amp;tid=$topic_id">ç¼–è¾‘</a>/<a href="$link.setAction("wml/topic")?sid=$g_site_id&amp;id=$topic_id&amp;eventSubmit_Delete=$topic_id">åˆ é™¤</a>)<br/>
 	#end
 #set($prev_topic = $BBS_tool.prev_topic($topic))
 #set($next_topic = $BBS_tool.next_topic($topic))
 #if($prev_topic)
-	ÉÏÒ»Æª:<a href="topic.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=${prev_topic.id}">$text.html(${prev_topic.title})</a><br/>
+	ä¸Šä¸€ç¯‡:<a href="topic.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=${prev_topic.id}">$text.html(${prev_topic.title})</a><br/>
 #end
 #if($next_topic)
-	ÏÂÒ»Æª:<a href="topic.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=${next_topic.id}">$text.html(${next_topic.title})</a><br/>
+	ä¸‹ä¸€ç¯‡:<a href="topic.vm?sid=$g_site_id&amp;fid=$forum_id&amp;tid=${next_topic.id}">$text.html(${next_topic.title})</a><br/>
 #end
 
 #if(${topic.replyCount}>0)	
-	<b>+×îĞÂÆÀÂÛ</b><br/>
+	<b>+æœ€æ–°è¯„è®º</b><br/>
 	#set($rpls = $BBS_tool.replies($topic, 1, 3))
 	#foreach($rpl in $rpls)
 	#set($content = $dlog.plain_text(${rpl.content}))
 	#set($rc = $dlog.abbreviate($content, 50))
-	#if($dlog.is_empty($rc))#set($rc="[ÎŞÎÄ±¾ÄÚÈİ]")#end
+	#if($dlog.is_empty($rc))#set($rc="[æ— æ–‡æœ¬å†…å®¹]")#end
 	${velocityCount}.${rc}
 	#if($rc.length() < $content.length())
-		<a href="rpl.vm?sid=$g_site_id&amp;tid=$topic_id&amp;rpl_id=${rpl.id}">[ÏêÏ¸ÄÚÈİ]</a>
+		<a href="rpl.vm?sid=$g_site_id&amp;tid=$topic_id&amp;rpl_id=${rpl.id}">[è¯¦ç»†å†…å®¹]</a>
 	#end($text.html(${rpl.user.nickname}),$date.format("MM-dd HH:mm",${rpl.replyTime}))<br/>
 	#end
 	#if($rpls.size()<${topic.replyCount})

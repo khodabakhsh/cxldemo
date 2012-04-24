@@ -17,15 +17,15 @@
 ##
 ###############################################################################
 #invoke("../_sub/_global.vm")
-#set($page_title="ĞŞ¸Ä¸öÈËÍøÖ·")
+#set($page_title="ä¿®æ”¹ä¸ªäººç½‘å€")
 <p>    
     #wml_error_msg()
 	#if(${g_user.homePage})
-	ÄúÏÖÔÚµÄ¸öÈËÍøÖ·ÊÇ: $text.html(${g_user.homePage})<br/>#end
+	æ‚¨ç°åœ¨çš„ä¸ªäººç½‘å€æ˜¯: $text.html(${g_user.homePage})<br/>#end
 	#set($uform = $form.getBean())
-	ÇëÊäÈëÄãµÄ¸öÈËÍøÖ·:<input type="text" name="homePage" size="15" value="$!{uform.homePage}"/>
-	ÇëÊäÈëÄãµÄÃÜÂë:<input type="text" name="password" size="15"/>
-    <anchor>ÏÖÔÚĞŞ¸Ä
+	è¯·è¾“å…¥ä½ çš„ä¸ªäººç½‘å€:<input type="text" name="homePage" size="15" value="$!{uform.homePage}"/>
+	è¯·è¾“å…¥ä½ çš„å¯†ç :<input type="text" name="password" size="15"/>
+    <anchor>ç°åœ¨ä¿®æ”¹
         <go href="$link.setAction("wml/user")" method="post">
             <postfield name="fromPage" value="modify_homepage.vm"/>
             <postfield name="sid" value="$g_site_id"/>

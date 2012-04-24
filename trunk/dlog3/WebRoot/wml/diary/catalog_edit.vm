@@ -17,21 +17,21 @@
 ##
 ###############################################################################
 #parse("/wml/_sub/_global.vm")
-#set($page_title="ĞŞ¸ÄÈÕ¼Ç·ÖÀà")
+#set($page_title="ä¿®æ”¹æ—¥è®°åˆ†ç±»")
 #set($catalog_id = $dlog.param("cat_id",-1))
 #set($catalog = $g_site.catalog($catalog_id))
 <p>
 #if($dlog.is_owner($g_site, $g_user))
 	#wml_error_msg()
-	·ÖÀàÃû:<input type="text" size="20" maxlength="20" name="name" value="$!{catalog.name}"/><br/>
-	È¨ÏŞ:<select name="type"><option value="1">¹«¿ª</option><option value="0">Ë½ÈË</option></select><br/>
-	Àà±ğ:<select name="catalog">	<option value="-1">[ÇëÑ¡ÔñÀà±ğ]</option>
+	åˆ†ç±»å:<input type="text" size="20" maxlength="20" name="name" value="$!{catalog.name}"/><br/>
+	æƒé™:<select name="type"><option value="1">å…¬å¼€</option><option value="0">ç§äºº</option></select><br/>
+	ç±»åˆ«:<select name="catalog">	<option value="-1">[è¯·é€‰æ‹©ç±»åˆ«]</option>
 	#set($__root_types = $TYPE_tool.root_types())
     #foreach($__type in $__root_types)
     <option value="$__type.id">${__type.name}</option>
 	#end
 	</select>
-    <anchor>¸üĞÂ·ÖÀà
+    <anchor>æ›´æ–°åˆ†ç±»
         <go href="$link.setAction("wml/catalog")" method="post">
             <postfield name="id" value="${catalog.id}"/>
             <postfield name="cat_id" value="${catalog.id}"/>
@@ -44,6 +44,6 @@
         </go>
     </anchor>
 #else	
-    ¶Ô²»Æğ£¬ÄãÃ»ÓĞ²Ù×÷È¨ÏŞ£¡
+    å¯¹ä¸èµ·ï¼Œä½ æ²¡æœ‰æ“ä½œæƒé™ï¼
 #end
 </p>

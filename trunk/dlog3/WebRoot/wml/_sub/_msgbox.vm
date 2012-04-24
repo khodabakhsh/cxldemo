@@ -17,11 +17,11 @@
 ##
 ###############################################################################
 #invoke("_global.vm")
-#set($page_title="²Ù×÷Íê±Ï")
+#set($page_title="æ“ä½œå®Œæ¯•")
 #set($msg = $request.getAttribute("msg"))
 #set($p_page= $request.getAttribute("page"))
 <p>
 	#invoke("_user_bar.vm")<br/>----------<br/>
 	$!msg<br/>
-	#if($p_page)<a href="$dlog.root()$dlog.replace($p_page,"&","&amp;")">·µ»Ø</a>#end
+	#if($p_page)<a href="$dlog.root()$dlog.replace($p_page,"&","&amp;")">è¿”å›</a>#end
 </p>

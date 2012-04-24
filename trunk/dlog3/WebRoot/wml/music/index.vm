@@ -19,8 +19,8 @@
 #parse("/wml/_sub/_global.vm")
 #set($page_title=$text.ui("channel.music"))
 <p>
-	ÍøÕ¾:<a href="$dlog.root()/wml/index.vm?sid=$g_site_id">$text.html(${g_site.friendlyName})</a><br/>
-	¹²ÓĞ${g_site.musicBoxes.size()}¸öÒôÀÖºĞ£¬${g_site.songs.size()}Ê×¸èÇú¡£<br/>
+	ç½‘ç«™:<a href="$dlog.root()/wml/index.vm?sid=$g_site_id">$text.html(${g_site.friendlyName})</a><br/>
+	å…±æœ‰${g_site.musicBoxes.size()}ä¸ªéŸ³ä¹ç›’ï¼Œ${g_site.songs.size()}é¦–æ­Œæ›²ã€‚<br/>
 #set($songs = $MUSIC_tool.songs_without_box($g_site))
 #foreach($song in $songs)
 	${velocityCount}.

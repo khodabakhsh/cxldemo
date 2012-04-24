@@ -17,47 +17,47 @@
 ##
 ###############################################################################
 #parse("/wml/_sub/_xhtml_global.vm")
-#set($page_title="ÉÏ´«ÕÕÆ¬")
+#set($page_title="ä¸Šä¼ ç…§ç‰‡")
 #set($album_id = $dlog.param("aid", -1))
 #set($fbean = $form.getBean())
 #if(!$dlog.is_owner($g_site, $g_user))
-	¶Ô²»Æğ£¬ÄãÃ»ÓĞ×ã¹»µÄ·ÃÎÊÈ¨ÏŞ£¬µã»÷<a href="$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())">$text.ui("label.login")</a>Ê¹ÓÃÆäËûÕÊºÅ½øÈë¡£<br /><br /><a href="#" onclick="history.go(-1);return false;">·µ»ØÉÏÒ³</a>
+	å¯¹ä¸èµ·ï¼Œä½ æ²¡æœ‰è¶³å¤Ÿçš„è®¿é—®æƒé™ï¼Œç‚¹å‡»<a href="$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($dlog.get_request_url())">$text.ui("label.login")</a>ä½¿ç”¨å…¶ä»–å¸å·è¿›å…¥ã€‚<br /><br /><a href="#" onclick="history.go(-1);return false;">è¿”å›ä¸Šé¡µ</a>
 #elseif(${g_site.albums.size()}==0)
-    Äú»¹Ã»ÓĞ´´½¨Ïà²¾£¬ÏÖÔÚ¾Í[<a href='$dlog.root()/wml/photo/album_add.vm?sid=$g_site_id'>´´½¨Ïà²¾</a>]£¡
+    æ‚¨è¿˜æ²¡æœ‰åˆ›å»ºç›¸ç°¿ï¼Œç°åœ¨å°±[<a href='$dlog.root()/wml/photo/album_add.vm?sid=$g_site_id'>åˆ›å»ºç›¸ç°¿</a>]ï¼
 #else
 <div>
-	Ïà²á×Ü¿Õ¼ä: <b>${g_site.capacity.photoTotalFriendly}</b>&nbsp;
-	ÒÑÓÃ¿Õ¼ä: <b>${g_site.capacity.photoUsedFriendly}</b>&nbsp;
-	¿Õ¼äÀûÓÃÂÊ: <b>${g_site.capacity.photoSpacePercent}%</b>
+	ç›¸å†Œæ€»ç©ºé—´: <b>${g_site.capacity.photoTotalFriendly}</b>&nbsp;
+	å·²ç”¨ç©ºé—´: <b>${g_site.capacity.photoUsedFriendly}</b>&nbsp;
+	ç©ºé—´åˆ©ç”¨ç‡: <b>${g_site.capacity.photoSpacePercent}%</b>
 </div>
 <!--
 <div>
-	<li>·²ÉÏ´«°üº¬²»Á¼ÄÚÈİ£¨ÈçÉ«Çé¡¢·´¶¯ÀàµÈ£©µÄÍ¼Æ¬£¬ÏµÍ³½«ÔÚ²»ÁíĞĞÍ¨ÖªÇé¿öÏÂ¶ÔÆäĞĞÉ¾³ı£¬ÑÏÖØÇé¿ö½«¹Ø±ÕÕ¾µã¡£</li>
-	<li>·²ÉÏ´«ÈÎºÎ·ÇÍ¼Æ¬ÄÚÈİµÄÎÄ¼ş£¨ÈçÈí¼ş¡¢ÊÓÆµ¼°Êı¾İÎÄ¼ş£©£¬ÏµÍ³½«ÔÚ²»ÁíĞĞÍ¨ÖªÇé¿öÏÂ¶ÔÆäÉ¾³ı¡£</li>
+	<li>å‡¡ä¸Šä¼ åŒ…å«ä¸è‰¯å†…å®¹ï¼ˆå¦‚è‰²æƒ…ã€ååŠ¨ç±»ç­‰ï¼‰çš„å›¾ç‰‡ï¼Œç³»ç»Ÿå°†åœ¨ä¸å¦è¡Œé€šçŸ¥æƒ…å†µä¸‹å¯¹å…¶è¡Œåˆ é™¤ï¼Œä¸¥é‡æƒ…å†µå°†å…³é—­ç«™ç‚¹ã€‚</li>
+	<li>å‡¡ä¸Šä¼ ä»»ä½•éå›¾ç‰‡å†…å®¹çš„æ–‡ä»¶ï¼ˆå¦‚è½¯ä»¶ã€è§†é¢‘åŠæ•°æ®æ–‡ä»¶ï¼‰ï¼Œç³»ç»Ÿå°†åœ¨ä¸å¦è¡Œé€šçŸ¥æƒ…å†µä¸‹å¯¹å…¶åˆ é™¤ã€‚</li>
 </div>
 -->
 #if($messages.exist())
 <div><b>$!messages.getAll()</b></div>
 #else
-<div>×¢ÒâÊÂÏî:ÕÕÆ¬Ö§³ÖÉÏ´«".jpg"ºÍ".gif"ºÍ¸ñÊ½µÄÍ¼Æ¬¡£</div>
+<div>æ³¨æ„äº‹é¡¹:ç…§ç‰‡æ”¯æŒä¸Šä¼ ".jpg"å’Œ".gif"å’Œæ ¼å¼çš„å›¾ç‰‡ã€‚</div>
 #end
 <form action="$link.setAction("wml/photo")" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="sid" value="$g_site_id"/>
 	<input type="hidden" name="__ClientId" value="$dlog.gen_client_id()"/>
     <div>
-    	ÕÕÆ¬Ãû³Æ:<input type="text" name="name" value="$!{fbean.name}" />
+    	ç…§ç‰‡åç§°:<input type="text" name="name" value="$!{fbean.name}" />
     </div>
     <div>
-    	ÕÕÆ¬ÎÄ¼ş:<input type="file" name="image"/>
+    	ç…§ç‰‡æ–‡ä»¶:<input type="file" name="image"/>
     </div>
     <div>
-    	ÕÕÆ¬¹Ø¼ü×Ö:<input type="text" name="keyword" value="$!{fbean.keyword}" />
+    	ç…§ç‰‡å…³é”®å­—:<input type="text" name="keyword" value="$!{fbean.keyword}" />
     </div>
     <div>
-    	ÕÕÆ¬ÃèÊö:<input type="text" name="desc" value="$!{fbean.desc}" />
+    	ç…§ç‰‡æè¿°:<input type="text" name="desc" value="$!{fbean.desc}" />
     </div>
     <div>
-    	´æ·ÅÏà²¾:
+    	å­˜æ”¾ç›¸ç°¿:
     	<select name="album">
             #foreach($album in $g_site.albums)
             <option value="${album.id}" #if(${album.id}==$album_id)selected#end>$text.html(${album.name})</option>
@@ -68,12 +68,12 @@
         </select>
     </div>
     <div>
-    	ÕÕÆ¬ÊôĞÔ:
-    	<input type="radio" name="status" value="0" checked="true" /> ¹«¿ª 
-    	<input type="radio" name="status" value="2"/> Òş²Ø 
+    	ç…§ç‰‡å±æ€§:
+    	<input type="radio" name="status" value="0" checked="true" /> å…¬å¼€ 
+    	<input type="radio" name="status" value="2"/> éšè— 
     </div>
     <div>
-    	<input type="submit" name="eventSubmit_Upload" value="ÉÏ´«ÕÕÆ¬" />
+    	<input type="submit" name="eventSubmit_Upload" value="ä¸Šä¼ ç…§ç‰‡" />
     </div>
 </form>
 #end

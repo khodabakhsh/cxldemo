@@ -1,9 +1,9 @@
 #invoke("_sub/_global.vm")
-#set($page_title="我要留言")
+#set($page_title="鎴戣鐣欒█")
 <p>
-	请输入给站长的留言内容:
+	璇疯緭鍏ョ粰绔欓暱鐨勭暀瑷�鍐呭:
 	<input type="text" name="content" value=""/><br/>	
-    <anchor>确定
+    <anchor>纭畾
         <go href="$link.setAction("wml/guestbook")" method="post">
             <postfield name="sid" value="$g_site_id"/>
             <postfield name="content" value="$(content)"/>

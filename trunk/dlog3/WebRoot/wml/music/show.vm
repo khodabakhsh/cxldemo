@@ -22,20 +22,20 @@
 #if($music)
 #set($page_title=${music.title})
 <p>
-	<b>¸èÇú:</b>$text.html($!{music.title})<br/>
+	<b>æ­Œæ›²:</b>$text.html($!{music.title})<br/>
 	#if($music && ${music.url})
-	<a href="${music.url}">[³¢ÊÔÏÂÔØ]</a><br/>
+	<a href="${music.url}">[å°è¯•ä¸‹è½½]</a><br/>
 	#end
-	<b>¸èÊÖ:</b>$text.html($!{music.singer})<br/>
-	<b>×¨¼­:</b>$text.html($!{music.album})<br/>
-	<b>¸è´Ê:</b><br/>$dlog.plain_text($!{music.word})<br/>
+	<b>æ­Œæ‰‹:</b>$text.html($!{music.singer})<br/>
+	<b>ä¸“è¾‘:</b>$text.html($!{music.album})<br/>
+	<b>æ­Œè¯:</b><br/>$dlog.plain_text($!{music.word})<br/>
 
 	#if($music && ${music.word} && ${music.url})
-	<a href="${music.url}">[³¢ÊÔÏÂÔØ]</a><br/>
+	<a href="${music.url}">[å°è¯•ä¸‹è½½]</a><br/>
 	#end
 	$MUSIC_tool.visit_music([$music])
 </p>
 #else
-#set($page_title="³ö´íÁË")
-<p>¸èÇúÃ»ÕÒµ½!</p>
+#set($page_title="å‡ºé”™äº†")
+<p>æ­Œæ›²æ²¡æ‰¾åˆ°!</p>
 #end

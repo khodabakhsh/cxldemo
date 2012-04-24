@@ -1,7 +1,7 @@
 <p>
-	��ȷ��Ҫɾ���òݸ���<br/>
-	<a href="#top">����</a>
-	<anchor>ɾ��
+	您确定要删除该草稿吗？<br/>
+	<a href="#top">返回</a>
+	<anchor>删除
 		<go href="$link.setAction("wml/diary")" method="post">
 			<postfield name="sid" value="$g_site_id"/>
             <postfield name="id" value="$(draft_id)"/>

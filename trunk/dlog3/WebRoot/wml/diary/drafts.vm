@@ -26,35 +26,35 @@
 #set($page_count = $dlog.page_count($log_count, $PAGE_SIZE))
 <p>
 	#invoke("_diary_nav_bar.vm")
-    ²İ¸åÏä¹²ÓĞ${log_count}Æª<a href="$dlog.root()/wml/diary/?sid=$g_site_id">ÈÕ¼Ç</a>.<br/>
+    è‰ç¨¿ç®±å…±æœ‰${log_count}ç¯‡<a href="$dlog.root()/wml/diary/?sid=$g_site_id">æ—¥è®°</a>.<br/>
 #if($page_count > 1)
-	µÚ${p_page}Ò³,¹²${page_count}Ò³,Ã¿Ò³${PAGE_SIZE}Ìõ.<br/>
+	ç¬¬${p_page}é¡µ,å…±${page_count}é¡µ,æ¯é¡µ${PAGE_SIZE}æ¡.<br/>
 	#if($p_page>1)
-		<a href="$dlog.root()/wml/diary/drafts.vm?sid=$g_site_id">Ê×Ò³</a>
-		<a href="$dlog.root()/wml/diary/drafts.vm?sid=$g_site_id&amp;p=$pre_page">ÉÏÒ³</a>
+		<a href="$dlog.root()/wml/diary/drafts.vm?sid=$g_site_id">é¦–é¡µ</a>
+		<a href="$dlog.root()/wml/diary/drafts.vm?sid=$g_site_id&amp;p=$pre_page">ä¸Šé¡µ</a>
 	#end
 	#if($p_page < $page_count)
-		<a href="$dlog.root()/wml/diary/drafts.vm?sid=$g_site_id&amp;p=$next_page">ÏÂÒ³</a>
-		<a href="$dlog.root()/wml/diary/drafts.vm?sid=$g_site_id&amp;p=$page_count">Î²Ò³</a>
+		<a href="$dlog.root()/wml/diary/drafts.vm?sid=$g_site_id&amp;p=$next_page">ä¸‹é¡µ</a>
+		<a href="$dlog.root()/wml/diary/drafts.vm?sid=$g_site_id&amp;p=$page_count">å°¾é¡µ</a>
 	#end
 	<br/>
 #end
 #set($logs = $DIARY_tool.list_drafts($g_site, $g_user, $p_page, $PAGE_SIZE ))
 #foreach($log in $logs)
 	${velocityCount}.<a href="$dlog.root()/wml/diary/show.vm?sid=$g_site_id&amp;log_id=${log.id}">$text.html(${log.title})</a>
-	(<a href="$dlog.root()/wml/diary/edit.vm?sid=$g_site_id&amp;log_id=${log.id}">±à¼­</a>/<a href="$link.setAction("wml/diary")?sid=$g_site_id&amp;id=${log.id}&amp;eventSubmit_PublishDraftDirectly">·¢²¼</a>/<anchor>É¾³ı<go href="#bottom"><setvar name="draft_id" value="${log.id}"/></go></anchor>)<br/>
+	(<a href="$dlog.root()/wml/diary/edit.vm?sid=$g_site_id&amp;log_id=${log.id}">ç¼–è¾‘</a>/<a href="$link.setAction("wml/diary")?sid=$g_site_id&amp;id=${log.id}&amp;eventSubmit_PublishDraftDirectly">å‘å¸ƒ</a>/<anchor>åˆ é™¤<go href="#bottom"><setvar name="draft_id" value="${log.id}"/></go></anchor>)<br/>
 #end
 #if($page_count > 1)
 	#if($p_page>1)
-		<a href="$dlog.root()/wml/diary/drafts.vm?sid=$g_site_id">Ê×Ò³</a>
-		<a href="$dlog.root()/wml/diary/drafts.vm?sid=$g_site_id&amp;p=$pre_page">ÉÏÒ³</a>
+		<a href="$dlog.root()/wml/diary/drafts.vm?sid=$g_site_id">é¦–é¡µ</a>
+		<a href="$dlog.root()/wml/diary/drafts.vm?sid=$g_site_id&amp;p=$pre_page">ä¸Šé¡µ</a>
 	#end
 	#if($p_page < $page_count)
-		<a href="$dlog.root()/wml/diary/drafts.vm?sid=$g_site_id&amp;p=$next_page">ÏÂÒ³</a>
-		<a href="$dlog.root()/wml/diary/drafts.vm?sid=$g_site_id&amp;p=$page_count">Î²Ò³</a>
+		<a href="$dlog.root()/wml/diary/drafts.vm?sid=$g_site_id&amp;p=$next_page">ä¸‹é¡µ</a>
+		<a href="$dlog.root()/wml/diary/drafts.vm?sid=$g_site_id&amp;p=$page_count">å°¾é¡µ</a>
 	#end
 	<br/>
 #end
 </p>
-#set($page_title_bottom="É¾³ı²İ¸å")
+#set($page_title_bottom="åˆ é™¤è‰ç¨¿")
 #set($screen_extend_template = $dlog.absolute_path("_del_draft_confirm.vm"))

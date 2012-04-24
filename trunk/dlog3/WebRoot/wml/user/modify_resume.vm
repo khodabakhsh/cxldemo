@@ -17,15 +17,15 @@
 ##
 ###############################################################################
 #invoke("../_sub/_global.vm")
-#set($page_title="ĞŞ¸ÄĞûÑÔ")
+#set($page_title="ä¿®æ”¹å®£è¨€")
 <p>    
     #wml_error_msg()
 	#if(${g_user.resume})
-	ÄúÏÖÔÚµÄĞûÑÔÊÇ: $text.html(${g_user.resume})<br/>#end
+	æ‚¨ç°åœ¨çš„å®£è¨€æ˜¯: $text.html(${g_user.resume})<br/>#end
 	#set($uform = $form.getBean())
-	ÇëÊäÈëĞÂµÄĞûÑÔ:<input type="text" name="resume" size="15" value=""/>
-	ÇëÊäÈëÄãµÄÃÜÂë:<input type="text" name="password" size="15"/>
-    <anchor>ÏÖÔÚĞŞ¸Ä
+	è¯·è¾“å…¥æ–°çš„å®£è¨€:<input type="text" name="resume" size="15" value=""/>
+	è¯·è¾“å…¥ä½ çš„å¯†ç :<input type="text" name="password" size="15"/>
+    <anchor>ç°åœ¨ä¿®æ”¹
         <go href="$link.setAction("wml/user")" method="post">
             <postfield name="fromPage" value="modify_resume.vm"/>
             <postfield name="sid" value="$g_site_id"/>

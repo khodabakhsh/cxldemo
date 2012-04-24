@@ -18,37 +18,37 @@
 ###############################################################################
 #parse("/wml/_sub/_global.vm")
 #set($PAGE_SIZE = 10)
-#set($page_title="ĞŞ¸Ä»°Ìâ")
+#set($page_title="ä¿®æ”¹è¯é¢˜")
 #set($topic_id = $dlog.param("tid",-1))
 #set($topic = $BBS_tool.topic($g_site, $g_user, $topic_id))
 <p>
 #if(!$topic)
-	»°Ìâ²»´æÔÚ£¡
+	è¯é¢˜ä¸å­˜åœ¨ï¼
 #elseif(${topic.forum.status}==3 && ${topic.site.owner.id} != ${g_user.id})
-	ÂÛÌ³ÒÑ±»Õ¾³¤¹Ø±Õ£¬ÔİÊ±²»¿ÉÓÃ£¡
+	è®ºå›å·²è¢«ç«™é•¿å…³é—­ï¼Œæš‚æ—¶ä¸å¯ç”¨ï¼
 #else
-	ÍøÕ¾:<a href="$dlog.root()/wml/index.vm?sid=$g_site_id">$text.html(${g_site.friendlyName})</a>&nbsp;<a href="$dlog.root()/wml/bbs/index.vm?sid=$g_site_id">$text.bbs($g_site)</a><br/>	
-	##ÏÔÊ¾ÒÑÉÏ´«µÃ¸½¼ş
+	ç½‘ç«™:<a href="$dlog.root()/wml/index.vm?sid=$g_site_id">$text.html(${g_site.friendlyName})</a>&nbsp;<a href="$dlog.root()/wml/bbs/index.vm?sid=$g_site_id">$text.bbs($g_site)</a><br/>	
+	##æ˜¾ç¤ºå·²ä¸Šä¼ å¾—é™„ä»¶
 	#set($files = $DIARY_tool.attachments($g_user, $dlog.dlog_session_id($request)))
 	#if($files.size()>0)
-	ÒÑÉÏ´«¸½¼ş:<br/>==========<br/>
+	å·²ä¸Šä¼ é™„ä»¶:<br/>==========<br/>
 	#foreach($file in $files)
-		${velocityCount}.<a href="$dlog.root()/wml/showimg.vm?sid=$g_site_id&amp;uri=$link.encodeURL(${file.uri})">$dlog.file_name(${file.savePath})</a>&nbsp;<a href="$link.setAction("wml/diary")?sid=$g_site_id&amp;file_id=${file.id}&amp;eventSubmit_DeleteAttachement=${file.id}">É¾³ı</a><br/>
+		${velocityCount}.<a href="$dlog.root()/wml/showimg.vm?sid=$g_site_id&amp;uri=$link.encodeURL(${file.uri})">$dlog.file_name(${file.savePath})</a>&nbsp;<a href="$link.setAction("wml/diary")?sid=$g_site_id&amp;file_id=${file.id}&amp;eventSubmit_DeleteAttachement=${file.id}">åˆ é™¤</a><br/>
 	#end
 	#else
-		ÇëÏÈ²åÈëÍ¼Æ¬ÔÙ±à¼­ÎÄ×Ö,·ñÔò»áµ¼ÖÂÎÄ×Ö¶ªÊ§.<br/>
+		è¯·å…ˆæ’å…¥å›¾ç‰‡å†ç¼–è¾‘æ–‡å­—,å¦åˆ™ä¼šå¯¼è‡´æ–‡å­—ä¸¢å¤±.<br/>
 	#end
-	<a href="$dlog.root()/wml/diary/upload.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL("/wml/bbs/new_topic.vm?sid=$g_site_id&fid=$forum_id")">&lt;²åÈëÍ¼Æ¬&gt;</a><br/>
+	<a href="$dlog.root()/wml/diary/upload.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL("/wml/bbs/new_topic.vm?sid=$g_site_id&fid=$forum_id")">&lt;æ’å…¥å›¾ç‰‡&gt;</a><br/>
 	#if($messages.exist())<b>$!messages.getAll()</b><br/>#end
-	±êÌâ:<input type="text" name="title" value="$text.html($!{topic.title})"/><br/>	
-	ÄÚÈİ:<input type="text" name="content" value="$text.html($!{topic.content})"/><br/>	
-	Ñ¡Ïî:<select name="options" ivalue="0" multiple="true">
-		<option value="">ÎŞ</option>
-		<option value="bookmark">±êÖ¾ÎªÊéÇ©</option>
-		<option value="top">ÖÃ¶¥</option>
-		<option value="elite">ÉèÎª¾«»ª</option>
+	æ ‡é¢˜:<input type="text" name="title" value="$text.html($!{topic.title})"/><br/>	
+	å†…å®¹:<input type="text" name="content" value="$text.html($!{topic.content})"/><br/>	
+	é€‰é¡¹:<select name="options" ivalue="0" multiple="true">
+		<option value="">æ— </option>
+		<option value="bookmark">æ ‡å¿—ä¸ºä¹¦ç­¾</option>
+		<option value="top">ç½®é¡¶</option>
+		<option value="elite">è®¾ä¸ºç²¾å</option>
 	</select><br/>
-	<anchor>ĞŞ¸Ä»°Ìâ
+	<anchor>ä¿®æ”¹è¯é¢˜
         <go href="$link.setAction("wml/bbs/topic")" method="post">
             <postfield name="sid" value="$g_site_id"/>
             <postfield name="id" value="$topic_id"/>

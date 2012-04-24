@@ -17,14 +17,14 @@
 ##
 ###############################################################################
 #invoke("../_sub/_global.vm")
-#set($page_title="ĞŞ¸ÄêÇ³Æ")
+#set($page_title="ä¿®æ”¹æ˜µç§°")
 <p>    
     #wml_error_msg()
-	ÄúÏÖÔÚµÄêÇ³ÆÊÇ: $text.html(${g_user.nickname})<br/>
+	æ‚¨ç°åœ¨çš„æ˜µç§°æ˜¯: $text.html(${g_user.nickname})<br/>
 	#set($uform = $form.getBean())
-	ÇëÊäÈëĞÂêÇ³Æ:<input type="text" name="nickname" size="15" value="$!{uform.nickname}"/>
-	ÇëÊäÈëÄãµÄÃÜÂë:<input type="text" name="password" size="15"/>
-    <anchor>ÏÖÔÚĞŞ¸Ä
+	è¯·è¾“å…¥æ–°æ˜µç§°:<input type="text" name="nickname" size="15" value="$!{uform.nickname}"/>
+	è¯·è¾“å…¥ä½ çš„å¯†ç :<input type="text" name="password" size="15"/>
+    <anchor>ç°åœ¨ä¿®æ”¹
         <go href="$link.setAction("wml/user")" method="post">
             <postfield name="fromPage" value="modify_nickname.vm"/>
             <postfield name="sid" value="$g_site_id"/>

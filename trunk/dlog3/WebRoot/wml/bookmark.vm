@@ -17,23 +17,23 @@
 ##
 ###############################################################################
 #invoke("_sub/_global.vm")
-#set($page_title="ÎÒµÄÊéÇ©")
+#set($page_title="æˆ‘çš„ä¹¦ç­¾")
 <p>
-	#invoke("_sub/_nav_bar.vm")&gt;ÎÒµÄÊéÇ©<br/>
+	#invoke("_sub/_nav_bar.vm")&gt;æˆ‘çš„ä¹¦ç­¾<br/>
 #if($g_user)
 	#set($bookmarks = $dlog.bookmarks($g_user))
 	#if($bookmarks && $bookmarks.size()>0)
-        Äú¹²ÓĞ${bookmarks.size()}¸öÊéÇ©£¡<br/>
+        æ‚¨å…±æœ‰${bookmarks.size()}ä¸ªä¹¦ç­¾ï¼<br/>
         #foreach($bm in $bookmarks)
 			${velocityCount}.
 			<a href="$dlog.gen_bookmark_hyperlink($bm,"wml")">${bm.title}</a>
-			<a href="$link.setAction("wml/bookmark")?sid=${g_site_id}&amp;eventSubmit_Delete=$bm.id">É¾³ı</a>
+			<a href="$link.setAction("wml/bookmark")?sid=${g_site_id}&amp;eventSubmit_Delete=$bm.id">åˆ é™¤</a>
 			<br/>
     	#end
 	#else
-		Äú»¹ÓĞÌí¼ÓÈÎºÎÊéÇ©¡£
+		æ‚¨è¿˜æœ‰æ·»åŠ ä»»ä½•ä¹¦ç­¾ã€‚
 	#end                         
 #else
-	ÄúÉĞÎ´µÇÂ¼£¬µã»÷´Ë´¦<a href="$dlog.root()/wml/login.vm?sid=$g_site_id&fromPage=$link.encodeURL($dlog.get_request_url())">µÇÂ¼</a>¡£
+	æ‚¨å°šæœªç™»å½•ï¼Œç‚¹å‡»æ­¤å¤„<a href="$dlog.root()/wml/login.vm?sid=$g_site_id&fromPage=$link.encodeURL($dlog.get_request_url())">ç™»å½•</a>ã€‚
 #end
 </p>

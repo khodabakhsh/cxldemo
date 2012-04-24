@@ -18,18 +18,18 @@
 ###############################################################################
 #parse("/wml/_sub/_global.vm")
 #set($close_search_robots = true)
-#set($page_title="ÎÒÒªÆÀÂÛ")
+#set($page_title="æˆ‘è¦è¯„è®º")
 #set($topic_id = $dlog.param("tid", -1))
 #set($topic = $BBS_tool.topic($g_site, $g_user, $topic_id))
 <p>
 #if(!$g_user)
 	#set($url = "/wml/bbs/reply.vm?sid=$g_site_id&tid=$topic_id")	
-	ÇëÏÈµÇÂ¼ºóÔÙÆÀÂÛ,µã»÷<a href="$dlog.root()/wml/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($url)">´Ë´¦µÇÂ¼</a>.
+	è¯·å…ˆç™»å½•åå†è¯„è®º,ç‚¹å‡»<a href="$dlog.root()/wml/login.vm?sid=$g_site_id&amp;fromPage=$link.encodeURL($url)">æ­¤å¤„ç™»å½•</a>.
 #elseif($topic)
     #wml_error_msg()
-	»°Ìâ:<a href="topic.vm?sid=$g_site_id&amp;fid=${topic.forum.id}&amp;tid=${topic.id}">$text.html(${topic.title})</a><br/>
-	»Ø¸´ÄÚÈİ:<input type="text" name="content" value=""/><br/>
-	<anchor>Ìá½»ÆÀÂÛ
+	è¯é¢˜:<a href="topic.vm?sid=$g_site_id&amp;fid=${topic.forum.id}&amp;tid=${topic.id}">$text.html(${topic.title})</a><br/>
+	å›å¤å†…å®¹:<input type="text" name="content" value=""/><br/>
+	<anchor>æäº¤è¯„è®º
         <go href="$link.setAction("wml/bbs/reply")" method="post">
             <postfield name="sid" value="$g_site_id"/>
             <postfield name="tid" value="$topic_id"/>
@@ -42,6 +42,6 @@
         </go>
     </anchor>
 #else
-	±àºÅÎª#${topic_id}µÄÌÖÂÛ»°Ìâ²»´æÔÚ£¡
+	ç¼–å·ä¸º#${topic_id}çš„è®¨è®ºè¯é¢˜ä¸å­˜åœ¨ï¼
 #end
 </p>

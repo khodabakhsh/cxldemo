@@ -17,17 +17,17 @@
 ##
 ###############################################################################
 #parse("/wml/_sub/_global.vm")
-#set($page_title="ÎÒÒªÆÀÂÛ")
+#set($page_title="æˆ‘è¦è¯„è®º")
 #set($close_search_robots = true)
 #set($photo_id = $dlog.param("pid", -1))
 #set($photo = $PHOTO_tool.photo($g_site, $g_user, $photo_id))
 <p>
 #if($photo && ${photo.status}==0)
     #wml_error_msg()
-	ÕÕÆ¬:<a href="$dlog.root()/wml/photo/show.vm?sid=$g_site_id&amp;pid=${photo_id}">$text.html(${photo.name})</a><br/>
-	ÄÚÈİ:<input type="text" name="content" value=""/><br/>
-	ÆÀÂÛÕß:<input type="text" name="author" value="$text.html($!{g_user.nickname})"/><br/>
-	<anchor>Ìá½»ÆÀÂÛ
+	ç…§ç‰‡:<a href="$dlog.root()/wml/photo/show.vm?sid=$g_site_id&amp;pid=${photo_id}">$text.html(${photo.name})</a><br/>
+	å†…å®¹:<input type="text" name="content" value=""/><br/>
+	è¯„è®ºè€…:<input type="text" name="author" value="$text.html($!{g_user.nickname})"/><br/>
+	<anchor>æäº¤è¯„è®º
         <go href="$link.setAction("wml/reply")" method="post">
             <postfield name="sid" value="$g_site_id"/>
             <postfield name="pid" value="$photo_id"/>
@@ -39,6 +39,6 @@
         </go>
     </anchor>
 #else
-	ÕÕÆ¬²»´æÔÚ£¡
+	ç…§ç‰‡ä¸å­˜åœ¨ï¼
 #end
 </p>

@@ -21,7 +21,7 @@
 #set($uid = $dlog.param("uid",-1))
 #set($user = $USER_tool.user($uid))
 <div class="page_top">
-	<h3>&nbsp;$text.html(${user.nickname})µÄ»ù±¾×ÊÁÏ</h3>
+	<h3>&nbsp;$text.html(${user.nickname})çš„åŸºæœ¬èµ„æ–™</h3>
 </div>
 <div class="page_content">
 	<form action="$link.setAction("dlog/user")" method="post">
@@ -37,40 +37,40 @@
     	</div>
 		#end
     	<div class="form_row">
-    		<div class="form_row_title fleft">ÓÃ»§Ãû:</div>
+    		<div class="form_row_title fleft">ç”¨æˆ·å:</div>
     		<div class="form_row_content">&nbsp;$text.html(${user.name})</div>
     	</div>
     	<div class="form_row">
-    		<div class="form_row_title fleft">ÔÚÏß×´Ì¬:</div>
-    		<div class="form_row_content">&nbsp;#if($user.onlineStatus==1)[ÔÚÏß]#else[ÀëÏß]#end</div>
+    		<div class="form_row_title fleft">åœ¨çº¿çŠ¶æ€:</div>
+    		<div class="form_row_content">&nbsp;#if($user.onlineStatus==1)[åœ¨çº¿]#else[ç¦»çº¿]#end</div>
     	</div>
     	<div class="form_row">
-    		<div class="form_row_title fleft">êÇ³Æ:</div>
+    		<div class="form_row_title fleft">æ˜µç§°:</div>
     		<div class="form_row_content">&nbsp;$text.html(${user.nickname})</div>
     	</div>
     	<div class="form_row">
-    		<div class="form_row_title fleft">ĞÔ±ğ:</div>
+    		<div class="form_row_title fleft">æ€§åˆ«:</div>
     		<div class="form_row_content">&nbsp;$text.get("sex.desc.${user.sex}","ui")</div>
     	</div>
     	<div class="form_row">
-    		<div class="form_row_title fleft">ÉúÈÕ:</div>
+    		<div class="form_row_title fleft">ç”Ÿæ—¥:</div>
     		<div class="form_row_content">&nbsp;$!date.format("yyyy/MM/dd",$!{user.birth})&nbsp;</div>
     	</div>
     	<div class="form_row">
-    		<div class="form_row_title fleft">¸öÈËĞûÑÔ:</div>
+    		<div class="form_row_title fleft">ä¸ªäººå®£è¨€:</div>
     		<div class="form_row_content">&nbsp;$!{user.resume}</div>
     	</div>
     	<div class="form_row">
-    		<div class="form_row_title fleft">×¢²áÊ±¼ä:</div>
+    		<div class="form_row_title fleft">æ³¨å†Œæ—¶é—´:</div>
     		<div class="form_row_content">&nbsp;$date.format("yyyy/MM/dd HH:mm",$user.regTime)</div>
     	</div>
     	<div class="form_row">
-    		<div class="form_row_title fleft">×î½ü·ÃÎÊÊ±¼ä:</div>
+    		<div class="form_row_title fleft">æœ€è¿‘è®¿é—®æ—¶é—´:</div>
     		<div class="form_row_content">&nbsp;$!date.format("yyyy/MM/dd HH:mm",$user.lastTime)</div>
     	</div>
-		<p><strong>ÁªÏµĞÅÏ¢:</strong></p>
+		<p><strong>è”ç³»ä¿¡æ¯:</strong></p>
     	<div class="form_row">
-    		<div class="form_row_title fleft">µç×ÓÓÊ¼ş:</div>
+    		<div class="form_row_title fleft">ç”µå­é‚®ä»¶:</div>
     		<div class="form_row_content">&nbsp;#if(!$dlog.is_empty($user.contactInfo.email))<a href="mailto:${user.contactInfo.email}">$!{user.contactInfo.email}</a>#end</div>
     	</div>
     	<div class="form_row">
@@ -82,46 +82,46 @@
     		<div class="form_row_content">&nbsp;$!{user.contactInfo.msn}</div>
     	</div>
     	<div class="form_row">
-    		<div class="form_row_title fleft">¸öÈËÍøÕ¾:</div>
+    		<div class="form_row_title fleft">ä¸ªäººç½‘ç«™:</div>
     		<div class="form_row_content">&nbsp;#if(!$dlog.is_empty($user.contactInfo.homePage))<a href="${user.contactInfo.homePage}" target="_blank">$!{user.contactInfo.homePage}</a>#end</div>
     	</div>
     	<div class="form_row">
-    		<div class="form_row_title fleft">µØÇø(Ê¡/ÊĞ):</div>
+    		<div class="form_row_title fleft">åœ°åŒº(çœ/å¸‚):</div>
     		<div class="form_row_content">&nbsp;$!{user.province} $!{user.city}</div>
     	</div>
-		<p><strong>²ÎÓëÇé¿ö:</strong></p>
+		<p><strong>å‚ä¸æƒ…å†µ:</strong></p>
     	#if($user.ownSiteId>0)
     		#set($user_site = $dlog.site($user.ownSiteId))
     	<div class="form_row">
-    		<div class="form_row_title fleft">×¢²áÍøÕ¾:</div>
+    		<div class="form_row_title fleft">æ³¨å†Œç½‘ç«™:</div>
     		<div class="form_row_content">&nbsp;<a href="$dlog.root()/?sid=$user.ownSiteId" title="$text.html(${user_site.title})">$text.html(${user_site.friendlyName})</a></div>
     	</div>
 		#end
     	<div class="form_row">
-    		<div class="form_row_title fleft">²ÎÓëÈÕ¼Ç:</div>
-    		<div class="form_row_content">&nbsp;ÈÕ¼Ç(${user.count.article})  ÆÀÂÛ(${user.count.articleReply})</div>
+    		<div class="form_row_title fleft">å‚ä¸æ—¥è®°:</div>
+    		<div class="form_row_content">&nbsp;æ—¥è®°(${user.count.article})  è¯„è®º(${user.count.articleReply})</div>
     	</div>
     	<div class="form_row">
-    		<div class="form_row_title fleft">²ÎÓëÏà²á:</div>
-    		<div class="form_row_content">&nbsp;ÕÕÆ¬(${user.count.photo})  ÆÀÂÛ(${user.count.photoReply})</div>
+    		<div class="form_row_title fleft">å‚ä¸ç›¸å†Œ:</div>
+    		<div class="form_row_content">&nbsp;ç…§ç‰‡(${user.count.photo})  è¯„è®º(${user.count.photoReply})</div>
     	</div>
     	<div class="form_row">
-    		<div class="form_row_title fleft">²ÎÓëÌÖÂÛ:</div>
-    		<div class="form_row_content">&nbsp;Ìù×Ó(${user.count.topic})  ÆÀÂÛ(${user.count.topicReply})</div>
+    		<div class="form_row_title fleft">å‚ä¸è®¨è®º:</div>
+    		<div class="form_row_content">&nbsp;è´´å­(${user.count.topic})  è¯„è®º(${user.count.topicReply})</div>
     	</div>
 		<div class="form_row_submit">
 			#if($g_user && ($uid != ${g_user.id}))
-        	<input type="button" value="¶ÌÏûÏ¢" onclick="location.href='$dlog.root()/dlog/sendmsg.vm?sid=$g_site_id&amp;uid=$user.id'">
-        	<input type="button" name="eventSubmit_AddFriend" value="¼ÓÎªºÃÓÑ" onclick="add_user_to_friend();">
+        	<input type="button" value="çŸ­æ¶ˆæ¯" onclick="location.href='$dlog.root()/dlog/sendmsg.vm?sid=$g_site_id&amp;uid=$user.id'">
+        	<input type="button" name="eventSubmit_AddFriend" value="åŠ ä¸ºå¥½å‹" onclick="add_user_to_friend();">
 			#end
 			#if($g_user && $uid == ${g_user.id})
-        	<input type="button" value="ĞŞ¸Ä" onclick="location.href='$dlog.root()/dlog/myprofile.vm?sid=$g_site_id&amp;uid=$user.id'">
+        	<input type="button" value="ä¿®æ”¹" onclick="location.href='$dlog.root()/dlog/myprofile.vm?sid=$g_site_id&amp;uid=$user.id'">
 			#end
     		#if($g_user && ($uid != ${g_user.id}))
-    		<input type="submit" name="eventSubmit_BlockUser" value="×èÖ¹">
+    		<input type="submit" name="eventSubmit_BlockUser" value="é˜»æ­¢">
     		#end
-        	<input type="button" name="btn_return" value="·µ»ØÉÏÒ³" onclick="history.go(-1)">
-        	<input type="button" name="btn_return" value="·µ»ØÍø¼Ç" onclick="location.href='$dlog.root()/?sid=$g_site_id'">
+        	<input type="button" name="btn_return" value="è¿”å›ä¸Šé¡µ" onclick="history.go(-1)">
+        	<input type="button" name="btn_return" value="è¿”å›ç½‘è®°" onclick="location.href='$dlog.root()/?sid=$g_site_id'">
 		</div>
 	</div>
 	</form>

@@ -19,9 +19,9 @@
 #parse("/wml/_sub/_global.vm")
 #set($page_title="$text.bbs($g_site)")
 <p>
-	<b>ÇëÑ¡ÔñÌÖÂÛÇø</b><br/>
+	<b>è¯·é€‰æ‹©è®¨è®ºåŒº</b><br/>
 #foreach($forum in $BBS_tool.forums($request, $g_site, $g_user))
 	${velocityCount}.<a href="forum.vm?sid=$g_site_id&amp;fid=${forum.id}">$text.html(${forum.name})</a>
-	(»°Ìâ:${forum.topicCount}#if($forum.lastPostTime),×îĞÂ·¢±í: $date.format("MM-dd HH:mm",${forum.lastPostTime}) by <a href="topic.vm?sid=$g_site_id&amp;fid=${forum.id}&amp;tid=${forum.lastTopic.id}">$text.html(${forum.lastUsername})</a>#end)<br/>
+	(è¯é¢˜:${forum.topicCount}#if($forum.lastPostTime),æœ€æ–°å‘è¡¨: $date.format("MM-dd HH:mm",${forum.lastPostTime}) by <a href="topic.vm?sid=$g_site_id&amp;fid=${forum.id}&amp;tid=${forum.lastTopic.id}">$text.html(${forum.lastUsername})</a>#end)<br/>
 #end
 </p>

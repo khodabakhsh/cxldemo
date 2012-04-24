@@ -17,12 +17,12 @@
 
 <body>
 <div id="error">
-  <div id="title_bar">$escape.html("£¡£¡£¡ ´í Îó £¡£¡£¡")</div>
+  <div id="title_bar">$escape.html("ï¼ï¼ï¼ é”™ è¯¯ ï¼ï¼ï¼")</div>
     <div id="info">
-      <h2>$escape.html("Äú·ÃÎÊµÄÒ³Ãæ·¢Éú´íÎó!")</h2>
-		$escape.html("Çë½«´Ë´íÎóÐÅÏ¢±¨¸æ¸øÎÒÃÇµÄÏµÍ³¹ÜÀíÔ±£¬ÒÔ±ãÎÒÃÇ¾¡¿ìÎªÄú½â¾ö¸ÃÎÊÌâ¡£")<br/><br/>        
-		$escape.html("Äú¿ÉÒÔÍ¨¹ýµç×ÓÓÊ¼þ£º")<a href="mailto:dlog4j@gmail.com">dlog4j@gmail.com</a> $escape.html("½«ÏÂÃæµÄÐÅÏ¢·¢ËÍ¸øÎÒÃÇ¡£")<br/><br/>
-	    $escape.html("¸ÐÐ»Äú¶ÔÎÒÃÇµÄ´óÁ¦Ö§³Ö£¡")(<a href="#" onclick="history.go(-1);return false;">$escape.html("»Øµ½ÉÏÒ³")</a>)
+      <h2>$escape.html("æ‚¨è®¿é—®çš„é¡µé¢å‘ç”Ÿé”™è¯¯!")</h2>
+		$escape.html("è¯·å°†æ­¤é”™è¯¯ä¿¡æ¯æŠ¥å‘Šç»™æˆ‘ä»¬çš„ç³»ç»Ÿç®¡ç†å‘˜ï¼Œä»¥ä¾¿æˆ‘ä»¬å°½å¿«ä¸ºæ‚¨è§£å†³è¯¥é—®é¢˜ã€‚")<br/><br/>        
+		$escape.html("æ‚¨å¯ä»¥é€šè¿‡ç”µå­é‚®ä»¶ï¼š")<a href="mailto:dlog4j@gmail.com">dlog4j@gmail.com</a> $escape.html("å°†ä¸‹é¢çš„ä¿¡æ¯å‘é€ç»™æˆ‘ä»¬ã€‚")<br/><br/>
+	    $escape.html("æ„Ÿè°¢æ‚¨å¯¹æˆ‘ä»¬çš„å¤§åŠ›æ”¯æŒï¼")(<a href="#" onclick="history.go(-1);return false;">$escape.html("å›žåˆ°ä¸Šé¡µ")</a>)
     </div>
 	<div id="error_detail">
 		<pre>$!dlog.exception()</pre>

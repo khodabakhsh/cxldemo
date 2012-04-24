@@ -18,11 +18,11 @@
 ###############################################################################
 #invoke("_sub/_global.vm")
 #select_layout("p_main.vm")
-#set($page_title="×¢²áĞÂÓÃ»§")
+#set($page_title="æ³¨å†Œæ–°ç”¨æˆ·")
 #set($next_uri=$dlog.param("fromPage",""))
 #set($uform = $form.getBean())
 <div class="page_top">
-	<h3>&nbsp;×¢²áĞÂÓÃ»§</h3>
+	<h3>&nbsp;æ³¨å†Œæ–°ç”¨æˆ·</h3>
 </div>
 <div class="page_content">
 	<form name="uform" method="POST" action="$link.setAction("dlog/user")" onsubmit="return validateUserForm(this);">
@@ -31,32 +31,32 @@
 	<input type="hidden" name="cb_agreement" value="1"/>
 	#if($g_site)<input type="hidden" name="sid" value="$g_site_id"/>#end
 	<div class="form">
-    <p><strong>ÓÃ»§»ù±¾ĞÅÏ¢(<font color="red">±ØÌî</font>):</strong></p>    
+    <p><strong>ç”¨æˆ·åŸºæœ¬ä¿¡æ¯(<font color="red">å¿…å¡«</font>):</strong></p>    
 	<div class="form_row">
 		<div class="form_row_title fleft">
-			ÓÃ»§Ãû:
+			ç”¨æˆ·å:
 		</div>
 		<div class="form_row_content">
 			<input type="text" size="20" maxlength="20" id="name" name="name" value="$!{uform.name}">
-			<a href="#" onclick="validateUname($F('name'));return false;">¼ì²âÓÃ»§Ãû</a>
+			<a href="#" onclick="validateUname($F('name'));return false;">æ£€æµ‹ç”¨æˆ·å</a>
 			#struts_message("name")
 		</div>
 	</div>
 	<div class="spacer_1"></div>
 	<div class="form_row">
 		<div class="form_row_title fleft">
-			êÇ³Æ:
+			æ˜µç§°:
 		</div>
 		<div class="form_row_content">
 			<input type="text" size="20" maxlength="20" id="nickname" name="nickname" value="$!{uform.nickname}">
-			<a href="#" onclick="validateNname($F('nickname'));return false;">¼ì²âêÇ³Æ</a>
+			<a href="#" onclick="validateNname($F('nickname'));return false;">æ£€æµ‹æ˜µç§°</a>
 			#struts_message("nickname")
 		</div>
 	</div>
 	<div class="spacer_1"></div>
 	<div class="form_row">
 		<div class="form_row_title fleft">
-			ÃÜÂë:
+			å¯†ç :
 		</div>
 		<div class="form_row_content">
 			<input type="password" size="20" maxlength="20" name="password">
@@ -66,7 +66,7 @@
 	<div class="spacer_1"></div>
 	<div class="form_row">
 		<div class="form_row_title fleft">
-			ÃÜÂëÈ·ÈÏ:
+			å¯†ç ç¡®è®¤:
 		</div>
 		<div class="form_row_content">
 			<input type="password" size="20" maxlength="20" name="password2">
@@ -75,7 +75,7 @@
 	<div class="spacer_1"></div>
 	<div class="form_row">
 		<div class="form_row_title fleft">
-			Ğ£ÑéÂë:
+			æ ¡éªŒç :
 		</div>
 		<div class="form_row_content">
 			<input type="text" size="5" maxlength="4" name="verifyCode">
@@ -83,15 +83,15 @@
 			#struts_message("verifyCode")
 		</div>
 	</div>
-    <p><strong>ÁªÏµĞÅÏ¢(¿ÉÑ¡):</strong></p>
+    <p><strong>è”ç³»ä¿¡æ¯(å¯é€‰):</strong></p>
 	<div class="form_row">
 		<div class="form_note">
-			<b>ÌáÊ¾£ºÇëÈÏÕæÌîĞ´µç×ÓÓÊ¼ş£¬ÒÔ±ãÄúÍü¼ÇÃÜÂëÊ±ÏµÍ³¿ÉÒÔ½«ÃÜÂë·¢ËÍµ½¸ÃÓÊÏä¡£</b>
+			<b>æç¤ºï¼šè¯·è®¤çœŸå¡«å†™ç”µå­é‚®ä»¶ï¼Œä»¥ä¾¿æ‚¨å¿˜è®°å¯†ç æ—¶ç³»ç»Ÿå¯ä»¥å°†å¯†ç å‘é€åˆ°è¯¥é‚®ç®±ã€‚</b>
 		</div>
 	</div>
 	<div class="form_row">
 		<div class="form_row_title fleft">
-			µç×ÓÓÊ¼ş:
+			ç”µå­é‚®ä»¶:
 		</div>
 		<div class="form_row_content">
 			<input type="text" size="30" maxlength="50" name="email" value="$!{uform.email}">                    
@@ -121,7 +121,7 @@
 	<div class="spacer_1"></div>
 	<div class="form_row">
 		<div class="form_row_title fleft">
-			¸öÈËÍøÖ·:
+			ä¸ªäººç½‘å€:
 		</div>
 		<div class="form_row_content">
             <input type="text" size="50" maxlength="50" name="homePage" value="$!{uform.homePage}">                    
@@ -131,19 +131,19 @@
 	<div class="spacer_1"></div>
 	<div class="form_row">
 		<div class="form_row_title fleft">
-			µØÇø(Ê¡/ÊĞ)
+			åœ°åŒº(çœ/å¸‚)
 		</div>
 		<div class="form_row_content">#invoke("_sub/_area.vm")</div>
 	</div>
 	<div class="spacer_1"></div>
 	<div class="form_row">
 		<div class="form_row_title fleft">
-			ÄúµÄĞÔ±ğ£¿
+			æ‚¨çš„æ€§åˆ«ï¼Ÿ
 		</div>
 		<div class="form_row_content">
-        <input type="radio" name="sex" value="0" #if(!$uform || ${uform.sex}==0)checked#end>±£ÃÜ
-        <input type="radio" name="sex" value="1" #if($uform && ${uform.sex}==1)checked#end>ÄĞ 
-        <input type="radio" name="sex" value="2" #if($uform && ${uform.sex}==2)checked#end>Å®
+        <input type="radio" name="sex" value="0" #if(!$uform || ${uform.sex}==0)checked#end>ä¿å¯†
+        <input type="radio" name="sex" value="1" #if($uform && ${uform.sex}==1)checked#end>ç”· 
+        <input type="radio" name="sex" value="2" #if($uform && ${uform.sex}==2)checked#end>å¥³
 		</div>
 	</div>
 	<div class="spacer_1"></div>
@@ -153,19 +153,19 @@
         <script type="text/javascript" src="$dlog.root()/js/calendar_lang/calendar-en.js"></script>
         <script type="text/javascript" src="$dlog.root()/js/calendar-setup.js"></script>
 		<div class="form_row_title fleft">
-			ÄúµÄÉúÈÕ£¿
+			æ‚¨çš„ç”Ÿæ—¥ï¼Ÿ
 		</div>
 		<div class="form_row_content">
         &nbsp;&nbsp;<span id="show_birth">$!{uform.birth}</span>&nbsp;&nbsp;
         <input type="hidden" name="birth" id="f_date_birth" value="$!{uform.birth}"/>
-        &nbsp;&nbsp;<img id="f_trigger_birth" src="$html.image_src("date_sel.gif")" border="0" align="absMiddle"/>&nbsp;&lt;--µã»÷ÕâÀï½øĞĞÉèÖÃ
+        &nbsp;&nbsp;<img id="f_trigger_birth" src="$html.image_src("date_sel.gif")" border="0" align="absMiddle"/>&nbsp;&lt;--ç‚¹å‡»è¿™é‡Œè¿›è¡Œè®¾ç½®
         #calendar_setup("f_date_birth" "show_birth" "f_trigger_birth")
 		</div>
 	</div>
 	<div class="spacer_1"></div>
 	<div class="form_row">
 		<div class="form_row_title fleft">
-			¸öÈËĞûÑÔ:
+			ä¸ªäººå®£è¨€:
 		</div>
 		<div class="form_row_content">
 			<textarea name="resume" rows="5" cols="40">$!{uform.resume}</textarea>
@@ -174,32 +174,32 @@
 	<div class="spacer_1"></div>
 	<div class="form_row">
 		<div class="form_row_title fleft">
-			µÇÂ¼ĞÅÏ¢:
+			ç™»å½•ä¿¡æ¯:
 		</div>
 		<div class="form_row_content">
             <select name="keepDays">
-                <option value="-1">²»±£´æ</option>
-                <option value="1">±£´æÒ»Ìì</option>
-                <option value="7">±£´æÒ»ÖÜ</option>
-                <option value="30">±£´æÒ»ÔÂ</option>
-                <option value="365" selected>±£´æÒ»Äê</option>
+                <option value="-1">ä¸ä¿å­˜</option>
+                <option value="1">ä¿å­˜ä¸€å¤©</option>
+                <option value="7">ä¿å­˜ä¸€å‘¨</option>
+                <option value="30">ä¿å­˜ä¸€æœˆ</option>
+                <option value="365" selected>ä¿å­˜ä¸€å¹´</option>
             </select>
 		</div>
 	</div>
 	<!--
 	<div class="form_row">
 		<p>
-		<input type="checkbox" name="cb_agreement" value="1"/> ÔÄ¶Á²¢Í¬Òâ½ÓÊÜ"<a href="$dlog.root()/dlog/agreement.html" target="agreement">DLOG·şÎñÌõ¿î</a>"
+		<input type="checkbox" name="cb_agreement" value="1"/> é˜…è¯»å¹¶åŒæ„æ¥å—"<a href="$dlog.root()/dlog/agreement.html" target="agreement">DLOGæœåŠ¡æ¡æ¬¾</a>"
 		</p>
     </div>
 	-->
 	<div class="spacer_1"></div>
 	<div class="form_row">
 		<div class="form_row_submit">
-            <input type="submit" name="eventSubmit_CreateUser" value="Ìá½»×¢²á">
-            <input type="reset" value="ÖØĞÂÌîĞ´">
-            <input type="button" value="·µ»ØÉÏÒ³" onclick="history.go(-1)"/>
-    		<input type="button" value="·µ»ØÊ×Ò³" onclick="location.href='$dlog.root()/#if($g_site)?sid=${g_site_id}#end';"/>
+            <input type="submit" name="eventSubmit_CreateUser" value="æäº¤æ³¨å†Œ">
+            <input type="reset" value="é‡æ–°å¡«å†™">
+            <input type="button" value="è¿”å›ä¸Šé¡µ" onclick="history.go(-1)"/>
+    		<input type="button" value="è¿”å›é¦–é¡µ" onclick="location.href='$dlog.root()/#if($g_site)?sid=${g_site_id}#end';"/>
 		</div>
 	</div>
 	</div>
@@ -211,7 +211,7 @@
 <script language="javascript" type="text/javascript">
 	function validateUname(uname){
 		if(is_empty(uname)){
-			alert("ÇëÊäÈëÓÃ»§Ãû");
+			alert("è¯·è¾“å…¥ç”¨æˆ·å");
 			document.uform.name.focus();
 			return;
 		}
@@ -224,7 +224,7 @@
 	}
 	function validateNname(uname){
 		if(is_empty(uname)){
-			alert("ÇëÊäÈëêÇ³Æ");
+			alert("è¯·è¾“å…¥æ˜µç§°");
 			document.uform.nickname.focus();
 			return;
 		}
@@ -240,7 +240,7 @@
 			if(not_empty(originalRequest.responseText))
 				alert(originalRequest.responseText);
 			else
-				alert("ÄúÊäÈëµÄĞÅÏ¢ÓĞĞ§.");
+				alert("æ‚¨è¾“å…¥çš„ä¿¡æ¯æœ‰æ•ˆ.");
 		}
     }
     function validateUserForm(uForm){
