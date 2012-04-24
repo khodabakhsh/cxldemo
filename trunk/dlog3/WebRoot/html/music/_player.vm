@@ -10,7 +10,7 @@ function play(url){
 	if (window.netscape){
     	mplayer = $('emplayer');
 		state = mplayer.GetPlayState();
-        if(state==2 && mplayer.GetFileName() == url) ##ÒÑ¾­ÔÚ²¥·ÅÖ¸¶¨¸èÇú
+        if(state==2 && mplayer.GetFileName() == url) ##å·²ç»åœ¨æ’­æ”¾æŒ‡å®šæ­Œæ›²
             return false;
 		if(state==2)
 		    mplayer.Stop();
@@ -19,7 +19,7 @@ function play(url){
 	else{
    		mplayer = $('omplayer');	
         state = mplayer.PlayState;
-        if(state==2 && mplayer.fileName == url) ##ÒÑ¾­ÔÚ²¥·ÅÖ¸¶¨¸èÇú
+        if(state==2 && mplayer.fileName == url) ##å·²ç»åœ¨æ’­æ”¾æŒ‡å®šæ­Œæ›²
             return false;
 		if(state==2)
 		    mplayer.Stop();

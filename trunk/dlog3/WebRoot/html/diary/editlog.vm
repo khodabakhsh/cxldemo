@@ -23,9 +23,9 @@
 #set($log = $DIARY_tool.diary($g_site, $g_user, $log_id))
 #set($page_title=${log.title})
 #if(!$g_user)
-    #show_msg_box("ÓÃ»§ÉĞÎ´µÇÂ¼,µã»÷<a href='$dlog.root()/dlog/login.vm?sid=$g_site_id'>ÕâÀï</a>µÇÂ¼")
+    #show_msg_box("ç”¨æˆ·å°šæœªç™»å½•,ç‚¹å‡»<a href='$dlog.root()/dlog/login.vm?sid=$g_site_id'>è¿™é‡Œ</a>ç™»å½•")
 #elseif(!$DIARY_tool.can_user_edit_diary($g_user, $log))
-    #show_msg_box("ÄúÃ»ÓĞ±à¼­¸ÃÈÕ¼ÇµÄÈ¨ÏŞ£¡")
+    #show_msg_box("æ‚¨æ²¡æœ‰ç¼–è¾‘è¯¥æ—¥è®°çš„æƒé™ï¼")
 #else
 #if($messages.exist())
 <div class="error_msg">$messages.getAll()</div>
@@ -42,10 +42,10 @@
 <div class="page_top">
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			<b>±à¼­ÈÕ¼Ç</b>
+			<b>ç¼–è¾‘æ—¥è®°</b>
 		</div>
 		<div class="pagecontent_right fright">
-			 ½ñÌìÊÇ: $date.get("MMMMM d, yyyy  EEEEE")
+			 ä»Šå¤©æ˜¯: $date.get("MMMMM d, yyyy  EEEEE")
 		</div>        
 	</div>
 	<div class="spacer_1"></div>
@@ -54,7 +54,7 @@
 	<div class="form">
     	<div class="form_row">
     		<div class="form_row_title fleft">
-    			·ÖÀà:
+    			åˆ†ç±»:
     		</div>
     		<div class="form_row_content">
         		<select name="catalogId">
@@ -62,13 +62,13 @@
 						<option value="${cat.id}"#if(${log.catalog.id}==${cat.id}) selected#end>$text.html(${cat.name})</option>
 					#end
 				</select>
-				<a href="$dlog.root()/html/sitemgr/catalog_add.vm?sid=$g_site_id">&lt;Ìí¼Ó·ÖÀà&gt;</a>
+				<a href="$dlog.root()/html/sitemgr/catalog_add.vm?sid=$g_site_id">&lt;æ·»åŠ åˆ†ç±»&gt;</a>
     		</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-    			ÌìÆø:
+    			å¤©æ°”:
     		</div>
     		<div class="form_row_content">
         		#set($weathers = ["sunny","ptcloudy","cloudy","showers","rain","storms","snow","flurries","ice","dark"])
@@ -90,12 +90,12 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-    			±³¾°ÒôÀÖ:
+    			èƒŒæ™¯éŸ³ä¹:
     		</div>
     		<div class="form_row_content">
         		#if($g_site.songs.size()>0)
                 <select name="bgSound">
-                	<option value="-1" selected>[ÎŞ±³¾°ÒôÀÖ]</option>
+                	<option value="-1" selected>[æ— èƒŒæ™¯éŸ³ä¹]</option>
                 	#foreach($song in $g_site.songs)
                 	<option value="${song.id}" #if(${log.bgSound} && ${log.bgSound.id}==${song.id})selected#end>&nbsp;&#8226;&nbsp;${song.title}</option>
                 	#end
@@ -107,16 +107,16 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-    			±êÌâ:
+    			æ ‡é¢˜:
     		</div>
     		<div class="form_row_content">
-        		<input type="text" name="title" maxlength="100" size="48" value="$!{log.title}" />&nbsp;{±ØĞëÌîĞ´}
+        		<input type="text" name="title" maxlength="100" size="48" value="$!{log.title}" />&nbsp;{å¿…é¡»å¡«å†™}
     		</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-    			×÷Õß:
+    			ä½œè€…:
     		</div>
     		<div class="form_row_content">
         		<input type="text" name="author" size="12" value="$!{log.author}" />
@@ -126,10 +126,10 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-    			¹Ø¼ü×Ö:
+    			å…³é”®å­—:
     		</div>
     		<div class="form_row_content">
-        		<input type="text" name="tags" maxlength="40" size="35" value="$!{log.keyword}" />&nbsp;(¶à¸ö¹Ø¼ü×ÖÇëÓÃ¿Õ¸ñ¸ô¿ª)
+        		<input type="text" name="tags" maxlength="40" size="35" value="$!{log.keyword}" />&nbsp;(å¤šä¸ªå…³é”®å­—è¯·ç”¨ç©ºæ ¼éš”å¼€)
     		</div>
     	</div>
 		<div class="spacer_1"></div>
@@ -141,7 +141,7 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-    			ÉÏ´«Í¼Æ¬:
+    			ä¸Šä¼ å›¾ç‰‡:
     		</div>
     		<div class="form_row_content">
 				<iframe src="_upload_file.vm?sid=$g_site_id" frameBorder="0" width="400" height="22" scrolling="no"></iframe>
@@ -150,7 +150,7 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-    			ÒıÓÃµØÖ·:
+    			å¼•ç”¨åœ°å€:
     		</div>
     		<div class="form_row_content">
 				<input type="text" name="refUrl" size="50" value="$!{log.refUrl}" />
@@ -159,7 +159,7 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-    			ĞÄÇéÏµÊı:
+    			å¿ƒæƒ…ç³»æ•°:
     		</div>
     		<div class="form_row_content">
 				<input type="radio" value="1" name="moodLevel"#if(${log.moodLevel}==1) checked#end> $html.img("mood/1.gif","1")
@@ -173,23 +173,23 @@
 		<div class="form_row">
 			<div class="form_row_content">
         		<input type="checkbox" name="notify" value="1" #if(!$dlog.is_email(${g_user.contactInfo.email}))disabled#end/>
-    			ÓĞ»ØÌûÊ±ÓÊ¼şÌáĞÑ#if($dlog.is_email(${g_user.contactInfo.email}))(${g_user.contactInfo.email})#end
+    			æœ‰å›å¸–æ—¶é‚®ä»¶æé†’#if($dlog.is_email(${g_user.contactInfo.email}))(${g_user.contactInfo.email})#end
 			</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
 			<div class="form_row_submit">
 				#if($log.status==5)
-                <input type="submit" name="eventSubmit_PublishDraft" value="·¢±í" onclick="return before_submit_diary();"/>#end
-                <input type="submit" name="eventSubmit_UpdateLog" value="ĞŞ¸Ä" onclick="return before_submit_update();"/>
+                <input type="submit" name="eventSubmit_PublishDraft" value="å‘è¡¨" onclick="return before_submit_diary();"/>#end
+                <input type="submit" name="eventSubmit_UpdateLog" value="ä¿®æ”¹" onclick="return before_submit_update();"/>
                 #if($log.lock==0)
-                <input type="submit" name="eventSubmit_Lock" value="Ëø¶¨" />
+                <input type="submit" name="eventSubmit_Lock" value="é”å®š" />
                 #else
-                <input type="submit" name="eventSubmit_UnLock" value="½âËø" />
+                <input type="submit" name="eventSubmit_UnLock" value="è§£é”" />
                 #end
-                <input type="submit" name="eventSubmit_Delete" value="É¾³ı" onclick="return confirm('ÄúÈ·ÈÏÒªÉ¾³ı¸ÃÈÕ¼ÇÂğ£¿');" />
-                <input type="reset" value="ÖØÖÃ" onclick="logForm.title.focus()" />
-                <input type="button" value="·µ»Ø" onclick="history.go(-1)" />
+                <input type="submit" name="eventSubmit_Delete" value="åˆ é™¤" onclick="return confirm('æ‚¨ç¡®è®¤è¦åˆ é™¤è¯¥æ—¥è®°å—ï¼Ÿ');" />
+                <input type="reset" value="é‡ç½®" onclick="logForm.title.focus()" />
+                <input type="button" value="è¿”å›" onclick="history.go(-1)" />
 			</div>
     	</div>
 	</div>
@@ -241,15 +241,15 @@
 	function check_network_response(originalRequest) {
 		if(originalRequest.status==200){
 			if(equals(originalRequest.responseText,"1")){
-				//¼ÌĞøÌá½»²Ù×÷
+				//ç»§ç»­æäº¤æ“ä½œ
 				document.logForm.submit();
 			}
 			else{
-				alert("ÓÃ»§µÇÂ¼ĞÅÏ¢ÒÑ³¬Ê±£¬ÇëÍ×ÉÆ±£´æÈÕ¼ÇÄÚÈİµÇÂ¼ºóÔÙÊÔ£¡");
+				alert("ç”¨æˆ·ç™»å½•ä¿¡æ¯å·²è¶…æ—¶ï¼Œè¯·å¦¥å–„ä¿å­˜æ—¥è®°å†…å®¹ç™»å½•åå†è¯•ï¼");
 			}
 		}
 		else{
-			alert("¼ì²éÍøÂçÁ¬½ÓÊ§°Ü£¬ÇëÍ×ÉÆ±£´æÈÕ¼ÇÄÚÈİÉÔºóÔÙÊÔ£¡");
+			alert("æ£€æŸ¥ç½‘ç»œè¿æ¥å¤±è´¥ï¼Œè¯·å¦¥å–„ä¿å­˜æ—¥è®°å†…å®¹ç¨åå†è¯•ï¼");
 		}
     }
 </script>

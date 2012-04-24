@@ -23,13 +23,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="UTF-8">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>ÍÆ¼öÏàÆ¬</title>
+    <title>æ¨èç›¸ç‰‡</title>
     <script type="text/javascript" src="$dlog.root()/js/common.js"></script>
     #select_css()
     <script language="javascript" type="text/javascript">
     function checkForm(theForm){
     	if(is_empty(theForm.mails.value)){
-    		alert("ÇëÊäÈëºÃÓÑµÄÓÊ¼şµØÖ·¡£");
+    		alert("è¯·è¾“å…¥å¥½å‹çš„é‚®ä»¶åœ°å€ã€‚");
     		theForm.mails.focus();
     		return false;
     	}
@@ -48,13 +48,13 @@
     		<input type="hidden" name="pid" value="$photo_id"/>
     		<input type="hidden" name="img" value="$img_url"/>
     		<input type="hidden" name="__ClientId" value="$dlog.gen_client_id()"/>
-            	<h2><strong>ÇëÊäÈëºÃÓÑµÄÓÊ¼şµØÖ·</strong></h2>(¶à¸öÓÊ¼şµØÖ·ÇëÓÃ ; ¸ô¿ª£¬×î¶àÊäÈëÊ®¸öÓÊÏäµØÖ·)
+            	<h2><strong>è¯·è¾“å…¥å¥½å‹çš„é‚®ä»¶åœ°å€</strong></h2>(å¤šä¸ªé‚®ä»¶åœ°å€è¯·ç”¨ ; éš”å¼€ï¼Œæœ€å¤šè¾“å…¥åä¸ªé‚®ç®±åœ°å€)
             	#if($messages.exist())<br/><font color="red"><b>$!messages.getAll()</b></font>#end
             	<p><textarea name="mails" rows="4" cols="40">$!{request.getParameter("mails")}</textarea></p>
             	<p>
-            		<input type="submit" value="Ìá½»ÓÊ¼şµØÖ·" name="eventSubmit_Recommend"> 
-            		<input type="button" value="¹Ø±Õ´°¿Ú" onclick="window.close()">
-            ¡¡	</p>
+            		<input type="submit" value="æäº¤é‚®ä»¶åœ°å€" name="eventSubmit_Recommend"> 
+            		<input type="button" value="å…³é—­çª—å£" onclick="window.close()">
+            ã€€	</p>
             </form>
 		</div>
 		<div class="popup_window"></div>

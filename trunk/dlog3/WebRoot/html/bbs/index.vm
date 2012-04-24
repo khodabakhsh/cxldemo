@@ -18,10 +18,10 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_bbs.vm")
-#set($page_title="ÌÖÂÛ")
+#set($page_title="è®¨è®º")
 ###############################################################################
 <div class="page_top">
-	<div class="bbs_catalog">&nbsp;ÇëÑ¡ÔñÌÖÂÛÇø</div>
+	<div class="bbs_catalog">&nbsp;è¯·é€‰æ‹©è®¨è®ºåŒº</div>
 	<div class="line_dashed"></div>
 </div>
 <div class="page_content">
@@ -41,11 +41,11 @@
 			</div>
 			<div class="activity">
 			#if(${forum.lastPostTime})
-				<b>Ö÷Ìâ£º</b><a href="$dlog.root()/html/bbs/topic.vm?sid=$g_site_id&amp;fid=${forum.id}&amp;tid=${forum.lastTopic.id}">$!{forum.lastTopic.title}&nbsp;&raquo;</a><br/>
-				<b>×÷Õß£º</b><a href="$dlog.root()/html/bbs/topic.vm?sid=$g_site_id&amp;fid=${forum.id}&amp;tid=${forum.lastTopic.id}">$!{forum.lastUsername}&nbsp;&raquo;</a><br/>
-				<b>·¢±íÊ±¼ä£º</b>$!date.format("yyyy/MM/dd HH:mm", ${forum.lastPostTime})<br/>
+				<b>ä¸»é¢˜ï¼š</b><a href="$dlog.root()/html/bbs/topic.vm?sid=$g_site_id&amp;fid=${forum.id}&amp;tid=${forum.lastTopic.id}">$!{forum.lastTopic.title}&nbsp;&raquo;</a><br/>
+				<b>ä½œè€…ï¼š</b><a href="$dlog.root()/html/bbs/topic.vm?sid=$g_site_id&amp;fid=${forum.id}&amp;tid=${forum.lastTopic.id}">$!{forum.lastUsername}&nbsp;&raquo;</a><br/>
+				<b>å‘è¡¨æ—¶é—´ï¼š</b>$!date.format("yyyy/MM/dd HH:mm", ${forum.lastPostTime})<br/>
 			#end
-				<b>Ö÷Ìâ×ÜÊı£º</b>${forum.topicCount}&nbsp;Æª
+				<b>ä¸»é¢˜æ€»æ•°ï¼š</b>${forum.topicCount}&nbsp;ç¯‡
 			</div>
 		</div>
         #end
@@ -55,7 +55,7 @@
 <div class="page_footer">
 	<div class="line_dashed"></div>
 	<div class="pagecontent">
-		$html.img("rss.png",null,"RSS","absmiddle",0)&nbsp;ÌÖÂÛÇøµÄRSSÁ´½Ó&nbsp;
-		$html.img("forum_lock.gif",null,null,"absmiddle",0)&nbsp;±»Ëø¶¨µÄÌÖÂÛÇø
+		$html.img("rss.png",null,"RSS","absmiddle",0)&nbsp;è®¨è®ºåŒºçš„RSSé“¾æ¥&nbsp;
+		$html.img("forum_lock.gif",null,null,"absmiddle",0)&nbsp;è¢«é”å®šçš„è®¨è®ºåŒº
 	</div>
 </div>

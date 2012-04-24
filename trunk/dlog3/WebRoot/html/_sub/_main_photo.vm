@@ -4,8 +4,8 @@
 #set($P_ROW_COUNT = 5)
 <div class="panel">
 	<div class="panel_head">
-		<div class="fleft"><B>×îÐÂÕÕÆ¬</B></div>
-		<div class="fright"><a href="$dlog.root()/html/photo/?sid=$g_site_id">¸ü¶à...</a></div>
+		<div class="fleft"><B>æœ€æ–°ç…§ç‰‡</B></div>
+		<div class="fright"><a href="$dlog.root()/html/photo/?sid=$g_site_id">æ›´å¤š...</a></div>
 		<div class="spacer_1"></div>
 	</div>
 	<div class="panel_body">
@@ -43,7 +43,7 @@
 			#end
             </table>
     	#else
-    		<p>Ã»ÓÐÕÕÆ¬!</p>
+    		<p>æ²¡æœ‰ç…§ç‰‡!</p>
     	#end
 	</div>
 </div>

@@ -14,7 +14,7 @@ function validateBoxForm(theForm)
 {
     with(theForm){
         if(is_empty(title.value)){
-            alert("¸èÇúÃû³Æ±ØĞëÌîĞ´.");
+            alert("æ­Œæ›²åç§°å¿…é¡»å¡«å†™.");
             title.focus();
             return false;
         }

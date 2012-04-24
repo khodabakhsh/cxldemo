@@ -18,7 +18,7 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_photo.vm")
-#set($page_title="Ôö¼ÓÏà²¾")
+#set($page_title="å¢åŠ ç›¸ç°¿")
 #set($close_left_menu=true)
 ###############################################################################
 #if(!$dlog.is_owner($g_site, $g_user))
@@ -28,7 +28,7 @@
 	<div class="page_top">
     	<div class="pagecontent">
     		<div class="pagecontent_left fleft">
-    			<b>Ôö¼ÓÏà²¾</b>#if($messages.exist())<b>$!messages.get("album")</b>#end
+    			<b>å¢åŠ ç›¸ç°¿</b>#if($messages.exist())<b>$!messages.get("album")</b>#end
     		</div>
     		<div class="pagecontent_right fright">
     		</div>        
@@ -44,14 +44,14 @@
 		<div class="form">
 			<div class="form_note">
     			<div class="spacer_5"></div>
-				<li>×î¶à¿É´´½¨20¸öÒ»¼¶Ïà²¾£»</li>
-				<li>Èç¹ûÄãĞèÒª´´½¨¸ü¶àµÄÏà²¾£¬Çë½¨Îª¶ş¼¶Ïà²¾¡£(ÔÚÄ³¸öÒ»¼¶Ïà²¾Ö®ÄÚ´´½¨Ïà²¾)</li>
+				<li>æœ€å¤šå¯åˆ›å»º20ä¸ªä¸€çº§ç›¸ç°¿ï¼›</li>
+				<li>å¦‚æœä½ éœ€è¦åˆ›å»ºæ›´å¤šçš„ç›¸ç°¿ï¼Œè¯·å»ºä¸ºäºŒçº§ç›¸ç°¿ã€‚(åœ¨æŸä¸ªä¸€çº§ç›¸ç°¿ä¹‹å†…åˆ›å»ºç›¸ç°¿)</li>
         		<div class="spacer_5"></div>
     		</div>
 			<div class="spacer_1"></div>
         	<div class="form_row">
 				<div class="form_row_title fleft">
-        			Ïà²¾Ãû:
+        			ç›¸ç°¿å:
         		</div>
         		<div class="form_row_content">
 					<input type="text" size="20" maxlength="20" name="name" value="$!{cform.name}">
@@ -61,20 +61,20 @@
 			<div class="spacer_1"></div>
     		<div class="form_row">
         		<div class="form_row_title fleft">
-        			Ïà²¾ÊôĞÔ:
+        			ç›¸ç°¿å±æ€§:
         		</div>
         		<div class="form_row_content">
-					&nbsp;&nbsp;¸ù¾İ¸öÈËĞèÒª¿ÉÒÔ½¨Á¢ÈıÖÖÏà²¾ÊôĞÔ!
+					&nbsp;&nbsp;æ ¹æ®ä¸ªäººéœ€è¦å¯ä»¥å»ºç«‹ä¸‰ç§ç›¸ç°¿å±æ€§!
     			</div>
         	</div>
 			<div class="spacer_1"></div>
 			<div class="form_row">
 				<div class="form_row_content">
 					<div class="spacer_5"></div>
-    				<input type="radio" name="type" value="0" checked> ÍêÈ«¹«¿ª <br/>
-                    <input type="radio" name="type" value="2"> Ë½ÈËÏà²¾ <br/>
-                    <input type="radio" name="type" value="1"> ĞèÒªÃÜÂëÑéÖ¤
-                    <input type="text" size="10" maxlength="20" name="verifyCode" value="$!{cform.verifyCode}">#struts_message("password") {ÊäÈë·ÃÎÊÃÜÂë!}
+    				<input type="radio" name="type" value="0" checked> å®Œå…¨å…¬å¼€ <br/>
+                    <input type="radio" name="type" value="2"> ç§äººç›¸ç°¿ <br/>
+                    <input type="radio" name="type" value="1"> éœ€è¦å¯†ç éªŒè¯
+                    <input type="text" size="10" maxlength="20" name="verifyCode" value="$!{cform.verifyCode}">#struts_message("password") {è¾“å…¥è®¿é—®å¯†ç !}
             		<div class="spacer_5"></div>
     			</div>
     		</div>
@@ -82,7 +82,7 @@
 			<div class="spacer_1"></div>
     		<div class="form_row">
         		<div class="form_row_title fleft">
-        			Ïà²¾Î»ÖÃ:
+        			ç›¸ç°¿ä½ç½®:
         		</div>
         		<div class="form_row_content">
 					<select name="id">
@@ -91,9 +91,9 @@
                         #end
                     </select>
                     <select name="direction">
-                        <option value="1">Ö®Ç°</option>
-                        <option value="2">Ö®ºó</option>
-                        <option value="3" #if($album_id>0)selected#end>Ö®ÄÚ</option>
+                        <option value="1">ä¹‹å‰</option>
+                        <option value="2">ä¹‹å</option>
+                        <option value="3" #if($album_id>0)selected#end>ä¹‹å†…</option>
                     </select>
     			</div>
         	</div>
@@ -101,10 +101,10 @@
 			<div class="spacer_1"></div>
     		<div class="form_row">
         		<div class="form_row_title fleft">
-        			Ïà²¾ÃèÊö:
+        			ç›¸ç°¿æè¿°:
         		</div>
         		<div class="form_row_content">
-    				&nbsp;&nbsp;Ö§³Ö´¿ÎÄ×Ö½éÉÜ 100×ÖÒÔÄÚ!
+    				&nbsp;&nbsp;æ”¯æŒçº¯æ–‡å­—ä»‹ç» 100å­—ä»¥å†…!
     			</div>
         	</div>
 			<div class="spacer_1"></div>
@@ -118,9 +118,9 @@
 			<div class="spacer_1"></div>
     		<div class="form_row">
     			<div class="form_row_submit">
-					<input type="submit" name="eventSubmit_Create" value="´´½¨Ïà²¾" class="button">
-                    <input type="reset" value="ÖØĞÂÌîĞ´" class="button">
-                    <input type="button" value="·µ»Ø" class="button" onclick="history.go(-1)">
+					<input type="submit" name="eventSubmit_Create" value="åˆ›å»ºç›¸ç°¿" class="button">
+                    <input type="reset" value="é‡æ–°å¡«å†™" class="button">
+                    <input type="button" value="è¿”å›" class="button" onclick="history.go(-1)">
     			</div>
         	</div>
         </div>

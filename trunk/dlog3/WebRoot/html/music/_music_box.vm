@@ -1,21 +1,21 @@
 #set($mbox = $MUSIC_tool.box($mboxid))
 <div class="music_nav">
-	<div class="fleft">$text.ui("label.music.box"): #if($mbox)${mbox.name}#elseif($mboxid==0) ÍøÓÑÍÆ¼öµÄ¸èÇú#else ËùÓĞ¸èÇú#end&nbsp;
+	<div class="fleft">$text.ui("label.music.box"): #if($mbox)${mbox.name}#elseif($mboxid==0) ç½‘å‹æ¨èçš„æ­Œæ›²#else æ‰€æœ‰æ­Œæ›²#end&nbsp;
         (#if($mbox)$!{mbox.songs.size()}#elseif($mboxid==0)${g_site.musicsRecommend.size()}#else${g_site.songs.size()}#end)
         #if($mbox && $is_owner)
-        <a href="$dlog.root()/html/music/mbox_edit.vm?sid=$g_site_id&amp;box=$mbox.id" title="µã»÷´Ë´¦ĞŞ¸Ä¡®${mbox.name}¡¯">ĞŞ¸Ä</a>&nbsp;|&nbsp;
-        <a href="$link.setAction("html/mbox")?sid=${g_site_id}&amp;eventSubmit_DeleteBox=$mboxid" onclick="return confirm('É¾³ıÒôÀÖºĞ»á°Ñ¸ÃÒôÀÖºĞÏÂËùÓĞĞÅÏ¢Çå¿Õ£¬ÊÇ·ñ¼ÌĞø');" title="µã»÷´Ë´¦É¾³ı¡®${mbox.name}¡¯">É¾³ı</a>
+        <a href="$dlog.root()/html/music/mbox_edit.vm?sid=$g_site_id&amp;box=$mbox.id" title="ç‚¹å‡»æ­¤å¤„ä¿®æ”¹â€˜${mbox.name}â€™">ä¿®æ”¹</a>&nbsp;|&nbsp;
+        <a href="$link.setAction("html/mbox")?sid=${g_site_id}&amp;eventSubmit_DeleteBox=$mboxid" onclick="return confirm('åˆ é™¤éŸ³ä¹ç›’ä¼šæŠŠè¯¥éŸ³ä¹ç›’ä¸‹æ‰€æœ‰ä¿¡æ¯æ¸…ç©ºï¼Œæ˜¯å¦ç»§ç»­');" title="ç‚¹å‡»æ­¤å¤„åˆ é™¤â€˜${mbox.name}â€™">åˆ é™¤</a>
 		#end
 	</div>
 	<div class="fright">
-		<a href="#" onclick="return play_selected('mid')">²¥·ÅÑ¡ÖĞ</a>&nbsp;|&nbsp;
+		<a href="#" onclick="return play_selected('mid')">æ’­æ”¾é€‰ä¸­</a>&nbsp;|&nbsp;
         #if($is_owner)
-			<a href="music_add.vm?sid=$g_site_id&amp;box=$mboxid">Ìí¼Ó</a>&nbsp;|&nbsp;
+			<a href="music_add.vm?sid=$g_site_id&amp;box=$mboxid">æ·»åŠ </a>&nbsp;|&nbsp;
 		#end
-        <a href="#" onclick="return select_all('mid',true)">È«Ñ¡</a>&nbsp;|&nbsp;
-        <a href="#" onclick="return select_all('mid',false)">È¡Ïû</a>&nbsp;|&nbsp;
+        <a href="#" onclick="return select_all('mid',true)">å…¨é€‰</a>&nbsp;|&nbsp;
+        <a href="#" onclick="return select_all('mid',false)">å–æ¶ˆ</a>&nbsp;|&nbsp;
         #if($is_owner)
-			<a href="#" onclick="delete_all(dform);return false;">É¾³ıÑ¡ÖĞ</a>
+			<a href="#" onclick="delete_all(dform);return false;">åˆ é™¤é€‰ä¸­</a>
         #end
 	</div>
 </div>
@@ -43,19 +43,19 @@
 				$html.img("music_check.gif",null,"check","absmiddle",0)
 			</a>
 		</td>
-        <td width="30%" nowrap>¸èÇúÃû³Æ</td>
-        <td width="15%" nowrap>¸èÊÖ</td>
-        <td width="15%" nowrap>×¨¼­</td>
+        <td width="30%" nowrap>æ­Œæ›²åç§°</td>
+        <td width="15%" nowrap>æ­Œæ‰‹</td>
+        <td width="15%" nowrap>ä¸“è¾‘</td>
         #if($mboxid==0 && $is_owner)
-        	<td width="1%" nowrap>ÍÆ¼öÕß</td>
-        	<td width="1%" nowrap>ÊÕ²Ø</td>
+        	<td width="1%" nowrap>æ¨èè€…</td>
+        	<td width="1%" nowrap>æ”¶è—</td>
         #end
-        <td width="1%" nowrap>²¥·Å</td>
-        <td width="1%" nowrap>ÏÂÔØ</td> 
-        <td width="1%" nowrap>¸è´Ê</td>	
+        <td width="1%" nowrap>æ’­æ”¾</td>
+        <td width="1%" nowrap>ä¸‹è½½</td> 
+        <td width="1%" nowrap>æ­Œè¯</td>	
         #if($is_owner)
-        <td width="1%" nowrap>±à¼­</td>
-        <td width="1%" nowrap>É¾³ı</td>
+        <td width="1%" nowrap>ç¼–è¾‘</td>
+        <td width="1%" nowrap>åˆ é™¤</td>
         #end
     </tr>
     #foreach($song in $songs)
@@ -64,38 +64,38 @@
         <td width="20%" nowrap>
 			${song.title}
             <div class="bvsection" id="song_${song.id}">
-    		·¢²¼Ê±¼ä:$date.format("yy/MM/dd", ${song.createTime})
+    		å‘å¸ƒæ—¶é—´:$date.format("yy/MM/dd", ${song.createTime})
             <DIV Class="spacer_5"></DIV>
             <DIV Class="line_dashed"></DIV>
             <DIV Class="spacer_5"></DIV>
-    		¸è´Ê:(<a href="#" onclick="hide_div('song_$song.id');return false;">¹Ø±Õ</a>)<br />$!{song.word}      
+    		æ­Œè¯:(<a href="#" onclick="hide_div('song_$song.id');return false;">å…³é—­</a>)<br />$!{song.word}      
             </div>
 		</td>
         <td width="8%" nowrap>$text.html($!{song.singer})</td>
         <td width="8%" nowrap>$text.html($!{song.album})</td>
         #if($mboxid==0 && $is_owner)
         <td width="1%" nowrap><a href="$dlog.root()/dlog/viewuser.vm?sid=$g_site_id&amp;uid=${song.introducer.id}">$text.html(${song.introducer.nickname})</a></td>
-        <td width="1%" nowrap>ÊÕ²Ø</td>
+        <td width="1%" nowrap>æ”¶è—</td>
         #end
         <td width="1%" align="center">
         #if(${song.url})
-        	<a href="#" onclick="return play('$link.getContextURL()/mlist.vm?sid=${g_site_id}&mid=${song.id}');">$html.img("music/icon_play.gif","µã»÷²¥·Å","play","absmiddle",0)</a>
+        	<a href="#" onclick="return play('$link.getContextURL()/mlist.vm?sid=${g_site_id}&mid=${song.id}');">$html.img("music/icon_play.gif","ç‚¹å‡»æ’­æ”¾","play","absmiddle",0)</a>
 		#end
 		</td>
         <td width="1%" align="center">
         #if(${song.url})
-        	<a href="${song.url}">$html.img("music/icon_down.gif","µã»÷ÏÂÔØ","download","absmiddle",0)</a>
+        	<a href="${song.url}">$html.img("music/icon_down.gif","ç‚¹å‡»ä¸‹è½½","download","absmiddle",0)</a>
         #end</td> 
         <td width="1%" align="center">
 		#if($dlog.not_empty(${song.word}))
-			<a href="#" onclick="show_div('song_$song.id');return false;">$html.img("music/icon_word.gif","²é¿´¸è´Ê",null,"absmiddle",0)</a>
+			<a href="#" onclick="show_div('song_$song.id');return false;">$html.img("music/icon_word.gif","æŸ¥çœ‹æ­Œè¯",null,"absmiddle",0)</a>
 		#end
 		</td>        
         #if($is_owner)
         <td width="1%" align="center">
-        <a href="$dlog.root()/html/music/music_edit.vm?sid=$g_site_id&amp;mid=${song.id}" title="ĞŞ¸Ä¸èÇúĞÅÏ¢">$html.img("music/music_edit.gif","ĞŞ¸Ä¸èÇúĞÅÏ¢",null,"absmiddle",0)</a></td>
+        <a href="$dlog.root()/html/music/music_edit.vm?sid=$g_site_id&amp;mid=${song.id}" title="ä¿®æ”¹æ­Œæ›²ä¿¡æ¯">$html.img("music/music_edit.gif","ä¿®æ”¹æ­Œæ›²ä¿¡æ¯",null,"absmiddle",0)</a></td>
         <td width="1%" align="center">
-        <a href="$link.setAction("html/music")?sid=$g_site_id&amp;box=$mboxid&amp;eventSubmit_DeleteMusic=$song.id" onclick="return confirm('È·¶¨ÒªÉ¾³ı¸èÇúÕâÊ×¸èÇúÂğ£¿');">$html.img("music/music_del.gif","µã»÷É¾³ı¸èÇú","DEL","absmiddle",0)</a></td>
+        <a href="$link.setAction("html/music")?sid=$g_site_id&amp;box=$mboxid&amp;eventSubmit_DeleteMusic=$song.id" onclick="return confirm('ç¡®å®šè¦åˆ é™¤æ­Œæ›²è¿™é¦–æ­Œæ›²å—ï¼Ÿ');">$html.img("music/music_del.gif","ç‚¹å‡»åˆ é™¤æ­Œæ›²","DEL","absmiddle",0)</a></td>
         #end
     </tr>
 	#end
@@ -114,7 +114,7 @@ function delete_all(theForm){
         }
     }
     if(selected){
-        if(!confirm('ÕæµÄÒªÉ¾³ıÏÂÃæÑ¡ÖĞµÄËùÓĞ¸èÇúÂï£¿'))
+        if(!confirm('çœŸçš„è¦åˆ é™¤ä¸‹é¢é€‰ä¸­çš„æ‰€æœ‰æ­Œæ›²å˜›ï¼Ÿ'))
             return false;
         theForm.submit();
     }

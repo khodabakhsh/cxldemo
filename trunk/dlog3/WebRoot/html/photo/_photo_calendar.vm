@@ -39,7 +39,7 @@
                 #if($d > 0)
                     #set($log_count = $logc.get($d))
 					#if($log_count>0)#set($_css = "mydate_aday")#end			
-                    #if($log_count>0)<a class="mydate_countday" href="$dlog.root()/html/photo/?sid=${g_site_id}&amp;year=${c_year}&amp;month=${c_month}&amp;date=${d}" title="ÕÕÆ¬Êı:$log_count">#end                    
+                    #if($log_count>0)<a class="mydate_countday" href="$dlog.root()/html/photo/?sid=${g_site_id}&amp;year=${c_year}&amp;month=${c_month}&amp;date=${d}" title="ç…§ç‰‡æ•°:$log_count">#end                    
 					<span class="$_css">${d}</span>
                     #if($log_count>0)</a>#end
                 #end

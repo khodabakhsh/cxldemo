@@ -1,6 +1,6 @@
 <form action="$link.setAction("html/reply")" method="post" onsubmit="return validateReplyForm(this);">
 	<div class="reply">
-		<a name="#reply"></a><b>¡Ô¡Ô¡Ô ·¢±íÆÀÂÛ ¡Ô¡Ô¡Ô</b><br/>
+		<a name="#reply"></a><b>â‰¡â‰¡â‰¡ å‘è¡¨è¯„è®º â‰¡â‰¡â‰¡</b><br/>
 		#if($reply_to_edit) 
             #set($author=${reply_to_edit.author})
             #set($author_url=${reply_to_edit.authorURL})
@@ -24,13 +24,13 @@
         #end
         <div class="comment_form">
 			<div class="comment_form_item">
-				<b>³Æºô:</b>&nbsp;<input type="text" name="author" value="$!escape.html($author)" size="10" maxlength="20"/>
+				<b>ç§°å‘¼:</b>&nbsp;<input type="text" name="author" value="$!escape.html($author)" size="10" maxlength="20"/>
         	</div>
 			<div class="comment_form_item">
-				ÓÊÏä:&nbsp;<input type="text" name="authorEmail" value="$!author_email" size="20" maxlength="50"/>
+				é‚®ç®±:&nbsp;<input type="text" name="authorEmail" value="$!author_email" size="20" maxlength="50"/>
         	</div>
             <div class="comment_form_item">
-				ÍøÖ·:&nbsp;<input type="text" name="authorURL" value="$!author_url" size="20" maxlength="50"/>
+				ç½‘å€:&nbsp;<input type="text" name="authorURL" value="$!author_url" size="20" maxlength="50"/>
         	</div>
 			<div class="comment_form_item">
 				<div class="spacer_5"></div>
@@ -38,9 +38,9 @@
         	</div>
             <div class="comment_form_item">
 				#if($reply_to_edit)
-                <input type="submit" value="¸üĞÂÆÀÂÛ" class="button" name="eventSubmit_UpdatePhotoReply" />
+                <input type="submit" value="æ›´æ–°è¯„è®º" class="button" name="eventSubmit_UpdatePhotoReply" />
                 #else
-                <input type="submit" value="Ìí¼ÓÆÀÂÛ" class="button" name="eventSubmit_AddPhotoReply" />
+                <input type="submit" value="æ·»åŠ è¯„è®º" class="button" name="eventSubmit_AddPhotoReply" />
                 #end
         	</div>
 		</div>

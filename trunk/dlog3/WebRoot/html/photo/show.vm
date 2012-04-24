@@ -23,7 +23,7 @@
 #set($photo_id = $dlog.param("pid",-1))
 #set($_photo = $PHOTO_tool.photo($g_site, $g_user, $photo_id))
 #if(!$_photo)
-	#show_msg_box("<b>ÕÕÆ¬Ã»ÕÒµ½£¬»òÕßÊÇÄúÃ»ÓĞ·ÃÎÊµÄÈ¨ÏŞ !!!</b>")
+	#show_msg_box("<b>ç…§ç‰‡æ²¡æ‰¾åˆ°ï¼Œæˆ–è€…æ˜¯æ‚¨æ²¡æœ‰è®¿é—®çš„æƒé™ !!!</b>")
 #else
 #set($page_title=${_photo.name})
 #set($nothing = $PHOTO_tool.visit_photo($g_site, $g_user, $_photo))
@@ -41,21 +41,21 @@
     			window.open(url,'share',"height=400,width=400,status=yes,toolbar=no,menubar=no,location=no");
     		}
     		</script>
-			<a href="#" onclick="open_share_dialog(${_photo.id});return false;">·ÖÏíÏàÆ¬</a> |
+			<a href="#" onclick="open_share_dialog(${_photo.id});return false;">åˆ†äº«ç›¸ç‰‡</a> |
         	#if(${_photo.photoInfo.width} > 560)
 			#set($img_url = "$dlog.root()${_photo.imageURL}")
-            <a href="show2.vm?img=$link.encodeURL($img_url)" target="_blank">²é¿´Ô­Í¼</a> |#end
+            <a href="show2.vm?img=$link.encodeURL($img_url)" target="_blank">æŸ¥çœ‹åŸå›¾</a> |#end
             #set($prev_photo = $PHOTO_tool.prev_photo($g_site, $g_user, $album_id, $_photo.id))
             #if($prev_photo)
-            <a href="?sid=$g_site_id&amp;aid=$album_id&amp;pid=${prev_photo.id}" title="$text.html(${prev_photo.name})">ÉÏÒ»ÕÅ</a>
+            <a href="?sid=$g_site_id&amp;aid=$album_id&amp;pid=${prev_photo.id}" title="$text.html(${prev_photo.name})">ä¸Šä¸€å¼ </a>
             #end
             #set($next_photo = $PHOTO_tool.next_photo($g_site, $g_user, $album_id, $_photo.id))
             #if($next_photo)
             #if($prev_photo) | #end
-            <a href="?sid=$g_site_id&amp;aid=$album_id&amp;pid=${next_photo.id}" title="$text.html(${next_photo.name})">ÏÂÒ»ÕÅ</a>
+            <a href="?sid=$g_site_id&amp;aid=$album_id&amp;pid=${next_photo.id}" title="$text.html(${next_photo.name})">ä¸‹ä¸€å¼ </a>
             #end
             #if($next_photo || $prev_photo) | #end
-            <a href="$dlog.root()/html/photo/?sid=$g_site_id&amp;aid=$album_id">·µ»ØÏàÆ¬ÁĞ±í</a>
+            <a href="$dlog.root()/html/photo/?sid=$g_site_id&amp;aid=$album_id">è¿”å›ç›¸ç‰‡åˆ—è¡¨</a>
 		</div>        
 	</div>
 	<div class="line_dashed"></div>
@@ -74,7 +74,7 @@
 			<div class="photo_detail tleft">$!{_photo.desc}</div>			
     		<div class="spacer_20"></div>
 			#if($dlog.not_empty($_photo.keyword))
-			<div class="keyword tleft">¹Ø¼ü×Ö: &nbsp;
+			<div class="keyword tleft">å…³é”®å­—: &nbsp;
 				#foreach($tag in $_photo.keywords)
                 <a href="$dlog.root()/html/showtag.vm?sid=$g_site_id&amp;type=2&amp;tag=$link.encodeURL($tag)"><b>${tag}</b></a>&nbsp;&nbsp;
                 #end
@@ -83,10 +83,10 @@
 			<div class="spacer_20"></div>
 		</div>
     	<div class="photo_foot">		
-			Ïà²¾:<a href="$dlog.root()/html/photo/?sid=$g_site_id&amp;aid=${_photo.album.id}">${_photo.album.name}</a>&nbsp;|&nbsp;ÆÀÂÛ:(${_photo.replyCount})&nbsp;|&nbsp;ä¯ÀÀ:(${_photo.viewCount})&nbsp;|&nbsp;
+			ç›¸ç°¿:<a href="$dlog.root()/html/photo/?sid=$g_site_id&amp;aid=${_photo.album.id}">${_photo.album.name}</a>&nbsp;|&nbsp;è¯„è®º:(${_photo.replyCount})&nbsp;|&nbsp;æµè§ˆ:(${_photo.viewCount})&nbsp;|&nbsp;
             #if(!$no_bookmark_link)
             <a href="#" onclick="bookmark('$photo_id','$link.encodeURL(${_photo.name})') ;return false;">
-				$html.img("bookmark.gif","±£´æ´ËÕÕÆ¬ÎªÊéÇ©","bookmark","absmiddle",0)
+				$html.img("bookmark.gif","ä¿å­˜æ­¤ç…§ç‰‡ä¸ºä¹¦ç­¾","bookmark","absmiddle",0)
             </a>
 			<script src="$dlog.root()/js/prototype.js" type="text/javascript"></script>
             <script type="text/javascript">
@@ -103,11 +103,11 @@
             </script>
             #end
             #if($dlog.is_owner($g_site, $g_user))
-            <a href="$link.setAction("html/photo")?sid=$g_site_id&amp;eventSubmit_Delete=${_photo.id}" onclick="return confirm('ÄúÈ·ÊµÒªÉ¾³ıÕÕÆ¬Âğ£¿');">
-                $html.img("icon_delete.gif","É¾³ıÕÕÆ¬","DEL","absmiddle",0)
+            <a href="$link.setAction("html/photo")?sid=$g_site_id&amp;eventSubmit_Delete=${_photo.id}" onclick="return confirm('æ‚¨ç¡®å®è¦åˆ é™¤ç…§ç‰‡å—ï¼Ÿ');">
+                $html.img("icon_delete.gif","åˆ é™¤ç…§ç‰‡","DEL","absmiddle",0)
             </a>
             <a href="$dlog.root()/html/photo/edit.vm?sid=$g_site_id&amp;pid=${_photo.id}">
-				$html.img("icon_edit.gif","ĞŞ¸ÄÕÕÆ¬","EDIT","absmiddle",0)
+				$html.img("icon_edit.gif","ä¿®æ”¹ç…§ç‰‡","EDIT","absmiddle",0)
             </a>
             #end
     	</div>
@@ -119,10 +119,10 @@
 	#if($_photo.replyCount > 0)
 	<div class="pagecontent">
 		<div class="fleft">
-			<a name="#replies"></a><b>¡Ô¡Ô¡Ô ÍøÓÑÆÀÂÛ ¡Ô¡Ô¡Ô</b>
+			<a name="#replies"></a><b>â‰¡â‰¡â‰¡ ç½‘å‹è¯„è®º â‰¡â‰¡â‰¡</b>
 		</div>
 		<div class="pagecontent_right fright">
-			##ÈÕ¼ÇÆÀÂÛ·ÖÒ³
+			##æ—¥è®°è¯„è®ºåˆ†é¡µ
 			##1 2 3 4
 		</div>
 	</div>
@@ -140,11 +140,11 @@
 			#if($reply.authorURL)
 				</a>
 			#end
-			ÍøÓÑËµ£º
+			ç½‘å‹è¯´ï¼š
 			$date.format("yyyy/MM/dd HH:mm",${reply.replyTime}) &nbsp;&nbsp;
             #if($_photo)
                 #if($g_user && ($dlog.is_owner($g_site,$g_user) || (${reply.user} && ${reply.user.id}==$g_user_id)))
-                  <a href="#" onclick="if(confirm('ÄúÕæµÄÒªÉ¾³ı¸ÃÆÀÂÛÂğ£¿')) deleteRForm_${reply.id}.submit(); return false;"">
+                  <a href="#" onclick="if(confirm('æ‚¨çœŸçš„è¦åˆ é™¤è¯¥è¯„è®ºå—ï¼Ÿ')) deleteRForm_${reply.id}.submit(); return false;"">
             		  $html.img("icon_delete.gif",null,"DEL","absmiddle",0)
                   </a>
                   <a href="$dlog.root()/html/photo/show.vm?sid=$g_site_id&amp;pid=${reply.photo.id}&reply_id=${reply.id}#reply">

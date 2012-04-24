@@ -18,7 +18,7 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_setting.vm")
-#set($page_title="ÈÕ¼Ç·ÖÀàÈ¨ÏŞÉèÖÃ")
+#set($page_title="æ—¥è®°åˆ†ç±»æƒé™è®¾ç½®")
 ###############################################################################
 #set($catalog_id = $dlog.param("cat_id", -1))
 #set($catalog = $DIARY_tool.catalog($g_site, $g_user, $catalog_id))
@@ -26,10 +26,10 @@
 <div class="page_top">
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			<b>ÈÕ¼Ç·ÖÀà:&nbsp;&nbsp;$text.html(${catalog.name})</b>&nbsp;&nbsp;(Àà±ğ:$text.get(${catalog.typeDescKey}))
+			<b>æ—¥è®°åˆ†ç±»:&nbsp;&nbsp;$text.html(${catalog.name})</b>&nbsp;&nbsp;(ç±»åˆ«:$text.get(${catalog.typeDescKey}))
 		</div>
 		<div class="pagecontent_right fright">
-			½ñÌìÊÇ: $date.get("MMMMM d, yyyy  EEEEE")
+			ä»Šå¤©æ˜¯: $date.get("MMMMM d, yyyy  EEEEE")
 		</div>
 	</div>
 	<div class="spacer_1"></div>
@@ -43,9 +43,9 @@
 			<div class="spacer_5"></div>
 			<div class="form_row_content">
 				<li>
-					ÓĞÌØÊâÈ¨ÏŞµÄÓÃ»§¹²&nbsp;${users.size()}&nbsp;¸ö&nbsp;
+					æœ‰ç‰¹æ®Šæƒé™çš„ç”¨æˆ·å…±&nbsp;${users.size()}&nbsp;ä¸ª&nbsp;
 					<a href="catalog_user_add.vm?sid=$g_site_id&amp;cat_id=$catalog_id">
-						$html.img("add.gif",null,null,"absmiddle",0) Ìí¼ÓÓÃ»§
+						$html.img("add.gif",null,null,"absmiddle",0) æ·»åŠ ç”¨æˆ·
 					</a>
 				</li>
 			</div>
@@ -55,8 +55,8 @@
 			<table cellspacing="1" cellpadding="3" border="0" class="table" width="100%">
     			<tr class="table_head">
         			<td nowrap></td>
-        			<td nowrap>ÓÃ»§Ãû</td>
-            		<td nowrap>È¡ÏûÓÃ»§È¨ÏŞ</td>
+        			<td nowrap>ç”¨æˆ·å</td>
+            		<td nowrap>å–æ¶ˆç”¨æˆ·æƒé™</td>
     			</tr>
 				#foreach($user in $users)
     			<tr class="table_cell">
@@ -72,12 +72,12 @@
 	</div>
 	#else
 		<div class="msgbox">
-        	<b>¸Ã·ÖÀàÎŞÌØÊâÈ¨ÏŞÓÃ»§£¡</b>&nbsp;&nbsp;(<a href="catalog_user_add.vm?sid=$g_site_id&amp;cat_id=$catalog_id">$html.img("add.gif",null,null,"absmiddle",0) Ìí¼ÓÓÃ»§</a>)<br/><br/><a href="#" onclick="history.go(-1);return false;">·µ»ØÉÏÒ³</a>
+        	<b>è¯¥åˆ†ç±»æ— ç‰¹æ®Šæƒé™ç”¨æˆ·ï¼</b>&nbsp;&nbsp;(<a href="catalog_user_add.vm?sid=$g_site_id&amp;cat_id=$catalog_id">$html.img("add.gif",null,null,"absmiddle",0) æ·»åŠ ç”¨æˆ·</a>)<br/><br/><a href="#" onclick="history.go(-1);return false;">è¿”å›ä¸Šé¡µ</a>
         </div>
     #end
 	<div class="spacer_10"></div>
 </div>
 <div class="page_bottom"></div>
 #else
-    #show_msg_box("·Ç·¨·ÃÎÊ£¡")
+    #show_msg_box("éæ³•è®¿é—®ï¼")
 #end

@@ -25,7 +25,7 @@
 <div class="page_top">
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			<b>ÒıÓÃ¡¶<a href="$dlog.root()/html/diary/showlog.vm?sid=$g_site_id&amp;log_id=$log_id">$text.html(${log.title})</a>¡·µÄÎÄÕÂ¹²ÓĞ${log.trackbacks.size()}Æª!</b>
+			<b>å¼•ç”¨ã€Š<a href="$dlog.root()/html/diary/showlog.vm?sid=$g_site_id&amp;log_id=$log_id">$text.html(${log.title})</a>ã€‹çš„æ–‡ç« å…±æœ‰${log.trackbacks.size()}ç¯‡!</b>
 		</div>
 		<div class="pagecontent_right fright">
 		</div>        
@@ -37,10 +37,10 @@
 	<table cellspacing="1" cellpadding="3" border="0" class="table" width="100%">
 		<tr class="table_head">
 			<td nowrap></td>
-			<td nowrap>ÍøÕ¾</td>
-			<td nowrap>ÎÄÕÂ±êÌâ</td>
-			<td nowrap>ÕªÒª</td>
-			<td nowrap>ÒıÓÃÊ±¼ä</td>
+			<td nowrap>ç½‘ç«™</td>
+			<td nowrap>æ–‡ç« æ ‡é¢˜</td>
+			<td nowrap>æ‘˜è¦</td>
+			<td nowrap>å¼•ç”¨æ—¶é—´</td>
 		</tr>
 	#foreach($tb in ${log.trackbacks})
 		<tr class="table_cell">

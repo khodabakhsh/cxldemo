@@ -18,7 +18,7 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_bbs.vm")
-#set($page_title="»ØÌù")
+#set($page_title="å›žè´´")
 ###############################################################################
 #set($forum_id = $dlog.param("fid",-1))
 #set($topic_id = $dlog.param("tid",-1))
@@ -27,7 +27,7 @@
 #if(!$g_user)
 	#set($prev_page = "$dlog.root()/html/bbs/reply.vm?sid=$g_site_id&fid=$forum_id&tid=$topic_id")
 	#set($prev_page = $link.encodeURL($prev_page))
-    #show_msg_box("ÓÃ»§ÉÐÎ´µÇÂ¼,µã»÷<a href='$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$prev_page'>ÕâÀï</a>µÇÂ¼")
+    #show_msg_box("ç”¨æˆ·å°šæœªç™»å½•,ç‚¹å‡»<a href='$dlog.root()/dlog/login.vm?sid=$g_site_id&amp;fromPage=$prev_page'>è¿™é‡Œ</a>ç™»å½•")
 #else
     #set($replyForm = $form.getBean())
     <form action="$link.setAction("html/bbs/reply")" onsubmit="return validateReplyForm(this)" method="post" name="replyForm">
@@ -40,10 +40,10 @@
     	<div class="adcontent"></div>
 		<div class="pagecontent">
     		<div class="pagecontent_left fleft">
-				<b>»ØÌù</b>
+				<b>å›žè´´</b>
     		</div>
     		<div class="pagecontent_right fright">
-				½ñÌìÊÇ: $date.get("MMMMM d, yyyy  EEEEE")
+				ä»Šå¤©æ˜¯: $date.get("MMMMM d, yyyy  EEEEE")
     		</div>
     	</div>
     	<div class="spacer_1"></div>
@@ -55,10 +55,10 @@
 		<div class="form">
     		<div class="form_row">
         		<div class="form_row_title fleft">
-					±êÌâ
+					æ ‡é¢˜
         		</div>
         		<div class="form_row_content">
-					<input type="text" name="title" maxlength="100" size="59" value="Re: $text.html(${topic.title})" />&nbsp;&nbsp;{±ØÐëÌîÐ´}
+					<input type="text" name="title" maxlength="100" size="59" value="Re: $text.html(${topic.title})" />&nbsp;&nbsp;{å¿…é¡»å¡«å†™}
     			</div>
         	</div>
 			<div class="spacer_1"></div>
@@ -72,9 +72,9 @@
 			<div class="spacer_1"></div>
     		<div class="form_row">
     			<div class="form_row_submit">
-					<input type="submit" name="eventSubmit_PublishReply" value="·¢±í" />
-					<input type="reset" value="ÖØÖÃ" onclick="replyForm.title.focus();" />
-					<input type="button" value="·µ»Ø" onclick="history.go(-1)" />
+					<input type="submit" name="eventSubmit_PublishReply" value="å‘è¡¨" />
+					<input type="reset" value="é‡ç½®" onclick="replyForm.title.focus();" />
+					<input type="button" value="è¿”å›ž" onclick="history.go(-1)" />
     			</div>
         	</div>
         </div>

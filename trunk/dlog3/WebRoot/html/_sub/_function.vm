@@ -30,7 +30,7 @@
     			#if($velocityCount == $current_menu_item)
     				<a class="nav_on"></a><a href="${m_link}" class="selected">${menu}</a>
     			#else
-    			##Ñ¡ÖĞÏîÄ¿µÄÇ°ºóÏîÄ¿¶¼²»ÏÔÊ¾ÊúÏß
+    			##é€‰ä¸­é¡¹ç›®çš„å‰åé¡¹ç›®éƒ½ä¸æ˜¾ç¤ºç«–çº¿
     			#set($show_line = $velocityCount < $menus_name.size())
     				#set($last_item = $current_menu_item - 1)
     				#set($show_line = $show_line && $last_item != $velocityCount)

@@ -20,14 +20,14 @@
 #select_layout("p_main.vm")
 #set($key = $request.getParameter("q"))
 #set($scope = $dlog.param("scope",1))
-#set($page_title="ËÑË÷#if($key):${key}#end")
+#set($page_title="æœç´¢#if($key):${key}#end")
 <form name="sform" action="search.vm" method="get">
 	<input type="hidden" name="sid" value="$g_site_id"/>
-    ËÑË÷¹Ø¼ü×Ö: 
+    æœç´¢å…³é”®å­—: 
 	<input type="text" name="q" value="$!key"/>
-    ËÑË÷·¶Î§:
+    æœç´¢èŒƒå›´:
 	#parse("/html/_search/_scope.vm")
-	<input type="submit" value="ËÑË÷"/>
+	<input type="submit" value="æœç´¢"/>
 	<hr size="1" noshade color="#CCCCCC">
     #if($key)
         #if($scope == 0)

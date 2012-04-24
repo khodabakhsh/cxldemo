@@ -1,15 +1,15 @@
 #set($objs = $SEARCH_tool.search_user($key))
-¹²ÓĞ<b>${objs.size()}</b>Ïî·ûºÏ<b>${key}</b>µÄ²éÑ¯½á¹û£¬(ËÑË÷ÓÃÊ±<b>${SEARCH_tool.get_search_time()}</b>ºÁÃë)<br/><br/>
+å…±æœ‰<b>${objs.size()}</b>é¡¹ç¬¦åˆ<b>${key}</b>çš„æŸ¥è¯¢ç»“æœï¼Œ(æœç´¢ç”¨æ—¶<b>${SEARCH_tool.get_search_time()}</b>æ¯«ç§’)<br/><br/>
 #if($objs && $objs.size() > 0)
 <table cellspacing=1 cellpadding=3 width="100%" border="0" class="table">
 <tr class="table_head">
-    <td nowrap><b>ĞòºÅ</b></td>
-    <td align="center"><b>ÓÃ»§Ãû</b></td>
-    <td align="center"><b>êÇ³Æ</b></td>
-    <td align="center"><b>ĞÔ±ğ</b></td>
-    <td align="center"><b>µç×ÓÓÊ¼ş</b></td>
-    <td align="center"><b>ÍøÕ¾</b></td>
-    <td align="center"><b>×¢²áÊ±¼ä</b></td>
+    <td nowrap><b>åºå·</b></td>
+    <td align="center"><b>ç”¨æˆ·å</b></td>
+    <td align="center"><b>æ˜µç§°</b></td>
+    <td align="center"><b>æ€§åˆ«</b></td>
+    <td align="center"><b>ç”µå­é‚®ä»¶</b></td>
+    <td align="center"><b>ç½‘ç«™</b></td>
+    <td align="center"><b>æ³¨å†Œæ—¶é—´</b></td>
 </tr>
 #foreach($obj in $objs)
 <tr class="table_cell">

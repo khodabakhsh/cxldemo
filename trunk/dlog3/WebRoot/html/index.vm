@@ -19,12 +19,12 @@
 #invoke("_sub/_global.vm")
 #select_layout("p_main.vm")
 
-##¶ÁÈ¡ÁôÑÔ²¾µÄĞÂÁôÑÔÊı
+##è¯»å–ç•™è¨€ç°¿çš„æ–°ç•™è¨€æ•°
 #if($dlog.is_owner($g_site,$g_user))
 #set($from_idx = $dlog.get_cookie_as_int("guestbook"))
 #set($guest_msg_count = $dlog.get_guest_msg_count_after($g_site, $from_idx))
 #if($guest_msg_count > 0)
-	<div id="guest_msg_tip">ÁôÑÔ²¾ÓĞ${guest_msg_count}ÌõĞÂµÄÁôÑÔÄú»¹Ã»ÓĞÔÄ¶Á¡£<a href="$dlog.root()/html/guestbook.vm?sid=$g_site_id">ÏÖÔÚÔÄ¶Á</a></div>
+	<div id="guest_msg_tip">ç•™è¨€ç°¿æœ‰${guest_msg_count}æ¡æ–°çš„ç•™è¨€æ‚¨è¿˜æ²¡æœ‰é˜…è¯»ã€‚<a href="$dlog.root()/html/guestbook.vm?sid=$g_site_id">ç°åœ¨é˜…è¯»</a></div>
 	<div class="spacer_10"></div>
 #end
 #end

@@ -18,18 +18,18 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_bbs.vm")
-#set($page_title="ÌÖÂÛÇøËÑË÷")
+#set($page_title="è®¨è®ºåŒºæœç´¢")
 ###############################################################################
 #set($forum_id = $dlog.param("fid",-1))
 #set($forum = $BBS_tool.forum($g_site, $forum_id))
 <div class="page_top">
 	<div class="pagecontent">
 		<div class="fleft">
-			<a href="$dlog.root()/html/bbs/?sid=$g_site_id">ÌÖÂÛÇøÊ×Ò³</a>&nbsp;&raquo;&nbsp;
+			<a href="$dlog.root()/html/bbs/?sid=$g_site_id">è®¨è®ºåŒºé¦–é¡µ</a>&nbsp;&raquo;&nbsp;
             #if($forum)
             	<a href="forum.vm?sid=$g_site_id&amp;fid=$forum_id">${forum.name}</a>&nbsp;&raquo;&nbsp;
 			#end
-			¸ß¼¶ËÑË÷
+			é«˜çº§æœç´¢
 		</div>
 		<div class="pagecontent_right fright">
 		</div>
@@ -40,8 +40,8 @@
 	<div class="bbs">
     	<div class="bbs_top">
 			<div class="form_note">
-    			<b>ËÑË÷ÌÖÂÛÇøÄÚÈİ</b>
-        		<br />Äã¿ÉÒÔÑ¡ÔñËÑË÷ËùÓĞÄÚÈİ»òÊÇ¸ù¾İÌÖÂÛÇø»òÊ±¼äËÑË÷£¬Í¬Ê±Äã»¹¿ÉÒÔ¸ù¾İÓÃ»§Ãû»òÓÃ»§ID¹ıÂË½á¹û!
+    			<b>æœç´¢è®¨è®ºåŒºå†…å®¹</b>
+        		<br />ä½ å¯ä»¥é€‰æ‹©æœç´¢æ‰€æœ‰å†…å®¹æˆ–æ˜¯æ ¹æ®è®¨è®ºåŒºæˆ–æ—¶é—´æœç´¢ï¼ŒåŒæ—¶ä½ è¿˜å¯ä»¥æ ¹æ®ç”¨æˆ·åæˆ–ç”¨æˆ·IDè¿‡æ»¤ç»“æœ!
 			</div>
 			<form name="frm_search" action="$link.setAction("html/bbs/search")#result">
             <input type="hidden" name="sid" value="$g_site_id" />
@@ -49,21 +49,21 @@
 			<div class="form">
         		<div class="form_row">
             		<div class="form_row_title fleft">
-						¹Ø¼ü×Ö
+						å…³é”®å­—
             		</div>
             		<div class="form_row_content">
 						<input maxLength="100" size="40" name="key" value="$!{param.key}" />&nbsp;&nbsp;
-						<input type="submit" value=" ËÑ Ë÷ " />
+						<input type="submit" value=" æœ ç´¢ " />
         			</div>
             	</div>
 				<div class="spacer_1"></div>
 				<div class="form_row">
             		<div class="form_row_title fleft">
-						Ñ¡Ôñ·¶Î§
+						é€‰æ‹©èŒƒå›´
             		</div>
             		<div class="form_row_content">
 						<select style="WIDTH: 180px" name="fid" onchange="fForm.submit()" size="1">
-                            <option value="-1">ËùÓĞÌÖÂÛÇø</option>
+                            <option value="-1">æ‰€æœ‰è®¨è®ºåŒº</option>
                             #foreach($f in $BBS_tool.forums($request, $g_site, $g_user))
                             <option value="${f.id}" #if($forum && ${forum.id}==${f.id})selected#end>
                                 &nbsp;&#8226;&nbsp;$text.html(${f.name})
@@ -75,30 +75,30 @@
 				<div class="spacer_1"></div>
 				<div class="form_row">
             		<div class="form_row_title fleft">
-						Ê±¼ä·¶Î§
+						æ—¶é—´èŒƒå›´
             		</div>
             		<div class="form_row_content">
 						<select size="1" name="dateRange">
-                            <option value="0" selected>ÈÎºÎÊ±¼ä</option>
-                            <option value="7" #if($param && $!{param.dateRange}==7)selected #end>×î½üÒ»ÖÜ</option>
-                            <option value="30" #if($param && $!{param.dateRange}==30)selected #end>×î½üÒ»ÔÂ</option>
-                            <option value="365" #if($param && $!{param.dateRange}==365)selected #end>×î½üÒ»Äê</option>
+                            <option value="0" selected>ä»»ä½•æ—¶é—´</option>
+                            <option value="7" #if($param && $!{param.dateRange}==7)selected #end>æœ€è¿‘ä¸€å‘¨</option>
+                            <option value="30" #if($param && $!{param.dateRange}==30)selected #end>æœ€è¿‘ä¸€æœˆ</option>
+                            <option value="365" #if($param && $!{param.dateRange}==365)selected #end>æœ€è¿‘ä¸€å¹´</option>
                         </select>
         			</div>
             	</div>
 				<div class="spacer_1"></div>
 				<div class="form_row">
             		<div class="form_row_title fleft">
-						ÓÃ»§Ãû
+						ç”¨æˆ·å
             		</div>
             		<div class="form_row_content">
-						<input maxLength="50" name="user" value="$!{param.user}" />&nbsp;&nbsp;{ÓÃ»§Ãû³Æ»òÕßIDºÅ}
+						<input maxLength="50" name="user" value="$!{param.user}" />&nbsp;&nbsp;{ç”¨æˆ·åç§°æˆ–è€…IDå·}
         			</div>
             	</div>
 				<div class="spacer_1"></div>
 				<div class="form_row">
 					<div class="form_row_title fleft">
-						Ã¿Ò³½á¹û
+						æ¯é¡µç»“æœ
             		</div>
         			<div class="form_row_content">
         				<select size="1" name="numResults">
@@ -117,7 +117,7 @@
 		<a name="result"></a>
     	<div class="bbs_body tcenter">
 			<div align="left">
-				ËÑË÷¹Ø¼ü×Ö&nbsp;<b>[$text.html(${param.key})]</b>&nbsp;&nbsp;¹²ÓĞ&nbsp;<b>${results.size()}</b>&nbsp;ÆªÖ÷Ìâ·ûºÏ&nbsp;&nbsp;ºÄÊ±&nbsp;<b>${time}</b>&nbsp;ºÁÃë
+				æœç´¢å…³é”®å­—&nbsp;<b>[$text.html(${param.key})]</b>&nbsp;&nbsp;å…±æœ‰&nbsp;<b>${results.size()}</b>&nbsp;ç¯‡ä¸»é¢˜ç¬¦åˆ&nbsp;&nbsp;è€—æ—¶&nbsp;<b>${time}</b>&nbsp;æ¯«ç§’
 			</div>
 			<div class="spacer_10"></div>
 			#foreach($topic in $results)
@@ -134,8 +134,8 @@
 				<div class="line_solid"></div>
 				<div class="spacer_1"></div>
 				<div class="thread_info">
-    				×÷Õß£º<a href="$dlog.root()/dlog/viewuser.vm?sid=$g_site_id&amp;uid=${topic.user.id}">$text.html(${topic.user.nickname})</a>
-    				&nbsp;&nbsp;·¢±íÊ±¼ä£º$date.format("yyyy-MM-dd HH:mm", ${topic.createTime})    				
+    				ä½œè€…ï¼š<a href="$dlog.root()/dlog/viewuser.vm?sid=$g_site_id&amp;uid=${topic.user.id}">$text.html(${topic.user.nickname})</a>
+    				&nbsp;&nbsp;å‘è¡¨æ—¶é—´ï¼š$date.format("yyyy-MM-dd HH:mm", ${topic.createTime})    				
 				</div>
 			</div>
 			<div class="spacer_10"></div>

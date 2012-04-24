@@ -18,16 +18,16 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_setting.vm")
-#set($page_title="ÂÛÌ³¹ÜÀí")
+#set($page_title="è®ºå›ç®¡ç†")
 ###############################################################################
 #set($forum_id = $dlog.param("fid", -1))
 <div class="page_top">
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			<b>ÂÛÌ³¹ÜÀí</b>&nbsp;&nbsp;¹²ÓĞ${g_site.forums.size()}¸öÂÛÌ³(<a href="forum_add.vm?sid=$g_site_id">$html.img("add.gif",null,null,"absmiddle",0)&nbsp;Ôö¼Ó</a>)
+			<b>è®ºå›ç®¡ç†</b>&nbsp;&nbsp;å…±æœ‰${g_site.forums.size()}ä¸ªè®ºå›(<a href="forum_add.vm?sid=$g_site_id">$html.img("add.gif",null,null,"absmiddle",0)&nbsp;å¢åŠ </a>)
 		</div>
 		<div class="pagecontent_right fright">
-			½ñÌìÊÇ: $date.get("MMMMM d, yyyy  EEEEE")
+			ä»Šå¤©æ˜¯: $date.get("MMMMM d, yyyy  EEEEE")
 		</div>
 	</div>
 	<div class="spacer_1"></div>
@@ -38,23 +38,23 @@
 			<div class="line_dashed"></div>
 			<div class="spacer_5"></div>
 			<div class="form_row_content">
-				<li>Äã¿ÉÒÔ½øĞĞÂÛÌ³µÄÅÅĞò¹ÜÀí£¡</li>
-				<li>Äã¿ÉÒÔ±à¼­ÂÛÌ³Ãû³Æ£¡</li>
-				<li>Äã¿ÉÒÔ¶ÔË½ÓĞÂÛÌ³Ìí¼Ó·ÃÎÊÓÃ»§£¡</li>
+				<li>ä½ å¯ä»¥è¿›è¡Œè®ºå›çš„æ’åºç®¡ç†ï¼</li>
+				<li>ä½ å¯ä»¥ç¼–è¾‘è®ºå›åç§°ï¼</li>
+				<li>ä½ å¯ä»¥å¯¹ç§æœ‰è®ºå›æ·»åŠ è®¿é—®ç”¨æˆ·ï¼</li>
 			</div>
 		</div>
     	<div class="setting_body">	
 			<table cellspacing="1" cellpadding="3" border="0" width="100%" class="table">
     			<tr class="table_head">
-        			<td nowrap>ÂÛÌ³Ãû</td>
-        			<td nowrap>Ìû×ÓÊı</td>
-					<td>ÀàĞÍ</td>
-					<td>ÌØÈ¨</td>
-        			<td>ËµÃ÷</td>
-        			<td nowrap>ÅÅĞò</td>
-        			<td nowrap>ÅÅĞò</td>
-        			<td nowrap>ÉèÖÃ</td>
-            		<td nowrap>É¾³ı</td>
+        			<td nowrap>è®ºå›å</td>
+        			<td nowrap>å¸–å­æ•°</td>
+					<td>ç±»å‹</td>
+					<td>ç‰¹æƒ</td>
+        			<td>è¯´æ˜</td>
+        			<td nowrap>æ’åº</td>
+        			<td nowrap>æ’åº</td>
+        			<td nowrap>è®¾ç½®</td>
+            		<td nowrap>åˆ é™¤</td>
     			</tr>
     			#foreach($forum in $g_site.forums)
                 #if($forum_id == $forum.id)
@@ -62,9 +62,9 @@
                 #end
     			<tr class="table_cell">
     				<td nowrap>${forum.name}</td>
-                    <td nowrap>${forum.topicCount}Æª</td>	
+                    <td nowrap>${forum.topicCount}ç¯‡</td>	
 					<td>$text.ui("forum.status.${forum.status}")</td>
-                    <td><a href="#" title="²é¿´²¢ÉèÖÃ¿É·ÃÎÊ¸ÃÌÖÂÛÇøµÄÓÃ»§">$html.img("users.gif",null,null,"absmiddle",0)</a></td>
+                    <td><a href="#" title="æŸ¥çœ‹å¹¶è®¾ç½®å¯è®¿é—®è¯¥è®¨è®ºåŒºçš„ç”¨æˆ·">$html.img("users.gif",null,null,"absmiddle",0)</a></td>
 					<td>$!{forum.desc}&nbsp;&nbsp;</td>
                     <td align="center">#if($velocityCount != 1)<a href="$link.setAction("html/sitemgr/bbs")?sid=$g_site_id&amp;eventSubmit_MoveUp=$forum.id">$html.img("arrow_up.gif",null,"up","absmiddle",0)</a>#else&nbsp;#end </td>
                     <td align="center">#if($velocityCount < $g_site.forums.size())<a href="$link.setAction("html/sitemgr/bbs")?sid=$g_site_id&amp;eventSubmit_MoveDown=$forum.id">$html.img("arrow_down.gif",null,"down","absmiddle",0)</a>#else&nbsp;#end</td>
@@ -79,7 +79,7 @@
 			#if($edit_forum)
         	<a name="edit"></a>
         	<div>
-        		<b>¸ü¸ÄÂÛÌ³·ÖÀà</b>
+        		<b>æ›´æ”¹è®ºå›åˆ†ç±»</b>
         	</div>
         	<form action="$link.setAction("html/sitemgr/bbs")" method="post">
             <input type="hidden" name="id" value="$edit_forum.id"/>
@@ -90,7 +90,7 @@
         	<div class="form">
 				<div class="form_row">
             		<div class="form_row_title fleft">
-						ÂÛÌ³Ãû
+						è®ºå›å
             		</div>
             		<div class="form_row_content">
 						<input type="text" size="30" maxlength="20" name="name" value="$!{edit_forum.name}">
@@ -99,21 +99,21 @@
             	</div>
         		<div class="form_row">
             		<div class="form_row_title fleft">
-						ÂÛÌ³×´Ì¬
+						è®ºå›çŠ¶æ€
             		</div>
             		<div class="form_row_content">
-						<input type="radio" name="status" value="0" #if($edit_forum.status==0)checked#end>ÆôÓÃ
-        				<input type="radio" name="status" value="1" #if($edit_forum.status==1)checked#end>Ëø¶¨
-        				<input type="radio" name="status" value="3" #if($edit_forum.status==3)checked#end>Òş²Ø
+						<input type="radio" name="status" value="0" #if($edit_forum.status==0)checked#end>å¯ç”¨
+        				<input type="radio" name="status" value="1" #if($edit_forum.status==1)checked#end>é”å®š
+        				<input type="radio" name="status" value="3" #if($edit_forum.status==3)checked#end>éšè—
                         #struts_message("name")
         			</div>
             	</div>
 				<div class="form_row">
             		<div class="form_row_title fleft">
-						ÂÛÌ³ËµÃ÷
+						è®ºå›è¯´æ˜
             		</div>
             		<div class="form_row_content">
-						&nbsp;&nbsp;100×ÖÒÔÄÚ£¡
+						&nbsp;&nbsp;100å­—ä»¥å†…ï¼
         			</div>
             	</div>
 				<div class="form_row">
@@ -125,8 +125,8 @@
             	</div>
         		<div class="form_row">
         			<div class="form_row_submit">
-						<input type="submit" name="eventSubmit_UpdateForum" value="¸üĞÂÂÛÌ³" />
-						<input type="reset" value="ÖØĞÂÌîĞ´" />
+						<input type="submit" name="eventSubmit_UpdateForum" value="æ›´æ–°è®ºå›" />
+						<input type="reset" value="é‡æ–°å¡«å†™" />
         			</div>
             	</div>
         	</div>

@@ -27,13 +27,13 @@
 <div class="page_top">
 <form action="">
 	<input type="hidden" name="sid" value="$g_site_id" />
-	Ïà²á¹Ø¼ü×Ö:
+	ç›¸å†Œå…³é”®å­—:
 	<input type="text" name="tag" value="$!{tag}" size="20" />
-	<input type="submit" name="" value="ËÑË÷¹Ø¼ü×Ö" />
+	<input type="submit" name="" value="æœç´¢å…³é”®å­—" />
 </form>
 #set($hot_tags = $TAG_tool.list_hot_tags($g_site, 5))
 #if($hot_tags.size()>0)
-	ÈÈÃÅ¹Ø¼ü×Ö:
+	çƒ­é—¨å…³é”®å­—:
 	#foreach($t_tag in $hot_tags)
 		#if($velocityCount>1),#end
 		<a href="?sid=$g_site_id&amp;type=$tag_type&amp;tag=${t_tag}">${t_tag}</a>
@@ -48,7 +48,7 @@
 	#set($diarys = $TAG_tool.photos_of_tag($g_site, $tag, $p_page, $PAGE_SITE))
 #end
 #set($time_used = $dlog.time_consume($start_time))
-¹²ÓÐÕÕÆ¬ <b>${diary_c}</b> ÕÅ£¬²éÑ¯ºÄÊ± <b>${time_used}</b> ºÁÃë¡£
+å…±æœ‰ç…§ç‰‡ <b>${diary_c}</b> å¼ ï¼ŒæŸ¥è¯¢è€—æ—¶ <b>${time_used}</b> æ¯«ç§’ã€‚
 <hr size="1" color="#cccccc" noshade/>
 #if($diarys)
 	#set($page_count = $dlog.page_count($diary_c, $PAGE_SITE))

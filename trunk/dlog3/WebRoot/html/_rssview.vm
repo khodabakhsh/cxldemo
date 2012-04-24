@@ -4,13 +4,13 @@
 #set($channel = $dlog.fetch_channel(${linkbean.type}, ${linkbean.url}))
 #if($channel)
 	<div class="page_top">
-		<h2><a href="$channel.link" target="_blank">$escape.html(${linkbean.title})</a>¹²ÓĞ$dlog.sizeof(${channel.items})ÆªÎÄÕÂ</h2>
+		<h2><a href="$channel.link" target="_blank">$escape.html(${linkbean.title})</a>å…±æœ‰$dlog.sizeof(${channel.items})ç¯‡æ–‡ç« </h2>
 		<p align="right">$!{channel.description}</p>
 	</div>
 	<div class="page_content">
 		<hr size="1" color="#cccccc" noshade/>
         #foreach($item in $channel.items)
-        <a href="${item.link}" target="_blank" title="µã»÷ÔÄ¶ÁÈ«ÎÄ">
+        <a href="${item.link}" target="_blank" title="ç‚¹å‡»é˜…è¯»å…¨æ–‡">
     		<span class="rss_item_title">
     		<b>${velocityCount}. $!{item.title}</b>
     		</span>
@@ -20,5 +20,5 @@
     	#end
 	</div>
 #else
-    #show_msg_box("ÆµµÀ×¥È¡Ê§°Ü£¬Çë¼ì²éÊÇ·ñÌî´íÆµµÀµÄÀàĞÍ»òÕßÊÇĞ´´íURLµØÖ·¡£")
+    #show_msg_box("é¢‘é“æŠ“å–å¤±è´¥ï¼Œè¯·æ£€æŸ¥æ˜¯å¦å¡«é”™é¢‘é“çš„ç±»å‹æˆ–è€…æ˜¯å†™é”™URLåœ°å€ã€‚")
 #end

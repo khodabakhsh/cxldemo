@@ -3,7 +3,7 @@
 #set($g_trash_count = $DIARY_tool.trash_count($g_site, $g_user))
 #set($g_draft_count = $DIARY_tool.draft_count($g_site, $g_user))
 #set($user_can_blog = $DIARY_tool.user_can_blog($g_site, $g_user))
-<div class="module_title"><b>ÈÕ¼Ç·ÖÀà</b></div>
+<div class="module_title"><b>æ—¥è®°åˆ†ç±»</b></div>
 <div class="module_content">
     #if($user_can_blog)
 		<span class="diary_new"><a href="$dlog.root()/html/diary/addlog.vm?sid=$g_site_id&amp;cat_id=$catalog_id"><b>$text.ui("label.diary.new")</b></a></span>
@@ -22,7 +22,7 @@
         #set($open = 0)
         #if($tmp_cat.id == $catalog_id) 
             #set($open = 1) 
-            ##ÏÂÃæµÄ¸³ÖµÓï¾äÎªdiary.vmËùÓÃ        
+            ##ä¸‹é¢çš„èµ‹å€¼è¯­å¥ä¸ºdiary.vmæ‰€ç”¨        
             #set($catalog_name = "<b>${tmp_cat.name}(${tmp_cat.articleCount})</b>")
         #else
             #set($catalog_name = "${tmp_cat.name}(${tmp_cat.articleCount})")

@@ -18,32 +18,32 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_diary.vm")
-#set($page_title="ËùÓĞÈÕ¼ÇÆÀÂÛ")
+#set($page_title="æ‰€æœ‰æ—¥è®°è¯„è®º")
 ###############################################################################
 #set($LOGS_PER_PAGE = 10)
 #set($p_page = $dlog.param("page",1))
 #set($pre_page = $p_page - 1)
 #set($next_page = $p_page + 1)
-#set($log = 1) ## ÓÃÓÚ¿ØÖÆ_reply_bottom_bar.vmµÄĞĞÎª
+#set($log = 1) ## ç”¨äºæ§åˆ¶_reply_bottom_bar.vmçš„è¡Œä¸º
 #set($reply_count = $DIARY_tool.diary_reply_count($g_site, $g_user))
 #set($page_count = $dlog.page_count($reply_count, $LOGS_PER_PAGE))
 <div class="page_top">
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			ÈÕ¼ÇÖĞ¹²ÓĞÆÀÂÛ${reply_count}Ìõ&nbsp;Ã¿Ò³ÏÔÊ¾${LOGS_PER_PAGE}Ìõ&nbsp;µÚ${p_page}Ò³&nbsp;¹²${page_count}Ò³
+			æ—¥è®°ä¸­å…±æœ‰è¯„è®º${reply_count}æ¡&nbsp;æ¯é¡µæ˜¾ç¤º${LOGS_PER_PAGE}æ¡&nbsp;ç¬¬${p_page}é¡µ&nbsp;å…±${page_count}é¡µ
 		</div>
 		<div class="pagecontent_right fright">
 			#if($page_count > 1)
-				#if($p_page > 1)<a href="?sid=$g_site_id">Ê×Ò³</a>#end&nbsp;
-                #if($p_page>1)<a href="?sid=$g_site_id&amp;page=$pre_page">ÉÏÒ³</a>#end&nbsp;
-                #if($p_page < $page_count)<a href="?sid=$g_site_id&amp;page=$next_page">ÏÂÒ³</a>#end&nbsp;
-                #if($p_page < $page_count)<a href="?sid=$g_site_id&amp;page=$page_count">Î²Ò³</a>#end&nbsp;
-                  ×ªµ½&nbsp;
+				#if($p_page > 1)<a href="?sid=$g_site_id">é¦–é¡µ</a>#end&nbsp;
+                #if($p_page>1)<a href="?sid=$g_site_id&amp;page=$pre_page">ä¸Šé¡µ</a>#end&nbsp;
+                #if($p_page < $page_count)<a href="?sid=$g_site_id&amp;page=$next_page">ä¸‹é¡µ</a>#end&nbsp;
+                #if($p_page < $page_count)<a href="?sid=$g_site_id&amp;page=$page_count">å°¾é¡µ</a>#end&nbsp;
+                  è½¬åˆ°&nbsp;
 				<select name="page">
                     #foreach($p in [1..$page_count])
 						<option value="$p" #if($p_page==$p)selected#end>$p</option>
                     #end
-                </select>&nbsp;Ò³
+                </select>&nbsp;é¡µ
 			#end
 		</div>        
 	</div>
@@ -56,7 +56,7 @@
 	<div class="comment">
 		<div class="comment_title"><a name="${reply.id}"></a>
 			<div class="fleft">            
-			<b>#if($reply.authorURL)<a href="$reply.authorURL">#end$text.html($reply.author)#if($reply.authorURL)</a>#end</b>ÔÚ<a href="$show_log_url"><b>$reply.diary.title</b></a>ÆÀÂÛËµ£º
+			<b>#if($reply.authorURL)<a href="$reply.authorURL">#end$text.html($reply.author)#if($reply.authorURL)</a>#end</b>åœ¨<a href="$show_log_url"><b>$reply.diary.title</b></a>è¯„è®ºè¯´ï¼š
 			#if($reply.client.type == 1)
 				$html.img("mobile.gif",null,"WAP","absmiddle",0)
 			#end
@@ -64,7 +64,7 @@
 			<div class="fright">
 			$date.format("yyyy/MM/dd HH:mm",${reply.replyTime}) &nbsp;&nbsp;
             #if($g_user && (${g_site.owner.id}==$g_user_id || (${reply.user} && ${reply.user.id}==$g_user_id)))
-              <a href="#" onclick="if(confirm('ÄúÕæµÄÒªÉ¾³ı¸ÃÆÀÂÛÂğ£¿')) deleteRForm_${reply.id}.submit(); return false;"">
+              <a href="#" onclick="if(confirm('æ‚¨çœŸçš„è¦åˆ é™¤è¯¥è¯„è®ºå—ï¼Ÿ')) deleteRForm_${reply.id}.submit(); return false;"">
         		  $html.img("icon_delete.gif",null,"del","absmiddle",0)
               </a>
               <a href="showlog.vm?sid=$g_site_id&amp;log_id=${reply.diary.id}&reply_id=${reply.id}#reply">

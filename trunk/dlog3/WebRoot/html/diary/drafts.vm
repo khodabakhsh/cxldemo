@@ -18,14 +18,14 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_diary.vm")
-#set($page_title="²İ¸åÏä")
+#set($page_title="è‰ç¨¿ç®±")
 ###############################################################################
 #set($logs = $DIARY_tool.list_drafts($g_site, $g_user))
 #set($g_draft_count=$logs.size())
 <div class="page_top">
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			<b>¹²ÓĞ²İ¸å ${g_draft_count} Æª!</b>
+			<b>å…±æœ‰è‰ç¨¿ ${g_draft_count} ç¯‡!</b>
 		</div>
 		<div class="pagecontent_right fright">
 		</div>        
@@ -35,7 +35,7 @@
 #if($logs && $logs.size()>0)
 <div class="page_content">
 	<hr size="1" noshade color="#CCCCCC">
-    #set($no_bookmark_link = true) ##²»ÏÔÊ¾´æÎªÊéÇ©µÄÁ´½Ó
+    #set($no_bookmark_link = true) ##ä¸æ˜¾ç¤ºå­˜ä¸ºä¹¦ç­¾çš„é“¾æ¥
 	#set($catalog_id=-1)
     #foreach($log in $logs)
 	#set($show_log_url = "$dlog.root()/html/diary/showlog.vm?sid=$g_site_id&amp;log_id=${log.id}")
@@ -49,10 +49,10 @@
     		<p>$preview_content</p>
 			</div>
 			#if($preview_content.length() < $log.content.length())
-    		<div><a href="$show_log_url" class="more">ÔÄ¶ÁÈ«ÎÄ...</a></div>
+    		<div><a href="$show_log_url" class="more">é˜…è¯»å…¨æ–‡...</a></div>
 			#end
 			#if($dlog.not_empty($log.keyword))
-			<div><b>¹Ø¼ü×Ö: </b>&nbsp;
+			<div><b>å…³é”®å­—: </b>&nbsp;
 				#foreach($tag in $log.keywords)
 					<a href="$dlog.root()/html/showtag.vm?sid=$g_site_id&amp;type=1&amp;tag=$link.encodeURL($tag)"><b>${tag}</b></a>&nbsp;&nbsp;
 				#end

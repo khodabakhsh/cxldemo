@@ -18,7 +18,7 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_bbs.vm")
-#set($page_title="¾«»ªÇø")
+#set($page_title="ç²¾ååŒº")
 ###############################################################################
 #set($forum_id = $dlog.param("fid",-1))
 #set($forum = $BBS_tool.forum($g_site, $forum_id))
@@ -32,11 +32,11 @@
 <div class="page_top">
 	<div class="pagecontent">
 		<div class="fleft">
-			<a href="$dlog.root()/html/bbs/?sid=$g_site_id">ÂÛÌ³Ê×Ò³</a>&nbsp;&raquo;&nbsp;
+			<a href="$dlog.root()/html/bbs/?sid=$g_site_id">è®ºå›é¦–é¡µ</a>&nbsp;&raquo;&nbsp;
 			#if($forum)
 				<a href="forum.vm?sid=$g_site_id&amp;fid=$!{forum.id}">$text.html($forum.name)</a>&nbsp;&raquo;&nbsp;
 			#end
-			<a href="elite.vm?sid=$g_site_id">¾«»ªÇø</a>
+			<a href="elite.vm?sid=$g_site_id">ç²¾ååŒº</a>
 		</div>
 		<div class="pagecontent_right fright">
 			#invoke("_fast_jump.vm")
@@ -52,38 +52,38 @@
 			<div class="bbs_forum_title">
 				<b>$text.html(${forum.name})</b>
 				<br />$!{forum.desc}
-				<br />Ö÷Ìâ×ÜÊı£º${forum.topicCount}&nbsp;Æª
+				<br />ä¸»é¢˜æ€»æ•°ï¼š${forum.topicCount}&nbsp;ç¯‡
 				#if(${forum.lastTopic})
-					<br/>×îºó·¢±íÊ±¼ä£º$!date.format("yy/MM/dd HH:mm", ${forum.lastPostTime})&nbsp;×÷Õß£º<a href="$dlog.root()/html/bbs/topic.vm?sid=$g_site_id&amp;fid=${forum.id}&amp;tid=${forum.lastTopic.id}">$text.html(${forum.lastUsername})&nbsp;&raquo;</a>
+					<br/>æœ€åå‘è¡¨æ—¶é—´ï¼š$!date.format("yy/MM/dd HH:mm", ${forum.lastPostTime})&nbsp;ä½œè€…ï¼š<a href="$dlog.root()/html/bbs/topic.vm?sid=$g_site_id&amp;fid=${forum.id}&amp;tid=${forum.lastTopic.id}">$text.html(${forum.lastUsername})&nbsp;&raquo;</a>
 				#end
 			</div>
 			#end
 			<div class="spacer_10"></div>
 			<div class="forum_nav">
-				<a class="thread_new" href="$dlog.root()/html/bbs/new_topic.vm?sid=$g_site_id&amp;fid=$!{forum.id}">·¢ĞÂÌû</a>
-                <a class="thread_search" href="$dlog.root()/html/bbs/search.vm?sid=$g_site_id&amp;fid=$!{forum.id}">ËÑË÷ÂÛÌ³</a>
-                <a class="thread_back" href="$dlog.root()/html/bbs/?sid=$g_site_id">·µ»ØÂÛÌ³ÁĞ±í</a>
+				<a class="thread_new" href="$dlog.root()/html/bbs/new_topic.vm?sid=$g_site_id&amp;fid=$!{forum.id}">å‘æ–°å¸–</a>
+                <a class="thread_search" href="$dlog.root()/html/bbs/search.vm?sid=$g_site_id&amp;fid=$!{forum.id}">æœç´¢è®ºå›</a>
+                <a class="thread_back" href="$dlog.root()/html/bbs/?sid=$g_site_id">è¿”å›è®ºå›åˆ—è¡¨</a>
 			</div>
 			<div class="spacer_10"></div>
 			<div class="pager_nav">
 				<form name="dform" action="">
     			<div class="fleft">
-    				¹²ÓĞ¾«»ªÌû×Ó${elite_count}Æª Ã¿Ò³ÏÔÊ¾${PAGE_SIZE}Æª ¹²${page_count}Ò³ µÚ${p_page}Ò³
+    				å…±æœ‰ç²¾åå¸–å­${elite_count}ç¯‡ æ¯é¡µæ˜¾ç¤º${PAGE_SIZE}ç¯‡ å…±${page_count}é¡µ ç¬¬${p_page}é¡µ
         		</div>
         		<div class="fright">
     				#if($page_count > 1)
                         <input type="hidden" name="sid" value="$g_site_id" />
 						<input type="hidden" name="fid" value="$forum.id" />
-    					#if($p_page > 1)<a href="?sid=${g_site_id}&amp;fid=$!{forum.id}">Ê×Ò³</a>#end
-                        #if($p_page>1)<a href="?sid=${g_site_id}&amp;fid=$!{forum.id}&amp;page=$pre_page">ÉÏÒ³</a>#end
-                        #if($p_page < $page_count)<a href="?sid=${g_site_id}&amp;fid=$!{forum.id}&amp;page=$next_page">ÏÂÒ³</a>#end
-                        #if($p_page < $page_count)<a href="?sid=${g_site_id}&amp;fid=$!{forum.id}&amp;page=$page_count">Î²Ò³</a>#end
-    					×ªµ½&nbsp;
+    					#if($p_page > 1)<a href="?sid=${g_site_id}&amp;fid=$!{forum.id}">é¦–é¡µ</a>#end
+                        #if($p_page>1)<a href="?sid=${g_site_id}&amp;fid=$!{forum.id}&amp;page=$pre_page">ä¸Šé¡µ</a>#end
+                        #if($p_page < $page_count)<a href="?sid=${g_site_id}&amp;fid=$!{forum.id}&amp;page=$next_page">ä¸‹é¡µ</a>#end
+                        #if($p_page < $page_count)<a href="?sid=${g_site_id}&amp;fid=$!{forum.id}&amp;page=$page_count">å°¾é¡µ</a>#end
+    					è½¬åˆ°&nbsp;
 						<select name="page" onchange="dform.submit();">
                         #foreach($p in [1..$page_count])
 							<option value="$p"#if($p_page==$p) selected#end>$p</option>
 						#end
-						</select>&nbsp;Ò³
+						</select>&nbsp;é¡µ
 					#end
 				</div>
 				</form>
@@ -102,16 +102,16 @@
 							<img src="$dlog.style($g_site, "pic/thread_new.gif")" alt="new" align="absmiddle" border="0" />
 					#end
 					<b>$text.html(${topic.title})</b></a>
-				&nbsp;&nbsp;<a href="topic.vm?sid=$g_site_id&amp;fid=${forum.id}&amp;tid=${topic.id}">ä¯ÀÀÌû×Ó&nbsp;&raquo;</a>
+				&nbsp;&nbsp;<a href="topic.vm?sid=$g_site_id&amp;fid=${forum.id}&amp;tid=${topic.id}">æµè§ˆå¸–å­&nbsp;&raquo;</a>
 				<div class="spacer_5"></div>
 				<div class="line_solid"></div>
 				<div class="spacer_5"></div>
-				×÷Õß£º<a href="$dlog.root()/dlog/viewuser.vm?sid=$g_site_id&amp;uid=${topic.user.id}">$text.html($topic.username)</a>
-				&nbsp;&nbsp;·¢±íÊ±¼ä£º$date.format("MM-dd HH:mm:ss", ${topic.createTime})
-				&nbsp;&nbsp;µã»÷£º${topic.viewCount}&nbsp;&nbsp;»Ø¸´£º${topic.replyCount}
+				ä½œè€…ï¼š<a href="$dlog.root()/dlog/viewuser.vm?sid=$g_site_id&amp;uid=${topic.user.id}">$text.html($topic.username)</a>
+				&nbsp;&nbsp;å‘è¡¨æ—¶é—´ï¼š$date.format("MM-dd HH:mm:ss", ${topic.createTime})
+				&nbsp;&nbsp;ç‚¹å‡»ï¼š${topic.viewCount}&nbsp;&nbsp;å›å¤ï¼š${topic.replyCount}
 				#if($topic.lastReply)
-        			<br>×îºó»Ø¸´£º$date.format($topic.lastReplyTime)
-        			&nbsp;×îºó»Ø¸´×÷Õß£º<a href="topic.vm?sid=$g_site_id&amp;fid=$!{forum.id}&amp;tid=${topic.id}#${topic.lastReply.id}">$text.html($topic.lastUsername)&nbsp;&raquo;</a>
+        			<br>æœ€åå›å¤ï¼š$date.format($topic.lastReplyTime)
+        			&nbsp;æœ€åå›å¤ä½œè€…ï¼š<a href="topic.vm?sid=$g_site_id&amp;fid=$!{forum.id}&amp;tid=${topic.id}#${topic.lastReply.id}">$text.html($topic.lastUsername)&nbsp;&raquo;</a>
                 #end
 			</div>
 			<div class="spacer_10"></div>
@@ -121,31 +121,31 @@
     	<div class="bbs_footer">
 			<form name="dform_2" action="">
 			<div class="fleft">
-				¹²ÓĞ¾«»ªÌû×Ó${elite_count}Æª Ã¿Ò³ÏÔÊ¾${PAGE_SIZE}Æª ¹²${page_count}Ò³ µÚ${p_page}Ò³
+				å…±æœ‰ç²¾åå¸–å­${elite_count}ç¯‡ æ¯é¡µæ˜¾ç¤º${PAGE_SIZE}ç¯‡ å…±${page_count}é¡µ ç¬¬${p_page}é¡µ
     		</div>
     		<div class="fright">
 				#if($page_count > 1)
                     <input type="hidden" name="sid" value="$g_site_id" />
                     <input type="hidden" name="fid" value="$forum.id" />
-                    #if($p_page > 1)<a href="?sid=${g_site_id}&amp;fid=$!{forum.id}">Ê×Ò³</a>#end
-                    #if($p_page>1)<a href="?sid=${g_site_id}&amp;fid=$!{forum.id}&amp;page=$pre_page">ÉÏÒ³</a>#end
-                    #if($p_page < $page_count)<a href="?sid=${g_site_id}&amp;fid=$!{forum.id}&amp;page=$next_page">ÏÂÒ³</a>#end
-                    #if($p_page < $page_count)<a href="?sid=${g_site_id}&amp;fid=$!{forum.id}&amp;page=$page_count">Î²Ò³</a>#end
-					×ªµ½&nbsp;
+                    #if($p_page > 1)<a href="?sid=${g_site_id}&amp;fid=$!{forum.id}">é¦–é¡µ</a>#end
+                    #if($p_page>1)<a href="?sid=${g_site_id}&amp;fid=$!{forum.id}&amp;page=$pre_page">ä¸Šé¡µ</a>#end
+                    #if($p_page < $page_count)<a href="?sid=${g_site_id}&amp;fid=$!{forum.id}&amp;page=$next_page">ä¸‹é¡µ</a>#end
+                    #if($p_page < $page_count)<a href="?sid=${g_site_id}&amp;fid=$!{forum.id}&amp;page=$page_count">å°¾é¡µ</a>#end
+					è½¬åˆ°&nbsp;
 					<select name="page" onchange="dform_2.submit();">
                         #foreach($p in [1..$page_count])
                         <option value="$p"#if($p_page==$p) selected#end>$p</option>
                         #end
 					</select>
-					&nbsp;Ò³
+					&nbsp;é¡µ
                 #end
     		</div>
 			</form>
 			<div class="spacer_10"></div>
 			<div class="forum_nav">
-    			<a class="thread_new" href="$dlog.root()/html/bbs/new_topic.vm?sid=$g_site_id&amp;fid=$!{forum.id}">·¢ĞÂÌû</a>
-                <a class="thread_search" href="$dlog.root()/html/bbs/search.vm?sid=$g_site_id&amp;fid=$!{forum.id}">ËÑË÷ÂÛÌ³</a>
-                <a class="thread_back" href="$dlog.root()/html/bbs/?sid=$g_site_id">·µ»ØÂÛÌ³ÁĞ±í</a>
+    			<a class="thread_new" href="$dlog.root()/html/bbs/new_topic.vm?sid=$g_site_id&amp;fid=$!{forum.id}">å‘æ–°å¸–</a>
+                <a class="thread_search" href="$dlog.root()/html/bbs/search.vm?sid=$g_site_id&amp;fid=$!{forum.id}">æœç´¢è®ºå›</a>
+                <a class="thread_back" href="$dlog.root()/html/bbs/?sid=$g_site_id">è¿”å›è®ºå›åˆ—è¡¨</a>
 			</div>
 			<div class="spacer_10"></div>
     	</div>

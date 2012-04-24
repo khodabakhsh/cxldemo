@@ -24,7 +24,7 @@
 #set($is_owner = $dlog.is_owner($g_site,$g_user))
 ###############################################################################
 #if(${topic.forum.status}==3 && !$is_owner)
-	#show_msg_box("ÂÛÌ³ÒÑ±»Õ¾³¤¹Ø±Õ£¬ÔİÊ±²»¿ÉÓÃ£¡")
+	#show_msg_box("è®ºå›å·²è¢«ç«™é•¿å…³é—­ï¼Œæš‚æ—¶ä¸å¯ç”¨ï¼")
 #elseif($is_owner || ($topic && $topic.status==0))
     #set($PAGE_SIZE = 20)
     #set($p_page = $dlog.param("page", 1))
@@ -35,19 +35,19 @@
     <div class="page_top">
     	<div class="pagecontent">
     		<div class="fleft">
-				<a href="$dlog.root()/html/bbs/?sid=$g_site_id">ÂÛÌ³Ê×Ò³</a>&nbsp;&raquo;&nbsp;
+				<a href="$dlog.root()/html/bbs/?sid=$g_site_id">è®ºå›é¦–é¡µ</a>&nbsp;&raquo;&nbsp;
     			<a href="$dlog.root()/html/bbs/forum.vm?sid=$g_site_id&amp;fid=${topic.forum.id}">${topic.forum.name}</a>
     		</div>
     		<div class="pagecontent_right fright">
 				<form name="fForm" action="$dlog.root()/html/bbs/forum.vm">
                 	#set($prev_topic = $BBS_tool.prev_topic($topic))
-                    #if($prev_topic)<a href="$dlog.root()/html/bbs/topic.vm?sid=$g_site_id&amp;fid=${prev_topic.forum.id}&amp;tid=${prev_topic.id}" title="$text.html($prev_topic.title)" class="Cprevious">ÉÏÒ»Æª</a>#end
+                    #if($prev_topic)<a href="$dlog.root()/html/bbs/topic.vm?sid=$g_site_id&amp;fid=${prev_topic.forum.id}&amp;tid=${prev_topic.id}" title="$text.html($prev_topic.title)" class="Cprevious">ä¸Šä¸€ç¯‡</a>#end
                     &nbsp;&nbsp;
                 	#set($next_topic = $BBS_tool.next_topic($topic))
-                    #if($next_topic)<a href="$dlog.root()/html/bbs/topic.vm?sid=$g_site_id&amp;fid=${next_topic.forum.id}&amp;tid=${next_topic.id}" title="$text.html($next_topic.title)" class="Cnext">ÏÂÒ»Æª</a>#end
+                    #if($next_topic)<a href="$dlog.root()/html/bbs/topic.vm?sid=$g_site_id&amp;fid=${next_topic.forum.id}&amp;tid=${next_topic.id}" title="$text.html($next_topic.title)" class="Cnext">ä¸‹ä¸€ç¯‡</a>#end
 					#set($forums = $BBS_tool.forums($request, $g_site, $g_user))
 					#if($forums && $forums.size()>1)
-                	&nbsp;&nbsp;¿ìËÙÌø×ª£º
+                	&nbsp;&nbsp;å¿«é€Ÿè·³è½¬ï¼š
                     <input type="hidden" name="sid" value="$g_site_id" />
                     <select name="fid" onchange="fForm.submit()">
                         #foreach($f in $forums)
@@ -65,9 +65,9 @@
         	<div class="bbs_top">
     			<div class="spacer_10"></div>
     			<div class="forum_nav">
-        			<a class="thread_reply" href="$dlog.root()/html/bbs/reply.vm?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}">»Ø¸´´ËÖ÷Ìâ</a>
-                    <a class="thread_new" href="$dlog.root()/html/bbs/new_topic.vm?sid=$g_site_id&amp;fid=${topic.forum.id}">·¢ĞÂÌû</a>
-					<a class="thread_search" href="$dlog.root()/html/bbs/search.vm?sid=$g_site_id&amp;fid=${topic.forum.id}">ËÑË÷ÂÛÌ³</a>
+        			<a class="thread_reply" href="$dlog.root()/html/bbs/reply.vm?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}">å›å¤æ­¤ä¸»é¢˜</a>
+                    <a class="thread_new" href="$dlog.root()/html/bbs/new_topic.vm?sid=$g_site_id&amp;fid=${topic.forum.id}">å‘æ–°å¸–</a>
+					<a class="thread_search" href="$dlog.root()/html/bbs/search.vm?sid=$g_site_id&amp;fid=${topic.forum.id}">æœç´¢è®ºå›</a>
                     <form name="bookmarkForm" action="$link.setAction("html/bookmark")" method="post">
                         <input type="hidden" name="sid" value="${g_site_id}" />
                         <input type="hidden" name="title" value="${topic.title}" />
@@ -76,13 +76,13 @@
                         <input type="hidden" name="fromPage" value="$dlog.get_request_url()" />
                         <input type="hidden" name="eventSubmit_Add" value="1" />    
                     </form>
-                    <a class="thread_bookmark" href="#" onclick="#if(!$g_user) alert('±ØĞëµÇÂ¼ºó²ÅÄÜ±£´æÎÄÕÂµ½ÊéÇ©') #else bookmarkForm.submit() #end ;return false;">¼ÓÈëÊéÇ©</a>
-                    <a class="thread_back" href="$dlog.root()/html/bbs/forum.vm?sid=$g_site_id&amp;fid=${topic.forum.id}">·µ»Øµ½Ö÷ÌâÁĞ±í</a>
+                    <a class="thread_bookmark" href="#" onclick="#if(!$g_user) alert('å¿…é¡»ç™»å½•åæ‰èƒ½ä¿å­˜æ–‡ç« åˆ°ä¹¦ç­¾') #else bookmarkForm.submit() #end ;return false;">åŠ å…¥ä¹¦ç­¾</a>
+                    <a class="thread_back" href="$dlog.root()/html/bbs/forum.vm?sid=$g_site_id&amp;fid=${topic.forum.id}">è¿”å›åˆ°ä¸»é¢˜åˆ—è¡¨</a>
     			</div>
     			<div class="spacer_1"></div>
     			<div class="pager_nav">
         			<div class="fleft">
-        				¹²ÓĞ»Ø¸´${topic.replyCount}Æª Ã¿Ò³ÏÔÊ¾${PAGE_SIZE}Æª µÚ${p_page}Ò³ ¹²${page_count}Ò³
+        				å…±æœ‰å›å¤${topic.replyCount}ç¯‡ æ¯é¡µæ˜¾ç¤º${PAGE_SIZE}ç¯‡ ç¬¬${p_page}é¡µ å…±${page_count}é¡µ
             		</div>
             		<div class="fright">
 						#if($page_count > 1)
@@ -91,19 +91,19 @@
                             <input type="hidden" name="fid" value="$topic.forum.id" />
                             <input type="hidden" name="tid" value="$topic.id" />
                             #if($p_page>1)
-                                <a href="?sid=${g_site_id}&amp;fid=${forum.id}">Ê×Ò³</a>
-                                <a href="?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}&amp;page=$pre_page">ÉÏÒ³</a>
+                                <a href="?sid=${g_site_id}&amp;fid=${forum.id}">é¦–é¡µ</a>
+                                <a href="?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}&amp;page=$pre_page">ä¸Šé¡µ</a>
                             #end
                             #if($p_page < $page_count)
-                                <a href="?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}&amp;page=$next_page">ÏÂÒ³</a>
-                                <a href="?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}&amp;page=$page_count">Î²Ò³</a>
+                                <a href="?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}&amp;page=$next_page">ä¸‹é¡µ</a>
+                                <a href="?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}&amp;page=$page_count">å°¾é¡µ</a>
                             #end
-                			×ªµ½&nbsp;
+                			è½¬åˆ°&nbsp;
                             <select name="page" onchange="dform.submit();">
                                 #foreach($p in [1..$page_count])
                                     <option value="$p"#if($p_page==$p) selected#end>$p</option>
                                 #end
-                            </select>&nbsp;Ò³
+                            </select>&nbsp;é¡µ
                 			</form>
                 		#end
 					</div>
@@ -126,22 +126,22 @@
 						</div>
 						<div class="fright">
         					#if(${topic.user.id}==$g_user_id || $is_owner)
-                			<a href="$dlog.root()/html/bbs/edit_topic.vm?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}">±à¼­</a>
-                			<a href="$link.setAction("html/bbs/topic")?sid=${g_site_id}&amp;forum=${topic.forum.id}&amp;id=${topic.id}&amp;eventSubmit_DeleteTopic" onclick="return confirm('ÄúÈ·ÈÏÒªÉ¾³ıÕâÆªÌû×ÓÂğ£¿');">É¾³ı</a>
+                			<a href="$dlog.root()/html/bbs/edit_topic.vm?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}">ç¼–è¾‘</a>
+                			<a href="$link.setAction("html/bbs/topic")?sid=${g_site_id}&amp;forum=${topic.forum.id}&amp;id=${topic.id}&amp;eventSubmit_DeleteTopic" onclick="return confirm('æ‚¨ç¡®è®¤è¦åˆ é™¤è¿™ç¯‡å¸–å­å—ï¼Ÿ');">åˆ é™¤</a>
         					#end				
         					#if(${topic.forum.status}!=1)
-                			<a href="$dlog.root()/html/bbs/reply.vm?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}">»Ø¸´</a>
+                			<a href="$dlog.root()/html/bbs/reply.vm?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}">å›å¤</a>
     						#end
 						</div>
 						<div class="spacer_1"></div>
 						</div>
 					</div>
 					<div class="thread_top_usr">
-        				×÷Õß: <a href="$dlog.root()/dlog/viewuser.vm?sid=$g_site_id&amp;uid=${topic.user.id}">$text.html(${topic.user.nickname})</a>#if(${topic.user.onlineStatus}==1)(ÔÚÏß)#else(ÀëÏß)#end
-						Ìá½»Ê±¼ä:$date.format("yy-MM-dd HH:mm",${topic.createTime})
-						##<a href="$dlog.root()/dlog/sendmsg.vm?sid=$g_site_id&amp;uid=${topic.user.id}">[·¢ÏûÏ¢]</a>&nbsp;&nbsp;
-                        ##&nbsp;&nbsp;·¢ÌûÊı: ${topic.user.count.topic}&nbsp;&nbsp;»ØÌûÊı: ${topic.user.count.topicReply} 
-                        ###<br />×¢²áÊ±¼ä: $date.format("yyyy-MM-dd", ${topic.user.regTime})&nbsp;&nbsp;×î½ü·ÃÎÊ: $!date.format("yyyy-MM-dd HH:mm", ${topic.user.lastTime})
+        				ä½œè€…: <a href="$dlog.root()/dlog/viewuser.vm?sid=$g_site_id&amp;uid=${topic.user.id}">$text.html(${topic.user.nickname})</a>#if(${topic.user.onlineStatus}==1)(åœ¨çº¿)#else(ç¦»çº¿)#end
+						æäº¤æ—¶é—´:$date.format("yy-MM-dd HH:mm",${topic.createTime})
+						##<a href="$dlog.root()/dlog/sendmsg.vm?sid=$g_site_id&amp;uid=${topic.user.id}">[å‘æ¶ˆæ¯]</a>&nbsp;&nbsp;
+                        ##&nbsp;&nbsp;å‘å¸–æ•°: ${topic.user.count.topic}&nbsp;&nbsp;å›å¸–æ•°: ${topic.user.count.topicReply} 
+                        ###<br />æ³¨å†Œæ—¶é—´: $date.format("yyyy-MM-dd", ${topic.user.regTime})&nbsp;&nbsp;æœ€è¿‘è®¿é—®: $!date.format("yyyy-MM-dd HH:mm", ${topic.user.lastTime})
 					</div>
     				<div class="spacer_2"></div>
     				<div class="line_dashed"></div>
@@ -164,20 +164,20 @@
 					</div>
 					<div class="fright">
     					#if($reply.user.id==$g_user_id || $is_owner)
-        				<a href="$dlog.root()/html/bbs/edit_reply.vm?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}&amp;rid=${reply.id}&amp;page=${p_page}">±à¼­</a>
-        				<a href="$link.setAction("html/bbs/reply")?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}&amp;id=${reply.id}&amp;page=${p_page}&amp;eventSubmit_DeleteReply" onclick="return confirm('ÄúÈ·ÈÏÒªÉ¾³ıÕâÆª»ØÌûÂğ£¿');">É¾³ı</a>
+        				<a href="$dlog.root()/html/bbs/edit_reply.vm?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}&amp;rid=${reply.id}&amp;page=${p_page}">ç¼–è¾‘</a>
+        				<a href="$link.setAction("html/bbs/reply")?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}&amp;id=${reply.id}&amp;page=${p_page}&amp;eventSubmit_DeleteReply" onclick="return confirm('æ‚¨ç¡®è®¤è¦åˆ é™¤è¿™ç¯‡å›å¸–å—ï¼Ÿ');">åˆ é™¤</a>
 						#end
 						#if(${topic.forum.status}!=1)
-        				<a href="$dlog.root()/html/bbs/reply.vm?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}">»Ø¸´</a>
+        				<a href="$dlog.root()/html/bbs/reply.vm?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}">å›å¤</a>
 						#end
 					</div>
 					<div class="spacer_1"></div>
 					</div>
 				</div>
 				<div class="thread_reply_usr">
-    				»Ø¸´×÷Õß: <a href="$dlog.root()/dlog/viewuser.vm?sid=$g_site_id&amp;uid=${reply.user.id}">$text.html(${reply.user.nickname})</a>#if(${reply.user.onlineStatus}==1)(ÔÚÏß)#else(ÀëÏß)#end&nbsp;&nbsp;»Ø¸´Ê±¼ä: $date.format($reply.replyTime)
-					###×¢²áÊ±¼ä: $date.format("yyyy-MM-dd", ${reply.user.regTime})×î½ü·ÃÎÊ: $!date.format("yyyy-MM-dd HH:mm", ${reply.user.lastTime})µ±Ç°×´Ì¬: #if(${reply.user.onlineStatus}==1)ÔÚÏß#else ÀëÏß#end<a href="$dlog.root()/html/sendmsg.vm?sid=$g_site_id&amp;uid=${reply.user.id}">[·¢ÏûÏ¢]</a>
-                    &nbsp;&nbsp;·¢ÌûÊı: ${reply.user.count.topic}&nbsp;&nbsp;»ØÌûÊı: ${reply.user.count.topicReply}
+    				å›å¤ä½œè€…: <a href="$dlog.root()/dlog/viewuser.vm?sid=$g_site_id&amp;uid=${reply.user.id}">$text.html(${reply.user.nickname})</a>#if(${reply.user.onlineStatus}==1)(åœ¨çº¿)#else(ç¦»çº¿)#end&nbsp;&nbsp;å›å¤æ—¶é—´: $date.format($reply.replyTime)
+					###æ³¨å†Œæ—¶é—´: $date.format("yyyy-MM-dd", ${reply.user.regTime})æœ€è¿‘è®¿é—®: $!date.format("yyyy-MM-dd HH:mm", ${reply.user.lastTime})å½“å‰çŠ¶æ€: #if(${reply.user.onlineStatus}==1)åœ¨çº¿#else ç¦»çº¿#end<a href="$dlog.root()/html/sendmsg.vm?sid=$g_site_id&amp;uid=${reply.user.id}">[å‘æ¶ˆæ¯]</a>
+                    &nbsp;&nbsp;å‘å¸–æ•°: ${reply.user.count.topic}&nbsp;&nbsp;å›å¸–æ•°: ${reply.user.count.topicReply}
 				</div>
 				<div class="spacer_2"></div>
     			<div class="line_dashed"></div>
@@ -195,7 +195,7 @@
     	<div class="line_dashed"></div>
 		<div class="pager_nav">
     		<div class="fleft">
-				¹²ÓĞ»Ø¸´${topic.replyCount}Æª Ã¿Ò³ÏÔÊ¾${PAGE_SIZE}Æª µÚ${p_page}Ò³ ¹²${page_count}Ò³
+				å…±æœ‰å›å¤${topic.replyCount}ç¯‡ æ¯é¡µæ˜¾ç¤º${PAGE_SIZE}ç¯‡ ç¬¬${p_page}é¡µ å…±${page_count}é¡µ
     		</div>
     		<div class="fright">
 				#if($page_count > 1)
@@ -204,30 +204,30 @@
                     <input type="hidden" name="fid" value="$topic.forum.id" />
                     <input type="hidden" name="tid" value="$topic.id" />
                     #if($p_page>1)
-                        <a href="?sid=${g_site_id}&amp;fid=${forum.id}">Ê×Ò³</a>
-                        <a href="?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}&amp;page=$pre_page">ÉÏÒ³</a>
+                        <a href="?sid=${g_site_id}&amp;fid=${forum.id}">é¦–é¡µ</a>
+                        <a href="?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}&amp;page=$pre_page">ä¸Šé¡µ</a>
                     #end
                     #if($p_page < $page_count)
-                        <a href="?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}&amp;page=$next_page">ÏÂÒ³</a>
-                        <a href="?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}&amp;page=$page_count">Î²Ò³</a>
+                        <a href="?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}&amp;page=$next_page">ä¸‹é¡µ</a>
+                        <a href="?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}&amp;page=$page_count">å°¾é¡µ</a>
                     #end
-            		×ªµ½&nbsp;
+            		è½¬åˆ°&nbsp;
                     <select name="page" onchange="dform_2.submit();">
                         #foreach($p in [1..$page_count])
                             <option value="$p"#if($p_page==$p) selected#end>$p</option>
                         #end
-                    </select>&nbsp;Ò³
+                    </select>&nbsp;é¡µ
             		</form>
             	#end
     		</div>
     	</div>
 		<div class="spacer_20"></div>
 		<div class="forum_nav">
-			<a class="thread_reply" href="$dlog.root()/html/bbs/reply.vm?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}">»Ø¸´´ËÖ÷Ìâ</a>
-            <a class="thread_new" href="$dlog.root()/html/bbs/new_topic.vm?sid=$g_site_id&amp;fid=${topic.forum.id}">·¢ĞÂÌû</a>
-			<a class="thread_search" href="$dlog.root()/html/bbs/search.vm?sid=$g_site_id&amp;fid=${topic.forum.id}">ËÑË÷ÂÛÌ³</a>            
-            <a class="thread_bookmark" href="#" onclick="#if(!$g_user) alert('±ØĞëµÇÂ¼ºó²ÅÄÜ±£´æÎÄÕÂµ½ÊéÇ©') #else bookmarkForm.submit() #end ;return false;">¼ÓÈëÊéÇ©</a>
-            <a class="thread_back" href="$dlog.root()/html/bbs/forum.vm?sid=$g_site_id&amp;fid=${topic.forum.id}">·µ»Øµ½Ö÷ÌâÁĞ±í</a>
+			<a class="thread_reply" href="$dlog.root()/html/bbs/reply.vm?sid=${g_site_id}&amp;fid=${topic.forum.id}&amp;tid=${topic.id}">å›å¤æ­¤ä¸»é¢˜</a>
+            <a class="thread_new" href="$dlog.root()/html/bbs/new_topic.vm?sid=$g_site_id&amp;fid=${topic.forum.id}">å‘æ–°å¸–</a>
+			<a class="thread_search" href="$dlog.root()/html/bbs/search.vm?sid=$g_site_id&amp;fid=${topic.forum.id}">æœç´¢è®ºå›</a>            
+            <a class="thread_bookmark" href="#" onclick="#if(!$g_user) alert('å¿…é¡»ç™»å½•åæ‰èƒ½ä¿å­˜æ–‡ç« åˆ°ä¹¦ç­¾') #else bookmarkForm.submit() #end ;return false;">åŠ å…¥ä¹¦ç­¾</a>
+            <a class="thread_back" href="$dlog.root()/html/bbs/forum.vm?sid=$g_site_id&amp;fid=${topic.forum.id}">è¿”å›åˆ°ä¸»é¢˜åˆ—è¡¨</a>
 		</div>
     </div>
 	#end

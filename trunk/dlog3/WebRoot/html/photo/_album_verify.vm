@@ -13,10 +13,10 @@
 	<input type="hidden" name="__ClientId" value="$dlog.gen_client_id()"/>
     <input type="hidden" name="eventSubmit_AlbumVerify" value="HTML"/> 
     <div class="form">
-		<div class="form_note">此相册需要密码验证正确后才能查看，请输入访问密码</div>
+		<div class="form_note">姝ょ浉鍐岄渶瑕佸瘑鐮侀獙璇佹纭悗鎵嶈兘鏌ョ湅锛岃杈撳叆璁块棶瀵嗙爜</div>
     	<div class="form_row">
     		<div class="form_row_title fleft">
-    			访问密码:
+    			璁块棶瀵嗙爜:
     		</div>
     		<div class="form_row_content">
     			<input type="password" name="verifyCode" value=""/>
@@ -25,8 +25,8 @@
 		<div class="spacer_1"></div>
     	<div class="form_row">
     		<div class="form_row_submit">
-    			<input type="submit" name="bt_ok" value="进入相簿"/> 
-    			<input type="button" value="返回上页" onclick="history.go(-1)" />
+    			<input type="submit" name="bt_ok" value="杩涘叆鐩哥翱"/> 
+    			<input type="button" value="杩斿洖涓婇〉" onclick="history.go(-1)" />
     		</div>
     	</div>
 	</div>

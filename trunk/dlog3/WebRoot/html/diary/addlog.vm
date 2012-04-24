@@ -18,20 +18,20 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_diary.vm")
-#set($page_title="Ğ´ÈÕ¼Ç")
+#set($page_title="å†™æ—¥è®°")
 ###############################################################################
 #if($messages.exist())
 <div class="error_msg">$messages.getAll()</div>
 #end
 #set($catalogs = $DIARY_tool.catalogs($g_site, $g_user, true))
 #if(!$g_user)
-    #show_msg_box("ÓÃ»§ÉĞÎ´µÇÂ¼,µã»÷<a href='$dlog.root()/dlog/login.vm?sid=$g_site_id'>ÕâÀï</a>µÇÂ¼")
+    #show_msg_box("ç”¨æˆ·å°šæœªç™»å½•,ç‚¹å‡»<a href='$dlog.root()/dlog/login.vm?sid=$g_site_id'>è¿™é‡Œ</a>ç™»å½•")
 #elseif($catalogs.size()==0)
 	#if($dlog.is_owner($g_site, $g_user))
-	#set($cn = $link.encodeURL("ÎÒµÄÈÕ¼Ç"))	
-    #show_msg_box("Äú»¹Ã»ÓĞÌí¼ÓÈÕ¼Ç·ÖÀà£¬ÏÖÔÚ¾Í[<a href='$dlog.root()/html/sitemgr/catalog_add.vm?sid=$g_site_id'>ÊÖ¹¤Ìí¼ÓÈÕ¼Ç·ÖÀà</a>]»òÕßÊÇ[<a href='$dlog.root()/html/diary.do?sid=$g_site_id&amp;eventSubmit_AutoCreateCatalogAndWrite&amp;catalog=$cn'>×Ô¶¯´´½¨·ÖÀà²¢¿ªÊ¼Ğ´ÈÕ¼Ç</a>]£¡")
+	#set($cn = $link.encodeURL("æˆ‘çš„æ—¥è®°"))	
+    #show_msg_box("æ‚¨è¿˜æ²¡æœ‰æ·»åŠ æ—¥è®°åˆ†ç±»ï¼Œç°åœ¨å°±[<a href='$dlog.root()/html/sitemgr/catalog_add.vm?sid=$g_site_id'>æ‰‹å·¥æ·»åŠ æ—¥è®°åˆ†ç±»</a>]æˆ–è€…æ˜¯[<a href='$dlog.root()/html/diary.do?sid=$g_site_id&amp;eventSubmit_AutoCreateCatalogAndWrite&amp;catalog=$cn'>è‡ªåŠ¨åˆ›å»ºåˆ†ç±»å¹¶å¼€å§‹å†™æ—¥è®°</a>]ï¼")
 	#else
-    #show_msg_box("ÄúÃ»ÓĞÔÚ<b>[${g_site.friendlyName}]</b>Ğ´ÈÕ¼ÇµÄÈ¨ÏŞ£¡")
+    #show_msg_box("æ‚¨æ²¡æœ‰åœ¨<b>[${g_site.friendlyName}]</b>å†™æ—¥è®°çš„æƒé™ï¼")
 	#end
 #else
 #set($logform = $form.getBean())
@@ -47,7 +47,7 @@
 			<b>$text.ui("label.diary.new")</b>
 		</div>
 		<div class="pagecontent_right fright">
-			½ñÌìÊÇ: $date.get("MMMMM d, yyyy  EEEEE")
+			ä»Šå¤©æ˜¯: $date.get("MMMMM d, yyyy  EEEEE")
 		</div>        
 	</div>
 	<div class="spacer_1"></div>
@@ -56,24 +56,24 @@
 	<div class="form">
 		<div class="form_row">
     		<div class="form_row_title fleft">
-    			·ÖÀà:
+    			åˆ†ç±»:
     		</div>
     		<div class="form_row_content">
         		<select name="catalogId">
         		#if($catalogs.size()==0)
-        			<option value="-1">ÎÒµÄÈÕ¼Ç</option>
+        			<option value="-1">æˆ‘çš„æ—¥è®°</option>
         		#end
                 #foreach($cat in $catalogs)
                     <option value="${cat.id}" #if(${cat.id}==$catalog_id)selected#end>$text.html(${cat.name})</option>
     			#end
     			</select>
-				<a href="$dlog.root()/html/sitemgr/catalog_add.vm?sid=$g_site_id">&lt;Ìí¼Ó·ÖÀà&gt;</a>
+				<a href="$dlog.root()/html/sitemgr/catalog_add.vm?sid=$g_site_id">&lt;æ·»åŠ åˆ†ç±»&gt;</a>
     		</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-    			ÌìÆø:
+    			å¤©æ°”:
     		</div>
     		<div class="form_row_content">
 				#set($weathers = ["sunny","ptcloudy","cloudy","showers","rain","storms","snow","flurries","ice","dark"])
@@ -95,11 +95,11 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-    			±³¾°ÒôÀÖ:
+    			èƒŒæ™¯éŸ³ä¹:
     		</div>
     		<div class="form_row_content">
 				<select name="bgSound">
-                <option value="-1" selected>[ÎŞ±³¾°ÒôÀÖ]</option>
+                <option value="-1" selected>[æ— èƒŒæ™¯éŸ³ä¹]</option>
                 #foreach($song in $g_site.songs)
                     <option value="${song.id}">&nbsp;&#8226;&nbsp;${song.title}</option>
                 #end
@@ -109,16 +109,16 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-    			±êÌâ:
+    			æ ‡é¢˜:
     		</div>
     		<div class="form_row_content">
-				<input type="text" name="title" maxlength="100" size="48" value="$!{logform.title}" />{±ØĞëÌîĞ´}
+				<input type="text" name="title" maxlength="100" size="48" value="$!{logform.title}" />{å¿…é¡»å¡«å†™}
 			</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-    			×÷Õß:
+    			ä½œè€…:
     		</div>
     		<div class="form_row_content">
 				<input type="text" name="author" size="12" value="$!g_user.nickname" />
@@ -128,7 +128,7 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-    			Éè¶¨ÈÕÆÚÊ±¼ä:
+    			è®¾å®šæ—¥æœŸæ—¶é—´:
     		</div>
     		<div class="form_row_content">&nbsp;
                 <link rel="stylesheet" type="text/css" media="all" href="$dlog.root()/css/calendar-blue.css" title="win2k-cold-1" />
@@ -137,24 +137,24 @@
                 <script type="text/javascript" src="$dlog.root()/js/calendar-setup.js"></script>
 				<span id="show_date">$!{logform.writeDate}</span>
 				<input type="hidden" name="writeDate" id="f_expired_time" value="$!{logform.writeDate}"/>
-                <img id="f_trigger_time" src="$html.image_src("date_sel.gif")" border="0" align="absMiddle" title="Ñ¡¶¨ÈÕÆÚ"/>
+                <img id="f_trigger_time" src="$html.image_src("date_sel.gif")" border="0" align="absMiddle" title="é€‰å®šæ—¥æœŸ"/>
                 #calendar_setup("f_expired_time" "show_date" "f_trigger_time")
 				<select name="writeHour">
-					<option value="-1">Ğ¡Ê±</option>
+					<option value="-1">å°æ—¶</option>
 					#foreach($h in [0..23])<option value="$h">$h</option>#end
-				</select>Ê±<select name="writeMinute">
-					<option value="-1">·ÖÖÓ</option>
+				</select>æ—¶<select name="writeMinute">
+					<option value="-1">åˆ†é’Ÿ</option>
 					#foreach($m in [0..59])<option value="$m">$m</option>#end
-				</select>·Ö(Ä¬ÈÏÎªµ±Ç°Ê±¼ä)
+				</select>åˆ†(é»˜è®¤ä¸ºå½“å‰æ—¶é—´)
 			</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-    			¹Ø¼ü×Ö:
+    			å…³é”®å­—:
     		</div>
     		<div class="form_row_content">
-				<input type="text" name="tags" maxlength="48" size="35" value="$!{logform.tags}" />{¶à¸ö¹Ø¼ü×ÖÇëÓÃ¿Õ¸ñ¸ô¿ª}
+				<input type="text" name="tags" maxlength="48" size="35" value="$!{logform.tags}" />{å¤šä¸ªå…³é”®å­—è¯·ç”¨ç©ºæ ¼éš”å¼€}
 			</div>
     	</div>
 		<div class="spacer_1"></div>
@@ -167,7 +167,7 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-    			ÉÏ´«Í¼Æ¬:
+    			ä¸Šä¼ å›¾ç‰‡:
     		</div>
     		<div class="form_row_content">
 				<iframe src="_upload_file.vm?sid=$g_site_id" frameBorder="0" width="400" height="22" scrolling="no"></iframe>
@@ -176,7 +176,7 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-    			ÒıÓÃµØÖ·:
+    			å¼•ç”¨åœ°å€:
     		</div>
     		<div class="form_row_content">
 				<input type="text" name="refUrl" size="48" value="$!{logform.refUrl}" />
@@ -185,7 +185,7 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-    			ĞÄÇéÏµÊı:
+    			å¿ƒæƒ…ç³»æ•°:
     		</div>
     		<div class="form_row_content">
 				<input type="radio" value="1" name="moodLevel" /> $html.img("mood/1.gif","1")
@@ -198,18 +198,18 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
 			<div class="form_row_content">
-				<input type="checkbox" name="bookmark" value="1" />&nbsp;&nbsp;Ìí¼Óµ½ÊéÇ©
+				<input type="checkbox" name="bookmark" value="1" />&nbsp;&nbsp;æ·»åŠ åˆ°ä¹¦ç­¾
         		<input type="checkbox" name="notify" value="1" #if(!$dlog.is_email(${g_user.contactInfo.email}))disabled#end/>
-    			ÓĞ»ØÌûÊ±ÓÊ¼şÌáĞÑ#if($dlog.is_email(${g_user.contactInfo.email}))(${g_user.contactInfo.email})#end
+    			æœ‰å›å¸–æ—¶é‚®ä»¶æé†’#if($dlog.is_email(${g_user.contactInfo.email}))(${g_user.contactInfo.email})#end
 			</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
 			<div class="form_row_submit">
-				<input type="submit" name="eventSubmit_SaveAsDraft" value="´æÎª²İ¸å" onclick="return before_submit_draft();"/>
-                <input type="submit" name="eventSubmit_PublishLog" value="·¢±í" onclick="return before_submit_diary();"/>
-                <input type="reset" value="Çå³ı" onclick="logForm.title.focus();" />
-                <input type="button" value="·µ»Ø" onclick="history.go(-1);" />
+				<input type="submit" name="eventSubmit_SaveAsDraft" value="å­˜ä¸ºè‰ç¨¿" onclick="return before_submit_draft();"/>
+                <input type="submit" name="eventSubmit_PublishLog" value="å‘è¡¨" onclick="return before_submit_diary();"/>
+                <input type="reset" value="æ¸…é™¤" onclick="logForm.title.focus();" />
+                <input type="button" value="è¿”å›" onclick="history.go(-1);" />
 			</div>
     	</div>
 	</div>
@@ -261,15 +261,15 @@
 	function check_network_response(originalRequest) {		
 		if(originalRequest.status==200){
 			if(equals(originalRequest.responseText,"1")){
-				//¼ÌĞøÌá½»²Ù×÷
+				//ç»§ç»­æäº¤æ“ä½œ
 				document.logForm.submit();
 			}
 			else{
-				alert("ÓÃ»§µÇÂ¼ĞÅÏ¢ÒÑ³¬Ê±£¬ÇëÍ×ÉÆ±£´æÈÕ¼ÇÄÚÈİµÇÂ¼ºóÔÙÊÔ£¡");
+				alert("ç”¨æˆ·ç™»å½•ä¿¡æ¯å·²è¶…æ—¶ï¼Œè¯·å¦¥å–„ä¿å­˜æ—¥è®°å†…å®¹ç™»å½•åå†è¯•ï¼");
 			}
 		}
 		else{
-			alert("¼ì²éÍøÂçÁ¬½ÓÊ§°Ü£¬ÇëÍ×ÉÆ±£´æÈÕ¼ÇÄÚÈİÉÔºóÔÙÊÔ£¡");
+			alert("æ£€æŸ¥ç½‘ç»œè¿æ¥å¤±è´¥ï¼Œè¯·å¦¥å–„ä¿å­˜æ—¥è®°å†…å®¹ç¨åå†è¯•ï¼");
 		}
     }
 </script>

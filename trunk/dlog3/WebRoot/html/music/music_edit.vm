@@ -18,7 +18,7 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_music.vm")
-#set($page_title="ĞŞ¸Ä¸èÇú")
+#set($page_title="ä¿®æ”¹æ­Œæ›²")
 ###############################################################################
 #if(!$dlog.is_owner($g_site, $g_user))
 #invoke("_illegal_access.vm")
@@ -35,10 +35,10 @@
 <div class="page_top">
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			<b>±à¼­ÒôÀÖ</b>
+			<b>ç¼–è¾‘éŸ³ä¹</b>
 		</div>
 		<div class="pagecontent_right fright">
-			½ñÌìÊÇ: $date.get("MMMMM d, yyyy  EEEEE")
+			ä»Šå¤©æ˜¯: $date.get("MMMMM d, yyyy  EEEEE")
 		</div>        
 	</div>
 	<div class="spacer_1"></div>
@@ -47,11 +47,11 @@
 	<div class="form">
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				ÒôÀÖºĞ
+				éŸ³ä¹ç›’
     		</div>
     		<div class="form_row_content">
 				<select name="box">
-                    <option value="-1">ÇëÑ¡ÔñÒôÀÖºĞ</option>
+                    <option value="-1">è¯·é€‰æ‹©éŸ³ä¹ç›’</option>
                 #foreach($box in $g_site.musicBoxes)
                     <option value="$box.id"#if($mboxid==$box.id) selected#end>&nbsp;&#8226;&nbsp;$text.html(${box.name})</option>
                 #end
@@ -61,16 +61,16 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				¸èÇúÃû
+				æ­Œæ›²å
     		</div>
     		<div class="form_row_content">
-				<input type="text" name="title" value="${song.title}"/>&nbsp;&nbsp;(±ØĞëÌîĞ´)
+				<input type="text" name="title" value="${song.title}"/>&nbsp;&nbsp;(å¿…é¡»å¡«å†™)
 			</div>
     	</div>
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				×¨¼­
+				ä¸“è¾‘
     		</div>
     		<div class="form_row_content">
 				<input type="text" name="album" value="$!{song.album}"/>
@@ -79,7 +79,7 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				¸èÊÖ
+				æ­Œæ‰‹
     		</div>
     		<div class="form_row_content">
 				<input type="text" name="singer" value="$!{song.singer}"/>
@@ -88,7 +88,7 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				Á´½ÓµØÖ·
+				é“¾æ¥åœ°å€
     		</div>
     		<div class="form_row_content">
 				<input type="text" name="url" value="$!{song.url}" size="50"/>
@@ -97,10 +97,10 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
     		<div class="form_row_title fleft">
-				¸è´Ê
+				æ­Œè¯
     		</div>
     		<div class="form_row_content">
-				&nbsp;&nbsp;·¢²¼¸è´ÊÍâ,Ò²Ì¸Ì¸¸ĞÏë°É!
+				&nbsp;&nbsp;å‘å¸ƒæ­Œè¯å¤–,ä¹Ÿè°ˆè°ˆæ„Ÿæƒ³å§!
 			</div>
     	</div>
 		<div class="spacer_1"></div>		
@@ -114,9 +114,9 @@
 		<div class="spacer_1"></div>
 		<div class="form_row">
 			<div class="form_row_submit">
-				<input type="submit" name="eventSubmit_UpdateMusic" value="È·¶¨"/>
-                <input type="reset" value="Çå³ı"/>
-                <input type="button" value="·µ»ØÉÏÒ³" onclick="history.go(-1)"/>
+				<input type="submit" name="eventSubmit_UpdateMusic" value="ç¡®å®š"/>
+                <input type="reset" value="æ¸…é™¤"/>
+                <input type="button" value="è¿”å›ä¸Šé¡µ" onclick="history.go(-1)"/>
 			</div>
     	</div>
     </div>

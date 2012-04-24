@@ -18,7 +18,7 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_diary.vm")
-#set($page_title="ÍøÂçÈÕ¼Ç")
+#set($page_title="ç½‘ç»œæ—¥è®°")
 ###############################################################################
 #if(!$LOGS_PER_PAGE)#set($LOGS_PER_PAGE = 5)#end
 #set($catalog_id = $dlog.param("cat_id", -1))
@@ -47,11 +47,11 @@
     			${current_catalog.name}
     			<a href="$dlog.root()/rss.vm?sid=$g_site_id&amp;tid=1&amp;cid=${current_catalog.id}">$html.img("rss.png",null,"RSS","absmiddle",0)</a>&nbsp;&nbsp;
     		#end
-    		¹²ÓĞ<b>${log_count}</b>Æª Ã¿Ò³<b>${LOGS_PER_PAGE}</b>Æª µÚ<b>${p_page}</b>Ò³ ¹²<b>${page_count}</b>Ò³
+    		å…±æœ‰<b>${log_count}</b>ç¯‡ æ¯é¡µ<b>${LOGS_PER_PAGE}</b>ç¯‡ ç¬¬<b>${p_page}</b>é¡µ å…±<b>${page_count}</b>é¡µ
 		</div>
 		<div class="pagecontent_right fright">
 			#if($page_count > 1)
-				<form name="dform" action=""><!-- ·­Ò³¿ØÖÆÌõ -->
+				<form name="dform" action=""><!-- ç¿»é¡µæ§åˆ¶æ¡ -->
 				<input type="hidden" name="sid" value="$g_site_id" />
 				#if($current_catalog)
                 <input type="hidden" name="cat_id" value="$current_catalog.id" />
@@ -61,15 +61,15 @@
                 #if($p_date > 0)<input type="hidden" name="date" value="$p_date" />#end
                     #set($date_param = $dlog.make_date_params("cat_id",$catalog_id,$p_year,$p_month,$p_date))
                     #if($p_page > 1)
-                    <a href="?sid=${g_site_id}${date_param}">Ê×Ò³</a>#end
-                    #if($p_page>1)<a href="?sid=${g_site_id}${date_param}&amp;page=$pre_page">ÉÏÒ³</a>#end
-                    #if($p_page < $page_count)<a href="?sid=${g_site_id}${date_param}&amp;page=$next_page">ÏÂÒ³</a>#end
-                    #if($p_page < $page_count)<a href="?sid=${g_site_id}${date_param}&amp;page=$page_count">Î²Ò³</a>#end
-                        µ½ <select name="page" onchange="dform.submit();">
+                    <a href="?sid=${g_site_id}${date_param}">é¦–é¡µ</a>#end
+                    #if($p_page>1)<a href="?sid=${g_site_id}${date_param}&amp;page=$pre_page">ä¸Šé¡µ</a>#end
+                    #if($p_page < $page_count)<a href="?sid=${g_site_id}${date_param}&amp;page=$next_page">ä¸‹é¡µ</a>#end
+                    #if($p_page < $page_count)<a href="?sid=${g_site_id}${date_param}&amp;page=$page_count">å°¾é¡µ</a>#end
+                        åˆ° <select name="page" onchange="dform.submit();">
                         #foreach($p in [1..$page_count])
                         <option value="$p"#if($p_page==$p) selected#end>$p</option>
                         #end
-						</select> Ò³
+						</select> é¡µ
 				</form>
 			#end
 		</div>
@@ -92,12 +92,12 @@
 			</div>
 			#if($preview_content.length() < $log.content.length())
     		<div id="diary_read_more">
-				<p><a href="$show_log_url" class="more">ÔÄ¶ÁÈ«ÎÄ...</a></p>
+				<p><a href="$show_log_url" class="more">é˜…è¯»å…¨æ–‡...</a></p>
 			</div>
 			#end
 			#if($dlog.not_empty($log.keyword))
 			<div class="keyword">
-				<b>¹Ø¼ü×Ö: </b>&nbsp;
+				<b>å…³é”®å­—: </b>&nbsp;
 				#foreach($tag in $log.keywords)
 					<a href="$dlog.root()/html/showtag.vm?sid=$g_site_id&amp;type=1&amp;tag=$link.encodeURL($tag)"><b>${tag}</b></a>&nbsp;&nbsp;
 				#end
@@ -117,7 +117,7 @@
 		<div class="pagecontent_left fleft"></div>
 		<div class="pagecontent_right fright">
 			#if($page_count > 1)
-                <form name="dform2" action=""><!-- ·­Ò³¿ØÖÆÌõ -->
+                <form name="dform2" action=""><!-- ç¿»é¡µæ§åˆ¶æ¡ -->
                 <input type="hidden" name="sid" value="$g_site_id" />
                 #if($current_catalog)
                     <input type="hidden" name="cat_id" value="$current_catalog.id" />
@@ -125,15 +125,15 @@
                 #if($p_year > 0)<input type="hidden" name="year" value="$p_year" />#end
                 #if($p_month > 0)<input type="hidden" name="month" value="$p_month" />#end
                 #if($p_date > 0)<input type="hidden" name="date" value="$p_date" />#end
-                    #if($p_page > 1)<a href="?sid=${g_site_id}${date_param}">Ê×Ò³</a>#end
-                    #if($p_page>1)<a href="?sid=${g_site_id}${date_param}&amp;page=$pre_page">ÉÏÒ³</a>#end
-                    #if($p_page < $page_count)<a href="?sid=${g_site_id}${date_param}&amp;page=$next_page">ÏÂÒ³</a>#end
-                    #if($p_page < $page_count)<a href="?sid=${g_site_id}${date_param}&amp;page=$page_count">Î²Ò³</a>#end
-                        µ½ <select name="page" onchange="dform2.submit();">
+                    #if($p_page > 1)<a href="?sid=${g_site_id}${date_param}">é¦–é¡µ</a>#end
+                    #if($p_page>1)<a href="?sid=${g_site_id}${date_param}&amp;page=$pre_page">ä¸Šé¡µ</a>#end
+                    #if($p_page < $page_count)<a href="?sid=${g_site_id}${date_param}&amp;page=$next_page">ä¸‹é¡µ</a>#end
+                    #if($p_page < $page_count)<a href="?sid=${g_site_id}${date_param}&amp;page=$page_count">å°¾é¡µ</a>#end
+                        åˆ° <select name="page" onchange="dform2.submit();">
                     #foreach($p in [1..$page_count])
                         <option value="$p"#if($p_page==$p) selected#end>$p</option>
                     #end
-                    </select> Ò³
+                    </select> é¡µ
                 </form>
 			#end
 		</div>

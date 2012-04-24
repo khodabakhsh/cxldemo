@@ -18,7 +18,7 @@
 ###############################################################################
 #invoke("_sub/_global.vm")
 #select_layout("p_main.vm")
-#set($page_title="×¢²áÓÃ»§ÁĞ±í")
+#set($page_title="æ³¨å†Œç”¨æˆ·åˆ—è¡¨")
 
 #set($LOGS_PER_PAGE = 50)
 #set($p_page = $dlog.param("page",1))
@@ -30,20 +30,20 @@
 <table width="100%" border="0">
 <tr height="25">
     <td valign="top">
-        ¹²ÓĞ×¢²áÓÃ»§${user_count}¸ö Ã¿Ò³ÏÔÊ¾${LOGS_PER_PAGE}¸ö µÚ${p_page}Ò³ ¹²${page_count}Ò³
+        å…±æœ‰æ³¨å†Œç”¨æˆ·${user_count}ä¸ª æ¯é¡µæ˜¾ç¤º${LOGS_PER_PAGE}ä¸ª ç¬¬${p_page}é¡µ å…±${page_count}é¡µ
     </td>
     #if($page_count > 1)
     <td align="right" valign="top">
         #if($p_page > 1)
-        <a href="?sid=$g_site_id">Ê×Ò³</a>#end
-        #if($p_page>1)<a href="?sid=$g_site_id&amp;page=$pre_page">ÉÏÒ³</a>#end
-        #if($p_page < $page_count)<a href="?sid=$g_site_id&amp;page=$next_page">ÏÂÒ³</a>#end
-        #if($p_page < $page_count)<a href="?sid=$g_site_id&amp;page=$page_count">Î²Ò³</a>#end
-            µ½<select name="page">
+        <a href="?sid=$g_site_id">é¦–é¡µ</a>#end
+        #if($p_page>1)<a href="?sid=$g_site_id&amp;page=$pre_page">ä¸Šé¡µ</a>#end
+        #if($p_page < $page_count)<a href="?sid=$g_site_id&amp;page=$next_page">ä¸‹é¡µ</a>#end
+        #if($p_page < $page_count)<a href="?sid=$g_site_id&amp;page=$page_count">å°¾é¡µ</a>#end
+            åˆ°<select name="page">
             #foreach($p in [1..$page_count])
             <option value="$p">$p</option>
             #end
-          </select>Ò³
+          </select>é¡µ
     </td>
     #end
 </tr>
@@ -51,14 +51,14 @@
 <table width="100%" border="0" cellpadding="3" cellspacing="1" class="table">
 <tr class="table_head">
     <td></td>
-    <td>êÇ³Æ</td>
+    <td>æ˜µç§°</td>
     <td></td>
-    <td>µç×ÓÓÊ¼ş</td>
-    <td>µÇ¼ÇÊ±¼ä</td>
-    <td>×î½ü·ÃÎÊÊ±¼ä</td>
+    <td>ç”µå­é‚®ä»¶</td>
+    <td>ç™»è®°æ—¶é—´</td>
+    <td>æœ€è¿‘è®¿é—®æ—¶é—´</td>
     <td></td>
 </tr>
-## $catalog_id ÒÑ¾­ÔÚ_catalog_and_calendar.vmÖĞ¶¨Òå
+## $catalog_id å·²ç»åœ¨_catalog_and_calendar.vmä¸­å®šä¹‰
 #set($users = $USER_tool.list_users($g_site, $p_page, $LOGS_PER_PAGE))
 #foreach($user in $users)
 #set($show_user_url = "$dlog.root()/dlog/viewuser.vm?sid=$g_site_id&amp;uid=${user.id}")
@@ -69,17 +69,17 @@
     <td><a href="$show_user_url">$text.html(${user.nickname})</a></td>
 	<td align="center">
 		#if(${user.onlineStatus}==1)
-		$html.img("online.gif","µ±Ç°ÔÚÏß",null,"absmiddle",0)
+		$html.img("online.gif","å½“å‰åœ¨çº¿",null,"absmiddle",0)
 		#else
-		$html.img("offline.gif","µ±Ç°ÀëÏß",null,"absmiddle",0)
+		$html.img("offline.gif","å½“å‰ç¦»çº¿",null,"absmiddle",0)
 		#end
 	</td>
     <td><a href="mailto:$!{user.contactInfo.email}">$!{user.contactInfo.email}</a></td>
     <td nowrap>$date.format("yyyy-MM-dd",${user.regTime})</td>
     <td nowrap>$!date.format("yy-MM-dd HH:mm",${user.lastTime})</td>
     <td>
-        <a href="$dlog.root()/dlog/sendmsg.vm?sid=$g_site_id&amp;uid=${user.id}" title="¸ø¸ÃÓÃ»§·¢ËÍ¶ÌÏûÏ¢">
-			$html.img("sendmsg.gif","·¢ËÍ¶ÌÏûÏ¢","MSG","absmiddle",0)
+        <a href="$dlog.root()/dlog/sendmsg.vm?sid=$g_site_id&amp;uid=${user.id}" title="ç»™è¯¥ç”¨æˆ·å‘é€çŸ­æ¶ˆæ¯">
+			$html.img("sendmsg.gif","å‘é€çŸ­æ¶ˆæ¯","MSG","absmiddle",0)
         </a>
     </td>
 </tr>

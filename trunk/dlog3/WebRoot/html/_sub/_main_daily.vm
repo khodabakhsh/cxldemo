@@ -5,8 +5,8 @@
 	<div class="left_panels">
 		<div class="panel">
         	<div class="panel_head">
-    			<div class="fleft"><B>×îÐÂÈÕ¼Ç</B></div>
-    			<div class="fright"><a href="$dlog.root()/html/diary/?sid=$g_site_id">¸ü¶à...</a></div>
+    			<div class="fleft"><B>æœ€æ–°æ—¥è®°</B></div>
+    			<div class="fright"><a href="$dlog.root()/html/diary/?sid=$g_site_id">æ›´å¤š...</a></div>
         		<div class="spacer_1"></div>
         	</div>
 			#set($logs = $DIARY_tool.top_diary($g_site, $g_user, 1, $TOP_DIARY_COUNT, false))
@@ -35,7 +35,7 @@
 	<div class="right_panels">		
 		<div class="panel">
         	<div class="panel_head">
-    			<div class="fleft"><B>×îÐÂÈÈÃÅÈÕ¼Ç</B></div>
+    			<div class="fleft"><B>æœ€æ–°çƒ­é—¨æ—¥è®°</B></div>
         		<div class="spacer_1"></div>
         	</div>
 			#set($logs = $DIARY_tool.list_hot_articles($g_site, 30, $TOP_DIARY_COUNT))

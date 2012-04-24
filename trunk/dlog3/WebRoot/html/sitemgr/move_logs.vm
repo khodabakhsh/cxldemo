@@ -18,7 +18,7 @@
 ###############################################################################
 #parse("/html/_sub/_global.vm")
 #select_layout("p_setting.vm")
-#set($page_title="ÒÆ¶¯ÈÕ¼Ç")
+#set($page_title="ç§»åŠ¨æ—¥è®°")
 ###############################################################################
 #if(!$dlog.is_owner($g_site, $g_user))
 #invoke("_illegal_access.vm")
@@ -28,10 +28,10 @@
 	<div class="adcontent"></div>
 	<div class="pagecontent">
 		<div class="pagecontent_left fleft">
-			<b>ÒÆ¶¯ÈÕ¼Ç</b>
+			<b>ç§»åŠ¨æ—¥è®°</b>
 		</div>
 		<div class="pagecontent_right fright">
-			½ñÌìÊÇ: $date.get("MMMMM d, yyyy  EEEEE")
+			ä»Šå¤©æ˜¯: $date.get("MMMMM d, yyyy  EEEEE")
 		</div>
 	</div>
 	<div class="spacer_1"></div>
@@ -51,7 +51,7 @@
         	<div class="admin_module">
 				<div class="am_setting">
             		<div class="admin_module_listcontent_30 fleft">
-						ÄúÒª½«&nbsp;<b>[${g_site.catalog($catalog_id).name}]</b>·ÖÀàÖĞµÄËùÓĞÈÕ¼ÇÒÆ¶¯µ½:
+						æ‚¨è¦å°†&nbsp;<b>[${g_site.catalog($catalog_id).name}]</b>åˆ†ç±»ä¸­çš„æ‰€æœ‰æ—¥è®°ç§»åŠ¨åˆ°:
             		</div>
             		<div class="am_content">
 						<select name="toCatalog">
@@ -60,15 +60,15 @@
                                 <option value="$cat.id">${cat.name}</option>
                                 #end
                             #end
-        					<option value="-1">À¬»øÏä</option>
+        					<option value="-1">åƒåœ¾ç®±</option>
                         </select>
         			</div>
             	</div>
 				<div class="spacer_1"></div>
         		<div class="am_setting">
         			<div class="am_submit">
-						<input type="submit" name="eventSubmit_MoveToCatalog" value="ÒÆ¶¯" />
-						<input type="button" value="·µ»Ø" onclick="history.go(-1)" />
+						<input type="submit" name="eventSubmit_MoveToCatalog" value="ç§»åŠ¨" />
+						<input type="button" value="è¿”å›" onclick="history.go(-1)" />
         			</div>
             	</div>
         	</div>

@@ -1,4 +1,4 @@
-<div class="module_title"><b>×îĞÂÌû×Ó</b></div>
+<div class="module_title"><b>æœ€æ–°å¸–å­</b></div>
 <div class="module_content">
 	#set($new_topics = $BBS_tool.all_topics($g_site,1,10))
     #foreach($topic in $new_topics)
