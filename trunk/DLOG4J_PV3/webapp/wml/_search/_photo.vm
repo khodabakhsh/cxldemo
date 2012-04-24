@@ -1,5 +1,0 @@
-#set($objs = $SEARCH_tool.search_photo($g_site, $g_user, $key))
-共有${objs.size()}项符合"${key}"的查询结果，(搜索用时${SEARCH_tool.get_search_time()}毫秒)<br/>
-#foreach($obj in $objs)
-	${velocityCount}.<a href="$dlog.root()/wml/photo/show.vm?sid=${obj.site.id}&amp;pid=${obj.id}">$text.html(${obj.name})</a>($date.format("yyyy/MM/dd HH:mm",${obj.writeTime}))<br/>
-#end

@@ -1,8 +1,0 @@
-#set($hot_tags = $TAG_tool.list_hot_tags($g_site, 10))
-#if($hot_tags.size()>0)
-	<b>»»√≈±Í«©:</b>
-	#foreach($t_tag in $hot_tags)
-		#if($velocityCount>1),#end
-		<a href="$dlog.root()/wml/showtag.vm?sid=$g_site_id&amp;type=$tag_type&amp;tag=$link.encodeURL(${t_tag})">$escape.html(${t_tag})</a>
-	#end
-#end

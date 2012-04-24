@@ -1,4 +1,0 @@
-#invoke("_sub/_nav_bar.vm")
-&gt;<a href="$dlog.root()/wml/list_tags.vm?sid=$g_site_id">±êÇ©</a>
-#if($tag)&gt;$escape.html($tag)#end
-<br/>
