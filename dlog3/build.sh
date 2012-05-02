@@ -1,1 +1,0 @@
-java -cp "packages/ant-launcher.jar" org.apache.tools.ant.launch.Launcher -lib packages $*
