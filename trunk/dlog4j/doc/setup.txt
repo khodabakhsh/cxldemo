@@ -1,0 +1,33 @@
+
+安装前提条件
+
+JDK 1.4.2
+如果你使用的是MySQL，请确保数据库的版本是4.1.18以后的版本！
+
+===========================================================================
+
+DLOG4J 3.0 的安装步骤
+
+1. 解压dlog4j.zip文件
+
+2. 如果使用默认的access数据库(DLOG4J自带了access数据库，只能在windows下运行)则直接跳到第5步
+
+3. 创建数据库，并执行doc目录下的dlog_(db).sql脚本创建表结构
+
+4. 打开/src/hibernate.cfg.xml注释掉access数据库的配置
+   并根据在该文件中找到具体的数据库去掉注释后修改数据库服务器的地址、端口、用户名、口令以及数据库名
+   转到该文件底部，注释掉access的hbm的配置，并去掉<mapping resource="com/liusoft/dlog4j/hbm/dlog.hbm.xml"/>这段的注释
+   如果是oracle数据库，请将/res/oracle/hibernate.cfg.xml拷贝并覆盖到/src/hibernate.cfg.xml文件，然后修改相应的数据库服务器的地址、端口、用户名、口令以及数据库名
+   
+   如果使用的是access/sqlserver/mysql/sybase之外的数据库，那请把相应的JDBC驱动程序包拷贝至dlog4j/webapp/WEB-INF/lib目录下
+
+5. 执行build.bat编译dlog4j (或者将解压后的目录导入到eclipse自动编译)
+
+6. 在应用服务器中发布程序指向webapp目录，或者使用dist目录下的dlog4j.war进行发布
+
+7. 启动应用服务器后 使用 http://xxxxx:xx/snoop.vm 来测试数据库配置是否正确。
+
+-----------------------------------------------------------------------------
+附注：如果你的数据库不在此目录中列出，请向我们索取相应数据库的建库脚本(javayou@gmail.com)
+
+另：不管你怎么改，请保留Powered by DLOG4J 3.0字样
