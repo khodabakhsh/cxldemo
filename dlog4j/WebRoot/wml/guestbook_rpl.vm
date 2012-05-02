@@ -1,0 +1,18 @@
+#invoke("_sub/_global.vm")
+#set($page_title="答复留言")
+#set($msg_id = $dlog.param("msgid",-1))
+#set($p_page = $dlog.param("page",-1))
+<p>
+	请输入答复内容:
+	<input type="text" name="reply" value=""/><br/>	
+    <anchor>确定
+        <go href="$link.setAction("wml/guestbook")" method="post">
+            <postfield name="sid" value="$g_site_id"/>
+            <postfield name="id" value="$msg_id"/>
+            <postfield name="page" value="$p_page"/>
+            <postfield name="reply" value="$(reply)"/>
+            <postfield name="__ClientId" value="$dlog.gen_client_id()"/>
+            <postfield name="eventSubmit_Reply" value="WML"/>
+        </go>
+    </anchor>
+</p>
