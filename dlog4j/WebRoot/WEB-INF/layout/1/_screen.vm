@@ -12,7 +12,7 @@
         		<div id="body">
     				<div class="body_content">
                     	<div id="side">
-							#parse($left_template)
+							#parse($left_template) ##left_template在WEB-INF/layout/1目录下各个以p_为前缀的文件中定义了。
                     	</div>            	
                     	<div id="main">
                     		<div id="top"></div>
