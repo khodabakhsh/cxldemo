@@ -25,7 +25,7 @@
 	<div class="fleft sitenav">
 		#foreach($menu in $menus_name)
 			#if($dlog.not_empty($menu))
-    			#set($idx = $velocityCount - 1)
+    			#set($idx = $velocityCount - 1)  ##【velocityCount指定在WEB-INF/conf/velocity.properties】
     			#set($m_link = $menus_link.get($idx))
     			#if($velocityCount == $current_menu_item)
     				<a class="nav_on"></a><a href="${m_link}" class="selected">${menu}</a>
