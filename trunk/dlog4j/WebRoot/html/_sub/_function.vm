@@ -27,7 +27,7 @@
 			#if($dlog.not_empty($menu))
     			#set($idx = $velocityCount - 1)  ##【velocityCount指定在WEB-INF/conf/velocity.properties】
     			#set($m_link = $menus_link.get($idx))
-    			#if($velocityCount == $current_menu_item)
+    			#if($velocityCount == $current_menu_item)  ##current_menu_item在WEB-INF/layout/1目录下各个以p_为前缀的文件中定义了。
     				<a class="nav_on"></a><a href="${m_link}" class="selected">${menu}</a>
     			#else
     			##选中项目的前后项目都不显示竖线
