@@ -534,7 +534,7 @@ public abstract class VelocityTool implements ViewTool, Configurable {
 	}
 
 	/**
-	 * 根据记录数和每页现实文章数确定页数
+	 * 根据记录数和每页显示文章数确定页数
 	 * @param recordCount
 	 * @param perPage
 	 * @return
