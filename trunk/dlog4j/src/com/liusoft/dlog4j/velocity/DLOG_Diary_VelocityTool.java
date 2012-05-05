@@ -296,7 +296,7 @@ public class DLOG_Diary_VelocityTool{
 	}
 
 	/**
-	 * 计算日记数
+	 * 计算日记数(时间选择：某年、某月、某日)
 	 * 
 	 * @param site
 	 * @param user
