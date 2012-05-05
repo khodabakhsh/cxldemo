@@ -21,7 +21,7 @@
 #set($page_title="网络日记")
 ###############################################################################
 #if(!$LOGS_PER_PAGE)#set($LOGS_PER_PAGE = 5)#end
-#set($catalog_id = $dlog.param("cat_id", -1))
+#set($catalog_id = $dlog.param("cat_id", -1))  ##$dlog.param用于获取浏览器提交的参数
 #set($p_page = $dlog.param("page",1))
 #set($pre_page = $p_page - 1)
 #set($next_page = $p_page + 1)
