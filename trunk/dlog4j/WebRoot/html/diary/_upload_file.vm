@@ -7,9 +7,9 @@
     	.button { border-width: 1px; height:18px;}
     </style>
 </head>
-<body leftmargin='10' topmargin='0' marginwidth='0' marginheight='0'>  ##上传文件由SecurityFCKUploadServlet处理
+<body leftmargin='10' topmargin='0' marginwidth='0' marginheight='0'>  ##上传文件由FCKEditor_UploadServlet与其子类SecurityFCKUploadServlet共同处理
 <form method="POST" enctype="multipart/form-data" action="$dlog.root()/servlet/fckeditor_upload" onsubmit="return check(this);">	
-    <input type="hidden" name="fromPage" value="/html/diary/_upload_file.vm">	
+    <input type="hidden" name="fromPage" value="/html/diary/_upload_file.vm">	<!--fromPage不为空，上传完成后返回fromPage页面-->
     <input type="hidden" name="Type" value="Image">
     <input type="file" name="NewFile" size="38" class="button">
     <input type="submit" value="上传" name="eventSubmit_UploadImage" class="button">
