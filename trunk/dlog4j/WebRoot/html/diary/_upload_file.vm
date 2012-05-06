@@ -28,6 +28,7 @@ function check(theForm){
 	#if($upload_image_errno && $upload_image_errno != 0)
 		alert('$upload_image_msg');
 	#elseif($upload_image_errno && $upload_image_errno == 0)
+	//upload_image_errno为0，插入图片到fck中
 		var oEditor = parent.FCKeditorAPI.GetInstance("content");
 		var html = "<img src='$upload_image_uri'/>";
 		oEditor.InsertHtml(html);
