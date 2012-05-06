@@ -7,7 +7,7 @@
     	.button { border-width: 1px; height:18px;}
     </style>
 </head>
-<body leftmargin='10' topmargin='0' marginwidth='0' marginheight='0'>
+<body leftmargin='10' topmargin='0' marginwidth='0' marginheight='0'>  ##上传文件由SecurityFCKUploadServlet处理
 <form method="POST" enctype="multipart/form-data" action="$dlog.root()/servlet/fckeditor_upload" onsubmit="return check(this);">	
     <input type="hidden" name="fromPage" value="/html/diary/_upload_file.vm">	
     <input type="hidden" name="Type" value="Image">
