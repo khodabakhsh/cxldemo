@@ -45,6 +45,14 @@
 	</global-forwards>
 	
 	<!-- ========== Action Mapping Definitions ============================== -->
+		<!-- 关于下面配置的 action-mappings，本来在struts 1 中，处理方法应该是execute，
+	     但是在com.liusoft.dlog4j.action.ActionExtend类（此类为系统中action的基类）对此做了扩展，用反射的方式实现了诸如
+	      1.按钮的名称是eventSubmit_Xxxx，对应执行的方法是doXxxx
+	      2.页面中传了__method参数，对应执行方法也是do开头的方法
+	      -->
+	      <!-- action 的配置(个人说明，没看官方文档。囧)：
+	           1.name：应该是对应struts-config.xml中的form-bean,该action中的ActionForm对象由此form-bean的实例注入
+	           2.path:应该是对应要拦截的请求路径-->
 	<action-mappings>
 
 		<action path="/search" forward="/html/search.vm" />
