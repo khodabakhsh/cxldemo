@@ -134,7 +134,7 @@ public class FCKEditor_UploadServlet extends HttpServlet {
 				req.setAttribute("upload_image_uri", uri);
 				req.setAttribute("upload_image_errno", new Integer(errno));
 				req.setAttribute("upload_image_msg", msg);
-				
+				//fromPage不为null，返回fromPage
 				getServletContext().getRequestDispatcher(fromPage).forward(req, res);
 			}
 			else{
