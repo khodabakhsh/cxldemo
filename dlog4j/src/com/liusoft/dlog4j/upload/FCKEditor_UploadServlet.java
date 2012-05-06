@@ -64,6 +64,7 @@ public class FCKEditor_UploadServlet extends HttpServlet {
 				max_upload_size *= 1024;
 		}
 		String s_file_handler_class = getInitParameter("file_saved_class");
+		//初始化文件上传保存处理类
 		FCK_UploadManager.init(getServletConfig(), s_file_handler_class);
 		
 		// 用于临时存储上传文件的路径
@@ -132,7 +133,7 @@ public class FCKEditor_UploadServlet extends HttpServlet {
 			String fromPage = (ht!=null)?(String)ht.get("fromPage"):null;
 			if(fromPage != null){
 				req.setAttribute("upload_image_uri", uri);
-				req.setAttribute("upload_image_errno", new Integer(errno));
+				req.setAttribute("upload_image_errno", new Integer(errno));//upload_image_errno为0，上传成功，前台页面就插入图片到fck
 				req.setAttribute("upload_image_msg", msg);
 				//fromPage不为null，返回fromPage
 				getServletContext().getRequestDispatcher(fromPage).forward(req, res);
