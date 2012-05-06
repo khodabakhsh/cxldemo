@@ -91,7 +91,8 @@ abstract class ActionExtend extends Action {
 
 	/**
 	 * Action类的入口，用于根据不同的提交按钮名称执行相对应的方法 
-	 * 按钮的名称是eventSubmit_Xxxx，对应执行的方法是doXxxx
+	 * 1.按钮的名称是eventSubmit_Xxxx，对应执行的方法是doXxxx
+	 * 2.页面中传了__method参数，对应执行方法也是do开头的方法
 	 */
 	public final ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest req, HttpServletResponse res) throws Exception 
