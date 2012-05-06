@@ -26,7 +26,11 @@ package com.liusoft.dlog4j.velocity;
  * @author liudong
  */
 public class HtmlVelocityTool extends VelocityTool {
-	
+	/**
+	 * 返回当前上下文的图片路径
+	 * @param img_name
+	 * @return
+	 */
 	public String image_src(String img_name){
 		StringBuffer img = new StringBuffer();
 		img.append(super.root());
