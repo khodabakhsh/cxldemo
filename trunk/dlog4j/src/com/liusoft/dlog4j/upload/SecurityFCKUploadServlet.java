@@ -57,8 +57,8 @@ public class SecurityFCKUploadServlet extends FCKEditor_UploadServlet {
 			throws ServletException, IOException {
 		//判断当前操作者是否已经登录，具有写日记的权限(第二条无法验证)
 		SessionUserObject loginUser = UserLoginManager.getLoginUser(req, res, true);		
-		if(loginUser!=null){			
-			super.doPost(req, res);
+		if(loginUser!=null){	
+			super.doPost(req, res);//这里调用父类的post保存文件到服务器。
 			Integer errno = (Integer)req.getAttribute("errno");
 			if(errno!=null && errno.intValue()==0){
 				//写入上传信息表中
