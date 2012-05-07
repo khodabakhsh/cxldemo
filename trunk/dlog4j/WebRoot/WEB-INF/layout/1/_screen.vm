@@ -17,7 +17,7 @@
                     	<div id="main">
                     		<div id="top"></div>
                     		<div id="content">
-            					${screen_content}
+            					${screen_content}     ##${screen_content}为velocity的关键字，用于占位符，即填充页面内容
                     		</div>
                     		<div id="bottom"></div>
                     	</div>    
