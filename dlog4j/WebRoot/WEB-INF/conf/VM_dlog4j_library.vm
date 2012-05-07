@@ -68,5 +68,5 @@
 #end
 
 #macro(select_layout $__p_page)
-	#set($layout="1/$__p_page")
+	#set($layout="1/$__p_page")  ##velocity.properties中已经定义了tools.view.servlet.layout.directory = /WEB-INF/layout/
 #end
