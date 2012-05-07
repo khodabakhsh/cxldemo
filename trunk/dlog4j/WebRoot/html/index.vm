@@ -31,13 +31,13 @@
 #end
 #end
 #if($g_site && ${g_site.functionStatus.diary}!=2)
-#invoke("_sub/_main_daily.vm")
+#invoke("_sub/_main_daily.vm")  ##日记
 <div class="spacer_10"></div>
 #end
 #if($g_site && ${g_site.functionStatus.photo}!=2)
-#invoke("_sub/_main_photo.vm")
+#invoke("_sub/_main_photo.vm")   ##最新照片
 <div class="spacer_10"></div>
 #end
 #if($g_site && ${g_site.functionStatus.music}!=2)
-#invoke("_sub/_main_music.vm")
+#invoke("_sub/_main_music.vm")  ##最新歌曲
 #end
