@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:components="org.asblog.components.*">
+	<components:GradientEditor ="gEditor" 
+		width="200" 
+		height="50" 
+		x="32" 
+		y="40"
+		colors="[0xff0000, 0x000000]"
+		alphas="[.5, 1]"
+		ratios="[100, 255]"/>
+	<mx:HSlider 
+		minimum="0" 
+		maximum="1" 
+		change="gEditor.selectedAlpha=event.value" 
+		x="62" 
+		y="99"
+		value="{gEditor.selectedAlpha}"/>
+	<mx:ColorPicker id="cPicker"
+		x="32" 
+		y="98"  
+		change="gEditor.selectedColor=cPicker.selectedColor"
+		selectedColor="{gEditor.selectedColor}"/>
+</mx:Canvas>

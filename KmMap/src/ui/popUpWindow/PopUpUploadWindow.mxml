@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PopUpBaseWindow xmlns="ui.popUpWindow.*" xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:ui="ui.*" creationComplete="popupbasewindow1_creationCompleteHandler(event)">
+	<subComponents>
+		<mx:HBox>
+			<mx:LinkButton label="图片管理" click="linkbutton1_clickHandler(event)"/>
+			<mx:ComboBox id="sortCom" labelField="typename"/>
+			<mx:Button id="removeSort" label="删除当前分类" click="removeSort_clickHandler(event)"/>
+			<mx:Button id="adSortBtn" label="添加分类" click="adSortBtn_clickHandler(event)"/>
+			<mx:TextInput id="sortName"/>
+		</mx:HBox>
+		
+		<ui:FileUpload
+			width="100%" height="100%"
+			uploadUrl="{domain+'upload?type='+sortCom.selectedItem.id}"
+			uploadComplete="Alert.show('File(s) have been uploaded.', 'Upload successful')" 
+			uploadIOError="Alert.show('IO Error in uploading file.', 'Error')" 
+			uploadSecurityError="Alert.show('Security Error in uploading file.', 'Error')"/>
+	</subComponents>
+	<mx:HTTPService useProxy="false" id="viewService" url="{domain+'type?ac=show'}" showBusyCursor="true" result="viewService_resultHandler(event)" resultFormat="e4x"/>
+	<mx:HTTPService useProxy="false" id="addService" url="{domain+'type?ac=add&amp;t='+sortName.text}" showBusyCursor="true" result="sendView();"/>
+	<mx:HTTPService useProxy="false" id="delService" url="{domain+'type?ac=del&amp;t='+sortCom.selectedItem.id}" showBusyCursor="true" result="sendView();"/>
+	<mx:Binding source="sortName.text!=''" destination="adSortBtn.enabled"/>
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.events.CloseEvent;
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			import mx.rpc.events.ResultEvent;
+			[Bindable]
+			private var domain:String = "http://61.129.86.108:8000/";
+			private function onAdd():void
+			{
+				PopUpManager.removePopUp(this);
+			}
+
+			protected function removeSort_clickHandler(event:MouseEvent):void
+			{
+				Alert.show("是否删除当前分类","警告", Alert.YES|Alert.NO, this, alertClickHandler);
+			}
+			private function alertClickHandler(evt:CloseEvent):void {
+				if (evt.detail == Alert.YES) {
+					delService.send();
+				} 
+			}
+			private function sendView():void
+			{
+				sortCom.selectedItem = null;
+				sortCom.selectedIndex = -1;
+				viewService.url = domain+'type?ac=show&timer='+Math.random();
+				viewService.send();
+			}
+
+			protected function popupbasewindow1_creationCompleteHandler(event:FlexEvent):void
+			{
+				sendView();
+			}
+
+
+			protected function adSortBtn_clickHandler(event:MouseEvent):void
+			{
+				addService.clearResult();
+				addService.send();
+			}
+
+
+			protected function viewService_resultHandler(event:ResultEvent):void
+			{		
+				sortCom.dataProvider = viewService.lastResult.row
+			}
+
+
+			protected function linkbutton1_clickHandler(event:MouseEvent):void
+			{
+				
+			}
+
+		]]>
+	</mx:Script>
+</PopUpBaseWindow>

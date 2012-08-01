@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="onCreated()">
+	<mx:HBox id="itemModel" width="100%">
+		<mx:Label text="混合模式:"/>
+		<mx:ComboBox id="modelList" labelField="name"/>
+		<mx:Label text="透明度:"/>
+		<mx:NumericStepper id="itemAlpha"
+						   focusIn="itemAlpha_focusInHandler(event)"
+						   focusOut="itemAlpha_focusOutHandler(event)"
+						   value="100" 
+						   minimum="0" maximum="100"
+			               />
+	</mx:HBox>
+	<mx:List id="layers" dataProvider="{designCanvas.itemList}" verticalScrollPolicy="on"
+			 selectedItem="{selectedItem}"
+			 width="100%"
+			 itemRenderer="ui.window.layer.LayerItem"
+			 />
+	<mx:HBox id="itemButton">
+		<mx:LinkButton label="上一层" id="up_btn"/>
+		<mx:LinkButton label="下一层" id="down_btn"/>
+		<mx:LinkButton label="删除" id="remove_btn"/>
+		<mx:LinkButton label="全部删除" id="removeAll_btn"/>
+	</mx:HBox>
+	<mx:Binding source="layers.selectedIndex!=-1" destination="noSelection"/>
+	<mx:Binding source="designCanvas.selectedItem" destination="selectedItem"/>
+	<mx:Binding source="designCanvas.selectedIndices" destination="selectedIndices"/>
+	<mx:Binding source="designCanvas.itemList" destination="itemList"/>
+	<mx:Script>
+		<![CDATA[
+			import org.asblog.core.DesignCanvas;
+			import org.asblog.core.IMediaObject;
+			import org.asblog.frameworks.ApplicationFacade;
+			import org.asblog.frameworks.view.LayersManagerMdeiator;
+			
+			import mx.collections.ArrayCollection;
+
+			//-----------私有变量-----------
+		    //图层列表
+			[ArrayElementType("IMediaObject")]
+		    [Bindable] 
+		    public var itemList:ArrayCollection;
+			private var _selectedItem:IMediaObject;
+			private var _selectedIndices:Array;
+		    private var _noSelection:Boolean;
+			private var facade:ApplicationFacade = ApplicationFacade.getInstance();
+		    //-----------公共变量------------
+			//引用的画布
+			[Bindable]
+			public var designCanvas:DesignCanvas
+			
+			[Bindable]
+		    public function get selectedItem():IMediaObject
+		    {
+		    	return _selectedItem;
+		    }
+		    public function set selectedItem(p_value:IMediaObject):void
+		    {
+			   	_selectedItem = p_value;
+				if(_selectedItem==null)	layers.selectedIndex = -1;
+				var layersManagerMdeiator:LayersManagerMdeiator = LayersManagerMdeiator(facade.retrieveMediator(LayersManagerMdeiator.NAME));
+				layersManagerMdeiator.setBtnEnable( _selectedItem );
+		    }
+			[Bindable]
+		    public function get selectedIndices():Array
+		    {
+		    	return _selectedIndices
+		    }
+		    public function set selectedIndices(v:Array):void
+		    {
+		    	layers.selectedIndices = v;
+		    	_selectedIndices = v;
+		    }
+		    //如果当前没有选中的元素就让关联与元素的功能不可用
+		    public function get noSelection():Boolean
+		    {
+		    	return _noSelection;
+		    }
+		    public function set noSelection(v:Boolean):void
+			{
+				callLater(function():void
+				{
+					_noSelection = v;
+					itemButton.enabled = v;
+					itemModel.enabled = v;
+				});				
+		    }
+			
+		    //---------------私有方法-------------
+			private function onCreated():void
+			{
+				
+			}
+		    
+
+			protected function itemAlpha_focusInHandler(event:FocusEvent):void
+			{
+				designCanvas.mouseEnabled = false;
+			}
+
+
+			protected function itemAlpha_focusOutHandler(event:FocusEvent):void
+			{
+				designCanvas.mouseEnabled = true;
+			}
+
+		]]>
+	</mx:Script>
+</mx:VBox>

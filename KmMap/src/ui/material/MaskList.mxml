@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MaterialListBase xmlns="ui.material.*" xmlns:mx="http://www.adobe.com/2006/mxml">
+	<mx:Script>
+		<![CDATA[
+			import org.asblog.core.ShapeLink;
+			import org.asblog.mediaItem.MediaShapMask;
+			import org.asblog.mediaItem.MediaShape;
+			
+			import mx.graphics.ImageSnapshot;
+			
+			import ui.Snapshot;
+			override protected function onCreated():void
+			{
+				var s1:MediaShape = new MediaShape();
+				s1.draw(MediaShape.Circle)
+
+				
+				var s2:MediaShape = new MediaShape();
+				s2.draw(MediaShape.Rect)
+				
+				var snapshot1:Snapshot = new Snapshot();
+				snapshot1.imageUrl = makeImageProxy(s1);
+				var link1:ShapeLink = new ShapeLink();
+				link1.isMask = true;
+				link1.classRef = MediaShapMask;
+				link1.shapType = MediaShape.Circle;
+				
+				snapshot1.mediaLink = link1;
+				imgList.addChild(snapshot1);
+				
+				var snapshot2:Snapshot = new Snapshot();
+				snapshot2.imageUrl = makeImageProxy(s2);
+				var link2:ShapeLink = new ShapeLink();
+				link2.isMask = true;
+				link2.classRef = MediaShapMask;
+				link2.shapType = MediaShape.Rect;
+				
+				snapshot2.mediaLink = link2;
+				imgList.addChild(snapshot2);
+			}
+			private function makeImageProxy(snapShotImage:DisplayObject):Bitmap
+	        {
+	            var imageProxyBitMap:Bitmap = new Bitmap(ImageSnapshot.captureBitmapData(snapShotImage))
+	        	return imageProxyBitMap
+	        }
+		]]>
+	</mx:Script>
+</MaterialListBase>

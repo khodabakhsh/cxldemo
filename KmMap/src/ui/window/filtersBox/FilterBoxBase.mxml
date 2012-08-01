@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="onCreat()">
+	<mx:Script>
+		<![CDATA[
+		    public var filterLabel:String; 
+			protected var _filter:BitmapFilter;
+			[Bindable]
+			public function get filter():BitmapFilter
+			{
+				return _filter
+			} 
+			public function set filter(v:BitmapFilter):void
+			{
+				_filter = v
+			} 
+			protected function onCreat():void
+			{
+				
+			}
+		]]>
+	</mx:Script>
+</mx:Box>

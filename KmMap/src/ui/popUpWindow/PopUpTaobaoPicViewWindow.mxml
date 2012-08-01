@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PopUpBaseWindow xmlns="ui.popUpWindow.*" xmlns:mx="http://www.adobe.com/2006/mxml">
+	<!--<subComponents>
+		<mx:RadioButton groupName="usetype" id="bg" value="bg" 
+						label="作为图片背景" width="150" />
+		<mx:RadioButton groupName="usetype" id="image" value="image" 
+						label="作为单个图片" width="150" />-->
+		<!--<mx:FormItem label="图片宽" required="true">
+			<mx:TextInput text="{TaobaoItem(imageList.selectedItem).imageW}"/>
+		</mx:FormItem>
+		<mx:FormItem label="图片高" required="true">
+			<mx:TextInput text="{TaobaoItem(imageList.selectedItem).imageH}"/>
+		</mx:FormItem>
+		<mx:RadioButton groupName="usetype" id="pubImg" value="pub" 
+						label="已发布的商品图片" width="150" />
+		<mx:RadioButton groupName="usetype" id="modelImg" value="model" 
+						label="模板图片" width="150" />
+		<mx:RadioButton groupName="usetype" id="customImg" value="custom" 
+						label="自定义图片" width="150" />
+		<mx:TileList doubleClickEnabled="true" doubleClick="imageList_doubleClickHandler(event)" id="imageList" height="400" width="600" itemRenderer="ui.TaobaoTileItem" dataProvider="{myData}"/>
+		<mx:Button click="button1_clickHandler(event)" label="确定"/>
+		
+	</subComponents>
+	<mx:RadioButtonGroup id="usetype" selectedValue="pub" change="usetype_changeHandler(event)"/>-->
+	<mx:Script>
+		<![CDATA[
+			
+			[Bindable]
+			public var myData:*
+
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				//addImage();
+			}
+			/*
+			private function addImage():void
+			{
+				DesignCanvasMediator.designCanvas.width = TaobaoItem(imageList.selectedItem).imageW;
+				DesignCanvasMediator.designCanvas.height = TaobaoItem(imageList.selectedItem).imageH;
+				var link:MediaLink = new MediaLink();
+				link.classRef = MediaImage;
+				link.source = TaobaoItem(imageList.selectedItem).picUrl;
+				link.isBackground = true;
+				ApplicationFacade.getInstance().sendNotification(DesignCanvasCT.CMD_CHANGE_BACKGROUND,new History(DesignCanvasMediator.designCanvas.background.mediaLink,link));
+				MediaCreator(FlexGlobals.topLevelApplication).taobaoItem = TaobaoItem(imageList.selectedItem);
+				PopUpManager.removePopUp(this);
+			}
+
+			protected function usetype_changeHandler(event:Event):void
+			{
+				trace("selection change");
+			}
+
+
+			protected function imageList_doubleClickHandler(event:MouseEvent):void
+			{
+				addImage();
+			}*/
+
+		]]>
+	</mx:Script>
+</PopUpBaseWindow>

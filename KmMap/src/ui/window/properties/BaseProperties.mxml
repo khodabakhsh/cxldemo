@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:code="http://code.google.com/p/flexlib/">
+	<mx:states>
+		<mx:State name="background">
+			<mx:AddChild position="lastChild">
+				<mx:RadioButtonGroup id="bgGroup"
+									 change="designCanvas.bgPolicy = String(bgGroup.selectedValue)"/>
+			</mx:AddChild>
+			<!--xwjstart-->
+			<mx:RemoveChild target="{form1}"/>
+			<mx:RemoveChild target="{form0}"/>			
+			<mx:RemoveChild target="{formitem1}"/>
+			<mx:SetProperty name="height" value="100%"/>
+			<mx:RemoveChild target="{HSliderItem1}"/>
+			<mx:RemoveChild target="{HSliderItem2}"/>
+			<!--xwjend-->
+			
+		</mx:State>
+	</mx:states>
+	<mx:FormItem label="名称:"
+				 id="formitem1">
+		<mx:TextInput id="tn"/>
+	</mx:FormItem>
+	<mx:Form borderStyle="solid" id="form1">
+		<mx:HBox id="hbox1">
+			<mx:FormItem label="宽: "
+						 id="formitem2">
+				<mx:NumericStepper id="tw"
+								   focusIn="onFocusIn(event)"
+								   focusOut="onFocusOut(event)"
+								   change="transformTool.targetW=tw.value"
+								   value="{transformTool.targetW}"
+								   maximum="2000"
+								   minimum="10"/>
+			</mx:FormItem>
+			<mx:FormItem label="X:"
+						 id="formitem4">
+				<mx:NumericStepper id="tx"
+								   focusIn="onFocusIn(event)"
+								   focusOut="onFocusOut(event)"
+								   change="transformTool.targetX=tx.value"
+								   value="{transformTool.targetX}"
+								   maximum="999" minimum="0"/>
+			</mx:FormItem>
+		</mx:HBox>
+		<mx:HBox id="hbox2">
+			<mx:FormItem label="高: "
+						 id="formitem3">
+				<mx:NumericStepper id="th"
+								   focusIn="onFocusIn(event)"
+								   focusOut="onFocusOut(event)"
+								   change="transformTool.targetH=th.value"
+								   value="{transformTool.targetH}"
+								   minimum="0"
+								   maximum="2000"/>
+			</mx:FormItem>
+			<mx:FormItem label="Y:"
+						 id="formitem5">
+				<mx:NumericStepper id="ty"
+								   focusIn="onFocusIn(event)"
+								   focusOut="onFocusOut(event)"
+								   change="transformTool.targetY=ty.value"
+								   value="{transformTool.targetY}"
+								   maximum="999" minimum="0"/>
+			</mx:FormItem>
+		</mx:HBox>
+	</mx:Form>
+	<!--xwjstart-->
+	<mx:Form  borderStyle="solid" id="form0" horizontalScrollPolicy="off"  verticalScrollPolicy="off">
+		<mx:FormItem id="HSliderItem1" label="光亮度">
+			<mx:HBox>
+				<mx:HSlider id="hslider1"
+							focusIn="onFocusIn(event)"
+							focusOut="onFocusOut(event)"
+							minimum="-100"
+							maximum="100"
+							liveDragging="true"
+							snapInterval="1"/>
+				<mx:TextInput width="30" text="{hslider1.value}"/>
+				<mx:Label text="%"/>
+			</mx:HBox>
+		</mx:FormItem>
+		<mx:FormItem id="HSliderItem2" label="饱和度">
+			<mx:HBox>
+				<mx:HSlider id="hslider2"
+							focusIn="onFocusIn(event)"
+							focusOut="onFocusOut(event)"
+							minimum="-100"
+							maximum="100"
+							liveDragging="true"
+							snapInterval="1"/>
+				<mx:TextInput width="30" text="{hslider2.value}"/>
+				<mx:Label text="%"/>
+			</mx:HBox>
+		</mx:FormItem>
+	</mx:Form>
+	<!--xwjend-->
+	<mx:Binding source="designCanvas.transformTool" destination="transformTool"/>
+	<mx:Binding source="designCanvas.isCanvasSelected?'background':''" destination="currentState"/>
+	<mx:Script>
+		<![CDATA[
+			import org.asblog.core.DesignCanvas;
+			import org.asblog.core.IMediaObject;
+			import org.asblog.graphics.ColorStyleEnum;
+			import org.asblog.transform.TransformTool;
+			[Bindable]
+			public var designCanvas:DesignCanvas
+			[Bindable]
+			public var transformTool:TransformTool;
+			public function set selectedItem(v:IMediaObject):void
+			{
+				if(_selectedItem)
+					_selectedItem.removeEventListener("proChange",proChange);
+				if(v)
+					v.addEventListener("proChange",proChange);
+				_selectedItem = v;
+				initColor();
+				tx.value = v.transform.pixelBounds.x
+				ty.value = v.transform.pixelBounds.y;
+				tw.value = v.transform.pixelBounds.width;
+				th.value = v.transform.pixelBounds.height;
+			}
+			[Bindable]
+			public function get selectedItem():IMediaObject
+			{
+				return _selectedItem;
+			}
+			[Bindable]
+			//xwjstart
+			public var colorStyleArray:Array = [{label:"无",    data:null},
+				{label:"亮度",  data:ColorStyleEnum.BRIGHTNESS},
+				{label:"饱和度",data:ColorStyleEnum.SATURATION}];
+			//xwjend
+			[Bindable]
+			public var canvasRBG:uint = 0xFFFFFF;
+			private function initColor():void
+			{
+				//xwjstart
+				hslider1.value = selectedItem.brightness;
+				hslider2.value = selectedItem.saturation;
+				//xwjend
+			}
+			private var _selectedItem:IMediaObject;
+			private function proChange(event:Event):void
+			{				
+				initColor();
+			}
+			
+			protected function onFocusIn(event:FocusEvent):void
+			{
+				designCanvas.mouseEnabled = false;
+			}
+			
+			protected function onFocusOut(event:FocusEvent):void
+			{
+				designCanvas.mouseEnabled = true;
+			}
+			
+		]]>
+	</mx:Script>
+</mx:VBox>

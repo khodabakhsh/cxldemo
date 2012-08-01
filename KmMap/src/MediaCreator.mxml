@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+				layout="absolute"
+				backgroundColor="#333333"
+				creationComplete="onCreated()"
+				xmlns:ui="ui.window.*"
+				xmlns:core="org.asblog.core.*"
+				xmlns:containers="flexlib.containers.*"
+				xmlns:material="ui.material.*"
+				xmlns:layer="ui.window.layer.*"
+				xmlns:mediaItem="org.asblog.mediaItem.*"
+				xmlns:properties="ui.window.properties.*">
+	<mx:ApplicationControlBar dock="true"
+							  id="applicationcontrolbar1">
+		<mx:Button label="我要添加文字" icon="@Embed('assets/add.png')" height="50" id="addTextBtn" click="addTextBtn_clickHandler(event)"/>
+		<mx:Button label="添加图片到画布" toolTip="可多选" icon="@Embed('assets/add.png')" height="50" click="button5_clickHandler(event)"/>
+		<mx:Button label="添加图片到搜藏家夹" toolTip="可多选" icon="@Embed('assets/add.png')" height="50" click="button6_clickHandler(event)"/>
+		<mx:Button label="添加背景图片到搜藏家夹" toolTip="可多选" icon="@Embed('assets/add.png')" height="50" click="button7_clickHandler(event)"/>
+		<mx:Spacer width="35%"/>
+		<!--<mx:Button label="图片浏览" click="button2_clickHandler(event)"/>
+		<mx:Button label="上传" click="button1_clickHandler(event)"/>
+		<mx:Button label="保存图片" click="button3_clickHandler(event)"/>-->
+		<mx:Button label="帮助" id="help"/>
+		<mx:Button label="FlexSpy" click="FlexSpy.show()" id="btnFlexSpy" />
+	</mx:ApplicationControlBar>
+	<mx:HDividedBox width="100%"
+					height="100%">
+		<mx:Accordion id="accNav" width="100"
+					  height="100%">
+			<material:PicList id="picList" label="照片"/>
+			<!--<material:TextList label="文字"/>-->
+			<material:GraphicsList label="图形"/>
+			<material:MaskList label="遮照"/>
+			<mx:VBox label="边框"
+					 width="100%"
+					 height="100%">
+			</mx:VBox>
+			<material:BackgroundList id="bgList" label="背景"/>
+		</mx:Accordion>
+		<mx:VDividedBox width="80%"
+						height="100%">
+			<containers:SuperTabNavigator width="100%"
+										  height="100%">
+				<mx:Canvas backgroundColor="#CCCCCC"
+						   label="未命名1"
+						   width="100%"
+						   height="100%"
+						   horizontalScrollPolicy="on"
+						   verticalScrollPolicy="on">
+					<core:DesignCanvas id="designCanvas"
+									   width="750"
+									   height="500"
+									   verticalScrollPolicy="off"
+									   horizontalScrollPolicy="off"
+									   verticalCenter="0"
+									   horizontalCenter="0"
+									   canvasRBG="{propertiesWin.canvasRBG}"
+									   transformTarget="transformTarget(event)"
+									   backgroundColor="#FFFFFF"/>
+				</mx:Canvas>
+			</containers:SuperTabNavigator>
+
+			<mx:HBox width="100%">
+				<mx:Form>
+					<mx:FormItem label="画布宽:">
+						<mx:TextInput id="canvasW" text="{designCanvas.width}" toolTip="按回车生效哦" enter="canvasW_enterHandler(event)"/>
+					</mx:FormItem>
+					<mx:FormItem label="画布高:">
+						<mx:TextInput id="canvasH" text="{designCanvas.height}" toolTip="按回车生效哦" enter="canvasH_enterHandler(event)"/>
+					</mx:FormItem>
+					<mx:Button label="更改画布大小" id="changeWT_btn" click="button4_clickHandler(event)"/>
+				</mx:Form>
+				
+				<mx:Spacer width="100%"/>
+				<mx:Button label="撤销"
+						   id="undo_btn"/>
+				<mx:Button label="重做"
+						   id="redo_btn"/>
+				<mx:Button label="生成图片"
+						   click="creatPic()"/>
+			</mx:HBox>
+		</mx:VDividedBox>
+		<mx:VDividedBox height="100%">
+			<mx:TabNavigator width="100%"
+							 height="100%">
+				<properties:BaseProperties id="propertiesWin"
+										   label="基本属性"
+										   designCanvas="{designCanvas}"
+										   selectedItem="{designCanvas.selectedItem}"
+										   width="100%"
+										   height="100%"/>
+				<!--<properties:Filters label="滤镜" width="100%" height="100%" selectedItem="{designCanvas.selectedItem}"/>-->
+				<properties:SpeProperties label="遮罩"
+										  selectedItem="{designCanvas.selectedItem}"/>
+				<properties:SpeEffect label="效果"
+									  width="100%"
+									  height="100%"/>
+			</mx:TabNavigator>
+			<mx:TitleWindow width="100%">
+				<layer:LayersManager designCanvas="{designCanvas}"
+									 id="layersManager"
+									 width="100%"/>
+			</mx:TitleWindow>
+		</mx:VDividedBox>
+	</mx:HDividedBox>
+	<mx:Style source="style/style.css"/>
+	<mx:Style>
+		ToolTip { fontSize:12}
+	</mx:Style>
+
+	<mx:Binding source="hasLastCommand"
+				destination="undo_btn.enabled"/>
+	<mx:Binding source="hasRedoCommand"
+				destination="redo_btn.enabled"/>
+	<mx:Binding source="designCanvas.width!=int(canvasW.text)||designCanvas.height!=int(canvasH.text)" destination="changeWT_btn.enabled"/>
+	<mx:Script>
+		<![CDATA[
+			import com.flexspy.FlexSpy;   
+			import mx.controls.Button;
+			import mx.core.FlexGlobals;
+			import mx.events.FlexEvent;
+			import mx.managers.BrowserManager;
+			import mx.managers.CursorManager;
+			import mx.managers.IBrowserManager;
+			import mx.managers.PopUpManager;
+			
+			import org.asblog.frameworks.ApplicationFacade;
+			import org.asblog.frameworks.controller.commandtype.DesignCanvasCT;
+			import org.asblog.frameworks.view.BasePropertiesMediator;
+			import org.asblog.frameworks.view.DesignCanvasMediator;
+			import org.asblog.frameworks.view.LayersManagerMdeiator;
+			import org.asblog.frameworks.view.MediaCreatorMediator;
+			import org.asblog.utils.FileCreateor;
+			import org.asblog.utils.LocalImageFileLoader;
+			import org.asblog.utils.PopUpUtils;
+			
+			import ui.popUpWindow.PopUpPicViewWindow;
+			import ui.popUpWindow.PopUpRichTextWindow;
+			import ui.popUpWindow.PopUpTaobaoPicViewWindow;
+			import ui.popUpWindow.PopUpTaobaoWindow;
+			import ui.popUpWindow.PopUpUploadWindow;
+
+			[Bindable("commandChange")]
+			private function get hasLastCommand():Boolean
+			{
+				return facade.hasLastCommand;
+			}
+
+			[Bindable("commandChange")]
+			private function get hasRedoCommand():Boolean
+			{
+				return facade.hasRedoCommand;
+			}
+			private var isTaobaoUser:Boolean;
+			private var facade:ApplicationFacade = ApplicationFacade.getInstance();
+
+			private function onCreated():void
+			{
+				Security.allowDomain("*");
+				init();
+				
+			//testAdd();
+			}
+
+			private function init():void
+			{
+				facade.registerMediator(new MediaCreatorMediator(this));
+				facade.registerMediator(new DesignCanvasMediator(designCanvas));
+				facade.registerMediator(new LayersManagerMdeiator(layersManager));
+				facade.registerMediator(new BasePropertiesMediator(propertiesWin));
+				var win:PopUpTaobaoWindow
+				win = PopUpManager.createPopUp(this, PopUpTaobaoWindow,true) as PopUpTaobaoWindow	
+				
+			}
+			public function popUpViewPic(myData:*):void
+			{
+				var win:PopUpTaobaoPicViewWindow;
+				win = PopUpManager.createPopUp(this, PopUpTaobaoPicViewWindow,true) as PopUpTaobaoPicViewWindow
+				win.myData = myData;
+			}
+			private function creatPic():void
+			{		
+				designCanvas.setSelection(null);
+				FileCreateor.createImage(designCanvas);
+				CursorManager.removeBusyCursor();
+			}
+
+			
+			   private function testAdd():void
+			   {
+			   //  var bb:MediaButton;
+			   //				var im:MediaImage = new MediaImage();
+			   //				im.source="xx.swf"
+			   //
+			   //				var im1:MediaImage = new MediaImage()
+			   //				im1.source = "pic/xx.swf"
+			   //
+			   //				designCanvas.addChild(im)
+			   //				designCanvas.addChild(im1)
+			   //				var _y:int= 10
+			   //				var _x:int= 10
+			   //				var _w:int= 10
+			   //				var _h:int= 10
+			   //
+			   //				for(var i:int = 0; i<3;i++)
+			   //				{
+			   //
+			   //					bb = new MediaButton()
+			   //					bb.name = "b"+i
+			   //					bb.x += _x
+			   //					bb.y += _y
+			   //					bb.contentObject.width += _w
+			   //					bb.contentObject.height += _h
+			   //					designCanvas.addMediaItem(bb)
+			   //					_x+=_x
+			   //					_y+=_y
+			   //					_w+=_w
+			   //					_h+=_h
+			   //				}
+			   /*
+			   bb = new MediaButton()
+			   bb.name = "b"
+			   bb.x = 20
+			   bb.y = 20
+			   bb.contentObject.width = 40
+			   bb.contentObject.height = 40
+			   designCanvas.addMediaItem(bb)*/
+			 }
+			private function transformTarget(event:Event):void
+			{
+				//发送此事件，用来更新选中元素的属性
+				propertiesWin.dispatchEvent(new Event("targetChange"))
+			}
+
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				var win:PopUpUploadWindow;
+				win = PopUpManager.createPopUp(MediaCreator(FlexGlobals.topLevelApplication).designCanvas, PopUpUploadWindow, false) as PopUpUploadWindow
+				
+			}
+
+
+			protected function button2_clickHandler(event:MouseEvent):void
+			{
+				var win:PopUpPicViewWindow
+				win = PopUpManager.createPopUp(MediaCreator(FlexGlobals.topLevelApplication).designCanvas, PopUpPicViewWindow, false) as PopUpPicViewWindow	
+			}
+
+			private function changeCanvasWT():void
+			{		
+				var oldWT:Object = {w:designCanvas.width,h:designCanvas.height};
+				var newWT:Object = {w:int(canvasW.text),h:int(canvasH.text)};
+				var classRef:Class = getDefinitionByName("org.asblog.core.History") as Class;
+				var history:* = new classRef(oldWT,newWT)
+				facade.sendNotification(DesignCanvasCT.CMD_CHANGE_CANVASWH,history);
+			}
+
+			protected function canvasW_enterHandler(event:FlexEvent):void
+			{
+				changeCanvasWT();
+			}
+
+
+			protected function canvasH_enterHandler(event:FlexEvent):void
+			{
+				changeCanvasWT();
+			}
+
+
+			protected function button4_clickHandler(event:MouseEvent):void
+			{
+				changeCanvasWT();
+			}
+			
+			
+			protected function addTextBtn_clickHandler(event:MouseEvent):void
+			{
+				PopUpUtils.addPop(PopUpRichTextWindow);
+			}
+
+
+			protected function button5_clickHandler(event:MouseEvent):void
+			{
+				var loader:LocalImageFileLoader = new LocalImageFileLoader();
+				loader.addImageToCanvas();
+			}
+
+
+			protected function button6_clickHandler(event:MouseEvent):void
+			{
+				var loader:LocalImageFileLoader = new LocalImageFileLoader();
+				loader.addImageToLibrary();
+			}
+			protected function button7_clickHandler(event:MouseEvent):void
+			{
+				var loader:LocalImageFileLoader = new LocalImageFileLoader();
+				loader.addImageToBgLibrary();
+			}
+		]]>
+	</mx:Script>
+</mx:Application>

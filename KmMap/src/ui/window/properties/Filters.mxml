@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="onCreat()">
+	<mx:Box id="filtersBox" width="100%" height="100%">
+		<mx:HBox id="filterPanels" width="100%" height="100%">
+			<mx:List id="filterList" height="100%"
+				     dataProvider="{filterArray}"
+				     itemRenderer="ui.window.filtersBox.FilterItem"
+				     change="onSelectFilter()"
+				     />
+		</mx:HBox>
+		<mx:HBox width="100%">
+				<mx:PopUpButton label="添加" id="add_menu"/>
+				<mx:Button label="删除"/>
+				<mx:Button label="全部删除"/>
+			</mx:HBox>
+	</mx:Box>
+	<mx:Binding source="selectedItem!=null" destination="filtersBox.enabled"/>
+	<mx:Binding source="BitmapFilter(filterList.selectedItem)" destination="selectedFilter"/>
+	<mx:Script>
+		<![CDATA[
+			import mx.events.ListEvent;
+			import mx.collections.ArrayCollection;
+			import org.asblog.event.FilterEvent;
+			import ui.window.filtersBox.FilterBoxBase;
+			import mx.events.MenuEvent;
+			import ui.window.filtersBox.BlurPanel;
+			import org.asblog.core.IMediaObject;
+			import mx.controls.Menu;
+			[Bindable]
+     		public var selectedItem:IMediaObject
+     		[Bindable]
+			private var selectedFilter:BitmapFilter
+			[ArrayElementType("BitmapFilter")]
+     		[Bindable]
+     		public var filterArray:Array
+			private function onCreat():void
+			{
+				var myMenu:Menu = new Menu();
+                var dp:Object = [
+                 // {label: "投影"}, 
+                  {label: "模糊",panel:BlurPanel}
+                 // {label: "发光"},
+                 // {label: "斜角"},
+                 // {label: "渐变发光"},
+                //  {label: "渐变斜角"},
+                 //{label: "调整颜色"}
+                ];        
+                myMenu.dataProvider = dp;
+                myMenu.addEventListener(MenuEvent.ITEM_CLICK, onAddFilter);
+				add_menu.popUp = myMenu
+			}
+			private function onAddFilter(eve:MenuEvent):void
+			{
+				if(!filterArray)
+				{
+					filterArray = []
+				}
+				var filterbox:FilterBoxBase
+				if(!judgeFilPanel(eve.item.panel))
+				{
+					filterbox = new eve.item.panel()
+					filterbox.name = "FilterBox"
+					filterbox.addEventListener(FilterEvent.CHANGE,filterChange)
+					filterPanels.addChild(filterbox)
+				}
+				filterbox.filter = selectedFilter
+//				//在滤镜列表里显示
+//				filterItems.addItem({label:filterbox.filterLabel,filter:filterbox.filter})
+				//放进要用在具体对象上的滤镜数组
+				filterArray.push(filterbox.filter)
+				selectedItem.filters = filterArray
+			}
+			private function filterChange(eve:FilterEvent):void
+			{
+				
+			}
+			private function judgeFilPanel(panel:Class):Boolean
+			{
+				var currentPanel:FilterBoxBase = filterPanels.getChildByName("FilterBox") as FilterBoxBase
+				if(currentPanel)
+					return currentPanel is panel
+				else
+					return false
+			}
+			private function onSelectFilter():void
+			{
+				
+			}
+			
+		]]>
+	</mx:Script>
+</mx:VBox>

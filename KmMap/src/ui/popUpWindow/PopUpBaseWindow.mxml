@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"
+	 			showCloseButton="true"
+	            close="PopUpManager.removePopUp(this);"
+	            creationComplete="onCreated()">
+    <mx:Script>
+        <![CDATA[
+            import mx.managers.PopUpManager;
+            private var _subComponents:Array
+            public function set subComponents(value:Array) : void
+		    {
+		        _subComponents = value;
+		    }
+			protected function onCreated():void
+			{
+				for(var i:int=0; i < _subComponents.length; i++)
+					if(_subComponents[i] is DisplayObject)
+                          myBox.addChild( _subComponents[i] );
+				PopUpManager.centerPopUp(this)
+			}
+        ]]>
+    </mx:Script>
+    <mx:Box id="myBox"/>
+</mx:TitleWindow>
+
