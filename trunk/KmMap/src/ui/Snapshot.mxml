@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" toolTip="将图案拖拽到面板"
+		   width="80"
+		   height="80"
+		   creationComplete="onCreated()"
+		   >
+	<mx:Script>
+		<![CDATA[
+			import org.asblog.core.MediaLink;
+			
+			import mx.core.DragSource;
+			import mx.graphics.ImageSnapshot;
+			import mx.managers.DragManager;
+			private var _relatedObject:DisplayObject
+			private var _delegateClass:Class
+			private var _classdData:Object
+			private var _ismask:Boolean
+			[Bindable]
+			public var imageUrl:Object
+			public var mediaLink:MediaLink;
+			private function onCreated():void
+			{
+				this.addEventListener(MouseEvent.MOUSE_DOWN,onMouseDown)
+			}
+			public function get relatedObject():DisplayObject
+			{
+				return _relatedObject
+			}
+			public function set relatedObject(v:DisplayObject):void
+			{
+				_relatedObject = v
+				addChild(v)
+			}
+			private function onMouseDown(event:MouseEvent):void
+	        {			
+	            var ds:DragSource = new DragSource();
+	            
+	            DragManager.doDrag(this, ds, event, makeImageProxy,-mouseX,-mouseY);
+	        }       
+	        private function get makeImageProxy():Image
+	        {
+	        	var imageProxy:Image = new Image();
+	            var imageProxyBitMap:Bitmap = new Bitmap(ImageSnapshot.captureBitmapData(snapShotImage))
+	            imageProxy.source = imageProxyBitMap;
+	            imageProxy.height = this.height;
+	            imageProxy.width  = this.width;
+	            return imageProxy
+	        }
+		]]>
+	</mx:Script>
+	<mx:Image id="snapShotImage" width="100%" height="100%" source="{imageUrl}"/>
+</mx:Canvas>

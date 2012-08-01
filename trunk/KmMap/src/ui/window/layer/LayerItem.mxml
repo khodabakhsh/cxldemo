@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox horizontalScrollPolicy="off" xmlns:mx="http://www.adobe.com/2006/mxml" removedFromStage="trace('removedFromStage')">
+	<mx:Script>
+		<![CDATA[
+			import org.asblog.core.IMediaObject;
+		]]>
+	</mx:Script>
+
+	<mx:Button id="vBtn" label="{IMediaObject(data).visible?'隐藏':'可视'}" click="IMediaObject(data).visible = !IMediaObject(data).visible;vBtn.label = IMediaObject(data).visible?'隐藏':'可视'"/>
+	<mx:Image />
+	<mx:TextInput id="nameTxt" change="data.name = nameTxt.text" text="{IMediaObject(data).name}"/>
+	<mx:Button label="特效"/>
+</mx:HBox>

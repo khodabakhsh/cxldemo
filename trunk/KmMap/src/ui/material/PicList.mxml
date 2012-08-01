@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MaterialListBase xmlns="ui.material.*" xmlns:mx="http://www.adobe.com/2006/mxml">
+	<mx:Script>
+		<![CDATA[
+			import org.asblog.core.MediaLink;
+			import org.asblog.event.CommonEvent;
+			import org.asblog.mediaItem.MediaImage;
+			
+			import ui.Snapshot;
+			override protected function onCreated():void
+			{
+				var snapshot:Snapshot;
+				var link:MediaLink;
+				
+				for(var i :int=1;i<20;i++)
+				{
+					snapshot = new Snapshot();
+					snapshot.imageUrl = "pic/"+i+".jpg"
+					link = new MediaLink();
+					link.classRef = MediaImage;
+					link.source = "pic/"+i+".jpg";
+					snapshot.mediaLink = link;
+					imgList.addChild(snapshot)
+				}
+				
+			}
+			private function uploadImage(event:MouseEvent):void
+			{
+				/*
+				var win:PopUpInputWindow;
+				win = PopUpManager.createPopUp(MediaCreator(FlexGlobals.topLevelApplication).designCanvas, PopUpInputWindow, false) as PopUpInputWindow
+				win.addEventListener("onAddItem",onAdd);*/
+				
+				
+			}
+			
+			private function onAdd(event:CommonEvent):void
+			{
+				var snapshot:Snapshot = new Snapshot();
+				snapshot.imageUrl = event.item;
+				var link:MediaLink = new MediaLink();
+				link.classRef = MediaImage;
+				link.source = event.item;
+				snapshot.mediaLink = link;
+				imgList.addChild(snapshot)
+			}
+		]]>
+	</mx:Script>
+</MaterialListBase>

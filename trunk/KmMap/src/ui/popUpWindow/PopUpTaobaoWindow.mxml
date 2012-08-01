@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PopUpBaseWindow xmlns="ui.popUpWindow.*" xmlns:mx="http://www.adobe.com/2006/mxml">
+	<subComponents>
+		<mx:HBox>
+			<mx:Button label="选择一张图片" click="button1_clickHandler(event)"/>
+		</mx:HBox>
+	</subComponents>
+	<mx:Script>
+		<![CDATA[
+			import mx.managers.PopUpManager;
+			
+			import org.asblog.utils.LocalImageFileLoader;
+
+
+
+
+
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				new LocalImageFileLoader().addImageToBg();
+				PopUpManager.removePopUp(this);
+			}
+
+		]]>
+	</mx:Script>
+</PopUpBaseWindow>

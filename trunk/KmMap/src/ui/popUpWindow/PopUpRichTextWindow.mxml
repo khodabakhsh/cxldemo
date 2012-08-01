@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PopUpBaseWindow title="" xmlns="ui.popUpWindow.*" xmlns:mx="http://www.adobe.com/2006/mxml">
+	<subComponents>
+		<mx:RichTextEditor id="rich_text" />
+		<mx:HBox>
+			<mx:Spacer width="100%"/>
+			<mx:Button label="确定" click="button1_clickHandler(event)"/>
+		</mx:HBox>
+	</subComponents>
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.managers.PopUpManager;
+			
+			import org.asblog.core.TextLink;
+			import org.asblog.frameworks.ApplicationFacade;
+			import org.asblog.frameworks.controller.commandtype.DesignCanvasCT;
+			import org.asblog.mediaItem.MediaText;
+			[Bindable]
+			public var text:String
+
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				var link:TextLink = new TextLink();
+				link.classRef = MediaText;
+				link.text = rich_text.htmlText;
+				ApplicationFacade.getInstance().sendNotification(DesignCanvasCT.CMD_ADD_MEDIAOBJECT,link);
+				PopUpManager.removePopUp(this);
+			}
+
+		]]>
+	</mx:Script>
+</PopUpBaseWindow>

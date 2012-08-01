@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PopUpBaseWindow xmlns="ui.popUpWindow.*" xmlns:mx="http://www.adobe.com/2006/mxml">
+	<mx:TextArea text="{text}" width="100%" height="100%"/>
+	<mx:Script>
+		<![CDATA[
+			[Bindable]
+            public var text:String
+		]]>
+	</mx:Script>
+</PopUpBaseWindow>

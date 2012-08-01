@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FilterBoxBase xmlns="ui.window.filtersBox.*" xmlns:mx="http://www.adobe.com/2006/mxml">
+	<mx:Form>
+		<mx:FormItem label="模糊X:">
+			<mx:HSlider id="blurX" value="5" minimum="0" maximum="100" change="dispatchEvent(new FilterEvent(FilterEvent.CHANGE,filter))"/>
+		</mx:FormItem>
+		<mx:FormItem label="模糊Y:">
+			<mx:HSlider id="blurY" value="5" minimum="0" maximum="100" change="dispatchEvent(new FilterEvent(FilterEvent.CHANGE,filter))"/>
+		</mx:FormItem>
+		<mx:FormItem label="品质:">
+			<mx:ComboBox id="blurQuality" selectedIndex="{getBlurQualityIndex(currentFilter)}" change="dispatchEvent(new FilterEvent(FilterEvent.CHANGE,filter))">
+				<mx:ArrayCollection id="blurQualityArr">
+					<mx:Object label="低" data="{BitmapFilterQuality.LOW}"/>
+					<mx:Object label="中" data="{BitmapFilterQuality.MEDIUM}"/>
+					<mx:Object label="高" data="{BitmapFilterQuality.HIGH}"/>
+				</mx:ArrayCollection>
+			</mx:ComboBox>
+		</mx:FormItem>
+	</mx:Form>
+	<mx:Script>
+		<![CDATA[
+			import org.asblog.event.FilterEvent;
+			[Bindable]
+			private var currentFilter:BlurFilter
+			override protected function onCreat():void
+			{
+				super.onCreat();
+				filterLabel = "模糊"
+			}
+			override public function get filter():BitmapFilter
+			{
+				if(_filter)
+				{
+					BlurFilter(currentFilter).blurX   = blurX.value
+					BlurFilter(currentFilter).blurY   = blurY.value
+					BlurFilter(currentFilter).quality = blurQuality.selectedItem.data
+				}
+				else
+				{
+					currentFilter = new BlurFilter(5,5,BitmapFilterQuality.LOW)
+				}
+				return currentFilter
+			}
+			private function getBlurQualityIndex(v:BlurFilter):int
+			{
+				var le:int = blurQualityArr.length
+				for(var i:int = 0;i<le;i++)
+				{
+					if(blurQualityArr.getItemAt(i).data==v.quality)
+					{
+						return i;
+					}
+				}
+				return 0
+			}
+		]]>
+	</mx:Script>
+</FilterBoxBase>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PopUpBaseWindow xmlns="ui.popUpWindow.*" xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="popupbasewindow1_creationCompleteHandler(event)">
+	<subComponents>
+		<mx:VBox>
+			<mx:ComboBox id="typeCom" change="combobox1_changeHandler(event)" dataProvider="{typeService.lastResult.row}" labelField="typename"/>
+			<mx:TileList   color="0x323232"
+						   columnCount="3"
+						   columnWidth="200"
+						   rowCount="2"
+						   rowHeight="200"
+						   direction="horizontal"
+						   horizontalScrollPolicy="on"
+						   verticalScrollPolicy="on"
+						   itemRenderer="ui.TileItem" dataProvider="{picService.lastResult.row}" labelField="url"/>
+		</mx:VBox>
+	</subComponents>
+	<mx:HTTPService id="typeService" url="{domain+'type?ac=show'}" showBusyCursor="true" resultFormat="e4x" result="typeService_resultHandler(event)"/>
+	<mx:HTTPService id="picService" showBusyCursor="true" resultFormat="e4x" result="picService_resultHandler(event)"/>
+	<mx:Script>
+		<![CDATA[
+			import mx.rpc.events.ResultEvent;
+			import mx.events.FlexEvent;
+			import mx.events.ListEvent;
+			[Bindable]
+			private var domain:String = "http://61.129.86.108:8000/";
+			private function getPic(type:String):void
+			{
+				picService.url = domain+"show?ac=show&t="+type+"&timer="+Math.random();
+				picService.send();
+			}
+			protected function combobox1_changeHandler(event:ListEvent):void
+			{
+				getPic(typeCom.selectedItem.id);
+			}
+
+			protected function popupbasewindow1_creationCompleteHandler(event:FlexEvent):void
+			{
+				typeService.send();
+			}
+
+
+			protected function typeService_resultHandler(event:ResultEvent):void
+			{
+				getPic(typeCom.selectedItem.id);
+			}
+
+
+			protected function picService_resultHandler(event:ResultEvent):void
+			{
+				
+			}
+
+		]]>
+	</mx:Script>
+</PopUpBaseWindow>

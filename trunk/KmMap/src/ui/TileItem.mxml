@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Image xmlns:mx="http://www.adobe.com/2006/mxml" source="{data.url}"  >
+	
+	<mx:Label text="{data.url}"  textAlign="center" width="100%" height="100%"/>
+	
+</mx:Image>

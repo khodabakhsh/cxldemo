@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PopUpBaseWindow xmlns="ui.popUpWindow.*" xmlns:mx="http://www.adobe.com/2006/mxml">
+	<subComponents>
+		<mx:HBox width="100%" height="100%">
+			<mx:Label text="URL地址:"/>
+			<mx:TextInput id="url_txt" text="http://"/>
+			<mx:Button label="添加" click="onAdd()"/>
+		</mx:HBox>
+	</subComponents>
+	<mx:Script>
+		<![CDATA[
+			import org.asblog.event.CommonEvent;
+			import org.asblog.event.MediaItemEvent;
+			import mx.managers.PopUpManager;
+			private function onAdd():void
+			{
+				dispatchEvent(new CommonEvent("onAddItem",url_txt.text));
+				PopUpManager.removePopUp(this);
+			}
+		]]>
+	</mx:Script>
+</PopUpBaseWindow>

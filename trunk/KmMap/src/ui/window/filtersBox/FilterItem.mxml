@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox horizontalScrollPolicy="off" xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="onCreat()">
+	<mx:Label id="filterName" text="{data}"/>
+	<mx:Script>
+		<![CDATA[
+			private function onCreat():void
+			{
+				if(data is DropShadowFilter)
+					filterName.text = "投影"
+				else if(data is BlurFilter)
+					filterName.text = "模糊"
+				else if(data is GlowFilter)
+					filterName.text = "发光"
+				else if(data is BevelFilter)
+					filterName.text = "斜角"
+				else if(data is GradientGlowFilter)
+					filterName.text = "渐变发光"
+				else if(data is GradientBevelFilter)
+					filterName.text = "渐变斜角"
+				else if(data is ColorMatrixFilter)
+					filterName.text = "调整颜色"
+			}
+		]]>
+	</mx:Script>
+</mx:HBox>
