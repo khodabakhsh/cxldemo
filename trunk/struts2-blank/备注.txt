@@ -1,0 +1,6 @@
+1.加入servlet包，如servlet-api.jar包   、jsp-api.jar包
+2.加入velocity-tools-2.0.jar包
+3.拷贝resource的文件到src
+4.拷贝struts-tags.tld到WEB-INF
+5.WEB-INF/lib下面不能放jsp-api.jar、servlet-api.jar，但struts源码编译有引用该jar，请放在除WEB-INF/lib以外的文件夹中。
+6.需要下载junit包
