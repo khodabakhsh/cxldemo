@@ -12,9 +12,12 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Properties implementation that remembers the location of each property.  When
- * loaded, a custom properties file parser is used to remember both the line number
- * and preceeding comments for each property entry.
+ * Properties implementation that remembers the location of each property. 
+ * <br/>
+ * 【 When  loaded】, a custom properties file parser is used to 【remember both the line number
+ * and preceeding comments for each property entry】
+ * 
+ * 
  */
 public class LocatableProperties extends Properties implements Locatable {
 

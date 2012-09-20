@@ -37,6 +37,8 @@ import java.util.Iterator;
 
 /**
  * A class to handle settings via a properties file.
+ * 
+ * 持有@LocatableProperties （settings）引用并管理其相应操作
  */
 class PropertiesSettings extends Settings {
 
@@ -48,7 +50,8 @@ class PropertiesSettings extends Settings {
      * Creates a new properties config given the name of a properties file. The name is expected to NOT have
      * the ".properties" file extension.  So when <tt>new PropertiesSettings("foo")</tt> is called
      * this class will look in the classpath for the <tt>foo.properties</tt> file.
-     *
+     * <p><b>
+     *  类PropertiesSettings 持有@LocatableProperties （settings）引用并管理其相应操作</b></p>
      * @param name the name of the properties file, excluding the ".properties" extension.
      */
     public PropertiesSettings(String name) {

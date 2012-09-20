@@ -10,6 +10,7 @@ import com.opensymphony.xwork2.util.location.LocationUtils;
 
 /**
  * Factory that remembers where a constant came from
+ * 常量factory
  */
 public class LocatableConstantFactory<T> extends Located implements Factory {
     T constant;

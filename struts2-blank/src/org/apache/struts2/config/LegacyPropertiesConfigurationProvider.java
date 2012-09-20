@@ -104,7 +104,8 @@ public class LegacyPropertiesConfigurationProvider implements ConfigurationProvi
      * @param props
      * @param settings
      */
-    protected void loadSettings(LocatableProperties props, final Settings settings) {
+    @SuppressWarnings("deprecation")
+	protected void loadSettings(LocatableProperties props, final Settings settings) {
         // We are calling the impl methods to get around the single instance of Settings that is expected
         for (Iterator i = settings.listImpl(); i.hasNext(); ) {
             String name = (String) i.next();

@@ -271,7 +271,7 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 										+ ex);
 							}
 						}
-					} else if ("constant".equals(nodeName)) {
+					} else if ("constant".equals(nodeName)) {//constant节点，加入到props中..........
 						String name = child.getAttribute("name");
 						String value = child.getAttribute("value");
 						props.setProperty(name, value, childNode);

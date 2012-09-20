@@ -311,14 +311,16 @@ public class DefaultActionMapper implements ActionMapper {
             return null;
         }
 
+        //解析name和namespace, 根据configManager中的config.getPackageConfigs获得所有action配置 ,在里面寻找匹配最长 namespace的action配置
         parseNameAndNamespace(uri, mapping, configManager);
 
+        //处理一些特殊的请求参数
         handleSpecialParameters(request, mapping);
 
         if (mapping.getName() == null) {
             return null;
         }
-
+        //当allowDynamicMethodCalls为true时,处理"name!method"方式的调用
         parseActionName(mapping);
 
         return mapping;
