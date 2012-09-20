@@ -81,6 +81,7 @@ public class StrutsPrepareAndExecuteFilter implements StrutsStatics, Filter {
 				chain.doFilter(request, response);
 			} else {
 				request = prepare.wrapRequest(request);
+				//找到对应的action配置
 				ActionMapping mapping = prepare.findActionMapping(request, response, true);
 				if (mapping == null) {
 					boolean handled = execute.executeStaticResourceRequest(request, response);

@@ -118,7 +118,7 @@ public final class ContainerBuilder {
    * @param name of dependency
    * @param factory creates objects to inject  【真正执行create创建对象的正是这个 factory】
    * @param scope scope of injected instances
-   * @return this builder
+   * @return this builder  
    * 
    * 
    */
