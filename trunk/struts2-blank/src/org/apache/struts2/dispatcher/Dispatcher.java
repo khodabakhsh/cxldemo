@@ -341,7 +341,7 @@ public class Dispatcher {
 		String[] files = configPaths.split("\\s*[,]\\s*");
 		for (String file : files) {
 			if (file.endsWith(".xml")) {
-				if ("xwork.xml".equals(file)) {
+				if ("xwork.xml".equals(file)) {//xwork.xml单独处理
 					configurationManager
 							.addContainerProvider(createXmlConfigurationProvider(
 									file, false));
@@ -473,7 +473,8 @@ public class Dispatcher {
 			// 加载其中的配置。
 			init_DefaultProperties();
 
-			// 在configurationManager加入了strut默认3个配置文件作configurationManager的containerProviders
+			//解析struts默认xml配置文件（"struts-default.xml,struts-plugin.xml,struts.xml"），可通过初始化参数config配置为其他路径（即非默认路径）
+			// 在configurationManager加入了strut默认3个配置文件作configurationManager的containerProviders,每个文件都对应containerProvider
 			// 这个@StrutsXmlConfigurationProvider 在注册register的时候读取strut默认3个配置文件("struts-default.xml,struts-plugin.xml,struts.xml"),
 			// 解析所有xml节点，进行相关数据初始化。
 			init_TraditionalXmlConfigurations();
@@ -563,6 +564,8 @@ public class Dispatcher {
 			String method = mapping.getMethod();
 
 			Configuration config = configurationManager.getConfiguration();
+			
+			//获得ActionProxy,是一个@StrutsActionProxy
 			ActionProxy proxy = config
 					.getContainer()
 					.getInstance(ActionProxyFactory.class)

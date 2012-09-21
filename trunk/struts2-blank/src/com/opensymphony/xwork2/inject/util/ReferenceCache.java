@@ -57,6 +57,9 @@ public abstract class ReferenceCache<K, V> extends ReferenceMap<K, V> {
    */
   protected abstract V create(K key);
 
+  /**
+   * 由{@link #create(Object)}调用，使用@FutureTask 负责创建对象的过程
+   */
   V internalCreate(K key) {
     try {
       FutureTask<V> futureTask = new FutureTask<V>(
@@ -131,6 +134,10 @@ public abstract class ReferenceCache<K, V> extends ReferenceMap<K, V> {
     future.cancel(false);
   }
 
+  /**
+   * 
+   * 第一次初始化的时候，call方法其实是回调了 {@link ReferenceCache #create(Object)方法}
+   */
   class CallableCreate implements Callable<V> {
 
     K key;

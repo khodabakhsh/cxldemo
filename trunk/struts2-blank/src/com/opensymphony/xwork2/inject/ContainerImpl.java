@@ -68,6 +68,7 @@ class ContainerImpl implements Container {
 				@Override
 				protected List<Injector> create( Class<?> key ) {
 					List<Injector> injectors = new ArrayList<Injector>();
+					//递归注入fields and methods的Injector ，优先注入父类
 					addInjectors(key, injectors);
 					return injectors;
 				}
@@ -155,16 +156,23 @@ class ContainerImpl implements Container {
 				throws MissingDependencyException;
 	}
 
-	private boolean isStatic( Member member ) {
+	/**
+	 * 是否静态成员
+	 */
+	private boolean isStatic(Member member) {
 		return Modifier.isStatic(member.getModifiers());
 	}
 
+	
 	static class FieldInjector implements Injector {
 
 		final Field field;
 		final InternalFactory<?> factory;
 		final ExternalContext<?> externalContext;
 
+		/**
+		 * 属性Injector
+		 */
 		public FieldInjector( ContainerImpl container, Field field, String name )
 				throws MissingDependencyException {
 			this.field = field;
@@ -269,6 +277,9 @@ class ContainerImpl implements Container {
 		final Method method;
 		final ParameterInjector<?>[] parameterInjectors;
 
+		/**
+		 * 方法Injector
+		 */
 		public MethodInjector( ContainerImpl container, Method method, String name )
 				throws MissingDependencyException {
 			this.method = method;
@@ -302,11 +313,15 @@ class ContainerImpl implements Container {
 			}
 		}
 	}
-
+    @SuppressWarnings("rawtypes")
 	Map<Class<?>, ConstructorInjector> constructors =
 			new ReferenceCache<Class<?>, ConstructorInjector>() {
 				@Override
 				@SuppressWarnings("unchecked")
+				/**
+				 * 在@ReferenceCache 的internalCreate中（里面用到了 lazy load 实现,当 @ReferenceCache #get(Object key) 为null的时候会调用internalCreate）
+				 * ，初始化是由@FutureTask 去回调这里的下面的create方法。
+				 */
 				protected ConstructorInjector<?> create( Class<?> implementation ) {
 					return new ConstructorInjector(ContainerImpl.this, implementation);
 				}

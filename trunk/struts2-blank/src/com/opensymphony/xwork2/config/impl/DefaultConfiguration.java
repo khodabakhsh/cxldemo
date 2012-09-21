@@ -238,6 +238,8 @@ public class DefaultConfiguration implements Configuration {
 			for (final ContainerProvider containerProvider : providers) {
 				if (containerProvider instanceof PackageProvider) {
 					container.inject(containerProvider);
+					//只有StrutsXmlConfigurationProvider（重写了父类 @see StrutsXmlConfigurationProvider#loadPackages()方法）
+					//只有它们的loadPackages方法有实质性的逻辑处理，所以这里其实是解析xml文件()中的配置，并完成框架核心类初始化
 					((PackageProvider) containerProvider).loadPackages();
 					packageProviders.add((PackageProvider) containerProvider);
 				}
