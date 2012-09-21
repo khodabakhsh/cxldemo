@@ -34,7 +34,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StrutsObjectFactory extends ObjectFactory {
-
+	/**
+	 * struts为Interceptor注入属性
+	 */
     public Interceptor buildInterceptor(InterceptorConfig interceptorConfig, Map refParams)
             throws ConfigurationException {
         String className = interceptorConfig.getClassName();

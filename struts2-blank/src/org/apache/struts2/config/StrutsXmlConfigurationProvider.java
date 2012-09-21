@@ -105,6 +105,7 @@ public class StrutsXmlConfigurationProvider extends XmlConfigurationProvider {
 
     /* (non-Javadoc)
      * @see com.opensymphony.xwork2.config.providers.XmlConfigurationProvider#init(com.opensymphony.xwork2.config.Configuration)
+     *  处理package节点
      */
     @Override
     public void loadPackages() {

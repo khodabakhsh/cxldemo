@@ -297,6 +297,9 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 		}
 	}
 
+	/**
+	 * 处理package节点
+	 */
 	public void loadPackages() throws ConfigurationException {
 		List<Element> reloads = new ArrayList<Element>();
 		for (Document doc : documents) {
@@ -313,6 +316,7 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 					final String nodeName = child.getNodeName();
 
 					if ("package".equals(nodeName)) {
+						System.out.println("package name --------> "+child.getAttribute("name")+ " | namespace --------> "+child.getAttribute("namespace"));
 						PackageConfig cfg = addPackage(child);
 						if (cfg.isNeedsRefresh()) {
 							reloads.add(child);
@@ -1043,6 +1047,9 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 	// addPackage(packageElement);
 	// }
 	// }
+	/**
+	 * 递归解析xml文件(包含对include节点的解析)。
+	 */
 	private List<Document> loadConfigurationFiles(String fileName,
 			Element includeElement) {
 		List<Document> docs = new ArrayList<Document>();
