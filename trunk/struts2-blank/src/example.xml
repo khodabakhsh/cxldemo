@@ -5,21 +5,40 @@
 
 <struts>
 
-    <package name="example" namespace="/example" extends="default">
+	<package name="example" namespace="/example" extends="default">
 
-        <action name="HelloWorld" class="example.HelloWorld">
-            <result>/example/HelloWorld.jsp</result>
-        </action>
+        <!-- 未指定method属性时，执行execute方法 -->
+		<action name="HelloWorld" class="example.HelloWorld">
+			<result>/example/HelloWorld.jsp</result>
+		</action>
+		<!-- 指定method属性的最普通应用 -->
+		<action name="echo" method="echo" class="example.HelloWorld">
+			<result name="success">/example/echo.jsp</result>
+		</action>
+		<!-- 直接write响应信息，无返回值(void) -->
+		<action name="write" method="write" class="example.HelloWorld">
+		</action>
+		<!-- 重定向到页面 -->
+		<action name="redirect_url" method="redirect_url" class="example.HelloWorld">
+			<result name="success" type="redirect">/example/redirect_url.jsp</result>
+		</action>
+		<!-- 重定向到action -->
+		<action name="redirect_action" method="redirect_action" class="example.HelloWorld">
+			<result name="success" type="redirectAction">handle_redirect_from_action</result>
+		</action>
+		<action name="handle_redirect_from_action" method="handle_redirect_from_action" class="example.HelloWorld">
+		</action>
 
-        <action name="Login_*" method="{1}" class="example.Login">
-            <result name="input">/example/Login.jsp</result>
-            <result type="redirectAction">Menu</result>
-        </action>
 
-        <action name="*" class="example.ExampleSupport">
-            <result>/example/{1}.jsp</result>
-        </action>
+		<action name="Login_*" method="{1}" class="example.Login">
+			<result name="input">/example/Login.jsp</result>
+			<result type="redirectAction">Menu</result>
+		</action>
 
-        <!-- Add actions here -->
-    </package>
+		<action name="*" class="example.ExampleSupport">
+			<result>/example/{1}.jsp</result>
+		</action>
+
+		<!-- Add actions here -->
+	</package>
 </struts>

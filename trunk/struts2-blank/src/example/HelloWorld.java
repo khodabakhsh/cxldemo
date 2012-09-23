@@ -21,15 +21,52 @@
 
 package example;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+
 /**
  * <code>Set welcome message.</code>
  */
 public class HelloWorld extends ExampleSupport {
 
+	//未指定method属性时，执行execute方法
     public String execute() throws Exception {
         setMessage(getText(MESSAGE));
         return SUCCESS;
     }
+    //最普通应用
+    public String echo(){
+    	ServletActionContext.getRequest().setAttribute("echo", " u just call the {@link HelloWorld#echo}");
+    	return SUCCESS;
+    }
+    //直接write响应信息，无返回值(void)
+    public void write(){
+    	try {
+			ServletActionContext.getResponse().getWriter().write("directly write response");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+    //重定向到页面
+    public String redirect_url(){
+    	return "success";
+    }
+    // 重定向到action
+    public String redirect_action(){
+    	return "success";
+    }
+    public String handle_redirect_from_action(){
+    	try {
+			ServletActionContext.getResponse().getWriter().write("handle_redirect_from_action");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return null;
+    }
+    
 
     /**
      * Provide default valuie for Message property.

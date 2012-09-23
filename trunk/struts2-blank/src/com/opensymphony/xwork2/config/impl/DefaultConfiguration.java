@@ -213,6 +213,8 @@ public class DefaultConfiguration implements Configuration {
 		for (final ContainerProvider containerProvider : providers) {
 			bootstrap.inject(containerProvider);
 			containerProvider.init(this);
+			//在对应struts-default.xml的@StrutsXmlConfigurationProvider 实例中
+			//会解析处理在struts-default.xml里定义<bean>的节点，而这其中已经为builder构建了这些bean相应的factory
 			containerProvider.register(builder, props);
 		}
 		//为builder配置constant相应的factory
@@ -239,7 +241,8 @@ public class DefaultConfiguration implements Configuration {
 				if (containerProvider instanceof PackageProvider) {
 					container.inject(containerProvider);
 					//只有StrutsXmlConfigurationProvider（重写了父类 @see StrutsXmlConfigurationProvider#loadPackages()方法）
-					//只有它们的loadPackages方法有实质性的逻辑处理，所以这里其实是解析xml文件()中的配置，并完成框架核心类初始化
+					//只有它们的loadPackages方法有实质性的逻辑处理，所以这里其实是解析xml文件中的配置，并完成框架核心类初始化
+					//处理<package>节点
 					((PackageProvider) containerProvider).loadPackages();
 					packageProviders.add((PackageProvider) containerProvider);
 				}
@@ -328,7 +331,6 @@ public class DefaultConfiguration implements Configuration {
 			throws ConfigurationException {
 		Map<String, Map<String, ActionConfig>> namespaceActionConfigs = new LinkedHashMap<String, Map<String, ActionConfig>>();
 		Map<String, String> namespaceConfigs = new LinkedHashMap<String, String>();
-
 		for (PackageConfig packageConfig : packageContexts.values()) {
 
 			if (!packageConfig.isAbstract()) {

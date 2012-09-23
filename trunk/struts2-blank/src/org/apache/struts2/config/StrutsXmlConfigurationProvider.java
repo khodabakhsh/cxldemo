@@ -45,6 +45,7 @@ import com.opensymphony.xwork2.util.logging.LoggerFactory;
 
 /**
  * Override Xwork class so we can use an arbitrary config file
+ *<p><b> 一个对象实例对应一个xml文件</b></p>
  */
 public class StrutsXmlConfigurationProvider extends XmlConfigurationProvider {
 

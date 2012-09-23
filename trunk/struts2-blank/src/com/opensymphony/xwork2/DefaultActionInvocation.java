@@ -1,17 +1,14 @@
 /*
  * Copyright 2002-2006,2009 The Apache Software Foundation.
  * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
  * 
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
  */
 package com.opensymphony.xwork2;
 
@@ -41,8 +38,8 @@ import java.util.Map;
  * 
  * @author Rainer Hermanns
  * @author tmjee
- * @version $Date: 2011-06-09 00:40:33 +0200 (Thu, 09 Jun 2011) $ $Id:
- *          DefaultActionInvocation.java 1133590 2011-06-08 22:40:33Z jafl $
+ * @version $Date: 2011-06-09 00:40:33 +0200 (Thu, 09 Jun 2011) $ $Id: DefaultActionInvocation.java 1133590 2011-06-08
+ * 22:40:33Z jafl $
  * @see com.opensymphony.xwork2.DefaultActionProxy
  */
 public class DefaultActionInvocation implements ActionInvocation {
@@ -130,12 +127,10 @@ public class DefaultActionInvocation implements ActionInvocation {
 	}
 
 	/**
-	 * If the DefaultActionInvocation has been executed before and the Result is
-	 * an instance of ActionChainResult, this method will walk down the chain of
-	 * ActionChainResults until it finds a non-chain result, which will be
-	 * returned. If the DefaultActionInvocation's result has not been executed
-	 * before, the Result instance will be created and populated with the result
-	 * params.
+	 * If the DefaultActionInvocation has been executed before and the Result is an instance of ActionChainResult, this
+	 * method will walk down the chain of ActionChainResults until it finds a non-chain result, which will be returned.
+	 * If the DefaultActionInvocation's result has not been executed before, the Result instance will be created and
+	 * populated with the result params.
 	 * 
 	 * @return a Result instance
 	 * @throws Exception
@@ -179,11 +174,9 @@ public class DefaultActionInvocation implements ActionInvocation {
 	}
 
 	/**
-	 * Register a com.opensymphony.xwork2.interceptor.PreResultListener to be
-	 * notified after the Action is executed and before the Result is executed.
-	 * The ActionInvocation implementation must guarantee that listeners will be
-	 * called in the order in which they are registered. Listener registration
-	 * and execution does not need to be thread-safe.
+	 * Register a com.opensymphony.xwork2.interceptor.PreResultListener to be notified after the Action is executed and
+	 * before the Result is executed. The ActionInvocation implementation must guarantee that listeners will be called
+	 * in the order in which they are registered. Listener registration and execution does not need to be thread-safe.
 	 * 
 	 * @param listener
 	 */
@@ -204,6 +197,8 @@ public class DefaultActionInvocation implements ActionInvocation {
 			return ret;
 		}
 		ActionConfig config = proxy.getConfig();
+		
+		//获得action配置的result节点信息（包含全局配置global-results节点）
 		Map<String, ResultConfig> results = config.getResults();
 
 		ResultConfig resultConfig = null;
@@ -217,11 +212,14 @@ public class DefaultActionInvocation implements ActionInvocation {
 		if (resultConfig == null) {
 			// If no result is found for the given resultCode, try to get a
 			// wildcard '*' match.
+			
+			//没有找到匹配项，尝试匹配*号
 			resultConfig = results.get("*");
 		}
 
 		if (resultConfig != null) {
 			try {
+				//构建返回结果@Result
 				return objectFactory.buildResult(resultConfig, invocationContext.getContextMap());
 			} catch (Exception e) {
 				LOG.error(
@@ -237,8 +235,7 @@ public class DefaultActionInvocation implements ActionInvocation {
 	}
 
 	/**
-	 * @throws ConfigurationException
-	 *             If no result can be found with the returned code
+	 * @throws ConfigurationException If no result can be found with the returned code
 	 */
 	public String invoke() throws Exception {
 		String profileKey = "invoke: ";
@@ -254,17 +251,27 @@ public class DefaultActionInvocation implements ActionInvocation {
 				String interceptorMsg = "interceptor: " + interceptor.getName();
 				UtilTimerStack.push(interceptorMsg);
 				try {
+					// 这里 通过intercept方法 实现拦截器栈的调用。
+					// 每个拦截器可以通过调用{@link DefaultActionInvocation#invoke}
+					// 来调用拦截器栈中下一个拦截器，或者可以通过返回结果值直接中断拦截过程。
+					// 实现的是一个拦截器栈的设计。
+					// 如拦截器a、b、c在intercept前的代码顺序调用，在intercept后的代码按c、b、a反向调用
 					resultCode = interceptor.getInterceptor().intercept(DefaultActionInvocation.this);
 				} finally {
 					UtilTimerStack.pop(interceptorMsg);
 				}
 			} else {
+				// 如果拦截器栈 顺利执行 到最后一个拦截器(顺利执行即中间过程中的拦截器没有中断整个拦截过程)
+				// ，这里就是被最后这个拦截器所调用。
+				//也是在这里，执行action方法！！！
 				resultCode = invokeActionOnly();
 			}
 
 			// this is needed because the result will be executed, then control
 			// will return to the Interceptor, which will
 			// return above and flow through again
+
+			// 整个拦截器栈中应该仅仅让最后的拦截器执行一次,再把执行结果逆向返回上一个拦截器。
 			if (!executed) {
 				if (preResultListeners != null) {
 					for (Object preResultListener : preResultListeners) {
@@ -281,10 +288,11 @@ public class DefaultActionInvocation implements ActionInvocation {
 				}
 
 				// now execute the result, if we're supposed to
+				//对action方法返回的结果，执行最终的处理，
+				//构建最终的响应内容（forward、redirect、或者是其它视图渲染）。
 				if (proxy.getExecuteResult()) {
 					executeResult();
 				}
-
 				executed = true;
 			}
 
@@ -371,16 +379,21 @@ public class DefaultActionInvocation implements ActionInvocation {
 	/**
 	 * Uses getResult to get the final Result and executes it
 	 * 
-	 * @throws ConfigurationException
-	 *             If not result can be found with the returned code
+	 * @throws ConfigurationException If not result can be found with the returned code
 	 */
 	private void executeResult() throws Exception {
+		//1.对于type="redirect"的result节点(重定向到页面)，返回@ServletRedirectResult
+		//  对于type="redirectAction"的result节点(重定向到action)，返回@ServletActionRedirectResult
+		//2.Includes or forwards 到一个视图（通常是jsp页面），返回@ServletDispatcherResult
+		//3.result可能为null，例如对于action中的void方法，没有返回值，这时result就是null，又例如action方法返回null时
+		//4.其它各种视图result或者自定义的result
 		result = createResult();
 
 		String timerKey = "executeResult: " + getResultCode();
 		try {
 			UtilTimerStack.push(timerKey);
 			if (result != null) {
+				//构建【最终】响应内容
 				result.execute(this);
 			} else if (resultCode != null && !Action.NONE.equals(resultCode)) {
 				throw new ConfigurationException("No result defined for action " + getAction().getClass().getName()
@@ -426,6 +439,10 @@ public class DefaultActionInvocation implements ActionInvocation {
 		interceptors = interceptorList.iterator();
 	}
 
+	/**
+	 * 在这里实现了执行action里的方法。
+	 * 注意，里面有代码表明struts里action类用于拦截映射的method方法都不应带有任何参数
+	 */
 	protected String invokeAction(Object action, ActionConfig actionConfig) throws Exception {
 		String methodName = proxy.getMethod();
 
@@ -441,10 +458,12 @@ public class DefaultActionInvocation implements ActionInvocation {
 			Object methodResult = null;
 			Method method = null;
 			try {
+//				注意，下面的代码表明struts里action类用于拦截映射的method方法都不应带有任何参数
 				method = getAction().getClass().getMethod(methodName, EMPTY_CLASS_ARRAY);
 			} catch (NoSuchMethodException e) {
 				// hmm -- OK, try doXxx instead
 				try {
+					//拿不到对应的方法，还回去匹配do***的方法
 					String altMethodName = "do" + methodName.substring(0, 1).toUpperCase() + methodName.substring(1);
 					method = getAction().getClass().getMethod(altMethodName, EMPTY_CLASS_ARRAY);
 				} catch (NoSuchMethodException e1) {
@@ -462,11 +481,11 @@ public class DefaultActionInvocation implements ActionInvocation {
 					}
 				}
 			}
-
+            //真正执行action映射方法。
 			if (!methodCalled) {
 				methodResult = method.invoke(action, EMPTY_OBJECT_ARRAY);
 			}
-
+            //预处理action方法执行后的结果
 			return saveResult(actionConfig, methodResult);
 		} catch (NoSuchMethodException e) {
 			throw new IllegalArgumentException("The " + methodName + "() is not defined in action "
@@ -495,8 +514,7 @@ public class DefaultActionInvocation implements ActionInvocation {
 	 * Save the result to be used later.
 	 * 
 	 * @param actionConfig
-	 * @param methodResult
-	 *            the result of the action.
+	 * @param methodResult the result of the action.
 	 * @return the result code to process.
 	 */
 	protected String saveResult(ActionConfig actionConfig, Object methodResult) {
