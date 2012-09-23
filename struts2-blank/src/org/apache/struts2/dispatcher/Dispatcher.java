@@ -565,7 +565,8 @@ public class Dispatcher {
 
 			Configuration config = configurationManager.getConfiguration();
 			
-			//获得ActionProxy,是一个@StrutsActionProxy
+			//在struts中,默认由@StrutsActionProxyFactory 作为ActionProxyFactory的实现
+			//下面获得的ActionProxy是一个@StrutsActionProxy
 			ActionProxy proxy = config
 					.getContainer()
 					.getInstance(ActionProxyFactory.class)

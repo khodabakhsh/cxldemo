@@ -50,12 +50,15 @@ public class DefaultActionProxyFactory implements ActionProxyFactory {
     public ActionProxy createActionProxy(String namespace, String actionName, Map<String, Object> extraContext, boolean executeResult, boolean cleanupContext) {
         return createActionProxy(namespace, actionName, null, extraContext, executeResult, cleanupContext);
     }
-
+    //在struts中,默认由@StrutsActionProxyFactory 作为ActionProxyFactory的实现
+    //这里便是由@StrutsActionProxyFactory 调用的父类方法
     public ActionProxy createActionProxy(String namespace, String actionName, String methodName, Map<String, Object> extraContext, boolean executeResult, boolean cleanupContext) {
         
         ActionInvocation inv = new DefaultActionInvocation(extraContext, true);
         //注入属性、方法
         container.inject(inv);
+        //在struts中，@StrutsActionProxyFactory 重写了下面的调用方法。
+        //所以真正创建的是@StrutsActionProxy(继承自@DefaultActionProxy )
         return createActionProxy(inv, namespace, actionName, methodName, executeResult, cleanupContext);
     }
     
@@ -67,7 +70,6 @@ public class DefaultActionProxyFactory implements ActionProxyFactory {
     public ActionProxy createActionProxy(ActionInvocation inv, String namespace, String actionName, String methodName, boolean executeResult, boolean cleanupContext) {
 
         DefaultActionProxy proxy = new DefaultActionProxy(inv, namespace, actionName, methodName, executeResult, cleanupContext);
-        //注入属性、方法
         container.inject(proxy);
         proxy.prepare();
         return proxy;

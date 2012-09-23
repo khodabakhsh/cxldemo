@@ -171,7 +171,9 @@ public class DefaultActionProxy implements ActionProxy, Serializable {
             methodSpecified = false;
         }
     }
-
+   /**
+    * 子类 @StrutsActionProxy 会调用此父类方法
+    */
     protected void prepare() {
         String profileKey = "create DefaultActionProxy: ";
         try {
@@ -184,7 +186,8 @@ public class DefaultActionProxy implements ActionProxy, Serializable {
             if (config == null) {
                 throw new ConfigurationException(getErrorMessage());
             }
-
+            //设置action执行的method，优先使用action节点配置的method属性，
+            //如果没有，使用默认的execute方法。
             resolveMethod();
 
             if (!config.isAllowedMethod(method)) {

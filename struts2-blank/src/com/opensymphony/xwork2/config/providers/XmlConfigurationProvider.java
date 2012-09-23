@@ -62,6 +62,11 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 	private static final Logger LOG = LoggerFactory
 			.getLogger(XmlConfigurationProvider.class);
 
+	/**
+	 * documents包括：
+	 * 	<li>1.当前包含的xml文件配置对象 
+	 *  <li>2.其所有include节点包含的xml文件配置对象 
+	 */
 	private List<Document> documents;
 	private Set<String> includedFileNames;
 	private String configFileName;
@@ -169,8 +174,10 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 					"Error loading configuration file " + configFileName, e);
 		}
 	}
-
-	@SuppressWarnings("unchecked")
+/**
+ *  处理&lt;bean&gt; 节点(在struts-default.xml里有此定义)
+ */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void register(ContainerBuilder containerBuilder,
 			LocatableProperties props) throws ConfigurationException {
 		if (LOG.isInfoEnabled()) {
@@ -189,7 +196,7 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 					Element child = (Element) childNode;
 
 					final String nodeName = child.getNodeName();
-					// 处理bean 节点
+					// 处理<bean> 节点(在struts-default.xml里有此定义)
 					if ("bean".equals(nodeName)) {
 						String type = child.getAttribute("type");
 						String name = child.getAttribute("name");
@@ -246,6 +253,7 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 
 								// Force loading of class to detect no class def
 								// found exceptions
+								//嗯，直接这样写就能确保class能被加载
 								cimpl.getDeclaredConstructors();
 
 								if (LOG.isDebugEnabled()) {
@@ -253,6 +261,7 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 											+ name + " impl:" + impl);
 								}
 								//加入到containerBuilder的factory
+								//为以后的初始化注入(inject)等操作作准备。
 								containerBuilder
 										.factory(ctype, name,
 												new LocatableFactory(name,
@@ -298,7 +307,7 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 	}
 
 	/**
-	 * 处理package节点
+	 * 解析&lt; package &gt;节点
 	 */
 	public void loadPackages() throws ConfigurationException {
 		List<Element> reloads = new ArrayList<Element>();
@@ -314,9 +323,8 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 					Element child = (Element) childNode;
 
 					final String nodeName = child.getNodeName();
-
+                    //解析<package>节点
 					if ("package".equals(nodeName)) {
-						System.out.println("package name --------> "+child.getAttribute("name")+ " | namespace --------> "+child.getAttribute("namespace"));
 						PackageConfig cfg = addPackage(child);
 						if (cfg.isNeedsRefresh()) {
 							reloads.add(child);
@@ -530,24 +538,31 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 		}
 
 		// add result types (and default result) to this package
+		//处理<result-types>节点
 		addResultTypes(newPackage, packageElement);
 
 		// load the interceptors and interceptor stacks for this package
+		// 处理<interceptor>节点、<interceptor-stack>节点
 		loadInterceptors(newPackage, packageElement);
 
 		// load the default interceptor reference for this package
+		//处理<default-interceptor-ref>节点
 		loadDefaultInterceptorRef(newPackage, packageElement);
 
 		// load the default class ref for this package
+		//处理<default-class-ref>节点
 		loadDefaultClassRef(newPackage, packageElement);
 
 		// load the global result list for this package
+		//处理<global-results>节点
 		loadGlobalResults(newPackage, packageElement);
 
 		// load the global exception handler list for this package
+		//处理<global-exception-mappings>节点
 		loadGobalExceptionMappings(newPackage, packageElement);
 
 		// get actions
+		//处理<action>节点
 		NodeList actionList = packageElement.getElementsByTagName("action");
 
 		for (int i = 0; i < actionList.getLength(); i++) {
@@ -556,6 +571,7 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 		}
 
 		// load the default action reference for this package
+		//处理<default-action-ref>节点
 		loadDefaultActionRef(newPackage, packageElement);
 
 		PackageConfig cfg = newPackage.build();
@@ -900,6 +916,9 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 		return allowedMethods;
 	}
 
+	/**
+	 * 处理&lt;default-interceptor-ref&gt;节点
+	 */
 	protected void loadDefaultInterceptorRef(
 			PackageConfig.Builder packageContext, Element element) {
 		NodeList resultTypeList = element
@@ -926,6 +945,7 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 
 	/**
 	 * Load all of the global results for this package from the XML element.
+	 * <br/>处理&lt;global-results&gt;节点
 	 */
 	protected void loadGlobalResults(PackageConfig.Builder packageContext,
 			Element packageElement) {
@@ -939,7 +959,9 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 			packageContext.addGlobalResultConfigs(results);
 		}
 	}
-
+/**
+ * 处理&lt;default-class-ref&gt;节点
+ */
 	protected void loadDefaultClassRef(PackageConfig.Builder packageContext,
 			Element element) {
 		NodeList defaultClassRefList = element
@@ -954,6 +976,7 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 
 	/**
 	 * Load all of the global results for this package from the XML element.
+	 *  <br/>处理&lt;global-exception-mappings&gt;节点
 	 */
 	protected void loadGobalExceptionMappings(
 			PackageConfig.Builder packageContext, Element packageElement) {
@@ -980,6 +1003,9 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 	// loadConfigurationFile(fileName, db);
 	// }
 	// }
+	/**
+	 * 处理&lt;interceptor-ref&gt;节点
+	 */
 	protected InterceptorStackConfig loadInterceptorStack(Element element,
 			PackageConfig.Builder context) throws ConfigurationException {
 		String name = element.getAttribute("name");
@@ -999,7 +1025,9 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 
 		return config.build();
 	}
-
+	/**
+	 * 处理&lt;interceptor-stack&gt;节点
+	 */
 	protected void loadInterceptorStacks(Element element,
 			PackageConfig.Builder context) throws ConfigurationException {
 		NodeList interceptorStackList = element
@@ -1015,7 +1043,9 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 			context.addInterceptorStackConfig(config);
 		}
 	}
-
+	/**
+	 * 处理&lt;interceptor&gt;节点、&lt;interceptor-stack&gt;节点
+	 */
 	protected void loadInterceptors(PackageConfig.Builder context,
 			Element element) throws ConfigurationException {
 		NodeList interceptorList = element.getElementsByTagName("interceptor");
@@ -1049,6 +1079,10 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 	// }
 	/**
 	 * 递归解析xml文件(包含对include节点的解析)。
+	 * 返回的List<Document>包含：
+	 * <li>1.当前包含的xml文件配置对象
+	 * <li>2.其所有include节点包含的xml文件配置对象
+	 * <hr/>
 	 */
 	private List<Document> loadConfigurationFiles(String fileName,
 			Element includeElement) {
@@ -1139,7 +1173,7 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 						Element child = (Element) childNode;
 
 						final String nodeName = child.getNodeName();
-
+                        //处理包含的<include>节点
 						if ("include".equals(nodeName)) {
 							String includeFileName = child.getAttribute("file");
 							if (includeFileName.indexOf('*') != -1) {
