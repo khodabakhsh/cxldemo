@@ -211,11 +211,18 @@ public class DefaultConfiguration implements Configuration {
 		ContainerBuilder builder = new ContainerBuilder();
 		Container bootstrap = createBootstrapContainer();
 		for (final ContainerProvider containerProvider : providers) {
+			
 			bootstrap.inject(containerProvider);
+			
+			//对于下面的init方法,纵观接口 @ContainerProvider 的实现类，
+			//只有@StrutsXmlConfigurationProvider (通过父类@XmlConfigurationProvider 方法)
+			//有实质性的逻辑处理(解析xml从而初始化documents属性)。
 			containerProvider.init(this);
-			//在对应struts-default.xml的@StrutsXmlConfigurationProvider 实例中
+			
+			//在处理struts-default.xml的@StrutsXmlConfigurationProvider 实例中
 			//会解析处理在struts-default.xml里定义<bean>的节点，而这其中已经为builder构建了这些bean相应的factory
 			containerProvider.register(builder, props);
+			
 		}
 		//为builder配置constant相应的factory
 		props.setConstants(builder);
