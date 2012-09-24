@@ -210,10 +210,11 @@ public class DefaultConfiguration implements Configuration {
 		ContainerProperties props = new ContainerProperties();
 		ContainerBuilder builder = new ContainerBuilder();
 		
+		//创建一个用于初始化的容器，为下面的注入作基础
 		Container bootstrap = createBootstrapContainer();
 		for (final ContainerProvider containerProvider : providers) {
 			
-			//为containerProvider对象 注入@Inject 的属性和方法。
+			//为containerProvider对象 注入了@Inject 的属性和方法。
 			bootstrap.inject(containerProvider);
 			
 			//对于下面的init方法,纵观接口 @ContainerProvider 的实现类，
@@ -222,7 +223,7 @@ public class DefaultConfiguration implements Configuration {
 			containerProvider.init(this);
 			
 			//在处理struts-default.xml的@StrutsXmlConfigurationProvider 实例中
-			//会解析处理在struts-default.xml里定义<bean>的节点，而这其中已经为builder构建了这些bean相应的factory
+			//会解析处理在struts-default.xml里定义<bean>的节点，而这其中会为builder构建这些bean相应的factory
 			containerProvider.register(builder, props);
 			
 		}
