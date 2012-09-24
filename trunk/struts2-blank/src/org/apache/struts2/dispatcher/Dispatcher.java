@@ -420,8 +420,7 @@ public class Dispatcher {
 	}
 
 	private Container init_PreloadConfiguration() {
-		// configuration ==
-		// null的时候getConfiguration实例化一个DefaultConfiguration返回，并会reloadContainer
+		// configuration ==null的时候getConfiguration实例化一个DefaultConfiguration返回
 		Configuration config = configurationManager.getConfiguration();
 		Container container = config.getContainer();
 
@@ -483,6 +482,8 @@ public class Dispatcher {
 
 			// 配置自定义的provider（由启动配置参数中的configProviders指定）
 			init_CustomConfigurationProviders();
+			
+			//initParams 参数
 			init_FilterInitParameters();
 
 			// 加入@BeanSelectionProvider，在注册register的时候加入系统中一些默认的alias

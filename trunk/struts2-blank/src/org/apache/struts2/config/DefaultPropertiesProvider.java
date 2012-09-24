@@ -47,7 +47,7 @@ public class DefaultPropertiesProvider extends LegacyPropertiesConfigurationProv
         } catch (Exception e) {
             throw new ConfigurationException("Could not find or error in org/apache/struts2/default.properties", e);
         }
-        //为props配置defaultSettings中的内容（根据上面代码，应该是org/apache/struts2/default.properties文件中的配置）
+        //解析org/apache/struts2/default.properties文件中的配置
         loadSettings(props, defaultSettings);
     }
 

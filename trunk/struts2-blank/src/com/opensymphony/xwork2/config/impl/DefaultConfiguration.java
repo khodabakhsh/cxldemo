@@ -209,9 +209,11 @@ public class DefaultConfiguration implements Configuration {
 		//@ContainerProperties 为@DefaultConfiguration 内部类
 		ContainerProperties props = new ContainerProperties();
 		ContainerBuilder builder = new ContainerBuilder();
+		
 		Container bootstrap = createBootstrapContainer();
 		for (final ContainerProvider containerProvider : providers) {
 			
+			//为containerProvider对象 注入@Inject 的属性和方法。
 			bootstrap.inject(containerProvider);
 			
 			//对于下面的init方法,纵观接口 @ContainerProvider 的实现类，
@@ -288,6 +290,9 @@ public class DefaultConfiguration implements Configuration {
 		return context;
 	}
 
+	/**
+	 * 设置启动环境
+	 */
 	protected Container createBootstrapContainer() {
 		ContainerBuilder builder = new ContainerBuilder();
 		builder.factory(ObjectFactory.class, Scope.SINGLETON);

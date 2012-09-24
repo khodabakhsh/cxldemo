@@ -62,8 +62,10 @@ public class ConfigurationManager {
      */
     public synchronized Configuration getConfiguration() {
         if (configuration == null) {
+        	//defaultFrameworkBeanName此时是struts
             setConfiguration(createConfiguration(defaultFrameworkBeanName));
             try {
+            	//下面代码完成对所有containerProviders的处理。重要核心逻辑
                 configuration.reloadContainer(getContainerProviders());
             } catch (ConfigurationException e) {
                 setConfiguration(null);
