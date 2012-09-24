@@ -15,3 +15,5 @@
 1.ReentrantLock
 com.opensymphony.xwork2.config.ConfigurationManager这个类有用到
 
+2.SecurityManager
+com.opensymphony.xwork2.inject.ContainerImpl.MethodInjector.MethodInjector类有用到
