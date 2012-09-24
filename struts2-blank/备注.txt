@@ -7,3 +7,11 @@
 4.拷贝struts-tags.tld到WEB-INF
 5.WEB-INF/lib下面不能放jsp-api.jar、servlet-api.jar，但struts源码编译有引用该jar，请放在除WEB-INF/lib以外的文件夹中。
 6.需要下载junit包
+
+
+
+
+----------------------------------------  why?  ---------------------------------------------
+1.ReentrantLock
+com.opensymphony.xwork2.config.ConfigurationManager这个类有用到
+

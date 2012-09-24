@@ -485,6 +485,7 @@ public final class ContainerBuilder {
     created = true;
     final ContainerImpl container = new ContainerImpl(
         new HashMap<Key<?>, InternalFactory<?>>(factories));
+    //是否加载scope==Scope.SINGLETON的factory
     if (loadSingletons) {
       container.callInContext(new ContainerImpl.ContextualCallable<Void>() {
         public Void call(InternalContext context) {
@@ -495,6 +496,7 @@ public final class ContainerBuilder {
         }
       });
     }
+    //追踪发现代码中staticInjections为空数组[]
     container.injectStatics(staticInjections);
     return container;
   }

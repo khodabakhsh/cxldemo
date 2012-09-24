@@ -230,6 +230,7 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 								ctype = ClassLoaderUtil.loadClass(type,
 										getClass());
 							}
+							//貌似现在在xml里面没有static属性的bean定义。。。。遗留的吗？
 							if ("true".equals(onlyStatic)) {
 								// Force loading of class to detect no class def
 								// found exceptions
