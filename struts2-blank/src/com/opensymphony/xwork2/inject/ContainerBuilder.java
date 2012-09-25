@@ -474,12 +474,15 @@ public final class ContainerBuilder {
   /**
    * Creates a {@link Container} instance. Injects static members for classes
    * which were registered using {@link #injectStatics(Class...)}.
-   *
+   * <li><b>返回的Container 实例的factories属性便来自于此 {@link ContainerBuilder#factories}</b>
+   * 
    * @param loadSingletons If true, the container will load all singletons
    *  now. If false, the container will lazily load singletons. Eager loading
    *  is appropriate for production use while lazy loading can speed
    *  development.
    * @throws IllegalStateException if called more than once
+   * 
+   * 
    */
   public Container create(boolean loadSingletons) {
     ensureNotCreated();
