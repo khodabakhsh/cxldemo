@@ -59,6 +59,7 @@ class ContainerImpl implements Container {
 
 	/**
 	 * Field and method injectors.
+	 * 通过lazy load实现
 	 */
 	final Map<Class<?>, List<Injector>> injectors = new ReferenceCache<Class<?>, List<Injector>>() {
 		@Override
@@ -80,6 +81,7 @@ class ContainerImpl implements Container {
 		}
 
 		// Add injectors for superclass first.
+		//父类优先
 		addInjectors(clazz.getSuperclass(), injectors);
 
 		// TODO (crazybob): Filter out overridden members.
@@ -264,7 +266,7 @@ class ContainerImpl implements Container {
 		final ParameterInjector<?>[] parameterInjectors;
 
 		/**
-		 * 方法Injector
+		 * 方法Injector，管理 {@link #method} 和 {@link #parameterInjectors}
 		 */
 		public MethodInjector(ContainerImpl container, Method method, String name) throws MissingDependencyException {
 			this.method = method;
@@ -303,7 +305,10 @@ class ContainerImpl implements Container {
 			}
 		}
 	}
-
+  
+	 /**
+     * 通过 lazy load 实现
+     */
 	@SuppressWarnings("rawtypes")
 	Map<Class<?>, ConstructorInjector> constructors = new ReferenceCache<Class<?>, ConstructorInjector>() {
 		@Override
@@ -316,12 +321,25 @@ class ContainerImpl implements Container {
 			return new ConstructorInjector(ContainerImpl.this, implementation);
 		}
 	};
-
+    /**
+     * 类构造函数Injector
+     */
 	static class ConstructorInjector<T> {
-
+        /**
+         * 类
+         */
 		final Class<T> implementation;
+		/**
+		 * 类中属性、方法的Injector
+		 */
 		final List<Injector> injectors;
+		/**
+		 * 构造函数
+		 */
 		final Constructor<T> constructor;
+		/**
+		 * 构造函数中参数的Injector
+		 */
 		final ParameterInjector<?>[] parameterInjectors;
 
 		ConstructorInjector(ContainerImpl container, Class<T> implementation) {
@@ -361,6 +379,9 @@ class ContainerImpl implements Container {
 			injectors = container.injectors.get(implementation);
 		}
 
+		/**
+		 * 获得 构造函数中参数的Injector信息
+		 */
 		ParameterInjector<?>[] constructParameterInjector(Inject inject, ContainerImpl container,
 				Constructor<T> constructor) throws MissingDependencyException {
 			return constructor.getParameterTypes().length == 0 ? null // default constructor.
@@ -368,9 +389,13 @@ class ContainerImpl implements Container {
 							constructor.getParameterTypes(), inject.value());
 		}
 
-		@SuppressWarnings("unchecked")
+		/**
+		 * <li>1.如果有使用注解@Inject 的构造函数(仅能有一个，否则抛异常)，返回
+		 * <li>2.如果没有使用注解@Inject 的构造函数，返回无参构造函数
+		 */
 		private Constructor<T> findConstructorIn(Class<T> implementation) {
 			Constructor<T> found = null;
+			@SuppressWarnings("unchecked")
 			Constructor<T>[] declaredConstructors = (Constructor<T>[]) implementation.getDeclaredConstructors();
 			for (Constructor<T> constructor : declaredConstructors) {
 				if (constructor.getAnnotation(Inject.class) != null) {
@@ -450,6 +475,7 @@ class ContainerImpl implements Container {
 
 	/**
 	 * 此类作用：包含参数的注入配置，可通过{@link #inject}方法获得参数值。
+	 * <p> {@link #MethodInjector} 和  {@link #ConstrutorInjector} 利用此类来保存参数注入配置</p>
 	 */
 	static class ParameterInjector<T> {
 
@@ -560,6 +586,9 @@ class ContainerImpl implements Container {
 		});
 	}
 
+	/**
+	 * 获得对应同一个type的所有name集合
+	 */
 	public Set<String> getInstanceNames(final Class<?> type) {
 		return factoryNamesByType.get(type);
 	}

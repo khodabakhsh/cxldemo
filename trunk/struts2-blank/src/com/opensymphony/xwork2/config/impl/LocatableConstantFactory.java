@@ -14,6 +14,9 @@ import com.opensymphony.xwork2.util.location.LocationUtils;
  */
 public class LocatableConstantFactory<T> extends Located implements Factory {
     T constant;
+    /**
+     * 常量factory
+     */
     public LocatableConstantFactory(T constant, Object location) {
         this.constant = constant;
         setLocation(LocationUtils.getLocation(location));

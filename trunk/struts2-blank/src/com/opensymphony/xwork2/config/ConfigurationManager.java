@@ -30,7 +30,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 
 /**
- * 有使用到ReentrantLock来维护containerProviders
+ * 
+ * <p>用于管理{@link #configuration}  、{@link #containerProviders} 、{@link #packageProviders} </p>
  * ConfigurationManager - central for XWork Configuration management, including
  * its ConfigurationProvider.
  *
