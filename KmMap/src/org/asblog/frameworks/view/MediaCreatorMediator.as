@@ -15,15 +15,15 @@ package org.asblog.frameworks.view
 	public class MediaCreatorMediator extends BaseMediator 
 	{
 		public static const NAME : String = "MediaCreatorMediator";
-		public static var mediaCreator : MediaCreator;
+		public static var mediaCreator : MapDesigner;
 
 		public function MediaCreatorMediator(viewComponent : Object = null)
 		{
 			super( NAME, viewComponent );
-			mediaCreator = MediaCreator( viewComponent );
+			mediaCreator = MapDesigner( viewComponent );
 			mediaCreator.addEventListener( Event.ADDED_TO_STAGE, onAddToStage );
 			
-			mediaCreator.undo_btn.addEventListener( MouseEvent.CLICK, undoClick );			mediaCreator.redo_btn.addEventListener( MouseEvent.CLICK, redoClick );
+//			mediaCreator.undo_btn.addEventListener( MouseEvent.CLICK, undoClick );//			mediaCreator.redo_btn.addEventListener( MouseEvent.CLICK, redoClick );
 		}
 		
 		private function  onAddToStage(event : Event) : void

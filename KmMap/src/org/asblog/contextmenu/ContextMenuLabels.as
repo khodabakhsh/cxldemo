@@ -5,10 +5,12 @@ package org.asblog.contextmenu
 		public static const UP:String               = "向上一层";
 		public static const DOWN:String             = "向下一层";
 		
+		public static const UP_MOST:String          = "置顶层";
+		
 		public static const COPY:String	            = "复制";
 		public static const PASTE:String            = "粘贴";
 		public static const CUT:String              = "剪切";
-		public static const DELETE:String           = "删除";
+		public static const DELETE:String           = "删除此项";
 		
 		public static const LOCK:String             = "锁定";
 		public static const UNLOCK:String           = "解锁";
@@ -24,6 +26,7 @@ package org.asblog.contextmenu
 		public static const CANCEL_MASK:String      = "取消遮罩";
 		
 		public static const BASIC_LABELS:Vector.<String> = Vector.<String>([COPY,PASTE,CUT,DELETE]);
+		public static const UP_MOST_LABELS:Vector.<String> = Vector.<String>([UP_MOST]);
 		public static const LAYER_LABELS:Vector.<String> = Vector.<String>([UP,DOWN]);
 		public static const LOCK_LABELS:Vector.<String>  = Vector.<String>([LOCK,UNLOCK]);
 		public static const UNDO_LABELS:Vector.<String>  = Vector.<String>([UNDO,REDO]);

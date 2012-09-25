@@ -1388,12 +1388,29 @@ package org.asblog.transform
 			_toolMatrix.concat( globalInvertedMatrix );
 			completeInteraction( true );
 		}
-
+		/**
+		 * 变换过程中bounds不允许交叉，暂时在这里控制。
+		 */
+		private function isBoundsCross():Boolean{
+			if(_boundsLeft.x>=_boundsCenter.x){
+				trace("【isBoundsCross】_boundsLeft.x ---> "+_boundsLeft.x+"  _boundsCenter.x----> "+_boundsCenter.x);
+				trace("【isBoundsCross】_boundsLeft.x>_boundsCenter.x");
+				return true;
+			}
+			if(_boundsTop.y>=_boundsCenter.y){
+				trace("【isBoundsCross】_boundsTop.y<=_boundsCenter.y");
+				return true;
+			}
+			return false;
+		}
 		/**
 		 * Control Interaction.  Scales the tool along the X axis
 		 */
 		public function scaleXInteraction(w : Number = Infinity) : void 
 		{
+			if(isBoundsCross()){
+			return;
+			}
 			if(w != Infinity)
 			{
 				_toolMatrix.scale( w / targetW, 1 );
@@ -1417,6 +1434,9 @@ package org.asblog.transform
 		 */
 		public function scaleYInteraction(h : Number = Infinity) : void 
 		{
+			if(isBoundsCross()){
+				return;
+			}
 			if(h != Infinity)
 			{
 				_toolMatrix.scale( 1, h / targetH );
@@ -1437,6 +1457,9 @@ package org.asblog.transform
 		 */
 		public function scaleBothInteraction(x : Number = Infinity,y : Number = Infinity) : void 
 		{
+			if(isBoundsCross()){
+				return;
+			}
 			// mouse reference, may change from innerMouseLoc if constraining
 			var innerMouseRef : Point = innerMouseLoc.clone( );
 			
@@ -1668,6 +1691,48 @@ package org.asblog.transform
 				_globalMatrix.c = Math.sin( angle ) * _maxScaleY;
 				enforced = true;
 			}
+			
+			/**
+			 * 加入代码###########################################################################
+			 **/
+			
+//			trace("【enforceLimits】_boundsLeft.x ---> "+_boundsLeft.x+"  _boundsCenter.x----> "+_boundsCenter.x);
+////			if(_currentControl  == _scaleTopLeftControl){
+////				if(_boundsLeft.x>=_boundsCenter.x){
+////					trace("_boundsLeft.x>_boundsCenter.x");
+////					angle = Math.atan2( _globalMatrix.b, _globalMatrix.a );
+////					_globalMatrix.a = Math.cos( angle ) * 0.5;
+////					_globalMatrix.b = Math.sin( angle ) * 0.5;
+////					enforced = true;
+////					trace("enforced ----  "+enforced);
+////				}
+////			}
+//			// check current scale in X
+//			currScale = Math.sqrt( _globalMatrix.a * _globalMatrix.a + _globalMatrix.b * _globalMatrix.b );
+//			var _minScaleX:Number = 1;
+//			if (currScale < _minScaleX) 
+//			{
+//				// set scaleX to no greater than _maxScaleX
+//				angle = Math.atan2( _globalMatrix.b, _globalMatrix.a );
+//				_globalMatrix.a = Math.cos( angle ) * _minScaleX;
+//				_globalMatrix.b = Math.sin( angle ) * _minScaleX;
+//				enforced = true;
+//			}
+//			// check current scale in Y
+//			currScale = Math.sqrt( _globalMatrix.c * _globalMatrix.c + _globalMatrix.d * _globalMatrix.d );
+//			var _minScaleY:Number = 1;
+//			if (currScale < _minScaleY) 
+//			{
+//				// set scaleY to no greater than _maxScaleY
+//				angle = Math.atan2( _globalMatrix.c, _globalMatrix.d );
+//				_globalMatrix.d = Math.cos( angle ) * _minScaleY;
+//				_globalMatrix.c = Math.sin( angle ) * _minScaleY;
+//				enforced = true;
+//			}
+			
+			/**
+			 * 结束#################################################################################
+			 **/
 			
 			
 			// if scale was enforced, apply to _toolMatrix
@@ -1947,7 +2012,7 @@ class TransformToolScaleControl extends TransformToolInternalControl
 		if (!_skin) 
 		{
 			graphics.lineStyle( 2, 0xFFFFFF );
-			graphics.beginFill( 0 );
+			graphics.beginFill( 0x3F83F1 );
 			var size : Number = _transformTool.controlSize;
 			var size2 : Number = size / 2;
 			graphics.drawRect( -size2, -size2, size, size );

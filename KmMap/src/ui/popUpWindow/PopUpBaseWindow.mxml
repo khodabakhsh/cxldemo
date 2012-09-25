@@ -16,7 +16,7 @@
 				for(var i:int=0; i < _subComponents.length; i++)
 					if(_subComponents[i] is DisplayObject)
                           myBox.addChild( _subComponents[i] );
-				PopUpManager.centerPopUp(this)
+				PopUpManager.centerPopUp(this);
 			}
         ]]>
     </mx:Script>

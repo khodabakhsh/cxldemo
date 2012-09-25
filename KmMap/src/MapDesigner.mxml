@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   backgroundColor="#c6f0ff"
+			   creationComplete="onCreated()"
+			   xmlns:ui="ui.window.*"
+			   xmlns:core="org.asblog.core.*"
+			   xmlns:containers="flexlib.containers.*"
+			   xmlns:material="ui.material.*"
+			   xmlns:layer="ui.window.layer.*"
+			   xmlns:mediaItem="org.asblog.mediaItem.*"
+			   xmlns:properties="ui.window.properties.*">
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+	<mx:ApplicationControlBar dock="true"
+							  id="applicationcontrolbar1"
+							  fillColors="[0xc6f0ff,0xc6f0ff]"
+							  fillAlphas="[1,1]">
+		<mx:Button label="添加文字"
+				   icon="@Embed('assets/write.gif')"
+				   toolTip="添加文字"
+				   height="50"
+				   id="addTextBtn"
+				   click="addTextBtn_clickHandler(event)"/>
+		<mx:Button label="添加图片"
+				   toolTip="添加图片"
+				   icon="@Embed('assets/add.png')"
+				   height="50"
+				   click="button5_clickHandler(event)"/>
+		<!--<mx:Button label="添加图片" toolTip="可多选" icon="@Embed('assets/add.png')" height="50" click="button6_clickHandler(event)"/> -->
+		<mx:Button label="设置背景图"
+				   toolTip="设置背景图"
+				   icon="@Embed('assets/background.gif')"
+				   height="50"
+				   click="button7_clickHandler(event)"/>
+		<mx:Button label="清除背景图"
+				   toolTip="清除背景图"
+				   icon="@Embed('assets/delete.png')"
+				   height="50"
+				   click="designCanvas.chageBackground()"/>
+		<!--	<mx:Button label="显示xml"
+				   toolTip=""
+				   height="50"
+				   click="button8_clickHandler(event)"/>-->
+		<mx:Spacer width="35%"/>
+		<!--<mx:Button label="图片浏览" click="button2_clickHandler(event)"/>
+		<mx:Button label="上传" click="button1_clickHandler(event)"/>
+		<mx:Button label="保存图片" click="button3_clickHandler(event)"/> -->
+		<!--<mx:Button label="帮助" id="help"/> -->
+		<!--<mx:Button label="FlexSpy" click="FlexSpy.show()" id="btnFlexSpy" />-->
+	</mx:ApplicationControlBar>
+	<mx:HDividedBox width="100%"
+					height="100%">
+		<mx:Accordion id="accNav"
+					  width="100"
+					  height="100%">
+			<material:GraphicsList label=" 图形与画线  "
+								   paddingLeft="5" backgroundColor="#374f59"  />
+		</mx:Accordion>
+		<mx:VDividedBox width="90%"
+						height="100%">
+			<mx:Canvas backgroundColor="#CCCCCC"
+					   label="知识地图"
+					   width="100%"
+					   height="100%"
+					   horizontalScrollPolicy="on"
+					   verticalScrollPolicy="on"
+					   borderColor="#a0c1e3"
+					   borderStyle="solid">
+				<core:DesignCanvas id="designCanvas"
+								   width="1750"
+								   height="1000"
+								   verticalScrollPolicy="off"
+								   horizontalScrollPolicy="off"
+								   transformTarget="transformTarget(event)"
+								   backgroundColor="#FFFFFF"/>
+			</mx:Canvas>
+		</mx:VDividedBox>
+	</mx:HDividedBox>
+	<fx:Style source="style/style.css"/>
+	<fx:Style>
+		@namespace mx "library://ns.adobe.com/flex/mx";  
+		mx|ToolTip { fontSize:14}
+		mx|Button { color:#000000}
+	</fx:Style>
+	<fx:Script>
+		<![CDATA[
+			import com.adobe.utils.StringUtil;
+
+			import flash.utils.setTimeout;
+
+			import mx.controls.Alert;
+			import mx.controls.Button;
+			import mx.core.Application;
+			import mx.core.FlexGlobals;
+			import mx.events.FlexEvent;
+			import mx.managers.BrowserManager;
+			import mx.managers.CursorManager;
+			import mx.managers.IBrowserManager;
+			import mx.managers.PopUpManager;
+			import mx.utils.StringUtil;
+
+			import org.asblog.core.History;
+			import org.asblog.core.ItemFactory;
+			import org.asblog.core.MediaLink;
+			import org.asblog.core.MediaObject;
+			import org.asblog.core.ShapeLink;
+			import org.asblog.core.TextLink;
+			import org.asblog.frameworks.ApplicationFacade;
+			import org.asblog.frameworks.controller.commandtype.DesignCanvasCT;
+			import org.asblog.frameworks.view.BasePropertiesMediator;
+			import org.asblog.frameworks.view.DesignCanvasMediator;
+			import org.asblog.frameworks.view.LayersManagerMdeiator;
+			import org.asblog.frameworks.view.MediaCreatorMediator;
+			import org.asblog.mediaItem.MediaImage;
+			import org.asblog.mediaItem.MediaLine;
+			import org.asblog.mediaItem.MediaShape;
+			import org.asblog.mediaItem.MediaText;
+			import org.asblog.utils.FileCreateor;
+			import org.asblog.utils.LocalImageFileLoader;
+			import org.asblog.utils.PopUpUtils;
+
+			import ui.popUpWindow.PopUpPicViewWindow;
+			import ui.popUpWindow.PopUpRichTextWindow;
+			import ui.popUpWindow.PopUpTaobaoPicViewWindow;
+			import ui.popUpWindow.PopUpTaobaoWindow;
+			import ui.popUpWindow.PopUpUploadWindow;
+			import ui.popUpWindow.ProgressBarWindow;
+
+			[Bindable("commandChange")]
+			private function get hasLastCommand():Boolean
+			{
+				return facade.hasLastCommand;
+			}
+
+			[Bindable("commandChange")]
+			private function get hasRedoCommand():Boolean
+			{
+				return facade.hasRedoCommand;
+			}
+			private var isTaobaoUser:Boolean;
+			private var facade:ApplicationFacade=ApplicationFacade.getInstance();
+
+			public static var contextPath:String;
+			public static var mapId:String;
+
+			private function onCreated():void
+			{
+				Security.allowDomain("*");
+				contextPath=FlexGlobals.topLevelApplication.parameters.contextPath;
+				mapId=FlexGlobals.topLevelApplication.parameters.mapId;
+				init();
+//				initXml();
+				var serial:InitXml=new InitXml(contextPath, mapId, designCanvas);
+				serial.startInitXml();
+			}
+
+
+//			public static function hexStr2ByteArr(value:String):ByteArray
+//			{
+//				if (value == null)
+//				{
+//					return null;
+//				}
+//				var byte:ByteArray=new ByteArray();
+//				var position:int=0;
+//				while (position < value.length)
+//				{
+//					byte.writeByte(Number("0x" + value.substr(position, 2))); //因为ByteAarray操作的是字节，所以要读取两位，两个字节表示一个16进制数               
+//					position=position + 2;
+//				}
+//				byte.position=0;
+//				return byte;
+//			}
+
+
+
+			public function setRelate2MapNode(obj_id:String, relateXml:String):void
+			{
+				var item:*=ItemFactory.ObjectId_MediaObject_Dic[obj_id];
+				if (item is MediaObject)
+				{
+					item=MediaObject(item);
+					var xml:XML=new XML(relateXml);
+					item.rk=xml.rk;
+					item.rq=xml.rq;
+					item.rm=xml.rm;
+					ItemFactory.ObjectId_MediaObject_Dic[obj_id]=item;
+				}
+			}
+
+			public function saveDesigner(mapId:String, urlString:String):String
+			{
+				//save img
+				var request1:URLRequest=new URLRequest(urlString + "?mapId=" + mapId);
+				request1.method=URLRequestMethod.POST;
+				request1.contentType="application/octet-stream";
+				request1.data=designCanvas.BuildImg();
+				var loader1:URLLoader=new URLLoader();
+				CursorManager.setBusyCursor();
+				loader1.load(request1);
+				loader1.addEventListener(IOErrorEvent.IO_ERROR, saveErrorHandle);
+
+				//save xml
+				var request:URLRequest=new URLRequest(urlString);
+				request.method=URLRequestMethod.POST;
+				request.contentType="application/x-www-form-urlencoded";
+				var variables:URLVariables=new URLVariables();
+				variables.mapId=mapId;
+				variables.xml=designCanvas.BuildXml().toXMLString();
+				request.data=variables;
+				var loader:URLLoader=new URLLoader();
+				loader.load(request);
+				loader.addEventListener(Event.COMPLETE, resultSave);
+				loader.addEventListener(IOErrorEvent.IO_ERROR, saveErrorHandle);
+				return "isHandling";
+			}
+
+			private function saveErrorHandle(event:IOErrorEvent):void
+			{
+//				Alert.show("IO异常，操作失败！", "提示");
+				ExternalInterface.call("saveDesignerReturnResult", "false");
+			}
+
+			private function resultSave(event:Event):void
+			{
+				CursorManager.removeBusyCursor();
+				ExternalInterface.call("saveDesignerReturnResult", "true");
+			}
+
+			private function init():void
+			{
+				ExternalInterface.addCallback("setRelate2MapNode", setRelate2MapNode);
+				ExternalInterface.addCallback("saveDesigner", saveDesigner);
+
+				facade.registerMediator(new MediaCreatorMediator(this));
+				facade.registerMediator(new DesignCanvasMediator(designCanvas));
+//				facade.registerMediator(new LayersManagerMdeiator(layersManager));
+//				facade.registerMediator(new BasePropertiesMediator(propertiesWin));
+			}
+
+			public function popUpViewPic(myData:*):void
+			{
+				var win:PopUpTaobaoPicViewWindow;
+				win=PopUpManager.createPopUp(this, PopUpTaobaoPicViewWindow, true) as PopUpTaobaoPicViewWindow
+				win.myData=myData;
+			}
+
+			private function creatPic():void
+			{
+				designCanvas.setSelection(null);
+				FileCreateor.createImage(designCanvas);
+				CursorManager.removeBusyCursor();
+			}
+
+
+			private function transformTarget(event:Event):void
+			{
+				//发送此事件，用来更新选中元素的属性
+//				propertiesWin.dispatchEvent(new Event("targetChange"))
+			}
+
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				var win:PopUpUploadWindow;
+				win=PopUpManager.createPopUp(MapDesigner(FlexGlobals.topLevelApplication).designCanvas, PopUpUploadWindow, false) as PopUpUploadWindow
+
+			}
+
+
+			protected function button2_clickHandler(event:MouseEvent):void
+			{
+				var win:PopUpPicViewWindow
+				win=PopUpManager.createPopUp(MapDesigner(FlexGlobals.topLevelApplication).designCanvas, PopUpPicViewWindow, false) as PopUpPicViewWindow
+			}
+
+			private function changeCanvasWT():void
+			{
+//				var oldWT:Object={w: designCanvas.width, h: designCanvas.height};
+//				var newWT:Object={w: int(canvasW.text), h: int(canvasH.text)};
+//				var classRef:Class=getDefinitionByName("org.asblog.core.History") as Class;
+//				var history:*=new classRef(oldWT, newWT)
+//				facade.sendNotification(DesignCanvasCT.CMD_CHANGE_CANVASWH, history);
+			}
+
+			protected function canvasW_enterHandler(event:FlexEvent):void
+			{
+				changeCanvasWT();
+			}
+
+
+			protected function canvasH_enterHandler(event:FlexEvent):void
+			{
+				changeCanvasWT();
+			}
+
+
+			protected function button4_clickHandler(event:MouseEvent):void
+			{
+				changeCanvasWT();
+			}
+
+
+			protected function addTextBtn_clickHandler(event:MouseEvent):void
+			{
+				MediaText.currentMediaText=null;
+				PopUpUtils.addPop(PopUpRichTextWindow);
+			}
+
+
+			protected function button5_clickHandler(event:MouseEvent):void
+			{
+				var loader:LocalImageFileLoader=new LocalImageFileLoader();
+				loader.addImageToCanvas();
+			}
+
+
+			protected function button6_clickHandler(event:MouseEvent):void
+			{
+				var loader:LocalImageFileLoader=new LocalImageFileLoader();
+				loader.addImageToLibrary();
+			}
+
+			protected function button7_clickHandler(event:MouseEvent):void
+			{
+				var loader:LocalImageFileLoader=new LocalImageFileLoader();
+				loader.addImageToBg();
+			}
+
+			protected function button8_clickHandler(event:MouseEvent):void
+			{
+				Alert.show(designCanvas.BuildXml());
+			}
+		]]>
+	</fx:Script>
+</s:Application>

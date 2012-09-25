@@ -2,6 +2,8 @@ package org.asblog.core
 {
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
+	
+	import mx.utils.UIDUtil;
 
 	public class MediaLink implements ICloneable
 	{
@@ -15,6 +17,23 @@ package org.asblog.core
 		public var maskedItemUid:String;
 		public var source:*;
 		public var depth:uint = uint.MAX_VALUE;
+		
+		public var rotation:Number=0;
+		public var rotationX:Number=0;
+		public var rotationY:Number=0;
+		public var rotationZ:Number=0;
+		
+		//关联
+		public var obj_id:String = UIDUtil.createUID().replace(/-/g,"");
+		public var rk:String="";
+		public var rm:String="";
+		public var rq:String="";
+		
+		//MediaImage的width和height
+		public var MediaImageWidth:Number;
+		public var MediaImageHeight:Number;
+		
+		
 		/**
 		 * 对自身类型的引用
 		 */		

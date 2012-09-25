@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"
+				showCloseButton="false"
+				close="PopUpManager.removePopUp(this);" creationComplete="onCreated()" title="加载中.....">
+	<mx:Script>
+		<![CDATA[
+			import mx.managers.PopUpManager;
+			protected function onCreated():void
+			{
+				PopUpManager.centerPopUp(this);
+			}
+		]]>
+	</mx:Script>
+	<mx:Image id="image1" 
+			  height="10" width="136" 
+			  autoLoad="true" 
+			  visible="true" source="@Embed('../../../assets/process.gif')" 
+			  /> 
+</mx:TitleWindow>
