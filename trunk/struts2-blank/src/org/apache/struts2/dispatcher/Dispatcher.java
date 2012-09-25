@@ -487,7 +487,10 @@ public class Dispatcher {
 			//initParams 参数
 			init_FilterInitParameters();
 
-			// 加入@BeanSelectionProvider，在注册register的时候加入系统中一些默认的alias
+			// 加入@BeanSelectionProvider，在注册register的时候设置系统中一些默认的alias，其思想是：
+			//  {@link Inject#value}值默认为"default"(@com.opensymphony.xwork2.inject.ContainerImpl.ParameterInjector 就默认使用此值)
+			//  但struts-default.xml中定义的一些<bean>节点，name属性为"struts"，要使用这些<bean>作为默认注入实现类，
+			//  就需要建立使用别名"default"的factory
 			init_AliasStandardObjects();
 
 			//【初始化的核心】

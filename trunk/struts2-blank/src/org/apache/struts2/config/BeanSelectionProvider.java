@@ -240,7 +240,9 @@ public class BeanSelectionProvider implements ConfigurationProvider {
     public boolean needsReload() {
         return false;
     }
-
+    /**
+     * 构建别名factory
+     */
     public void register(ContainerBuilder builder, LocatableProperties props) {
         alias(ObjectFactory.class, StrutsConstants.STRUTS_OBJECTFACTORY, builder, props);
         alias(FileManager.class, StrutsConstants.STRUTS_FILEMANAGER, builder, props);
@@ -307,20 +309,39 @@ public class BeanSelectionProvider implements ConfigurationProvider {
         }
     }
 
+    /**
+     * 使用单例模式的factory
+     */
     void alias(Class type, String key, ContainerBuilder builder, Properties props) {
         alias(type, key, builder, props, Scope.SINGLETON);
     }
 
-    void alias(Class type, String key, ContainerBuilder builder, Properties props, Scope scope) {
+    /**
+     * 在props中找不到key对应的值时，默认使用“struts”,所以下面中，虽然可以配置key对应的值，
+     *  但感觉key对应的值应该是“struts”，至少大部分是，没全部验证!
+     * <li>1.先查看builder已经包含了{key,key对应的值}，那么就建立一个"default"的别名factory
+     * <li>2.如果没有包含，就先用类加载去构建factory
+     * <li>3.第2歩中，加载不了类的话(抛出ClassNotFoundException)，就委托@ObjectFactory实例进行构建factory
+     * 
+     * @param type 类
+     * @param key 名称
+     * @param builder
+     * @param props 一些配置属性
+     * @param scope 这里使用单例模式
+     */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	void alias(Class type, String key, ContainerBuilder builder, Properties props, Scope scope) {
         if (!builder.contains(type)) {
             String foundName = props.getProperty(key, DEFAULT_BEAN_NAME);
             if (builder.contains(type, foundName)) {
                 if (LOG.isInfoEnabled()) {
                     LOG.info("Choosing bean (#0) for (#1)", foundName, type.getName());
                 }
+                //构建别名factory
                 builder.alias(type, foundName, Container.DEFAULT_NAME);
             } else {
                 try {
+                	//使用类加载
                     Class cls = ClassLoaderUtil.loadClass(foundName, this.getClass());
                     if (LOG.isDebugEnabled()) {
                         LOG.debug("Choosing bean (#0) for (#1)", cls.getName(), type.getName());
@@ -335,6 +356,7 @@ public class BeanSelectionProvider implements ConfigurationProvider {
                         // Probably an optional bean, will ignore
                     } else {
                         if (ObjectFactory.class != type) {
+                        	//委托@ObjectFactory实例进行构建factory
                             builder.factory(type, new ObjectFactoryDelegateFactory(foundName, type), scope);
                         } else {
                             throw new ConfigurationException("Cannot locate the chosen ObjectFactory implementation: " + foundName);
