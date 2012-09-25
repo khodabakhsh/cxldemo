@@ -473,10 +473,10 @@ public class Dispatcher {
 			// 加载其中的配置。
 			init_DefaultProperties();
 
-			//解析struts默认xml配置文件（"struts-default.xml,struts-plugin.xml,struts.xml"），可通过初始化参数config配置为其他路径（即非默认路径）
+			// 1.解析struts默认xml配置文件（"struts-default.xml,struts-plugin.xml,struts.xml"），可通过初始化参数config配置为其他路径（即非默认路径）
 			// 在configurationManager加入了strut默认3个配置文件作configurationManager的containerProviders,每个文件都对应containerProvider
-			// 这个@StrutsXmlConfigurationProvider 在注册register的时候读取strut默认3个配置文件("struts-default.xml,struts-plugin.xml,struts.xml"),
-			// 解析所有xml节点，进行相关数据初始化。
+			// 2.这个@StrutsXmlConfigurationProvider 在注册register的时候，处理<bean>和<constant>节点
+			// 这个@StrutsXmlConfigurationProvider 在loadPackages的时候，处理了<package>节点。
 			init_TraditionalXmlConfigurations();
 
 			init_LegacyStrutsProperties();
@@ -493,9 +493,12 @@ public class Dispatcher {
 			//  就需要建立使用别名"default"的factory
 			init_AliasStandardObjects();
 
-			//【初始化的核心】
+			//【---初始化的核心---返回的container具备了基本的ioc容器功能】
 			Container container = init_PreloadConfiguration();
+			
+			//为当前实例注入
 			container.inject(this);
+			
 			init_CheckConfigurationReloading(container);
 			init_CheckWebLogicWorkaround(container);
 

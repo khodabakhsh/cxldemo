@@ -64,7 +64,7 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 
 	/**
 	 * documents包括：
-	 * 	<li>1.当前包含的xml文件配置对象 
+	 * 	<li>1.当前对应的xml文件配置对象 
 	 *  <li>2.其所有include节点包含的xml文件配置对象 
 	 */
 	private List<Document> documents;
@@ -175,7 +175,9 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 		}
 	}
 /**
- *  处理&lt;bean&gt; 节点(在struts-default.xml里有此定义)
+ *  <li>处理&lt;bean&gt; 节点(在struts-default.xml里有此定义)
+ *  <li>containerBuilder为这些&lt;bean&gt; 构建的factory是LocatableFactory类型的。
+ *  <li>LocatableFactory如何创建实例？看： {@link LocatableFactory#create(com.opensymphony.xwork2.inject.Context)}
  */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void register(ContainerBuilder containerBuilder,
@@ -525,7 +527,7 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 
 	/**
 	 * Create a PackageConfig from an XML element representing it.
-	 * 对于xml文件中package节点进行解析处理，构建@PackageConfig
+	 * <p>对于xml文件中package节点进行解析处理，构建@PackageConfig</p>
 	 */
 	protected PackageConfig addPackage(Element packageElement)
 			throws ConfigurationException {

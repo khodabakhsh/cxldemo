@@ -26,7 +26,9 @@ public class LocatableFactory<T> extends Located implements Factory<T> {
         this.scope = scope;
         setLocation(LocationUtils.getLocation(location));
     }
-
+    /**
+     * 它的创建，也是在ioc容器(例如某个{@link #ContainerImpl} 实例)中注入而成
+     */
     @SuppressWarnings("unchecked")
     public T create(Context context) {
         Object obj = context.getContainer().inject(implementation);
