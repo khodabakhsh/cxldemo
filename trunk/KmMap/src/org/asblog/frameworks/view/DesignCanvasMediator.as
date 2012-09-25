@@ -54,18 +54,19 @@ package org.asblog.frameworks.view
 			{
 				snapshot = Snapshot( event.dragInitiator );
 				var link:MediaLink = snapshot.mediaLink.clone();
-				if(link.isBackground)
-					facade.sendNotification( DesignCanvasCT.CMD_CHANGE_BACKGROUND, new History(designCanvas.background.mediaLink,link) );
-				else if(link.isMask)
-					facade.sendNotification( DesignCanvasCT.CMD_ADD_MASK, link );
-				else				
+//				if(link.isBackground)
+//					facade.sendNotification( DesignCanvasCT.CMD_CHANGE_BACKGROUND, new History(designCanvas.background.mediaLink,link) );
+//				else if(link.isMask)
+//					facade.sendNotification( DesignCanvasCT.CMD_ADD_MASK, link );
+//				else				
 					facade.sendNotification( DesignCanvasCT.CMD_ADD_MEDIAOBJECT, link );
 			}
 		}
 		
 		private function onMatrixChange(event : TransformToolEvent) : void
 		{
-			//trace( "DesignCanvasMediator onMatrixChange" );
+//			trace( "DesignCanvasMediator onMatrixChange" );
+//			trace( "onMatrixChange event.target  ："+event.target );
 			sendNotification( DesignCanvasCT.CMD_MATRIX_CHANGE, event );
 		}
 		/*

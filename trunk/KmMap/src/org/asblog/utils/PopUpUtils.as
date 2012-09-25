@@ -8,7 +8,7 @@ package org.asblog.utils
 	{
 		public static function addPop(classRef:Class):*
 		{
-			return PopUpManager.createPopUp(DesignCanvasMediator.designCanvas, classRef, false);
+			return PopUpManager.createPopUp(DesignCanvasMediator.designCanvas, classRef, true);
 		}
 	}
 }

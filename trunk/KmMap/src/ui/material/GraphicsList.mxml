@@ -1,42 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<MaterialListBase xmlns="ui.material.*" xmlns:mx="http://www.adobe.com/2006/mxml">
+<MaterialListBase xmlns="ui.material.*"
+				  xmlns:mx="http://www.adobe.com/2006/mxml">
 	<mx:Script>
 		<![CDATA[
+			import mx.controls.Alert;
+
 			import org.asblog.core.ShapeLink;
+			import org.asblog.frameworks.view.DesignCanvasMediator;
+			import org.asblog.mediaItem.MediaLine;
 			import org.asblog.mediaItem.MediaShape;
-			
+			import org.asblog.transform.TransformTool;
+			import org.asblog.transform.TransformToolEvent;
+			import org.puremvc.as3.patterns.facade.Facade;
+
 			import ui.Snapshot;
+
+			private static var mediaLine:MediaLine=new MediaLine();
+			private static var _isMediaLineSelecting:Boolean=false;
+			
+			[Embed(source="assets/circle.png")]
+			private var circlePic:Class;
+			[Embed(source="assets/rectangle.png")]
+			private var rectanglePic:Class;
+			[Embed(source="assets/doubleArrow.png")]
+			private var doubleArrowPic:Class;
+			[Embed(source="assets/arrow.png")]
+			private var arrowPic:Class;
+			[Embed(source="assets/hexagon.png")]
+			private var hexagonPic:Class;
+			[Embed(source="assets/roundRect.png")]
+			private var roundRectPic:Class;
+
+			public static function get isMediaLineSelecting():Boolean
+			{
+				return _isMediaLineSelecting;
+			}
+
+			public static function set isMediaLineSelecting(value:Boolean):void
+			{
+				_isMediaLineSelecting=value;
+				if (_isMediaLineSelecting)
+				{
+					mediaLine.draw4GraphicsList(MediaLine.LINE_COLOR);
+					//取消选择。。。。
+					//线控制
+					DesignCanvasMediator.designCanvas.lineControl.selectNull();
+					//图形控制
+					var toolEvent:TransformToolEvent=new TransformToolEvent(TransformToolEvent.SETSELECTION);
+					toolEvent.selectedUid=null;
+					toolEvent.oldSelectedUid=DesignCanvasMediator.designCanvas.selectedItem != null ? DesignCanvasMediator.designCanvas.selectedItem.uid : null;
+					DesignCanvasMediator.designCanvas.dispatchEvent(toolEvent);
+				}
+				else
+				{
+					mediaLine.draw4GraphicsList();
+				}
+			}
+
 
 			override protected function onCreated():void
 			{
-				var s1:MediaShape = new MediaShape();
-				s1.draw(MediaShape.Circle)
+				//Circle
+				var s1:MediaShape=new MediaShape();
+				s1.draw(MediaShape.Circle);
+				var snapshot1:Snapshot=new Snapshot();
+//				snapshot1.imageUrl=s1;
+				snapshot1.imageUrl=circlePic;
 
-				
-				var s2:MediaShape = new MediaShape();
-				s2.draw(MediaShape.Rect)
+				var link1:ShapeLink=new ShapeLink();
+				link1.classRef=MediaShape;
+				link1.shapType=MediaShape.Circle;
 
-				var snapshot1:Snapshot = new Snapshot();
-				snapshot1.imageUrl = s1;
-				
-				var link1:ShapeLink = new ShapeLink();
-				link1.classRef = MediaShape;
-				link1.shapType = MediaShape.Circle;
-				
-				snapshot1.mediaLink = link1;
-				imgList.addChild(snapshot1)
-				
-				var snapshot2:Snapshot = new Snapshot();
-				snapshot2.imageUrl = s2;
-				
-				var link2:ShapeLink = new ShapeLink();
-				link2.classRef = MediaShape;
-				link2.shapType = MediaShape.Rect;
-				
-				snapshot2.mediaLink = link2;
+				snapshot1.mediaLink=link1;
+				imgList.addChild(snapshot1);
+
+				//Rect
+				var s2:MediaShape=new MediaShape();
+				s2.draw(MediaShape.Rect);
+
+				var snapshot2:Snapshot=new Snapshot();
+//				snapshot2.imageUrl=s2;
+				snapshot2.imageUrl=rectanglePic;
+
+				var link2:ShapeLink=new ShapeLink();
+				link2.classRef=MediaShape;
+				link2.shapType=MediaShape.Rect;
+
+				snapshot2.mediaLink=link2;
 				imgList.addChild(snapshot2);
+
+				//DoubleArrow
+				var s3:MediaShape=new MediaShape();
+				s3.draw(MediaShape.DoubleArrow)
+
+				var snapshot3:Snapshot=new Snapshot();
+//				snapshot3.imageUrl=s3;
+				snapshot3.imageUrl=doubleArrowPic;
+
+				var link3:ShapeLink=new ShapeLink();
+				link3.classRef=MediaShape;
+				link3.shapType=MediaShape.DoubleArrow;
+
+				snapshot3.mediaLink=link3;
+				imgList.addChild(snapshot3);
+
+				//Arrow
+				var s4:MediaShape=new MediaShape();
+				s4.draw(MediaShape.Arrow)
+
+				var snapshot4:Snapshot=new Snapshot();
+//				snapshot4.imageUrl=s4;
+				snapshot4.imageUrl=arrowPic;
+
+				var link4:ShapeLink=new ShapeLink();
+				link4.classRef=MediaShape;
+				link4.shapType=MediaShape.Arrow;
+
+				snapshot4.mediaLink=link4;
+				imgList.addChild(snapshot4);
+
+				//Hexagon
+				var s5:MediaShape=new MediaShape();
+				s5.draw(MediaShape.Hexagon)
+
+				var snapshot5:Snapshot=new Snapshot();
+//				snapshot5.imageUrl=s5;
+				snapshot5.imageUrl=hexagonPic;
+
+				var link5:ShapeLink=new ShapeLink();
+				link5.classRef=MediaShape;
+				link5.shapType=MediaShape.Hexagon;
+
+				snapshot5.mediaLink=link5;
+				imgList.addChild(snapshot5);
+
+				//RoundRect
+				var s6:MediaShape=new MediaShape();
+				s6.draw(MediaShape.RoundRect)
+
+				var snapshot6:Snapshot=new Snapshot();
+//				snapshot6.imageUrl=s6;
+				snapshot6.imageUrl=roundRectPic;
+
+				var link6:ShapeLink=new ShapeLink();
+				link6.classRef=MediaShape;
+				link6.shapType=MediaShape.RoundRect;
+
+				snapshot6.mediaLink=link6;
+				imgList.addChild(snapshot6);
+
+				//Line
+//				var s7:MediaShape = new MediaShape();
+//				s7.draw(MediaShape.Line)
+//				
+//				var snapshot7:Snapshot = new Snapshot();
+//				snapshot7.imageUrl = s7;
+//				
+//				var link7:ShapeLink = new ShapeLink();
+//				link7.classRef = MediaShape;
+//				link7.shapType = MediaShape.Line;
+//				
+//				snapshot7.mediaLink = link7;
+//				imgList.addChild(snapshot7);
+
+				mediaLine=new MediaLine();
+				mediaLine.draw4GraphicsList();
+				imgList.addChild(mediaLine);
+
+				this.addEventListener(MouseEvent.CLICK, isMediaLineSelect);
 			}
-			
+
+			public function isMediaLineSelect(e:Event):void
+			{
+				if (e.target is MediaLine)
+				{
+					isMediaLineSelecting=true;
+				}
+				else
+				{
+					isMediaLineSelecting=false;
+				}
+			}
 		]]>
 	</mx:Script>
 </MaterialListBase>

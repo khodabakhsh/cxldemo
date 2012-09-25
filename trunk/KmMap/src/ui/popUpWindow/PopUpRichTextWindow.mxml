@@ -1,33 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PopUpBaseWindow title="" xmlns="ui.popUpWindow.*" xmlns:mx="http://www.adobe.com/2006/mxml">
+<PopUpBaseWindow title="文本编辑框"
+				 xmlns="ui.popUpWindow.*"
+				 xmlns:mx="http://www.adobe.com/2006/mxml"
+				 xmlns:s="library://ns.adobe.com/flex/spark">
 	<subComponents>
-		<mx:RichTextEditor id="rich_text" />
-		<mx:HBox>
+		<!--<mx:RichTextEditor id="rich_text" />-->
+		<mx:Form borderStyle="solid"
+				 id="form1">
+			<mx:FormItem label="颜色: ">
+				<mx:ColorPicker id="fontColor"
+								selectedColor="0x000000"
+								change="changeColor()"/>
+			</mx:FormItem>
+			<mx:FormItem label="内容: ">
+				<mx:TextArea id="text_input"
+							 width="250"
+							 height="200"
+							 fontSize="{fontSize.selectedItem}"/>
+			</mx:FormItem>
+			<mx:FormItem label="">
+				<mx:Button label="确定"
+						   click="button1_clickHandler(event)"/>
+			</mx:FormItem>
+			<mx:FormItem label="字号: " visible="false">
+				<s:DropDownList id="fontSize"
+								horizontalCenter="0"
+								selectedItem="18"
+								top="20">
+					<s:dataProvider>
+						<s:ArrayList source="[12,13,14,15,16,17,18,19,20]"/>
+					</s:dataProvider>
+				</s:DropDownList>
+			</mx:FormItem>
+		</mx:Form>
+		<!--
+		<mx:HBox >
+			<mx:Button label="确定"
+					   click="button1_clickHandler(event)"/>
 			<mx:Spacer width="100%"/>
-			<mx:Button label="确定" click="button1_clickHandler(event)"/>
-		</mx:HBox>
+		</mx:HBox>-->
 	</subComponents>
-	
+
 	<mx:Script>
 		<![CDATA[
+			import flash.text.TextField;
+
+			import mx.controls.Alert;
+			import mx.core.UIComponent;
 			import mx.managers.PopUpManager;
-			
+
 			import org.asblog.core.TextLink;
 			import org.asblog.frameworks.ApplicationFacade;
 			import org.asblog.frameworks.controller.commandtype.DesignCanvasCT;
 			import org.asblog.mediaItem.MediaText;
+
+//			[Bindable]
+//			public var text:String;
 			[Bindable]
-			public var text:String
+			public var textField:TextField=new flash.text.TextField();
+			private var textFormat:flash.text.TextFormat=new TextFormat();
 
 			protected function button1_clickHandler(event:MouseEvent):void
 			{
-				var link:TextLink = new TextLink();
-				link.classRef = MediaText;
-				link.text = rich_text.htmlText;
-				ApplicationFacade.getInstance().sendNotification(DesignCanvasCT.CMD_ADD_MEDIAOBJECT,link);
-				PopUpManager.removePopUp(this);
+				if (text_input.text == "")
+				{
+					Alert.show("请输入内容");
+					return;
+				}
+				if (MediaText.currentMediaText == null)
+				{
+					var link:TextLink=new TextLink();
+					link.classRef=MediaText;
+					//				link.text = rich_text.htmlText;
+					link.text=text_input.text;
+					link.fontColor=fontColor.selectedColor;
+					link.fontSize=fontSize.selectedItem;
+					ApplicationFacade.getInstance().sendNotification(DesignCanvasCT.CMD_ADD_MEDIAOBJECT, link);
+					PopUpManager.removePopUp(this);
+				}
+				else
+				{
+					MediaText.currentMediaText.text=text_input.text;
+					MediaText.currentMediaText.textLink.fontColor=fontColor.selectedColor;
+					MediaText.currentMediaText.textLink.fontSize=fontSize.selectedItem;
+					MediaText.currentMediaText.render();
+					MediaText.currentMediaText=null;
+					PopUpManager.removePopUp(this);
+				}
 			}
 
+			override protected function onCreated():void
+			{
+				super.onCreated();
+				if (MediaText.currentMediaText != null)
+				{
+					text_input.text=MediaText.currentMediaText.text;
+					fontColor.selectedColor=MediaText.currentMediaText.textLink.fontColor;
+					fontSize.selectedItem=MediaText.currentMediaText.textLink.fontSize;
+					text_input.setStyle("color", "0x" + fontColor.selectedColor.toString(16));
+				}
+			}
+
+			private function changeColor():void
+			{
+				text_input.setStyle("color", "0x" + fontColor.selectedColor.toString(16));
+			}
 		]]>
 	</mx:Script>
 </PopUpBaseWindow>

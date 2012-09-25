@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="100"
+		 height="50"
+		 creationComplete="onCreated()">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import org.asblog.mediaItem.MediaLine;
+			
+			private var _isBeginDragStartControl:Boolean=false;
+			private var _isBeginDragEndControl:Boolean=false;
+
+			private var _currentControlMediaLine:MediaLine;
+			
+			
+
+
+			public function get isBeginDragEndControl():Boolean
+			{
+				return _isBeginDragEndControl;
+			}
+
+			public function set isBeginDragEndControl(value:Boolean):void
+			{
+				_isBeginDragEndControl = value;
+			}
+
+			public function get isBeginDragStartControl():Boolean
+			{
+				return _isBeginDragStartControl;
+			}
+
+			public function set isBeginDragStartControl(value:Boolean):void
+			{
+				_isBeginDragStartControl=value;
+			}
+
+			public function get currentControlMediaLine():MediaLine
+			{
+				return _currentControlMediaLine;
+			}
+
+			public function set currentControlMediaLine(value:MediaLine):void
+			{
+				_currentControlMediaLine=value;
+			}
+
+			private function onCreated():void
+			{
+				startControl.addEventListener(MouseEvent.MOUSE_DOWN, onStartControlMouseDown);
+				startControl.addEventListener(MouseEvent.MOUSE_UP, onStartControlMouseUp);
+				
+				endControl.addEventListener(MouseEvent.MOUSE_DOWN, onEndControlMouseDown);
+				endControl.addEventListener(MouseEvent.MOUSE_UP, onEndControlMouseUp);
+
+				this.addEventListener(MouseEvent.MOUSE_MOVE, onStartControlMouseMove);
+			}
+			//just for drawing
+			internal var slopy:Number;
+			internal var cosy:Number;
+			internal var siny:Number; 
+			internal var Par:Number=12;
+			private function onStartControlMouseMove(event:MouseEvent):void
+			{
+				if (isBeginDragStartControl && _currentControlMediaLine != null)
+				{
+//					trace("_currentControlMediaLine.fromX : " + _currentControlMediaLine.fromX + "  , _currentControlMediaLine.fromY  ：" + _currentControlMediaLine.fromY);
+//					trace("mouseX" + mouseX + " ,mouseY: " + mouseY);
+					_currentControlMediaLine.fromX=mouseX;
+					_currentControlMediaLine.fromY=mouseY;
+					_currentControlMediaLine.draw();
+					
+				
+					slopy = Math.atan2((_currentControlMediaLine.toY - mouseY),(_currentControlMediaLine.toX - mouseX));
+					cosy = Math.cos(slopy);
+					siny = Math.sin(slopy);
+					_currentControlMediaLine.fromX=mouseX + Par* cosy;
+					_currentControlMediaLine.fromY=mouseY + Par* siny;
+					_currentControlMediaLine.draw();
+				}
+				if (isBeginDragEndControl && _currentControlMediaLine != null)
+				{
+//					trace("_currentControlMediaLine.toX :  " + _currentControlMediaLine.toX + "  , _currentControlMediaLine.toY  ：" + _currentControlMediaLine.toY);
+//					trace("mouseX" + mouseX + " ,mouseY: " + mouseY);
+					
+					slopy = Math.atan2((mouseY - _currentControlMediaLine.fromY),(mouseX - _currentControlMediaLine.fromX));
+					cosy = Math.cos(slopy);
+					siny = Math.sin(slopy);
+//					
+					_currentControlMediaLine.toX=mouseX- Par* cosy;
+					_currentControlMediaLine.toY=mouseY- Par* siny;
+					_currentControlMediaLine.draw();
+				}
+			}
+			private function onStartControlMouseDown(event:MouseEvent):void
+			{
+				trace("onStartControlMouseDown   event.target:"+event.target);
+				isBeginDragStartControl=true;
+				this.startControl.startDrag();
+			}
+
+			private function onStartControlMouseUp(event:MouseEvent):void
+			{
+				trace("onStartControlMouseUp   event.target:"+event.target);
+				isBeginDragStartControl=false;
+				this.startControl.stopDrag();
+			}
+			private function onEndControlMouseDown(event:MouseEvent):void
+			{
+				trace("onEndControlMouseDown   event.target:"+event.target);
+				isBeginDragEndControl=true;
+				this.endControl.startDrag();
+			}
+			
+			private function onEndControlMouseUp(event:MouseEvent):void
+			{
+				trace("onEndControlMouseUp   event.target:"+event.target);
+				isBeginDragEndControl=false;
+				this.endControl.stopDrag();
+			}
+			public function selectNull():void
+			{
+				isBeginDragStartControl=false;
+				isBeginDragEndControl=false;
+				_currentControlMediaLine=null;
+				startControl.x=-1000;
+				startControl.y=-1000;
+				endControl.x=-1000;
+				endControl.y=-1000;
+			}
+		]]>
+	</fx:Script>
+	<mx:Image id="startControl"
+			 source="@Embed(source='slider_thumb.png')" x="-550" y="-550"/>
+	<mx:Image id="endControl"
+			 source="@Embed(source='slider_thumb.png')" x="-550" y="-550"/>
+</s:Group>

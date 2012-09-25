@@ -1,26 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" toolTip="将图案拖拽到面板"
-		   width="80"
-		   height="80"
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" toolTip="将图案拖拽到画布"
+		   width="82"
+		   height="82"
 		   creationComplete="onCreated()"
 		   >
 	<mx:Script>
 		<![CDATA[
-			import org.asblog.core.MediaLink;
-			
 			import mx.core.DragSource;
+			import mx.events.FlexEvent;
 			import mx.graphics.ImageSnapshot;
 			import mx.managers.DragManager;
+			
+			import org.asblog.core.DesignCanvas;
+			import org.asblog.core.MediaLink;
+			import org.asblog.core.MediaObject;
 			private var _relatedObject:DisplayObject
 			private var _delegateClass:Class
 			private var _classdData:Object
 			private var _ismask:Boolean
-			[Bindable]
-			public var imageUrl:Object
+			private var _imageUrl:Object
 			public var mediaLink:MediaLink;
+
+			[Bindable]
+			public function get imageUrl():Object
+			{
+				return _imageUrl;
+			}
+
+			public function set imageUrl(value:Object):void
+			{
+				_imageUrl = value;
+			}
+			
 			private function onCreated():void
 			{
-				this.addEventListener(MouseEvent.MOUSE_DOWN,onMouseDown)
+				this.addEventListener(MouseEvent.MOUSE_DOWN,onMouseDown);
+				//先在此处覆盖MediaObject的tooltip
+				if(_imageUrl is MediaObject){
+					MediaObject(this.imageUrl).toolTip="将图案拖拽到画布";
+					MediaObject(this.imageUrl).removeEventListener(MouseEvent.DOUBLE_CLICK,MediaObject(this.imageUrl).onMouseDoubleClick);
+				}
 			}
 			public function get relatedObject():DisplayObject
 			{
