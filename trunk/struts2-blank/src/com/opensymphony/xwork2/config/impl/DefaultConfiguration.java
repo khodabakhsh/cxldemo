@@ -247,6 +247,8 @@ public class DefaultConfiguration implements Configuration {
 			// Set the bootstrap container for the purposes of factory creation
 			// ？？？？？？？？？？？？？？
 			setContext(bootstrap);
+			
+			//创建container实例
 			container = builder.create(false);
 			setContext(container);
 			objectFactory = container.getInstance(ObjectFactory.class);
