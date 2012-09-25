@@ -20,7 +20,9 @@ import java.util.concurrent.Callable;
 
 /**
  * Scope of an injected objects.
- *
+ * <p><b>具有抽象方法{@link #scopeFactory(Class, String, InternalFactory)} ,
+ *       各枚举值通过实现此方法，达到控制作用域的目的。
+ * </b><p>
  * @author crazybob
  */
 public enum Scope {
@@ -46,6 +48,7 @@ public enum Scope {
       return new InternalFactory<T>() {
         T instance;
         public T create(InternalContext context) {
+          //同步代码，instance不为null时直接返回
           synchronized (context.getContainer()) {
             if (instance == null) {
               instance = factory.create(context);

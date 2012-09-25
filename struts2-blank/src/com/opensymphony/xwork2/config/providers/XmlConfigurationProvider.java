@@ -525,6 +525,7 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 
 	/**
 	 * Create a PackageConfig from an XML element representing it.
+	 * 对于xml文件中package节点进行解析处理，构建@PackageConfig
 	 */
 	protected PackageConfig addPackage(Element packageElement)
 			throws ConfigurationException {

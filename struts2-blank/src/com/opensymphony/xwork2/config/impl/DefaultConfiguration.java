@@ -135,6 +135,10 @@ public class DefaultConfiguration implements Configuration {
 		return container;
 	}
 
+	/**
+	 * {@link #reloadContainer(List)} 中处理package节点的代码部分，最终会调用这个方法，
+	 * 完成对packageContexts的赋值
+	 */
 	public void addPackageConfig(String name, PackageConfig packageContext) {
 		PackageConfig check = packageContexts.get(name);
 		if (check != null) {
@@ -219,7 +223,7 @@ public class DefaultConfiguration implements Configuration {
 			
 			//对于下面的init方法,纵观接口 @ContainerProvider 的实现类，
 			//只有@StrutsXmlConfigurationProvider (通过父类@XmlConfigurationProvider 方法)
-			//有实质性的逻辑处理(解析xml从而初始化documents属性)。
+			//有实质性的逻辑处理(设置属性configuration，然后解析xml从而初始化documents属性)。
 			containerProvider.init(this);
 			
 			//在处理struts-default.xml的@StrutsXmlConfigurationProvider 实例中
@@ -227,7 +231,8 @@ public class DefaultConfiguration implements Configuration {
 			containerProvider.register(builder, props);
 			
 		}
-		//为builder配置constant相应的factory
+		//为builder配置一些常量值的factory,常量值在上一步代码（containerProvider.register）中初始化好了。
+		//方便以后获取常量值，就可以用{String.class,常量名}作为key取得相应值。
 		props.setConstants(builder);
 
 		//设置Configuration默认实例为当前DefaultConfiguration实例
@@ -240,7 +245,7 @@ public class DefaultConfiguration implements Configuration {
 		ActionContext oldContext = ActionContext.getContext();
 		try {
 			// Set the bootstrap container for the purposes of factory creation
-			// 这里是神马意思？？？？？？？？？？？？？？
+			// ？？？？？？？？？？？？？？
 			setContext(bootstrap);
 			container = builder.create(false);
 			setContext(container);
@@ -259,6 +264,7 @@ public class DefaultConfiguration implements Configuration {
 			}
 
 			// Then process any package providers from the plugins
+			//获得对应PackageProvider.class的所有name集合，没有plugins的话，这里应该是空集合
 			Set<String> packageProviderNames = container
 					.getInstanceNames(PackageProvider.class);
 			if (packageProviderNames != null) {
@@ -270,7 +276,8 @@ public class DefaultConfiguration implements Configuration {
 					packageProviders.add(provider);
 				}
 			}
-
+            
+			//重新构建runtimeConfiguration
 			rebuildRuntimeConfiguration();
 		} finally {
 			if (oldContext == null) {
@@ -292,7 +299,7 @@ public class DefaultConfiguration implements Configuration {
 	}
 
 	/**
-	 * 设置启动环境
+	 * 设置启动环境,加入一些{@link Scope.SINGLETON} 的factory
 	 */
 	protected Container createBootstrapContainer() {
 		ContainerBuilder builder = new ContainerBuilder();

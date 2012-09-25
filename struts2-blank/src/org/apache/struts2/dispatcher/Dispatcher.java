@@ -462,6 +462,7 @@ public class Dispatcher {
 	public void init() {
 
 		if (configurationManager == null) {
+			//使用默认名“struts”
 			configurationManager = createConfigurationManager(BeanSelectionProvider.DEFAULT_BEAN_NAME);
 		}
 
@@ -489,6 +490,7 @@ public class Dispatcher {
 			// 加入@BeanSelectionProvider，在注册register的时候加入系统中一些默认的alias
 			init_AliasStandardObjects();
 
+			//【初始化的核心】
 			Container container = init_PreloadConfiguration();
 			container.inject(this);
 			init_CheckConfigurationReloading(container);

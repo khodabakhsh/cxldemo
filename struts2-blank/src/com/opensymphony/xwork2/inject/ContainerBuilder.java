@@ -80,6 +80,7 @@ public final class ContainerBuilder {
   private <T> ContainerBuilder factory(final Key<T> key,
       InternalFactory<? extends T> factory, Scope scope) {
     ensureNotCreated();
+    //key重复性校验
     checkKey(key);
     final InternalFactory<? extends T> scopedFactory =
         scope.scopeFactory(key.getType(), key.getName(), factory);
