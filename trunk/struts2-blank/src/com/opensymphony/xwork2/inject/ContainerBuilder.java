@@ -62,6 +62,9 @@ public final class ContainerBuilder {
 
   /**
    * Constructs a new builder.
+   * <p>加入以下两个key对应的factory:
+   * <li>Container.class, Container.DEFAULT_NAME为key
+   * <li>Logger.class, Container.DEFAULT_NAME为key
    */
   public ContainerBuilder() {
     // In the current container as the default Container implementation.

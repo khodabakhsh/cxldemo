@@ -212,6 +212,10 @@ public class DefaultConfiguration implements Configuration {
 		
 		//@ContainerProperties 为@DefaultConfiguration 内部类
 		ContainerProperties props = new ContainerProperties();
+		
+		//new ContainerBuilder()已经设置了下面两个key的factory ：
+		//Container.class, Container.DEFAULT_NAME作key
+		//Logger.class, Container.DEFAULT_NAME作key
 		ContainerBuilder builder = new ContainerBuilder();
 		
 		//创建一个用于初始化的容器，为下面的注入作基础
@@ -248,7 +252,7 @@ public class DefaultConfiguration implements Configuration {
 			// ？？？？？？？？？？？？？？
 			setContext(bootstrap);
 			
-			//创建container实例
+			//创建container实例,把builder的factories都传给container
 			container = builder.create(false);
 			setContext(container);
 			objectFactory = container.getInstance(ObjectFactory.class);

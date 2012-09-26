@@ -66,6 +66,14 @@ public class HelloWorld extends ExampleSupport {
 		}
     	return null;
     }
+    public String subPathEcho(){
+    	try {
+			ServletActionContext.getResponse().getWriter().write("/sub/path/echo");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return null;
+    }
     
 
     /**

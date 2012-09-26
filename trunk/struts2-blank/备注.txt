@@ -20,3 +20,7 @@ com.opensymphony.xwork2.inject.ContainerImpl.MethodInjector.MethodInjector类有
 
 3.ReentrantLock
 com.opensymphony.xwork2.config.ConfigurationManager有使用到ReentrantLock来维护containerProviders
+
+4. Collections.addAll(list, 数组);
+
+5.看一下org.apache.struts2.util.PrefixTrie
