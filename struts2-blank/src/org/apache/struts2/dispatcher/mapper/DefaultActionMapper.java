@@ -170,12 +170,24 @@ public class DefaultActionMapper implements ActionMapper {
 
     protected static final String REDIRECT_ACTION_PREFIX = "redirectAction:";
 
+    /**
+     * 是否允许动态方法调用
+     */
     protected boolean allowDynamicMethodCalls = true;
 
+    /**
+     * action名中是否能包含”/“号
+     */
     protected boolean allowSlashesInActionNames = false;
 
+    /**
+     * 为true的话(默认为false)，以uri中最后一个"/"为分隔符，前面的内容作namespace，后面的内容作name
+     */
     protected boolean alwaysSelectFullNamespace = false;
 
+    /**
+     * 默认过滤处理这四个参数名："method:"、"action:"、"redirect:" 、"redirectAction:"
+     */
     protected PrefixTrie prefixTrie = null;
 
     protected List<String> extensions = new ArrayList<String>() {{
@@ -292,10 +304,11 @@ public class DefaultActionMapper implements ActionMapper {
         return parseActionName(mapping);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see org.apache.struts2.dispatcher.mapper.ActionMapper#getMapping(javax.servlet.http.HttpServletRequest)
+     * 
      */
 
     public ActionMapping getMapping(HttpServletRequest request,
@@ -306,26 +319,38 @@ public class DefaultActionMapper implements ActionMapper {
         int indexOfSemicolon = uri.indexOf(";");
         uri = (indexOfSemicolon > -1) ? uri.substring(0, indexOfSemicolon) : uri;
 
+        //去掉后缀，并把后缀保存在mapping里
         uri = dropExtension(uri, mapping);
         if (uri == null) {
             return null;
         }
 
-        //解析name和namespace, 根据configManager中的config.getPackageConfigs获得所有action配置 ,在里面寻找匹配最长 namespace的action配置
+        //根据configManager中的config.getPackageConfigs获得所有action配置 ,在里面寻找匹配最长 namespace的action配置
+        //设置mapping的name、namespace值,
         parseNameAndNamespace(uri, mapping, configManager);
 
-        //处理一些特殊的请求参数
+        /**
+         * 处理一些特殊的请求参数
+         * 1.image button location info
+           2.利用属性prefixTrie默认过滤处理这四个参数名："method:"、"action:"、"redirect:" 、"redirectAction:"
+         */
         handleSpecialParameters(request, mapping);
 
         if (mapping.getName() == null) {
             return null;
         }
-        //当allowDynamicMethodCalls为true时,处理"name!method"方式的调用
+        
+        //当allowDynamicMethodCalls为true时,处理"name!method"方式的调用,
+        //为mapping的name、method赋值
         parseActionName(mapping);
 
         return mapping;
     }
 
+    /**
+     * 当{@link #allowDynamicMethodCalls}为true时,处理"name!method"方式的调用,
+     *  为mapping的name、method赋值
+     */
     protected ActionMapping parseActionName(ActionMapping mapping) {
         if (mapping.getName() == null) {
             return mapping;
@@ -371,6 +396,7 @@ public class DefaultActionMapper implements ActionMapper {
                 if (parameterAction != null) {
                     parameterAction.execute(key, mapping);
                     uniqueParameters.add(key);
+                    //只要有一个匹配了，就终止循环
                     break;
                 }
             }
@@ -410,7 +436,8 @@ public class DefaultActionMapper implements ActionMapper {
             for (Object cfg : config.getPackageConfigs().values()) {
                 String ns = ((PackageConfig) cfg).getNamespace();
                 if (ns != null && prefix.startsWith(ns) && (prefix.length() == ns.length() || prefix.charAt(ns.length()) == '/')) {
-                    if (ns.length() > namespace.length()) {
+                    //在有多个namespace匹配的情况下，使用最长的namespace
+                	if (ns.length() > namespace.length()) {
                         namespace = ns;
                     }
                 }
@@ -422,11 +449,14 @@ public class DefaultActionMapper implements ActionMapper {
             name = uri.substring(namespace.length() + 1);
 
             // Still none found, use root namespace if found
+            // 如果没找到匹配项，使用根路径作匹配
             if (rootAvailable && "".equals(namespace)) {
                 namespace = "/";
             }
         }
 
+        //对action名，判断是否过滤"/"号
+        //过滤的话，会把action名最后一个"/"之后的值作action
         if (!allowSlashesInActionNames && name != null) {
             int pos = name.lastIndexOf('/');
             if (pos > -1 && pos < name.length() - 1) {

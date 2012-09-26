@@ -78,14 +78,17 @@ public class StrutsPrepareAndExecuteFilter implements StrutsStatics, Filter {
         try {
             prepare.setEncodingAndLocale(request, response);
             prepare.createActionContext(request, response);
+            //设置dispatch实例到当前线程
             prepare.assignDispatcherToThread();
 			if ( excludedPatterns != null && prepare.isUrlExcluded(request, excludedPatterns)) {
 				chain.doFilter(request, response);
 			} else {
+				//封装request，返回@StrutsRequestWrapper 或其子类 @MultiPartRequestWrapper （处理multipart/form-data）
 				request = prepare.wrapRequest(request);
-				//找到对应的action配置
+				//找到对应的ActionMapping配置
 				ActionMapping mapping = prepare.findActionMapping(request, response, true);
 				if (mapping == null) {
+			        //判断是否静态资源处理
 					boolean handled = execute.executeStaticResourceRequest(request, response);
 					if (!handled) {
 						chain.doFilter(request, response);

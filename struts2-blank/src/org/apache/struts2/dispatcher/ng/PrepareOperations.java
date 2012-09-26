@@ -155,6 +155,9 @@ public class PrepareOperations {
     }
 
     /**
+     * <li>forceLookup 为false时，优先返回(ActionMapping) request.getAttribute(STRUTS_ACTION_MAPPING_KEY)
+     * <li>forceLookup 为true时，每次都去获取ActionMapper实例
+     * <br/><br/>
      * Finds and optionally creates an {@link ActionMapping}.  if forceLookup is false, it first looks in the current request to see if one
      * has already been found, otherwise, it creates it and stores it in the request.  No mapping will be created in the
      * case of static resource requests or unidentifiable requests for other servlets, for example.
@@ -165,6 +168,7 @@ public class PrepareOperations {
         ActionMapping mapping = (ActionMapping) request.getAttribute(STRUTS_ACTION_MAPPING_KEY);
         if (mapping == null || forceLookup) {
             try {
+            	//ActionMapper默认实例是{ @link org.apache.struts2.dispatcher.mapper.DefaultActionMapper}
                 mapping = dispatcher.getContainer().getInstance(ActionMapper.class).getMapping(request, dispatcher.getConfigurationManager());
                 if (mapping != null) {
                     request.setAttribute(STRUTS_ACTION_MAPPING_KEY, mapping);
