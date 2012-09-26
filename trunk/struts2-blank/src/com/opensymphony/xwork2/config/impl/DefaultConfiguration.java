@@ -72,8 +72,8 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 /**
- * DefaultConfiguration
- * 
+ * 属性成员：{@link #packageContexts} 、 {@link #runtimeConfiguration} 、 {@link #container} 、 {@link #defaultFrameworkBeanName}
+ * 、 {@link #loadedFileNames}、 {@link #unknownHandlerStack}、 {@link #objectFactory}
  * @author Jason Carreira Created Feb 24, 2003 7:38:06 AM
  */
 public class DefaultConfiguration implements Configuration {

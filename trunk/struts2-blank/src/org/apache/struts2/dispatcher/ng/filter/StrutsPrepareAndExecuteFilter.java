@@ -48,6 +48,7 @@ public class StrutsPrepareAndExecuteFilter implements StrutsStatics, Filter {
         try {
             FilterHostConfig config = new FilterHostConfig(filterConfig);
             init.initLogging(config);
+            //创建、并初始化Dispatcher
             Dispatcher dispatcher = init.initDispatcher(config);
             init.initStaticContentLoader(config, dispatcher);
 
@@ -55,6 +56,7 @@ public class StrutsPrepareAndExecuteFilter implements StrutsStatics, Filter {
             execute = new ExecuteOperations(filterConfig.getServletContext(), dispatcher);
 			this.excludedPatterns = init.buildExcludedPatternsList(dispatcher);
 
+			//回调
             postInit(dispatcher, filterConfig);
         } finally {
             init.cleanup();

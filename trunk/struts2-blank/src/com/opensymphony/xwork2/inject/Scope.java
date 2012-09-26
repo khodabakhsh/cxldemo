@@ -48,7 +48,7 @@ public enum Scope {
       return new InternalFactory<T>() {
         T instance;
         public T create(InternalContext context) {
-          //同步代码，instance不为null时直接返回
+          //同步代码，单例模式，instance不为null时直接返回
           synchronized (context.getContainer()) {
             if (instance == null) {
               instance = factory.create(context);

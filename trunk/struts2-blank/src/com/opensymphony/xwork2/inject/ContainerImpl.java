@@ -59,7 +59,8 @@ class ContainerImpl implements Container {
 
 	/**
 	 * Field and method injectors.
-	 * 通过lazy load实现
+	 * <li>通过lazy load实现
+	 * <li>递归注入fields and methods的Injector ，优先注入父类
 	 */
 	final Map<Class<?>, List<Injector>> injectors = new ReferenceCache<Class<?>, List<Injector>>() {
 		@Override
@@ -133,6 +134,7 @@ class ContainerImpl implements Container {
 					try {
 						injectors.add(injectorFactory.create(this, member, inject.value()));
 					} catch (MissingDependencyException e) {
+						//如果是required=true的，抛出异常。。。。
 						if (inject.required()) {
 							throw new DependencyException(e);
 						}
@@ -154,6 +156,9 @@ class ContainerImpl implements Container {
 		return Modifier.isStatic(member.getModifiers());
 	}
 
+	/**
+	 * 属性Injector
+	 */
 	static class FieldInjector implements Injector {
 
 		final Field field;
@@ -553,6 +558,10 @@ class ContainerImpl implements Container {
 		return getInstance(type, DEFAULT_NAME, context);
 	}
 
+	/**
+	 * @param o 需要注入的对象
+	 * @return 为o注入属性、方法后的对象
+	 */
 	public void inject(final Object o) {
 		callInContext(new ContextualCallable<Void>() {
 			public Void call(InternalContext context) {
@@ -561,7 +570,10 @@ class ContainerImpl implements Container {
 			}
 		});
 	}
-
+	/**
+	 * @param implementation 需要注入的类
+	 * @return 通过构造函数实例化一个implementation类(并为其注入属性、方法)
+	 */
 	public <T> T inject(final Class<T> implementation) {
 		return callInContext(new ContextualCallable<T>() {
 			public T call(InternalContext context) {

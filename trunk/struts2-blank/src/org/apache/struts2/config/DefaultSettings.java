@@ -37,6 +37,10 @@ import com.opensymphony.xwork2.util.logging.LoggerFactory;
  * <p>
  * This class creates and delegates to other settings by using an internal
  * {@link DelegatingSettings} object.
+ * <p>对象创建流程是：
+     * <li>1.首先 加载 struts.properties
+     * <li>2.根据 struts.properties文件中struts.custom.properties 的配置项(如果有)，获得自定义配置文件名
+     * <li>3.对象实例的属性{@link delegate}包含1、2步产生的配置文件</p>
  */
 public class DefaultSettings extends Settings {
 
@@ -47,6 +51,7 @@ public class DefaultSettings extends Settings {
 
     /**
      * The Settings object that handles API calls.
+     * <p>包含多个配置文件处理的委托
      */
     Settings delegate;
 
@@ -58,6 +63,12 @@ public class DefaultSettings extends Settings {
      * Since this constructor  combines Settings from multiple resources,
      * it utilizes a {@link DelegatingSettings} instance,
      * and all API calls are handled by that instance.
+     * <p>
+     * 
+     * 对象创建流程是：
+     * <li>1.首先 加载 struts.properties
+     * <li>2.根据 struts.properties文件中struts.custom.properties 的配置项(如果有)，获得自定义配置文件名
+     * <li>3.对象实例的属性{@link delegate}包含1、2步产生的配置文件
      */
     public DefaultSettings() {
 
@@ -90,6 +101,8 @@ public class DefaultSettings extends Settings {
             settings = new Settings[list.size()];
             delegate = new DelegatingSettings(list.toArray(settings));
         } catch (IllegalArgumentException e) {
+        	//其实在没有struts.properies,或struts.properies没有struts.custom.properties 这个配置值的时候，这里是会进来的，
+        	//不过这个在此应该也不用任何处理的.
             // Assume it's OK, since IllegalArgumentException is thrown  
             // when Settings is unable to find a certain setting,
             // like the struts.custom.properties, which is commented out

@@ -479,6 +479,13 @@ public class Dispatcher {
 			// 这个@StrutsXmlConfigurationProvider 在loadPackages的时候，处理了<package>节点。
 			init_TraditionalXmlConfigurations();
 
+			/**
+			 * 加入@LegacyPropertiesConfigurationProvider 到ContainerProvider中。
+			 * 在register注册的时候，处理逻辑如下：
+		     * 默认情况下加载的是struts.properties文件(及这个配置文件中struts.custom.properties配置指定的文件)，
+		     * (或是是其他自定义的Settings 实现类，如果有)
+		     * 看  {@link Settings#getDefaultInstance()} 
+		     */
 			init_LegacyStrutsProperties();
 
 			// 配置自定义的provider（由启动配置参数中的configProviders指定）
@@ -493,13 +500,15 @@ public class Dispatcher {
 			//  就需要建立使用别名"default"的factory
 			init_AliasStandardObjects();
 
-			//【---初始化的核心---返回的container具备了基本的ioc容器功能】
+			//【---初始化的核心---返回的container具备ioc容器功能】
 			Container container = init_PreloadConfiguration();
 			
-			//为当前实例注入
+			//为当前Dispatch实例注入属性、方法
 			container.inject(this);
 			
 			init_CheckConfigurationReloading(container);
+			
+			//检测 WebLogic 服务器环境
 			init_CheckWebLogicWorkaround(container);
 
 			if (!dispatcherListeners.isEmpty()) {

@@ -327,7 +327,7 @@ public class BeanSelectionProvider implements ConfigurationProvider {
      * @param key 名称
      * @param builder
      * @param props 一些配置属性
-     * @param scope 这里使用单例模式
+     * @param scope 
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	void alias(Class type, String key, ContainerBuilder builder, Properties props, Scope scope) {

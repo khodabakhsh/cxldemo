@@ -176,8 +176,9 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 	}
 /**
  *  <li>处理&lt;bean&gt; 节点(在struts-default.xml里有此定义)
- *  <li>containerBuilder为这些&lt;bean&gt; 构建的factory是LocatableFactory类型的。
+ *  <li>containerBuilder为这些&lt;bean&gt; 构建的factory是LocatableFactory类型的(但最底层factory是由 {@link Scope#scopeFactory(Class, String, InternalFactory)} 创建 )。
  *  <li>LocatableFactory如何创建实例？看： {@link LocatableFactory#create(com.opensymphony.xwork2.inject.Context)}
+ *  <li>构建的factory缺省值是 {@link Scope#SINGLETON}，在&lt;bean&gt; 节点没有指定scope属性时用缺省值。
  */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void register(ContainerBuilder containerBuilder,
@@ -207,6 +208,7 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 						String scopeStr = child.getAttribute("scope");
 						boolean optional = "true".equals(child
 								.getAttribute("optional"));
+						//默认是SINGLETON的
 						Scope scope = Scope.SINGLETON;
 						if ("default".equals(scopeStr)) {
 							scope = Scope.DEFAULT;
@@ -256,7 +258,7 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 
 								// Force loading of class to detect no class def
 								// found exceptions
-								//嗯，直接这样写就能确保class能被加载
+								//嗯，直接这样写就能确定class是否能被加载
 								cimpl.getDeclaredConstructors();
 
 								if (LOG.isDebugEnabled()) {
@@ -265,6 +267,7 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 								}
 								//加入到containerBuilder的factory
 								//为以后的初始化注入(inject)等操作作准备。
+								//这里，scope，缺省值是 Scope.SINGLETON
 								containerBuilder
 										.factory(ctype, name,
 												new LocatableFactory(name,
