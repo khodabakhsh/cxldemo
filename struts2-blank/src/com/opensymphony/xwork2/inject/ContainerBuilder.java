@@ -73,10 +73,12 @@ public final class ContainerBuilder {
         LOGGER_FACTORY);
   }
 
-  /**
-   * Maps a dependency. All methods in this class ultimately funnel through
-   * here.
-   */
+	/**
+	 * Maps a dependency. All methods in this class ultimately funnel through
+	 * here.
+	 * <p><b><li>最底层factory包装，使用 {@link Scope#scopeFactory(Class, String, InternalFactory)} 
+	 *       <li>所有其他的factory重载函数都最终使用这个方法</b><p>
+	 */
   private <T> ContainerBuilder factory(final Key<T> key,
       InternalFactory<? extends T> factory, Scope scope) {
     ensureNotCreated();
@@ -86,6 +88,7 @@ public final class ContainerBuilder {
         scope.scopeFactory(key.getType(), key.getName(), factory);
     factories.put(key, scopedFactory);
     if (scope == Scope.SINGLETON) {
+    //静态Scope处理
       singletonFactories.add(new InternalFactory<T>() {
         public T create(InternalContext context) {
           try {
@@ -113,12 +116,12 @@ public final class ContainerBuilder {
 
   /**
    * Maps a factory to a given dependency type and name.
-   * <br/>以type、name构建的Key作为主键在factories中put一个 scopedFactory，返回该scopedFactory
+   * <br/>以{type,name}构建的Key作为主键在factories中put一个 Factory实现类，该实现类的最底层包装是：{@link Scope#scopeFactory(Class, String, InternalFactory)}}
    *  
    * @param type of dependency
    * @param name of dependency
    * @param factory creates objects to inject  【真正执行create创建对象的正是这个 factory】
-   * @param scope scope of injected instances
+   * @param scope scope of injected instances 。   {@link Scope} 实例
    * @return this builder  
    * 
    * 
@@ -153,7 +156,7 @@ public final class ContainerBuilder {
   /**
    * Convenience method.&nbsp;Equivalent to {@code factory(type,
    * Container.DEFAULT_NAME, factory, scope)}.
-   *<br/>以type、<b> @Container.DEFAULT_NAME</b> 构建的Key作为主键在factories中put一个 scopedFactory，
+   *<br/>以type、<b> @Container.DEFAULT_NAME</b> 构建的Key作为主键在factories中put一个 Factory实现类，
    * @see #factory(Class, String, Factory, Scope)
    */
   public <T> ContainerBuilder factory(Class<T> type,

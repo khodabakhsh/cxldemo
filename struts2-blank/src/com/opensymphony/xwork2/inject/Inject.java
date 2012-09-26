@@ -27,6 +27,10 @@ import java.lang.annotation.Target;
  * <p>Annotates members and parameters which should have their value[s]
  * injected.
  *
+ *<p><b>但凡使用{@link Inject} 注入、并且required=true的成员，都应该能在{@link ContainerImpl#getFactory(Key)}有对应值，否则抛异常！</b></p>
+ *见<li>{@link ContainerImpl.FieldInjector#FieldInjector(ContainerImpl, java.lang.reflect.Field, String)}
+ *  <li>{@link ContainerImpl.MethodInjector#MethodInjector(ContainerImpl, java.lang.reflect.Method, String)}
+ *
  * @author crazybob@google.com (Bob Lee)
  */
 @Target({METHOD, CONSTRUCTOR, FIELD, PARAMETER})

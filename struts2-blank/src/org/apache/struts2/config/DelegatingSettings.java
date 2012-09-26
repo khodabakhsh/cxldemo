@@ -45,7 +45,7 @@ class DelegatingSettings extends Settings {
 
     /**
      * Creates a new DelegatingSettings object utilizing the list of {@link Settings} objects.
-     *
+     * <p><b>用于处理多个配置文件的委托模式</b>
      * @param delegates The Settings objects to use as delegates
      */
     public DelegatingSettings(Settings[] delegates) {
@@ -85,7 +85,7 @@ class DelegatingSettings extends Settings {
                 // Try next delegate
             }
         }
-
+        //找不到值，就抛异常啦。。。
         throw e;
     }
 

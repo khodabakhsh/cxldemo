@@ -268,12 +268,17 @@ class Settings {
     private static Settings getDefaultInstance() {
         if (defaultImpl == null) {
             // Create bootstrap implementation
+//        	对象创建流程是： 
+//        	1.首先 加载 struts.properties 
+//        	2.根据 struts.properties文件中struts.custom.properties 的配置项(如果有)，获得自定义配置文件名 
+//        	3.对象实例的属性delegate包含1、2步产生的配置文件
             defaultImpl = new DefaultSettings();
 
             // Create default implementation
             try {
+            	//返回defaultImpl中struts.configuration的配置信息。
                 String className = get(StrutsConstants.STRUTS_CONFIGURATION);
-
+                //比较，优先使用struts.configuration配置中指定的类型
                 if (!className.equals(defaultImpl.getClass().getName())) {
                     try {
                         // singleton instances shouldn't be built accessing request or session-specific context data

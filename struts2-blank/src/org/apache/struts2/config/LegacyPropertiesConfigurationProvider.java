@@ -60,10 +60,15 @@ public class LegacyPropertiesConfigurationProvider implements ConfigurationProvi
     public boolean needsReload() {
         return false;
     }
-
-    public void register(ContainerBuilder builder, LocatableProperties props)
+    /**
+     * 默认情况下加载的是struts.properties文件(及这个配置文件中struts.custom.properties配置指定的文件)，
+     * 但是也可以是其他自定义的Settings 实现类
+     * 看  {@link Settings#getDefaultInstance()}
+     */
+	@SuppressWarnings("unchecked")
+	public void register(ContainerBuilder builder, LocatableProperties props)
             throws ConfigurationException {
-        
+       
         final Settings settings = Settings.getInstance();
         
         loadSettings(props, settings);
