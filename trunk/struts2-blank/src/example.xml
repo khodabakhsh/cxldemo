@@ -28,7 +28,7 @@
 		</action>
 		<action name="handle_redirect_from_action" method="handle_redirect_from_action" class="example.HelloWorld">
 		</action>
-    	<!--DefaultActionMapper.parseNameAndNamespace 方法会过滤掉action名中的"/" ，导致此actin匹配的namespace是/example,name则变成echo-->
+    	<!--DefaultActionMapper.parseNameAndNamespace 方法可能会过滤掉action名中的"/" ，导致此actin匹配的namespace是/example,name则变成echo-->
 		<action name="/sub/path/echo" method="subPathEcho" class="example.HelloWorld">
 		</action>
 

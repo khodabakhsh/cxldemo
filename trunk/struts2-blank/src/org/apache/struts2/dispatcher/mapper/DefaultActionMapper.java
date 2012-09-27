@@ -190,6 +190,9 @@ public class DefaultActionMapper implements ActionMapper {
      */
     protected PrefixTrie prefixTrie = null;
 
+    /**
+     * 由struts.action.extension配置值指定后缀，该配置项若以","号结尾的话，会加入空字符串做后缀
+     */
     protected List<String> extensions = new ArrayList<String>() {{
         add("action");
         add("");
@@ -289,6 +292,7 @@ public class DefaultActionMapper implements ActionMapper {
             List<String> list = new ArrayList<String>();
             String[] tokens = extensions.split(",");
             Collections.addAll(list, tokens);
+            //以","号结尾，会加入空字符串后缀
             if (extensions.endsWith(",")) {
                 list.add("");
             }
@@ -319,7 +323,9 @@ public class DefaultActionMapper implements ActionMapper {
         int indexOfSemicolon = uri.indexOf(";");
         uri = (indexOfSemicolon > -1) ? uri.substring(0, indexOfSemicolon) : uri;
 
-        //去掉后缀，并把后缀保存在mapping里
+        //1.去掉后缀(后缀由struts.action.extension配置值指定后缀，该配置项若以","号结尾的话，会加入空字符串做后缀)，
+        //注意：“支持无后缀名的Action请求”经常带来一些混乱，最典型的就是“/*”错误地拦截了其他的映射为无后缀名的Servlet请求。比如DWR、FCKEditor等都存在这种问题
+        //2.把后缀保存在mapping里
         uri = dropExtension(uri, mapping);
         if (uri == null) {
             return null;
@@ -491,6 +497,7 @@ public class DefaultActionMapper implements ActionMapper {
             return name;
         }
         for (String ext : extensions) {
+        	//空字符串后缀判断
             if ("".equals(ext)) {
                 // This should also handle cases such as /foo/bar-1.0/description. It is tricky to
                 // distinquish /foo/bar-1.0 but perhaps adding a numeric check in the future could

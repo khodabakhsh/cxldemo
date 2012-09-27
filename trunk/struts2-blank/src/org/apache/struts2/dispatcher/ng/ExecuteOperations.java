@@ -58,8 +58,12 @@ public class ExecuteOperations {
         }
 
         StaticContentLoader staticResourceLoader = dispatcher.getContainer().getInstance(StaticContentLoader.class);
+        
+//        struts.serve.static配置的值为true，且请求以/struts/、/static/开头的资源时，视为用struts处理该静态请求
         if (staticResourceLoader.canHandle(resourcePath)) {
+        	//在classpath中获得静态资源,并写到响应输出流中。。。
             staticResourceLoader.findStaticResource(resourcePath, request, response);
+          //有一个问题，如果上面请求的静态资源在classpath中找不到，下面都是返回true。。。
             // The framework did its job here
             return true;
 

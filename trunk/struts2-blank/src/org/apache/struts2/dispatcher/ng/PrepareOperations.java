@@ -171,6 +171,7 @@ public class PrepareOperations {
             	//ActionMapper默认实例是{ @link org.apache.struts2.dispatcher.mapper.DefaultActionMapper}
                 mapping = dispatcher.getContainer().getInstance(ActionMapper.class).getMapping(request, dispatcher.getConfigurationManager());
                 if (mapping != null) {
+                	//设置mapping到request属性，
                     request.setAttribute(STRUTS_ACTION_MAPPING_KEY, mapping);
                 }
             } catch (Exception ex) {
