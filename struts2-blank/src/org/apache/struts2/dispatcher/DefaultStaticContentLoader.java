@@ -48,6 +48,8 @@ public class DefaultStaticContentLoader implements StaticContentLoader {
 
     /**
      * Store set of path prefixes to use with static resources.
+     * <li>包含web.xml中struts分发器配置参数&lt;packages&gt;节点指定的路径
+     * <li>以及有 @see {@link #getAdditionalPackages()}所默认的几个路径
      */
     protected String[] pathPrefixes;
 
@@ -119,6 +121,9 @@ public class DefaultStaticContentLoader implements StaticContentLoader {
         initLogging(filterConfig);
     }
 
+    /**
+     * 默认的几个路径"org/apache/struts2/static/"、 "template/"、 "org/apache/struts2/interceptor/debugging/"、 "static/"
+     */
     protected String getAdditionalPackages() {
         return "org.apache.struts2.static template org.apache.struts2.interceptor.debugging static";
     }
@@ -157,8 +162,10 @@ public class DefaultStaticContentLoader implements StaticContentLoader {
      */
     public void findStaticResource(String path, HttpServletRequest request, HttpServletResponse response)
             throws IOException {
+    	//去掉"/struts"、"/static"前缀
         String name = cleanupPath(path);
         for (String pathPrefix : pathPrefixes) {
+        	//在classpath中获得资源
             URL resourceUrl = findResource(buildPath(name, pathPrefix));
             if (resourceUrl != null) {
                 InputStream is = null;
@@ -173,6 +180,7 @@ public class DefaultStaticContentLoader implements StaticContentLoader {
                 }
 
                 //not inside the try block, as this could throw IOExceptions also
+                //响应输出流(根据struts.serve.static.browserCache选择写入浏览器缓存与否)
                 if (is != null) {
                     process(is, path, request, response);
                     return;
@@ -214,7 +222,7 @@ public class DefaultStaticContentLoader implements StaticContentLoader {
             if (contentType != null) {
                 response.setContentType(contentType);
             }
-
+            //struts.serve.static.browserCache配置为true时，设置浏览器缓存
             if (serveStaticBrowserCache) {
                 // set heading information for caching static content
                 response.setDateHeader("Date", now);
@@ -223,12 +231,14 @@ public class DefaultStaticContentLoader implements StaticContentLoader {
                 response.setHeader("Cache-Control", "public");
                 response.setDateHeader("Last-Modified", lastModifiedMillis);
             } else {
+            	//不做浏览器端缓存
                 response.setHeader("Cache-Control", "no-cache");
                 response.setHeader("Pragma", "no-cache");
                 response.setHeader("Expires", "-1");
             }
 
             try {
+            	//写到输出流
                 copy(is, response.getOutputStream());
             } finally {
                 is.close();
@@ -338,6 +348,9 @@ public class DefaultStaticContentLoader implements StaticContentLoader {
         output.flush();
     }
 
+    /**
+     * struts.serve.static配置的值为true，且请求以/struts/、/static/开头的资源
+     */
     public boolean canHandle(String resourcePath) {
         return serveStatic && (resourcePath.startsWith("/struts/") || resourcePath.startsWith("/static/"));
     }

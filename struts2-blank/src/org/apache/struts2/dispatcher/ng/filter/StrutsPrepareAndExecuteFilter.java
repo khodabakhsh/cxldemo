@@ -48,8 +48,12 @@ public class StrutsPrepareAndExecuteFilter implements StrutsStatics, Filter {
         try {
             FilterHostConfig config = new FilterHostConfig(filterConfig);
             init.initLogging(config);
+            
             //创建、并初始化Dispatcher
             Dispatcher dispatcher = init.initDispatcher(config);
+            
+            //初始化struts的静态资源处理机制  
+            //@see org.apache.struts2.dispatcher.DefaultStaticContentLoader#setHostConfig(javax.servlet.FilterConfig)
             init.initStaticContentLoader(config, dispatcher);
 
             prepare = new PrepareOperations(filterConfig.getServletContext(), dispatcher);
@@ -78,7 +82,7 @@ public class StrutsPrepareAndExecuteFilter implements StrutsStatics, Filter {
         try {
             prepare.setEncodingAndLocale(request, response);
             prepare.createActionContext(request, response);
-            //设置dispatch实例到当前线程
+            //
             prepare.assignDispatcherToThread();
 			if ( excludedPatterns != null && prepare.isUrlExcluded(request, excludedPatterns)) {
 				chain.doFilter(request, response);
@@ -88,12 +92,17 @@ public class StrutsPrepareAndExecuteFilter implements StrutsStatics, Filter {
 				//找到对应的ActionMapping配置
 				ActionMapping mapping = prepare.findActionMapping(request, response, true);
 				if (mapping == null) {
-			        //判断是否静态资源处理
+					
+			        //判断是否静态资源处理(struts.serve.static配置的值为true，且请求以/struts/、/static/开头的资源时，视为用struts处理该静态请求)
 					boolean handled = execute.executeStaticResourceRequest(request, response);
+					
+					//如果没有处理成功，才让filter链继续往下走
+					//有一个问题，如果上面请求的静态资源在classpath中找不到，handled也是返回true。。。
 					if (!handled) {
 						chain.doFilter(request, response);
 					}
 				} else {
+					//执行ActionMapping
 					execute.executeAction(request, response, mapping);
 				}
 			}
