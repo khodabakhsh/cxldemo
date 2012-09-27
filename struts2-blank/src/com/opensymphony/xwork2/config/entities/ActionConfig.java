@@ -31,6 +31,8 @@ import java.util.Set;
 
 
 /**
+ * <p>对应了&ltaction&gt;节点的配置信息</p>
+ * 
  * Contains everything needed to configure and execute an action:
  * <ul>
  * <li>methodName - the method name to execute on the action. If this is null, the Action will be cast to the Action
@@ -59,6 +61,10 @@ public class ActionConfig extends Located implements Serializable {
     protected String methodName;
     protected String packageName;
     protected String name;
+    /**
+     * <li>见 {@link com.opensymphony.xwork2.config.providers.XmlConfigurationProvider#addAction}
+     * <li>此属性值可以在&ltaction&gt; 节点 中指定allowed-methods属性设置
+     */
     protected Set<String> allowedMethods;
 
     protected ActionConfig(String packageName, String name, String className) {
@@ -133,6 +139,13 @@ public class ActionConfig extends Located implements Serializable {
         return results;
     }
 
+    /**
+     * 判断这个ActionConfig的配置是否能应用用于方法method
+     * <li>{@link #allowedMethods} 仅有一个并且为"*"号
+     * <li>{@link #methodName}为null时，method等于"execute"  ；  或者{@link #methodName}不为null时，{@link #methodName}等于method
+     * <li>{@link #allowedMethods} 包含method
+     * @param method 要判断的method参数
+     */
     public boolean isAllowedMethod(String method) {
         if (allowedMethods.size() == 1 && WILDCARD.equals(allowedMethods.iterator().next())) {
             return true;

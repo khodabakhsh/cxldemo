@@ -440,6 +440,9 @@ public class PackageConfig extends Located implements Comparable, Serializable, 
     public static class Builder implements InterceptorLocator {
 
         protected PackageConfig target;
+        /**
+         * &lt;package&gt; 节点是否配置strict-method-invocation为true
+         */
         private boolean strictDMI;
 
         public Builder(String name) {

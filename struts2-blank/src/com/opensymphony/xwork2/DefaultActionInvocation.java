@@ -57,10 +57,20 @@ public class DefaultActionInvocation implements ActionInvocation {
 	private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
 
 	protected Object action;
+	/**
+	 * 对应ActionProxy实例
+	 */
 	protected ActionProxy proxy;
 	protected List<PreResultListener> preResultListeners;
+	/**
+	 * <li>是一个大杂烩对象。
+	 * <li>最初来源，看： {@link org.apache.struts2.dispatcher.Dispatcher#serviceAction(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, javax.servlet.ServletContext, org.apache.struts2.dispatcher.mapper.ActionMapping)}
+	 */
 	protected Map<String, Object> extraContext;
 	protected ActionContext invocationContext;
+	/**
+	 * action对应拦截器链
+	 */
 	protected Iterator<InterceptorMapping> interceptors;
 	protected ValueStack stack;
 	protected Result result;

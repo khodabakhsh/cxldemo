@@ -555,6 +555,11 @@ public class Dispatcher {
 			HttpServletResponse response, ServletContext context,
 			ActionMapping mapping) throws ServletException {
 
+		/**
+		 * 这个extraContext是个大杂烩，后续代码，会使用它来创建
+		 * @com.opensymphony.xwork2.DefaultActionInvocation
+		 * @StrutsActionProxy#invocation 属性就来自于这个DefaultActionInvocation
+		 */
 		Map<String, Object> extraContext = createContextMap(request, response,
 				mapping, context);
 
@@ -595,10 +600,12 @@ public class Dispatcher {
 					proxy.getInvocation().getStack());
 
 			// if the ActionMapping says to go straight to a result, do it!
+			//mapping已经指定了result的话，直接处理
 			if (mapping.getResult() != null) {
 				Result result = mapping.getResult();
 				result.execute(proxy.getInvocation());
 			} else {
+		    //开始执行ActionProy实例proxy！！
 				proxy.execute();
 			}
 

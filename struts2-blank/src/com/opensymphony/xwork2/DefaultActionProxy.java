@@ -36,6 +36,9 @@ import java.util.Locale;
 
 
 /**
+ * <li>在struts中对应到action执行处理逻辑，实例为：{@link org.apache.struts2.impl.StrutsActionProxy}为此类的子类
+ * <li>struts通过继承此类，重写{@link org.apache.struts2.impl.StrutsActionProxy#execute()}
+ * <p>
  * The Default ActionProxy implementation
  *
  * @author Rainer Hermanns
@@ -53,6 +56,8 @@ public class DefaultActionProxy implements ActionProxy, Serializable {
     protected Configuration configuration;
     protected ActionConfig config;
     protected ActionInvocation invocation;
+    /**
+     */
     protected UnknownHandlerManager unknownHandlerManager;
     protected String actionName;
     protected String namespace;
@@ -180,6 +185,7 @@ public class DefaultActionProxy implements ActionProxy, Serializable {
             UtilTimerStack.push(profileKey);
             config = configuration.getRuntimeConfiguration().getActionConfig(namespace, actionName);
 
+            //判断是否处理未匹配的action
             if (config == null && unknownHandlerManager.hasUnknownHandlers()) {
                 config = unknownHandlerManager.handleUnknownAction(namespace, actionName);
             }
@@ -190,6 +196,7 @@ public class DefaultActionProxy implements ActionProxy, Serializable {
             //如果没有，使用默认的execute方法。
             resolveMethod();
 
+            //判断这个ActionConfig的配置是否能应用用于方法method
             if (!config.isAllowedMethod(method)) {
                 throw new ConfigurationException("Invalid method: " + method + " for action " + actionName);
             }
