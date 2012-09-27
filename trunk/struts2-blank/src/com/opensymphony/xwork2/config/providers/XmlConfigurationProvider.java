@@ -455,6 +455,7 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 		List<ExceptionMappingConfig> exceptionMappings = buildExceptionMappings(
 				actionElement, packageContext);
 
+		//返回ActionConfig允许调用的方法集
 		Set<String> allowedMethods = buildAllowedMethods(actionElement,
 				packageContext);
 
@@ -900,6 +901,12 @@ public class XmlConfigurationProvider implements ConfigurationProvider {
 		return exceptionMappings;
 	}
 
+	/**
+	 * <li>1.如果&lt;action&gt; 节点配置了allowed-methods属性，用这个来构建
+	 * <li>2.如果packageContext#strictDMI为true，返回 new HashSet<String>()
+	 * <li>3.否则，返回null
+	 * @param packageContext
+	 */
 	protected Set<String> buildAllowedMethods(Element element,
 			PackageConfig.Builder packageContext) {
 		NodeList allowedMethodsEls = element

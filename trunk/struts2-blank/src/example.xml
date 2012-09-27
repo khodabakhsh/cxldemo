@@ -33,6 +33,7 @@
 		</action>
 
 
+
 		<action name="Login_*" method="{1}" class="example.Login">
 			<result name="input">/example/Login.jsp</result>
 			<result type="redirectAction">Menu</result>
