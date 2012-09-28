@@ -103,7 +103,13 @@ public class PrepareInterceptor extends MethodFilterInterceptor {
     private final static String PREPARE_PREFIX = "prepare";
     private final static String ALT_PREPARE_PREFIX = "prepareDo";
 
+    /**
+     * 是否总是执行action中的prepare方法
+     */
     private boolean alwaysInvokePrepare = true;
+    /**
+     * 优先处理前缀"prepareDo",还是"prepare"
+     */
     private boolean firstCallPrepareDo = false;
 
     /**
@@ -128,13 +134,19 @@ public class PrepareInterceptor extends MethodFilterInterceptor {
         this.firstCallPrepareDo = Boolean.parseBoolean(firstCallPrepareDo);
     }
 
+    /**<li>实现以下功能：：
+     * <li>执行prepare{方法名}，或prepareDo{方法名}
+     * <li>执行prepare方法
+     */
     @Override
     public String doIntercept(ActionInvocation invocation) throws Exception {
         Object action = invocation.getAction();
-
+        //action必须实现了{@link com.opensymphony.xwork2.Preparable}接口
         if (action instanceof Preparable) {
             try {
                 String[] prefixes;
+                //优先处理前缀"prepareDo",还是"prepare"
+                //默认是"prepare"前缀
                 if (firstCallPrepareDo) {
                     prefixes = new String[] {ALT_PREPARE_PREFIX, PREPARE_PREFIX};
                 } else {
