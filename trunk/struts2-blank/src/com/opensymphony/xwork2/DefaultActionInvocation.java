@@ -74,7 +74,8 @@ public class DefaultActionInvocation implements ActionInvocation {
 	 * 如
 	 * <li>com.opensymphony.xwork2.interceptor.PrepareInterceptor
 	 * <li>com.opensymphony.xwork2.interceptor.ParametersInterceptor
-	 * 
+	 * <li>com.opensymphony.xwork2.interceptor.ModelDrivenInterceptor
+	 * <li>还有很多....
 	 */
 	protected Iterator<InterceptorMapping> interceptors;
 	protected ValueStack stack;
