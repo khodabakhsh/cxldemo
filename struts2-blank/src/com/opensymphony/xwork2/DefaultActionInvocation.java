@@ -70,6 +70,11 @@ public class DefaultActionInvocation implements ActionInvocation {
 	protected ActionContext invocationContext;
 	/**
 	 * action对应拦截器链
+	 * struts有很多拦截器，
+	 * 如
+	 * <li>com.opensymphony.xwork2.interceptor.PrepareInterceptor
+	 * <li>com.opensymphony.xwork2.interceptor.ParametersInterceptor
+	 * 
 	 */
 	protected Iterator<InterceptorMapping> interceptors;
 	protected ValueStack stack;
@@ -281,7 +286,7 @@ public class DefaultActionInvocation implements ActionInvocation {
 			// will return to the Interceptor, which will
 			// return above and flow through again
 
-			// 整个拦截器栈中应该仅仅让最后的拦截器执行一次,再把执行结果逆向返回上一个拦截器。
+			// 整个拦截器栈中应该仅仅让的拦截器执行一次,再把执行结果逆向返回上一个拦截器。
 			if (!executed) {
 				if (preResultListeners != null) {
 					for (Object preResultListener : preResultListeners) {
@@ -473,7 +478,7 @@ public class DefaultActionInvocation implements ActionInvocation {
 			} catch (NoSuchMethodException e) {
 				// hmm -- OK, try doXxx instead
 				try {
-					//拿不到对应的方法，还回去匹配do***的方法
+					//拿不到对应的方法，还会去匹配do***的方法
 					String altMethodName = "do" + methodName.substring(0, 1).toUpperCase() + methodName.substring(1);
 					method = getAction().getClass().getMethod(altMethodName, EMPTY_CLASS_ARRAY);
 				} catch (NoSuchMethodException e1) {
