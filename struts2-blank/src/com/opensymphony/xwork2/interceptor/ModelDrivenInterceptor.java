@@ -85,7 +85,7 @@ public class ModelDrivenInterceptor extends AbstractInterceptor {
     @Override
     public String intercept(ActionInvocation invocation) throws Exception {
         Object action = invocation.getAction();
-
+        //需要实现了ModelDriven接口
         if (action instanceof ModelDriven) {
             ModelDriven modelDriven = (ModelDriven) action;
             ValueStack stack = invocation.getStack();

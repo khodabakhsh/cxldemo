@@ -209,6 +209,7 @@ public class ParametersInterceptor extends MethodFilterInterceptor {
     @Override
     public String doIntercept(ActionInvocation invocation) throws Exception {
         Object action = invocation.getAction();
+        //看代码可知如果action实现了NoParameters接口，就不会注入参数
         if (!(action instanceof NoParameters)) {
             ActionContext ac = invocation.getInvocationContext();
             final Map<String, Object> parameters = retrieveParameters(ac);
