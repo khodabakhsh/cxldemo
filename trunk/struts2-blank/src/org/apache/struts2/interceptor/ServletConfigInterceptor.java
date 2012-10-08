@@ -119,6 +119,16 @@ public class ServletConfigInterceptor extends AbstractInterceptor implements Str
      *
      * @param invocation an encapsulation of the action execution state.
      * @throws Exception if an error occurs when setting action properties.
+     * 
+     * 
+     * action可以通过实现下列不同的接口，从而获得不同的属性：如request、response、session等等等....
+     * @see ServletContextAware
+     * @see ServletRequestAware
+     * @see ServletResponseAware
+     * @see ParameterAware
+     * @see SessionAware
+     * @see ApplicationAware
+     * @see PrincipalAware
      */
     public String intercept(ActionInvocation invocation) throws Exception {
         final Object action = invocation.getAction();
