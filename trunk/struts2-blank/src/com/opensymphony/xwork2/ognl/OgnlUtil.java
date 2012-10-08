@@ -209,6 +209,9 @@ public class OgnlUtil {
         setValue(name, context, root, value, true);
     }
 
+	/**
+	 * 使用ognl赋值
+	 */
     protected void setValue(String name, Map<String, Object> context, Object root, Object value, boolean evalName) throws OgnlException {
         Object tree = compile(name);
         if (!evalName && isEvalExpression(tree, context)) {

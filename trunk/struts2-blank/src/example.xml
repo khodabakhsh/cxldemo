@@ -32,7 +32,9 @@
 		<action name="/sub/path/echo" method="subPathEcho" class="example.HelloWorld">
 		</action>
 
-
+        <!-- 带请求参数 -->
+		<action name="echoUserName" method="echoUserName" class="example.HelloWorld">
+		</action>
 
 		<action name="Login_*" method="{1}" class="example.Login">
 			<result name="input">/example/Login.jsp</result>

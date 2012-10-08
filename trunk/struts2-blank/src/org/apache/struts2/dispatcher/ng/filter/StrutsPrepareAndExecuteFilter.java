@@ -37,9 +37,13 @@ import java.util.regex.Pattern;
 /**
  * Handles both the preparation and execution phases of the Struts dispatching process.  This filter is better to use
  * when you don't have another filter that needs access to action context information, such as Sitemesh.
+ * 
+ *<p><b>在Struts 2.1.3 之前，使用 的应该是{@link org.apache.struts2.dispatcher.FilterDispatcher}</b>
  */
 public class StrutsPrepareAndExecuteFilter implements StrutsStatics, Filter {
+	//预处理
     protected PrepareOperations prepare;
+    //执行处理
     protected ExecuteOperations execute;
 	protected List<Pattern> excludedPatterns = null;
 
@@ -81,6 +85,8 @@ public class StrutsPrepareAndExecuteFilter implements StrutsStatics, Filter {
 
         try {
             prepare.setEncodingAndLocale(request, response);
+            
+            //下面代码，创建action context，并设置thread local
             prepare.createActionContext(request, response);
             //
             prepare.assignDispatcherToThread();

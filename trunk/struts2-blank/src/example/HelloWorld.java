@@ -75,8 +75,25 @@ public class HelloWorld extends ExampleSupport {
     	return null;
     }
     
+    public String echoUserName(){
+    	try {
+			ServletActionContext.getResponse().getWriter().write("请求参数"+"userName --- >  "+userName);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return null;
+    }
+    private String userName;
+    
+    
 
-    /**
+    public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	/**
      * Provide default valuie for Message property.
      */
     public static final String MESSAGE = "HelloWorld.message";

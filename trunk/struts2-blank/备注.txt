@@ -29,3 +29,7 @@ com.opensymphony.xwork2.config.ConfigurationManager有使用到ReentrantLock来�
 
 
 7.UtilTimerStack
+
+8.ParametersInterceptor里的Collections.emptySet()使用
+
+9.static的ThreadLocal属性，如ActionContext#actionContext

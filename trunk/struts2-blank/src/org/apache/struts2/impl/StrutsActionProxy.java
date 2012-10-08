@@ -40,8 +40,11 @@ public class StrutsActionProxy extends DefaultActionProxy {
         super(inv, namespace, actionName, methodName, executeResult, cleanupContext);
     }
 
+    
     public String execute() throws Exception {
         ActionContext previous = ActionContext.getContext();
+        
+        //调整当前线程的action context
         ActionContext.setContext(invocation.getInvocationContext());
         try {
 // This is for the new API:

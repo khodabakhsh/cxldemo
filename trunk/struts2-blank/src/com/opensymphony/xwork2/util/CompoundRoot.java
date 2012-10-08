@@ -22,6 +22,8 @@ import java.util.List;
 /**
  * A Stack that is implemented using a List.
  * 
+ * <p>用ArrayList实现简单的栈结构</p>
+ * 
  * @author plightbo
  * @version $Revision: 894090 $
  */

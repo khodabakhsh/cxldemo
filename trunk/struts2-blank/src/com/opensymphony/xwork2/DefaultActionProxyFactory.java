@@ -53,7 +53,7 @@ public class DefaultActionProxyFactory implements ActionProxyFactory {
     //在struts中,默认由@StrutsActionProxyFactory 作为ActionProxyFactory的实现
     //这里便是由@StrutsActionProxyFactory 调用的父类方法
     public ActionProxy createActionProxy(String namespace, String actionName, String methodName, Map<String, Object> extraContext, boolean executeResult, boolean cleanupContext) {
-        
+        //在这里实例化DefaultActionInvocation
         ActionInvocation inv = new DefaultActionInvocation(extraContext, true);
         //注入属性、方法
         container.inject(inv);

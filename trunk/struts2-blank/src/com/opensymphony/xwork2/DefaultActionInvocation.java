@@ -33,6 +33,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.dispatcher.mapper.ActionMapping;
+
 /**
  * The Default ActionInvocation implementation
  * 
@@ -322,6 +328,9 @@ public class DefaultActionInvocation implements ActionInvocation {
 		return invokeAction(getAction(), proxy.getConfig());
 	}
 
+	/**
+	 * 为{@link #action} 赋值
+	 */
 	protected void createAction(Map<String, Object> contextMap) {
 		// load action
 		String timerKey = "actionCreate: " + proxy.getActionName();
@@ -359,9 +368,15 @@ public class DefaultActionInvocation implements ActionInvocation {
 		}
 	}
 
+	/**
+	 * 创建一个contextMap,这个对象也是包罗万象啦！
+	 */
 	protected Map<String, Object> createContextMap() {
+		
 		Map<String, Object> contextMap;
-
+		
+		//见{@link org.apache.struts2.dispatcher.Dispatcher#serviceAction(HttpServletRequest request,HttpServletResponse response, ServletContext context,ActionMapping mapping)}
+		//,已经中为extraContext赋值，且已包含ValueStack值啦
 		if ((extraContext != null) && (extraContext.containsKey(ActionContext.VALUE_STACK))) {
 			// In case the ValueStack was passed in
 			stack = (ValueStack) extraContext.get(ActionContext.VALUE_STACK);
@@ -382,6 +397,7 @@ public class DefaultActionInvocation implements ActionInvocation {
 
 		// put extraContext in
 		if (extraContext != null) {
+			//这里让contextMap拥有全部extraContext的内容,当然也包括了value stack值
 			contextMap.putAll(extraContext);
 		}
 
@@ -425,8 +441,19 @@ public class DefaultActionInvocation implements ActionInvocation {
 		}
 	}
 
+	/**
+	 * 完成众多属性的赋值:
+	 * <li>{@link #proxy}
+	 * <li>{@link #action}
+	 * <li>{@link #stack}
+	 * <li>{@link #invocationContext}
+	 * <li>{@link #interceptors}
+	 * <li>等等...
+	 */
 	public void init(ActionProxy proxy) {
 		this.proxy = proxy;
+		
+	    //创建一个contextMap，是一个包罗万象的对象呀。
 		Map<String, Object> contextMap = createContextMap();
 
 		// Setting this so that other classes, like object factories, can use
@@ -438,13 +465,17 @@ public class DefaultActionInvocation implements ActionInvocation {
 			actionContext.setActionInvocation(this);
 		}
 
+		//为action属性赋值
 		createAction(contextMap);
 
 		if (pushAction) {
+			
+			//加入action实例到value stack的root中。
 			stack.push(action);
 			contextMap.put("action", action);
 		}
 
+		//为属性invocationContext赋值
 		invocationContext = new ActionContext(contextMap);
 		invocationContext.setName(proxy.getActionName());
 

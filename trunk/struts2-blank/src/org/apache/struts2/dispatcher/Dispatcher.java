@@ -557,8 +557,8 @@ public class Dispatcher {
 
 		/**
 		 * 这个extraContext是个大杂烩，后续代码，会使用它来创建
-		 * @com.opensymphony.xwork2.DefaultActionInvocation
-		 * @StrutsActionProxy#invocation 属性就来自于这个DefaultActionInvocation
+		 * @com.opensymphony.xwork2.DefaultActionInvocation ,
+		 * 而@StrutsActionProxy#invocation 属性就来自于这个DefaultActionInvocation
 		 */
 		Map<String, Object> extraContext = createContextMap(request, response,
 				mapping, context);
@@ -574,6 +574,7 @@ public class Dispatcher {
 				stack = ctx.getValueStack();
 			}
 		}
+		//创建并设置一个新的value stack到extraContext中，而extraContext用于对@DefaultActionInvocation 的extraContext属性赋值
 		if (stack != null) {
 			extraContext.put(ActionContext.VALUE_STACK,
 					valueStackFactory.createValueStack(stack));
@@ -589,7 +590,7 @@ public class Dispatcher {
 			Configuration config = configurationManager.getConfiguration();
 			
 			//在struts中,默认由@StrutsActionProxyFactory 作为ActionProxyFactory的实现
-			//下面获得的ActionProxy是一个@StrutsActionProxy
+			//下面获得的ActionProxy是一个@StrutsActionProxy , 在创建的时候，已经执行了@StrutsActionProxy#prepare 方法。
 			ActionProxy proxy = config
 					.getContainer()
 					.getInstance(ActionProxyFactory.class)
@@ -605,7 +606,7 @@ public class Dispatcher {
 				Result result = mapping.getResult();
 				result.execute(proxy.getInvocation());
 			} else {
-		    //开始执行ActionProy实例proxy！！
+		    //开始执行ActionProy实例proxy！！调用invocation#invoke方法
 				proxy.execute();
 			}
 

@@ -31,7 +31,9 @@ import com.opensymphony.xwork2.DefaultActionProxyFactory;
 
 public class StrutsActionProxyFactory extends DefaultActionProxyFactory {
 
-    @Override
+	/**
+	 * 实例化@StrutsActionProxy , 并执行其prepare方法(对其一些属性赋值、初始化，如invocation属性)
+	 */
     public ActionProxy createActionProxy(ActionInvocation inv, String namespace, String actionName, String methodName, boolean executeResult, boolean cleanupContext) {
         
         StrutsActionProxy proxy = new StrutsActionProxy(inv, namespace, actionName, methodName, executeResult, cleanupContext);

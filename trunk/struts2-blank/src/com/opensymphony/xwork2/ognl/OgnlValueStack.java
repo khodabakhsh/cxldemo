@@ -84,11 +84,16 @@ public class OgnlValueStack implements Serializable, ValueStack, ClearableValueS
         this.ognlUtil = ognlUtil;
     }
 
-    protected void setRoot(XWorkConverter xworkConverter, CompoundRootAccessor accessor, CompoundRoot compoundRoot,
+    @SuppressWarnings("unchecked")
+	protected void setRoot(XWorkConverter xworkConverter, CompoundRootAccessor accessor, CompoundRoot compoundRoot,
                            boolean allowStaticMethodAccess) {
         this.root = compoundRoot;
         this.securityMemberAccess = new SecurityMemberAccess(allowStaticMethodAccess);
+        
+        //使用ognl,这里的属性context，就是实例化为一个ognl.OgnlContext类型的对象
         this.context = Ognl.createDefaultContext(this.root, accessor, new OgnlTypeConverterWrapper(xworkConverter), securityMemberAccess);
+        
+        //设置当前OgnlValueStack实例到context中
         context.put(VALUE_STACK, this);
         Ognl.setClassResolver(context, accessor);
         ((OgnlContext) context).setTraceEvaluations(false);
