@@ -149,9 +149,21 @@ public class ExceptionMappingInterceptor extends AbstractInterceptor {
     
     protected static final Logger LOG = LoggerFactory.getLogger(ExceptionMappingInterceptor.class);
 
+    /**
+     * 在{@link #logCategory}有设置的时候才用到
+     */
     protected Logger categoryLogger;
+    /**
+     * 是否记录日志
+     */
     protected boolean logEnabled = false;
+    /**
+     * 日志类别
+     */
     protected String logCategory;
+    /**
+     * 日志级别
+     */
     protected String logLevel;
     
 
@@ -179,8 +191,11 @@ public class ExceptionMappingInterceptor extends AbstractInterceptor {
 		this.logLevel = logLevel;
 	}
 
-    @Override
-    public String intercept(ActionInvocation invocation) throws Exception {
+
+	/**
+	 * 异常处理拦截器，应该建议配置在拦截器链的第一个位置，这样能捕获到其它拦截器抛出的异常
+	 */
+	public String intercept(ActionInvocation invocation) throws Exception {
         String result;
 
         try {
@@ -189,10 +204,14 @@ public class ExceptionMappingInterceptor extends AbstractInterceptor {
             if (isLogEnabled()) {
                 handleLogging(e);
             }
+            //在xml配置文件中，异常配置应该是<exception-mapping>节点
             List<ExceptionMappingConfig> exceptionMappings = invocation.getProxy().getConfig().getExceptionMappings();
             String mappedResult = this.findResultFromExceptions(exceptionMappings, e);
+            
+            //有配置异常处理结果的话，就可以进一步处理
             if (mappedResult != null) {
                 result = mappedResult;
+                //包装异常，并放入invocation的value stack中
                 publishException(invocation, new ExceptionHolder(e));
             } else {
                 throw e;
@@ -248,6 +267,9 @@ public class ExceptionMappingInterceptor extends AbstractInterceptor {
     	}
     }
 
+    /**
+     * 寻找xml中异常配置
+     */
     protected String findResultFromExceptions(List<ExceptionMappingConfig> exceptionMappings, Throwable t) {
         String result = null;
 
@@ -257,6 +279,7 @@ public class ExceptionMappingInterceptor extends AbstractInterceptor {
             for (Object exceptionMapping : exceptionMappings) {
                 ExceptionMappingConfig exceptionMappingConfig = (ExceptionMappingConfig) exceptionMapping;
                 int depth = getDepth(exceptionMappingConfig.getExceptionClassName(), t);
+                //寻找匹配的异常配置。在类继承中越靠近异常类别的优先。
                 if (depth >= 0 && depth < deepest) {
                     deepest = depth;
                     result = exceptionMappingConfig.getResult();
@@ -279,6 +302,9 @@ public class ExceptionMappingInterceptor extends AbstractInterceptor {
         return getDepth(exceptionMapping, t.getClass(), 0);
     }
 
+    /**
+     * 递归寻找匹配的异常配置。
+     */
     private int getDepth(String exceptionMapping, Class exceptionClass, int depth) {
         if (exceptionClass.getName().contains(exceptionMapping)) {
             // Found it!

@@ -91,8 +91,17 @@ public class I18nInterceptor extends AbstractInterceptor {
     public static final String DEFAULT_PARAMETER = "request_locale";
     public static final String DEFAULT_REQUESTONLY_PARAMETER = "request_only_locale";
 
+    /**
+     * 用于设置locale的请求参数名称
+     */
     protected String parameterName = DEFAULT_PARAMETER;
+    /**
+     * 仅仅用于设置当前请求locale的请求参数名称，只有当{@link #parameterName}没设置时才有效
+     */
     protected String requestOnlyParameterName = DEFAULT_REQUESTONLY_PARAMETER;
+    /**
+     * 用作键名把locale值设置到session中
+     */
     protected String attributeName = DEFAULT_SESSION_ATTRIBUTE;
 
     public I18nInterceptor() {
@@ -113,7 +122,10 @@ public class I18nInterceptor extends AbstractInterceptor {
         this.attributeName = attributeName;
     }
 
-    @Override
+    /**
+     * 通过一些有关locale设置的请求参数，
+     * 把指定的locale信息设置到session中，或仅作用于当前请求,
+     */
     public String intercept(ActionInvocation invocation) throws Exception {
         if (LOG.isDebugEnabled()) {
             LOG.debug("intercept '"
@@ -124,10 +136,13 @@ public class I18nInterceptor extends AbstractInterceptor {
         Map<String, Object> params = invocation.getInvocationContext().getParameters();
 
         boolean storeInSession = true;
+        //优先使用parameterName获取locale参数
         Object requested_locale = findLocaleParameter(params, parameterName);
         if (requested_locale == null) {
+        	//找不到的话，再使用requestOnlyParameterName获取locale参数
             requested_locale = findLocaleParameter(params, requestOnlyParameterName);
             if (requested_locale != null) {
+            	//requestOnlyParameterName，不保存在session中
                 storeInSession = false;
             }
         }
@@ -163,10 +178,12 @@ public class I18nInterceptor extends AbstractInterceptor {
                     }
                 }
                 if (storeInSession) {
+                	//如果需要保存到session中
                     session.put(attributeName, locale);
                 }
             }
         }
+        //为invocation设置locale
         saveLocale(invocation, locale);
 
         if (LOG.isDebugEnabled()) {
@@ -185,6 +202,9 @@ public class I18nInterceptor extends AbstractInterceptor {
         return result;
     }
 
+    /**
+     * 获得locale参数
+     */
     private Object findLocaleParameter(Map<String, Object> params, String parameterName) {
         Object requested_locale = params.remove(parameterName);
         if (requested_locale != null && requested_locale.getClass().isArray()

@@ -90,6 +90,9 @@ public class AliasInterceptor extends AbstractInterceptor {
     private static final Logger LOG = LoggerFactory.getLogger(AliasInterceptor.class);
 
     private static final String DEFAULT_ALIAS_KEY = "aliases";
+    /**
+     * 别名配置名称，默认为"aliases"
+     */
     protected String aliasesKey = DEFAULT_ALIAS_KEY;
 
     protected ValueStackFactory valueStackFactory;
@@ -116,7 +119,10 @@ public class AliasInterceptor extends AbstractInterceptor {
         this.aliasesKey = aliasesKey;
     }
 
-    @Override public String intercept(ActionInvocation invocation) throws Exception {
+    /**
+     * 别名拦截器。应该是用于"为别名参数赋值"
+     */
+    public String intercept(ActionInvocation invocation) throws Exception {
 
         ActionConfig config = invocation.getProxy().getConfig();
         ActionContext ac = invocation.getInvocationContext();
@@ -125,6 +131,7 @@ public class AliasInterceptor extends AbstractInterceptor {
         // get the action's parameters
         final Map<String, String> parameters = config.getParams();
 
+        //首先判断action配置中是否有别名参数配置
         if (parameters.containsKey(aliasesKey)) {
 
             String aliasExpression = parameters.get(aliasesKey);
@@ -165,6 +172,7 @@ public class AliasInterceptor extends AbstractInterceptor {
                     }
                     if (null != value) {
                         try {
+                        	//为别名参数赋值
                             newStack.setValue(alias, value);
                         } catch (RuntimeException e) {
                             if (devMode) {
