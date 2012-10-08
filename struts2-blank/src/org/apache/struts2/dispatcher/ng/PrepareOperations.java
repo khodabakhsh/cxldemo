@@ -43,6 +43,14 @@ import java.util.regex.Pattern;
 
 /**
  * Contains preparation operations for a request before execution
+ * <p>做一些预处理工作，如：
+ * <li>创建action context，并设置thread local, {@link #createActionContext(HttpServletRequest, HttpServletResponse)}
+ * <li>设置请求编码,  {@link #setEncodingAndLocale(HttpServletRequest, HttpServletResponse)}
+ * <li>包装request  ,  {@link #wrapRequest(HttpServletRequest)}
+ * <li>释放request资源（如由MultiPartRequestWrapper创建的文件）; 设置 ActionContext.setContext(null); Dispatcher.setInstance(null);
+ * , 详情见 {@link #cleanupRequest(HttpServletRequest)}
+ * <li>其他等等...
+ * </p>
  */
 public class PrepareOperations {
 
@@ -77,6 +85,8 @@ public class PrepareOperations {
         } else {
             ValueStack stack = dispatcher.getContainer().getInstance(ValueStackFactory.class).createValueStack();
             stack.getContext().putAll(dispatcher.createContextMap(request, response, null, servletContext));
+            
+            //利用ValueStack的context属性实例化ActionContext
             ctx = new ActionContext(stack.getContext());
         }
         request.setAttribute(CLEANUP_RECURSION_COUNTER, counter);

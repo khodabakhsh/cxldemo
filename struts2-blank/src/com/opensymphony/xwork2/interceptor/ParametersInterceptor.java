@@ -132,7 +132,9 @@ public class ParametersInterceptor extends MethodFilterInterceptor {
     private static final Logger LOG = LoggerFactory.getLogger(ParametersInterceptor.class);
 
     protected static final int PARAM_NAME_MAX_LENGTH = 100;
-
+    /**
+     * 参数名最大长度
+     */
     private int paramNameMaxLength = PARAM_NAME_MAX_LENGTH;
 
     boolean ordered = false;
@@ -140,7 +142,9 @@ public class ParametersInterceptor extends MethodFilterInterceptor {
     Set<Pattern> acceptParams = Collections.emptySet();
     static boolean devMode = false;
 
-    // Allowed names of parameters
+    /**
+     *  Allowed names of parameters
+     */
     private String acceptedParamNames = "\\w+((\\.\\w+)|(\\[\\d+\\])|(\\(\\d+\\))|(\\['\\w+'\\])|(\\('\\w+'\\)))*";
     private Pattern acceptedPattern = Pattern.compile(acceptedParamNames);
 
@@ -260,7 +264,12 @@ public class ParametersInterceptor extends MethodFilterInterceptor {
     protected void addParametersToContext(ActionContext ac, Map<String, Object> newParams) {
     }
 
+    
+    /**
+     * 参数注入
+     */
     protected void setParameters(Object action, ValueStack stack, final Map<String, Object> parameters) {
+    	//由下面代码可知，action实现了ParameterNameAware接口，就可以过滤选择自己需要的注入参数
         ParameterNameAware parameterNameAware = (action instanceof ParameterNameAware)
                 ? (ParameterNameAware) action : null;
 
@@ -278,6 +287,7 @@ public class ParametersInterceptor extends MethodFilterInterceptor {
         for (Map.Entry<String, Object> entry : params.entrySet()) {
             String name = entry.getKey();
 
+            //判断参数是否可以用于注入
             boolean acceptableName = acceptableName(name)
                     && (parameterNameAware == null
                     || parameterNameAware.acceptableParameterName(name));
@@ -315,6 +325,9 @@ public class ParametersInterceptor extends MethodFilterInterceptor {
             String name = entry.getKey();
             Object value = entry.getValue();
             try {
+            	//使用ognl注入参数,此时的newStack的root是：
+            	//1.com.opensymphony.xwork2.DefaultTextProvider实例
+            	//2.action实例
                 newStack.setParameter(name, value);
             } catch (RuntimeException e) {
                 if (devMode) {
@@ -346,6 +359,9 @@ public class ParametersInterceptor extends MethodFilterInterceptor {
         return rbCollator;
     }
 
+    /**
+     * 用于打印参数日志
+     */
     protected String getParameterLogMap(Map<String, Object> parameters) {
         if (parameters == null) {
             return "NONE";
@@ -375,15 +391,24 @@ public class ParametersInterceptor extends MethodFilterInterceptor {
         return logEntry.toString();
     }
 
+    /**
+     * 
+     */
     protected boolean acceptableName(String name) {
         return isWithinLengthLimit(name) && isAccepted(name)
                 && !isExcluded(name);
     }
 
+    /**
+     * 参数长度检验
+     */
 	protected boolean isWithinLengthLimit( String name ) {
 		return name.length() <= paramNameMaxLength;
 	}
 
+	/**
+	 * 参数是否允许处理检验
+	 */
 	protected boolean isAccepted(String paramName) {
         if (!this.acceptParams.isEmpty()) {
             for (Pattern pattern : acceptParams) {
@@ -397,6 +422,9 @@ public class ParametersInterceptor extends MethodFilterInterceptor {
             return acceptedPattern.matcher(paramName).matches();
     }
 
+	/**
+	 * 参数排除检验
+	 */
     protected boolean isExcluded(String paramName) {
         if (!this.excludeParams.isEmpty()) {
             for (Pattern pattern : excludeParams) {

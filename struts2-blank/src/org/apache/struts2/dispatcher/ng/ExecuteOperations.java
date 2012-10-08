@@ -33,6 +33,7 @@ import java.io.IOException;
 
 /**
  * Contains execution operations for filters
+ * <p>其实就是对dispatcher、servletContext做了一个包装进行调用而已。</p>
  */
 public class ExecuteOperations {
     private ServletContext servletContext;
