@@ -83,6 +83,19 @@ public class HelloWorld extends ExampleSupport {
 		}
     	return null;
     }
+    public String echoActionParam(){
+    	try {
+			ServletActionContext.getResponse().getWriter().write("配置在当前<action>中的<param>节点值  -->  "+actionParam);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return null;
+    }
+    public void setActionParam(String value){
+    	actionParam = value;
+    }
+    private String actionParam;
+    
     private String userName;
     
     

@@ -134,7 +134,7 @@ public class PrepareInterceptor extends MethodFilterInterceptor {
         this.firstCallPrepareDo = Boolean.parseBoolean(firstCallPrepareDo);
     }
 
-    /**<li>实现以下功能：：
+    /**<li>可以实现以下功能：：
      * <li>执行prepare{方法名}，或prepareDo{方法名}
      * <li>执行prepare方法
      */
@@ -175,6 +175,7 @@ public class PrepareInterceptor extends MethodFilterInterceptor {
                 }
             }
 
+            //是否执行prepare方法
             if (alwaysInvokePrepare) {
                 ((Preparable) action).prepare();
             }

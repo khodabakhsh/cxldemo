@@ -78,6 +78,7 @@ import java.util.Map;
  * <!-- END SNIPPET: example -->
  * </pre>
  *
+ * 用于"参数转换错误"记录、处理
  * @author Jason Carreira
  */
 public class ConversionErrorInterceptor extends AbstractInterceptor {
@@ -109,6 +110,7 @@ public class ConversionErrorInterceptor extends AbstractInterceptor {
                 String message = XWorkConverter.getConversionErrorMessage(propertyName, stack);
 
                 Object action = invocation.getAction();
+                //实现了ValidationAware , 就增加该错误信息
                 if (action instanceof ValidationAware) {
                     ValidationAware va = (ValidationAware) action;
                     va.addFieldError(propertyName, message);
@@ -117,7 +119,7 @@ public class ConversionErrorInterceptor extends AbstractInterceptor {
                 if (fakie == null) {
                     fakie = new HashMap<Object, Object>();
                 }
-
+                //记录原始值
                 fakie.put(propertyName, getOverrideExpr(invocation, value));
             }
         }
@@ -125,6 +127,7 @@ public class ConversionErrorInterceptor extends AbstractInterceptor {
         if (fakie != null) {
             // if there were some errors, put the original (fake) values in place right before the result
             stack.getContext().put(ORIGINAL_PROPERTY_OVERRIDE, fakie);
+            //增加监听
             invocation.addPreResultListener(new PreResultListener() {
                 public void beforeResult(ActionInvocation invocation, String resultCode) {
                     Map<Object, Object> fakie = (Map<Object, Object>) invocation.getInvocationContext().get(ORIGINAL_PROPERTY_OVERRIDE);
@@ -138,6 +141,9 @@ public class ConversionErrorInterceptor extends AbstractInterceptor {
         return invocation.invoke();
     }
 
+    /**
+     * 默认返回true，子类可以重写此方法进行过滤
+     */
     protected boolean shouldAddError(String propertyName, Object value) {
         return true;
     }

@@ -47,6 +47,8 @@ import java.util.Iterator;
  * <!-- START SNIPPET: extending -->
  * <p/>
  * <!-- END SNIPPET: extending -->
+ * 
+ * <b>这个拦截器应该只用于struts的标签&lt; s:checkbox &gt; ;并且使用该标签，应保证不能重名，否则拦截器失效。</b>
  */
 public class CheckboxInterceptor extends AbstractInterceptor {
 
@@ -64,12 +66,13 @@ public class CheckboxInterceptor extends AbstractInterceptor {
         for (Iterator<Map.Entry> iterator = entries.iterator(); iterator.hasNext();) {
             Map.Entry entry = iterator.next();
             String key = (String)entry.getKey();
-
+            //由下面的代码可知，这个拦截器应该只用于struts的标签<s:checkbox>,"__checkbox_"是由该标签生成的hidden域id前缀。
             if (key.startsWith("__checkbox_")) {
                 String name = key.substring("__checkbox_".length());
 
                 Object values = entry.getValue();
                 iterator.remove();
+                //由此可见，<s:checkbox>重名的话，这个拦截器就失效了。。
                 if (values != null && values instanceof String[] && ((String[])values).length > 1) {
                     if (LOG.isDebugEnabled()) {
                 	    LOG.debug("Bypassing automatic checkbox detection due to multiple checkboxes of the same name: #0", name);

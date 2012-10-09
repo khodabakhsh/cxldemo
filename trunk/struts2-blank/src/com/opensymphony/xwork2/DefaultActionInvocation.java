@@ -295,6 +295,8 @@ public class DefaultActionInvocation implements ActionInvocation {
 
 			// 整个拦截器栈中应该仅仅让的拦截器执行一次,再把执行结果逆向返回上一个拦截器。
 			if (!executed) {
+				
+				//在某些拦截器(如ModelDrivenInterceptor中)，可以根据设置添加PreResultListener实例
 				if (preResultListeners != null) {
 					for (Object preResultListener : preResultListeners) {
 						PreResultListener listener = (PreResultListener) preResultListener;

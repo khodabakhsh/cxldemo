@@ -118,6 +118,10 @@ import com.opensymphony.xwork2.util.logging.LoggerFactory;
  * <!-- END SNIPPET: example -->
  * </pre>
  *
+ * 用于验证的拦截器,验证来源：
+ * <li>{action名}-validation.xml或者注解
+ * <li>action实例中validate***,validateDo***,validate()方法(必须实现com.opensymphony.xwork2.Validateable 接口)
+ * <br>
  * @author Jason Carreira
  * @author Rainer Hermanns
  * @author <a href='mailto:the_mindstorm[at]evolva[dot]ro'>Alexandru Popescu</a>
@@ -215,6 +219,7 @@ public class ValidationInterceptor extends MethodFilterInterceptor {
         }
         
 
+        //下面的验证基于：{action名}-validation.xml或者注解
         if (declarative) {
            if (validateAnnotatedMethodOnly) {
                actionValidatorManager.validate(action, context, method);
@@ -222,7 +227,7 @@ public class ValidationInterceptor extends MethodFilterInterceptor {
                actionValidatorManager.validate(action, context);
            }
        }    
-        
+        //必须实现com.opensymphony.xwork2.Validateable 接口，才会执行validate***,validateDo***,validate()方法
         if (action instanceof Validateable && programmatic) {
             // keep exception that might occured in validateXXX or validateDoXXX
             Exception exception = null; 
@@ -233,6 +238,7 @@ public class ValidationInterceptor extends MethodFilterInterceptor {
             }
             
             try {
+            	//执行action实例中以validate***、validateDo***为前缀的方法(执行其中一个，优先validate***方法，不包含validate方法本身)
                 PrefixMethodInvocationUtil.invokePrefixMethod(
                                 invocation, 
                                 new String[] { VALIDATE_PREFIX, ALT_VALIDATE_PREFIX });
@@ -248,9 +254,10 @@ public class ValidationInterceptor extends MethodFilterInterceptor {
             
             
             if (alwaysInvokeValidate) {
+            	//执行validate()方法
                 validateable.validate();
             }
-            
+            //抛出执行validate***、validateDo***为前缀的方法时抛出的异常
             if (exception != null) { 
                 // rethrow if something is wrong while doing validateXXX / validateDoXXX 
                 throw exception;

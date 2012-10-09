@@ -35,6 +35,11 @@
         <!-- 带请求参数 -->
 		<action name="echoUserName" method="echoUserName" class="example.HelloWorld">
 		</action>
+		
+		 <!-- 带请求参数 -->
+		<action name="echoActionParam" method="echoActionParam" class="example.HelloWorld">
+		<param name="actionParam">it is a child param node define in the  action node</param>
+		</action>
 
 		<action name="Login_*" method="{1}" class="example.Login">
 			<result name="input">/example/Login.jsp</result>
