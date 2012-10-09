@@ -34,7 +34,10 @@ import com.opensymphony.xwork2.util.reflection.ReflectionProvider;
 
 /**
  * Writes an object as a table, where each field can be expanded if it is an Object/Collection/Array
- *
+ * 将java对象转化为html的表格显示 ，功能包括：
+ * <li>表格构建
+ * <li>以不同颜色区分空集合、null值、基本数据类型等等......
+ * <li>等等......
  */
 class ObjectToHTMLWriter {
     private PrettyPrintWriter prettyWriter;

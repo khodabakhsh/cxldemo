@@ -88,6 +88,9 @@ import com.opensymphony.xwork2.util.reflection.ReflectionProvider;
  * before the action is executed. All operations occur before the natural
  * Result has a chance to execute.
  * <!-- END SNIPPET: remarks -->
+ * 
+ * <p>选择xml、console、command、browser中的一种方式，帮助调试
+ * 
  */
 public class DebuggingInterceptor extends AbstractInterceptor {
 
@@ -140,6 +143,9 @@ public class DebuggingInterceptor extends AbstractInterceptor {
      * (non-Javadoc)
      *
      * @see com.opensymphony.xwork2.interceptor.Interceptor#invoke(com.opensymphony.xwork2.ActionInvocation)
+     */
+    /**
+     * 以PreResultListener 监听的方式，实现调试信息显示
      */
     public String intercept(ActionInvocation inv) throws Exception {
         boolean actionOnly = false;
@@ -253,6 +259,9 @@ public class DebuggingInterceptor extends AbstractInterceptor {
                     inv.invokeActionOnly();
                     return null;
                 } else {
+                	//貌似在上面部分调试方式中，使用writer.close()之后，
+                	//再让拦截器链继续走下去，然后处理action的result，
+                	//这时响应已经提交到浏览器端了，会有问题吧？
                     return inv.invoke();
                 }
             } finally {
@@ -290,6 +299,7 @@ public class DebuggingInterceptor extends AbstractInterceptor {
         res.setContentType("text/xml");
 
         try {
+        	//使用功能强大的PrettyPrintWriter 进行xml输出
             PrettyPrintWriter writer = new PrettyPrintWriter(
                     ServletActionContext.getResponse().getWriter());
             printContext(writer);
@@ -344,6 +354,8 @@ public class DebuggingInterceptor extends AbstractInterceptor {
      * of objects serialized already in the current functioncall. This is used
      * to avoid looping (stack overflow) of circular linked objects. Struts and
      * XWork objects are ignored.
+     * 
+     * <p><b>序列化对象为xml并可防止循环引用</b></p>
      *
      * @param bean   The object you want serialized.
      * @param name   The name of the object, used for element &lt;name/&gt;

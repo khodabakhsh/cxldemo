@@ -121,6 +121,7 @@ import com.opensymphony.xwork2.util.logging.LoggerFactory;
  * 用于验证的拦截器,验证来源：
  * <li>{action名}-validation.xml或者注解
  * <li>action实例中validate***,validateDo***,validate()方法(必须实现com.opensymphony.xwork2.Validateable 接口)
+ * <br>ps: 这个拦截器可以和com.opensymphony.xwork2.validator.DefaultWorkflowInterceptor 配合使用
  * <br>
  * @author Jason Carreira
  * @author Rainer Hermanns

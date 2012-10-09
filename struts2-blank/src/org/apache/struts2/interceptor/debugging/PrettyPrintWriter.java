@@ -25,6 +25,14 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.Stack;
 
+/**
+ * 便捷输出xml ，功能包括：
+ * <li>输出节点
+ * <li>缩进
+ * <li>换行
+ * <li>处理xml特殊字符
+ * <li>等等......
+ */
 public class PrettyPrintWriter {
 
     private final PrintWriter writer;

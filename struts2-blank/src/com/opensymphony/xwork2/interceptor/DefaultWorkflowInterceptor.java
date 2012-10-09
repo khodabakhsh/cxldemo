@@ -108,6 +108,14 @@ import java.lang.reflect.Method;
  * <!-- END SNIPPET: example -->
  * </pre>
  *
+ * 对于实现了{@link com.opensymphony.xwork2.ValidationAware}接口的action实例，存在验证错误时，<b>终止拦截器链的继续，返回结果</b>，结果寻找顺序：
+ * <ol>
+ * <li>@InputConfig 注解
+ * <li>{@link com.opensymphony.xwork2.interceptor.ValidationWorkflowAware#getInputResultName()}
+ * <li>默认值"input"
+ * </ol>
+ * <p>ps:应该是和{@link com.opensymphony.xwork2.validator.ValidationInterceptor }配合使用
+ * <br>
  * @author Jason Carreira
  * @author Rainer Hermanns
  * @author <a href='mailto:the_mindstorm[at]evolva[dot]ro'>Alexandru Popescu</a>
@@ -122,6 +130,9 @@ public class DefaultWorkflowInterceptor extends MethodFilterInterceptor {
 
     private static final Class[] EMPTY_CLASS_ARRAY = new Class[0];
     
+    /**
+     * 默认值为"input"
+     */
     private String inputResultName = Action.INPUT;
 
     /**
@@ -143,21 +154,22 @@ public class DefaultWorkflowInterceptor extends MethodFilterInterceptor {
     @Override
     protected String doIntercept(ActionInvocation invocation) throws Exception {
         Object action = invocation.getAction();
-
+        //action实例必须实现com.opensymphony.xwork2.ValidationAware 接口
         if (action instanceof ValidationAware) {
             ValidationAware validationAwareAction = (ValidationAware) action;
-
+            //这里可以看到。这个拦截器应该是和com.opensymphony.xwork2.validator.ValidationInterceptor 配合使用
             if (validationAwareAction.hasErrors()) {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Errors on action " + validationAwareAction + ", returning result name 'input'");
                 }
-
+                //1.使用默认值"input"
                 String resultName = inputResultName;
 
+                //2.是否实现了ValidationWorkflowAware接口
                 if (action instanceof ValidationWorkflowAware) {
                     resultName = ((ValidationWorkflowAware) action).getInputResultName();
                 }
-
+                //3.是否有@InputConfig 注解
                 InputConfig annotation = action.getClass().getMethod(invocation.getProxy().getMethod(), EMPTY_CLASS_ARRAY).getAnnotation(InputConfig.class);
                 if (annotation != null) {
                     if (!annotation.methodName().equals("")) {
@@ -167,8 +179,6 @@ public class DefaultWorkflowInterceptor extends MethodFilterInterceptor {
                         resultName = annotation.resultName();
                     }
                 }
-
-
                 return resultName;
             }
         }
