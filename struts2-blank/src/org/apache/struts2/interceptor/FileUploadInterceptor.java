@@ -183,6 +183,9 @@ public class FileUploadInterceptor extends AbstractInterceptor {
 
     protected boolean useActionMessageBundle;
 
+    /**
+     * 单个文件最大值
+     */
     protected Long maximumSize;
     protected Set<String> allowedTypesSet = Collections.emptySet();
     protected Set<String> allowedExtensionsSet = Collections.emptySet();
@@ -228,12 +231,23 @@ public class FileUploadInterceptor extends AbstractInterceptor {
     /* (non-Javadoc)
      * @see com.opensymphony.xwork2.interceptor.Interceptor#intercept(com.opensymphony.xwork2.ActionInvocation)
      */
-
+	/**
+	 * <p>1.过滤符合条件的文件:
+	 * <li>文件最大值
+	 * <li>文件类型/后缀
+     * </p>
+	 * <p>2.加入下面三个值到请求参数中:
+       <li>.[inputName]
+       <li>.[inputName]ContentType
+       <li>.[inputName]FileName
+       </p>
+	 */
     public String intercept(ActionInvocation invocation) throws Exception {
         ActionContext ac = invocation.getInvocationContext();
 
         HttpServletRequest request = (HttpServletRequest) ac.get(ServletActionContext.HTTP_REQUEST);
 
+        //此拦截器只针对MultiPartRequestWrapper实例进行处理
         if (!(request instanceof MultiPartRequestWrapper)) {
             if (LOG.isDebugEnabled()) {
                 ActionProxy proxy = invocation.getProxy();
@@ -253,6 +267,7 @@ public class FileUploadInterceptor extends AbstractInterceptor {
 
         MultiPartRequestWrapper multiWrapper = (MultiPartRequestWrapper) request;
 
+        //判断是否有错误
         if (multiWrapper.hasErrors()) {
             for (String error : multiWrapper.getErrors()) {
                 if (validation != null) {
@@ -289,6 +304,7 @@ public class FileUploadInterceptor extends AbstractInterceptor {
                         String fileNameName = inputName + "FileName";
 
                         for (int index = 0; index < files.length; index++) {
+                        	//过滤文件
                             if (acceptFile(action, files[index], fileName[index], contentType[index], inputName, validation, ac.getLocale())) {
                                 acceptedFiles.add(files[index]);
                                 acceptedContentTypes.add(contentType[index]);
@@ -298,7 +314,10 @@ public class FileUploadInterceptor extends AbstractInterceptor {
 
                         if (!acceptedFiles.isEmpty()) {
                             Map<String, Object> params = ac.getParameters();
-
+                            //加入下面三个值到请求参数中:
+                            //1.[inputName]
+                            //2.[inputName]ContentType
+                            //3.[inputName]FileName
                             params.put(inputName, acceptedFiles.toArray(new File[acceptedFiles.size()]));
                             params.put(contentTypeName, acceptedContentTypes.toArray(new String[acceptedContentTypes.size()]));
                             params.put(fileNameName, acceptedFileNames.toArray(new String[acceptedFileNames.size()]));

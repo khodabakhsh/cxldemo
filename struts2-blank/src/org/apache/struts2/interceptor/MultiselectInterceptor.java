@@ -34,6 +34,8 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
  * Just as the CheckboxInterceptor checks that if only the hidden field is present, so too does this interceptor. If
  * the "__multiselect_" request parameter is present and its visible counterpart is not, set a new request parameter to an
  * empty Sting.
+ *
+ * <p><b>这个拦截器用于struts的标签(好像checkboxlist、doubleselect、select等几个标签有用到，具体没有确认),可以把所有"选择标签"都作为请求参数传进来</b>
  */
 public class MultiselectInterceptor extends AbstractInterceptor {
     private static final long serialVersionUID = 1L;
@@ -60,10 +62,11 @@ public class MultiselectInterceptor extends AbstractInterceptor {
                 String name = key.substring("__multiselect_".length());
 
                 iterator.remove();
-
+                
+                //把所有"选择标签"都放进请求参数中
                 // is this multi-select box submitted?
                 if (!parameters.containsKey(name)) {
-
+                    
                     // if not, let's be sure to default the value to an empty string array
                     newParams.put(name, new String[0]);
                 }

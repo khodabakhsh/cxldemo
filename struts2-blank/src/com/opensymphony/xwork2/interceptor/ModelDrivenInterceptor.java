@@ -71,6 +71,8 @@ import com.opensymphony.xwork2.util.ValueStack;
  * <!-- END SNIPPET: example -->
  * </pre>
  * 
+ * <p>这个拦截器，应该配置在 {@link StaticParametersInterceptor} 和  {@link ParametersInterceptor} 之前</p>
+ * 
  * @author tm_jee
  * @version $Date: 2009-12-27 19:18:29 +0100 (Sun, 27 Dec 2009) $ $Id: ModelDrivenInterceptor.java 894090 2009-12-27 18:18:29Z martinc $
  */
@@ -90,9 +92,12 @@ public class ModelDrivenInterceptor extends AbstractInterceptor {
             ModelDriven modelDriven = (ModelDriven) action;
             ValueStack stack = invocation.getStack();
             Object model = modelDriven.getModel();
+            //model必须不为null
             if (model !=  null) {
+            	//加入value stack中,以便在后续中 {@link StaticParametersInterceptor} 和  {@link ParametersInterceptor} 进行参数注入
             	stack.push(model);
             }
+            //是否刷新value stack 中的model对象
             if (refreshModelBeforeResult) {
                 invocation.addPreResultListener(new RefreshModelBeforeResult(modelDriven, model));
             }

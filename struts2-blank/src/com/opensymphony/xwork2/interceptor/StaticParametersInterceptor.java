@@ -76,6 +76,13 @@ import java.util.TreeMap;
  * <!-- END SNIPPET: example -->
  * </pre>
  *
+ *<br>
+ * 这个拦截器对于action的xml配置，&lt;action&gt; &lt;param name="someParamName" &gt; someParamValue &lt;/param&gt;  &lt;/action&gt;
+     * action可以通过以下两种方式获得该param参数值：
+     * <li>实现 com.opensymphony.xwork2.config.entities.Parameterizable 接口
+     * <li>action中定义对应的setter方法，如setSomeParamName(String value)
+     * 
+     * 
  * @author Patrick Lightbody
  */
 public class StaticParametersInterceptor extends AbstractInterceptor {
@@ -118,7 +125,7 @@ public class StaticParametersInterceptor extends AbstractInterceptor {
         this.overwrite = Boolean.valueOf(value).booleanValue();
     }
 
-    @Override
+    
     public String intercept(ActionInvocation invocation) throws Exception {
         ActionConfig config = invocation.getProxy().getConfig();
         Object action = invocation.getAction();
@@ -130,6 +137,7 @@ public class StaticParametersInterceptor extends AbstractInterceptor {
         }
 
         // for actions marked as Parameterizable, pass the static parameters directly
+        //实现了Parameterizable 接口，就可以直接获得param配置参数
         if (action instanceof Parameterizable) {
             ((Parameterizable) action).setParams(parameters);
         }
@@ -163,6 +171,7 @@ public class StaticParametersInterceptor extends AbstractInterceptor {
                         val = TextParseUtil.translateVariables(val.toString(), stack);
                     }
                     try {
+                    	//使用ognl，利用action中对应的setter方法赋值(如param配置中name为userName,action中就要有一个对应的setUserName方法)
                         newStack.setValue(entry.getKey(), val);
                     } catch (RuntimeException e) {
                         if (devMode) {

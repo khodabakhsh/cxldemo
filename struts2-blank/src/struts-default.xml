@@ -265,20 +265,20 @@
                 <interceptor-ref name="alias"/> <!-- 别名参数赋值-->
                 <interceptor-ref name="servletConfig"/> <!-- 实现不同接口，为不同属性(request/response/session...)赋值-->
                 <interceptor-ref name="i18n"/> <!-- 通过一些有关locale设置的请求参数，把指定的locale信息设置到session中，或仅作用于当前请求, -->
-                <interceptor-ref name="prepare"/>
+                <interceptor-ref name="prepare"/> <!-- prepare拦截器，执行prepare{方法名}，或prepareDo{方法名}，或prepare方法 -->
                 <interceptor-ref name="chain"/>
                 <interceptor-ref name="scopedModelDriven"/>
-                <interceptor-ref name="modelDriven"/>
-                <interceptor-ref name="fileUpload"/>
-                <interceptor-ref name="checkbox"/>
-                <interceptor-ref name="multiselect"/>
-                <interceptor-ref name="staticParams"/>
+                <interceptor-ref name="modelDriven"/> <!-- modelDriven拦截器，可以用于请求参数构建表单对象 -->
+                <interceptor-ref name="fileUpload"/> <!-- 过滤符合条件(文件大小、类型等)的文件,构建[inputName]、[inputName]ContentType、[inputName]FileName参数 -->
+                <interceptor-ref name="checkbox"/> <!-- 这个拦截器应该只用于struts的标签&lt; s:checkbox &gt; ,并且使用该标签，应保证不能重名，否则拦截器失效。 -->
+                <interceptor-ref name="multiselect"/> <!-- 这个拦截器用于struts的标签(好像checkboxlist、doubleselect、select等几个标签有用到，具体没有确认) -->
+                <interceptor-ref name="staticParams"/> <!-- action实例利用这个拦截器，可以获得&lt;param&gt; 配置的参数值 -->
                 <interceptor-ref name="actionMappingParams"/>
-                <interceptor-ref name="params">
+                <interceptor-ref name="params">  <!-- 参数注入 -->
                     <param name="excludeParams">dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,parameters\...*</param>
                 </interceptor-ref>
-                <interceptor-ref name="conversionError"/>
-                <interceptor-ref name="validation">
+                <interceptor-ref name="conversionError"/> <!-- 用于"参数转换错误"记录、处理 -->
+                <interceptor-ref name="validation"> <!-- 验证拦截器,来源: 1.{action名}-validation.xml或者注解     2.validate***,validateDo***,validate()方法(必须实现com.opensymphony.xwork2.Validateable 接口)-->
                     <param name="excludeMethods">input,back,cancel,browse</param>
                 </interceptor-ref>
                 <interceptor-ref name="workflow">
