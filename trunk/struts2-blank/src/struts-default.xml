@@ -281,10 +281,10 @@
                 <interceptor-ref name="validation"> <!-- 验证拦截器,来源: 1.{action名}-validation.xml或者注解     2.validate***,validateDo***,validate()方法(必须实现com.opensymphony.xwork2.Validateable 接口)-->
                     <param name="excludeMethods">input,back,cancel,browse</param>
                 </interceptor-ref>
-                <interceptor-ref name="workflow">
+                <interceptor-ref name="workflow"> <!-- 与validation拦截器配合使用，对于实现了{@link com.opensymphony.xwork2.ValidationAware}接口的action实例，存在验证错误时，终止拦截器链的继续，返回结果（详见该类实现） -->
                     <param name="excludeMethods">input,back,cancel,browse</param>
                 </interceptor-ref>
-                <interceptor-ref name="debugging"/>
+                <interceptor-ref name="debugging"/> <!-- 选择xml、console、command、browser中的一种方式，帮助调试 -->
             </interceptor-stack>
 
             <!-- The completeStack is here for backwards compatibility for

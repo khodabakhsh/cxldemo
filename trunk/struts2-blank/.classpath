@@ -30,5 +30,6 @@
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-web-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/testng-5.1-jdk15.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/junit-4.10.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/struts2-dojo-plugin-2.3.4.1.jar"/>
 	<classpathentry kind="output" path="webapp/WEB-INF/classes"/>
 </classpath>
