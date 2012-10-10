@@ -1,0 +1,13 @@
+
+------------------------------------------		环境搭建 (mybatis 3.0.5) 	---------------------------------------------------
+1.jpetstore 6.0.1 中使用的是mybatis 3.0.5
+2.还要加入ognl-2.6.9.jar包，注意是2.6.9版本，2.7.0后，PropertyAccessor有四个方法，
+而”org.apache.ibatis.builder.xml.dynamic.DynamicContext 内部类 static class ContextAccessor implements PropertyAccessor 只实现了两个方法”
+会有冲突。
+3.加入其它包，如servlet-api.jar包   、 slf4j的两个包
+4.spring集成插件用的是mybatis-spring-1.0.1版本，下载对应源码
+
+5.源码包对应关系：
+/src/org/apache/ibatis   --->   mybatis 3.0.5框架源码
+/src/org/mybatis/jpetstore    --->  jpetstore 6.0.1实例源码
+/src/org/mybatis/spring    --->  mybatis-spring-1.0.1源码
