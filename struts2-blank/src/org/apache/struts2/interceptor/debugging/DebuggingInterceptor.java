@@ -89,8 +89,10 @@ import com.opensymphony.xwork2.util.reflection.ReflectionProvider;
  * Result has a chance to execute.
  * <!-- END SNIPPET: remarks -->
  * 
- * <p>选择xml、console、command、browser中的一种方式，帮助调试
- * 
+ * <p>通过传入请求参数debug(取值范围:xml、console、command、browser)，帮助调试
+ *  启用调试，应该满足：
+ *  <li>1.struts.devMode=true
+ *  <li>2.struts.serve.static=true(因为会引用到一些struts的静态资源)
  */
 public class DebuggingInterceptor extends AbstractInterceptor {
 
@@ -152,6 +154,7 @@ public class DebuggingInterceptor extends AbstractInterceptor {
         boolean cont = true;
         Boolean devModeOverride = FilterDispatcher.getDevModeOverride();
         boolean devMode = devModeOverride != null ? devModeOverride.booleanValue() : this.devMode;
+//      启用调试，应该设置struts.devMode=true
         if (devMode) {
             final ActionContext ctx = ActionContext.getContext();
             String type = getParameter(DEBUG_PARAM);
@@ -259,9 +262,10 @@ public class DebuggingInterceptor extends AbstractInterceptor {
                     inv.invokeActionOnly();
                     return null;
                 } else {
-                	//貌似在上面部分调试方式中，使用writer.close()之后，
+                	//1.假如已经进入调试页，貌似在上面部分调试方式中，使用writer.close()之后，
                 	//再让拦截器链继续走下去，然后处理action的result，
-                	//这时响应已经提交到浏览器端了，会有问题吧？
+                	//这时响应已经提交到浏览器端了，会有问题吗？
+                	//2.如果没有进入调试页，跑到这里是合理的。
                     return inv.invoke();
                 }
             } finally {
