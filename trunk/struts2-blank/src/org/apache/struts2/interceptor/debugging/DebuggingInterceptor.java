@@ -89,7 +89,7 @@ import com.opensymphony.xwork2.util.reflection.ReflectionProvider;
  * Result has a chance to execute.
  * <!-- END SNIPPET: remarks -->
  * 
- * <p>通过传入请求参数debug(取值范围:xml、console、command、browser)，帮助调试
+ * <p>通过传入请求参数debug(取值范围:xml、console、browser)，帮助调试
  *  启用调试，应该满足：
  *  <li>1.struts.devMode=true
  *  <li>2.struts.serve.static=true(因为会引用到一些struts的静态资源)
@@ -196,6 +196,7 @@ public class DebuggingInterceptor extends AbstractInterceptor {
                             }
                         });
             } else if (COMMAND_MODE.equals(type)) {
+            	//只在使用console模式进入页面webconsole.html之后，使用debug=command进行控制台命令处理,才进入此处。
                 ValueStack stack = (ValueStack) ctx.getSession().get(SESSION_KEY);
                 if (stack == null) {
                     //allows it to be embedded on another page
@@ -222,9 +223,11 @@ public class DebuggingInterceptor extends AbstractInterceptor {
                 inv.addPreResultListener(
                     new PreResultListener() {
                         public void beforeResult(ActionInvocation inv, String actionResult) {
+                        	//当进入browser首页后，点击页面上的"Expand"查看某个对象的详细内容时，传参就是object=***
                             String rootObjectExpression = getParameter(OBJECT_PARAM);
                             if (rootObjectExpression == null)
                                 rootObjectExpression = "#context";
+                            //获取decorate参数
                             String decorate = getParameter(DECORATE_PARAM);
                             ValueStack stack = (ValueStack) ctx.get(ActionContext.VALUE_STACK);
                             Object rootObject = stack.findValue(rootObjectExpression);

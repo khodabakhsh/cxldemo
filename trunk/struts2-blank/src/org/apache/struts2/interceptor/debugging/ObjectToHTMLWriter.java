@@ -34,7 +34,7 @@ import com.opensymphony.xwork2.util.reflection.ReflectionProvider;
 
 /**
  * Writes an object as a table, where each field can be expanded if it is an Object/Collection/Array
- * 将java对象转化为html的表格显示 ，功能包括：
+ * 将java对象转化为html的表格显示(使用{@link org.apache.struts2.interceptor.debugging.PrettyPrintWriter}) ，功能包括：
  * <li>表格构建
  * <li>以不同颜色区分空集合、null值、基本数据类型等等......
  * <li>等等......
@@ -167,6 +167,7 @@ class ObjectToHTMLWriter {
             prettyWriter.setValue(String.valueOf(value));
         } else {
             prettyWriter.startNode("a");
+            //需要处理"#"
             String path = expr.replaceAll("#", "%23") + "[\"" +
                 name.replaceAll("#", "%23") + "\"]";
             prettyWriter.addAttribute("onclick", "expand(this, '" + path + "')");

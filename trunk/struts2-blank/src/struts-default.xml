@@ -284,7 +284,7 @@
                 <interceptor-ref name="workflow"> <!-- 与validation拦截器配合使用，对于实现了{@link com.opensymphony.xwork2.ValidationAware}接口的action实例，存在验证错误时，终止拦截器链的继续，返回结果（详见该类实现） -->
                     <param name="excludeMethods">input,back,cancel,browse</param>
                 </interceptor-ref>
-                <interceptor-ref name="debugging"/> <!-- 通过传入请求参数debug(取值范围:xml、console、command、browser)，帮助调试 -->
+                <interceptor-ref name="debugging"/> <!-- 通过传入请求参数debug(取值范围:xml、console、browser)，帮助调试 -->
             </interceptor-stack>
 
             <!-- The completeStack is here for backwards compatibility for
