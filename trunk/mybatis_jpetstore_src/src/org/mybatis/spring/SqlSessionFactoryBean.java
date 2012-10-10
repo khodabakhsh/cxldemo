@@ -260,7 +260,10 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
     }
 
     /**
-     * {@inheritDoc}
+     * 实现接口{@link org.springframework.beans.factory.InitializingBean}的方法，
+     * 此处的逻辑是：
+     * <li>校验{@link #dataSource}和{@link #sqlSessionFactoryBuilder}不为空
+     * <li>为{@link #sqlSessionFactory}赋值
      */
     public void afterPropertiesSet() throws Exception {
         Assert.notNull(dataSource, "Property 'dataSource' is required");
@@ -428,7 +431,7 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
     }
 
     /**
-     * {@inheritDoc}
+     * 实现接口 {@link org.springframework.context.ApplicationListener}的方法
      */
     public void onApplicationEvent(ApplicationEvent event) {
         if (failFast && event instanceof ContextRefreshedEvent) {

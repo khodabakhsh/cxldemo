@@ -86,21 +86,21 @@ public class MapperFactoryBean<T> extends SqlSessionDaoSupport implements Factor
     }
 
     /**
-     * {@inheritDoc}
+     * 实现接口{@link org.springframework.beans.factory.FactoryBean}的方法
      */
     public T getObject() throws Exception {
         return getSqlSession().getMapper(this.mapperInterface);
     }
 
     /**
-     * {@inheritDoc}
+     * 实现接口{@link org.springframework.beans.factory.FactoryBean}的方法
      */
     public Class<T> getObjectType() {
         return this.mapperInterface;
     }
 
     /**
-     * {@inheritDoc}
+     * 实现接口{@link org.springframework.beans.factory.FactoryBean}的方法
      */
     public boolean isSingleton() {
         return true;
