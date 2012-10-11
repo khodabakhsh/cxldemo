@@ -8,6 +8,7 @@ import java.util.Properties;
 
 /**
  * A class to simplify access to resources through the classloader.
+ * <p>通过类加载器访问资源的工具类
  */
 public class Resources {
 

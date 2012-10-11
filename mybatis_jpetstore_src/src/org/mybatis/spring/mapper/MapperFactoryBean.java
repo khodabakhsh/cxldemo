@@ -64,10 +64,10 @@ public class MapperFactoryBean<T> extends SqlSessionDaoSupport implements Factor
     }
 
     /**
-     * {@inheritDoc}
+     * 解析mapper对应xml
      */
-    @Override
     protected void checkDaoConfig() {
+    	//父类中验证{@link #sqlSession} 不为空
         super.checkDaoConfig();
         
         Assert.notNull(this.mapperInterface, "Property 'mapperInterface' is required");
@@ -75,11 +75,13 @@ public class MapperFactoryBean<T> extends SqlSessionDaoSupport implements Factor
         Configuration configuration = getSqlSession().getConfiguration();
         if (this.addToConfig && !configuration.hasMapper(this.mapperInterface)) {
             try {
+            	//解析mapper对应xml
                 configuration.addMapper(this.mapperInterface);
             } catch (Throwable t) {
                 logger.error("Error while adding the mapper '" + this.mapperInterface + "' to configuration.", t);
                 throw new IllegalArgumentException(t);
             } finally {
+            	//?????
                 ErrorContext.instance().reset();
             }
         }

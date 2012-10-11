@@ -67,6 +67,9 @@ public class MapperAnnotationBuilder {
 
   private Configuration configuration;
   private MapperBuilderAssistant assistant;
+  /**
+   * 应用于mybatis的mapper接口类
+   */
   private Class<?> type;
 
   public MapperAnnotationBuilder(Configuration configuration, Class<?> type) {
@@ -88,7 +91,9 @@ public class MapperAnnotationBuilder {
 
   public void parse() {
     String resource = type.toString();
+    //每个mapper只解析一次
     if (!configuration.isResourceLoaded(resource)) { 
+      //解析mapper对应的xml
       loadXmlResource();
       configuration.addLoadedResource(resource);
       assistant.setCurrentNamespace(type.getName());
@@ -106,10 +111,12 @@ public class MapperAnnotationBuilder {
     // Spring may not know the real resource name so we check a flag
     // to prevent loading again a resource twice
     // this flag is set at XMLMapperBuilder#bindMapperForNamespace
+	//这里跟spring有什么关系，还没看？
     if (!configuration.isResourceLoaded("namespace:" + type.getName())) {
       String xmlResource = type.getName().replace('.', '/') + ".xml";
       InputStream inputStream = null;
       try {
+    	//寻找该mapper接口所在包路径中相同名称的xml文件
         inputStream = Resources.getResourceAsStream(type.getClassLoader(), xmlResource);
       } catch (IOException e) {
         // ignore, resource is not required
@@ -146,6 +153,10 @@ public class MapperAnnotationBuilder {
     }
   }
 
+  /**
+   * <li>带参数的函数，返回形式是:  全路径类名.方法名-参数1类型名-参数2类型名-参数3类型名
+   * <li>对于无参函数，返回形式是:  全路径类名.方法名-void
+   */
   private String generateResultMapName(Method method) {
     StringBuilder suffix = new StringBuilder();
     for (Class<?> c : method.getParameterTypes()) {
@@ -157,7 +168,6 @@ public class MapperAnnotationBuilder {
     }
     return type.getName() + "." + method.getName() + suffix;
   }
-
   private void applyResultMap(String resultMapId, Class<?> returnType, Arg[] args, Result[] results, TypeDiscriminator discriminator) {
     List<ResultMapping> resultMappings = new ArrayList<ResultMapping>();
     applyConstructorArgs(args, returnType, resultMappings);
