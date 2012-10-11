@@ -83,6 +83,17 @@ public class XMLMapperBuilder extends BaseBuilder {
     return sqlFragments.get(refid);
   }
 
+  /**
+   * 处理xml节点:
+   * <ol>
+   * <li>cache-ref
+   * <li>cache
+   * <li>/mapper/parameterMap
+   * <li>/mapper/resultMap
+   * <li>/mapper/sql
+   * <li>select|insert|update|delete
+   * </ol>
+   */
   private void configurationElement(XNode context) {
     try {
       String namespace = context.getStringAttribute("namespace");
@@ -139,6 +150,9 @@ public class XMLMapperBuilder extends BaseBuilder {
 	  }
   }
 
+  /**
+   * 处理 &lt; cache-ref &gt;节点
+   */
   private void cacheRefElement(XNode context) {
     if (context != null) {
       configuration.addCacheRef(builderAssistant.getCurrentNamespace(), context.getStringAttribute("namespace"));

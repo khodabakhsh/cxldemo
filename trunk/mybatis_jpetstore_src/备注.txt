@@ -1,5 +1,5 @@
 
-------------------------------------------		环境搭建 (mybatis 3.0.5) 	---------------------------------------------------
+------------------------------------------		环境搭建 (mybatis 3.0.5)  2012.10.10 	---------------------------------------------------
 1.jpetstore 6.0.1 中使用的是mybatis 3.0.5
 2.还要加入ognl-2.6.9.jar包，注意是2.6.9版本，2.7.0后，PropertyAccessor有四个方法，
 而”org.apache.ibatis.builder.xml.dynamic.DynamicContext 内部类 static class ContextAccessor implements PropertyAccessor 只实现了两个方法”

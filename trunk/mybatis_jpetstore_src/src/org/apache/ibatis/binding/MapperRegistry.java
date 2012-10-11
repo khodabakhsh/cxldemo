@@ -31,7 +31,9 @@ public class MapperRegistry {
   }
 
   public void addMapper(Class<?> type) {
+	//type只能是接口
     if (type.isInterface()) {
+      //一旦重复，就抛异常
       if (knownMappers.contains(type)) {
         throw new BindingException("Type " + type + " is already known to the MapperRegistry.");
       }

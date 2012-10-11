@@ -71,6 +71,9 @@ public class Configuration {
   protected Properties variables = new Properties();
   protected ObjectFactory objectFactory = new DefaultObjectFactory();
   protected ObjectWrapperFactory objectWrapperFactory = new DefaultObjectWrapperFactory();
+  /**
+   * 当前Configuration实例 和  {@link #mapperRegistry} 互相引用
+   */
   protected MapperRegistry mapperRegistry = new MapperRegistry(this);
 
   protected final InterceptorChain interceptorChain = new InterceptorChain();
@@ -87,6 +90,9 @@ public class Configuration {
   protected final Map<String, KeyGenerator> keyGenerators = new StrictMap<String, KeyGenerator>(
       "Key Generators collection");
 
+  /**
+   * 记录已经解析的mapper类名(全路径)集合 + mapper对应的xml名称(全路径)集合
+   */
   protected final Set<String> loadedResources = new HashSet<String>();
   protected final Map<String, XNode> sqlFragments = new StrictMap<String, XNode>(
       "XML fragments parsed from previous mappers");
@@ -97,6 +103,10 @@ public class Configuration {
    * A map holds cache-ref relationship. The key is the namespace that
    * references a cache bound to another namespace and the value is the
    * namespace which the actual cache is bound to.
+   * 
+   * <p>即存储 &lt; cache-ref &gt; 节点 ,
+   * <p>key为mapper对应xml文件中的namespace，而value为&lt; cache-ref &gt; 节点 配置的namespace属性
+   * 
    */
   protected final Map<String, String> cacheRefMap = new HashMap<String, String>();
 
