@@ -72,7 +72,7 @@ public class Configuration {
   protected ObjectFactory objectFactory = new DefaultObjectFactory();
   protected ObjectWrapperFactory objectWrapperFactory = new DefaultObjectWrapperFactory();
   /**
-   * 当前Configuration实例 和  {@link #mapperRegistry} 互相引用
+   * 已解析的mapper集合
    */
   protected MapperRegistry mapperRegistry = new MapperRegistry(this);
 

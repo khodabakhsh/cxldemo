@@ -20,14 +20,33 @@ public class MapperMethod {
   private SqlSession sqlSession;
   private Configuration config;
 
+  /**
+   * 取值范围：insert/update/select/delete/unknown
+   * @see org.apache.ibatis.mapping.SqlCommandType
+   */
   private SqlCommandType type;
+  /**
+   * 值为：mapper接口名.方法名
+   */
   private String commandName;
 
+  /**
+   * mapper接口
+   */
   private Class<?> declaringInterface;
   private Method method;
 
+  /**
+   * 返回结果是否{@link java.util.List}
+   */
   private boolean returnsList;
+  /**
+   * 返回结果是否{@link java.util.Map}
+   */
   private boolean returnsMap;
+  /**
+   * 有无返回值
+   */
   private boolean returnsVoid;
   private String mapKey;
 
@@ -46,8 +65,11 @@ public class MapperMethod {
     this.config = sqlSession.getConfiguration();
     this.hasNamedParameters = false;
     this.declaringInterface = declaringInterface;
+    //设置#commandName
     setupFields();
+    //配置方法签名的相关信息
     setupMethodSignature();
+    //设置#type
     setupCommandType();
     validateStatement();
   }
@@ -129,12 +151,17 @@ public class MapperMethod {
     }
   }
 
-  // Setup //
-
+ /**
+  *  {@link #commandName} = mapper接口名.方法名
+  */
   private void setupFields() {
     this.commandName = declaringInterface.getName() + "." + method.getName();
   }
 
+  /**
+   * 设置{@link #returnsVoid}、{@link #returnsList}、{@link #mapKey}、{@link #returnsMap}、{@link #rowBoundsIndex}
+   * 、{@link #resultHandlerIndex} 、{@link #paramNames}、{@link #paramPositions}
+   */
   private void setupMethodSignature() {
     if( method.getReturnType().equals(Void.TYPE)){
       returnsVoid = true;
@@ -143,6 +170,7 @@ public class MapperMethod {
       returnsList = true;
     }
     if (Map.class.isAssignableFrom(method.getReturnType())) { 
+      //@MapKey 注解
       final MapKey mapKeyAnnotation = method.getAnnotation(MapKey.class);
       if (mapKeyAnnotation != null) {
         mapKey = mapKeyAnnotation.value();
@@ -184,6 +212,9 @@ public class MapperMethod {
     return paramName;
   }
 
+  /**
+   * 设置{@link #type}
+   */
   private void setupCommandType() {
     MappedStatement ms = config.getMappedStatement(commandName);
     type = ms.getSqlCommandType();

@@ -3,6 +3,10 @@ package org.apache.ibatis.type;
 import java.sql.Types;
 import java.util.*;
 
+/**
+ * jdbc type枚举 ，引用 {@link java.sql.Types} 中定义的一些类型，和部分特殊类型(如oracle和jdk6的)
+ *
+ */
 public enum JdbcType {
   /**
    * This is added to enable basic support for the

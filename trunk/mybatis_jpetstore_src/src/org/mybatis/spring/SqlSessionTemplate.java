@@ -122,6 +122,8 @@ public class SqlSessionTemplate implements SqlSession {
         this.sqlSessionFactory = sqlSessionFactory;
         this.executorType = executorType;
         this.exceptionTranslator = exceptionTranslator;
+        //这里使用内部类 #org.mybatis.spring.SqlSessionTemplate.SqlSessionInterceptor
+        //作为代理。
         this.sqlSessionProxy = (SqlSession) Proxy.newProxyInstance(
                 SqlSessionFactory.class.getClassLoader(),
                 new Class[] { SqlSession.class }, 
@@ -330,11 +332,14 @@ public class SqlSessionTemplate implements SqlSession {
      */
     private class SqlSessionInterceptor implements InvocationHandler {
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        	//这里从spring中获得SqlSession实例,以便使用spring的事务控制
             final SqlSession sqlSession = SqlSessionUtils.getSqlSession(
                     SqlSessionTemplate.this.sqlSessionFactory,
                     SqlSessionTemplate.this.executorType,
                     SqlSessionTemplate.this.exceptionTranslator);
             try {
+            	//利用上面从spring获得的SqlSession实例，真正的去调用mapper类的方法。
+            	//这样可以使DAO操作处于spring的事务控制中
                 Object result = method.invoke(sqlSession, args);
                 if (!SqlSessionUtils.isSqlSessionTransactional(sqlSession, SqlSessionTemplate.this.sqlSessionFactory)) {
                     sqlSession.commit();

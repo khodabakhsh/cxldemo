@@ -16,6 +16,9 @@ public class MapperRegistry {
     this.config = config;
   }
 
+  /**
+   * 返回的是一个 MapperProxy代理
+   */
   public <T> T getMapper(Class<T> type, SqlSession sqlSession) {
     if (!knownMappers.contains(type))
       throw new BindingException("Type " + type + " is not known to the MapperRegistry.");
@@ -44,6 +47,9 @@ public class MapperRegistry {
         // otherwise the binding may automatically be attempted by the
         // mapper parser.  If the type is already known, it won't try.
         MapperAnnotationBuilder parser = new MapperAnnotationBuilder(config, type);
+        
+        //完成mapper类对应的xml文件的解析
+        //完成mapper类的注解解析
         parser.parse();
         loadCompleted = true;
       } finally {

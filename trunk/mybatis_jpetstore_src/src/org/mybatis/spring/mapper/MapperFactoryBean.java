@@ -46,6 +46,9 @@ import org.springframework.util.Assert;
  * <p>
  * Note that this factory can only inject <em>interfaces</em>, not concrete classes.
  *
+ * 实现了spring的接口　{@link org.springframework.beans.factory.FactoryBean},该接口详见:http://static.springsource.org/spring/docs/2.0.0/api/org/springframework/beans/factory/FactoryBean.html,
+ * MapperFactoryBean这个类，是为了spring在给service层注入mapper接口，而提供的一个生成mybatis的mapper的工厂
+ *
  * @see SqlSessionTemplate
  * @version $Id: MapperFactoryBean.java 3650 2011-02-28 22:45:59Z eduardo.macarron $
  */
@@ -64,7 +67,8 @@ public class MapperFactoryBean<T> extends SqlSessionDaoSupport implements Factor
     }
 
     /**
-     * 解析mapper对应xml
+     * 解析mapper对应xml,
+     * 解析mapper类注解
      */
     protected void checkDaoConfig() {
     	//父类中验证{@link #sqlSession} 不为空
@@ -75,7 +79,7 @@ public class MapperFactoryBean<T> extends SqlSessionDaoSupport implements Factor
         Configuration configuration = getSqlSession().getConfiguration();
         if (this.addToConfig && !configuration.hasMapper(this.mapperInterface)) {
             try {
-            	//解析mapper对应xml
+            	//解析mapper对应xml,解析mapper类注解
                 configuration.addMapper(this.mapperInterface);
             } catch (Throwable t) {
                 logger.error("Error while adding the mapper '" + this.mapperInterface + "' to configuration.", t);
@@ -88,7 +92,9 @@ public class MapperFactoryBean<T> extends SqlSessionDaoSupport implements Factor
     }
 
     /**
-     * 实现接口{@link org.springframework.beans.factory.FactoryBean}的方法
+     * 实现接口{@link org.springframework.beans.factory.FactoryBean}的方法，
+     * spring在给service层注入mapper接口时，从这里获得mabatis的mapper,
+     * 追踪后面的代码，可知返回的是一个由MapperProxy代理的mapper实例。
      */
     public T getObject() throws Exception {
         return getSqlSession().getMapper(this.mapperInterface);

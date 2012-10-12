@@ -43,6 +43,13 @@ public class MapperBuilderAssistant extends BaseBuilder {
     this.currentNamespace = currentNamespace;
   }
 
+  /**
+   * @return 
+   * <ol>
+   * <li>base为null，返回null
+   * <li>base包含"."号，直接返回
+   * <li>返回当前namespace+"."+base参数
+   */
   public String applyCurrentNamespace(String base) {
     if (base == null) return null;
     // is it qualified with this or other namespace yet?
