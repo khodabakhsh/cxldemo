@@ -60,6 +60,10 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.TypeHandler;
 
+/**
+ * <li>完成mapper类对应的xml文件的解析
+ * <li>完成mapper类的注解解析
+ */
 public class MapperAnnotationBuilder {
 
   private final Set<Class<? extends Annotation>> sqlAnnotationTypes = new HashSet<Class<? extends Annotation>>();
@@ -89,19 +93,30 @@ public class MapperAnnotationBuilder {
     sqlProviderAnnotationTypes.add(DeleteProvider.class);
   }
 
+  /**
+   * <li>完成mapper类对应的xml文件的解析
+   * <li>完成mapper类的注解解析
+   */
   public void parse() {
     String resource = type.toString();
     //每个mapper只解析一次
     if (!configuration.isResourceLoaded(resource)) { 
-      //解析mapper对应的xml
+      //加载解析mapper对应的xml，增加到#configuration 
       loadXmlResource();
       configuration.addLoadedResource(resource);
       assistant.setCurrentNamespace(type.getName());
+      
+      //处理mapper类的注解 {@link org.apache.ibatis.annotations.CacheNamespace}
       parseCache();
+      //处理mapper类的注解 {@link org.apache.ibatis.annotations.CacheNamespaceRef}
       parseCacheRef();
       Method[] methods = type.getMethods();
+      
+      //处理mapper类的注解，增加到#configuration
       for (Method method : methods) {
+    	//处理方法的Result、Constructor注解
         parseResultsAndConstructorArgs(method);
+        //处理方法的其他注解
         parseStatement(method);
       }
     }
@@ -123,18 +138,24 @@ public class MapperAnnotationBuilder {
       }
       if (inputStream != null) {
         XMLMapperBuilder xmlParser = new XMLMapperBuilder(inputStream, assistant.getConfiguration(), xmlResource, configuration.getSqlFragments(), type.getName());
+        //解析mapper的xml，增加到#configuration 
         xmlParser.parse();
       }
     }
   }
 
+  /**
+   * 处理mapper类的注解 {@link org.apache.ibatis.annotations.CacheNamespace}
+   */
   private void parseCache() {
     CacheNamespace cacheDomain = type.getAnnotation(CacheNamespace.class);
     if (cacheDomain != null) {
       assistant.useNewCache(cacheDomain.implementation(), cacheDomain.eviction(), cacheDomain.flushInterval(), cacheDomain.size(), cacheDomain.readWrite(), null);
     }
   }
-
+  /**
+   * 处理mapper类的注解 {@link org.apache.ibatis.annotations.CacheNamespaceRef}
+   */
   private void parseCacheRef() {
     CacheNamespaceRef cacheDomainRef = type.getAnnotation(CacheNamespaceRef.class);
     if (cacheDomainRef != null) {
@@ -142,6 +163,12 @@ public class MapperAnnotationBuilder {
     }
   }
 
+  /**
+   * 处理方法的注解:
+   *  <li>{@link org.apache.ibatis.annotations.ConstructorArgs}
+   *  <li>{@link org.apache.ibatis.annotations.Results}
+   *  <li>{@link org.apache.ibatis.annotations.TypeDiscriminator}
+   */
   private void parseResultsAndConstructorArgs(Method method) {
     Class<?> returnType = getReturnType(method);
     if (returnType != null) {

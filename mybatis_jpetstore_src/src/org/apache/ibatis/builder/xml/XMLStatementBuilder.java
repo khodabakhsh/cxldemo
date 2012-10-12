@@ -27,6 +27,24 @@ public class XMLStatementBuilder extends BaseBuilder {
     this.context = context;
   }
 
+  /**
+   * 处理select|insert|update|delete的节点,属性包括:
+   * <ol>
+   * <li>id
+   * <li>fetchSize
+   * <li>timeout
+   * <li>parameterMap
+   * <li>parameterType
+   * <li>resultMap
+   * <li>resultType
+   * <li>resultSetType
+   * <li>statementType
+   * <li>flushCache
+   * <li>useCache
+   * <li>keyProperty
+   * <li>useGeneratedKeys
+   * <li>keyColumn
+   */
   public void parseStatementNode() {
     String id = context.getStringAttribute("id");
     Integer fetchSize = context.getIntAttribute("fetchSize", null);
@@ -42,10 +60,13 @@ public class XMLStatementBuilder extends BaseBuilder {
     StatementType statementType = StatementType.valueOf(context.getStringAttribute("statementType", StatementType.PREPARED.toString()));
     ResultSetType resultSetTypeEnum = resolveResultSetType(resultSetType);
 
+    //处理节点的内容(SQL语句、NodeHandler等)
     List<SqlNode> contents = parseDynamicTags(context);
     MixedSqlNode rootSqlNode = new MixedSqlNode(contents);
     SqlSource sqlSource = new DynamicSqlSource(configuration, rootSqlNode);
     String nodeName = context.getNode().getNodeName();
+    
+    //sql语句类型:select|insert|update|delete
     SqlCommandType sqlCommandType = SqlCommandType.valueOf(nodeName.toUpperCase(Locale.ENGLISH));
     boolean isSelect = sqlCommandType == SqlCommandType.SELECT;
     boolean flushCache = context.getBooleanAttribute("flushCache", !isSelect);

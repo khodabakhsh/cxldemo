@@ -67,15 +67,20 @@ public class XMLMapperBuilder extends BaseBuilder {
     this.sqlFragments = sqlFragments;
     this.resource = resource;
   }
-  
+  /**
+   * 解析mapper的xml，增加到{@link #configuration} 
+   */
   public void parse() {
     if (!configuration.isResourceLoaded(resource)) {
+      // 解析mapper的xml，增加到{@link #configuration} 
       configurationElement(parser.evalNode("/mapper"));
       configuration.addLoadedResource(resource);
       bindMapperForNamespace();
     }
-    
+    //解析未成功处理的 <cache-ref>
     parsePendingChacheRefs();
+    
+  //解析未成功处理的 <select> <insert> <update> <delete> 
     parsePendingStatements();
   }
       
