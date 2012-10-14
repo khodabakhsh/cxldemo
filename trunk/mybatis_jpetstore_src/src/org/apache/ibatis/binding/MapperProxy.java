@@ -39,6 +39,7 @@ public class MapperProxy implements InvocationHandler, Serializable {
     if (!OBJECT_METHODS.contains(method.getName())) {
       final Class<?> declaringInterface = findDeclaringInterface(proxy, method);
       final MapperMethod mapperMethod = new MapperMethod(declaringInterface, method, sqlSession);
+      //mapperMethod.execute内部是利用SqlSession来真正执行数据库操作，并获得执行结果
       final Object result = mapperMethod.execute(args);
       //方法声明中返回值是基本数据类型的方法，result为null时直接抛异常
       if (result == null && method.getReturnType().isPrimitive() && !method.getReturnType().equals(Void.TYPE)) {

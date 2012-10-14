@@ -15,7 +15,12 @@ import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
+/**
+ * <li>包装mapper方法的信息 
+ * <li>持有{@link #sqlSession}引用，并利用它来获得数据库结果。
+ */
 public class MapperMethod {
+
 
   private SqlSession sqlSession;
   private Configuration config;
@@ -74,6 +79,9 @@ public class MapperMethod {
     validateStatement();
   }
 
+  /**
+   * 调用 {@link org.apache.ibatis.session.SqlSession}中的方法，得到结果。
+   */
   public Object execute(Object[] args) {
     Object result = null;
     if (SqlCommandType.INSERT == type) {

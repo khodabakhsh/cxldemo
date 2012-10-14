@@ -35,10 +35,10 @@ public class XMLStatementBuilder extends BaseBuilder {
    * <li>timeout
    * <li>parameterMap
    * <li>parameterType
-   * <li>resultMap
+   * <li>resultMap ,可以配置多个，","号隔开
    * <li>resultType
    * <li>resultSetType
-   * <li>statementType
+   * <li>statementType ,默认是{@link org.apache.ibatis.mapping.StatementType#PREPARED} , 取值范围:{@link org.apache.ibatis.mapping.StatementType}
    * <li>flushCache
    * <li>useCache
    * <li>keyProperty

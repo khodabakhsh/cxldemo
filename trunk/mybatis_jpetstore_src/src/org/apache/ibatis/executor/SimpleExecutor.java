@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.Collections;
 import java.util.List;
 
+
 public class SimpleExecutor extends BaseExecutor {
 
   public SimpleExecutor(Configuration configuration, Transaction transaction) {
@@ -32,29 +33,31 @@ public class SimpleExecutor extends BaseExecutor {
     }
   }
 
-  public List doQuery(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler) throws SQLException {
-    Statement stmt = null;
-    try {
-      Configuration configuration = ms.getConfiguration();
-      StatementHandler handler = configuration.newStatementHandler(this, ms, parameter, rowBounds, resultHandler);
-      stmt = prepareStatement(handler);
-      return handler.query(stmt, resultHandler);
-    } finally {
-      closeStatement(stmt);
-    }
-  }
+	@SuppressWarnings("rawtypes")
+	public List doQuery(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler)
+			throws SQLException {
+		Statement stmt = null;
+		try {
+			Configuration configuration = ms.getConfiguration();
+			StatementHandler handler = configuration.newStatementHandler(this, ms, parameter, rowBounds, resultHandler);
+			stmt = prepareStatement(handler);
+			return handler.query(stmt, resultHandler);
+		} finally {
+			closeStatement(stmt);
+		}
+	}
 
-  public List doFlushStatements(boolean isRollback)
-      throws SQLException {
-    return Collections.EMPTY_LIST;
-  }
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List doFlushStatements(boolean isRollback) throws SQLException {
+		return Collections.EMPTY_LIST;
+	}
 
-  private Statement prepareStatement(StatementHandler handler) throws SQLException {
-    Statement stmt;
-    Connection connection = transaction.getConnection();
-    stmt = handler.prepare(connection);
-    handler.parameterize(stmt);
-    return stmt;
-  }
+	private Statement prepareStatement(StatementHandler handler) throws SQLException {
+		Statement stmt;
+		Connection connection = transaction.getConnection();
+		stmt = handler.prepare(connection);
+		handler.parameterize(stmt);
+		return stmt;
+	}
 
 }

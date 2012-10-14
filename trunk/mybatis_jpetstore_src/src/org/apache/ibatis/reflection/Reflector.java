@@ -5,6 +5,7 @@ import org.apache.ibatis.reflection.invoker.Invoker;
 import org.apache.ibatis.reflection.invoker.MethodInvoker;
 import org.apache.ibatis.reflection.invoker.SetFieldInvoker;
 import org.apache.ibatis.reflection.property.PropertyNamer;
+import org.apache.ibatis.session.SqlSession;
 
 import java.lang.reflect.*;
 import java.util.*;
@@ -26,6 +27,9 @@ public class Reflector {
   private Map<String, Invoker> getMethods = new HashMap<String, Invoker>();
   private Map<String, Class> setTypes = new HashMap<String, Class>();
   private Map<String, Class> getTypes = new HashMap<String, Class>();
+  /**
+   * 默认无参构造函数
+   */
   private Constructor defaultConstructor;
 
   private Map<String, String> caseInsensitivePropertyMap = new HashMap<String, String>();
@@ -46,10 +50,14 @@ public class Reflector {
     }
   }
 
+  /**
+   * 设置默认无参构造函数
+   */
   private void addDefaultConstructor(Class clazz) {
     Constructor[] consts = clazz.getDeclaredConstructors();
     for (Constructor constructor : consts) {
       if (constructor.getParameterTypes().length == 0) {
+    	//处理访问权限
         if (canAccessPrivateMethods()) {
           try {
             constructor.setAccessible(true);
@@ -204,6 +212,8 @@ public class Reflector {
    * We use this method, instead of the simpler Class.getMethods(),
    * because we want to look for private methods as well.
    *
+   *<p><b>返回cls中所有方法(包括其所有父类的方法)</b>
+   *
    * @param cls The class
    * @return An array containing all methods in this class
    */
@@ -220,6 +230,7 @@ public class Reflector {
         addUniqueMethods(uniqueMethods, anInterface.getMethods());
       }
 
+      //父类
       currentClass = currentClass.getSuperclass();
     }
 

@@ -1,5 +1,10 @@
 package org.apache.ibatis.executor;
 
+/**
+ * 
+ * 用于记录代码执行过程的一些信息(thread local)
+ *
+ */
 public class ErrorContext {
 
   private static final String LINE_SEPARATOR = System.getProperty("line.separator","\n");

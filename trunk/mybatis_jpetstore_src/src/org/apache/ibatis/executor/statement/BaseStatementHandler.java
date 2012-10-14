@@ -62,7 +62,9 @@ public abstract class BaseStatementHandler implements StatementHandler {
     Statement statement = null;
     try {
       statement = instantiateStatement(connection);
+      //超时设置
       setStatementTimeout(statement);
+      //fetchSize设置
       setFetchSize(statement);
       return statement;
     } catch (SQLException e) {
@@ -77,6 +79,11 @@ public abstract class BaseStatementHandler implements StatementHandler {
   protected abstract Statement instantiateStatement(Connection connection)
       throws SQLException;
 
+  /**
+   * 设置sql语句超时设置，
+   * 可在xml中配置timeout属性
+   * @see java.sql.Statement#setQueryTimeout(int)
+   */
   protected void setStatementTimeout(Statement stmt)
       throws SQLException {
     Integer timeout = mappedStatement.getTimeout();
@@ -87,7 +94,11 @@ public abstract class BaseStatementHandler implements StatementHandler {
       stmt.setQueryTimeout(defaultTimeout);
     }
   }
-
+  /**
+   * 设置sql语句超时设置，
+   * 可在xml中配置fetchSize属性
+   * @see java.sql.Statement#setFetchSize(int)
+   */
   protected void setFetchSize(Statement stmt)
       throws SQLException {
     Integer fetchSize = mappedStatement.getFetchSize();

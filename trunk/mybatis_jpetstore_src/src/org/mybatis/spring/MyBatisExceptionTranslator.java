@@ -57,7 +57,7 @@ public class MyBatisExceptionTranslator implements PersistenceExceptionTranslato
     }
 
     /**
-     * {@inheritDoc}
+     * 实现接口{@link org.springframework.dao.support.PersistenceExceptionTranslator}的方法
      */
     public DataAccessException translateExceptionIfPossible(RuntimeException e) {
         if (e instanceof PersistenceException) {

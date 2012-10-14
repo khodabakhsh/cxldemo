@@ -2,6 +2,11 @@ package org.apache.ibatis.executor.result;
 
 import org.apache.ibatis.session.ResultContext;
 
+/**
+ * 用于循环处理数据库操作结果时，
+ * <li>持有结果实例
+ * <li>结果累加计数
+ */
 public class DefaultResultContext implements ResultContext {
 
   private Object resultObject;

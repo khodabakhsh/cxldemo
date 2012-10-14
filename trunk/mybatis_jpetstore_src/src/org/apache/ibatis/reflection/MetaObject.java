@@ -130,6 +130,9 @@ public class MetaObject {
     return objectWrapper;
   }
 
+  /**
+   * 没有任何内容的class 
+   */
   private static class NullObject {
   }
 

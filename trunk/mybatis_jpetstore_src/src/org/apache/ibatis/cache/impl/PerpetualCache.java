@@ -9,6 +9,10 @@ import java.util.Map;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+/**
+ * Perpetual（美[pə'petʃuəl]）:永久
+ *
+ */
 public class PerpetualCache implements Cache {
 
   private String id;

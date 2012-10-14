@@ -11,3 +11,43 @@
 /src/org/apache/ibatis   --->   mybatis 3.0.5框架源码
 /src/org/mybatis/jpetstore    --->  jpetstore 6.0.1实例源码
 /src/org/mybatis/spring    --->  mybatis-spring-1.0.1源码
+
+
+
+
+
+
+
+
+------------------------------------------	   学习       	------------------------------------------		
+1. boolean java.lang.Class.isArray()判断是否数组
+
+2.org.apache.ibatis.mapping.MappedStatement.getBoundSql,里面有个 hasNestedResultMaps |= rm.hasNestedResultMaps();的运算
+
+3.java.sql.Statement.setFetchSize(int rows) 
+
+4.org.apache.ibatis.executor.resultset.FastResultSetHandler.getNextResultSet
+里的stmt.getConnection().getMetaData().supportsMultipleResultSets()
+
+5.ResultSet.TYPE_FORWARD_ONLY
+
+6.org.apache.ibatis.reflection.factory.DefaultObjectFactory#instantiateClass  
+constructor.setAccessible(true); 设置构造函数的访问限制
+
+7. Collections.unmodifiableList
+
+8.  assert mappedStatement.configuration != null;
+
+9.boolean java.lang.Class.isAssignableFrom
+
+10.看看org.apache.ibatis.io.ResolverUtil类
+
+11.java.lang.Class.isAnonymousClass
+
+12.@interface ,,看org.apache.ibatis.type.Alias的定义
+
+13.看看org.apache.ibatis.reflection.Reflector里的
+securityManager.checkPermission(new ReflectPermission("suppressAccessChecks"));
+和 currentMethod.isBridge()
+
+

@@ -68,6 +68,9 @@ public class SqlSessionTemplate implements SqlSession {
 
     private final SqlSessionFactory sqlSessionFactory;
 
+    /**
+     * {@link org.apache.ibatis.session.ExecutorType}
+     */
     private final ExecutorType executorType;
 
     private final SqlSession sqlSessionProxy;
@@ -94,6 +97,7 @@ public class SqlSessionTemplate implements SqlSession {
      * @param executorType
      */
     public SqlSessionTemplate(SqlSessionFactory sqlSessionFactory, ExecutorType executorType) {
+    	//MyBatisExceptionTranslator实现了spring的PersistenceExceptionTranslator接口
         this(sqlSessionFactory, executorType, 
                 new MyBatisExceptionTranslator(
                         sqlSessionFactory.getConfiguration().getEnvironment().getDataSource(), true));
@@ -338,8 +342,9 @@ public class SqlSessionTemplate implements SqlSession {
                     SqlSessionTemplate.this.executorType,
                     SqlSessionTemplate.this.exceptionTranslator);
             try {
-            	//利用上面从spring获得的SqlSession实例，真正的去调用mapper类的方法。
+            	//1.利用上面从spring获得的SqlSession实例，真正的去调用mapper类的方法。
             	//这样可以使DAO操作处于spring的事务控制中
+            	//2.这里的method，已经对应到@org.apache.ibatis.session.SqlSession 中的方法
                 Object result = method.invoke(sqlSession, args);
                 if (!SqlSessionUtils.isSqlSessionTransactional(sqlSession, SqlSessionTemplate.this.sqlSessionFactory)) {
                     sqlSession.commit();

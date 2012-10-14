@@ -222,10 +222,13 @@ public class MapperBuilderAssistant extends BaseBuilder {
     statementBuilder.statementType(statementType);
     statementBuilder.keyGenerator(keyGenerator);
     statementBuilder.keyProperty(keyProperty);
+    //sql执行超时设置
     setStatementTimeout(timeout, statementBuilder);
-
+    //设置parameterMap
     setStatementParameterMap(parameterMap, parameterType, statementBuilder);
+    //设置resultMap
     setStatementResultMap(resultMap, resultType, resultSetType, statementBuilder);
+    //设置cache相关值
     setStatementCache(isSelect, flushCache, useCache, currentCache, statementBuilder);
 
     MappedStatement statement = statementBuilder.build();
@@ -250,10 +253,16 @@ public class MapperBuilderAssistant extends BaseBuilder {
     statementBuilder.cache(cache);
   }
 
+  /**
+   * 为statementBuilder配置parameterMap:
+   * <li>parameterMap 不为null时，使用parameterMap构造ParameterMap
+   * <li>当parameterMap为null时并且parameterTypeClass不为null时，使用parameterTypeClass来构造ParameterMap
+   */
   private void setStatementParameterMap(
       String parameterMap,
       Class<?> parameterTypeClass,
       MappedStatement.Builder statementBuilder) {
+	//先设置当前namespace
     parameterMap = applyCurrentNamespace(parameterMap);
 
     if (parameterMap != null) {
@@ -272,12 +281,18 @@ public class MapperBuilderAssistant extends BaseBuilder {
       statementBuilder.parameterMap(inlineParameterMapBuilder.build());
     }
   }
-
+  /**
+   * 为statementBuilder配置resultMap:
+   * <li>resultMap 不为null时，使用resultMap构造ResultMap
+   * <li>当resultMap为null时并且resultType不为null时，使用resultType来构造ResultMap
+   * <br/>ps:resultMap是可以配置多个的，以","号隔开
+   */
   private void setStatementResultMap(
       String resultMap,
       Class<?> resultType,
       ResultSetType resultSetType,
       MappedStatement.Builder statementBuilder) {
+	//先设置当前namespace
     resultMap = applyCurrentNamespace(resultMap);
 
     List<ResultMap> resultMaps = new ArrayList<ResultMap>();
@@ -303,8 +318,12 @@ public class MapperBuilderAssistant extends BaseBuilder {
     statementBuilder.resultSetType(resultSetType);
   }
 
+  /**
+   * sql执行超时设置
+   */
   private void setStatementTimeout(Integer timeout, MappedStatement.Builder statementBuilder) {
     if (timeout == null) {
+      //使用默认的
       timeout = configuration.getDefaultStatementTimeout();
     }
     statementBuilder.timeout(timeout);
