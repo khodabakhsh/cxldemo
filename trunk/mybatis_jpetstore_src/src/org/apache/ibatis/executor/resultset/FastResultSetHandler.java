@@ -233,7 +233,7 @@ protected void handleResultSet(ResultSet rs, ResultMap resultMap, List multipleR
   protected Object getRowValue(ResultSet rs, ResultMap resultMap, CacheKey rowKey) throws SQLException {
     final List<String> mappedColumnNames = new ArrayList<String>();
     final List<String> unmappedColumnNames = new ArrayList<String>();
-    //懒加载
+    //
     final ResultLoaderMap lazyLoader = instantiateResultLoaderMap();
     Object resultObject = createResultObject(rs, resultMap, lazyLoader);
     if (resultObject != null && !typeHandlerRegistry.hasTypeHandler(resultMap.getType())) {

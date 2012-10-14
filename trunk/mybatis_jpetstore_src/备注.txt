@@ -50,4 +50,5 @@ constructor.setAccessible(true); 设置构造函数的访问限制
 securityManager.checkPermission(new ReflectPermission("suppressAccessChecks"));
 和 currentMethod.isBridge()
 
+14.看org.apache.ibatis.reflection.property.PropertyTokenizer
 

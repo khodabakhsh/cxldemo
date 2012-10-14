@@ -80,8 +80,17 @@ public class Configuration {
   protected MapperRegistry mapperRegistry = new MapperRegistry(this);
 
   protected final InterceptorChain interceptorChain = new InterceptorChain();
+  
+  /**
+   * 已注册的type handler ，默认初始值为{@link org.apache.ibatis.type.TypeHandlerRegistry}
+   */
   protected final TypeHandlerRegistry typeHandlerRegistry = new TypeHandlerRegistry();
+  
+  /**
+   * 已注册的alias ，默认初始值为{@link org.apache.ibatis.type.TypeAliasRegistry}
+   */
   protected final TypeAliasRegistry typeAliasRegistry = new TypeAliasRegistry();
+  
   /**
    * select|insert|update|delete配置
    */
@@ -121,6 +130,20 @@ public class Configuration {
     this.environment = environment;
   }
 
+  /**
+   * 默认注册了一些type alias:
+   * <ol>
+   * <li>JDBC
+   * <li>MANAGED
+   * <li>JNDI
+   * <li>POOLED
+   * <li>UNPOOLED
+   * <li>PERPETUAL
+   * <li>FIFO
+   * <li>LRU
+   * <li>SOFT
+   * <li>WEAK
+   */
   public Configuration() {
     typeAliasRegistry.registerAlias("JDBC",
         JdbcTransactionFactory.class.getName());

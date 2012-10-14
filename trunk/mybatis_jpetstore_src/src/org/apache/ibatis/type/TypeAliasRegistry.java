@@ -24,7 +24,7 @@ public class TypeAliasRegistry {
   private final HashMap<String, Class> TYPE_ALIASES = new HashMap<String, Class>();
 
   /**
-   * 默认先增加mybatis自己定义的一些alias
+   * 默认注册mybatis自己定义的一些type alias
    */
   public TypeAliasRegistry() {
     registerAlias("string", String.class);
