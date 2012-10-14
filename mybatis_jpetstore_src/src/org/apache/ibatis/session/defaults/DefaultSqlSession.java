@@ -193,6 +193,11 @@ public class DefaultSqlSession implements SqlSession {
     return (!autoCommit && dirty) || force;
   }
 
+  /**
+   * <li>object为List，返回键为list的hashmap
+   * <li>object为数组，返回键为array的hashmap
+   * <li>否则返回object
+   */
   private Object wrapCollection(final Object object) {
     if (object instanceof List) {
       return new HashMap() {{

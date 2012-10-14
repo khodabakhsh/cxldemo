@@ -13,11 +13,19 @@ import java.util.Set;
 
 import org.apache.ibatis.io.ResolverUtil;
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.mapping.ResultMap;
 
+/**
+ * 维护管理alias 
+ */
 public class TypeAliasRegistry {
+
 
   private final HashMap<String, Class> TYPE_ALIASES = new HashMap<String, Class>();
 
+  /**
+   * 默认先增加mybatis自己定义的一些alias
+   */
   public TypeAliasRegistry() {
     registerAlias("string", String.class);
 
@@ -99,16 +107,22 @@ public class TypeAliasRegistry {
 
   public void registerAliases(String packageName, Class superType){
     ResolverUtil<Class> resolverUtil = new ResolverUtil<Class>();
+    //找出packageName对应的路径中，isAssignableFrom superType的java类
     resolverUtil.find(new ResolverUtil.IsA(superType), packageName);
     Set<Class<? extends Class>> typeSet = resolverUtil.getClasses();
     for(Class type : typeSet){
       //Ignore inner classes and interfaces (including package-info.java)
+      //忽略匿名类和接口
       if (!type.isAnonymousClass() && !type.isInterface()) {
         registerAlias(type);
       }
     }
   }
 
+  /**
+   * <li>优先使用{@link org.apache.ibatis.type.Alias} 配置的注解作alias
+   * <li>没有注解的话，使用Class#getSimpleName作alias
+   */
   public void registerAlias(Class type) {
     String alias = type.getSimpleName();
     Alias aliasAnnotation = (Alias) type.getAnnotation(Alias.class);

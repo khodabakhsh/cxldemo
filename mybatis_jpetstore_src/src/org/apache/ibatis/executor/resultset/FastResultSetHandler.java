@@ -96,6 +96,7 @@ public class FastResultSetHandler implements ResultSetHandler {
     while (rs == null) {
         // move forward to get the first resultset in case the driver
         // doesn't return the resultset as the first result (HSQLDB 2.1)
+    	// 看注释，貌似是对HSQLDB 2.1的特殊处理
         if (stmt.getMoreResults()) {
             rs = stmt.getResultSet();
         } else {
@@ -107,9 +108,11 @@ public class FastResultSetHandler implements ResultSetHandler {
     }
     
     validateResultMapsCount(rs, resultMapCount);
+    //循环 处理resultSet(因为可能有多个，所以resultMap属性在xml文件中可以配置多个，以","号隔开)
     while (rs != null && resultMapCount > resultSetCount) {
       final ResultMap resultMap = resultMaps.get(resultSetCount);
       handleResultSet(rs, resultMap, multipleResults);
+      //循环下一个(如果有)
       rs = getNextResultSet(stmt);
       cleanUpAfterHandlingResultSet();
       resultSetCount++;
@@ -138,17 +141,22 @@ public class FastResultSetHandler implements ResultSetHandler {
               + "'.  It's likely that neither a Result Type nor a Result Map was specified.");
     }
   }
-
-  protected void handleResultSet(ResultSet rs, ResultMap resultMap, List multipleResults) throws SQLException {
+  /**
+   * 处理 "数据库操作结果"
+   */
+  @SuppressWarnings("unchecked")
+protected void handleResultSet(ResultSet rs, ResultMap resultMap, List multipleResults) throws SQLException {
     try {
       if (resultHandler == null) {
         DefaultResultHandler defaultResultHandler = new DefaultResultHandler();
+        //循环处理ResultSet
         handleRowValues(rs, resultMap, defaultResultHandler, rowBounds);
         multipleResults.add(defaultResultHandler.getResultList());
       } else {
         handleRowValues(rs, resultMap, resultHandler, rowBounds);
       }
     } finally {
+      //用完关闭	
       closeResultSet(rs); // issue #228 (close resultsets)
     }
   }
@@ -161,16 +169,19 @@ public class FastResultSetHandler implements ResultSetHandler {
     }
   }
 
-  //
-  // HANDLE ROWS
-  //
-
+  
+/**
+ * 处理 "数据库操作结果",包含基于内存的分页处理
+ */
   protected void handleRowValues(ResultSet rs, ResultMap resultMap, ResultHandler resultHandler, RowBounds rowBounds) throws SQLException {
     final DefaultResultContext resultContext = new DefaultResultContext();
+    //起始位置定位
     skipRows(rs, rowBounds);
     while (shouldProcessMoreRows(rs, resultContext, rowBounds)) {
+      //处理resultMap配置中的discriminator
       final ResultMap discriminatedResultMap = resolveDiscriminatedResultMap(rs, resultMap);
       Object rowValue = getRowValue(rs, discriminatedResultMap, null);
+      //计数
       resultContext.nextResultObject(rowValue);
       resultHandler.handleResult(resultContext);
     }
@@ -180,17 +191,27 @@ public class FastResultSetHandler implements ResultSetHandler {
     return rs.next() && context.getResultCount() < rowBounds.getLimit() && !context.isStopped();
   }
 
+  /**
+   *  因为mybatis的分页是基于内存的分页(先不说这种方式不好)，
+   *  所以这里要直接把resultSet定位到rowBounds指定的起始位置
+   */
   protected void skipRows(ResultSet rs, RowBounds rowBounds) throws SQLException {
+	//数据库是否支持ResultSet#absolute
     if (rs.getType() != ResultSet.TYPE_FORWARD_ONLY) {
       if (rowBounds.getOffset() != 0) {
         rs.absolute(rowBounds.getOffset());
       }
     } else {
+      //只能一个一个next啦
       for (int i = 0; i < rowBounds.getOffset(); i++) rs.next();
     }
   }
 
+  /**
+   * 判断是否有多个resultSet，如果有，返回下一个resultSet
+   */
   protected ResultSet getNextResultSet(Statement stmt) throws SQLException {
+	//tolerant( [美][ˈtɑlərənt]  宽容的；容忍的，忍受的)
     // Making this method tolerant of bad JDBC drivers
     try {
       if (stmt.getConnection().getMetaData().supportsMultipleResultSets()) {
@@ -212,6 +233,7 @@ public class FastResultSetHandler implements ResultSetHandler {
   protected Object getRowValue(ResultSet rs, ResultMap resultMap, CacheKey rowKey) throws SQLException {
     final List<String> mappedColumnNames = new ArrayList<String>();
     final List<String> unmappedColumnNames = new ArrayList<String>();
+    //懒加载
     final ResultLoaderMap lazyLoader = instantiateResultLoaderMap();
     Object resultObject = createResultObject(rs, resultMap, lazyLoader);
     if (resultObject != null && !typeHandlerRegistry.hasTypeHandler(resultMap.getType())) {
@@ -430,9 +452,10 @@ public class FastResultSetHandler implements ResultSetHandler {
   }
 
   //
-  // DISCRIMINATOR
-  //
-
+  // DISCRIMINATOR([美][dɪˈskrɪməˌnet] 歧视；区别；辨出)
+  /**
+   * 处理resultMap配置中的discriminator,如果没有discriminator，返回原来的resultMap
+   */
   public ResultMap resolveDiscriminatedResultMap(ResultSet rs, ResultMap resultMap) throws SQLException {
     Set<String> pastDiscriminators = new HashSet<String>();
     Discriminator discriminator = resultMap.getDiscriminator();

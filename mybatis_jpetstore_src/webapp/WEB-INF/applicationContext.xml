@@ -51,6 +51,7 @@
     <!-- define the SqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
+        <!-- 扫描alias的包路径,可配置多个路径，","";"号隔开 -->
         <property name="typeAliasesPackage" value="org.mybatis.jpetstore.domain" />
     </bean>
 

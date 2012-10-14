@@ -90,6 +90,9 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
 
     private Class<?>[] typeAliases;
 
+    /**
+     * 扫描alias的包路径
+     */
     private String typeAliasesPackage;
 
     /**
@@ -295,7 +298,8 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
             }
             configuration = new Configuration();
         }
-                
+        
+        //扫描包路径typeAliasesPackage , 处理 alias
         if (StringUtils.hasLength(this.typeAliasesPackage)) {
             String[] typeAliasPackageArray = StringUtils.tokenizeToStringArray(this.typeAliasesPackage, 
                 ConfigurableApplicationContext.CONFIG_LOCATION_DELIMITERS);
@@ -316,6 +320,7 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
             }
         }
 
+        //处理plugins
         if (!ObjectUtils.isEmpty(this.plugins)) {
             for (Interceptor plugin : this.plugins) {
                 configuration.addInterceptor(plugin);

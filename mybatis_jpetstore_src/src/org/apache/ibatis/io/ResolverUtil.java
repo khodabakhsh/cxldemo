@@ -115,7 +115,7 @@ public class ResolverUtil<T> {
 		/**
 		 * Returns true if type is assignable to the parent type supplied in the constructor.
 		 */
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "rawtypes" })
 		public boolean matches(Class type) {
 			return type != null && parent.isAssignableFrom(type);
 		}
@@ -244,13 +244,16 @@ public class ResolverUtil<T> {
 	 *                    classes, e.g. {@code net.sourceforge.stripes}
 	 */
 	public ResolverUtil<T> find(Test test, String packageName) {
+		
+		//把"."号换为"/"号
 		String path = getPackagePath(packageName);
-
 		try {
 			List<URL> urls = Collections.list(getClassLoader().getResources(path));
 			for (URL url : urls) {
+				//递归遍历,获得所有层级下的java class
 				List<String> children = listClassResources(url, path);
 				for (String child : children) {
+					//这里child的形式是:   your/package/name/someJavaBean.class
 					addIfMatching(test, child);
 				}
 			}
@@ -283,6 +286,7 @@ public class ResolverUtil<T> {
 
 			// First, try to find the URL of a JAR file containing the requested resource. If a JAR
 			// file is found, then we'll list child resources by reading the JAR.
+			//先看看是否为jar
 			URL jarUrl = findJarForResource(url, path);
 			if (jarUrl != null) {
 				is = jarUrl.openStream();
@@ -304,6 +308,7 @@ public class ResolverUtil<T> {
 					} else {
 						// Some servlet containers allow reading from "directory" resources like a
 						// text file, listing the child resources one per line.
+						//试了一下，tomcat容器中是可以的。。
 						is = url.openStream();
 						BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 						for (String line; (line = reader.readLine()) != null;) {
@@ -342,6 +347,7 @@ public class ResolverUtil<T> {
 					prefix = prefix + "/";
 
 				// Iterate over each immediate child, adding classes and recursing into directories
+				//递归遍历
 				for (String child : children) {
 					String resourcePath = path + "/" + child;
 					if (child.endsWith(".class")) {
@@ -443,6 +449,7 @@ public class ResolverUtil<T> {
 				return testUrl;
 			} else {
 				// WebLogic fix: check if the URL's file exists in the filesystem.
+				//看来这里是为了修复WebLogic的
 				log.debug("Not a JAR: " + jarUrl);
 				jarUrl.replace(0, jarUrl.length(), testUrl.getFile());
 				File file = new File(jarUrl.toString());
@@ -540,7 +547,7 @@ public class ResolverUtil<T> {
 	 * @param test the test used to determine if the class matches
 	 * @param fqn  the fully qualified name of a class
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected void addIfMatching(Test test, String fqn) {
 		try {
 			String externalName = fqn.substring(0, fqn.indexOf('.')).replace('/', '.');

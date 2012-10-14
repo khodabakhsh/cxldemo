@@ -64,6 +64,9 @@ public class Configuration {
   protected boolean useGeneratedKeys = false;
   protected boolean useColumnLabel = true;
   protected boolean cacheEnabled = true;
+  /**
+   * 默认sql执行超时设置
+   */
   protected Integer defaultStatementTimeout;
   protected ExecutorType defaultExecutorType = ExecutorType.SIMPLE;
   protected AutoMappingBehavior autoMappingBehavior = AutoMappingBehavior.PARTIAL;
@@ -79,6 +82,9 @@ public class Configuration {
   protected final InterceptorChain interceptorChain = new InterceptorChain();
   protected final TypeHandlerRegistry typeHandlerRegistry = new TypeHandlerRegistry();
   protected final TypeAliasRegistry typeAliasRegistry = new TypeAliasRegistry();
+  /**
+   * select|insert|update|delete配置
+   */
   protected final Map<String, MappedStatement> mappedStatements = new StrictMap<String, MappedStatement>(
       "Mapped Statements collection");
   protected final Map<String, Cache> caches = new StrictMap<String, Cache>(
