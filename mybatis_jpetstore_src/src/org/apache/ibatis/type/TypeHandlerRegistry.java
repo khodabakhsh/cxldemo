@@ -30,6 +30,9 @@ public final class TypeHandlerRegistry {
   private final Map<Class<?>, Map<JdbcType, TypeHandler>> TYPE_HANDLER_MAP = new HashMap<Class<?>, Map<JdbcType, TypeHandler>>();
   private final TypeHandler UNKNOWN_TYPE_HANDLER = new UnknownTypeHandler(this);
 
+  /**
+   * 默认注册mybatis定义的一些type handler
+   */
   public TypeHandlerRegistry() {
     register(Boolean.class, new BooleanTypeHandler());
     register(boolean.class, new BooleanTypeHandler());
