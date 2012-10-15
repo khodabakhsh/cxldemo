@@ -33,6 +33,9 @@ public class DefaultSqlSession implements SqlSession {
     return selectOne(statement, null);
   }
 
+  /**
+   * ps:只能有一个结果，多个结果抛异常
+   */
   public Object selectOne(String statement, Object parameter) {
     // Popular vote was to return null on 0 results and throw exception on too many.
     List list = selectList(statement, parameter);

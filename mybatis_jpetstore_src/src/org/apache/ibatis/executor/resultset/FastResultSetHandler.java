@@ -19,6 +19,9 @@ import org.apache.ibatis.type.TypeHandlerRegistry;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * SQL执行结果的处理工具 
+ */
 public class FastResultSetHandler implements ResultSetHandler {
 
   protected final Executor executor;
@@ -177,6 +180,7 @@ protected void handleResultSet(ResultSet rs, ResultMap resultMap, List multipleR
     final DefaultResultContext resultContext = new DefaultResultContext();
     //起始位置定位
     skipRows(rs, rowBounds);
+    //循环处理结果
     while (shouldProcessMoreRows(rs, resultContext, rowBounds)) {
       //处理resultMap配置中的discriminator
       final ResultMap discriminatedResultMap = resolveDiscriminatedResultMap(rs, resultMap);
@@ -317,6 +321,7 @@ protected void handleResultSet(ResultSet rs, ResultMap resultMap, List multipleR
     final int columnCount = rsmd.getColumnCount();
     final Set<String> mappedColumns = resultMap.getMappedColumns();
     for (int i = 1; i <= columnCount; i++) {
+      //getColumnLabel是sql语句中as ***的名称，getColumnName是字段名
       final String columnName = configuration.isUseColumnLabel() ? rsmd.getColumnLabel(i) : rsmd.getColumnName(i);
       final String upperColumnName = columnName.toUpperCase(Locale.ENGLISH);
       if (mappedColumns.contains(upperColumnName)) {
@@ -348,10 +353,12 @@ protected void handleResultSet(ResultSet rs, ResultMap resultMap, List multipleR
     final Class resultType = resultMap.getType();
     final List<ResultMapping> constructorMappings = resultMap.getConstructorResultMappings();
     if (typeHandlerRegistry.hasTypeHandler(resultType)) {
+      //typeHandlerRegistry中已经注册的类型(默认的mybatis能处理java基本数据类型、java.sql.*定义的一些类型、{@link org.apache.ibatis.type.JdbcType}定义的一些类型)
       return createPrimitiveResultObject(rs, resultMap);
     } else if (constructorMappings.size() > 0) {
       return createParameterizedResultObject(rs, resultType, constructorMappings, constructorArgTypes, constructorArgs);
     } else {
+      //
       return objectFactory.create(resultType);
     }
   }

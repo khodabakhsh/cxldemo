@@ -8,6 +8,9 @@ public class MethodInvoker implements Invoker {
   private Class type;
   private Method method;
 
+  /**
+   * 
+   */
   public MethodInvoker(Method method) {
     this.method = method;
 

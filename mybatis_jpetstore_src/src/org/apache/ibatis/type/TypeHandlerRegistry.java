@@ -31,7 +31,11 @@ public final class TypeHandlerRegistry {
   private final TypeHandler UNKNOWN_TYPE_HANDLER = new UnknownTypeHandler(this);
 
   /**
-   * 默认注册mybatis定义的一些type handler
+   * 默认注册mybatis定义的一些type handler,包括:
+   * <li>java基本数据类型
+   * <li>java.sql.*定义的一些类型
+   * <li>{@link org.apache.ibatis.type.JdbcType}定义的一些类型
+   * <li>等等...
    */
   public TypeHandlerRegistry() {
     register(Boolean.class, new BooleanTypeHandler());
