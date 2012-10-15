@@ -80,10 +80,11 @@ public class DynamicContext {
       return null;
     }
   }
-
+  @SuppressWarnings("rawtypes")
   static class ContextAccessor implements PropertyAccessor {
 
-    public Object getProperty(Map context, Object target, Object name)
+   
+	public Object getProperty(Map context, Object target, Object name)
         throws OgnlException {
       Map map = (Map) target;
 

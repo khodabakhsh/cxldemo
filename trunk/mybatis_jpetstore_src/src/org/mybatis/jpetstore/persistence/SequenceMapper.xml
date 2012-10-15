@@ -4,7 +4,6 @@
 
 <mapper namespace="org.mybatis.jpetstore.persistence.SequenceMapper">
 
-  <cache />
 
   <select id="getSequence" parameterType="Sequence" resultType="Sequence">
     SELECT name, nextid

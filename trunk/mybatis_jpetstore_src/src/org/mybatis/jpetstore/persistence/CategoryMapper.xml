@@ -4,7 +4,6 @@
 
 <mapper namespace="org.mybatis.jpetstore.persistence.CategoryMapper">
 
-  <cache />
   
   <select id="getCategory" parameterType="string" resultType="Category">
     SELECT

@@ -4,7 +4,6 @@
 
 <mapper namespace="org.mybatis.jpetstore.persistence.ItemMapper">
 
-  <cache />
 
   <select id="getItemListByProduct" parameterType="string" resultType="Item">
     SELECT

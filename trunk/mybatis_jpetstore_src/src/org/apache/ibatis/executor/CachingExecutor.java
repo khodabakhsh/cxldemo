@@ -14,6 +14,9 @@ import java.util.List;
 
 public class CachingExecutor implements Executor {
 
+  /**
+   * 真正执行方法的executor，可以是BatchExecutor/ReuseExecutor/SimpleExecutor
+   */
   private Executor delegate;
   private TransactionalCacheManager tcm = new TransactionalCacheManager();
 

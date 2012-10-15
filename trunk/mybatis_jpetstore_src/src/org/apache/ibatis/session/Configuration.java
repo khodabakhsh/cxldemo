@@ -68,6 +68,9 @@ public class Configuration {
    * 默认sql执行超时设置
    */
   protected Integer defaultStatementTimeout;
+  /**
+   * 默认的executor 类型，默认为simple
+   */
   protected ExecutorType defaultExecutorType = ExecutorType.SIMPLE;
   protected AutoMappingBehavior autoMappingBehavior = AutoMappingBehavior.PARTIAL;
 
@@ -333,6 +336,11 @@ public class Configuration {
     return newExecutor(transaction, defaultExecutorType);
   }
 
+  /**
+   * 创建 BatchExecutor/ReuseExecutor/SimpleExecutor/CachingExecutor,
+   * 并加上plugin
+   * <p>PS:在 {@link #cacheEnabled}为true的时候，返回包装了 BatchExecutor/ReuseExecutor/SimpleExecutor的CachingExecutor
+   */
   public Executor newExecutor(Transaction transaction, ExecutorType executorType) {
     executorType = executorType == null ? defaultExecutorType : executorType;
     executorType = executorType == null ? ExecutorType.SIMPLE : executorType;
