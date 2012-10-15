@@ -101,6 +101,7 @@ public class MapperMethod {
       } else if (returnsMap) {
         result = executeForMap(args);
       } else {
+    	//返回一个结果
         Object param = getParam(args);
         result = sqlSession.selectOne(commandName, param);
       }

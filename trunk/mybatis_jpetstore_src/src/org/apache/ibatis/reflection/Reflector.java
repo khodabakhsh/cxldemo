@@ -36,9 +36,13 @@ public class Reflector {
 
   private Reflector(Class clazz) {
     type = clazz;
+    //增加默认无参构造函数
     addDefaultConstructor(clazz);
+    //处理get***方法、is***方法 
     addGetMethods(clazz);
+    //set方法
     addSetMethods(clazz);
+    //把clazz.getDeclaredFields()加入到{@link #setMethods}和 {@link #getMethods} 中
     addFields(clazz);
     readablePropertyNames = getMethods.keySet().toArray(new String[getMethods.keySet().size()]);
     writeablePropertyNames = setMethods.keySet().toArray(new String[setMethods.keySet().size()]);
@@ -72,6 +76,9 @@ public class Reflector {
     }
   }
 
+  /**
+   * 处理get***方法、is***方法 
+   */
   private void addGetMethods(Class cls) {
     Method[] methods = getClassMethods(cls);
     for (Method method : methods) {
@@ -97,6 +104,9 @@ public class Reflector {
     }
   }
 
+  /**
+   * 处理set***方法 
+   */
   private void addSetMethods(Class cls) {
     Map<String, List<Method>> conflictingSetters = new HashMap<String, List<Method>>();
     Method[] methods = getClassMethods(cls);
@@ -109,9 +119,14 @@ public class Reflector {
         }
       }
     }
+    //在同一个property具有多个setter的情况下，根据getter选其一 
     resolveSetterConflicts(conflictingSetters);
   }
 
+  /**
+   *  set***方法可能有多个(比如说setName(String value)、setName(int value)，即重载)，
+   *  所以用list保存。
+   */
   private void addSetterConflict(Map<String, List<Method>> conflictingSetters, String name, Method method) {
     List<Method> list = conflictingSetters.get(name);
     if (list == null) {
@@ -121,6 +136,9 @@ public class Reflector {
     list.add(method);
   }
 
+  /**
+   * 在同一个property具有多个setter的情况下，根据getter选其一 
+   */
   private void resolveSetterConflicts(Map<String, List<Method>> conflictingSetters) {
     for (String propName : conflictingSetters.keySet()) {
       List<Method> setters = conflictingSetters.get(propName);
@@ -128,6 +146,7 @@ public class Reflector {
       if (setters.size() == 1) {
         addSetMethod(propName, firstMethod);
       } else {
+    	//getter的returnType
         Class expectedType = getTypes.get(propName);
         if (expectedType == null) {
           throw new ReflectionException("Illegal overloaded setter method with ambiguous type for property "
@@ -162,6 +181,9 @@ public class Reflector {
     }
   }
 
+  /**
+   * 把clazz.getDeclaredFields()加入到{@link #setMethods}和 {@link #getMethods} 中
+   */
   private void addFields(Class clazz) {
     Field[] fields = clazz.getDeclaredFields();
     for (Field field : fields) {
@@ -183,6 +205,7 @@ public class Reflector {
         }
       }
     }
+    //父类
     if (clazz.getSuperclass() != null) {
       addFields(clazz.getSuperclass());
     }
