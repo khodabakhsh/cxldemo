@@ -4,7 +4,6 @@
 
 <mapper namespace="org.mybatis.jpetstore.persistence.OrderMapper">
 
-  <cache />
 
   <select id="getOrder" resultType="Order" parameterType="int">
     select

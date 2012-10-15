@@ -16,6 +16,10 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * 创建{@link org.apache.ibatis.session.defaults.DefaultSqlSession.DefaultSqlSession} 实例的工厂
+ *
+ */
 public class DefaultSqlSessionFactory implements SqlSessionFactory {
 
   private static final Log log = LogFactory.getLog(Connection.class);
@@ -86,6 +90,10 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory {
     }
   }
 
+  /**
+   * 从connection获得{@link org.apache.ibatis.session.defaults.DefaultSqlSession.DefaultSqlSession}
+   * ,包含日志记录功能。 
+   */
   private SqlSession openSessionFromConnection(ExecutorType execType, Connection connection) {
     try {
       boolean autoCommit;
@@ -96,6 +104,7 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory {
         // or databases won't support transactions
         autoCommit = true;
       }
+      //加上日志功能
       connection = wrapConnection(connection);
       final Environment environment = configuration.getEnvironment();
       final TransactionFactory transactionFactory = getTransactionFactoryFromEnvironment(environment);
@@ -123,6 +132,9 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory {
     return environment.getTransactionFactory();
   }
 
+  /**
+   * 加上日志功能
+   */
   private Connection wrapConnection(Connection connection) {
     if (log.isDebugEnabled()) {
       return ConnectionLogger.newInstance(connection);

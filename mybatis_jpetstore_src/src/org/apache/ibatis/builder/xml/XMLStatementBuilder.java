@@ -60,9 +60,11 @@ public class XMLStatementBuilder extends BaseBuilder {
     StatementType statementType = StatementType.valueOf(context.getStringAttribute("statementType", StatementType.PREPARED.toString()));
     ResultSetType resultSetTypeEnum = resolveResultSetType(resultSetType);
 
-    //处理节点的内容(SQL语句、NodeHandler等)
+    //循环处理节点(含子节点)的内容(文本、其它嵌套子节点)
     List<SqlNode> contents = parseDynamicTags(context);
     MixedSqlNode rootSqlNode = new MixedSqlNode(contents);
+    
+    //使用DynamicSqlSource
     SqlSource sqlSource = new DynamicSqlSource(configuration, rootSqlNode);
     String nodeName = context.getNode().getNodeName();
     
@@ -93,21 +95,27 @@ public class XMLStatementBuilder extends BaseBuilder {
   public String getStatementIdWithNameSpace() {
 	  return builderAssistant.applyCurrentNamespace(context.getStringAttribute("id"));
   }
+  /**
+   *  循环处理节点(含子节点)的内容(文本、其它嵌套子节点)
+   */
   private List<SqlNode> parseDynamicTags(XNode node) {
     List<SqlNode> contents = new ArrayList<SqlNode>();
     NodeList children = node.getNode().getChildNodes();
     for (int i = 0; i < children.getLength(); i++) {
       XNode child = node.newXNode(children.item(i));
       String nodeName = child.getNode().getNodeName();
+      //文本节点
       if (child.getNode().getNodeType() == Node.CDATA_SECTION_NODE
           || child.getNode().getNodeType() == Node.TEXT_NODE) {
         String data = child.getStringBody("");
         contents.add(new TextSqlNode(data));
       } else {
+    	//其它类型的节点
         NodeHandler handler = nodeHandlers.get(nodeName);
         if (handler == null) {
           throw new BuilderException("Unknown element <" + nodeName + "> in SQL statement.");
         }
+        //循环遍历每个节点(含子节点)
         handler.handleNode(child, contents);
 
       }
@@ -115,6 +123,20 @@ public class XMLStatementBuilder extends BaseBuilder {
     return contents;
   }
 
+  /**
+   * mybatis定义的一些xml节点。
+   * <ol>
+   * <li>include
+   * <li>trim
+   * <li>where
+   * <li>set
+   * <li>foreach
+   * <li>if
+   * <li>choose
+   * <li>when
+   * <li>otherwise
+   * <li>selectKey
+   */
   private Map<String, NodeHandler> nodeHandlers = new HashMap<String, NodeHandler>() {
     private static final long serialVersionUID = 7123056019193266281L;
 
