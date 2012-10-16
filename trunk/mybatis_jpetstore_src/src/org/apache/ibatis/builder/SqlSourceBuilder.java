@@ -18,8 +18,15 @@ public class SqlSourceBuilder extends BaseBuilder {
     super(configuration);
   }
 
+  /**
+   * 解析sql参数#{}
+   * @param originalSql xml里配置的未解析的sql
+   * @param parameterType 参数类型
+   * @return {@link org.apache.ibatis.builder.StaticSqlSource}
+   */
   public SqlSource parse(String originalSql, Class<?> parameterType) {
     ParameterMappingTokenHandler handler = new ParameterMappingTokenHandler(configuration, parameterType);
+    //处理所有#{}参数
     GenericTokenParser parser = new GenericTokenParser("#{", "}", handler);
     String sql = parser.parse(originalSql);
     return new StaticSqlSource(configuration, sql, handler.getParameterMappings());

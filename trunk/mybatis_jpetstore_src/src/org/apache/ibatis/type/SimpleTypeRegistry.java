@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.*;
 
+@SuppressWarnings("unchecked")
 public class SimpleTypeRegistry {
 
   private static final Set SIMPLE_TYPE_SET = new HashSet();

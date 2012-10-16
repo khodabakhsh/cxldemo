@@ -13,10 +13,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+/**
+ * 持有SimpleStatementHandler/PreparedStatementHandler/CallableStatementHandler 的委托。
+ */
 public class RoutingStatementHandler implements StatementHandler {
 
+  /**
+   * 委托
+   */
   private final StatementHandler delegate;
 
+  /**
+   * 根据ms.getStatementType()，构建对应的委托:
+   * <p>SimpleStatementHandler/PreparedStatementHandler/CallableStatementHandler
+   */
   public RoutingStatementHandler(Executor executor, MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler) {
 
     switch (ms.getStatementType()) {

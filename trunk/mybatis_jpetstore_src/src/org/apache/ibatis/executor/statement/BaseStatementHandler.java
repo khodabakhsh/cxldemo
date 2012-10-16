@@ -56,6 +56,9 @@ public abstract class BaseStatementHandler implements StatementHandler {
     return parameterHandler;
   }
 
+  /**
+   * 设置timeout、fetSize等，返回接口{@link java.sql.Statement}的实现类
+   */
   public Statement prepare(Connection connection)
       throws SQLException {
     ErrorContext.instance().sql(boundSql.getSql());

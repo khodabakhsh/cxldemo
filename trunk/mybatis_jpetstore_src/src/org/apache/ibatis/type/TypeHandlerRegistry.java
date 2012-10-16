@@ -36,6 +36,7 @@ public final class TypeHandlerRegistry {
    * <li>java.sql.*定义的一些类型
    * <li>{@link org.apache.ibatis.type.JdbcType}定义的一些类型
    * <li>等等...
+   * <p>PS:也初始化了一些JavaType默认对应的TypeHandler(此时jdbcType为null)
    */
   public TypeHandlerRegistry() {
     register(Boolean.class, new BooleanTypeHandler());
@@ -128,6 +129,12 @@ public final class TypeHandlerRegistry {
     return JDBC_TYPE_HANDLER_MAP.get(jdbcType);
   }
 
+  /**
+   * 
+   * @param type
+   * @param jdbcType 在此值为null时，可以获得参数type所对应默认的typeHandler
+   * @return
+   */
   public TypeHandler getTypeHandler(Class<?> type, JdbcType jdbcType) {
     Map<JdbcType, TypeHandler> jdbcHandlerMap = TYPE_HANDLER_MAP.get(type);
     TypeHandler handler = null;
@@ -151,6 +158,10 @@ public final class TypeHandlerRegistry {
     JDBC_TYPE_HANDLER_MAP.put(jdbcType, handler);
   }
 
+  /**
+   * <li>如果handler有@MappedJdbcTypes注解，使用之
+   * <li>否则注册一个&lt;type,&lt;null,handler&gt;&gt; 相当于把handler作为type默认对应的typeHandler(此时jdbcType为null)
+   */
   public void register(Class<?> type, TypeHandler handler) {
     MappedJdbcTypes mappedJdbcTypes = (MappedJdbcTypes) handler.getClass().getAnnotation(MappedJdbcTypes.class);
     if (mappedJdbcTypes != null) {

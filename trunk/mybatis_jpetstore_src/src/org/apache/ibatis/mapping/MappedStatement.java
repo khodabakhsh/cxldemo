@@ -19,6 +19,10 @@ public class MappedStatement {
   private Integer timeout;
   private StatementType statementType;
   private ResultSetType resultSetType;
+  /**
+   * 如果当前MappedStatement的构建来源是{@link org.apache.ibatis.builder.xml.XMLStatementBuilder#parseStatementNode},
+   * 使用的是一个{@link org.apache.ibatis.builder.xml.dynamic.DynamicSqlSource}实例
+   */
   private SqlSource sqlSource;
   private Cache cache;
   private ParameterMap parameterMap;

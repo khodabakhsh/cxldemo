@@ -78,6 +78,9 @@ public class ParameterMapping {
       return parameterMapping;
     }
 
+    /**
+     * typeHandler为null时且javaType不为null时，利用javaType寻找对应值
+     */
     private void resolveTypeHandler() {
       if (parameterMapping.typeHandler == null) {
         if (parameterMapping.javaType != null) {

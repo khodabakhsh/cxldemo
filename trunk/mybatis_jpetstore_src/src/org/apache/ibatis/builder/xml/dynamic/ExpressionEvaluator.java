@@ -13,6 +13,12 @@ import org.apache.ibatis.mapping.SqlMapperException;
 
 public class ExpressionEvaluator {
 
+  /**
+   * 根据ognl计算的表达式结果value，返回:
+   * <li>value是Boolean,返回(Boolean) value
+   * <li>value是Number，value不为({@link java.math.BigDecimal#ZERO})时为true
+   * <li>否则，value不为null时返回true
+   */
   public boolean evaluateBoolean(String expression, Object parameterObject) {
     try {
       Object value = Ognl.getValue(expression, parameterObject);
