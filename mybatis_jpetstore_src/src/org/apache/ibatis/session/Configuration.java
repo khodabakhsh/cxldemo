@@ -322,6 +322,9 @@ public class Configuration {
     return resultSetHandler;
   }
 
+  /**
+   * 构建一个{@link org.apache.ibatis.executor.statement.RoutingStatementHandler}
+   */
   public StatementHandler newStatementHandler(Executor executor,
       MappedStatement mappedStatement, Object parameterObject,
       RowBounds rowBounds, ResultHandler resultHandler) {

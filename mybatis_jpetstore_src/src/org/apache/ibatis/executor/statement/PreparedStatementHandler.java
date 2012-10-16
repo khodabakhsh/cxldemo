@@ -33,6 +33,9 @@ public class PreparedStatementHandler extends BaseStatementHandler {
     ps.addBatch();
   }
 
+  /**
+   * 执行ps.execute()，并处理数据库执行结果
+   */
   public List query(Statement statement, ResultHandler resultHandler)
       throws SQLException {
     PreparedStatement ps = (PreparedStatement) statement;
@@ -51,6 +54,10 @@ public class PreparedStatementHandler extends BaseStatementHandler {
     }
   }
 
+  /**
+   * <li>主键
+   * <li>为PreparedStatement设置参数
+   */
   public void parameterize(Statement statement)
       throws SQLException {
     KeyGenerator keyGenerator = mappedStatement.getKeyGenerator();

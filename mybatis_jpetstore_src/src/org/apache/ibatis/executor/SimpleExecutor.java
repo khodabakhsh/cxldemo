@@ -39,6 +39,7 @@ public class SimpleExecutor extends BaseExecutor {
 		Statement stmt = null;
 		try {
 			Configuration configuration = ms.getConfiguration();
+			//构建一个RoutingStatementHandler
 			StatementHandler handler = configuration.newStatementHandler(this, ms, parameter, rowBounds, resultHandler);
 			stmt = prepareStatement(handler);
 			return handler.query(stmt, resultHandler);
