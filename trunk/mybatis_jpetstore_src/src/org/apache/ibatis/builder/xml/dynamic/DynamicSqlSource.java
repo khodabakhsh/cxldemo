@@ -11,7 +11,8 @@ public class DynamicSqlSource implements SqlSource {
 
   private Configuration configuration;
   /**
-   * 一般是一个{@link org.apache.ibatis.builder.xml.dynamic.MixedSqlNode}
+   * 一般是一个{@link org.apache.ibatis.builder.xml.dynamic.MixedSqlNode},
+   * 包含了一个sql操作的xml节点（select/insert/delete/update）
    */
   private SqlNode rootSqlNode;
 
@@ -31,7 +32,7 @@ public class DynamicSqlSource implements SqlSource {
     rootSqlNode.apply(context);
     SqlSourceBuilder sqlSourceParser = new SqlSourceBuilder(configuration);
     Class<?> parameterType = parameterObject == null ? Object.class : parameterObject.getClass();
-    //解析sql参数#{}
+    //解析sql参数#{},返回StaticSqlSource
     SqlSource sqlSource = sqlSourceParser.parse(context.getSql(), parameterType);
     BoundSql boundSql = sqlSource.getBoundSql(parameterObject);
     for (Map.Entry<String, Object> entry : context.getBindings().entrySet()) {

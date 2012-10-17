@@ -5,17 +5,47 @@ import org.apache.ibatis.parsing.TokenHandler;
 import org.apache.ibatis.session.Configuration;
 
 import java.util.Map;
-
+/**
+ * &lt;foreach&gt;节点 
+ */
 public class ForEachSqlNode implements SqlNode {
   public static final String ITEM_PREFIX = "__frch_";
 
   private ExpressionEvaluator evaluator;
+  
+  /**
+   * foreach 节点 的collection属性
+   */
   private String collectionExpression;
+  
+  /**
+   * foreach 节点包含的所有内容
+   */
   private SqlNode contents;
+  
+  /**
+   * foreach 节点 的open属性
+   */
   private String open;
+  
+  /**
+   * foreach 节点 的close属性
+   */
   private String close;
+  
+  /**
+   * foreach 节点 的separator属性
+   */
   private String separator;
+  
+  /**
+   * foreach 节点 的item属性
+   */
   private String item;
+  
+  /**
+   * foreach 节点 的index属性
+   */
   private String index;
   private Configuration configuration;
 
@@ -86,10 +116,17 @@ public class ForEachSqlNode implements SqlNode {
     }
   }
 
+  /**
+   * {@link #ITEM_PREFIX} + item + "_" + i
+   */
   private static String itemizeItem(String item, int i) {
     return new StringBuilder(ITEM_PREFIX).append(item).append("_").append(i).toString();
   }
-
+  
+  /**
+   *  根据条件在{@link org.apache.ibatis.builder.xml.dynamic.DynamicContext#appendSql(String)}操作之前，
+   *  先解析所有#{{@link #item}}参数，转化为对应的占位符(以itemizeItem计算)
+   */
   private static class FilteredDynamicContext extends DynamicContext {
     private DynamicContext delegate;
     private int index;
@@ -105,7 +142,6 @@ public class ForEachSqlNode implements SqlNode {
     public Map<String, Object> getBindings() {
       return delegate.getBindings();
     }
-
     public void bind(String name, Object value) {
       delegate.bind(name, value);
     }
@@ -114,6 +150,9 @@ public class ForEachSqlNode implements SqlNode {
       return delegate.getSql();
     }
 
+    /**
+     * 转化#{{@link #item}}参数参数
+     */
     public void appendSql(String sql) {
       GenericTokenParser parser = new GenericTokenParser("#{", "}", new TokenHandler() {
         public String handleToken(String content) {
@@ -133,6 +172,9 @@ public class ForEachSqlNode implements SqlNode {
   }
 
 
+  /**
+   *  根据条件在{@link org.apache.ibatis.builder.xml.dynamic.DynamicContext#appendSql(String)}操作前加上前缀
+   */
   private class PrefixedContext extends DynamicContext {
     private DynamicContext delegate;
     private String prefix;
@@ -157,6 +199,9 @@ public class ForEachSqlNode implements SqlNode {
       delegate.bind(name, value);
     }
 
+    /**
+     * 根据条件加上前缀
+     */
     public void appendSql(String sql) {
       if (!prefixApplied && sql != null && sql.trim().length() > 0) {
         delegate.appendSql(prefix);
