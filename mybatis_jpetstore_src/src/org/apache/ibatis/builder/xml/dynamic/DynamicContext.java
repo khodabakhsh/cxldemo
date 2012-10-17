@@ -50,6 +50,9 @@ public class DynamicContext {
     return sqlBuilder.toString().trim();
   }
 
+  /**
+   * @return uniqueNumber++
+   */
   public int getUniqueNumber() {
     return uniqueNumber++;
   }

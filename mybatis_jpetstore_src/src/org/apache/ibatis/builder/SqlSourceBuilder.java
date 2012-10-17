@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+/**
+ * <p>处理所有#{}参数,将用?号替代。
+ * <p>见 {@link #parse(String, Class)}方法，构建StaticSqlSource(为其parameterMappings赋值)
+ */
 public class SqlSourceBuilder extends BaseBuilder {
 
   public SqlSourceBuilder(Configuration configuration) {
@@ -26,14 +30,17 @@ public class SqlSourceBuilder extends BaseBuilder {
    */
   public SqlSource parse(String originalSql, Class<?> parameterType) {
     ParameterMappingTokenHandler handler = new ParameterMappingTokenHandler(configuration, parameterType);
-    //处理所有#{}参数
     GenericTokenParser parser = new GenericTokenParser("#{", "}", handler);
+    //处理所有#{}参数,将用?号替代
     String sql = parser.parse(originalSql);
     return new StaticSqlSource(configuration, sql, handler.getParameterMappings());
   }
 
   private static class ParameterMappingTokenHandler extends BaseBuilder implements TokenHandler {
 
+	/**
+	 * 所有#{}参数对应的ParameterMapping集合
+	 */
     private List<ParameterMapping> parameterMappings = new ArrayList<ParameterMapping>();
     private Class<?> parameterType;
 
@@ -46,11 +53,26 @@ public class SqlSourceBuilder extends BaseBuilder {
       return parameterMappings;
     }
 
+    /**
+     * 构建 {@link #parameterMappings}集合
+     * @return ?号
+     */
     public String handleToken(String content) {
       parameterMappings.add(buildParameterMapping(content));
       return "?";
     }
 
+    /**
+     * 处理#{property}参数，可配置项：
+     * <ol>
+     * <li>javaType
+     * <li>jdbcType
+     * <li>mode
+     * <li>numericScale
+     * <li>resultMap
+     * <li>typeHandler
+     * <li>jdbcTypeName
+     */
     private ParameterMapping buildParameterMapping(String content) {
       StringTokenizer parameterMappingParts = new StringTokenizer(content, ", \n\r\t");
       String propertyWithJdbcType = parameterMappingParts.nextToken();
