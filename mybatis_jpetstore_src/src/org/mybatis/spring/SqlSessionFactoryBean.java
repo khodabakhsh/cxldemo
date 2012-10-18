@@ -289,6 +289,7 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
         Configuration configuration;
         
         XMLConfigBuilder xmlConfigBuilder = null;
+        //检查configLocation是否配置(比如可以配置<property name="configLocation" value="classpath:mybatis.xml" />)
         if (this.configLocation != null) {
             xmlConfigBuilder = new XMLConfigBuilder(this.configLocation.getInputStream(), null, this.configurationProperties);
             configuration = xmlConfigBuilder.getConfiguration();
@@ -349,7 +350,7 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
                 }
             }
         }
-
+        //处理自定义的mybatis配置
         if (xmlConfigBuilder != null) {
             try {
                 xmlConfigBuilder.parse();

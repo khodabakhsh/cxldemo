@@ -68,6 +68,7 @@ public class Configuration {
    * 默认sql执行超时设置
    */
   protected Integer defaultStatementTimeout;
+  
   /**
    * 默认的executor 类型，默认为simple
    */

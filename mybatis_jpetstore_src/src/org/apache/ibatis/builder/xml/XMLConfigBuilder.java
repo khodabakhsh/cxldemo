@@ -22,6 +22,10 @@ import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.type.TypeHandler;
 
+/**
+ * 处理mybatis的初始化xml配置文件 
+ *
+ */
 public class XMLConfigBuilder extends BaseBuilder {
 
   private boolean parsed;

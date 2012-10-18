@@ -22,6 +22,10 @@ public class Plugin implements InvocationHandler {
     this.signatureMap = signatureMap;
   }
 
+  /**
+   * 如果有多个拦截器，使用了Plugin{@link #wrap(Object, Interceptor)},就形成了多个拦截器组成的层层代理链。
+   * @return Plugin代理
+   */
   public static Object wrap(Object target, Interceptor interceptor) {
     Map<Class<?>, Set<Method>> signatureMap = getSignatureMap(interceptor);
     Class<?> type = target.getClass();
@@ -39,6 +43,7 @@ public class Plugin implements InvocationHandler {
     try {
       Set<Method> methods = signatureMap.get(method.getDeclaringClass());
       if (methods != null && methods.contains(method)) {
+    	//使用Invocation#proceed,形成链
         return interceptor.intercept(new Invocation(target, method, args));
       }
       return method.invoke(target, args);
@@ -47,6 +52,9 @@ public class Plugin implements InvocationHandler {
     }
   }
 
+  /**
+   * 解析 interceptor里面的@Signature注解
+   */
   private static Map<Class<?>, Set<Method>> getSignatureMap(Interceptor interceptor) {
     Signature[] sigs = interceptor.getClass().getAnnotation(Intercepts.class).value();
     Map<Class<?>, Set<Method>> signatureMap = new HashMap<Class<?>, Set<Method>>();
@@ -66,6 +74,12 @@ public class Plugin implements InvocationHandler {
     return signatureMap;
   }
 
+  /**
+   * 找出type类(及其父类)包含在signatureMap中的类型
+   * @param type
+   * @param signatureMap
+   * @return 
+   */
   private static Class<?>[] getAllInterfaces(Class<?> type, Map<Class<?>, Set<Method>> signatureMap) {
     Set<Class<?>> interfaces = new HashSet<Class<?>>();
     while (type != null) {
@@ -74,6 +88,7 @@ public class Plugin implements InvocationHandler {
           interfaces.add(c);
         }
       }
+      //遍历其父类
       type = type.getSuperclass();
     }
     return interfaces.toArray(new Class<?>[interfaces.size()]);
