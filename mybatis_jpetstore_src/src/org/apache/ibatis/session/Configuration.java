@@ -61,6 +61,10 @@ public class Configuration {
   protected boolean lazyLoadingEnabled = false;
   protected boolean aggressiveLazyLoading = true;
   protected boolean multipleResultSetsEnabled = true;
+  
+  /**
+   * 执行数据库操作后，是否为主键对应的java po属性赋值
+   */
   protected boolean useGeneratedKeys = false;
   protected boolean useColumnLabel = true;
   protected boolean cacheEnabled = true;

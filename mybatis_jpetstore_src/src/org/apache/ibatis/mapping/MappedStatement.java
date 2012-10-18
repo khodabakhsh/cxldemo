@@ -29,6 +29,9 @@ public class MappedStatement {
   private List<ResultMap> resultMaps;
   private boolean flushCacheRequired;
   private boolean useCache;
+  /**
+   * select/insert/update/delete，见{@link SqlCommandType}
+   */
   private SqlCommandType sqlCommandType;
   private KeyGenerator keyGenerator;
   private String keyProperty;

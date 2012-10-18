@@ -41,9 +41,9 @@ public class XMLStatementBuilder extends BaseBuilder {
    * <li>statementType ,默认是{@link org.apache.ibatis.mapping.StatementType#PREPARED} , 取值范围:{@link org.apache.ibatis.mapping.StatementType}
    * <li>flushCache
    * <li>useCache
-   * <li>keyProperty
-   * <li>useGeneratedKeys
-   * <li>keyColumn
+   * <li>keyProperty ,主键对应的java po属性
+   * <li>useGeneratedKeys, 执行数据库操作后，是否为主键对应的java po属性赋值
+   * <li>keyColumn, 数据库主键列
    */
   public void parseStatementNode() {
     String id = context.getStringAttribute("id");
