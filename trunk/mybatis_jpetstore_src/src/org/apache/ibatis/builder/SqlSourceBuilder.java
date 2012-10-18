@@ -63,7 +63,7 @@ public class SqlSourceBuilder extends BaseBuilder {
     }
 
     /**
-     * 处理#{property}参数，可配置项：
+     * 处理#{}参数，可配置项：
      * <ol>
      * <li>javaType
      * <li>jdbcType

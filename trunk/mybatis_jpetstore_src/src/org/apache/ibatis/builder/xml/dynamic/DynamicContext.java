@@ -3,7 +3,6 @@ package org.apache.ibatis.builder.xml.dynamic;
 import java.util.HashMap;
 import java.util.Map;
 
-import ognl.OgnlContext;
 import ognl.OgnlException;
 import ognl.OgnlRuntime;
 import ognl.PropertyAccessor;
