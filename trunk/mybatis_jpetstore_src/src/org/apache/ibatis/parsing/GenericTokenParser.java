@@ -1,9 +1,23 @@
 package org.apache.ibatis.parsing;
 
+/**
+ * 使用 {@link #handler}，
+ * 循环处理 {@link #openToken}和{@link #closeToken} 之间的参数
+ * <p>PS：通用的工具
+ */
 public class GenericTokenParser {
 
+  /**
+   * 开始符号
+   */
   private final String openToken;
+  /**
+   * 结束符号
+   */
   private final String closeToken;
+  /**
+   * 
+   */
   private final TokenHandler handler;
 
   public GenericTokenParser(String openToken, String closeToken, TokenHandler handler) {

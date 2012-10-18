@@ -3,6 +3,10 @@ package org.apache.ibatis.plugin;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 拦截器链 
+ *
+ */
 public class InterceptorChain {
 
   private final List<Interceptor> interceptors = new ArrayList<Interceptor>();
