@@ -55,11 +55,29 @@ public class MapperMethod {
   private boolean returnsVoid;
   private String mapKey;
 
+  /**
+   * 记录ResultHandler类型参数的位置
+   */
   private Integer resultHandlerIndex;
+  
+  /**
+   * 记录RowBounds类型参数的位置
+   */
   private Integer rowBoundsIndex;
+  
+  /**
+   * 记录参数的名称(优先使用参数中@Param注解的值，如果没有注解，则使用普通参数{@link #paramPositions}中位置排序，如0、1、2...)
+   */
   private List<String> paramNames;
+  
+  /**
+   * 记录普通参数的位置
+   */
   private List<Integer> paramPositions;
 
+  /**
+   * 是否有使用了@Param注解的参数
+   */
   private boolean hasNamedParameters;
 
   public MapperMethod(Class<?> declaringInterface, Method method, SqlSession sqlSession) {
@@ -72,7 +90,7 @@ public class MapperMethod {
     this.declaringInterface = declaringInterface;
     //设置#commandName
     setupFields();
-    //配置方法签名的相关信息
+    //解析方法声明的相关信息
     setupMethodSignature();
     //设置#type
     setupCommandType();
@@ -145,6 +163,11 @@ public class MapperMethod {
     return result;
   }
 
+  /**
+   * 使用原始参数，构建新的参数，以适用于mybatis动态sql中的赋值机制
+   * @param args 原始参数
+   * @return 解析构建的参数
+   */
   private Object getParam(Object[] args) {
     final int paramCount = paramPositions.size();
     if (args == null || paramCount == 0) {
@@ -189,19 +212,24 @@ public class MapperMethod {
 
     final Class<?>[] argTypes = method.getParameterTypes();
     for (int i = 0; i < argTypes.length; i++) {
+      //处理RowBounds类型的参数	
       if (RowBounds.class.isAssignableFrom(argTypes[i])) {
         if (rowBoundsIndex == null) {
           rowBoundsIndex = i;
         } else {
           throw new BindingException(method.getName() + " cannot have multiple RowBounds parameters");
         }
-      } else if (ResultHandler.class.isAssignableFrom(argTypes[i])) {
+      }
+      //处理ResultHandler类型的参数	
+      else if (ResultHandler.class.isAssignableFrom(argTypes[i])) {
         if (resultHandlerIndex == null) {
           resultHandlerIndex = i;
         } else {
           throw new BindingException(method.getName() + " cannot have multiple ResultHandler parameters");
         }
-      } else {
+      } 
+      //处理其他普通参数
+      else {
         String paramName = String.valueOf(paramPositions.size());
         paramName = getParamNameFromAnnotation(i, paramName);
         paramNames.add(paramName);
@@ -210,6 +238,10 @@ public class MapperMethod {
     }
   }
 
+  /**
+   * 解析第i个参数是否具有@Param 注解 
+   * @param i 参数位置
+   */
   private String getParamNameFromAnnotation(int i, String paramName) {
     Object[] paramAnnos = method.getParameterAnnotations()[i];
     for (int j = 0; j < paramAnnos.length; j++) {
