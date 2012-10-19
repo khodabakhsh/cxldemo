@@ -104,8 +104,14 @@ public class MetaObject {
     }
   }
 
+  /**
+   * 可以实现链式表达式赋值，如：person[0].school.schoolName
+   * @param name 属性名
+   * @param value 赋给属性的值
+   */
   public void setValue(String name, Object value) {
     PropertyTokenizer prop = new PropertyTokenizer(name);
+    //是链式表达式
     if (prop.hasNext()) {
       MetaObject metaValue = metaObjectForProperty(prop.getIndexedName());
       if (metaValue == MetaObject.NULL_META_OBJECT) {
@@ -115,8 +121,11 @@ public class MetaObject {
           metaValue = objectWrapper.instantiatePropertyValue(name, prop, objectFactory);
         }
       }
+      //指向children
       metaValue.setValue(prop.getChildren(), value);
-    } else {
+    }
+    //不是链式表达式
+    else {
       objectWrapper.set(prop, value);
     }
   }
