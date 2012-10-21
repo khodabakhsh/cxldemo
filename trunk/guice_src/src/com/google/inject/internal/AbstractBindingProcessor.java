@@ -133,6 +133,8 @@ abstract class AbstractBindingProcessor extends AbstractProcessor {
   /** 
    * Processor for visiting bindings.  Each overriden method that wants to
    * actually process the binding should call prepareBinding first.
+   * 
+   * <p>虽然声明为abstract，但并没有abstract方法
    */
   abstract class Processor<T, V> extends DefaultBindingTargetVisitor<T, V> {
     final Object source;

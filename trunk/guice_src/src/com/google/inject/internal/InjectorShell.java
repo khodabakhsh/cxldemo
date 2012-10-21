@@ -168,6 +168,7 @@ final class InjectorShell {
       new TypeConverterBindingProcessor(errors).process(injector, elements);
       stopwatch.resetAndLog("Converters creation");
 
+      
       bindInjector(injector);
       bindLogger(injector);
       
