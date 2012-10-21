@@ -186,6 +186,10 @@ public final class Preconditions {
   }
 
   /**
+   * <p>
+   * <li>reference为null，抛NullPointerException
+   * <li>不为null时，返回reference</p>
+   * 
    * Ensures that an object reference passed as a parameter to the calling
    * method is not null.
    *

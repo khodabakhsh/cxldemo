@@ -19,6 +19,8 @@ package com.google.inject.spi;
 import com.google.inject.Binding;
 
 /**
+ * <p>虽然声明为abstract，但并没有abstract方法</p>
+ * 
  * No-op visitor for subclassing. All interface methods simply delegate to {@link
  * #visitOther(Binding)}, returning its result.
  *

@@ -94,6 +94,9 @@ public class BindingBuilder<T> extends AbstractBindingBuilder<T>
         base.getSource(), base.getKey(), Scoping.EAGER_SINGLETON, injectionPoints, instance));
   }
 
+  /**
+   * binding使用{@link com.google.inject.internal.ProviderInstanceBindingImpl}实例
+   */
   public BindingBuilder<T> toProvider(Provider<? extends T> provider) {
     checkNotNull(provider, "provider");
     checkNotTargetted();

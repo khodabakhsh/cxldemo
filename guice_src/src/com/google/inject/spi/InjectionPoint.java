@@ -462,6 +462,12 @@ public final class InjectionPoint {
     }
   }
 
+  /**
+   * <ol>
+   * <li>优先获取{@link javax.inject.Inject}注解(JSR330规范)
+   * <li>上一步为null时，获取{@link  com.google.inject.Inject}注解
+   * </ol>
+   */
   static Annotation getAtInject(AnnotatedElement member) {
     Annotation a = member.getAnnotation(javax.inject.Inject.class);
     return a == null ? member.getAnnotation(Inject.class) : a;
@@ -504,7 +510,11 @@ public final class InjectionPoint {
     }
   }
 
-  /** Position in type hierarchy. */
+  /** Position in type hierarchy.
+   *  <li>TOP 不会有override的方法
+   *  <li>MIDDLE
+   *  <li>BOTTOM 方法不会被override
+   */
   enum Position {
     TOP, // No need to check for overridden methods
     MIDDLE,
@@ -631,7 +641,7 @@ public final class InjectionPoint {
       boolean statics, Errors errors) {
     InjectableMembers injectableMembers = new InjectableMembers();
     OverrideIndex overrideIndex = null;
-
+    //获取继承树
     List<TypeLiteral<?>> hierarchy = hierarchyFor(type);
     int topIndex = hierarchy.size() - 1;
     for (int i = topIndex; i >= 0; i--) {
@@ -646,8 +656,10 @@ public final class InjectionPoint {
 
       TypeLiteral<?> current = hierarchy.get(i);
 
+      
       for (Field field : current.getRawType().getDeclaredFields()) {
         if (Modifier.isStatic(field.getModifiers()) == statics) {
+          //获取{@link javax.inject.Inject}注解/{@link  com.google.inject.Inject}注解
           Annotation atInject = getAtInject(field);
           if (atInject != null) {
             InjectableField injectableField = new InjectableField(current, field, atInject);
@@ -747,6 +759,9 @@ public final class InjectionPoint {
     return result;
   }
 
+  /**
+   * 获取type的继承树集合(其所有父类、接口)
+   */
   private static List<TypeLiteral<?>> hierarchyFor(TypeLiteral<?> type) {
     List<TypeLiteral<?>> hierarchy = new ArrayList<TypeLiteral<?>>();
     TypeLiteral<?> current = type;
