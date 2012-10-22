@@ -59,6 +59,7 @@ final class ProviderInstanceBindingImpl<T> extends BindingImpl<T>
       return ((ProviderWithExtensionVisitor<? extends T>) providerInstance)
           .acceptExtensionVisitor(visitor, this);
     } else {
+      //回调visitor的方法,见@BindingProcessor 的visit方法
       return visitor.visit(this);
     }
   }

@@ -32,7 +32,11 @@ public class Main {
 
     Injector injector = Guice.createInjector(new AbstractModule() {
       protected void configure() {
+    	  
+    	//使用com.google.inject.internal.LinkedBindingImpl
         bind(Contacts.class).to(SimCard.class);
+        
+        //使用com.google.inject.internal.ProviderInstanceBindingImpl
         install(new XmlBeanModule(xmlUrl));
       }
     });

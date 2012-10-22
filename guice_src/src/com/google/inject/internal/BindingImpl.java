@@ -89,6 +89,9 @@ public abstract class BindingImpl<T> implements Binding<T> {
     return this instanceof InstanceBinding;
   }
 
+  /**
+   * 回调{@link ElementVisitor#visit(Binding)}方法
+   */
   public <V> V acceptVisitor(ElementVisitor<V> visitor) {
     return visitor.visit(this);
   }

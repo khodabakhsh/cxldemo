@@ -45,14 +45,25 @@ public abstract class AbstractBindingBuilder<T> {
   protected static final Key<?> NULL_KEY = Key.get(Void.class);
 
   protected List<Element> elements;
+  
+  /**
+   * 记录{@link #binding}在{@link #elements}中的位置，
+   * 见{@link #setBinding(BindingImpl)}中实现替换。
+   */
   protected int position;
+  
   protected final Binder binder;
   private BindingImpl<T> binding;
 
+  /**
+   * <li>赋值:{@link #binder},{@link #elements},{@link #position},{@link #binding}
+   * <li>把{@link #binding}加入到{@link #elements}中 
+   */
   public AbstractBindingBuilder(Binder binder, List<Element> elements, Object source, Key<T> key) {
     this.binder = binder;
     this.elements = elements;
     this.position = elements.size();
+    //实例化的是一个UntargettedBindingImpl
     this.binding = new UntargettedBindingImpl<T>(source, key, Scoping.UNSCOPED);
     elements.add(position, this.binding);
   }
@@ -61,6 +72,11 @@ public abstract class AbstractBindingBuilder<T> {
     return binding;
   }
 
+  /**
+   * 使用binding参数：
+   * <li>为{@link #binding}赋值
+   * <li>替换{@link #elements}中索引为{@link #position}的元素为{@link #binding}
+   */
   protected BindingImpl<T> setBinding(BindingImpl<T> binding) {
     this.binding = binding;
     elements.set(position, binding);

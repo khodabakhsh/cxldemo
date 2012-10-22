@@ -75,6 +75,8 @@ public interface Binding<T> extends Element {
   Provider<T> getProvider();
 
   /**
+   * 在实现类的方法体中，可以回调visitor的方法(使用当前Binding实例做参数)
+   * <p>
    * Accepts a target visitor. Invokes the visitor method specific to this binding's target.
    *
    * @param visitor to call back on
