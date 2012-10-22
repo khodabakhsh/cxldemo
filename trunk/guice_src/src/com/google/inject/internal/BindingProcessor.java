@@ -31,6 +31,10 @@ import com.google.inject.spi.ProviderBinding;
 import com.google.inject.spi.ProviderInstanceBinding;
 import com.google.inject.spi.ProviderKeyBinding;
 import com.google.inject.spi.UntargettedBinding;
+
+import example.xml.Contacts;
+import example.xml.SimCard;
+
 import java.util.Set;
 
 /**
@@ -65,6 +69,7 @@ final class BindingProcessor extends AbstractBindingProcessor {
       return true;
     }
     
+    //实现 call back 处理
     return command.acceptTargetVisitor(new Processor<T, Boolean>((BindingImpl<T>)command) {
       public Boolean visit(ConstructorBinding<? extends T> binding) {
         prepareBinding();
@@ -94,6 +99,9 @@ final class BindingProcessor extends AbstractBindingProcessor {
         return true;
       }
 
+      /**
+       * bind(...).toProvider(...)方法通道，如例子里的example.xml.XmlBeanModule绑定example.xml.Phone实例的方式
+       */
       public Boolean visit(ProviderInstanceBinding<? extends T> binding) {
         prepareBinding();
         Provider<? extends T> provider = binding.getProviderInstance();
@@ -121,6 +129,9 @@ final class BindingProcessor extends AbstractBindingProcessor {
         return true;
       }
 
+      /**
+       * bind(...).to(...)方法通道，如例子里的 bind(Contacts.class).to(SimCard.class);
+       */
       public Boolean visit(LinkedKeyBinding<? extends T> binding) {
         prepareBinding();
         Key<? extends T> linkedKey = binding.getLinkedKey();

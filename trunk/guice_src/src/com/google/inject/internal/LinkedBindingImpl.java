@@ -29,7 +29,10 @@ import java.util.Set;
 
 public final class LinkedBindingImpl<T> extends BindingImpl<T> implements LinkedKeyBinding<T>, HasDependencies {
 
-  final Key<? extends T> targetKey;
+	/**
+	 * bind(***).to(someImpl)绑定中的someImpl
+	 */
+	final Key<? extends T> targetKey;
 
   public LinkedBindingImpl(InjectorImpl injector, Key<T> key, Object source,
       InternalFactory<? extends T> internalFactory, Scoping scoping,
@@ -44,6 +47,7 @@ public final class LinkedBindingImpl<T> extends BindingImpl<T> implements Linked
   }
 
   public <V> V acceptTargetVisitor(BindingTargetVisitor<? super T, V> visitor) {
+	//回调visitor的方法,见@BindingProcessor 的visit方法
     return visitor.visit(this);
   }
 

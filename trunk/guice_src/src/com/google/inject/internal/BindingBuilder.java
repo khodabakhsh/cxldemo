@@ -34,6 +34,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * 处理各种to/toProvider/to***方法,替换UntargettedBindingImpl为各种对应的***BindingImpl 
+ * <p>
  * Bind a non-constant key.
  *
  * @author jessewilson@google.com (Jesse Wilson)
@@ -41,6 +43,9 @@ import java.util.Set;
 public class BindingBuilder<T> extends AbstractBindingBuilder<T>
     implements AnnotatedBindingBuilder<T> {
 
+  /**
+   * 
+   */
   public BindingBuilder(Binder binder, List<Element> elements, Object source, Key<T> key) {
     super(binder, elements, source, key);
   }
@@ -95,7 +100,7 @@ public class BindingBuilder<T> extends AbstractBindingBuilder<T>
   }
 
   /**
-   * binding使用{@link com.google.inject.internal.ProviderInstanceBindingImpl}实例
+   * toProvider使用{@link com.google.inject.internal.ProviderInstanceBindingImpl}实例
    */
   public BindingBuilder<T> toProvider(Provider<? extends T> provider) {
     checkNotNull(provider, "provider");
@@ -111,6 +116,7 @@ public class BindingBuilder<T> extends AbstractBindingBuilder<T>
     }
 
     BindingImpl<T> base = getBinding();
+    //使用ProviderInstanceBindingImpl实例
     setBinding(new ProviderInstanceBindingImpl<T>(
         base.getSource(), base.getKey(), base.getScoping(), injectionPoints, provider));
     return this;

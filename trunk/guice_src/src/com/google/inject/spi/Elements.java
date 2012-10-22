@@ -121,6 +121,9 @@ public final class Elements {
     return (BindingTargetVisitor<T, T>) GET_INSTANCE_VISITOR;
   }
 
+  /**
+   * {@link Binder#bind}处理通道,返回{@link BindingBuilder}实例
+   */
   private static class RecordingBinder implements Binder, PrivateBinder {
     private final Stage stage;
     private final Set<Module> modules;
@@ -212,6 +215,9 @@ public final class Elements {
       }
     }
 
+    /**
+     * 调用{@link com.google.inject.Module#configure(Binder)}方法
+     */
     public void install(Module module) {
       if (modules.add(module)) {
         Binder binder = this;
@@ -250,6 +256,9 @@ public final class Elements {
       elements.add(message);
     }
 
+    /**
+     * 传入{@link #elements}参数，构造@BindingBuilder 时会把相关的UntargettedBindingImpl加入到elements中。
+     */
     public <T> AnnotatedBindingBuilder<T> bind(Key<T> key) {
       return new BindingBuilder<T>(this, elements, getSource(), key);
     }
