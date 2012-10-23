@@ -21,7 +21,7 @@ import java.util.List;
 import com.google.inject.internal.util.Lists;
 
 /**
- * <b>以观察者模式实现</b>
+ * <b>观察者模式(作为主题)</b>
  * <P>
  * Keeps track of creation listeners & uninitialized bindings,
  * so they can be processed after bindings are recorded.
