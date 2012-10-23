@@ -15,4 +15,6 @@
 
 3.看com.google.inject.spi.InjectionPoint的java.lang.reflect.AnnotatedElement
 
-4.
+4.import static
+
+5.ProcessedBindingData观察者模式

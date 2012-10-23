@@ -34,6 +34,7 @@ import java.lang.reflect.WildcardType;
 import java.util.List;
 
 /**
+ * <p>使用此类获得泛型信息</p>
  * Represents a generic type {@code T}. Java doesn't yet provide a way to
  * represent generic types, so this class does. Forces clients to create a
  * subclass of this class which enables retrieval the type information even at

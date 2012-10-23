@@ -291,6 +291,9 @@ public final class Errors implements Serializable {
     return addMessage("Binding points to itself.");
   }
 
+  /**
+   * 重复bind一个Key的错误信息
+   */
   public Errors bindingAlreadySet(Key<?> key, Object source) {
     return addMessage("A binding to %s was already configured at %s.", key, convert(source));
   }
@@ -628,6 +631,9 @@ public final class Errors implements Serializable {
       this.type = type;
     }
 
+    /**
+     * isAssignableFrom 
+     */
     boolean appliesTo(Object o) {
       return o != null && type.isAssignableFrom(o.getClass());
     }
@@ -639,6 +645,9 @@ public final class Errors implements Serializable {
     abstract String toString(T t);
   }
 
+  /**
+   * 对@Class 、 @Member 、@Key 提供了输出格式
+   */
   private static final Collection<Converter<?>> converters = ImmutableList.of(
       new Converter<Class>(Class.class) {
         public String toString(Class c) {
@@ -661,6 +670,9 @@ public final class Errors implements Serializable {
         }
       });
 
+  /**
+   * 规范信息输出
+   */
   public static Object convert(Object o) {
     for (Converter<?> converter : converters) {
       if (converter.appliesTo(o)) {

@@ -22,6 +22,8 @@ import com.google.inject.internal.util.ToStringBuilder;
 import com.google.inject.spi.Dependency;
 
 /**
+ * link key binding使用，即bind(***).to(***)的形式
+ * <p>
  * A placeholder which enables us to swap in the real factory once the injector is created.
  * Used for a linked binding, so that getting the linked binding returns the link's factory.
  */
@@ -29,9 +31,16 @@ final class FactoryProxy<T> implements InternalFactory<T>, CreationListener {
 
   private final InjectorImpl injector;
   private final Key<T> key;
+  
+  /**
+   * bind(***).to(someImpl)绑定中的someImpl的key
+  */
   private final Key<? extends T> targetKey;
   private final Object source;
 
+  /**
+   * {@link #targetKey}对应的 InternalFactory 
+   */
   private InternalFactory<? extends T> targetFactory;
 
   FactoryProxy(InjectorImpl injector, Key<T> key, Key<? extends T> targetKey, Object source) {
@@ -49,6 +58,9 @@ final class FactoryProxy<T> implements InternalFactory<T>, CreationListener {
     }
   }
 
+  /**
+   * 通过{@link #targetFactory}获得{@link #targetKey}对应的实现
+   */
   public T get(Errors errors, InternalContext context, Dependency<?> dependency, boolean linked)
       throws ErrorsException {
     return targetFactory.get(errors.withSource(targetKey), context, dependency, true);
