@@ -30,7 +30,7 @@ import java.util.Set;
 public final class LinkedBindingImpl<T> extends BindingImpl<T> implements LinkedKeyBinding<T>, HasDependencies {
 
 	/**
-	 * bind(***).to(someImpl)绑定中的someImpl
+	 * bind(***).to(someImpl)绑定中的someImpl的key
 	 */
 	final Key<? extends T> targetKey;
 

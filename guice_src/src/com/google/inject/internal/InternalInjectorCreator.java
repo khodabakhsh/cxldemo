@@ -130,6 +130,9 @@ public final class InternalInjectorCreator {
     injectionRequestProcessor.process(shells);
     stopwatch.resetAndLog("Collecting injection requests");
 
+    /**
+     * 通知@CreationListener，调用其notify
+     */
     bindingData.runCreationListeners(errors);
     stopwatch.resetAndLog("Binding validation");
 

@@ -21,13 +21,17 @@ import java.util.List;
 import com.google.inject.internal.util.Lists;
 
 /**
+ * <b>以观察者模式实现</b>
+ * <P>
  * Keeps track of creation listeners & uninitialized bindings,
  * so they can be processed after bindings are recorded.
  * 
  * @author sameb@google.com (Sam Berlin)
  */
 class ProcessedBindingData {
-  
+  /**
+   * 订阅者
+   */
   private final List<CreationListener> creationListeners = Lists.newArrayList();
   private final List<Runnable> uninitializedBindings = Lists.newArrayList();
   
@@ -45,6 +49,9 @@ class ProcessedBindingData {
     }
   }
 
+  /**
+   * 通知订阅者
+   */
   void runCreationListeners(Errors errors) {
     for (CreationListener creationListener : creationListeners) {
       creationListener.notify(errors);
