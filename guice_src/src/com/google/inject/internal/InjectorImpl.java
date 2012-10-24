@@ -591,6 +591,12 @@ final class InjectorImpl implements Injector, Lookups {
   }
 
   /**
+   * 根据以下顺序创建{@link BindingImpl}实例(子类)
+   * <li>如果是{@link TypeLiteral} 实例
+   * <li>以{@link ImplementedBy} 注解
+   * <li>以{@link ProvidedBy }注解
+   * <li>寻找符合条件的构造函数({@link com.google.inject.Inject} 注解、{@link javax.inject.Inject} 注解的构造函数、或默认无参构造函数)
+   * <p>
    * Creates a binding for an injectable type with the given scope. Looks for a scope on the type if
    * none is specified.
    */
@@ -625,7 +631,7 @@ final class InjectorImpl implements Injector, Lookups {
       return createProvidedByBinding(key, scoping, providedBy, errors);
     }
 
-    
+    //没有上面相关注解的话，使用ConstructorBindingImpl
     return ConstructorBindingImpl.create(this, key, null, source, scoping, errors, jitBinding && options.jitDisabled);
   }
 

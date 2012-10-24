@@ -150,6 +150,7 @@ public class Annotations {
   }
 
   /**
+   * 寻找 @BindingAnnotation 注解 和 @Qualifier 注解<p>
    * Returns the binding annotation on {@code member}, or null if there isn't one.
    */
   public static Annotation findBindingAnnotation(
@@ -170,6 +171,10 @@ public class Annotations {
     return found;
   }
 
+ /**
+  * @BindingAnnotation 注解
+  * @Qualifier 注解
+  */
   private static final AnnotationChecker bindingAnnotationChecker = new AnnotationChecker(
       Arrays.asList(BindingAnnotation.class, Qualifier.class));
 

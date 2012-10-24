@@ -208,6 +208,9 @@ final class CustomConcurrentHashMap {
     }
 
     /**
+     * 
+     * 创建@ComputingImpl 实例
+     * <p>
      * Creates a {@link ConcurrentMap}, backed by the given strategy, that
      * supports atomic, on-demand computation of values. {@link Map#get}
      * returns the value corresponding to the given key, atomically computes
@@ -1970,6 +1973,12 @@ final class CustomConcurrentHashMap {
     }
   }
 
+  /**
+   * 重写了get方法
+   * @param <K>
+   * @param <V>
+   * @param <E>
+   */
   static class ComputingImpl<K, V, E> extends Impl<K, V, E> {
 
     static final long serialVersionUID = 0;
