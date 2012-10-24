@@ -227,6 +227,10 @@ public final class InjectionPoint {
   }
 
   /**
+   * 使用构造函数作为注入的InjectionPoint
+   * <li>优先使用{@link com.google.inject.Inject} 注解、{@link javax.inject.Inject}注解的构造函数
+   * <li>如果没有以上注解，使用默认无参构造函数
+   * <p>
    * Returns a new injection point for the injectable constructor of {@code type}.
    *
    * @param type a concrete type with exactly one constructor annotated {@literal @}{@link Inject},
@@ -263,6 +267,7 @@ public final class InjectionPoint {
       }
 
       injectableConstructor = constructor;
+      //检查 @BindingAnnotation 注解 和 @Qualifier 注解
       checkForMisplacedBindingAnnotations(injectableConstructor, errors);
     }
 
@@ -376,6 +381,9 @@ public final class InjectionPoint {
   }
 
   /**
+   * 如果有 @BindingAnnotation 注解 和 @Qualifier 注解，返回false.
+   * <br/>这两个注解的作用:{@link http://code.google.com/p/google-guice/wiki/BindingAnnotations}
+   * <p>
    * Returns true if the binding annotation is in the wrong place.
    */
   private static boolean checkForMisplacedBindingAnnotations(Member member, Errors errors) {

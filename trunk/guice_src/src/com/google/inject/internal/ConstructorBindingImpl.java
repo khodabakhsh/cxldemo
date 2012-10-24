@@ -63,6 +63,8 @@ final class ConstructorBindingImpl<T> extends BindingImpl<T> implements Construc
   }
 
   /**
+   * 构造符合条件(构造函数)的ConstructorBindingImpl
+   * <p>
    * @param constructorInjector the constructor to use, or {@code null} to use the default.
    * @param failIfNotLinked true if this ConstructorBindingImpl's InternalFactory should
    *                             only succeed if retrieved from a linked binding
@@ -93,6 +95,7 @@ final class ConstructorBindingImpl<T> extends BindingImpl<T> implements Construc
     // Find a constructor annotated @Inject
     if (constructorInjector == null) {
       try {
+        //寻找符合条件(构造函数)的InjectionPoint
         constructorInjector = InjectionPoint.forConstructorOf(key.getTypeLiteral());
       } catch (ConfigurationException e) {
         throw errors.merge(e.getErrorMessages()).toException();
