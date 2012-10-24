@@ -140,6 +140,7 @@ final class BindingProcessor extends AbstractBindingProcessor {
         }
 
         FactoryProxy<T> factory = new FactoryProxy<T>(injector, key, linkedKey, source);
+        //订阅
         bindingData.addCreationListener(factory);
         InternalFactory<? extends T> scopedFactory
             = Scoping.scope(key, injector, factory, source, scoping);
