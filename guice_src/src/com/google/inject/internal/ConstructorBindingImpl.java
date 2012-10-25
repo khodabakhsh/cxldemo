@@ -40,6 +40,9 @@ import java.util.Set;
 
 final class ConstructorBindingImpl<T> extends BindingImpl<T> implements ConstructorBinding<T> {
 
+  /**
+   * 创建实例(供注入使用)的工厂
+   */
   private final Factory<T> factory;
   private final InjectionPoint constructorInjectionPoint;
 
@@ -122,6 +125,9 @@ final class ConstructorBindingImpl<T> extends BindingImpl<T> implements Construc
         injector, key, source, scopedFactory, scoping, factoryFactory, constructorInjector);
   }
 
+  /**
+   * 为{@link #factory}的allowCircularProxy和constructorInjector赋值
+   */
   @SuppressWarnings("unchecked") // the result type always agrees with the ConstructorInjector type
   public void initialize(InjectorImpl injector, Errors errors) throws ErrorsException {
     factory.allowCircularProxy = !injector.options.disableCircularProxies;
