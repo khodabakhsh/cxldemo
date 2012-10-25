@@ -28,6 +28,9 @@ import com.google.inject.spi.InjectionPoint;
 final class ConstructorInjectorStore {
   private final InjectorImpl injector;
 
+  /**
+   * lazy load、并可缓存
+   */
   private final FailableCache<InjectionPoint, ConstructorInjector<?>>  cache
       = new FailableCache<InjectionPoint, ConstructorInjector<?>> () {
     @SuppressWarnings("unchecked")

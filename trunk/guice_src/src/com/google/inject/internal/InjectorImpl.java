@@ -508,6 +508,9 @@ final class InjectorImpl implements Injector, Lookups {
     }
   }
 
+  /**
+   * 初始化{@link com.google.inject.internal.ConstructorBindingImpl}
+   */
   <T> void initializeJitBinding(BindingImpl<T> binding, Errors errors) throws ErrorsException {
     // Put the partially constructed binding in the map a little early. This enables us to handle
     // circular dependencies. Example: FooImpl -> BarImpl -> FooImpl.
@@ -848,8 +851,11 @@ final class InjectorImpl implements Injector, Lookups {
     }
 
     Object source = key.getTypeLiteral().getRawType();
+    //创建未初始化的BindingImpl
     BindingImpl<T> binding = createUninitializedBinding(key, Scoping.UNSCOPED, source, errors, true);
     errors.throwIfNewErrors(numErrorsBefore);
+    
+    //初始化,ConstructorBindingImpl#initialize
     initializeJitBinding(binding, errors);
     return binding;
   }
