@@ -17,4 +17,6 @@
 
 4.import static
 
-5.ProcessedBindingData观察者模式
+5.ProcessedBindingData观察者模式，，，InternalFactoryToProviderAdapter适配器模式
+
+6.Initializer类 ：CountDownLatch

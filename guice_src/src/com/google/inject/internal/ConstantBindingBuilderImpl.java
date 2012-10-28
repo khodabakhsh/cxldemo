@@ -27,6 +27,11 @@ import java.lang.annotation.Annotation;
 import java.util.List;
 
 /**
+ * to(....) 方法可以绑定：
+ * <li>基本数据类型
+ * <li>Class
+ * <li>Enum
+ * <p><br>
  * Bind a constant.
  *
  * @author jessewilson@google.com (Jesse Wilson)

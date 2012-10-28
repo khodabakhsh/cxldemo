@@ -105,6 +105,7 @@ public abstract class AbstractModule implements Module {
   }
 
   /**
+   * 
    * @see Binder#bindConstant()
    */
   protected AnnotatedConstantBindingBuilder bindConstant() {

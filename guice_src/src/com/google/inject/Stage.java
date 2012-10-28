@@ -32,6 +32,8 @@ public enum Stage {
   TOOL,
 
   /**
+   * <b>跟PRODUCTION的其中一个不同:Stage.PRODUCTION loads singletons eagerly; Stage.DEVELOPMENT  does not.</b>
+   * <p>
    * We want fast startup times at the expense of runtime performance and some up front error
    * checking.
    */

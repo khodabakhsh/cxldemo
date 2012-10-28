@@ -22,6 +22,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Target;
 
 /**
+ * guice允许为接口指定具体的实现类。如:<br>
+ * .<code>@ImplementedBy (FortuneServiceImpl.class) <br>
+ *  public interface FortuneService { <br>
+ *  String randomFortune(); <br>
+ * } </code><br>
  * A pointer to the default implementation of a type.
  *
  * @author crazybob@google.com (Bob Lee)

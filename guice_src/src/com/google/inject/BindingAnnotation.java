@@ -22,6 +22,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Target;
 
 /**
+ * gucie可以根据annotatedWith注解指定实例，如:<br>
+ * bind(FortuneService.class).annotatedWith(Mega.class) .to(MegaFortuneService.class); 
+ * <br>其中Mega类的定义就需要使用到BindingAnnotation注解作标示。
+ * <p>
  * Annotates annotations which are used for binding. Only one such annotation
  * may apply to a single injection point. You must also annotate binder
  * annotations with {@code @Retention(RUNTIME)}. For example:

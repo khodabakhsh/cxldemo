@@ -23,6 +23,13 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Target;
 
 /**
+ * 在guice中，@Named使用如下：<br>
+ * bind(Actor.class).annotatedWith(Names.named("stallone")).to(...); <br>
+ * 其中：
+ * public class ActionMovie { <br>
+ *    &#64;Inject &#64;Named("stallone")  <br>
+ *    private Actor actor;  <br>
+ *  } <br><br>
  * Annotates named things.
  *
  * @author crazybob@google.com (Bob Lee)

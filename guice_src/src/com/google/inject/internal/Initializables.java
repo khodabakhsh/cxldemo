@@ -17,11 +17,14 @@
 package com.google.inject.internal;
 
 /**
+ * 生成一个Initializable实例，其{@link Initializable#get(Errors)}直接返回
  * @author jessewilson@google.com (Jesse Wilson)
  */
 final class Initializables {
 
   /**
+   * 生成一个Initializable实例，其{@link Initializable#get(Errors)}直接返回instance
+   * <p>
    * Returns an initializable for an instance that requires no initialization.
    */
   static <T> Initializable<T> of(final T instance) {
