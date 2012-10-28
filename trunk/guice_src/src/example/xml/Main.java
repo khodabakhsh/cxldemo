@@ -36,11 +36,12 @@ public class Main {
     	//使用com.google.inject.internal.LinkedBindingImpl
         bind(Contacts.class).to(SimCard.class);
         
-        //使用com.google.inject.internal.ProviderInstanceBindingImpl
+        //XmlBeanModule使用com.google.inject.internal.ProviderInstanceBindingImpl
         install(new XmlBeanModule(xmlUrl));
       }
     });
 
+    //下面这句代码，等同于：Phone phone = injector.getInstance(Key.get(Phone.class)); 
     Phone phone = injector.getInstance(Phone.class);
 
     if (phone.getContacts() == null) {

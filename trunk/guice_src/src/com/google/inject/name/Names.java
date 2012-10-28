@@ -23,6 +23,56 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
+ * 处理properties文件，例如：
+ * 
+ * 
+Listing 3-18. Loading and Using db.properties 。
+public class PropertiesModule extends AbstractModule { 
+    protected void configure() { 
+        try { 
+            Properties databaseProperties = loadProperties("db.properties"); 
+            Names.bindProperties(binder(), databaseProperties); 
+        } catch (RuntimeException e) { 
+            addError("Could not configure database properties", e); 
+        } 
+    } 
+     
+    private static Properties loadProperties(String name) { 
+        Properties properties = new Properties(); 
+        InputStream is = new Object(){} 
+                            .getClass() 
+                            .getEnclosingClass() 
+                            .getResourceAsStream(name); 
+        try { 
+            properties.load(is); 
+        } catch(IOException e) { 
+            throw new RuntimeException(e); 
+        } finally { 
+            if (is != null) { 
+                try { 
+                    is.close(); 
+                } catch (IOException dontCare) {} 
+            } 
+        } 
+        return properties; 
+    } 
+} 
+ 
+public class PropertiesExample { 
+    @Inject 
+    public void databaseURL(@Named("db.url") String url) { 
+        System.out.println(url); 
+    } 
+     
+    public static void main(String[] args) { 
+        Injector i = Guice.createInjector(new PropertiesModule()); 
+        i.getInstance(PropertiesExample.class); 
+    } 
+} 
+Running this example prints jdbc:mysql://localhost/test . 
+
+
+ * <p>
  * Utility methods for use with {@code @}{@link Named}.
  *
  * @author crazybob@google.com (Bob Lee)
