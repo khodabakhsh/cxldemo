@@ -9,8 +9,7 @@ import org.apache.commons.dbcp.BasicDataSource;
 
 /**
  * 测试一下hsqldb，
- * @author Administrator , 2012-10-28
- *
+ * 2012-10-28
  */
 public class HsqldbExample {
 	 public static void main(String[] args) {

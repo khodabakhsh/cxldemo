@@ -1345,6 +1345,8 @@ public class BasicDataSource implements DataSource {
 
 
     /**
+     * 这个方法是synchronized，下面注释说到是否要采用双重检查加锁
+     * <p>
      * <p>Create (if necessary) and return the internal data source we are
      * using to manage our connections.</p>
      *
@@ -1370,7 +1372,9 @@ public class BasicDataSource implements DataSource {
         // create factory which returns raw physical connections
         ConnectionFactory driverConnectionFactory = createConnectionFactory();
 
-        // create a pool for our connections
+        /**
+         *  create a pool for our connections ，为connectionPool 赋值 
+         */
         createConnectionPool();
 
         // Set up statement pool, if desired
@@ -1387,6 +1391,7 @@ public class BasicDataSource implements DataSource {
         // Set up the poolable connection factory
         createPoolableConnectionFactory(driverConnectionFactory, statementPoolFactory, abandonedConfig);
 
+        //创建一个@PoolingDataSource 实例, 将其赋给dataSource 
         // Create and return the pooling data source to manage the connections
         createDataSourceInstance();
         
@@ -1402,6 +1407,8 @@ public class BasicDataSource implements DataSource {
     }
 
     /**
+     * 创建一个{@link DriverConnectionFactory}.
+     * <p>
      * Creates a JDBC connection factory for this datasource.  This method only
      * exists so subclasses can replace the implementation class.
      */
@@ -1479,6 +1486,8 @@ public class BasicDataSource implements DataSource {
     }
 
     /**
+     * 为{@link #connectionPool} 赋值
+     * <p>
      * Creates a connection pool for this datasource.  This method only exists
      * so subclasses can replace the implementation class.
      */
@@ -1505,6 +1514,8 @@ public class BasicDataSource implements DataSource {
     }
 
     /**
+     * 创建{@link PoolingDataSource} , 将其赋给{@link #dataSource}
+     * <p>
      * Creates the actual data source instance.  This method only exists so
      * subclasses can replace the implementation class.
      * 

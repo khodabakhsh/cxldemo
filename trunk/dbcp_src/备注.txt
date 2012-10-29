@@ -3,3 +3,11 @@
 1.需要依赖commons-pool-1.5.4的源码
 2.使用一下hsqldb作数据库(例子写在HsqldbExample里)
   HSQLDB安装与使用:http://www.cnblogs.com/fyfblog/archive/2010/12/10/2097149.html
+  
+  
+  
+  
+  
+  1.org.apache.commons.pool.impl.GenericKeyedObjectPool.ObjectTimestampPair，内部类，处理int溢出
+
+  

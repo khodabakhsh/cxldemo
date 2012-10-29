@@ -22,6 +22,8 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
+ * 使用 {@link java.sql.Driver#connect(String, Properties)}来创建{@link Connection}.
+ * <p>
  * A {@link Driver}-based implementation of {@link ConnectionFactory}.
  *
  * @author Rodney Waldhoff
@@ -39,7 +41,12 @@ public class DriverConnectionFactory implements ConnectionFactory {
     }
 
     protected Driver _driver = null;
+    
     protected String _connectUri = null;
+    
+    /**
+     * 应该包含数据库"user" 和 "password"
+     */
     protected Properties _props = null;
 
     public String toString() {
