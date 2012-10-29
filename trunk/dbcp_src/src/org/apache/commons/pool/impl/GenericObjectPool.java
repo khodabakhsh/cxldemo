@@ -1878,6 +1878,11 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
     private long _maxWait = DEFAULT_MAX_WAIT;
 
     /**
+     * 当池满时的处理，取值可以是：
+     * <li>WHEN_EXHAUSTED_BLOCK(默认值)
+     * <li>WHEN_EXHAUSTED_FAIL
+     * <li>WHEN_EXHAUSTED_GROW
+     * <p>
      * The action to take when the {@link #borrowObject} method
      * is invoked when the pool is exhausted (the maximum number
      * of "active" objects has been reached).

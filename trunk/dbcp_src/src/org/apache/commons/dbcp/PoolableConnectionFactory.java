@@ -578,6 +578,9 @@ public class PoolableConnectionFactory implements PoolableObjectFactory {
         _defaultCatalog = defaultCatalog;
     }
 
+    /**
+     * 创建一个PoolableConnection实例
+     */
     public Object makeObject() throws Exception {
         Connection conn = _connFactory.createConnection();
         if (conn == null) {
@@ -592,6 +595,9 @@ public class PoolableConnectionFactory implements PoolableObjectFactory {
         return new PoolableConnection(conn,_pool,_config);
     }
 
+    /**
+     * 执行{@link #_connectionInitSqls}里面的sql
+     */
     protected void initializeConnection(Connection conn) throws SQLException {
         Collection sqls = _connectionInitSqls;
         if(conn.isClosed()) {
@@ -642,6 +648,9 @@ public class PoolableConnectionFactory implements PoolableObjectFactory {
         }
     }
 
+    /**
+     * 根据查询语句{@link #_validationQuery}、查询超时{@link #_validationQueryTimeout}测试{@link Connection conn}是否正常
+     */
     public void validateConnection(Connection conn) throws SQLException {
         String query = _validationQuery;
         if(conn.isClosed()) {
