@@ -2238,6 +2238,8 @@ public class GenericKeyedObjectPool extends BaseKeyedObjectPool implements Keyed
         }
 
         /**
+         * 
+         * <p>
          * Compares this to another ObjectTimestampPair, using the timestamp as basis for comparison.
          * Implementation is consistent with equals.
          * 
@@ -2251,6 +2253,7 @@ public class GenericKeyedObjectPool extends BaseKeyedObjectPool implements Keyed
                 // see java.lang.Comparable Javadocs
                 return System.identityHashCode(this) - System.identityHashCode(other);
             } else {
+            	//包含溢出处理
                 // handle int overflow
                 return (int)Math.min(Math.max(tstampdiff, Integer.MIN_VALUE), Integer.MAX_VALUE);
             }
@@ -2493,6 +2496,7 @@ public class GenericKeyedObjectPool extends BaseKeyedObjectPool implements Keyed
     private long _maxWait = DEFAULT_MAX_WAIT;
 
     /**
+     * 当池到达最大容量时
      * The action to take when the {@link #borrowObject} method
      * is invoked when the pool is exhausted (the maximum number
      * of "active" objects has been reached).

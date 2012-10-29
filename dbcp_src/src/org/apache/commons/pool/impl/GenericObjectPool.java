@@ -31,6 +31,10 @@ import org.apache.commons.pool.PoolableObjectFactory;
 import org.apache.commons.pool.impl.GenericKeyedObjectPool.ObjectTimestampPair;
 
 /**
+ * 对象池。结合PoolableObjectFactory一起使用(即用到{@link #_factory}来创建对象).
+ *<br> {@link #_factory}可以使用构造函数传入，或使用{@link #setFactory(PoolableObjectFactory)}赋值。
+ * <br>
+ * <p>
  * A configurable {@link ObjectPool} implementation.
  * <p>
  * When coupled with the appropriate {@link PoolableObjectFactory},
@@ -1786,7 +1790,7 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
         /** object timestamp pair allocated to this latch */
         private ObjectTimestampPair _pair;
         
-        /** Wheter or not this latch may create an object instance */
+        /** Whether or not this latch may create an object instance */
         private boolean _mayCreate = false;
 
         /**
