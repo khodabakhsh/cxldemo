@@ -1044,11 +1044,13 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
      * @return object instance
      * @throws NoSuchElementException if an instance cannot be returned
      */
-    public Object borrowObject() throws Exception {
+    @SuppressWarnings("unchecked")
+	public Object borrowObject() throws Exception {
         long starttime = System.currentTimeMillis();
         Latch latch = new Latch();
         byte whenExhaustedAction;
         long maxWait;
+        //需要同步
         synchronized (this) {
             // Get local copy of current config. Can't sync when used later as
             // it can result in a deadlock. Has the added advantage that config
@@ -1069,6 +1071,7 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
                 assertOpen();
             }
 
+            //如果没有从池中获得资源
             // If no object was allocated from the pool above
             if(latch.getPair() == null) {
                 // check if we were allowed to create one
@@ -1079,6 +1082,7 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
                     switch(whenExhaustedAction) {
                         case WHEN_EXHAUSTED_GROW:
                             // allow new object to be created
+                        	//需要同步代码，检查其他线程是否改变了latch
                             synchronized (this) {
                                 // Make sure another thread didn't allocate us an object
                                 // or permit a new object to be created
@@ -1089,6 +1093,7 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
                             }
                             break;
                         case WHEN_EXHAUSTED_FAIL:
+                        	//需要同步代码，检查其他线程是否改变了latch
                             synchronized (this) {
                                 // Make sure allocate hasn't already assigned an object
                                 // in a different thread or permitted a new object to be created
@@ -1097,14 +1102,17 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
                                 }
                                 _allocationQueue.remove(latch);
                             }
+                            //抛异常
                             throw new NoSuchElementException("Pool exhausted");
                         case WHEN_EXHAUSTED_BLOCK:
                             try {
+                            	//需要同步代码，检查其他线程是否改变了latch
                                 synchronized (latch) {
                                     // Before we wait, make sure another thread didn't allocate us an object
                                     // or permit a new object to be created
                                     if (latch.getPair() == null && !latch.mayCreate()) {
                                         if(maxWait <= 0) {
+                                        	//maxWait <= 0表示无限期等待...
                                             latch.wait();
                                         } else {
                                             // this code may be executed again after a notify then continue cycle
@@ -1113,6 +1121,7 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
                                             final long waitTime = maxWait - elapsed;
                                             if (waitTime > 0)
                                             {
+                                            	//根据最大超时和当前时间，计算线程最大等待(阻塞)时间
                                                 latch.wait(waitTime);
                                             }
                                         }
@@ -1125,6 +1134,7 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
                                 throw e;
                             }
                             if(maxWait > 0 && ((System.currentTimeMillis() - starttime) >= maxWait)) {
+                            	//需要同步代码，检查其他线程是否改变了latch
                                 synchronized(this) {
                                     // Make sure allocate hasn't already assigned an object
                                     // in a different thread or permitted a new object to be created
@@ -1135,6 +1145,7 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
                                         break;
                                     }
                                 }
+                                //等待资源超时，抛异常
                                 throw new NoSuchElementException("Timeout waiting for idle object");
                             } else {
                                 continue; // keep looping
@@ -1165,7 +1176,9 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
             }
             // activate & validate the object
             try {
+            	//一些初始化工作
                 _factory.activateObject(latch.getPair().value);
+                //校验
                 if(_testOnBorrow &&
                         !_factory.validateObject(latch.getPair().value)) {
                     throw new Exception("ValidateObject failed");
@@ -1189,6 +1202,7 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
                         latch.reset();
                         _allocationQueue.add(0, latch);
                     }
+                    //异常时，也需要调用allocate()
                     allocate();
                 }
                 if(newlyCreated) {
@@ -1202,6 +1216,7 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
     }
 
     /**
+     * synchronized关键字结合 {@link #_allocationQueue }的removeFirst方法,实现"分配资源的顺序与线程请求先后顺序一致"<br>
      * Allocate available instances to latches in the allocation queue.  Then
      * set _mayCreate to true for as many additional latches remaining in queue
      * as _maxActive allows.
@@ -1210,11 +1225,14 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
         if (isClosed()) return;
 
         // First use any objects in the pool to clear the queue
+        // 池有空闲资源 ,直接获得
         for (;;) {
             if (!_pool.isEmpty() && !_allocationQueue.isEmpty()) {
+            	//从_allocationQueue中移除
                 Latch latch = (Latch) _allocationQueue.removeFirst();
                 latch.setPair((ObjectTimestampPair) _pool.removeFirst());
                 _numInternalProcessing++;
+                //同步latch
                 synchronized (latch) {
                     latch.notify();
                 }
@@ -1224,11 +1242,14 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
         }
 
         // Second utilise any spare capacity to create new objects
+        // 池没有空闲资源，但允许创建新的资源
         for(;;) {
             if((!_allocationQueue.isEmpty()) && (_maxActive < 0 || (_numActive + _numInternalProcessing) < _maxActive)) {
-                Latch latch = (Latch) _allocationQueue.removeFirst();
+            	//从_allocationQueue中移除
+            	Latch latch = (Latch) _allocationQueue.removeFirst();
                 latch.setMayCreate(true);
                 _numInternalProcessing++;
+                //同步latch
                 synchronized (latch) {
                     latch.notify();
                 }
@@ -1363,6 +1384,8 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
     }
 
     /**
+     * 回收资源、或销毁资源
+     * <br>
      * <p>Adds an object to the pool.</p>
      * 
      * <p>Validates the object if testOnReturn == true and passivates it before returning it to the pool.
@@ -1380,6 +1403,7 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
         if(_testOnReturn && !(_factory.validateObject(obj))) {
             success = false;
         } else {
+        	//一些复位操作
             _factory.passivateObject(obj);
         }
 
@@ -1392,10 +1416,12 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
                 shouldDestroy = true;
             } else {
                 if((_maxIdle >= 0) && (_pool.size() >= _maxIdle)) {
+                	//池的资源数量已经超过最大空闲值，资源无需放回池中，需销毁。
                     shouldDestroy = true;
                 } else if(success) {
                     // borrowObject always takes the first element from the queue,
                     // so for LIFO, push on top, FIFO add to end
+                	//根据LIFO、FIFO实现资源返回池后被重用的顺序
                     if (_lifo) {
                         _pool.addFirst(new ObjectTimestampPair(obj));
                     } else {
@@ -1404,12 +1430,14 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
                     if (decrementNumActive) {
                         _numActive--;
                     }
+                    //回收资源成功，需要调用allocate
                     allocate();
                 }
             }
         }
 
         // Destroy the instance if necessary
+        //如果需要销毁资源
         if(shouldDestroy) {
             try {
                 _factory.destroyObject(obj);
@@ -1781,6 +1809,7 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
     }
 
     /**
+     * 所有成员方法都是synchronized的。<br>
      * Latch used to control allocation order of objects to threads to ensure
      * fairness. That is, objects are allocated to threads in the order that
      * threads request objects.
@@ -1860,6 +1889,7 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
     private int _maxActive = DEFAULT_MAX_ACTIVE;
 
     /**
+     * 最大等待(阻塞)时间<br>
      * The maximum amount of time (in millis) the
      * {@link #borrowObject} method should block before throwing
      * an exception when the pool is exhausted and the
@@ -1897,6 +1927,7 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
     private byte _whenExhaustedAction = DEFAULT_WHEN_EXHAUSTED_ACTION;
 
     /**
+     * 为true时，从池获取资源时，要先用{@link PoolableObjectFactory#validateObject validated}校验<br>
      * When <tt>true</tt>, objects will be
      * {@link PoolableObjectFactory#validateObject validated}
      * before being returned by the {@link #borrowObject}
@@ -1910,6 +1941,7 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
     private volatile boolean _testOnBorrow = DEFAULT_TEST_ON_BORROW;
 
     /**
+     *  为true时，资源返回池时，要先用{@link PoolableObjectFactory#validateObject validated}校验<br>
      * When <tt>true</tt>, objects will be
      * {@link PoolableObjectFactory#validateObject validated}
      * before being returned to the pool within the
@@ -2017,6 +2049,9 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
     private int _numInternalProcessing = 0;
 
     /**
+     * 1.当从池中获得资源    2.当允许创建资源时   3.当创建资源失败时<br>
+     * 上面几种情况的latch，都应该从{@link #_allocationQueue}移除<br>
+     * 见{@link #allocate()}<br>
      * Used to track the order in which threads call {@link #borrowObject()} so
      * that objects can be allocated in the order in which the threads requested
      * them.
