@@ -734,8 +734,17 @@ public class PoolableConnectionFactory implements PoolableObjectFactory {
     protected Collection _connectionInitSqls = null;
     protected volatile ObjectPool _pool = null;
     protected volatile KeyedObjectPoolFactory _stmtPoolFactory = null;
+    /**
+     * 是否只读
+     */
     protected Boolean _defaultReadOnly = null;
+    /**
+     * 是否自动commit
+     */
     protected boolean _defaultAutoCommit = true;
+    /**
+     * 事务隔离级别
+     */
     protected int _defaultTransactionIsolation = UNKNOWN_TRANSACTIONISOLATION;
     protected String _defaultCatalog;
 
