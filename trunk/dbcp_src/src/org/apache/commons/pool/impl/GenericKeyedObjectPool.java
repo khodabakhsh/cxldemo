@@ -2496,7 +2496,6 @@ public class GenericKeyedObjectPool extends BaseKeyedObjectPool implements Keyed
     private long _maxWait = DEFAULT_MAX_WAIT;
 
     /**
-     * 当池到达最大容量时
      * The action to take when the {@link #borrowObject} method
      * is invoked when the pool is exhausted (the maximum number
      * of "active" objects has been reached).
