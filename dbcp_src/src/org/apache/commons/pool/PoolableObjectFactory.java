@@ -107,6 +107,8 @@ public interface PoolableObjectFactory {
   void destroyObject(Object obj) throws Exception;
 
   /**
+   * 对生产的对象进行校验
+   * <br>
    * Ensures that the instance is safe to be returned by the pool.
    * Returns <code>false</code> if <code>obj</code> should be destroyed.
    *
@@ -117,6 +119,8 @@ public interface PoolableObjectFactory {
   boolean validateObject(Object obj);
 
   /**
+   * 可以在此实现一些初始化设置
+   * <br>
    * Reinitialize an instance to be returned by the pool.
    *
    * @param obj the instance to be activated
@@ -127,6 +131,8 @@ public interface PoolableObjectFactory {
   void activateObject(Object obj) throws Exception;
 
   /**
+   * 可以在此实现一些复位操作(应该是与{@link #activateObject(Object)}对应的)
+   * <br>
    * Uninitialize an instance to be returned to the idle object pool.
    *
    * @param obj the instance to be passivated

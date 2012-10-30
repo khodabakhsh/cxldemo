@@ -32,6 +32,8 @@ import java.util.NoSuchElementException;
 import java.lang.ref.WeakReference;
 
 /**
+ * 双向链表，从commons Collections 拷过来的呀
+ * <br>
  * <p>
  * This class has been copied from Commons Collections, version 3.1 in order
  * to eliminate the dependency of pool on collections.  It has package scope
