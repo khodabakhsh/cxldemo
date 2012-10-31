@@ -1110,6 +1110,7 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
                                 synchronized (latch) {
                                     // Before we wait, make sure another thread didn't allocate us an object
                                     // or permit a new object to be created
+                                	//根据条件，调用latch.wait()
                                     if (latch.getPair() == null && !latch.mayCreate()) {
                                         if(maxWait <= 0) {
                                         	//maxWait <= 0表示无限期等待...
@@ -1157,9 +1158,16 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
                 }
             }
 
+            //1.当允许创建资源 。
+            //2.池满了，但是增长策略为WHEN_EXHAUSTED_GROW时。
+            //当满足上面两个条件时，null == latch.getPair()此时就可能为null。
+            //为什么是可能呢，
+            //对于第1种情况，null == latch.getPair()是一定成立的。
+            //对于第2种情况，由于可能通过其他线程从池中获得资源,这种情况下，latch.getPair()就不是null啦。
             boolean newlyCreated = false;
             if(null == latch.getPair()) {
                 try {
+                	//从_factory创建新资源
                     Object obj = _factory.makeObject();
                     latch.setPair(new ObjectTimestampPair(obj));
                     newlyCreated = true;
@@ -1232,7 +1240,7 @@ public class GenericObjectPool extends BaseObjectPool implements ObjectPool {
                 Latch latch = (Latch) _allocationQueue.removeFirst();
                 latch.setPair((ObjectTimestampPair) _pool.removeFirst());
                 _numInternalProcessing++;
-                //同步latch
+                //同步latch,因为只需唤醒在#borrowObject()中对应阻塞的latch(调用了wait)，所以下面只需调用latch.notify()
                 synchronized (latch) {
                     latch.notify();
                 }
