@@ -1,0 +1,6 @@
+
+—————————————————————————————————————————————  quartz-2.1.6 （2012.11.3用maven搭环境）     ———————————————————————————————————————————————————————————
+1.先是在{quartz_download_directory}/quartz目录下，mvn eclipse:eclipse搭建eclipse环境
+2.导入工程到eclipse中。
+3.为了方便，把{quartz_download_directory}/examples/src目录下的内容拷到了工程源码中(即例子源码在src/main/java/examples中)。
+另外，把这些示例的说明放在了工程的examples文件中
