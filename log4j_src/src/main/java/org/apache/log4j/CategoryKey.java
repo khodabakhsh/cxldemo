@@ -27,7 +27,7 @@ class CategoryKey {
   String   name;  
   int hashCache;
 
-  CategoryKey(String name) {
+	CategoryKey(String name) {
     this.name = name;
     hashCache = name.hashCode();
   }
