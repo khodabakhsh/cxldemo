@@ -30,7 +30,7 @@ public class DefaultRepositorySelector implements RepositorySelector {
   }
 
   public
-  LoggerRepository getLoggerRepository() {
+ LoggerRepository getLoggerRepository() {
     return repository;
   }
 }
