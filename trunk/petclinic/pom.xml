@@ -678,6 +678,69 @@
       <scope>test</scope>
     </dependency>
 		
+		<!--  spring_core from org.springframework.core-3.0.0.RELEASE.pom -->
+		<dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>com.springsource.org.apache.commons.logging</artifactId>
+      <version>1.1.1</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.log4j</groupId>
+      <artifactId>com.springsource.org.apache.log4j</artifactId>
+      <version>1.2.15</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>com.springsource.org.aspectj.weaver</artifactId>
+      <version>1.6.5.RELEASE</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.vfs</groupId>
+      <artifactId>com.springsource.org.jboss.virtual</artifactId>
+      <version>2.1.0.GA</version>
+      <optional>true</optional>
+    </dependency>
+    <!-- 
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>org.springframework.asm</artifactId>
+      <version>3.0.0.RELEASE</version>
+      <optional>true</optional>
+    </dependency>
+     -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>com.springsource.javax.servlet</artifactId>
+      <version>2.5.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit</groupId>
+      <artifactId>com.springsource.org.junit</artifactId>
+      <version>4.7.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>com.springsource.org.easymock</artifactId>
+      <version>2.5.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.custommonkey.xmlunit</groupId>
+      <artifactId>com.springsource.org.custommonkey.xmlunit</artifactId>
+      <version>1.2.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.woodstox</groupId>
+      <artifactId>com.springsource.com.ctc.wstx</artifactId>
+      <version>3.2.7</version>
+      <scope>test</scope>
+    </dependency>
 
 		<!-- Spring -->
 		
