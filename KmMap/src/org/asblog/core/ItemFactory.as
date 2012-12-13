@@ -55,15 +55,14 @@ package org.asblog.core
 			
 			if (obj is MediaImage)
 			{
-				MediaImage( obj ).source = link.source;
-//				MediaImage( obj ).imageWidth = link.MediaImageWidth;
-//				MediaImage( obj ).imageHeight = link.MediaImageHeight;
-				if(link.MediaImageWidth && link.MediaImageHeight){
-					MediaImage( obj ).width = MediaImage( obj ).sprite.width = link.MediaImageWidth;
-					MediaImage( obj ).height = MediaImage( obj ).sprite.height = link.MediaImageHeight;
-//				Alert.show("MediaImage( obj ).image.width : "+ MediaImage( obj ).sprite.width + "  ,  MediaImage( obj ).image.height: "+MediaImage( obj ).sprite.height );
-				}
-				
+					MediaImage( obj ).source = link.source;
+					//				MediaImage( obj ).imageWidth = link.MediaImageWidth;
+					//				MediaImage( obj ).imageHeight = link.MediaImageHeight;
+					if(link.MediaImageWidth && link.MediaImageHeight){
+						MediaImage( obj ).width = MediaImage( obj ).sprite.width = link.MediaImageWidth;
+						MediaImage( obj ).height = MediaImage( obj ).sprite.height = link.MediaImageHeight;
+						//				Alert.show("MediaImage( obj ).image.width : "+ MediaImage( obj ).sprite.width + "  ,  MediaImage( obj ).image.height: "+MediaImage( obj ).sprite.height );
+					}
 			}
 			else if (obj is MediaShape)
 			{
@@ -96,6 +95,15 @@ package org.asblog.core
 			ObjectId_MediaObject_Dic[obj.obj_id]=obj;
 			
 			CacheUtil.allCacheMediaLinks[obj.uid] = link;
+
+			//防止图片不能识别,source == "unload"
+			if (obj is MediaImage)
+			{
+				if (MediaImage(obj).source == "unload")
+				{
+					return null;
+				}
+			}
 			return obj;
 		}
 	}
