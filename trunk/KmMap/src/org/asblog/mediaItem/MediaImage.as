@@ -5,6 +5,7 @@ package org.asblog.mediaItem
 	import flash.display.Loader;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.IOErrorEvent;
 	import flash.system.LoaderContext;
 	import flash.utils.ByteArray;
 	
@@ -151,12 +152,11 @@ package org.asblog.mediaItem
 			return _source;
 		}
 
-		public function set source(v : Object) : void
+		public function set source(v : Object): void
 		{
 //			if(v is String)	_isSwf = String( v ).lastIndexOf( ".swf" ) != -1 ? true : false;
 //			_source = v;
 //			if(!hasSmall)	load( v );
-
 			if(v is Bitmap){
 				sprite.addChild(Bitmap(v));
 				sprite.width=Bitmap(v).bitmapData.width;
@@ -166,10 +166,17 @@ package org.asblog.mediaItem
 				_source = v;
 			}else{
 			var loc1:Loader=new flash.display.Loader();
-			loc1.contentLoaderInfo.addEventListener(flash.events.Event.COMPLETE, this.imageLoaded);
-			loc1.loadBytes(ByteArray(v));
+				loc1.contentLoaderInfo.addEventListener(flash.events.Event.COMPLETE, this.imageLoaded);
+				loc1.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,IOErrorFun);
+				loc1.loadBytes(ByteArray(v));
 			}
 		
+		}
+		internal function IOErrorFun(arg1:flash.events.Event):void
+		{
+			Alert.show("很抱歉，此图片暂不能为系统所识别，请使用其他图片");
+			//防止图片不能识别,source == "unload"
+			_source ="unload";
 		}
 		internal function imageLoaded(arg1:flash.events.Event):void
 		{

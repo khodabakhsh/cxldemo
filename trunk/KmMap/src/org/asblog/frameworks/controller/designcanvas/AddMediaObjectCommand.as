@@ -1,10 +1,11 @@
 package org.asblog.frameworks.controller.designcanvas 
 {
+	import mx.controls.Alert;
+	
 	import org.asblog.core.ItemFactory;
 	import org.asblog.core.MediaLink;
 	import org.asblog.frameworks.controller.MediaCommand;
 	import org.asblog.utils.CacheUtil;
-	
 	import org.puremvc.as3.interfaces.INotification;
 	
 	/**
@@ -12,9 +13,13 @@ package org.asblog.frameworks.controller.designcanvas
 	 */
 	public class AddMediaObjectCommand extends MediaCommand
 	{
-		override public function execute( note : INotification) : void 
+		override public function execute( note : INotification) : void
 		{
-			designCanvas.addMediaItem( ItemFactory.creatMediaObject( MediaLink( note.getBody( ) ) ) );
+			var obj:*=ItemFactory.creatMediaObject(MediaLink(note.getBody()));
+			if (obj != null)
+			{
+				designCanvas.addMediaItem(obj);
+			}
 		}
 		
 		override public function undo( note : INotification) : void 
