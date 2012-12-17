@@ -741,6 +741,30 @@
       <version>3.2.7</version>
       <scope>test</scope>
     </dependency>
+    
+    
+    <!--  spring_aop from org.springframework.aop-3.0.0.RELEASE.pom 只选了这个一个-->
+    <dependency>
+      <groupId>com.jamonapi</groupId>
+      <artifactId>com.springsource.com.jamonapi</artifactId>
+      <version>2.4.0</version>
+      <optional>true</optional>
+    </dependency>
+    
+    <!--  spring_transaction from org.springframework.transaction-3.0.0.RELEASE.pom 只选了部分-->
+    <dependency>
+      <groupId>javax.resource</groupId>
+      <artifactId>com.springsource.javax.resource</artifactId>
+      <version>1.5.0</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>com.ibm.websphere</groupId>
+      <artifactId>com.springsource.com.ibm.websphere.uow</artifactId>
+      <version>6.0.2.17</version>
+      <optional>true</optional>
+    </dependency>
+    
 
 		<!-- Spring -->
 		
