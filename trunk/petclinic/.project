@@ -41,6 +41,11 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>edu.mit.csail.relo.jdt.builder.ReloJDTBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.maven.ide.eclipse.maven2Nature</nature>
@@ -51,5 +56,6 @@
 		<nature>org.eclipse.wst.common.modulecore.ModuleCoreNature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
+		<nature>edu.mit.csail.relo.jdt.builder.ReloJDTBuilderProjectNature</nature>
 	</natures>
 </projectDescription>
