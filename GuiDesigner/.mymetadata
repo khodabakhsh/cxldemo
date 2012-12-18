@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="GuiDesigner"
+  id="myeclipse.1355801086582"
+  context-root="/GuiDesigner"
+  j2ee-spec="5.0"
+  archive="GuiDesigner.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
