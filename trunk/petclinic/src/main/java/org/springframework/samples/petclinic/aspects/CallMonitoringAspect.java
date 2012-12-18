@@ -1,8 +1,10 @@
 package org.springframework.samples.petclinic.aspects;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedOperation;
@@ -76,6 +78,10 @@ public class CallMonitoringAspect {
 		else {
 			return joinPoint.proceed();
 		}
+	}
+	@Before("execution(* org.springframework.samples.petclinic.jdbc.SimpleJdbcClinic.*(..))")
+	public void before(JoinPoint joinPoint) throws Throwable {
+				System.out.println("before ---------------------- ----------------------");
 	}
 
 }
