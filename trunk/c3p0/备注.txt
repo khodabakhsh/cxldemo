@@ -1,0 +1,9 @@
+
+___________需要使用jdk1.5___________
+
+http://handawei.iteye.com/blog/651300
+·          从sourceforge下载我们目前使用的0.9.1.2版本 [http://nchc.dl.sourceforge.net/sourceforge/c3p0/c3p0-0.9.1.2.src.zip 下载]
+
+·          ant codegen(因为它有很自动生成代码)
+
+·          导入eclipse(source包括src/classes,build/codegen,缺少juit.jar,log4j.jar,自己解决)
