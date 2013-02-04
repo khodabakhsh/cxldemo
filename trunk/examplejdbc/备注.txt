@@ -1,0 +1,18 @@
+
+
+
+
+————————————————————————————————————————————    2013.2.4  boneCP版本0.7.1 release ————————————————————————————————————————————————————————————————
+
+
+
+
+
+1.ExampleJDBC.java的例子来自于官方：
+http://jolbox.com/bonecp/downloads/examples/examplejdbc-1.0.0-project.tar.gz
+
+2.使用的boneCP版本是0.7.1 release
+来自github：
+https://github.com/wwadge/bonecp.git
+
+3.把工程bonecp-test-commons中的java代码拷贝过来，解决部分src/test/java中的部分编译错误
