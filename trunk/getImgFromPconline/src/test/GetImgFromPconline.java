@@ -30,7 +30,7 @@ public class GetImgFromPconline {
 	/**
 	 * 抓取图片存放目录
 	 */
-	private static final String PIC_DIR = "d:/temp";
+	private static final String PIC_DIR = "d:/太平洋电脑壁纸";
 
 	private static final String gb2312 = "gb2312";
 	private static final String utf8 = "utf-8";
@@ -77,7 +77,7 @@ public class GetImgFromPconline {
 			}
 			//			System.out.println(sBuffer);
 		} catch (Exception e) {
-			System.out.println("重新 尝试url --->  " + url);
+			System.err.println("重新 尝试url --->  " + url);
 			return getHtmlContent(url);
 		} finally {
 			try {
@@ -91,7 +91,7 @@ public class GetImgFromPconline {
 	}
 
 	/**
-	 * 获取指定url对应图集的所有图片 
+	 * 获取指定url对应图片专辑下的所有图片 
 	 */
 	public static void beginGetImgsByAlbum(String url, String preDirectory) throws Exception {
 		//		System.out.println(url);
@@ -113,19 +113,19 @@ public class GetImgFromPconline {
 			final String htmlurl = list.get(j);
 			final String fileName = String.valueOf(j + 1);
 			final String listSize = String.valueOf(list.size());
-//			Thread.sleep(200);
-			final String directory = preDirectory + ("".equals(preDirectory)?"":"/") + title + "_" + listSize;
+			//			Thread.sleep(200);
+			final String directory = preDirectory + ("".equals(preDirectory) ? "" : "/") + title + "_" + listSize;
 			executor.execute((new Runnable() {
 				public void run() {
 					try {
 						get_1680_1050(htmlurl, listSize + "_" + fileName, directory);
 					} catch (Exception e) {
 						try {
-							System.out.println("重新尝试下载IMG  --->  " + htmlurl);
+							System.err.println("重新尝试下载IMG  --->  " + htmlurl);
 							get_1680_1050(htmlurl, listSize + "_" + fileName, directory);
 						} catch (Exception e1) {
 							e1.printStackTrace();
-							System.out.println("重新尝试【失败】 " + htmlurl);
+							System.err.println("重新尝试【失败】 " + htmlurl);
 						}
 					}
 				}
@@ -178,11 +178,11 @@ public class GetImgFromPconline {
 			} catch (Exception e) {
 				throw e;
 			} finally {
-				bit =null;
+				bit = null;
 				if (out != null)
 					out.close();
 			}
-			System.err.println("成功创建文件【" + diretoryPathString + fileName + "】" + "，源路径：【" + url + "】");
+			System.out.println("成功创建文件【" + diretoryPathString + fileName + "】" + "，源路径：【" + url + "】");
 		}
 	}
 
@@ -248,10 +248,72 @@ public class GetImgFromPconline {
 		}
 	}
 
+	/**
+	 * 获取选了某一分辨率、某一类型的所有图片（包含所有分页专辑）
+	 */
+	private static void getAllImgsOfPconlineByTypeAndResolution(String url, String preBaseDirectory, String albumTitle)
+			throws Exception {
+		Document doc = Jsoup.parse(getHtmlContent(url));
+		//找到<title></title>标题
+		String headTitle = doc.getElementsByTag("title").get(0).html();
+		headTitle = headTitle.substring(0, headTitle.lastIndexOf("】") + 1);
+		//优先使用自定义的标题名
+		headTitle = "".equals(albumTitle) ? headTitle : albumTitle;
+		//找到页数，类似3/13，表示共13页，当前第3页
+		int pageNum = 0;
+		try {
+			String pageSymbol = doc.select("div.page-num i").get(0).html();
+			String pageNumString = pageSymbol.substring(pageSymbol.lastIndexOf("/") + 1);
+			pageNum = Integer.parseInt(pageNumString);
+		} catch (Exception e) {
+			System.err.println("获取类型：【" + headTitle + "】分页数发生异常 ， url: " + url);
+			return;
+		}
+		//因其分页命名规律如：
+		//		第1页：http://wallpaper.pconline.com.cn/list/1_b10_1_des0.html
+		//		第2页：http://wallpaper.pconline.com.cn/list/1_b10_2_des0.html
+		String seperator = "_des";
+		String tempPrefix = url.substring(0, url.lastIndexOf(seperator));
+		String prefix = tempPrefix.substring(0, tempPrefix.lastIndexOf("_") + 1);
+		String suffix = url.substring(url.lastIndexOf(seperator));
+		//循环每一页
+		for (int k = 1; k <= pageNum; k++) {
+			String eachPagePredictory = headTitle + "_共" + pageNum + "页" + "/" + headTitle + "第" + k + "页";
+			if (!"".equals(preBaseDirectory)) {
+				eachPagePredictory = preBaseDirectory + "/" + eachPagePredictory;
+			}
+
+			String eachPageUrl = prefix + k + suffix;
+			Document eachPageDoc = Jsoup.parse(getHtmlContent(eachPageUrl));
+			Elements links = eachPageDoc.select("i.i-pic a");
+			//遍历某一页下的所有图片专辑
+			for (int j = 0; j < links.size(); j++) {
+				beginGetImgsByAlbum(baseUrl + links.get(j).attr("href"), eachPagePredictory);
+			}
+		}
+	}
+
+	/**
+	 * 获取选了某一分辨率下所有类型的所有图片（包含所有类型的所有分页专辑）
+	 */
+	private static void getAllImgsOfPconlineByResolution(String url, String preBaseDirectory) throws Exception {
+		Document eachPageDoc = Jsoup.parse(getHtmlContent(url));
+		Elements links = eachPageDoc.select("div.getWap div.getParam").get(0).select("dd.clearfix a");
+		//遍历某一分辨率下所有类型
+		for (int j = 0; j < links.size(); j++) {
+			Element link = links.get(j);
+			getAllImgsOfPconlineByTypeAndResolution(baseUrl + link.attr("href"), preBaseDirectory,
+					link.html().replace("<em></em>", ""));
+		}
+	}
+
 	public static void main(String[] args) throws Exception {
 		//		beginGetImgsByAlbum("http://wallpaper.pconline.com.cn/pic/17536.html");
-		getAllImgsOfPconlineHomePage();
-		getTopImgsOfPconlineHomePage();
+		//		getAllImgsOfPconlineHomePage();
+		//		getTopImgsOfPconlineHomePage();
+		//		getAllImgsOfPconlineByTypeAndResolution("http://wallpaper.pconline.com.cn/list/1_b10_1_des0.html","","");
+		//		getAllImgsOfPconlineByTypeAndResolution("http://wallpaper.pconline.com.cn/list/1_a14-b10_1_des0.html","","");
+		getAllImgsOfPconlineByResolution("http://wallpaper.pconline.com.cn/list/1_b10_2_des0.html", "【1280x1024桌面壁纸下载】");
 		executor.shutdown();
 	}
 }
