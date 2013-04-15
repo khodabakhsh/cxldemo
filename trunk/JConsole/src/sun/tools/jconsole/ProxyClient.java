@@ -1,8 +1,8 @@
 /*
  * %W% %E%
- *
- * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
- * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved. ORACLE PROPRIETARY/CONFIDENTIAL. Use is
+ * subject to license terms.
  */
 
 package sun.tools.jconsole;
@@ -78,20 +78,21 @@ import sun.rmi.transport.LiveRef;
 
 import com.sun.management.HotSpotDiagnosticMXBean;
 import com.sun.tools.jconsole.JConsoleContext;
+
 /**
  * 对应每个连接的jvm进程
- *
  */
 public class ProxyClient implements JConsoleContext {
 
 	private ConnectionState connectionState = ConnectionState.DISCONNECTED;
 
 	// The SwingPropertyChangeSupport will fire events on the EDT
-	private SwingPropertyChangeSupport propertyChangeSupport = new SwingPropertyChangeSupport(
-			this, true);
+	private SwingPropertyChangeSupport propertyChangeSupport = new SwingPropertyChangeSupport(this, true);
 
-	private static Map<String, ProxyClient> cache = Collections
-			.synchronizedMap(new HashMap<String, ProxyClient>());
+	/**
+	 * 把{@link ProxyClient}缓存起来
+	 */
+	private static Map<String, ProxyClient> cache = Collections.synchronizedMap(new HashMap<String, ProxyClient>());
 
 	private volatile boolean isDead = true;
 	private String hostName = null;
@@ -140,8 +141,7 @@ public class ProxyClient implements JConsoleContext {
 
 	final static private String HOTSPOT_DIAGNOSTIC_MXBEAN_NAME = "com.sun.management:type=HotSpotDiagnostic";
 
-	private ProxyClient(String hostName, int port, String userName,
-			String password) throws IOException {
+	private ProxyClient(String hostName, int port, String userName, String password) throws IOException {
 		this.connectionName = getConnectionName(hostName, port, userName);
 		this.displayName = connectionName;
 		if (hostName.equals("localhost") && port == 0) {
@@ -151,8 +151,7 @@ public class ProxyClient implements JConsoleContext {
 		} else {
 			// Create an RMI connector client and connect it to
 			// the RMI connector server
-			final String urlPath = "/jndi/rmi://" + hostName + ":" + port
-					+ "/jmxrmi";
+			final String urlPath = "/jndi/rmi://" + hostName + ":" + port + "/jmxrmi";
 			JMXServiceURL url = new JMXServiceURL("rmi", "", 0, urlPath);
 			setParameters(url, userName, password);
 			vmConnector = true;
@@ -162,8 +161,7 @@ public class ProxyClient implements JConsoleContext {
 		}
 	}
 
-	private ProxyClient(String url, String userName, String password)
-			throws IOException {
+	private ProxyClient(String url, String userName, String password) throws IOException {
 		this.advancedUrl = url;
 		this.connectionName = getConnectionName(url, userName);
 		this.displayName = connectionName;
@@ -176,8 +174,7 @@ public class ProxyClient implements JConsoleContext {
 		this.displayName = "pid: " + lvm.vmid() + " " + lvm.displayName();
 	}
 
-	private void setParameters(JMXServiceURL url, String userName,
-			String password) {
+	private void setParameters(JMXServiceURL url, String userName, String password) {
 		this.jmxUrl = url;
 		this.hostName = jmxUrl.getHost();
 		this.port = jmxUrl.getPort();
@@ -190,15 +187,12 @@ public class ProxyClient implements JConsoleContext {
 		//
 		if (stub.getClass() != stubClass) {
 			if (!Proxy.isProxyClass(stub.getClass())) {
-				throw new SecurityException("Expecting a "
-						+ stubClass.getName() + " stub!");
+				throw new SecurityException("Expecting a " + stubClass.getName() + " stub!");
 			} else {
 				InvocationHandler handler = Proxy.getInvocationHandler(stub);
 				if (handler.getClass() != RemoteObjectInvocationHandler.class) {
-					throw new SecurityException(
-							"Expecting a dynamic proxy instance with a "
-									+ RemoteObjectInvocationHandler.class
-											.getName() + " invocation handler!");
+					throw new SecurityException("Expecting a dynamic proxy instance with a "
+							+ RemoteObjectInvocationHandler.class.getName() + " invocation handler!");
 				} else {
 					stub = (Remote) handler;
 				}
@@ -209,9 +203,7 @@ public class ProxyClient implements JConsoleContext {
 		//
 		RemoteRef ref = ((RemoteObject) stub).getRef();
 		if (ref.getClass() != UnicastRef2.class) {
-			throw new SecurityException("Expecting a "
-					+ UnicastRef2.class.getName()
-					+ " remote reference in stub!");
+			throw new SecurityException("Expecting a " + UnicastRef2.class.getName() + " remote reference in stub!");
 		}
 		// Check RMIClientSocketFactory in stub is from the expected class
 		// "javax.rmi.ssl.SslRMIClientSocketFactory".
@@ -219,8 +211,7 @@ public class ProxyClient implements JConsoleContext {
 		LiveRef liveRef = ((UnicastRef2) ref).getLiveRef();
 		RMIClientSocketFactory csf = liveRef.getClientSocketFactory();
 		if (csf == null || csf.getClass() != SslRMIClientSocketFactory.class) {
-			throw new SecurityException("Expecting a "
-					+ SslRMIClientSocketFactory.class.getName()
+			throw new SecurityException("Expecting a " + SslRMIClientSocketFactory.class.getName()
 					+ " RMI client socket factory in stub!");
 		}
 	}
@@ -237,12 +228,10 @@ public class ProxyClient implements JConsoleContext {
 		// referencing it.
 		Class<? extends Remote> serverStubClass = null;
 		try {
-			serverStubClass = Class.forName(rmiServerImplStubClassName)
-					.asSubclass(Remote.class);
+			serverStubClass = Class.forName(rmiServerImplStubClassName).asSubclass(Remote.class);
 		} catch (ClassNotFoundException e) {
 			// should never reach here
-			throw (InternalError) new InternalError(e.getMessage())
-					.initCause(e);
+			throw (InternalError) new InternalError(e.getMessage()).initCause(e);
 		}
 		rmiServerImplStubClass = serverStubClass;
 	}
@@ -252,23 +241,19 @@ public class ProxyClient implements JConsoleContext {
 		//
 		Registry registry;
 		try {
-			registry = LocateRegistry.getRegistry(registryHostName,
-					registryPort, sslRMIClientSocketFactory);
+			registry = LocateRegistry.getRegistry(registryHostName, registryPort, sslRMIClientSocketFactory);
 			try {
 				stub = (RMIServer) registry.lookup("jmxrmi");
 			} catch (NotBoundException nbe) {
-				throw (IOException) new IOException(nbe.getMessage())
-						.initCause(nbe);
+				throw (IOException) new IOException(nbe.getMessage()).initCause(nbe);
 			}
 			sslRegistry = true;
 		} catch (IOException e) {
-			registry = LocateRegistry.getRegistry(registryHostName,
-					registryPort);
+			registry = LocateRegistry.getRegistry(registryHostName, registryPort);
 			try {
 				stub = (RMIServer) registry.lookup("jmxrmi");
 			} catch (NotBoundException nbe) {
-				throw (IOException) new IOException(nbe.getMessage())
-						.initCause(nbe);
+				throw (IOException) new IOException(nbe.getMessage()).initCause(nbe);
 			}
 			sslRegistry = false;
 		}
@@ -285,17 +270,15 @@ public class ProxyClient implements JConsoleContext {
 	/**
 	 * Returns true if the underlying RMI registry is SSL-protected.
 	 * 
-	 * @exception UnsupportedOperationException
-	 *                If this {@code ProxyClient} does not denote a JMX
-	 *                connector for a JMX VM agent.
+	 * @exception UnsupportedOperationException If this {@code ProxyClient} does not denote a JMX connector for a JMX VM
+	 * agent.
 	 */
 	public boolean isSslRmiRegistry() {
 		// Check for VM connector
 		//
 		if (!isVmConnector()) {
-			throw new UnsupportedOperationException(
-					"ProxyClient.isSslRmiRegistry() is only supported if this "
-							+ "ProxyClient is a JMX connector for a JMX VM agent");
+			throw new UnsupportedOperationException("ProxyClient.isSslRmiRegistry() is only supported if this "
+					+ "ProxyClient is a JMX connector for a JMX VM agent");
 		}
 		return sslRegistry;
 	}
@@ -303,37 +286,33 @@ public class ProxyClient implements JConsoleContext {
 	/**
 	 * Returns true if the retrieved RMI stub is SSL-protected.
 	 * 
-	 * @exception UnsupportedOperationException
-	 *                If this {@code ProxyClient} does not denote a JMX
-	 *                connector for a JMX VM agent.
+	 * @exception UnsupportedOperationException If this {@code ProxyClient} does not denote a JMX connector for a JMX VM
+	 * agent.
 	 */
 	public boolean isSslRmiStub() {
 		// Check for VM connector
 		//
 		if (!isVmConnector()) {
-			throw new UnsupportedOperationException(
-					"ProxyClient.isSslRmiStub() is only supported if this "
-							+ "ProxyClient is a JMX connector for a JMX VM agent");
+			throw new UnsupportedOperationException("ProxyClient.isSslRmiStub() is only supported if this "
+					+ "ProxyClient is a JMX connector for a JMX VM agent");
 		}
 		return sslStub;
 	}
 
 	/**
-	 * Returns true if this {@code ProxyClient} denotes a JMX connector for a
-	 * JMX VM agent.
+	 * Returns true if this {@code ProxyClient} denotes a JMX connector for a JMX VM agent.
 	 */
 	public boolean isVmConnector() {
 		return vmConnector;
 	}
 
 	/**
-	 * 设置连接状态、并分发PropertyChange事件 
+	 * 设置连接状态、并分发PropertyChange事件
 	 */
 	private void setConnectionState(ConnectionState state) {
 		ConnectionState oldState = this.connectionState;
 		this.connectionState = state;
-		propertyChangeSupport.firePropertyChange(CONNECTION_STATE_PROPERTY,
-				oldState, state);
+		propertyChangeSupport.firePropertyChange(CONNECTION_STATE_PROPERTY, oldState, state);
 	}
 
 	public ConnectionState getConnectionState() {
@@ -346,6 +325,9 @@ public class ProxyClient implements JConsoleContext {
 		}
 	}
 
+	/**
+	 * 连接jvm进程
+	 */
 	void connect() {
 		setConnectionState(ConnectionState.CONNECTING);
 		try {
@@ -358,7 +340,9 @@ public class ProxyClient implements JConsoleContext {
 			setConnectionState(ConnectionState.DISCONNECTED);
 		}
 	}
-
+	/**
+	 * 通过jmx服务连接jvm进程
+	 */
 	private void tryConnect() throws IOException {
 		if (jmxUrl == null && "localhost".equals(hostName) && port == 0) {
 			// Monitor self
@@ -369,6 +353,7 @@ public class ProxyClient implements JConsoleContext {
 			// Monitor another process
 			if (lvm != null) {
 				if (!lvm.isManageable()) {
+					//启动jmx agent,即Attach到JVM上，并加载jmx Agent(即management-agent.jar)
 					lvm.startManagementAgent();
 					if (!lvm.isManageable()) {
 						// FIXME: what to throw
@@ -393,8 +378,7 @@ public class ProxyClient implements JConsoleContext {
 				}
 			} else {
 				Map<String, String[]> env = new HashMap<String, String[]>();
-				env.put(JMXConnector.CREDENTIALS, new String[] { userName,
-						password });
+				env.put(JMXConnector.CREDENTIALS, new String[] { userName, password });
 				if (isVmConnector()) {
 					// Check for SSL config on reconnection only
 					if (stub == null) {
@@ -414,12 +398,10 @@ public class ProxyClient implements JConsoleContext {
 		try {
 			ObjectName on = new ObjectName(THREAD_MXBEAN_NAME);
 			this.hasPlatformMXBeans = server.isRegistered(on);
-			this.hasHotSpotDiagnosticMXBean = server
-					.isRegistered(new ObjectName(HOTSPOT_DIAGNOSTIC_MXBEAN_NAME));
+			this.hasHotSpotDiagnosticMXBean = server.isRegistered(new ObjectName(HOTSPOT_DIAGNOSTIC_MXBEAN_NAME));
 			// check if it has 6.0 new APIs
 			if (this.hasPlatformMXBeans) {
-				MBeanOperationInfo[] mopis = server.getMBeanInfo(on)
-						.getOperations();
+				MBeanOperationInfo[] mopis = server.getMBeanInfo(on).getOperations();
 				// look for findDeadlockedThreads operations;
 				for (MBeanOperationInfo op : mopis) {
 					if (op.getName().equals("findDeadlockedThreads")) {
@@ -458,8 +440,7 @@ public class ProxyClient implements JConsoleContext {
 	/**
 	 * Gets a proxy client for a given local virtual machine.
 	 */
-	public static ProxyClient getProxyClient(LocalVirtualMachine lvm)
-			throws IOException {
+	public static ProxyClient getProxyClient(LocalVirtualMachine lvm) throws IOException {
 		final String key = getCacheKey(lvm);
 		ProxyClient proxyClient = cache.get(key);
 		if (proxyClient == null) {
@@ -480,8 +461,7 @@ public class ProxyClient implements JConsoleContext {
 	/**
 	 * Gets a proxy client for a given JMXServiceURL.
 	 */
-	public static ProxyClient getProxyClient(String url, String userName,
-			String password) throws IOException {
+	public static ProxyClient getProxyClient(String url, String userName, String password) throws IOException {
 		final String key = getCacheKey(url, userName, password);
 		ProxyClient proxyClient = cache.get(key);
 		if (proxyClient == null) {
@@ -499,18 +479,16 @@ public class ProxyClient implements JConsoleContext {
 		}
 	}
 
-	private static String getCacheKey(String url, String userName,
-			String password) {
-		return (url == null ? "" : url) + ":"
-				+ (userName == null ? "" : userName) + ":"
+	private static String getCacheKey(String url, String userName, String password) {
+		return (url == null ? "" : url) + ":" + (userName == null ? "" : userName) + ":"
 				+ (password == null ? "" : password);
 	}
 
 	/**
 	 * Gets a proxy client for a given "hostname:port".
 	 */
-	public static ProxyClient getProxyClient(String hostName, int port,
-			String userName, String password) throws IOException {
+	public static ProxyClient getProxyClient(String hostName, int port, String userName, String password)
+			throws IOException {
 		final String key = getCacheKey(hostName, port, userName, password);
 		ProxyClient proxyClient = cache.get(key);
 		if (proxyClient == null) {
@@ -520,8 +498,7 @@ public class ProxyClient implements JConsoleContext {
 		return proxyClient;
 	}
 
-	public static String getConnectionName(String hostName, int port,
-			String userName) {
+	public static String getConnectionName(String hostName, int port, String userName) {
 		String name = hostName + ":" + port;
 		if (userName != null && userName.length() > 0) {
 			return userName + "@" + name;
@@ -530,10 +507,8 @@ public class ProxyClient implements JConsoleContext {
 		}
 	}
 
-	private static String getCacheKey(String hostName, int port,
-			String userName, String password) {
-		return (hostName == null ? "" : hostName) + ":" + port + ":"
-				+ (userName == null ? "" : userName) + ":"
+	private static String getCacheKey(String hostName, int port, String userName, String password) {
+		return (hostName == null ? "" : hostName) + ":" + port + ":" + (userName == null ? "" : userName) + ":"
 				+ (password == null ? "" : password);
 	}
 
@@ -547,8 +522,7 @@ public class ProxyClient implements JConsoleContext {
 
 	public String toString() {
 		if (!isConnected()) {
-			return Resources.getText("ConnectionName (disconnected)",
-					displayName);
+			return Resources.getText("ConnectionName (disconnected)", displayName);
 		} else {
 			return displayName;
 		}
@@ -621,13 +595,11 @@ public class ProxyClient implements JConsoleContext {
 	}
 
 	/**
-	 * Returns a map of MBeans with ObjectName as the key and MBeanInfo value of
-	 * a given domain. If domain is <tt>null</tt>, all MBeans are returned. If
-	 * no MBean found, an empty map is returned.
+	 * Returns a map of MBeans with ObjectName as the key and MBeanInfo value of a given domain. If domain is
+	 * <tt>null</tt>, all MBeans are returned. If no MBean found, an empty map is returned.
 	 * 
 	 */
-	public Map<ObjectName, MBeanInfo> getMBeans(String domain)
-			throws IOException {
+	public Map<ObjectName, MBeanInfo> getMBeans(String domain) throws IOException {
 
 		ObjectName name = null;
 		if (domain != null) {
@@ -639,8 +611,7 @@ public class ProxyClient implements JConsoleContext {
 			}
 		}
 		Set mbeans = server.queryNames(name, null);
-		Map<ObjectName, MBeanInfo> result = new HashMap<ObjectName, MBeanInfo>(
-				mbeans.size());
+		Map<ObjectName, MBeanInfo> result = new HashMap<ObjectName, MBeanInfo>(mbeans.size());
 		Iterator iterator = mbeans.iterator();
 		while (iterator.hasNext()) {
 			Object object = iterator.next();
@@ -665,8 +636,7 @@ public class ProxyClient implements JConsoleContext {
 	 * Returns a list of attributes of a named MBean.
 	 * 
 	 */
-	public AttributeList getAttributes(ObjectName name, String[] attributes)
-			throws IOException {
+	public AttributeList getAttributes(ObjectName name, String[] attributes) throws IOException {
 		AttributeList list = null;
 		try {
 			list = server.getAttributes(name, attributes);
@@ -682,8 +652,8 @@ public class ProxyClient implements JConsoleContext {
 	/**
 	 * Set the value of a specific attribute of a named MBean.
 	 */
-	public void setAttribute(ObjectName name, Attribute attribute)
-			throws InvalidAttributeValueException, MBeanException, IOException {
+	public void setAttribute(ObjectName name, Attribute attribute) throws InvalidAttributeValueException,
+			MBeanException, IOException {
 		try {
 			server.setAttribute(name, attribute);
 		} catch (InstanceNotFoundException e) {
@@ -698,12 +668,10 @@ public class ProxyClient implements JConsoleContext {
 	/**
 	 * Invokes an operation of a named MBean.
 	 * 
-	 * @throws MBeanException
-	 *             Wraps an exception thrown by the MBean's invoked method.
+	 * @throws MBeanException Wraps an exception thrown by the MBean's invoked method.
 	 */
-	public Object invoke(ObjectName name, String operationName,
-			Object[] params, String[] signature) throws IOException,
-			MBeanException {
+	public Object invoke(ObjectName name, String operationName, Object[] params, String[] signature)
+			throws IOException, MBeanException {
 		Object result = null;
 		try {
 			result = server.invoke(name, operationName, params, signature);
@@ -715,26 +683,21 @@ public class ProxyClient implements JConsoleContext {
 		return result;
 	}
 
-	public synchronized ClassLoadingMXBean getClassLoadingMXBean()
-			throws IOException {
+	public synchronized ClassLoadingMXBean getClassLoadingMXBean() throws IOException {
 		if (hasPlatformMXBeans && classLoadingMBean == null) {
-			classLoadingMBean = newPlatformMXBeanProxy(server,
-					CLASS_LOADING_MXBEAN_NAME, ClassLoadingMXBean.class);
+			classLoadingMBean = newPlatformMXBeanProxy(server, CLASS_LOADING_MXBEAN_NAME, ClassLoadingMXBean.class);
 		}
 		return classLoadingMBean;
 	}
 
-	public synchronized CompilationMXBean getCompilationMXBean()
-			throws IOException {
+	public synchronized CompilationMXBean getCompilationMXBean() throws IOException {
 		if (hasCompilationMXBean && compilationMBean == null) {
-			compilationMBean = newPlatformMXBeanProxy(server,
-					COMPILATION_MXBEAN_NAME, CompilationMXBean.class);
+			compilationMBean = newPlatformMXBeanProxy(server, COMPILATION_MXBEAN_NAME, CompilationMXBean.class);
 		}
 		return compilationMBean;
 	}
 
-	public Collection<MemoryPoolProxy> getMemoryPoolProxies()
-			throws IOException {
+	public Collection<MemoryPoolProxy> getMemoryPoolProxies() throws IOException {
 
 		// TODO: How to deal with changes to the list??
 		if (memoryPoolProxies == null) {
@@ -759,15 +722,13 @@ public class ProxyClient implements JConsoleContext {
 		return memoryPoolProxies;
 	}
 
-	public synchronized Collection<GarbageCollectorMXBean> getGarbageCollectorMXBeans()
-			throws IOException {
+	public synchronized Collection<GarbageCollectorMXBean> getGarbageCollectorMXBeans() throws IOException {
 
 		// TODO: How to deal with changes to the list??
 		if (garbageCollectorMBeans == null) {
 			ObjectName gcName = null;
 			try {
-				gcName = new ObjectName(GARBAGE_COLLECTOR_MXBEAN_DOMAIN_TYPE
-						+ ",*");
+				gcName = new ObjectName(GARBAGE_COLLECTOR_MXBEAN_DOMAIN_TYPE + ",*");
 			} catch (MalformedObjectNameException e) {
 				// should not reach here
 				assert (false);
@@ -778,11 +739,9 @@ public class ProxyClient implements JConsoleContext {
 				Iterator iterator = mbeans.iterator();
 				while (iterator.hasNext()) {
 					ObjectName on = (ObjectName) iterator.next();
-					String name = GARBAGE_COLLECTOR_MXBEAN_DOMAIN_TYPE
-							+ ",name=" + on.getKeyProperty("name");
+					String name = GARBAGE_COLLECTOR_MXBEAN_DOMAIN_TYPE + ",name=" + on.getKeyProperty("name");
 
-					GarbageCollectorMXBean mBean = newPlatformMXBeanProxy(
-							server, name, GarbageCollectorMXBean.class);
+					GarbageCollectorMXBean mBean = newPlatformMXBeanProxy(server, name, GarbageCollectorMXBean.class);
 					garbageCollectorMBeans.add(mBean);
 				}
 			}
@@ -792,47 +751,40 @@ public class ProxyClient implements JConsoleContext {
 
 	public synchronized MemoryMXBean getMemoryMXBean() throws IOException {
 		if (hasPlatformMXBeans && memoryMBean == null) {
-			memoryMBean = newPlatformMXBeanProxy(server, MEMORY_MXBEAN_NAME,
-					MemoryMXBean.class);
+			memoryMBean = newPlatformMXBeanProxy(server, MEMORY_MXBEAN_NAME, MemoryMXBean.class);
 		}
 		return memoryMBean;
 	}
 
 	public synchronized RuntimeMXBean getRuntimeMXBean() throws IOException {
 		if (hasPlatformMXBeans && runtimeMBean == null) {
-			runtimeMBean = newPlatformMXBeanProxy(server, RUNTIME_MXBEAN_NAME,
-					RuntimeMXBean.class);
+			runtimeMBean = newPlatformMXBeanProxy(server, RUNTIME_MXBEAN_NAME, RuntimeMXBean.class);
 		}
 		return runtimeMBean;
 	}
 
 	public synchronized ThreadMXBean getThreadMXBean() throws IOException {
 		if (hasPlatformMXBeans && threadMBean == null) {
-			threadMBean = newPlatformMXBeanProxy(server, THREAD_MXBEAN_NAME,
-					ThreadMXBean.class);
+			threadMBean = newPlatformMXBeanProxy(server, THREAD_MXBEAN_NAME, ThreadMXBean.class);
 		}
 		return threadMBean;
 	}
 
-	public synchronized OperatingSystemMXBean getOperatingSystemMXBean()
-			throws IOException {
+	public synchronized OperatingSystemMXBean getOperatingSystemMXBean() throws IOException {
 		if (hasPlatformMXBeans && operatingSystemMBean == null) {
-			operatingSystemMBean = newPlatformMXBeanProxy(server,
-					OPERATING_SYSTEM_MXBEAN_NAME, OperatingSystemMXBean.class);
+			operatingSystemMBean = newPlatformMXBeanProxy(server, OPERATING_SYSTEM_MXBEAN_NAME,
+					OperatingSystemMXBean.class);
 		}
 		return operatingSystemMBean;
 	}
 
-	public synchronized com.sun.management.OperatingSystemMXBean getSunOperatingSystemMXBean()
-			throws IOException {
+	public synchronized com.sun.management.OperatingSystemMXBean getSunOperatingSystemMXBean() throws IOException {
 
 		try {
 			ObjectName on = new ObjectName(OPERATING_SYSTEM_MXBEAN_NAME);
 			if (sunOperatingSystemMXBean == null) {
-				if (server.isInstanceOf(on,
-						"com.sun.management.OperatingSystemMXBean")) {
-					sunOperatingSystemMXBean = newPlatformMXBeanProxy(server,
-							OPERATING_SYSTEM_MXBEAN_NAME,
+				if (server.isInstanceOf(on, "com.sun.management.OperatingSystemMXBean")) {
+					sunOperatingSystemMXBean = newPlatformMXBeanProxy(server, OPERATING_SYSTEM_MXBEAN_NAME,
 							com.sun.management.OperatingSystemMXBean.class);
 				}
 			}
@@ -844,20 +796,16 @@ public class ProxyClient implements JConsoleContext {
 		return sunOperatingSystemMXBean;
 	}
 
-	public synchronized HotSpotDiagnosticMXBean getHotSpotDiagnosticMXBean()
-			throws IOException {
+	public synchronized HotSpotDiagnosticMXBean getHotSpotDiagnosticMXBean() throws IOException {
 		if (hasHotSpotDiagnosticMXBean && hotspotDiagnosticMXBean == null) {
-			hotspotDiagnosticMXBean = newPlatformMXBeanProxy(server,
-					HOTSPOT_DIAGNOSTIC_MXBEAN_NAME,
+			hotspotDiagnosticMXBean = newPlatformMXBeanProxy(server, HOTSPOT_DIAGNOSTIC_MXBEAN_NAME,
 					HotSpotDiagnosticMXBean.class);
 		}
 		return hotspotDiagnosticMXBean;
 	}
 
-	public <T> T getMXBean(ObjectName objName, Class<T> interfaceClass)
-			throws IOException {
-		return newPlatformMXBeanProxy(server, objName.toString(),
-				interfaceClass);
+	public <T> T getMXBean(ObjectName objName, Class<T> interfaceClass) throws IOException {
+		return newPlatformMXBeanProxy(server, objName.toString(), interfaceClass);
 
 	}
 
@@ -916,8 +864,7 @@ public class ProxyClient implements JConsoleContext {
 	public void removePropertyChangeListener(PropertyChangeListener listener) {
 		if (!(listener instanceof WeakPCL)) {
 			// Search for the WeakPCL holding this listener (if any)
-			for (PropertyChangeListener pcl : propertyChangeSupport
-					.getPropertyChangeListeners()) {
+			for (PropertyChangeListener pcl : propertyChangeSupport.getPropertyChangeListeners()) {
 				if (pcl instanceof WeakPCL && ((WeakPCL) pcl).get() == listener) {
 					listener = pcl;
 					break;
@@ -928,11 +875,9 @@ public class ProxyClient implements JConsoleContext {
 	}
 
 	/**
-	 * The PropertyChangeListener is handled via a WeakReference so as not to
-	 * pin down the listener.
+	 * The PropertyChangeListener is handled via a WeakReference so as not to pin down the listener.
 	 */
-	private class WeakPCL extends WeakReference<PropertyChangeListener>
-			implements PropertyChangeListener {
+	private class WeakPCL extends WeakReference<PropertyChangeListener> implements PropertyChangeListener {
 		WeakPCL(PropertyChangeListener referent) {
 			super(referent);
 		}
@@ -973,8 +918,7 @@ public class ProxyClient implements JConsoleContext {
 	// that are in the cache will be retrieved between two subsequent updates.
 	//
 
-	public interface SnapshotMBeanServerConnection extends
-			MBeanServerConnection {
+	public interface SnapshotMBeanServerConnection extends MBeanServerConnection {
 		/**
 		 * Flush all cached values of attributes.
 		 */
@@ -985,11 +929,9 @@ public class ProxyClient implements JConsoleContext {
 		private Snapshot() {
 		}
 
-		public static SnapshotMBeanServerConnection newSnapshot(
-				MBeanServerConnection mbsc) {
+		public static SnapshotMBeanServerConnection newSnapshot(MBeanServerConnection mbsc) {
 			final InvocationHandler ih = new SnapshotInvocationHandler(mbsc);
-			return (SnapshotMBeanServerConnection) Proxy.newProxyInstance(
-					Snapshot.class.getClassLoader(),
+			return (SnapshotMBeanServerConnection) Proxy.newProxyInstance(Snapshot.class.getClassLoader(),
 					new Class[] { SnapshotMBeanServerConnection.class }, ih);
 		}
 	}
@@ -1012,8 +954,7 @@ public class ProxyClient implements JConsoleContext {
 			cachedValues = newMap();
 		}
 
-		public Object invoke(Object proxy, Method method, Object[] args)
-				throws Throwable {
+		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 			final String methodName = method.getName();
 			if (methodName.equals("getAttribute")) {
 				return getAttribute((ObjectName) args[0], (String) args[1]);
@@ -1031,11 +972,9 @@ public class ProxyClient implements JConsoleContext {
 			}
 		}
 
-		private Object getAttribute(ObjectName objName, String attrName)
-				throws MBeanException, InstanceNotFoundException,
-				AttributeNotFoundException, ReflectionException, IOException {
-			final NameValueMap values = getCachedAttributes(objName,
-					Collections.singleton(attrName));
+		private Object getAttribute(ObjectName objName, String attrName) throws MBeanException,
+				InstanceNotFoundException, AttributeNotFoundException, ReflectionException, IOException {
+			final NameValueMap values = getCachedAttributes(objName, Collections.singleton(attrName));
 			Object value = values.get(attrName);
 			if (value != null || values.containsKey(attrName)) {
 				return value;
@@ -1046,11 +985,9 @@ public class ProxyClient implements JConsoleContext {
 			return conn.getAttribute(objName, attrName);
 		}
 
-		private AttributeList getAttributes(ObjectName objName,
-				String[] attrNames) throws InstanceNotFoundException,
+		private AttributeList getAttributes(ObjectName objName, String[] attrNames) throws InstanceNotFoundException,
 				ReflectionException, IOException {
-			final NameValueMap values = getCachedAttributes(objName,
-					new TreeSet<String>(Arrays.asList(attrNames)));
+			final NameValueMap values = getCachedAttributes(objName, new TreeSet<String>(Arrays.asList(attrNames)));
 			final AttributeList list = new AttributeList();
 			for (String attrName : attrNames) {
 				final Object value = values.get(attrName);
@@ -1061,10 +998,8 @@ public class ProxyClient implements JConsoleContext {
 			return list;
 		}
 
-		private synchronized NameValueMap getCachedAttributes(
-				ObjectName objName, Set<String> attrNames)
-				throws InstanceNotFoundException, ReflectionException,
-				IOException {
+		private synchronized NameValueMap getCachedAttributes(ObjectName objName, Set<String> attrNames)
+				throws InstanceNotFoundException, ReflectionException, IOException {
 			NameValueMap values = cachedValues.get(objName);
 			if (values != null && values.keySet().containsAll(attrNames)) {
 				return values;
@@ -1075,8 +1010,7 @@ public class ProxyClient implements JConsoleContext {
 				attrNames.addAll(oldNames);
 			}
 			values = new NameValueMap();
-			final AttributeList attrs = conn.getAttributes(objName,
-					attrNames.toArray(new String[attrNames.size()]));
+			final AttributeList attrs = conn.getAttributes(objName, attrNames.toArray(new String[attrNames.size()]));
 			for (Attribute attr : attrs.asList()) {
 				values.put(attr.getName(), attr.getValue());
 			}

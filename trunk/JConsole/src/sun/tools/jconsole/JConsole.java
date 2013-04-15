@@ -86,10 +86,13 @@ public class JConsole extends JFrame implements ActionListener,
 	private JMenuItem userGuideMI, aboutMI;
 
 	/**
-	 * 新建连接
+	 * 新建连接  按钮
 	 */
 	private JButton connectButton;
 	private JDesktopPane desktop;
+	/**
+	 * 新建连接   对话框
+	 */
 	private ConnectDialog connectDialog;
 	private CreateMBeanDialog createDialog;
 
@@ -518,7 +521,10 @@ public class JConsole extends JFrame implements ActionListener,
 		}.start();
 	}
 
-	// Call on worker thread
+	/**
+	 * 连接jvm进程，创建{@link VMPanel}
+	 * <p>Call on worker thread
+	 */
 	void addProxyClient(final ProxyClient proxyClient, final boolean tile) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -532,6 +538,7 @@ public class JConsole extends JFrame implements ActionListener,
 						}
 					});
 				}
+				//连接jvm进程
 				vmPanel.connect();
 			}
 		});
