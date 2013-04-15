@@ -1,8 +1,8 @@
 /*
  * %W% %E%
- *
- * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
- * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved. ORACLE PROPRIETARY/CONFIDENTIAL. Use is
+ * subject to license terms.
  */
 
 package sun.tools.jconsole;
@@ -29,18 +29,30 @@ import static java.awt.BorderLayout.*;
 import static javax.swing.ListSelectionModel.*;
 import static sun.tools.jconsole.Resources.*;
 import static sun.tools.jconsole.Utilities.*;
-
+/**
+ * "新建连接"对话框
+ */
 @SuppressWarnings("serial")
-public class ConnectDialog extends InternalDialog implements DocumentListener,
-		FocusListener, ItemListener, ListSelectionListener, KeyListener {
+public class ConnectDialog extends InternalDialog implements DocumentListener, FocusListener, ItemListener,
+		ListSelectionListener, KeyListener {
 
 	private static final int COL_NAME = 0;
 	private static final int COL_PID = 1;
 
 	JConsole jConsole;
 	JTextField userNameTF, passwordTF;
-	JRadioButton localRadioButton, remoteRadioButton;
+	/**
+	 * "本地进程"raido
+	 */
+	JRadioButton localRadioButton;
+	/**
+	 * "远程进程"raido
+	 */
+	JRadioButton remoteRadioButton;
 	JLabel localMessageLabel, remoteMessageLabel;
+	/**
+	 * "远程进程"输入框
+	 */
 	JTextField remoteTF;
 	/**
 	 * 连接按钮
@@ -52,30 +64,34 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 	JButton cancelButton;
 	JPanel radioButtonPanel;
 
-	private Icon mastheadIcon = new MastheadIcon(
-			getText("ConnectDialog.masthead.title"));
+	private Icon mastheadIcon = new MastheadIcon(getText("ConnectDialog.masthead.title"));
 	private Color hintTextColor, disabledTableCellColor;
 
-	// The table of managed VM (local process)
+	/**
+	 * 本地进程表格
+	 * <p> The table of managed VM (local process)
+	 */
 	JTable vmTable;
+	/**
+	 * 代表本地进程表格模型的实例
+	 */
 	ManagedVmTableModel vmModel = null;
 
 	JScrollPane localTableScrollPane = null;
-    /**
-     * 连接Action
-     */
+	/**
+	 * 连接Action
+	 */
 	private Action connectAction;
 	/**
-     * 取消Action
-     */
+	 * 取消Action
+	 */
 	private Action cancelAction;
 
 	public ConnectDialog(JConsole jConsole) {
 		super(jConsole, Resources.getText("ConnectDialog.title"), true);
 
 		this.jConsole = jConsole;
-		setAccessibleDescription(this,
-				getText("ConnectDialog.accessibleDescription"));
+		setAccessibleDescription(this, getText("ConnectDialog.accessibleDescription"));
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setResizable(false);
 		Container cp = (JComponent) getContentPane();
@@ -86,17 +102,14 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 		JPanel bottomPanel = new JPanel(new BorderLayout());
 
 		statusBar = new JLabel(" ", JLabel.CENTER);
-		setAccessibleName(statusBar,
-				getText("ConnectDialog.statusBar.accessibleName"));
+		setAccessibleName(statusBar, getText("ConnectDialog.statusBar.accessibleName"));
 
 		Font normalLabelFont = statusBar.getFont();
 		Font boldLabelFont = normalLabelFont.deriveFont(Font.BOLD);
-		Font smallLabelFont = normalLabelFont.deriveFont(normalLabelFont
-				.getSize2D() - 1);
+		Font smallLabelFont = normalLabelFont.deriveFont(normalLabelFont.getSize2D() - 1);
 
 		JLabel mastheadLabel = new JLabel(mastheadIcon);
-		setAccessibleName(mastheadLabel,
-				getText("ConnectDialog.masthead.accessibleName"));
+		setAccessibleName(mastheadLabel, getText("ConnectDialog.masthead.accessibleName"));
 
 		cp.add(mastheadLabel, NORTH);
 		cp.add(radioButtonPanel, CENTER);
@@ -109,8 +122,7 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 		remoteTF.getDocument().addDocumentListener(this);
 		remoteTF.addFocusListener(this);
 		remoteTF.setPreferredSize(remoteTF.getPreferredSize());
-		setAccessibleName(remoteTF,
-				getText("Remote Process.textField.accessibleName"));
+		setAccessibleName(remoteTF, getText("Remote Process.textField.accessibleName"));
 
 		//
 		// If the VM supports the local attach mechanism (is: Sun
@@ -172,24 +184,17 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 
 			Action nextRadioButtonAction = new AbstractAction("nextRadioButton") {
 				public void actionPerformed(ActionEvent ev) {
-					JRadioButton rb = (ev.getSource() == localRadioButton) ? remoteRadioButton
-							: localRadioButton;
+					JRadioButton rb = (ev.getSource() == localRadioButton) ? remoteRadioButton : localRadioButton;
 					rb.doClick();
 					rb.requestFocus();
 				}
 			};
 
-			localRadioButton.getActionMap().put("nextRadioButton",
-					nextRadioButtonAction);
-			remoteRadioButton.getActionMap().put("nextRadioButton",
-					nextRadioButtonAction);
+			localRadioButton.getActionMap().put("nextRadioButton", nextRadioButtonAction);
+			remoteRadioButton.getActionMap().put("nextRadioButton", nextRadioButtonAction);
 
-			localRadioButton.getInputMap().put(
-					KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0),
-					"nextRadioButton");
-			remoteRadioButton.getInputMap().put(
-					KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0),
-					"nextRadioButton");
+			localRadioButton.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "nextRadioButton");
+			remoteRadioButton.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "nextRadioButton");
 		} else {
 			JLabel remoteLabel = new JLabel(remoteRadioButton.getText());
 			remoteLabel.setFont(boldLabelFont);
@@ -207,8 +212,7 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 		remoteMessageLabel.setForeground(hintTextColor);
 		remoteTFPanel.add(remoteMessageLabel, CENTER);
 
-		JPanel userPwdPanel = new JPanel(new FlowLayout(FlowLayout.LEADING, 0,
-				0));
+		JPanel userPwdPanel = new JPanel(new FlowLayout(FlowLayout.LEADING, 0, 0));
 		userPwdPanel.setBorder(new EmptyBorder(12, 0, 0, 0)); // top padding
 
 		int tfWidth = JConsole.IS_WIN ? 12 : 8;
@@ -220,8 +224,7 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 		setAccessibleName(userNameTF, getText("Username.accessibleName"));
 		String labelKey = "Username: ";
 		LabeledComponent lc;
-		lc = new LabeledComponent(getText(labelKey), getMnemonicInt(labelKey),
-				userNameTF);
+		lc = new LabeledComponent(getText(labelKey), getMnemonicInt(labelKey), userNameTF);
 		lc.label.setFont(boldLabelFont);
 		userPwdPanel.add(lc);
 
@@ -233,8 +236,7 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 		passwordTF.addFocusListener(this);
 		setAccessibleName(passwordTF, getText("Password.accessibleName"));
 		labelKey = "Password: ";
-		lc = new LabeledComponent(getText(labelKey), getMnemonicInt(labelKey),
-				passwordTF);
+		lc = new LabeledComponent(getText(labelKey), getMnemonicInt(labelKey), passwordTF);
 		lc.setBorder(new EmptyBorder(0, 12, 0, 0)); // Left padding
 		lc.label.setFont(boldLabelFont);
 		userPwdPanel.add(lc);
@@ -266,19 +268,15 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 
 	public void revalidate() {
 		// Adjust some colors
-		hintTextColor = ensureContrast(
-				UIManager.getColor("Label.disabledForeground"),
+		hintTextColor = ensureContrast(UIManager.getColor("Label.disabledForeground"),
 				UIManager.getColor("Panel.background"));
-		disabledTableCellColor = ensureContrast(new Color(0x808080),
-				UIManager.getColor("Table.background"));
+		disabledTableCellColor = ensureContrast(new Color(0x808080), UIManager.getColor("Table.background"));
 
 		if (remoteMessageLabel != null) {
 			remoteMessageLabel.setForeground(hintTextColor);
 			// Update html color setting
-			String colorStr = String.format("%06x",
-					hintTextColor.getRGB() & 0xFFFFFF);
-			remoteMessageLabel.setText("<html><font color=#" + colorStr + ">"
-					+ getText("remoteTF.usage"));
+			String colorStr = String.format("%06x", hintTextColor.getRGB() & 0xFFFFFF);
+			remoteMessageLabel.setText("<html><font color=#" + colorStr + ">" + getText("remoteTF.usage"));
 		}
 		if (localMessageLabel != null) {
 			localMessageLabel.setForeground(hintTextColor);
@@ -289,13 +287,16 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 		super.revalidate();
 	}
 
+	/**
+	 * 连接按钮、取消按钮 的事件处理
+	 */
 	private void createActions() {
 		connectAction = new AbstractAction(getText("Connect")) {
 			/* init */{
 				putValue(Action.MNEMONIC_KEY, getMnemonicInt("Connect"));
 			}
 
-			//连接事件处理
+			// 连接事件处理
 			public void actionPerformed(ActionEvent ev) {
 				if (!isEnabled() || !isVisible()) {
 					return;
@@ -304,6 +305,7 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 				statusBar.setText("");
 
 				if (remoteRadioButton.isSelected()) {
+					// 远程进程
 					String txt = remoteTF.getText().trim();
 					String userName = userNameTF.getText().trim();
 					userName = userName.equals("") ? null : userName;
@@ -311,12 +313,14 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 					password = password.equals("") ? null : password;
 					try {
 						if (txt.startsWith(JConsole.ROOT_URL)) {
+							//service:jmx:<protocol>:<sap>这种形式
 							String url = txt;
 							String msg = null;
 							jConsole.addUrl(url, userName, password, false);
 							remoteTF.setText(JConsole.ROOT_URL);
 							return;
 						} else {
+							//<hostname>:<port>这种形式
 							String host = remoteTF.getText().trim();
 							String port = "0";
 							int index = host.lastIndexOf(":");
@@ -337,13 +341,12 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 						statusBar.setText(ex.toString());
 					}
 					setVisible(true);
-				} else if (localRadioButton != null
-						&& localRadioButton.isSelected()) {
+				} else if (localRadioButton != null && localRadioButton.isSelected()) {
 					// Try to connect to selected VM. If a connection
 					// cannot be established for some reason (the process has
 					// terminated for example) then keep the dialog open showing
 					// the connect error.
-					//
+					// 本地进程
 					int row = vmTable.getSelectedRow();
 					if (row >= 0) {
 						jConsole.addVmid(vmModel.vmAt(row));
@@ -369,6 +372,9 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 		return (int) tmpLabel.getPreferredSize().getWidth() + 1;
 	}
 
+	/**
+	 * 本地进程表格
+	 */
 	private class LocalTabJTable extends JTable {
 		ManagedVmTableModel vmModel;
 		Border rendererBorder = new EmptyBorder(0, 6, 0, 6);
@@ -385,6 +391,7 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 			}
 
 			// Double-click handler
+			//双击建立连接
 			addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent evt) {
 					if (evt.getClickCount() == 2) {
@@ -396,8 +403,7 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 			// Enter should call default action
 			getActionMap().put("connect", connectAction);
 			InputMap inputMap = getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-			inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),
-					"connect");
+			inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "connect");
 		}
 
 		public String getToolTipText(MouseEvent e) {
@@ -406,7 +412,7 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 			int rowIndex = rowAtPoint(p);
 			int colIndex = columnAtPoint(p);
 			int realColumnIndex = convertColumnIndexToModel(colIndex);
-
+            //提示文字
 			if (realColumnIndex == COL_NAME) {
 				LocalVirtualMachine vmd = vmModel.vmAt(rowIndex);
 				tip = vmd.toString();
@@ -416,11 +422,10 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 
 		public TableCellRenderer getCellRenderer(int row, int column) {
 			return new DefaultTableCellRenderer() {
-				public Component getTableCellRendererComponent(JTable table,
-						Object value, boolean isSelected, boolean hasFocus,
-						int row, int column) {
-					Component comp = super.getTableCellRendererComponent(table,
-							value, isSelected, hasFocus, row, column);
+				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+						boolean hasFocus, int row, int column) {
+					Component comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row,
+							column);
 
 					if (!isSelected) {
 						LocalVirtualMachine lvm = vmModel.vmAt(row);
@@ -444,10 +449,8 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 		}
 	}
 
-	public void setConnectionParameters(String url, String host, int port,
-			String userName, String password, String msg) {
-		if ((url != null && url.length() > 0)
-				|| (host != null && host.length() > 0 && port > 0)) {
+	public void setConnectionParameters(String url, String host, int port, String userName, String password, String msg) {
+		if ((url != null && url.length() > 0) || (host != null && host.length() > 0 && port > 0)) {
 
 			remoteRadioButton.setSelected(true);
 			if (url != null && url.length() > 0) {
@@ -506,8 +509,7 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 		Object source = e.getSource();
 		Component opposite = e.getOppositeComponent();
 
-		if (!e.isTemporary() && source instanceof JTextField
-				&& opposite instanceof JComponent
+		if (!e.isTemporary() && source instanceof JTextField && opposite instanceof JComponent
 				&& SwingUtilities.getRootPane(opposite) == getRootPane()) {
 
 			((JTextField) source).selectAll();
@@ -574,10 +576,8 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 				}
 			}
 		}
-		String colorStr = String.format("%06x",
-				hintTextColor.getRGB() & 0xFFFFFF);
-		localMessageLabel.setText("<html><font color=#" + colorStr + ">"
-				+ labelText);
+		String colorStr = String.format("%06x", hintTextColor.getRGB() & 0xFFFFFF);
+		localMessageLabel.setText("<html><font color=#" + colorStr + ">" + labelText);
 	}
 
 	// ----
@@ -599,8 +599,7 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 			if (selected != null) {
 				for (int i = 0; i < n; i++) {
 					LocalVirtualMachine lvm = vmModel.vmAt(i);
-					if (selected.vmid() == lvm.vmid()
-							&& selected.toString().equals(lvm.toString())) {
+					if (selected.vmid() == lvm.vmid() && selected.toString().equals(lvm.toString())) {
 
 						selectRow = i;
 						break;
@@ -618,9 +617,8 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 			// Tricky. Reduce height by one to avoid double line at bottom,
 			// but that causes a scroll bar to appear, so remove it.
 			dim.height = Math.min(dim.height - 1, 100);
-			localTableScrollPane
-					.setVerticalScrollBarPolicy((dim.height < 100) ? JScrollPane.VERTICAL_SCROLLBAR_NEVER
-							: JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+			localTableScrollPane.setVerticalScrollBarPolicy((dim.height < 100) ? JScrollPane.VERTICAL_SCROLLBAR_NEVER
+					: JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 			localTableScrollPane.getViewport().setMinimumSize(dim);
 			localTableScrollPane.getViewport().setPreferredSize(dim);
 		}
@@ -628,12 +626,18 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 		setLocationRelativeTo(jConsole);
 	}
 
-	// Represents the list of managed VMs as a tabular data model.
+	/**
+	 *  代表本地进程表格模型的类
+	 *  <p>Represents the list of managed VMs as a tabular data model.
+	 */
 	private static class ManagedVmTableModel extends AbstractTableModel {
-		private static String[] columnNames = {
-				Resources.getText("Column.Name"),
-				Resources.getText("Column.PID"), };
-
+		/**
+		 * 包含名称、PID
+		 */
+		private static String[] columnNames = { Resources.getText("Column.Name"), Resources.getText("Column.PID"), };
+		/**
+		 * 本地jvm进程集合
+		 */
 		private List<LocalVirtualMachine> vmList;
 
 		public int getColumnCount() {
@@ -681,8 +685,7 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 		}
 
 		public synchronized void refresh() {
-			Map<Integer, LocalVirtualMachine> map = LocalVirtualMachine
-					.getAllVirtualMachines();
+			Map<Integer, LocalVirtualMachine> map = LocalVirtualMachine.getAllVirtualMachines();
 			vmList = new ArrayList<LocalVirtualMachine>();
 			vmList.addAll(map.values());
 
@@ -716,8 +719,7 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 
 		private static Rectangle getTextRectangle(AbstractButton button) {
 			String text = button.getText();
-			Icon icon = (button.isEnabled()) ? button.getIcon() : button
-					.getDisabledIcon();
+			Icon icon = (button.isEnabled()) ? button.getIcon() : button.getDisabledIcon();
 
 			if (icon == null && button.getUI() instanceof BasicRadioButtonUI) {
 				icon = ((BasicRadioButtonUI) button.getUI()).getDefaultIcon();
@@ -735,22 +737,16 @@ public class ConnectDialog extends InternalDialog implements DocumentListener,
 			paintViewInsets = button.getInsets(paintViewInsets);
 			paintViewR.x = paintViewInsets.left;
 			paintViewR.y = paintViewInsets.top;
-			paintViewR.width = button.getWidth()
-					- (paintViewInsets.left + paintViewInsets.right);
-			paintViewR.height = button.getHeight()
-					- (paintViewInsets.top + paintViewInsets.bottom);
+			paintViewR.width = button.getWidth() - (paintViewInsets.left + paintViewInsets.right);
+			paintViewR.height = button.getHeight() - (paintViewInsets.top + paintViewInsets.bottom);
 
 			Graphics g = button.getGraphics();
 			if (g == null) {
 				return null;
 			}
-			String clippedText = SwingUtilities.layoutCompoundLabel(button,
-					g.getFontMetrics(), text, icon,
-					button.getVerticalAlignment(),
-					button.getHorizontalAlignment(),
-					button.getVerticalTextPosition(),
-					button.getHorizontalTextPosition(), paintViewR, paintIconR,
-					paintTextR, button.getIconTextGap());
+			String clippedText = SwingUtilities.layoutCompoundLabel(button, g.getFontMetrics(), text, icon,
+					button.getVerticalAlignment(), button.getHorizontalAlignment(), button.getVerticalTextPosition(),
+					button.getHorizontalTextPosition(), paintViewR, paintIconR, paintTextR, button.getIconTextGap());
 
 			return paintTextR;
 		}

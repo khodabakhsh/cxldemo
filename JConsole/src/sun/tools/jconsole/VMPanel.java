@@ -274,7 +274,10 @@ public class VMPanel extends JTabbedPane implements PropertyChangeListener {
 		proxyClient.removePropertyChangeListener(this);
 	}
 
-	// Call on EDT
+	/**
+	 * 连接jvm进程
+	 * <p>Call on EDT
+	 */
 	public void connect() {
 		if (isConnected()) {
 			// create plugin tabs if not done
