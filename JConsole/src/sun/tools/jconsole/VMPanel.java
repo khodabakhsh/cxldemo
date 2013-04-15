@@ -36,7 +36,7 @@ public class VMPanel extends JTabbedPane implements PropertyChangeListener {
 	 */
 	private Timer timer;
 	/**
-	 * 更新所有tab页数据的间隔
+	 * 更新所有tab页数据的时间间隔
 	 */
 	private int updateInterval;
 	private String hostName;
