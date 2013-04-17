@@ -28,16 +28,16 @@ import org.jsoup.select.Elements;
 public class GetImgFromPconline {
 
 	/**
-	 * ×¥È¡Í¼Æ¬´æ·ÅÄ¿Â¼
+	 * æŠ“å–å›¾ç‰‡å­˜æ”¾ç›®å½•
 	 */
-	private static final String PIC_DIR = "d:/Ì«Æ½ÑóµçÄÔ±ÚÖ½";
+	private static final String PIC_DIR = "d:/å¤ªå¹³æ´‹ç”µè„‘å£çº¸";
 
 	private static final String gb2312 = "gb2312";
 	private static final String utf8 = "utf-8";
 	private static final String gbk = "GBK";
 
 	/**
-	 * Á´½Ó³¬Ê±
+	 * é“¾æ¥è¶…æ—¶
 	 */
 	private static final int TIME_OUT = 5000;
 
@@ -47,15 +47,15 @@ public class GetImgFromPconline {
 	private static final String resolution = "1680x1050";
 
 	/**
-	 * ´«Èëurl»ñµÃhtmlÄÚÈİ
-	 * @throws Exception 
+	 * ä¼ å…¥urlè·å¾—htmlå†…å®¹
+	 * @throws Exception
 	 */
 	public static String getHtmlContent(String url) throws Exception {
 		HttpClient client = new DefaultHttpClient();
 		client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, TIME_OUT);
 		HttpGet get = new HttpGet(url);
 
-		//pconline±ØĞëÒªÉèÖÃheader£¬²»È»»áÂÒÂë
+		// pconlineå¿…é¡»è¦è®¾ç½®headerï¼Œä¸ç„¶ä¼šä¹±ç 
 		get.setHeader("User-Agent",
 				"Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.2.6) Gecko/20100625 Firefox/3.6.6 Greatwqs");
 		get.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
@@ -75,13 +75,15 @@ public class GetImgFromPconline {
 			while ((strLine = bufferedReader.readLine()) != null) {
 				sBuffer.append(strLine + "\n");
 			}
-			//			System.out.println(sBuffer);
+			// System.out.println(sBuffer);
 		} catch (Exception e) {
-			System.err.println("ÖØĞÂ ³¢ÊÔurl --->  " + url);
+			System.err.println("é‡æ–° å°è¯•url --->  " + url);
 			return getHtmlContent(url);
 		} finally {
 			try {
-				bufferedReader.close();
+				if (bufferedReader != null) {
+					bufferedReader.close();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -91,10 +93,10 @@ public class GetImgFromPconline {
 	}
 
 	/**
-	 * »ñÈ¡Ö¸¶¨url¶ÔÓ¦Í¼Æ¬×¨¼­ÏÂµÄËùÓĞÍ¼Æ¬ 
+	 * è·å–æŒ‡å®šurlå¯¹åº”å›¾ç‰‡ä¸“è¾‘ä¸‹çš„æ‰€æœ‰å›¾ç‰‡
 	 */
 	public static void beginGetImgsByAlbum(String url, String preDirectory) throws Exception {
-		//		System.out.println(url);
+		// System.out.println(url);
 		Document doc = Jsoup.parse(getHtmlContent(url));
 		Elements lis = doc.select("div.sPicList li");
 		final String title = doc.select("h1.photoName").get(0).html();
@@ -105,7 +107,7 @@ public class GetImgFromPconline {
 		String suffix = ".html";
 		String prefix = url.substring(0, url.lastIndexOf(suffix));
 		list.add(url);
-		//ÒòÎªÆäurl¹æÂÉÊÇ£ºhttp://wallpaper.pconline.com.cn/pic/17536_¼ÆÊı.html
+		// å› ä¸ºå…¶urlè§„å¾‹æ˜¯ï¼šhttp://wallpaper.pconline.com.cn/pic/17536_è®¡æ•°.html
 		for (int i = 2; i <= count; i++) {
 			list.add(prefix + "_" + i + suffix);
 		}
@@ -113,19 +115,19 @@ public class GetImgFromPconline {
 			final String htmlurl = list.get(j);
 			final String fileName = String.valueOf(j + 1);
 			final String listSize = String.valueOf(list.size());
-			//			Thread.sleep(200);
+			// Thread.sleep(200);
 			final String directory = preDirectory + ("".equals(preDirectory) ? "" : "/") + title + "_" + listSize;
 			executor.execute((new Runnable() {
 				public void run() {
 					try {
-						get_1680_1050(htmlurl, listSize + "_" + fileName, directory);
+						getWantedImg(htmlurl, listSize + "_" + fileName, directory);
 					} catch (Exception e) {
 						try {
-							System.err.println("ÖØĞÂ³¢ÊÔÏÂÔØIMG  --->  " + htmlurl);
-							get_1680_1050(htmlurl, listSize + "_" + fileName, directory);
+							System.err.println("é‡æ–°å°è¯•ä¸‹è½½IMG  --->  " + htmlurl);
+							getWantedImg(htmlurl, listSize + "_" + fileName, directory);
 						} catch (Exception e1) {
 							e1.printStackTrace();
-							System.err.println("ÖØĞÂ³¢ÊÔ¡¾Ê§°Ü¡¿ " + htmlurl);
+							System.err.println("é‡æ–°å°è¯•ã€å¤±è´¥ã€‘ " + htmlurl);
 						}
 					}
 				}
@@ -133,28 +135,28 @@ public class GetImgFromPconline {
 		}
 	}
 
-	public static void get_1680_1050(String url, String fileName, String directory) throws Exception {
+	public static void getWantedImg(String url, String fileName, String directory) throws Exception {
 		Document doc = Jsoup.parse(getHtmlContent(url));
 		Elements imgs = doc.select("div.sPicList li.cur img");
 		for (int j = 0; j < imgs.size(); j++) {
 			Element element = imgs.get(j);
-			//			System.out.println(element.attr("src"));
+			// System.out.println(element.attr("src"));
 			String img_100x75 = element.attr("src");
-			//Í¼Æ¬img_100x75µØÖ·Èç£ºhttp://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1303/06/c0/18673593_1362554875411_·Ö±æÂÊ.jpg
-			//ÕæÊµµØÖ·ÊÇ£¬²»ÖªÔõÃ´µÃÀ´£¬http://imgrt.pconline.com.cn/images/upload/upc/tx/wallpaper/1303/06/c0/spcgroup/18673593_1362554875411__·Ö±æÂÊ.jpg
+			// å›¾ç‰‡img_100x75åœ°å€å¦‚ï¼šhttp://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1303/06/c0/18673593_1362554875411_åˆ†è¾¨ç‡.jpg
+			// çœŸå®åœ°å€æ˜¯ï¼Œä¸çŸ¥æ€ä¹ˆå¾—æ¥ï¼Œhttp://imgrt.pconline.com.cn/images/upload/upc/tx/wallpaper/1303/06/c0/spcgroup/18673593_1362554875411__åˆ†è¾¨ç‡.jpg
 			String prefix = img_100x75.substring(0, img_100x75.lastIndexOf("_"));
 			String suffix = img_100x75.substring(img_100x75.lastIndexOf("."));
 			String img_temp = prefix + "_" + resolution + suffix;
 			String prefixSplash = img_temp.substring(0, img_temp.lastIndexOf("/"));
 			String suffixSplash = img_temp.substring(img_temp.lastIndexOf("/") + 1);
-			//Ö»ÄÜÓ²±àÂë
+			// åªèƒ½ç¡¬ç¼–ç 
 			String img_wanted = (prefixSplash + "/spcgroup/" + suffixSplash).replace("img", "imgrt");
 			saveImg(img_wanted, fileName + suffix, directory);
 		}
 	}
 
 	/**
-	 * ±£´æÍ¼Æ¬
+	 * ä¿å­˜å›¾ç‰‡
 	 */
 	public static void saveImg(String url, String fileName, String directory) throws Exception {
 		if (fileName == null || "".equals(fileName)) {
@@ -182,17 +184,17 @@ public class GetImgFromPconline {
 				if (out != null)
 					out.close();
 			}
-			System.out.println("³É¹¦´´½¨ÎÄ¼ş¡¾" + diretoryPathString + fileName + "¡¿" + "£¬Ô´Â·¾¶£º¡¾" + url + "¡¿");
+			System.out.println("æˆåŠŸåˆ›å»ºæ–‡ä»¶ã€" + diretoryPathString + fileName + "ã€‘" + "ï¼Œæºè·¯å¾„ï¼šã€" + url + "ã€‘");
 		}
 	}
 
 	/**
-	 * »ñÈ¡Í¼Æ¬×Ö½ÚÁ÷
+	 * è·å–å›¾ç‰‡å­—èŠ‚æµ
 	 */
-	static byte[] getByte(String uri) throws IOException {
+	static byte[] getByte(String url) throws IOException {
 		HttpClient client = new DefaultHttpClient();
 		client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, TIME_OUT);
-		HttpGet get = new HttpGet(uri);
+		HttpGet get = new HttpGet(url);
 		get.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, TIME_OUT);
 		HttpResponse resonse;
 		try {
@@ -205,7 +207,8 @@ public class GetImgFromPconline {
 				}
 			}
 		} catch (IOException e) {
-			throw e;
+			System.err.println("é‡æ–° å°è¯•è·å–å›¾ç‰‡å­—èŠ‚æµ , url--->  " + url);
+			return getByte(url);
 		} finally {
 			client.getConnectionManager().shutdown();
 		}
@@ -213,7 +216,7 @@ public class GetImgFromPconline {
 	}
 
 	/**
-	 * »ñÈ¡Ê×Ò³µÄÈ«²¿ÍÆ¹ãµÄÍ¼¼¯
+	 * è·å–é¦–é¡µçš„å…¨éƒ¨æ¨å¹¿çš„å›¾é›†
 	 */
 	private static void getAllImgsOfPconlineHomePage() throws Exception {
 		Document doc = Jsoup.parse(getHtmlContent(baseUrl));
@@ -221,7 +224,7 @@ public class GetImgFromPconline {
 		for (int h = 0; h < homepage_types.size(); h++) {
 			Elements links = homepage_types.get(h).select("i.i-pic a");
 			String type = homepage_types.get(h).select("div.mark a").html();
-			//°²ÕÕ²»Í¬±ÚÖ½Àà±ğ
+			// å®‰ç…§ä¸åŒå£çº¸ç±»åˆ«
 			for (int j = 0; j < links.size(); j++) {
 				beginGetImgsByAlbum(links.get(j).attr("href"), type);
 			}
@@ -229,7 +232,7 @@ public class GetImgFromPconline {
 	}
 
 	/**
-	 * »ñÈ¡Ê×Ò³µÄÏÂÔØÅÅĞĞµÄÍ¼¼¯
+	 * è·å–é¦–é¡µçš„ä¸‹è½½æ’è¡Œçš„å›¾é›†
 	 */
 	private static void getTopImgsOfPconlineHomePage() throws Exception {
 		Document doc = Jsoup.parse(getHtmlContent(baseUrl));
@@ -241,7 +244,7 @@ public class GetImgFromPconline {
 			type_items.addAll(links_top_1);
 			type_items.addAll(links_top_2_10);
 			String type = top_types.get(h).getElementsByTag("strong").html();
-			//°²ÕÕ²»Í¬±ÚÖ½Àà±ğÅÅĞĞ£¬Èç¶¯Îï±ÚÖ½ÅÅĞĞ
+			// å®‰ç…§ä¸åŒå£çº¸ç±»åˆ«æ’è¡Œï¼Œå¦‚åŠ¨ç‰©å£çº¸æ’è¡Œ
 			for (int j = 0; j < type_items.size(); j++) {
 				beginGetImgsByAlbum(type_items.get(j).attr("href"), type);
 			}
@@ -249,36 +252,36 @@ public class GetImgFromPconline {
 	}
 
 	/**
-	 * »ñÈ¡Ñ¡ÁËÄ³Ò»·Ö±æÂÊ¡¢Ä³Ò»ÀàĞÍµÄËùÓĞÍ¼Æ¬£¨°üº¬ËùÓĞ·ÖÒ³×¨¼­£©
+	 * è·å–é€‰äº†æŸä¸€åˆ†è¾¨ç‡ã€æŸä¸€ç±»å‹çš„æ‰€æœ‰å›¾ç‰‡ï¼ˆåŒ…å«æ‰€æœ‰åˆ†é¡µä¸“è¾‘ï¼‰
 	 */
 	private static void getAllImgsOfPconlineByTypeAndResolution(String url, String preBaseDirectory, String albumTitle)
 			throws Exception {
 		Document doc = Jsoup.parse(getHtmlContent(url));
-		//ÕÒµ½<title></title>±êÌâ
+		// æ‰¾åˆ°<title></title>æ ‡é¢˜
 		String headTitle = doc.getElementsByTag("title").get(0).html();
-		headTitle = headTitle.substring(0, headTitle.lastIndexOf("¡¿") + 1);
-		//ÓÅÏÈÊ¹ÓÃ×Ô¶¨ÒåµÄ±êÌâÃû
+		headTitle = headTitle.substring(0, headTitle.lastIndexOf("ã€‘") + 1);
+		// ä¼˜å…ˆä½¿ç”¨è‡ªå®šä¹‰çš„æ ‡é¢˜å
 		headTitle = "".equals(albumTitle) ? headTitle : albumTitle;
-		//ÕÒµ½Ò³Êı£¬ÀàËÆ3/13£¬±íÊ¾¹²13Ò³£¬µ±Ç°µÚ3Ò³
+		// æ‰¾åˆ°é¡µæ•°ï¼Œç±»ä¼¼3/13ï¼Œè¡¨ç¤ºå…±13é¡µï¼Œå½“å‰ç¬¬3é¡µ
 		int pageNum = 0;
 		try {
 			String pageSymbol = doc.select("div.page-num i").get(0).html();
 			String pageNumString = pageSymbol.substring(pageSymbol.lastIndexOf("/") + 1);
 			pageNum = Integer.parseInt(pageNumString);
 		} catch (Exception e) {
-			System.err.println("»ñÈ¡ÀàĞÍ£º¡¾" + headTitle + "¡¿·ÖÒ³Êı·¢ÉúÒì³£ £¬ url: " + url);
+			System.err.println("è·å–ç±»å‹ï¼šã€" + headTitle + "ã€‘åˆ†é¡µæ•°å‘ç”Ÿå¼‚å¸¸ ï¼Œ url: " + url);
 			return;
 		}
-		//ÒòÆä·ÖÒ³ÃüÃû¹æÂÉÈç£º
-		//		µÚ1Ò³£ºhttp://wallpaper.pconline.com.cn/list/1_b10_1_des0.html
-		//		µÚ2Ò³£ºhttp://wallpaper.pconline.com.cn/list/1_b10_2_des0.html
+		// å› å…¶åˆ†é¡µå‘½åè§„å¾‹å¦‚ï¼š
+		// ç¬¬1é¡µï¼šhttp://wallpaper.pconline.com.cn/list/1_b10_1_des0.html
+		// ç¬¬2é¡µï¼šhttp://wallpaper.pconline.com.cn/list/1_b10_2_des0.html
 		String seperator = "_des";
 		String tempPrefix = url.substring(0, url.lastIndexOf(seperator));
 		String prefix = tempPrefix.substring(0, tempPrefix.lastIndexOf("_") + 1);
 		String suffix = url.substring(url.lastIndexOf(seperator));
-		//Ñ­»·Ã¿Ò»Ò³
+		// å¾ªç¯æ¯ä¸€é¡µ
 		for (int k = 1; k <= pageNum; k++) {
-			String eachPagePredictory = headTitle + "_¹²" + pageNum + "Ò³" + "/" + headTitle + "µÚ" + k + "Ò³";
+			String eachPagePredictory = headTitle + "_å…±" + pageNum + "é¡µ" + "/" + headTitle + "ç¬¬" + k + "é¡µ";
 			if (!"".equals(preBaseDirectory)) {
 				eachPagePredictory = preBaseDirectory + "/" + eachPagePredictory;
 			}
@@ -286,7 +289,7 @@ public class GetImgFromPconline {
 			String eachPageUrl = prefix + k + suffix;
 			Document eachPageDoc = Jsoup.parse(getHtmlContent(eachPageUrl));
 			Elements links = eachPageDoc.select("i.i-pic a");
-			//±éÀúÄ³Ò»Ò³ÏÂµÄËùÓĞÍ¼Æ¬×¨¼­
+			// éå†æŸä¸€é¡µä¸‹çš„æ‰€æœ‰å›¾ç‰‡ä¸“è¾‘
 			for (int j = 0; j < links.size(); j++) {
 				beginGetImgsByAlbum(baseUrl + links.get(j).attr("href"), eachPagePredictory);
 			}
@@ -294,12 +297,12 @@ public class GetImgFromPconline {
 	}
 
 	/**
-	 * »ñÈ¡Ñ¡ÁËÄ³Ò»·Ö±æÂÊÏÂËùÓĞÀàĞÍµÄËùÓĞÍ¼Æ¬£¨°üº¬ËùÓĞÀàĞÍµÄËùÓĞ·ÖÒ³×¨¼­£©
+	 * è·å–é€‰äº†æŸä¸€åˆ†è¾¨ç‡ä¸‹æ‰€æœ‰ç±»å‹çš„æ‰€æœ‰å›¾ç‰‡ï¼ˆåŒ…å«æ‰€æœ‰ç±»å‹çš„æ‰€æœ‰åˆ†é¡µä¸“è¾‘ï¼‰
 	 */
 	private static void getAllImgsOfPconlineByResolution(String url, String preBaseDirectory) throws Exception {
 		Document eachPageDoc = Jsoup.parse(getHtmlContent(url));
 		Elements links = eachPageDoc.select("div.getWap div.getParam").get(0).select("dd.clearfix a");
-		//±éÀúÄ³Ò»·Ö±æÂÊÏÂËùÓĞÀàĞÍ
+		// éå†æŸä¸€åˆ†è¾¨ç‡ä¸‹æ‰€æœ‰ç±»å‹
 		for (int j = 0; j < links.size(); j++) {
 			Element link = links.get(j);
 			getAllImgsOfPconlineByTypeAndResolution(baseUrl + link.attr("href"), preBaseDirectory,
@@ -308,12 +311,12 @@ public class GetImgFromPconline {
 	}
 
 	public static void main(String[] args) throws Exception {
-		//		beginGetImgsByAlbum("http://wallpaper.pconline.com.cn/pic/17536.html");
-		//		getAllImgsOfPconlineHomePage();
-		//		getTopImgsOfPconlineHomePage();
-		//		getAllImgsOfPconlineByTypeAndResolution("http://wallpaper.pconline.com.cn/list/1_b10_1_des0.html","","");
-		//		getAllImgsOfPconlineByTypeAndResolution("http://wallpaper.pconline.com.cn/list/1_a14-b10_1_des0.html","","");
-		getAllImgsOfPconlineByResolution("http://wallpaper.pconline.com.cn/list/1_b10_2_des0.html", "¡¾1280x1024×ÀÃæ±ÚÖ½ÏÂÔØ¡¿");
+		// beginGetImgsByAlbum("http://wallpaper.pconline.com.cn/pic/17536.html");
+		// getAllImgsOfPconlineHomePage();
+		// getTopImgsOfPconlineHomePage();
+		// getAllImgsOfPconlineByTypeAndResolution("http://wallpaper.pconline.com.cn/list/1_b10_1_des0.html","","");
+		// getAllImgsOfPconlineByTypeAndResolution("http://wallpaper.pconline.com.cn/list/1_a14-b10_1_des0.html","","");
+		getAllImgsOfPconlineByResolution("http://wallpaper.pconline.com.cn/list/1_b10_2_des0.html", "ã€1280x1024æ¡Œé¢å£çº¸ä¸‹è½½ã€‘");
 		executor.shutdown();
 	}
 }
