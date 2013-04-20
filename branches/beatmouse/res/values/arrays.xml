@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="dialog_items">
-        <item>乌龟</item>
-        <item>兔子</item>
-        <item>猎豹</item>
-        <item>外星人</item>
-    </string-array>
-</resources>
